@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body { @apply bg-arena text-navy font-sans; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-navy text-gold font-semibold px-5 py-2.5 rounded-lg hover:bg-navy-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-transparent border border-navy text-navy font-medium px-5 py-2.5 rounded-lg hover:bg-navy hover:text-gold transition-colors;
+  }
+  .btn-gold {
+    @apply bg-gold text-navy font-semibold px-5 py-2.5 rounded-lg hover:bg-gold-dark transition-colors;
+  }
+  .input {
+    @apply w-full border border-arena-dark rounded-lg px-4 py-2.5 text-sm text-navy bg-white focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors;
+  }
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-stone mb-1.5;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-arena-dark p-6;
+  }
+}
