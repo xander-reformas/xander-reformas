@@ -1,0 +1,258 @@
+import { useState, useEffect } from 'react'
+import { supabase } from '../../lib/supabase'
+
+export default function AdminPanel() {
+  const [users, setUsers]           = useState([])
+  const [notifs, setNotifs]         = useState([])
+  const [loading, setLoading]       = useState(true)
+  const [activeTab, setActiveTab]   = useState('usuarios')
+  const [stats, setStats]           = useState({ total: 0, semana: 0, activos: 0 })
+
+  useEffect(() => {
+    loadAll()
+    // Escuchar nuevas notificaciones en tiempo real
+    const canal = supabase
+      .channel('admin_notifs')
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'admin_notificaciones',
+      }, payload => {
+        setNotifs(prev => [payload.new, ...prev])
+      })
+      .subscribe()
+    return () => supabase.removeChannel(canal)
+  }, [])
+
+  async function loadAll() {
+    setLoading(true)
+    const [{ data: usersData }, { data: notifsData }] = await Promise.all([
+      supabase.rpc('admin_get_all_profiles'),
+      supabase
+        .from('admin_notificaciones')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(50),
+    ])
+
+    if (usersData) {
+      setUsers(usersData)
+      const ahora = new Date()
+      const haceUnaSemana = new Date(ahora - 7 * 24 * 60 * 60 * 1000)
+      setStats({
+        total: usersData.length,
+        semana: usersData.filter(u => new Date(u.created_at) > haceUnaSemana).length,
+        activos: usersData.filter(u => u.onboarding_completado).length,
+      })
+    }
+    if (notifsData) setNotifs(notifsData)
+    setLoading(false)
+  }
+
+  async function marcarLeida(id) {
+    await supabase.rpc('admin_marcar_notificacion_leida', { notificacion_id: id })
+    setNotifs(prev => prev.map(n => n.id === id ? { ...n, leida: true } : n))
+  }
+
+  async function marcarTodasLeidas() {
+    const noLeidas = notifs.filter(n => !n.leida)
+    await Promise.all(noLeidas.map(n =>
+      supabase.rpc('admin_marcar_notificacion_leida', { notificacion_id: n.id })
+    ))
+    setNotifs(prev => prev.map(n => ({ ...n, leida: true })))
+  }
+
+  const noLeidas = notifs.filter(n => !n.leida).length
+
+  if (loading) {
+    return (
+      <div className="p-8 flex items-center justify-center min-h-[60vh]">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <div className="text-stone text-sm">Cargando panel de administración...</div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="p-6 max-w-6xl mx-auto">
+      {/* Cabecera */}
+      <div className="flex items-start justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-navy flex items-center gap-2">
+            🛡️ Panel de Administración
+          </h1>
+          <p className="text-stone text-sm mt-0.5">Autónomos registrados en XANDER Gestión</p>
+        </div>
+        <button
+          onClick={loadAll}
+          className="text-xs text-stone hover:text-navy border border-stone/20 rounded-lg px-3 py-1.5 transition-colors"
+        >
+          ↻ Actualizar
+        </button>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="bg-white rounded-xl p-5 border border-stone/10">
+          <div className="text-3xl font-black text-navy">{stats.total}</div>
+          <div className="text-sm text-stone mt-1">Total registrados</div>
+        </div>
+        <div className="bg-white rounded-xl p-5 border border-stone/10">
+          <div className="text-3xl font-black text-green-600">{stats.semana}</div>
+          <div className="text-sm text-stone mt-1">Nuevos esta semana</div>
+        </div>
+        <div className="bg-white rounded-xl p-5 border border-stone/10">
+          <div className="text-3xl font-black text-gold">{stats.activos}</div>
+          <div className="text-sm text-stone mt-1">Con perfil completo</div>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 mb-4 border-b border-stone/10">
+        {[
+          { id: 'usuarios',        label: 'Usuarios',        icon: '👤' },
+          { id: 'notificaciones',  label: 'Notificaciones',  icon: '🔔', badge: noLeidas },
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
+              activeTab === tab.id
+                ? 'border-gold text-navy'
+                : 'border-transparent text-stone hover:text-navy'
+            }`}
+          >
+            {tab.icon} {tab.label}
+            {tab.badge > 0 && (
+              <span className="bg-gold text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                {tab.badge}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab: Usuarios */}
+      {activeTab === 'usuarios' && (
+        <div className="bg-white rounded-xl border border-stone/10 overflow-hidden">
+          {users.length === 0 ? (
+            <div className="py-16 text-center text-stone">
+              <div className="text-4xl mb-3">👤</div>
+              <div className="font-medium">Aún no hay usuarios registrados</div>
+              <div className="text-sm mt-1">Aquí aparecerán los autónomos que se den de alta</div>
+            </div>
+          ) : (
+            <table className="w-full text-sm">
+              <thead className="bg-navy/5 border-b border-stone/10">
+                <tr>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">NOMBRE</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">EMAIL</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">EMPRESA</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">CIUDAD</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">REGISTRO</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">ÚLTIMO ACCESO</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">ESTADO</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-stone/5">
+                {users.map(u => (
+                  <tr key={u.id} className="hover:bg-stone/5 transition-colors">
+                    <td className="px-4 py-3 font-medium text-navy">
+                      {u.nombre || u.apellidos
+                        ? `${u.nombre || ''} ${u.apellidos || ''}`.trim()
+                        : <span className="text-stone/50 italic">Sin nombre</span>
+                      }
+                    </td>
+                    <td className="px-4 py-3 text-stone">{u.email}</td>
+                    <td className="px-4 py-3 text-stone">{u.empresa_nombre || '—'}</td>
+                    <td className="px-4 py-3 text-stone">{u.empresa_ciudad || '—'}</td>
+                    <td className="px-4 py-3 text-stone">
+                      {new Date(u.created_at).toLocaleDateString('es-ES', {
+                        day: '2-digit', month: 'short', year: 'numeric'
+                      })}
+                    </td>
+                    <td className="px-4 py-3 text-stone">
+                      {u.last_sign_in_at
+                        ? new Date(u.last_sign_in_at).toLocaleDateString('es-ES', {
+                            day: '2-digit', month: 'short', year: 'numeric'
+                          })
+                        : '—'
+                      }
+                    </td>
+                    <td className="px-4 py-3">
+                      {u.onboarding_completado
+                        ? <span className="px-2 py-0.5 bg-green-50 text-green-700 rounded-full text-xs font-medium">✓ Activo</span>
+                        : <span className="px-2 py-0.5 bg-yellow-50 text-yellow-700 rounded-full text-xs font-medium">⏳ Pendiente</span>
+                      }
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
+
+      {/* Tab: Notificaciones */}
+      {activeTab === 'notificaciones' && (
+        <div className="bg-white rounded-xl border border-stone/10 overflow-hidden">
+          {notifs.length === 0 ? (
+            <div className="py-16 text-center text-stone">
+              <div className="text-4xl mb-3">🔔</div>
+              <div className="font-medium">Sin notificaciones</div>
+              <div className="text-sm mt-1">Aquí aparecerán los nuevos registros</div>
+            </div>
+          ) : (
+            <>
+              {noLeidas > 0 && (
+                <div className="px-4 py-2.5 border-b border-stone/10 flex items-center justify-between bg-gold/5">
+                  <span className="text-xs text-stone">{noLeidas} notificaciones sin leer</span>
+                  <button
+                    onClick={marcarTodasLeidas}
+                    className="text-xs text-gold hover:text-gold/70 font-medium transition-colors"
+                  >
+                    Marcar todas como leídas
+                  </button>
+                </div>
+              )}
+              <div className="divide-y divide-stone/5">
+                {notifs.map(n => (
+                  <div
+                    key={n.id}
+                    className={`flex items-start gap-3 px-4 py-3.5 transition-colors ${
+                      n.leida ? 'opacity-60' : 'bg-gold/5'
+                    }`}
+                  >
+                    <div className="text-lg mt-0.5">
+                      {n.tipo === 'nuevo_registro' ? '👤' : '🔔'}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-navy text-sm">{n.titulo}</div>
+                      <div className="text-xs text-stone mt-0.5">{n.mensaje}</div>
+                      <div className="text-xs text-stone/50 mt-1">
+                        {new Date(n.created_at).toLocaleString('es-ES', {
+                          day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+                        })}
+                      </div>
+                    </div>
+                    {!n.leida && (
+                      <button
+                        onClick={() => marcarLeida(n.id)}
+                        className="text-xs text-stone hover:text-navy transition-colors flex-shrink-0 mt-1"
+                        title="Marcar como leída"
+                      >
+                        ✓
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}

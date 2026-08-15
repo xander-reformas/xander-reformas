@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../lib/supabase'
 import CalendarioWidget from './CalendarioWidget'
 import AgenteChat from './AgenteChat'
+import AdminPanel from '../admin/AdminPanel'
 import Clientes from '../clientes/Clientes'
 import Obras from '../obras/Obras'
 import Presupuestos from '../presupuestos/Presupuestos'
@@ -21,6 +22,8 @@ import Documentos from '../documentos/Documentos'
 import Empleados from '../empleados/Empleados'
 import PartesTrabajo from '../partes/PartesTrabajo'
 import Nominas from '../nominas/Nominas'
+
+const ADMIN_EMAIL = 'reformasxander@gmail.com'
 
 const NAV_GROUPS = [
   {
@@ -165,8 +168,28 @@ function HomePanel({ profile }) {
 
 
 export default function Dashboard() {
-  const { profile, signOut } = useAuth()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const { user, profile, signOut } = useAuth()
+  const [sidebarOpen, setSidebarOpen]   = useState(true)
+  const [notifCount, setNotifCount]     = useState(0)
+  const isAdmin = user?.email === ADMIN_EMAIL
+
+  // Cargar badge de notificaciones (solo admin)
+  useEffect(() => {
+    if (!isAdmin) return
+    supabase.rpc('admin_contar_no_leidas').then(({ data }) => {
+      if (data != null) setNotifCount(data)
+    })
+    // Escuchar nuevas notificaciones en tiempo real
+    const canal = supabase
+      .channel('admin_badge')
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'admin_notificaciones',
+      }, () => setNotifCount(c => c + 1))
+      .subscribe()
+    return () => supabase.removeChannel(canal)
+  }, [isAdmin])
 
   return (
     <div className="min-h-screen flex bg-arena">
@@ -221,6 +244,46 @@ export default function Dashboard() {
               </div>
             </div>
           ))}
+
+          {/* Sección Admin — solo visible para el administrador */}
+          {isAdmin && (
+            <div className="mb-2 mt-2 border-t border-white/10 pt-3">
+              {sidebarOpen && (
+                <div className="px-4 py-1.5 text-[10px] font-semibold tracking-widest text-gold/50">
+                  ADMINISTRACIÓN
+                </div>
+              )}
+              <div className="px-2">
+                <NavLink
+                  to="/dashboard/admin"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+                      isActive
+                        ? 'bg-gold/20 text-gold font-semibold'
+                        : 'text-white/55 hover:text-white hover:bg-white/5'
+                    }`
+                  }
+                >
+                  <span className="text-base flex-shrink-0 relative">
+                    🛡️
+                    {notifCount > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] rounded-full w-4 h-4 flex items-center justify-center font-bold leading-none">
+                        {notifCount > 9 ? '9+' : notifCount}
+                      </span>
+                    )}
+                  </span>
+                  {sidebarOpen && (
+                    <span className="truncate flex-1">Panel Admin</span>
+                  )}
+                  {sidebarOpen && notifCount > 0 && (
+                    <span className="bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold leading-none flex-shrink-0">
+                      {notifCount > 9 ? '9+' : notifCount}
+                    </span>
+                  )}
+                </NavLink>
+              </div>
+            </div>
+          )}
         </nav>
 
         {/* User footer */}
@@ -268,6 +331,9 @@ export default function Dashboard() {
           <Route path="empleados"    element={<Empleados />} />
           <Route path="partes"       element={<PartesTrabajo />} />
           <Route path="nominas"      element={<Nominas />} />
+          {isAdmin && (
+            <Route path="admin" element={<AdminPanel />} />
+          )}
         </Routes>
       </main>
 
