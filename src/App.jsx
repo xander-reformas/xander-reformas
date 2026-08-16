@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import LoginPage from './components/auth/LoginPage'
 import RegisterPage from './components/auth/RegisterPage'
+import ForgotPasswordPage from './components/auth/ForgotPasswordPage'
+import ResetPasswordPage from './components/auth/ResetPasswordPage'
 import OnboardingWizard from './components/onboarding/OnboardingWizard'
 import Dashboard from './components/dashboard/Dashboard'
 
@@ -44,6 +46,11 @@ export default function App() {
       <Route path="/registro" element={
         <PublicRoute><RegisterPage /></PublicRoute>
       } />
+      <Route path="/recuperar-password" element={
+        <PublicRoute><ForgotPasswordPage /></PublicRoute>
+      } />
+      {/* reset-password NO usa PublicRoute: el usuario llega desde el email sin sesión activa */}
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/onboarding" element={
         <PrivateRoute><OnboardingWizard /></PrivateRoute>
       } />

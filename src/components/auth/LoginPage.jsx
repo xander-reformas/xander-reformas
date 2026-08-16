@@ -69,7 +69,12 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label className="label">Contraseña</label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="label mb-0">Contraseña</label>
+                <Link to="/recuperar-password" className="text-xs text-gold hover:underline">
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </div>
               <input
                 type="password"
                 className="input"
