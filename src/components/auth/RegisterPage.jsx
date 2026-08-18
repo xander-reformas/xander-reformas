@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import GoogleButton from './GoogleButton'
 
 export default function RegisterPage() {
   const { signUp } = useAuth()
@@ -78,7 +79,15 @@ export default function RegisterPage() {
           </div>
 
           <h1 className="text-2xl font-bold text-navy mb-1">Crea tu cuenta</h1>
-          <p className="text-sm text-stone mb-8">Gratis durante la beta · Sin límites</p>
+          <p className="text-sm text-stone mb-6">Gratis durante la beta · Sin límites</p>
+
+          {/* Google */}
+          <GoogleButton label="Registrarse con Google" />
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-arena-dark" />
+            <span className="text-xs text-stone">o con email</span>
+            <div className="flex-1 h-px bg-arena-dark" />
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import GoogleButton from './GoogleButton'
 
 export default function LoginPage() {
   const { signIn } = useAuth()
@@ -54,7 +55,15 @@ export default function LoginPage() {
           </div>
 
           <h1 className="text-2xl font-bold text-navy mb-1">Bienvenido</h1>
-          <p className="text-sm text-stone mb-8">Accede a tu cuenta</p>
+          <p className="text-sm text-stone mb-6">Accede a tu cuenta</p>
+
+          {/* Google */}
+          <GoogleButton label="Continuar con Google" />
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-arena-dark" />
+            <span className="text-xs text-stone">o con email</span>
+            <div className="flex-1 h-px bg-arena-dark" />
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
