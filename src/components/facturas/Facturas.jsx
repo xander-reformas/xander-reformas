@@ -24,7 +24,7 @@ function calculos(items, iva, descuento, retencion) {
 
 const ITEM_EMPTY = { titulo: '', detalle: '', cantidad: '1', unidad: 'ud', precio_unitario: '', importe: '' }
 
-function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel, initialFromPres }) {
+function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, onCancel, initialFromPres }) {
   const hoy = new Date().toISOString().split('T')[0]
   const [form, setForm] = useState({
     numero: '', cliente_id: '', obra_id: '', presupuesto_id: '',
@@ -130,7 +130,11 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
       ? await supabase.from('facturas').update(payload).eq('id', editData.id)
       : await supabase.from('facturas').insert(payload)
     setSaving(false)
-    if (err) { setError(err.message); return }
+    if (err) {
+      // El trigger de Verifactu ya devuelve mensajes en español listos para mostrar
+      setError(err.message)
+      return
+    }
     onSave()
   }
 
@@ -139,7 +143,10 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
       <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-4xl my-4">
         <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-ink">{editData ? 'Editar factura' : 'Nueva factura'}</h2>
+            <h2 className="text-lg font-bold text-ink flex items-center gap-2">
+              {editData ? 'Editar factura' : 'Nueva factura'}
+              {locked && <span className="text-xs font-semibold bg-navy text-gold px-2 py-0.5 rounded-full">🔒 Verifactu</span>}
+            </h2>
             {initialFromPres && !editData && (
               <p className="text-xs text-green-700 mt-0.5">📋 Creada desde presupuesto {initialFromPres.numero}</p>
             )}
@@ -148,6 +155,14 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
         </div>
 
         <form onSubmit={save} className="p-6 space-y-6">
+          {locked && (
+            <div className="bg-navy/5 border border-navy/20 rounded-xl p-4 text-sm text-ink">
+              🔒 Esta factura ya está registrada en el libro Verifactu (RD 1007/2023): número, fecha, líneas, IVA, descuento, retención y cliente
+              no se pueden modificar. Solo puedes cambiar el estado, la obra asociada, el vencimiento o las notas. Para corregir un dato económico,
+              emite una factura rectificativa.
+            </div>
+          )}
+
           {/* Importar desde presupuesto (solo si no viene de navigate) */}
           {!editData && !initialFromPres && presFiltrados.length > 0 && (
             <div className="bg-gold/10 border border-gold/30 rounded-xl p-4">
@@ -165,7 +180,7 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div>
               <label className="label">Número *</label>
-              <input className="input" value={form.numero} onChange={e => setF('numero', e.target.value)} placeholder="FAC-2026-001" required />
+              <input className="input" value={form.numero} onChange={e => setF('numero', e.target.value)} placeholder="FAC-2026-001" required disabled={locked} />
             </div>
             <div>
               <label className="label">Estado</label>
@@ -175,7 +190,7 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
             </div>
             <div>
               <label className="label">Fecha emisión</label>
-              <input className="input" type="date" value={form.fecha} onChange={e => setF('fecha', e.target.value)} />
+              <input className="input" type="date" value={form.fecha} onChange={e => setF('fecha', e.target.value)} disabled={locked} />
             </div>
             <div>
               <label className="label">Vencimiento</label>
@@ -186,7 +201,7 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className="label">Cliente</label>
-              <select className="input" value={form.cliente_id} onChange={e => { setF('cliente_id', e.target.value); setF('obra_id', '') }}>
+              <select className="input" value={form.cliente_id} onChange={e => { setF('cliente_id', e.target.value); setF('obra_id', '') }} disabled={locked}>
                 <option value="">Sin cliente</option>
                 {clientes.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}
               </select>
@@ -204,40 +219,42 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
           <div>
             <div className="flex items-center justify-between mb-3">
               <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Líneas de factura</label>
-              <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">+ Añadir línea</button>
+              {!locked && <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">+ Añadir línea</button>}
             </div>
             <div className="space-y-3">
               {items.map((item, i) => (
                 <div key={i} className="bg-page rounded-xl p-4 relative">
-                  <button type="button" onClick={() => removeItem(i)} className="absolute top-3 right-3 text-ink-soft/40 hover:text-red-500 text-lg leading-none">×</button>
+                  {!locked && (
+                    <button type="button" onClick={() => removeItem(i)} className="absolute top-3 right-3 text-ink-soft/40 hover:text-red-500 text-lg leading-none">×</button>
+                  )}
                   <div className="pr-6 space-y-3">
                     <div>
                       <label className="label">Descripción</label>
-                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Trabajos ejecutados en reforma de baño" />
+                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Trabajos ejecutados en reforma de baño" disabled={locked} />
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       <div>
                         <label className="label">Unidad</label>
-                        <select className="input bg-surface" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)}>
+                        <select className="input bg-surface" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)} disabled={locked}>
                           {UNIDADES.map(u => <option key={u} value={u}>{u}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="label">Cantidad</label>
-                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" />
+                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" disabled={locked} />
                       </div>
                       <div>
                         <label className="label">Precio / ud (€)</label>
-                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" />
+                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" disabled={locked} />
                       </div>
                       <div>
                         <label className="label">Importe (€)</label>
-                        <input className="input bg-surface font-semibold text-ink" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" />
+                        <input className="input bg-surface font-semibold text-ink" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" disabled={locked} />
                       </div>
                     </div>
                     <div>
                       <label className="label">Detalle (opcional)</label>
-                      <textarea className="input bg-surface resize-none h-12 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} />
+                      <textarea className="input bg-surface resize-none h-12 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} disabled={locked} />
                     </div>
                   </div>
                 </div>
@@ -257,9 +274,10 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
                 <div>
                   <label className="text-xs text-white/60 block mb-1.5 font-semibold">IVA (%)</label>
                   <select
-                    className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none"
+                    className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none disabled:opacity-60"
                     value={form.iva}
                     onChange={e => setF('iva', e.target.value)}
+                    disabled={locked}
                   >
                     <option value="0">0% — Sin IVA</option>
                     <option value="10">10% — Residencial</option>
@@ -269,20 +287,22 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
                 <div>
                   <label className="text-xs text-white/60 block mb-1.5 font-semibold">Dto. (%)</label>
                   <input
-                    className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none"
+                    className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none disabled:opacity-60"
                     type="number" min="0" max="100" step="0.5"
                     value={form.descuento}
                     onChange={e => setF('descuento', e.target.value)}
+                    disabled={locked}
                   />
                 </div>
                 <div>
                   <label className="text-xs text-white/60 block mb-1.5 font-semibold">Ret. IRPF (%)</label>
                   <input
-                    className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none"
+                    className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none disabled:opacity-60"
                     type="number" min="0" max="25" step="0.5"
                     value={form.retencion}
                     onChange={e => setF('retencion', e.target.value)}
                     placeholder="0"
+                    disabled={locked}
                   />
                 </div>
               </div>
@@ -333,6 +353,7 @@ export default function Facturas() {
   const [clientes, setClientes] = useState([])
   const [obras, setObras] = useState([])
   const [presupuestos, setPresupuestos] = useState([])
+  const [lockedIds, setLockedIds] = useState(new Set())
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('')
@@ -354,16 +375,18 @@ export default function Facturas() {
 
   async function load() {
     setLoading(true)
-    const [{ data: facs }, { data: clis }, { data: obs }, { data: pres }] = await Promise.all([
+    const [{ data: facs }, { data: clis }, { data: obs }, { data: pres }, { data: reg }] = await Promise.all([
       supabase.from('facturas').select('*, clientes(nombre), obras(nombre)').order('fecha', { ascending: false }),
       supabase.from('clientes').select('id, nombre').order('nombre'),
       supabase.from('obras').select('id, nombre, cliente_id').order('nombre'),
       supabase.from('presupuestos').select('id, numero, cliente_id, obra_id, items, iva, descuento, estado, clientes(nombre)').eq('estado', 'aceptado').order('created_at', { ascending: false }),
+      supabase.from('registro_facturacion').select('factura_id').eq('tipo_registro', 'alta'),
     ])
     setFacturas(facs || [])
     setClientes(clis || [])
     setObras(obs || [])
     setPresupuestos(pres || [])
+    setLockedIds(new Set((reg || []).map(r => r.factura_id)))
     setLoading(false)
   }
 
@@ -371,13 +394,19 @@ export default function Facturas() {
   function openEdit(f) { setEditData(f); setFromPresupuesto(null); setShowForm(true) }
 
   async function cambiarEstado(id, estado) {
-    await supabase.from('facturas').update({ estado }).eq('id', id)
+    const { error: err } = await supabase.from('facturas').update({ estado }).eq('id', id)
+    if (err) { alert(err.message); return }
     load()
   }
 
   async function remove(id, numero) {
+    if (lockedIds.has(id)) {
+      alert('Esta factura ya está registrada en el libro Verifactu y no se puede eliminar. Emite una factura rectificativa.')
+      return
+    }
     if (!confirm(`¿Eliminar la factura ${numero}?`)) return
-    await supabase.from('facturas').delete().eq('id', id)
+    const { error: err } = await supabase.from('facturas').delete().eq('id', id)
+    if (err) { alert(err.message); return }
     load()
   }
 
@@ -468,7 +497,12 @@ export default function Facturas() {
                 return (
                   <tr key={f.id} className={`hover:bg-page/50 transition-colors ${vencida ? 'bg-red-50/50' : ''}`}>
                     <td className="px-5 py-3.5">
-                      <div className="font-bold text-ink">{f.numero}</div>
+                      <div className="font-bold text-ink flex items-center gap-1.5">
+                        {f.numero}
+                        {lockedIds.has(f.id) && (
+                          <span title="Registrada en el libro Verifactu — datos económicos bloqueados" className="text-[10px] font-semibold bg-navy text-gold px-1.5 py-0.5 rounded-full">🔒</span>
+                        )}
+                      </div>
                       {f.obras?.nombre && <div className="text-xs text-ink-soft mt-0.5">{f.obras.nombre}</div>}
                     </td>
                     <td className="px-4 py-3.5 hidden md:table-cell text-ink">{f.clientes?.nombre || '—'}</td>
@@ -491,8 +525,14 @@ export default function Facturas() {
                     </td>
                     <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
                     <td className="px-4 py-3.5 text-right whitespace-nowrap">
-                      <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">Editar</button>
-                      <button onClick={() => remove(f.id, f.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
+                      <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">
+                        {lockedIds.has(f.id) ? 'Ver' : 'Editar'}
+                      </button>
+                      {lockedIds.has(f.id) ? (
+                        <span title="No se puede eliminar: registrada en Verifactu" className="text-ink-soft/20 text-xs cursor-not-allowed">Eliminar</span>
+                      ) : (
+                        <button onClick={() => remove(f.id, f.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
+                      )}
                     </td>
                   </tr>
                 )
@@ -505,6 +545,7 @@ export default function Facturas() {
       {showForm && (
         <FormFactura
           editData={editData}
+          locked={editData ? lockedIds.has(editData.id) : false}
           clientes={clientes}
           obras={obras}
           presupuestos={presupuestos}
