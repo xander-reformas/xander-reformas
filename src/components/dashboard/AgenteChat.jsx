@@ -201,7 +201,7 @@ export default function AgenteChat() {
   return (
     <>
       {open && (
-        <div className="fixed bottom-20 right-5 w-96 bg-white rounded-2xl shadow-2xl border border-arena-dark z-50 flex flex-col overflow-hidden" style={{ height: '520px' }}>
+        <div className="fixed bottom-20 right-5 w-96 bg-surface rounded-2xl shadow-2xl border border-edge z-50 flex flex-col overflow-hidden" style={{ height: '520px' }}>
           {/* Header */}
           <div className="bg-navy px-4 py-3 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-2">
@@ -224,14 +224,14 @@ export default function AgenteChat() {
             <div className="flex-1 p-5 flex flex-col justify-center">
               <div className="text-center mb-4">
                 <div className="text-3xl mb-2">🔑</div>
-                <div className="font-bold text-navy mb-2">Falta configurar la API key</div>
-                <p className="text-xs text-stone mb-4">Para activar el agente, crea el archivo <code className="bg-arena px-1 rounded">.env</code> en la raíz del proyecto con:</p>
+                <div className="font-bold text-ink mb-2">Falta configurar la API key</div>
+                <p className="text-xs text-ink-soft mb-4">Para activar el agente, crea el archivo <code className="bg-page px-1 rounded">.env</code> en la raíz del proyecto con:</p>
               </div>
               <div className="bg-navy text-gold font-mono text-xs px-4 py-3 rounded-xl mb-4 leading-relaxed">
                 VITE_GROQ_API_KEY=gsk_xxxxxxxxxxxx
               </div>
-              <ol className="text-xs text-stone space-y-1 list-decimal list-inside">
-                <li>Ve a <span className="font-semibold text-navy">console.groq.com</span></li>
+              <ol className="text-xs text-ink-soft space-y-1 list-decimal list-inside">
+                <li>Ve a <span className="font-semibold text-ink">console.groq.com</span></li>
                 <li>Crea una cuenta gratuita</li>
                 <li>API Keys → Create API Key</li>
                 <li>Copia la key en el archivo .env</li>
@@ -242,8 +242,8 @@ export default function AgenteChat() {
             <div className="flex-1 p-5 flex flex-col justify-center">
               <div className="text-center mb-4">
                 <div className="text-3xl mb-2">⚙️</div>
-                <div className="font-bold text-navy mb-2">Paso previo en Supabase</div>
-                <p className="text-xs text-stone mb-4">Ejecuta en el SQL Editor de Supabase:</p>
+                <div className="font-bold text-ink mb-2">Paso previo en Supabase</div>
+                <p className="text-xs text-ink-soft mb-4">Ejecuta en el SQL Editor de Supabase:</p>
               </div>
               <div className="bg-navy text-gold font-mono text-xs px-4 py-3 rounded-xl">
                 supabase/chat_mensajes.sql
@@ -261,7 +261,7 @@ export default function AgenteChat() {
                     <div className={`text-sm px-3 py-2.5 rounded-2xl max-w-[85%] leading-relaxed ${
                       m.role === 'user'
                         ? 'bg-navy text-white rounded-br-sm'
-                        : 'bg-arena text-navy rounded-bl-sm'
+                        : 'bg-page text-ink rounded-bl-sm'
                     }`}>
                       {renderTexto(m.content)}
                     </div>
@@ -271,7 +271,7 @@ export default function AgenteChat() {
                 {pensando && (
                   <div className="flex justify-start">
                     <div className="w-6 h-6 rounded-full bg-gold/20 flex items-center justify-center text-xs flex-shrink-0 mr-2 mt-0.5">X</div>
-                    <div className="bg-arena text-navy text-sm px-4 py-2.5 rounded-2xl rounded-bl-sm flex items-center gap-1.5">
+                    <div className="bg-page text-ink text-sm px-4 py-2.5 rounded-2xl rounded-bl-sm flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 bg-stone/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                       <span className="w-1.5 h-1.5 bg-stone/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                       <span className="w-1.5 h-1.5 bg-stone/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -289,10 +289,10 @@ export default function AgenteChat() {
               </div>
 
               {/* Input */}
-              <div className="p-3 border-t border-arena-dark flex gap-2 flex-shrink-0">
+              <div className="p-3 border-t border-edge flex gap-2 flex-shrink-0">
                 <input
                   ref={inputRef}
-                  className="flex-1 text-sm border border-arena-dark rounded-xl px-3 py-2 focus:outline-none focus:border-gold resize-none"
+                  className="flex-1 text-sm border border-edge rounded-xl px-3 py-2 focus:outline-none focus:border-gold resize-none"
                   placeholder="Escribe tu consulta…"
                   value={input}
                   onChange={e => setInput(e.target.value)}

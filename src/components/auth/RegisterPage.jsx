@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import GoogleButton from './GoogleButton'
+import ThemeToggle from '../dashboard/ThemeToggle'
 
 export default function RegisterPage() {
   const { signUp } = useAuth()
@@ -30,13 +31,13 @@ export default function RegisterPage() {
   }
 
   if (done) return (
-    <div className="min-h-screen bg-arena flex items-center justify-center p-8">
+    <div className="min-h-screen bg-page flex items-center justify-center p-8">
       <div className="card max-w-md w-full text-center">
         <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
           <span className="text-gold text-2xl">✓</span>
         </div>
-        <h2 className="text-xl font-bold text-navy mb-2">Revisa tu email</h2>
-        <p className="text-sm text-stone mb-6">
+        <h2 className="text-xl font-bold text-ink mb-2">Revisa tu email</h2>
+        <p className="text-sm text-ink-soft mb-6">
           Te hemos enviado un enlace de confirmación a <strong>{form.email}</strong>.
           Confirma tu cuenta y podrás empezar a configurar tu perfil.
         </p>
@@ -46,7 +47,10 @@ export default function RegisterPage() {
   )
 
   return (
-    <div className="min-h-screen bg-arena flex">
+    <div className="min-h-screen bg-page flex relative">
+      <div className="absolute top-4 right-4 z-10">
+        <ThemeToggle compact />
+      </div>
       <div className="hidden lg:flex w-1/2 bg-navy flex-col justify-between p-12">
         <div>
           <div className="text-3xl font-black">
@@ -75,18 +79,18 @@ export default function RegisterPage() {
         <div className="w-full max-w-sm">
           <div className="lg:hidden text-2xl font-black mb-8">
             <span className="text-gold">X</span>
-            <span className="text-navy">ANDER</span>
+            <span className="text-ink">ANDER</span>
           </div>
 
-          <h1 className="text-2xl font-bold text-navy mb-1">Crea tu cuenta</h1>
-          <p className="text-sm text-stone mb-6">Gratis durante la beta · Sin límites</p>
+          <h1 className="text-2xl font-bold text-ink mb-1">Crea tu cuenta</h1>
+          <p className="text-sm text-ink-soft mb-6">Gratis durante la beta · Sin límites</p>
 
           {/* Google */}
           <GoogleButton label="Registrarse con Google" />
           <div className="flex items-center gap-3 my-5">
-            <div className="flex-1 h-px bg-arena-dark" />
-            <span className="text-xs text-stone">o con email</span>
-            <div className="flex-1 h-px bg-arena-dark" />
+            <div className="flex-1 h-px bg-edge" />
+            <span className="text-xs text-ink-soft">o con email</span>
+            <div className="flex-1 h-px bg-edge" />
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -114,7 +118,7 @@ export default function RegisterPage() {
               {loading ? 'Creando cuenta...' : 'Crear cuenta gratuita'}
             </button>
 
-            <p className="text-xs text-stone text-center">
+            <p className="text-xs text-ink-soft text-center">
               Al registrarte aceptas nuestros{' '}
               <a href="#" className="text-gold hover:underline">Términos de uso</a>
               {' '}y{' '}
@@ -122,7 +126,7 @@ export default function RegisterPage() {
             </p>
           </form>
 
-          <div className="mt-6 text-center text-sm text-stone">
+          <div className="mt-6 text-center text-sm text-ink-soft">
             ¿Ya tienes cuenta?{' '}
             <Link to="/login" className="text-gold font-semibold hover:underline">Accede aquí</Link>
           </div>

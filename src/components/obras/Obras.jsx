@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { supabase, getUID } from '../../lib/supabase'
 
 const ESTADOS = [
-  { value: 'pendiente',   label: 'Pendiente',   color: 'bg-stone/20 text-stone' },
+  { value: 'pendiente',   label: 'Pendiente',   color: 'bg-stone/20 text-ink-soft' },
   { value: 'en_curso',    label: 'En curso',    color: 'bg-gold/20 text-gold-dark' },
   { value: 'pausada',     label: 'Pausada',     color: 'bg-orange-100 text-orange-700' },
   { value: 'completada',  label: 'Completada',  color: 'bg-green-100 text-green-700' },
@@ -27,19 +27,19 @@ function EtapaBar({ etapa, onChange }) {
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-xs font-semibold text-stone uppercase tracking-wide">Etapa</span>
-        <span className="text-xs font-bold text-navy">{pct}% completado</span>
+        <span className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Etapa</span>
+        <span className="text-xs font-bold text-ink">{pct}% completado</span>
       </div>
       <div className="relative">
-        <div className="h-2 bg-arena-dark rounded-full overflow-hidden">
+        <div className="h-2 bg-edge rounded-full overflow-hidden">
           <div className="h-full bg-gold rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
         </div>
         <div className="flex justify-between mt-2 overflow-x-auto pb-1">
           {ETAPAS.map((e, i) => (
             <button key={e} onClick={() => onChange && onChange(e)}
               className={`text-[9px] font-semibold flex-shrink-0 px-1 text-center transition-colors ${
-                i <= idx ? 'text-gold-dark' : 'text-stone/40'
-              } ${onChange ? 'hover:text-navy cursor-pointer' : 'cursor-default'}`}
+                i <= idx ? 'text-gold-dark' : 'text-ink-soft/40'
+              } ${onChange ? 'hover:text-ink cursor-pointer' : 'cursor-default'}`}
               title={e}
             >
               {i <= idx ? '●' : '○'}
@@ -50,7 +50,7 @@ function EtapaBar({ etapa, onChange }) {
           {ETAPAS.map((e, i) => (
             <span key={e}
               className={`text-[8px] flex-shrink-0 text-center leading-tight max-w-[52px] ${
-                e === etapa ? 'text-navy font-bold' : 'text-stone/40'
+                e === etapa ? 'text-ink font-bold' : 'text-ink-soft/40'
               }`}
             >
               {i === 0 || i === ETAPAS.length - 1 || e === etapa ? e : ''}
@@ -341,7 +341,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
   return (
     <div className="fixed inset-0 bg-navy/70 backdrop-blur-sm z-50 flex items-start justify-end">
-      <div className="bg-white h-full w-full max-w-2xl flex flex-col shadow-2xl overflow-hidden">
+      <div className="bg-surface h-full w-full max-w-2xl flex flex-col shadow-2xl overflow-hidden">
 
         {/* Header */}
         <div className="bg-navy px-6 py-4 flex-shrink-0">
@@ -417,7 +417,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
         )}
 
         {/* Tabs */}
-        <div className="flex gap-0 border-b border-arena-dark flex-shrink-0 bg-white px-4">
+        <div className="flex gap-0 border-b border-edge flex-shrink-0 bg-surface px-4">
           {[
             { id: 'seguimiento', label: '📋 Seguimiento', count: obra.seguimiento?.length },
             { id: 'fotos',       label: '📷 Fotos',       count: fotos.length },
@@ -427,10 +427,10 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
           ].map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
               className={`px-4 py-3 text-sm font-semibold border-b-2 transition-colors flex items-center gap-1.5 ${
-                tab === t.id ? 'border-gold text-navy' : 'border-transparent text-stone hover:text-navy'
+                tab === t.id ? 'border-gold text-ink' : 'border-transparent text-ink-soft hover:text-ink'
               }`}>
               {t.label}
-              {t.count > 0 && <span className="text-xs bg-arena-dark text-stone px-1.5 py-0.5 rounded-full">{t.count}</span>}
+              {t.count > 0 && <span className="text-xs bg-edge text-ink-soft px-1.5 py-0.5 rounded-full">{t.count}</span>}
             </button>
           ))}
         </div>
@@ -446,7 +446,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                   ❌ {errorSeg}
                 </div>
               )}
-              {saving && <div className="mb-3 text-xs text-stone animate-pulse">Guardando…</div>}
+              {saving && <div className="mb-3 text-xs text-ink-soft animate-pulse">Guardando…</div>}
               {/* Cambio de etapa rápido */}
               <div className="mb-5">
                 <label className="label mb-2">Avanzar etapa</label>
@@ -460,7 +460,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                             ? 'bg-gold text-navy border-gold'
                             : i < actual
                             ? 'bg-green-50 text-green-700 border-green-200'
-                            : 'bg-white text-stone border-arena-dark hover:border-gold hover:text-navy'
+                            : 'bg-surface text-ink-soft border-edge hover:border-gold hover:text-ink'
                         }`}>
                         {i < actual ? '✓ ' : ''}{e}
                       </button>
@@ -487,7 +487,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
               {/* Timeline */}
               {seguimientoOrdenado.length === 0 ? (
-                <div className="text-center py-10 text-stone text-sm">
+                <div className="text-center py-10 text-ink-soft text-sm">
                   <div className="text-3xl mb-2">📋</div>
                   Aún no hay actualizaciones. Añade la primera nota.
                 </div>
@@ -501,21 +501,21 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                         }`}>
                           {entry.tipo === 'etapa' ? '→' : '✍'}
                         </div>
-                        <div className="w-px flex-1 bg-arena-dark mt-1" />
+                        <div className="w-px flex-1 bg-edge mt-1" />
                       </div>
                       <div className="flex-1 pb-3">
                         <div className="flex items-start justify-between gap-2">
-                          <p className={`text-sm leading-relaxed ${entry.tipo === 'etapa' ? 'text-stone italic' : 'text-navy'}`}>
+                          <p className={`text-sm leading-relaxed ${entry.tipo === 'etapa' ? 'text-ink-soft italic' : 'text-ink'}`}>
                             {entry.nota}
                           </p>
                           {entry.tipo !== 'etapa' && (
                             <button onClick={() => eliminarNota(entry.id)}
-                              className="text-stone/30 hover:text-red-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                              className="text-ink-soft/30 hover:text-red-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                               ×
                             </button>
                           )}
                         </div>
-                        <span className="text-xs text-stone/50 mt-1 block">
+                        <span className="text-xs text-ink-soft/50 mt-1 block">
                           {new Date(entry.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
                         </span>
                       </div>
@@ -532,11 +532,11 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               {/* Upload */}
               <div
                 onClick={() => !subiendo && fileRef.current?.click()}
-                className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors mb-5 group ${subiendo ? 'border-gold bg-gold/5 cursor-wait' : 'border-arena-dark hover:border-gold cursor-pointer'}`}
+                className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors mb-5 group ${subiendo ? 'border-gold bg-gold/5 cursor-wait' : 'border-edge hover:border-gold cursor-pointer'}`}
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{subiendo ? '⏳' : '📷'}</div>
-                <div className="font-semibold text-navy mb-1">{subiendo ? 'Subiendo fotos…' : 'Toca para añadir fotos'}</div>
-                <div className="text-xs text-stone">JPG, PNG, WEBP · Máx 10 MB por foto</div>
+                <div className="font-semibold text-ink mb-1">{subiendo ? 'Subiendo fotos…' : 'Toca para añadir fotos'}</div>
+                <div className="text-xs text-ink-soft">JPG, PNG, WEBP · Máx 10 MB por foto</div>
                 <input ref={fileRef} type="file" multiple accept="image/*" className="hidden" onChange={subirFotos} disabled={subiendo} />
               </div>
               {errorFoto && (
@@ -545,7 +545,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                   {errorFoto.includes('policy') || errorFoto.includes('Unauthorized') ? (
                     <div className="mt-2 font-semibold">
                       ⚙️ Falta política de Storage. Ejecuta en Supabase SQL Editor:<br />
-                      <code className="font-mono text-navy">
+                      <code className="font-mono text-ink">
                         CREATE POLICY &quot;up&quot; ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = &apos;obras-fotos&apos;);
                       </code>
                     </div>
@@ -554,16 +554,16 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               )}
 
               {cargandoFotos ? (
-                <div className="text-center py-8 text-stone text-sm">Cargando fotos…</div>
+                <div className="text-center py-8 text-ink-soft text-sm">Cargando fotos…</div>
               ) : fotos.length === 0 ? (
-                <div className="text-center py-8 text-stone text-sm">
+                <div className="text-center py-8 text-ink-soft text-sm">
                   <div className="text-3xl mb-2">🖼️</div>
                   Aún no hay fotos de esta obra
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
                   {fotos.map((foto, i) => (
-                    <div key={i} className="relative group rounded-xl overflow-hidden bg-arena aspect-square">
+                    <div key={i} className="relative group rounded-xl overflow-hidden bg-page aspect-square">
                       <img src={foto.url} alt={foto.nombre} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/40 transition-all flex items-end">
                         <div className="p-2 w-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between">
@@ -587,9 +587,9 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
               {/* Info bucket */}
               {fotos.length === 0 && (
-                <div className="mt-4 bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 text-xs text-stone">
-                  <strong className="text-navy">⚙️ Primera vez:</strong> Asegúrate de haber creado el bucket{' '}
-                  <code className="bg-white px-1 rounded">obras-fotos</code> en Supabase → Storage → New bucket (público).
+                <div className="mt-4 bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 text-xs text-ink-soft">
+                  <strong className="text-ink">⚙️ Primera vez:</strong> Asegúrate de haber creado el bucket{' '}
+                  <code className="bg-surface px-1 rounded">obras-fotos</code> en Supabase → Storage → New bucket (público).
                 </div>
               )}
             </div>
@@ -601,11 +601,11 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               {/* Zona de subida */}
               <div
                 onClick={() => !subiendoPlano && planoRef.current?.click()}
-                className={`border-2 border-dashed rounded-xl p-7 text-center transition-colors mb-5 group cursor-pointer ${subiendoPlano ? 'border-gold bg-gold/5 cursor-wait' : 'border-arena-dark hover:border-gold'}`}
+                className={`border-2 border-dashed rounded-xl p-7 text-center transition-colors mb-5 group cursor-pointer ${subiendoPlano ? 'border-gold bg-gold/5 cursor-wait' : 'border-edge hover:border-gold'}`}
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{subiendoPlano ? '⏳' : '📐'}</div>
-                <div className="font-semibold text-navy mb-1">{subiendoPlano ? 'Subiendo planos…' : 'Añadir planos del proyecto'}</div>
-                <div className="text-xs text-stone">PDF, DWG, DXF, RVT, imágenes · Sin límite de archivos</div>
+                <div className="font-semibold text-ink mb-1">{subiendoPlano ? 'Subiendo planos…' : 'Añadir planos del proyecto'}</div>
+                <div className="text-xs text-ink-soft">PDF, DWG, DXF, RVT, imágenes · Sin límite de archivos</div>
                 <input
                   ref={planoRef}
                   type="file"
@@ -623,21 +623,21 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
               {/* Lista de planos */}
               {cargandoPlanos ? (
-                <div className="text-center py-8 text-stone text-sm">Cargando planos…</div>
+                <div className="text-center py-8 text-ink-soft text-sm">Cargando planos…</div>
               ) : planos.length === 0 ? (
-                <div className="text-center py-10 text-stone text-sm">
+                <div className="text-center py-10 text-ink-soft text-sm">
                   <div className="text-4xl mb-2">📂</div>
-                  <div className="font-semibold text-navy mb-1">Sin planos</div>
+                  <div className="font-semibold text-ink mb-1">Sin planos</div>
                   <div className="text-xs">Sube el proyecto, memorias, mediciones o cualquier documento técnico</div>
                 </div>
               ) : (
                 <div className="space-y-2">
                   {planos.map((p, i) => (
-                    <div key={i} className="flex items-center gap-3 py-3 px-4 bg-arena rounded-xl group hover:bg-arena-dark/50 transition-colors">
+                    <div key={i} className="flex items-center gap-3 py-3 px-4 bg-page rounded-xl group hover:bg-edge/50 transition-colors">
                       <span className="text-2xl flex-shrink-0">{planoIcon(p.nombre)}</span>
                       <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-navy text-sm truncate">{p.nombre}</div>
-                        <div className="text-xs text-stone flex gap-3 mt-0.5">
+                        <div className="font-semibold text-ink text-sm truncate">{p.nombre}</div>
+                        <div className="text-xs text-ink-soft flex gap-3 mt-0.5">
                           {p.fecha && <span>{new Date(p.fecha+'T12:00:00').toLocaleDateString('es-ES')}</span>}
                           {p.size > 0 && <span>{fmtBytes(p.size)}</span>}
                         </div>
@@ -655,7 +655,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                         )}
                         <button
                           onClick={() => eliminarPlano(p)}
-                          className="text-stone/30 hover:text-red-500 text-sm opacity-0 group-hover:opacity-100 transition-opacity px-1"
+                          className="text-ink-soft/30 hover:text-red-500 text-sm opacity-0 group-hover:opacity-100 transition-opacity px-1"
                           title="Eliminar"
                         >
                           ×
@@ -666,8 +666,8 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                 </div>
               )}
 
-              <div className="mt-4 bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 text-xs text-stone">
-                <strong className="text-navy">💡 Consejo:</strong> Aquí van los documentos técnicos del proyecto — memoria, planos, mediciones, detalles constructivos. Las fotos de obra van en el tab <strong>Fotos</strong>.
+              <div className="mt-4 bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 text-xs text-ink-soft">
+                <strong className="text-ink">💡 Consejo:</strong> Aquí van los documentos técnicos del proyecto — memoria, planos, mediciones, detalles constructivos. Las fotos de obra van en el tab <strong>Fotos</strong>.
               </div>
             </div>
           )}
@@ -677,8 +677,8 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
             <div className="p-5">
               {/* Asignar empleado */}
               {asignando ? (
-                <form onSubmit={asignarEmpleado} className="card bg-arena mb-5 space-y-3">
-                  <div className="font-semibold text-navy">Asignar empleado a esta obra</div>
+                <form onSubmit={asignarEmpleado} className="card bg-page mb-5 space-y-3">
+                  <div className="font-semibold text-ink">Asignar empleado a esta obra</div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="col-span-2">
                       <label className="label">Empleado *</label>
@@ -718,7 +718,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
               {/* Lista equipo */}
               {equipoObra.length === 0 ? (
-                <div className="text-center py-10 text-stone text-sm">
+                <div className="text-center py-10 text-ink-soft text-sm">
                   <div className="text-4xl mb-2">👷</div>
                   Aún no hay empleados asignados a esta obra
                 </div>
@@ -727,13 +727,13 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                   {equipoObra.map(eq => {
                     const emp = eq.empleados
                     return (
-                      <div key={eq.id} className="flex items-center gap-4 py-3 border-b border-arena-dark last:border-0">
-                        <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center text-navy font-bold text-sm flex-shrink-0">
+                      <div key={eq.id} className="flex items-center gap-4 py-3 border-b border-edge last:border-0">
+                        <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center text-ink font-bold text-sm flex-shrink-0">
                           {emp?.nombre?.[0]}{emp?.apellidos?.[0]}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-navy">{emp?.nombre} {emp?.apellidos}</div>
-                          <div className="text-xs text-stone flex flex-wrap gap-x-3 mt-0.5">
+                          <div className="font-semibold text-ink">{emp?.nombre} {emp?.apellidos}</div>
+                          <div className="text-xs text-ink-soft flex flex-wrap gap-x-3 mt-0.5">
                             <span>{emp?.puesto}</span>
                             {eq.rol_en_obra && <span className="text-gold-dark font-semibold">{eq.rol_en_obra}</span>}
                             {eq.fecha_inicio && <span>Desde {new Date(eq.fecha_inicio+'T12:00:00').toLocaleDateString('es-ES')}</span>}
@@ -741,9 +741,9 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                           </div>
                         </div>
                         {emp?.telefono && (
-                          <a href={`tel:${emp.telefono}`} className="text-stone/50 hover:text-navy text-sm px-2">📞</a>
+                          <a href={`tel:${emp.telefono}`} className="text-ink-soft/50 hover:text-ink text-sm px-2">📞</a>
                         )}
-                        <button onClick={()=>quitarEmpleado(eq.id)} className="text-stone/30 hover:text-red-500 text-sm px-1 transition-colors flex-shrink-0">×</button>
+                        <button onClick={()=>quitarEmpleado(eq.id)} className="text-ink-soft/30 hover:text-red-500 text-sm px-1 transition-colors flex-shrink-0">×</button>
                       </div>
                     )
                   })}
@@ -905,8 +905,8 @@ export default function Obras() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Obras</h1>
-          <p className="text-sm text-stone mt-0.5">{obras.length} obra{obras.length !== 1 ? 's' : ''} en total</p>
+          <h1 className="text-2xl font-bold text-ink">Obras</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{obras.length} obra{obras.length !== 1 ? 's' : ''} en total</p>
         </div>
         <button onClick={openNew} className="btn-primary">+ Nueva obra</button>
       </div>
@@ -914,14 +914,14 @@ export default function Obras() {
       {/* Stats */}
       <div className="grid grid-cols-4 gap-3 mb-6">
         {[
-          { label: 'Total', value: resumen.total, color: 'text-navy' },
+          { label: 'Total', value: resumen.total, color: 'text-ink' },
           { label: 'En curso', value: resumen.en_curso, color: 'text-gold-dark' },
-          { label: 'Pendientes', value: resumen.pendiente, color: 'text-stone' },
+          { label: 'Pendientes', value: resumen.pendiente, color: 'text-ink-soft' },
           { label: 'Completadas', value: resumen.completada, color: 'text-green-700' },
         ].map(s => (
           <div key={s.label} className="card text-center py-3 cursor-pointer hover:shadow-sm" onClick={() => setFiltroEstado(s.label === 'Total' ? '' : s.label.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(' ', '_'))}>
             <div className={`text-xl font-bold ${s.color}`}>{s.value}</div>
-            <div className="text-xs text-stone mt-0.5">{s.label}</div>
+            <div className="text-xs text-ink-soft mt-0.5">{s.label}</div>
           </div>
         ))}
       </div>
@@ -937,12 +937,12 @@ export default function Obras() {
 
       {/* Listado */}
       {loading ? (
-        <div className="text-stone text-sm py-10 text-center">Cargando obras…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">Cargando obras…</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">🔨</div>
-          <div className="font-bold text-navy mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes obras'}</div>
-          <div className="text-sm text-stone mb-5">
+          <div className="font-bold text-ink mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes obras'}</div>
+          <div className="text-sm text-ink-soft mb-5">
             {search || filtroEstado ? 'Prueba otros filtros' : 'Crea tu primera obra para empezar a gestionar proyectos'}
           </div>
           {!search && !filtroEstado && <button onClick={openNew} className="btn-primary">+ Nueva obra</button>}
@@ -964,27 +964,27 @@ export default function Obras() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 flex-wrap">
-                      <span className="font-bold text-navy text-base">{o.nombre}</span>
+                      <span className="font-bold text-ink text-base">{o.nombre}</span>
                       <EstadoBadge estado={o.estado} />
-                      {nFotos > 0 && <span className="text-xs text-stone/60">📷 {nFotos}</span>}
-                      {nNotas > 0 && <span className="text-xs text-stone/60">📋 {nNotas}</span>}
+                      {nFotos > 0 && <span className="text-xs text-ink-soft/60">📷 {nFotos}</span>}
+                      {nNotas > 0 && <span className="text-xs text-ink-soft/60">📋 {nNotas}</span>}
                     </div>
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-1.5 text-sm text-stone">
+                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-1.5 text-sm text-ink-soft">
                       {o.clientes?.nombre && <span>👤 {o.clientes.nombre}</span>}
                       {o.direccion_obra && <span>📍 {o.direccion_obra}</span>}
                       {o.fecha_fin_prevista && <span>🏁 {new Date(o.fecha_fin_prevista).toLocaleDateString('es-ES')}</span>}
                     </div>
                     {/* Mini barra de progreso */}
                     <div className="mt-2.5 flex items-center gap-2">
-                      <div className="flex-1 h-1 bg-arena-dark rounded-full overflow-hidden">
+                      <div className="flex-1 h-1 bg-edge rounded-full overflow-hidden">
                         <div className="h-full bg-gold rounded-full transition-all" style={{ width: `${pct}%` }} />
                       </div>
-                      <span className="text-xs text-stone flex-shrink-0">{o.etapa || 'Planificación'}</span>
+                      <span className="text-xs text-ink-soft flex-shrink-0">{o.etapa || 'Planificación'}</span>
                     </div>
                   </div>
                   <div className="text-right flex-shrink-0">
                     {o.presupuesto_total > 0 && (
-                      <div className="text-sm font-bold text-navy">
+                      <div className="text-sm font-bold text-ink">
                         {o.presupuesto_total.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
                       </div>
                     )}
@@ -995,9 +995,9 @@ export default function Obras() {
                     )}
                   </div>
                 </div>
-                <div className="flex gap-4 mt-3 pt-3 border-t border-arena-dark" onClick={e => e.stopPropagation()}>
+                <div className="flex gap-4 mt-3 pt-3 border-t border-edge" onClick={e => e.stopPropagation()}>
                   <button onClick={() => setDetalleObra(o)} className="text-gold hover:text-gold-dark text-xs font-semibold">Ver detalle →</button>
-                  <button onClick={e => remove(o.id, o.nombre, e)} className="text-stone/40 hover:text-red-500 text-xs transition-colors">Eliminar</button>
+                  <button onClick={e => remove(o.id, o.nombre, e)} className="text-ink-soft/40 hover:text-red-500 text-xs transition-colors">Eliminar</button>
                 </div>
               </div>
             )
@@ -1008,10 +1008,10 @@ export default function Obras() {
       {/* Modal nueva obra */}
       {showForm && (
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col">
-            <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-navy">Nueva obra</h2>
-              <button onClick={() => setShowForm(false)} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+          <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col">
+            <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
+              <h2 className="text-lg font-bold text-ink">Nueva obra</h2>
+              <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
               <div>

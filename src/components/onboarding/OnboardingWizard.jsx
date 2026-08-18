@@ -59,20 +59,20 @@ export default function OnboardingWizard() {
   }
 
   return (
-    <div className="min-h-screen bg-arena flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-page flex flex-col items-center justify-center p-6">
       {/* Header */}
       <div className="mb-8 text-center">
         <div className="text-2xl font-black mb-1">
           <span className="text-gold">X</span>
-          <span className="text-navy">ANDER</span>
+          <span className="text-ink">ANDER</span>
         </div>
-        <p className="text-sm text-stone">Cuéntanos quién eres — solo lo esencial</p>
+        <p className="text-sm text-ink-soft">Cuéntanos quién eres — solo lo esencial</p>
       </div>
 
       {/* Card */}
       <div className="card w-full max-w-md">
-        <h2 className="text-lg font-bold text-navy mb-1">Bienvenido a XANDER</h2>
-        <p className="text-sm text-stone mb-6">
+        <h2 className="text-lg font-bold text-ink mb-1">Bienvenido a XANDER</h2>
+        <p className="text-sm text-ink-soft mb-6">
           Rellena dos datos y ya puedes empezar. Puedes completar el resto del perfil más tarde.
         </p>
 
@@ -120,9 +120,9 @@ export default function OnboardingWizard() {
           <div>
             <label className="label">
               Especialidades
-              <span className="text-stone font-normal ml-1">(opcional)</span>
+              <span className="text-ink-soft font-normal ml-1">(opcional)</span>
             </label>
-            <p className="text-xs text-stone mb-2">¿Qué trabajos realizas habitualmente?</p>
+            <p className="text-xs text-ink-soft mb-2">¿Qué trabajos realizas habitualmente?</p>
             <div className="flex flex-wrap gap-2">
               {ESPECIALIDADES.map(e => (
                 <button key={e} type="button"
@@ -130,7 +130,7 @@ export default function OnboardingWizard() {
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all border ${
                     data.especialidades.includes(e)
                       ? 'bg-navy text-gold border-navy'
-                      : 'bg-white text-stone border-arena-dark hover:border-navy'
+                      : 'bg-surface text-ink-soft border-edge hover:border-navy'
                   }`}>
                   {e}
                 </button>
@@ -140,14 +140,14 @@ export default function OnboardingWizard() {
         </div>
 
         {/* Aviso datos adicionales */}
-        <div className="mt-6 bg-arena rounded-lg px-4 py-3 text-xs text-stone flex gap-2">
+        <div className="mt-6 bg-page rounded-lg px-4 py-3 text-xs text-ink-soft flex gap-2">
           <span>ℹ️</span>
           <span>Puedes añadir NIF, dirección, teléfonos y más en <strong>Mi Empresa</strong> cuando quieras. Son necesarios para imprimir presupuestos y facturas completos.</span>
         </div>
 
         {/* Botones */}
-        <div className="flex justify-between mt-6 pt-4 border-t border-arena-dark">
-          <button onClick={signOut} className="text-sm text-stone hover:text-navy">
+        <div className="flex justify-between mt-6 pt-4 border-t border-edge">
+          <button onClick={signOut} className="text-sm text-ink-soft hover:text-ink">
             Salir
           </button>
           <button onClick={finish} disabled={saving} className="btn-gold">

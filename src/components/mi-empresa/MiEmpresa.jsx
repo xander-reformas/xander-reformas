@@ -63,19 +63,19 @@ export default function MiEmpresa() {
     setTimeout(() => setSaved(false), 3000)
   }
 
-  if (!form) return <div className="p-6 text-stone text-sm">Cargando…</div>
+  if (!form) return <div className="p-6 text-ink-soft text-sm">Cargando…</div>
 
   return (
     <div className="p-6 max-w-3xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy">Mi Empresa</h1>
-        <p className="text-sm text-stone mt-0.5">Estos datos aparecerán en tus presupuestos y facturas</p>
+        <h1 className="text-2xl font-bold text-ink">Mi Empresa</h1>
+        <p className="text-sm text-ink-soft mt-0.5">Estos datos aparecerán en tus presupuestos y facturas</p>
       </div>
 
       <form onSubmit={save} className="space-y-8">
         {/* Datos personales */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-stone border-b border-arena-dark pb-3">Datos personales</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Datos personales</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label">Nombre</label>
@@ -98,7 +98,7 @@ export default function MiEmpresa() {
 
         {/* Datos de empresa */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-stone border-b border-arena-dark pb-3">Datos de empresa / actividad</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Datos de empresa / actividad</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
               <label className="label">Nombre comercial / empresa *</label>
@@ -137,7 +137,7 @@ export default function MiEmpresa() {
 
         {/* Actividad */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-stone border-b border-arena-dark pb-3">Actividad profesional</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Actividad profesional</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label">Fecha inicio actividad</label>
@@ -145,9 +145,9 @@ export default function MiEmpresa() {
             </div>
             <div className="flex items-center gap-3 pt-5">
               <input type="checkbox" id="tarifa_red" checked={form.tarifa_reducida} onChange={e => setF('tarifa_reducida', e.target.checked)} className="w-4 h-4 accent-gold" />
-              <label htmlFor="tarifa_red" className="text-sm text-navy cursor-pointer">
+              <label htmlFor="tarifa_red" className="text-sm text-ink cursor-pointer">
                 Tarifa plana / reducida activa
-                <span className="block text-xs text-stone">Primeros 2 años como autónomo</span>
+                <span className="block text-xs text-ink-soft">Primeros 2 años como autónomo</span>
               </label>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function MiEmpresa() {
                 const active = form.especialidades.includes(esp)
                 return (
                   <button key={esp} type="button" onClick={() => toggleEsp(esp)}
-                    className={`text-xs px-3 py-1.5 rounded-full border font-medium transition-colors ${active ? 'bg-navy text-gold border-navy' : 'bg-white text-stone border-arena-dark hover:border-navy hover:text-navy'}`}>
+                    className={`text-xs px-3 py-1.5 rounded-full border font-medium transition-colors ${active ? 'bg-navy text-gold border-navy' : 'bg-surface text-ink-soft border-edge hover:border-navy hover:text-ink'}`}>
                     {esp}
                   </button>
                 )

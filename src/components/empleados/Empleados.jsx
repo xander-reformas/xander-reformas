@@ -239,8 +239,8 @@ export default function Empleados() {
       {/* Cabecera */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Empleados y equipo</h1>
-          <p className="text-sm text-stone mt-0.5">Gestión del equipo de trabajo, costes laborales y convenio colectivo</p>
+          <h1 className="text-2xl font-bold text-ink">Empleados y equipo</h1>
+          <p className="text-sm text-ink-soft mt-0.5">Gestión del equipo de trabajo, costes laborales y convenio colectivo</p>
         </div>
         {tab === 'equipo' && !setupNeeded && (
           <button onClick={openNew} className="btn-primary">+ Nuevo empleado</button>
@@ -251,12 +251,12 @@ export default function Empleados() {
       {!setupNeeded && !loading && activos.length > 0 && (
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="card text-center py-3">
-            <div className="text-2xl font-black text-navy">{activos.length}</div>
-            <div className="text-xs text-stone mt-0.5">Empleados activos</div>
+            <div className="text-2xl font-black text-ink">{activos.length}</div>
+            <div className="text-xs text-ink-soft mt-0.5">Empleados activos</div>
           </div>
           <div className="card text-center py-3">
-            <div className="text-lg font-black text-navy">{fmt(costeTotalMensual)}</div>
-            <div className="text-xs text-stone mt-0.5">Salario bruto mensual</div>
+            <div className="text-lg font-black text-ink">{fmt(costeTotalMensual)}</div>
+            <div className="text-xs text-ink-soft mt-0.5">Salario bruto mensual</div>
           </div>
           <div className="card bg-navy text-center py-3">
             <div className="text-lg font-black text-gold">{fmt(totalEmpresa)}</div>
@@ -266,14 +266,14 @@ export default function Empleados() {
       )}
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-arena-dark rounded-xl p-1 w-fit mb-6">
+      <div className="flex gap-1 bg-edge rounded-xl p-1 w-fit mb-6">
         {[
           { id: 'equipo',   label: '👥 Equipo' },
           { id: 'costes',   label: '💰 Costes' },
           { id: 'convenio', label: '📋 Convenio' },
         ].map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
-            className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === t.id ? 'bg-white text-navy shadow-sm' : 'text-stone hover:text-navy'}`}>
+            className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === t.id ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
             {t.label}
           </button>
         ))}
@@ -286,20 +286,20 @@ export default function Empleados() {
             <div className="flex items-start gap-4">
               <div className="text-3xl">⚙️</div>
               <div>
-                <div className="font-bold text-navy mb-2">Crear tabla en Supabase</div>
-                <p className="text-sm text-stone mb-3">Ejecuta el archivo <code className="bg-arena px-1.5 py-0.5 rounded font-mono text-xs">supabase/empleados.sql</code> en el SQL Editor de Supabase.</p>
+                <div className="font-bold text-ink mb-2">Crear tabla en Supabase</div>
+                <p className="text-sm text-ink-soft mb-3">Ejecuta el archivo <code className="bg-page px-1.5 py-0.5 rounded font-mono text-xs">supabase/empleados.sql</code> en el SQL Editor de Supabase.</p>
                 <button onClick={() => { setSetup(false); load() }} className="btn-primary text-sm">Ya ejecutado — recargar</button>
               </div>
             </div>
           </div>
         ) : loading ? (
-          <div className="text-stone text-sm py-10 text-center">Cargando equipo…</div>
+          <div className="text-ink-soft text-sm py-10 text-center">Cargando equipo…</div>
         ) : (
           <div>
             {/* Filtros */}
             <div className="flex flex-wrap gap-3 mb-5">
               <input className="input max-w-xs" placeholder="🔍  Buscar…" value={search} onChange={e => setSearch(e.target.value)} />
-              <div className="flex gap-1 bg-arena-dark rounded-xl p-1">
+              <div className="flex gap-1 bg-edge rounded-xl p-1">
                 {[
                   { v: 'activo', l: 'Activos' },
                   { v: 'baja_temporal', l: 'Baja temporal' },
@@ -307,7 +307,7 @@ export default function Empleados() {
                   { v: 'todos', l: 'Todos' },
                 ].map(o => (
                   <button key={o.v} onClick={() => setFiltro(o.v)}
-                    className={`px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${filtroEstado === o.v ? 'bg-white text-navy shadow-sm' : 'text-stone hover:text-navy'}`}>
+                    className={`px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${filtroEstado === o.v ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
                     {o.l}
                   </button>
                 ))}
@@ -317,8 +317,8 @@ export default function Empleados() {
             {lista.length === 0 ? (
               <div className="card text-center py-14">
                 <div className="text-5xl mb-3">👷</div>
-                <div className="font-bold text-navy mb-1">{search ? 'Sin resultados' : 'Sin empleados registrados'}</div>
-                <div className="text-sm text-stone mb-5">Añade tu primer empleado o colaborador</div>
+                <div className="font-bold text-ink mb-1">{search ? 'Sin resultados' : 'Sin empleados registrados'}</div>
+                <div className="text-sm text-ink-soft mb-5">Añade tu primer empleado o colaborador</div>
                 {!search && <button onClick={openNew} className="btn-primary">+ Nuevo empleado</button>}
               </div>
             ) : (
@@ -338,7 +338,7 @@ export default function Empleados() {
                         {/* Info principal */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-3 flex-wrap">
-                            <span className="font-bold text-navy">{emp.nombre} {emp.apellidos}</span>
+                            <span className="font-bold text-ink">{emp.nombre} {emp.apellidos}</span>
                             {tc && (
                               <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${tc.color}`}>{tc.label}</span>
                             )}
@@ -349,11 +349,11 @@ export default function Empleados() {
                               <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-red-100 text-red-700">Baja definitiva</span>
                             )}
                           </div>
-                          <div className="text-sm text-stone mt-0.5">
+                          <div className="text-sm text-ink-soft mt-0.5">
                             {puestoLabel(emp.puesto)}{emp.especialidad ? ` · ${emp.especialidad}` : ''}
                             {emp.grupo_convenio ? ` · Grupo ${emp.grupo_convenio} CC` : ''}
                           </div>
-                          <div className="flex flex-wrap gap-4 mt-2 text-xs text-stone">
+                          <div className="flex flex-wrap gap-4 mt-2 text-xs text-ink-soft">
                             {emp.telefono && <span>📞 {emp.telefono}</span>}
                             {emp.fecha_alta && <span>📅 Alta: {new Date(emp.fecha_alta + 'T12:00:00').toLocaleDateString('es-ES')}</span>}
                             {emp.jornada_pct < 100 && <span>⏱️ {emp.jornada_pct}% jornada</span>}
@@ -364,9 +364,9 @@ export default function Empleados() {
                         <div className="text-right flex-shrink-0">
                           {bruto > 0 && (
                             <>
-                              <div className="text-sm text-stone">{fmt(bruto)} bruto</div>
-                              <div className="text-xs text-stone/60">+ {fmt(ss)} SS</div>
-                              <div className="font-bold text-navy text-base">{fmt(total)} / mes</div>
+                              <div className="text-sm text-ink-soft">{fmt(bruto)} bruto</div>
+                              <div className="text-xs text-ink-soft/60">+ {fmt(ss)} SS</div>
+                              <div className="font-bold text-ink text-base">{fmt(total)} / mes</div>
                             </>
                           )}
                         </div>
@@ -375,12 +375,12 @@ export default function Empleados() {
                         <div className="flex items-center gap-2 flex-shrink-0 ml-2">
                           <button onClick={() => openEdit(emp)} className="text-gold hover:text-gold-dark text-xs font-semibold">Editar</button>
                           {emp.estado === 'activo' && (
-                            <button onClick={() => cambiarEstado(emp, 'baja_temporal')} className="text-xs text-stone hover:text-orange-600" title="Dar de baja temporal">↓ Baja</button>
+                            <button onClick={() => cambiarEstado(emp, 'baja_temporal')} className="text-xs text-ink-soft hover:text-orange-600" title="Dar de baja temporal">↓ Baja</button>
                           )}
                           {emp.estado === 'baja_temporal' && (
-                            <button onClick={() => cambiarEstado(emp, 'activo')} className="text-xs text-stone hover:text-green-600" title="Reincorporar">↑ Alta</button>
+                            <button onClick={() => cambiarEstado(emp, 'activo')} className="text-xs text-ink-soft hover:text-green-600" title="Reincorporar">↑ Alta</button>
                           )}
-                          <button onClick={() => remove(emp)} className="text-stone/30 hover:text-red-500 text-lg leading-none">×</button>
+                          <button onClick={() => remove(emp)} className="text-ink-soft/30 hover:text-red-500 text-lg leading-none">×</button>
                         </div>
                       </div>
                     </div>
@@ -404,17 +404,17 @@ export default function Empleados() {
           {/* Resumen del equipo */}
           {activos.length > 0 && (
             <div>
-              <h2 className="text-base font-bold text-navy mb-4">Resumen del equipo activo</h2>
+              <h2 className="text-base font-bold text-ink mb-4">Resumen del equipo activo</h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-arena-dark">
-                      <th className="text-left py-2 px-3 text-xs font-bold text-stone uppercase tracking-wide">Empleado</th>
-                      <th className="text-left py-2 px-3 text-xs font-bold text-stone uppercase tracking-wide">Puesto</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-stone uppercase tracking-wide">Bruto / mes</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-stone uppercase tracking-wide">SS empresa</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-stone uppercase tracking-wide">Coste total / mes</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-stone uppercase tracking-wide">Anual estimado</th>
+                    <tr className="border-b border-edge">
+                      <th className="text-left py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Empleado</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Puesto</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Bruto / mes</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">SS empresa</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Coste total / mes</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Anual estimado</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -422,13 +422,13 @@ export default function Empleados() {
                       const bruto = parseFloat(emp.salario_bruto) || 0
                       const { ss, total } = costeEmpresa(bruto)
                       return (
-                        <tr key={emp.id} className="border-b border-arena-dark/50 hover:bg-arena/30 transition-colors">
-                          <td className="py-2.5 px-3 font-semibold text-navy">{emp.nombre} {emp.apellidos}</td>
-                          <td className="py-2.5 px-3 text-stone">{puestoLabel(emp.puesto)}</td>
+                        <tr key={emp.id} className="border-b border-edge/50 hover:bg-page/30 transition-colors">
+                          <td className="py-2.5 px-3 font-semibold text-ink">{emp.nombre} {emp.apellidos}</td>
+                          <td className="py-2.5 px-3 text-ink-soft">{puestoLabel(emp.puesto)}</td>
                           <td className="py-2.5 px-3 text-right">{fmt(bruto)}</td>
-                          <td className="py-2.5 px-3 text-right text-stone">{fmt(ss)}</td>
-                          <td className="py-2.5 px-3 text-right font-bold text-navy">{fmt(total)}</td>
-                          <td className="py-2.5 px-3 text-right text-stone">{fmt(total * 12)}</td>
+                          <td className="py-2.5 px-3 text-right text-ink-soft">{fmt(ss)}</td>
+                          <td className="py-2.5 px-3 text-right font-bold text-ink">{fmt(total)}</td>
+                          <td className="py-2.5 px-3 text-right text-ink-soft">{fmt(total * 12)}</td>
                         </tr>
                       )
                     })}
@@ -444,14 +444,14 @@ export default function Empleados() {
                   </tfoot>
                 </table>
               </div>
-              <p className="text-xs text-stone mt-3">
+              <p className="text-xs text-ink-soft mt-3">
                 * La SS empresa se calcula al {SS_TOTAL.toFixed(2)}% sobre el salario bruto (contingencias + AT/EP construcción + desempleo + FOGASA + FP + MEI). El coste real puede variar según la base de cotización y convenio provincial.
               </p>
             </div>
           )}
 
           {activos.length === 0 && (
-            <div className="card text-center py-10 text-stone text-sm">
+            <div className="card text-center py-10 text-ink-soft text-sm">
               Añade empleados en la pestaña Equipo para ver el resumen de costes.
             </div>
           )}
@@ -461,7 +461,7 @@ export default function Empleados() {
       {/* ── CONVENIO ──────────────────────────────────────────────────────── */}
       {tab === 'convenio' && (
         <div>
-          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-stone">
+          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-ink-soft">
             ℹ️ <strong>Guía orientativa.</strong> Basada en el VI Convenio Colectivo General del Sector de la Construcción (2022-2026). Verifica siempre los importes actualizados con tu asesoría laboral o en el BOE / convenio provincial.
           </div>
           <div className="space-y-6">
@@ -470,15 +470,15 @@ export default function Empleados() {
                 <div className="flex items-start gap-3 mb-4">
                   <span className="text-2xl flex-shrink-0">{sec.icon}</span>
                   <div>
-                    <h2 className="font-bold text-navy">{sec.titulo}</h2>
-                    <p className="text-sm text-stone mt-1 leading-relaxed">{sec.desc}</p>
+                    <h2 className="font-bold text-ink">{sec.titulo}</h2>
+                    <p className="text-sm text-ink-soft mt-1 leading-relaxed">{sec.desc}</p>
                   </div>
                 </div>
-                <div className="bg-arena rounded-xl overflow-hidden">
+                <div className="bg-page rounded-xl overflow-hidden">
                   {sec.items.map((item, i) => (
                     <div key={i} className={`flex items-baseline justify-between gap-4 px-4 py-2.5 ${i < sec.items.length - 1 ? 'border-b border-white/60' : ''}`}>
-                      <span className={`text-sm ${item.bold ? 'font-bold text-navy' : 'text-stone'}`}>{item.label}</span>
-                      <span className={`text-sm text-right flex-shrink-0 ${item.bold ? 'font-bold text-navy' : 'text-navy'}`}>{item.valor}</span>
+                      <span className={`text-sm ${item.bold ? 'font-bold text-ink' : 'text-ink-soft'}`}>{item.label}</span>
+                      <span className={`text-sm text-right flex-shrink-0 ${item.bold ? 'font-bold text-ink' : 'text-ink'}`}>{item.valor}</span>
                     </div>
                   ))}
                 </div>
@@ -511,10 +511,10 @@ export default function Empleados() {
       {/* ── Modal formulario ──────────────────────────────────────────────── */}
       {showForm && (
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col">
-            <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-navy">{editId ? 'Editar empleado' : 'Nuevo empleado'}</h2>
-              <button onClick={() => setShowForm(false)} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+          <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col">
+            <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
+              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar empleado' : 'Nuevo empleado'}</h2>
+              <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
               {/* Nombre */}
@@ -566,7 +566,7 @@ export default function Empleados() {
                   <input className="input" type="number" min="0" step="0.01" value={form.salario_bruto}
                     onChange={e => setF('salario_bruto', e.target.value)} required placeholder="1.500,00" />
                   {form.salario_bruto > 0 && (
-                    <div className="text-xs text-stone mt-1">
+                    <div className="text-xs text-ink-soft mt-1">
                       Coste empresa: <strong>{fmt(costeEmpresa(parseFloat(form.salario_bruto) || 0).total)}</strong> / mes
                     </div>
                   )}
@@ -575,7 +575,7 @@ export default function Empleados() {
                   <label className="label">% de jornada</label>
                   <input className="input" type="number" min="1" max="100" value={form.jornada_pct}
                     onChange={e => setF('jornada_pct', e.target.value)} />
-                  <div className="text-xs text-stone mt-1">100% = jornada completa</div>
+                  <div className="text-xs text-ink-soft mt-1">100% = jornada completa</div>
                 </div>
               </div>
 
@@ -655,14 +655,14 @@ function CostCalculator() {
             onChange={e => setBruto(e.target.value)} placeholder="1.500" />
         </div>
         {b > 0 && (
-          <div className="bg-arena rounded-xl p-4 space-y-2 text-sm">
+          <div className="bg-page rounded-xl p-4 space-y-2 text-sm">
             {Object.entries(SS).map(([k, v]) => (
-              <div key={k} className="flex justify-between text-stone">
+              <div key={k} className="flex justify-between text-ink-soft">
                 <span className="capitalize">{k.replace('_', ' + ')} ({v.toFixed(2)}%)</span>
                 <span>{fmt(b * v / 100)}</span>
               </div>
             ))}
-            <div className="border-t border-stone/20 pt-2 flex justify-between font-bold text-navy">
+            <div className="border-t border-stone/20 pt-2 flex justify-between font-bold text-ink">
               <span>Total SS empresa ({SS_TOTAL.toFixed(2)}%)</span>
               <span>{fmt(ss)}</span>
             </div>
@@ -679,18 +679,18 @@ function CostCalculator() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="card text-center py-3">
-                <div className="text-sm font-bold text-navy">{fmt(total * 12)}</div>
-                <div className="text-xs text-stone">Coste anual (×12)</div>
+                <div className="text-sm font-bold text-ink">{fmt(total * 12)}</div>
+                <div className="text-xs text-ink-soft">Coste anual (×12)</div>
               </div>
               <div className="card text-center py-3">
-                <div className="text-sm font-bold text-navy">{fmt(total * 14)}</div>
-                <div className="text-xs text-stone">Con 2 pagas extra</div>
+                <div className="text-sm font-bold text-ink">{fmt(total * 14)}</div>
+                <div className="text-xs text-ink-soft">Con 2 pagas extra</div>
               </div>
             </div>
           </>
         )}
         {!b && (
-          <div className="flex items-center justify-center h-full text-stone text-sm text-center py-10">
+          <div className="flex items-center justify-center h-full text-ink-soft text-sm text-center py-10">
             Introduce el salario bruto para calcular el coste real
           </div>
         )}

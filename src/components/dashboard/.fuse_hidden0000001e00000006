@@ -1,0 +1,300 @@
+import { useState, useEffect } from 'react'
+import { format, startOfMonth, endOfMonth, eachDayOfInterval,
+         isSameMonth, isToday, isSameDay, addMonths, subMonths } from 'date-fns'
+import { es } from 'date-fns/locale'
+import { supabase, getUID } from '../../lib/supabase'
+
+const TIPOS = {
+  trabajo:       { label: 'Trabajo',       color: '#1A1A2E' },
+  reunion:       { label: 'Reunión',       color: '#C9A84C' },
+  cobro:         { label: 'Cobro',         color: '#16a34a' },
+  recordatorio:  { label: 'Recordatorio', color: '#9333ea' },
+  visita:        { label: 'Visita obra',  color: '#ea580c' },
+}
+
+const EVENTO_EMPTY = { titulo: '', tipo: 'trabajo', hora: '', descripcion: '', notificar_email: false }
+
+export default function CalendarioWidget() {
+  const [abierto,         setAbierto]         = useState(false)
+  const [mes,             setMes]             = useState(new Date())
+  const [diaSeleccionado, setDiaSeleccionado] = useState(new Date())
+  const [eventos,         setEventos]         = useState([])
+  const [cargando,        setCargando]        = useState(false)
+  const [modalNuevo,      setModalNuevo]      = useState(false)
+  const [nuevo,           setNuevo]           = useState({ ...EVENTO_EMPTY })
+  const [editando,        setEditando]        = useState(null)   // evento que se está editando
+  const [guardando,       setGuardando]       = useState(false)
+
+  useEffect(() => { if (abierto) cargar() }, [abierto])
+
+  async function cargar() {
+    setCargando(true)
+    const { data } = await supabase
+      .from('calendario_eventos')
+      .select('*')
+      .order('fecha').order('hora', { nullsFirst: false })
+    setEventos(data || [])
+    setCargando(false)
+  }
+
+  async function guardar() {
+    if (!nuevo.titulo.trim()) return
+    setGuardando(true)
+    const payload = {
+      hora: nuevo.hora || null,
+      titulo: nuevo.titulo.trim(),
+      tipo: nuevo.tipo,
+      descripcion: nuevo.descripcion || null,
+      notificar_email: nuevo.notificar_email,
+    }
+
+    if (editando) {
+      // Actualizar evento existente
+      const { error } = await supabase.from('calendario_eventos').update(payload).eq('id', editando.id)
+      setGuardando(false)
+      if (!error) { setEditando(null); setNuevo({ ...EVENTO_EMPTY }); setModalNuevo(false); cargar() }
+    } else {
+      // Crear nuevo evento
+      const user_id = await getUID()
+      const { error } = await supabase.from('calendario_eventos').insert({
+        user_id,
+        fecha: format(diaSeleccionado, 'yyyy-MM-dd'),
+        ...payload,
+      })
+      setGuardando(false)
+      if (!error) { setNuevo({ ...EVENTO_EMPTY }); setModalNuevo(false); cargar() }
+    }
+  }
+
+  function abrirEdicion(ev) {
+    setEditando(ev)
+    setNuevo({
+      titulo: ev.titulo || '',
+      tipo: ev.tipo || 'trabajo',
+      hora: ev.hora?.slice(0, 5) || '',
+      descripcion: ev.descripcion || '',
+      notificar_email: ev.notificar_email || false,
+    })
+    setModalNuevo(true)
+  }
+
+  async function eliminar(id) {
+    await supabase.from('calendario_eventos').delete().eq('id', id)
+    setEventos(p => p.filter(e => e.id !== id))
+  }
+
+  const dias = eachDayOfInterval({ start: startOfMonth(mes), end: endOfMonth(mes) })
+  const offset = (() => { const d = startOfMonth(mes).getDay(); return d === 0 ? 6 : d - 1 })()
+
+  const eventosDia = eventos
+    .filter(e => isSameDay(new Date(e.fecha + 'T00:00:00'), diaSeleccionado))
+    .sort((a, b) => (a.hora || '99:99').localeCompare(b.hora || '99:99'))
+
+  const tieneDia = (dia) => eventos.some(e => isSameDay(new Date(e.fecha + 'T00:00:00'), dia))
+
+  // Próximos eventos (hoy + 7 días) para el mini-aviso
+  const hoy = new Date(); hoy.setHours(0,0,0,0)
+  const en7 = new Date(hoy); en7.setDate(en7.getDate() + 7)
+  const proximos = eventos.filter(e => {
+    const d = new Date(e.fecha + 'T00:00:00')
+    return d >= hoy && d <= en7
+  }).slice(0, 3)
+
+  return (
+    <div className="card">
+      {/* Toggle header */}
+      <button onClick={() => setAbierto(p => !p)} className="w-full flex items-center justify-between text-left">
+        <div className="flex items-center gap-2">
+          <span className="text-lg">📅</span>
+          <span className="font-semibold text-ink">Calendario de trabajo</span>
+          {eventos.length > 0 && (
+            <span className="bg-gold text-ink text-xs font-bold px-2 py-0.5 rounded-full">{eventos.length}</span>
+          )}
+        </div>
+        <span className={`text-ink-soft text-sm transition-transform ${abierto ? 'rotate-180' : ''}`}>▼</span>
+      </button>
+
+      {/* Próximos (siempre visible) */}
+      {!abierto && proximos.length > 0 && (
+        <div className="mt-3 space-y-1.5">
+          {proximos.map(e => (
+            <div key={e.id} className="flex items-center gap-2 text-xs">
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: TIPOS[e.tipo]?.color }} />
+              <span className="text-ink-soft w-16 flex-shrink-0">
+                {isToday(new Date(e.fecha + 'T00:00:00')) ? 'Hoy' : format(new Date(e.fecha + 'T00:00:00'), 'dd MMM', { locale: es })}
+                {e.hora ? ` ${e.hora.slice(0,5)}` : ''}
+              </span>
+              <span className="text-ink font-medium truncate">{e.titulo}</span>
+              {e.notificar_email && <span className="text-gold text-xs" title="Alerta por email">🔔</span>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {abierto && (
+        <div className="mt-4 border-t border-edge pt-4">
+          {cargando ? (
+            <div className="text-center text-ink-soft text-sm py-8">Cargando…</div>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Calendario */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <button onClick={() => setMes(m => subMonths(m, 1))} className="text-ink-soft hover:text-ink p-1">◀</button>
+                  <span className="text-sm font-semibold text-ink capitalize">
+                    {format(mes, 'MMMM yyyy', { locale: es })}
+                  </span>
+                  <button onClick={() => setMes(m => addMonths(m, 1))} className="text-ink-soft hover:text-ink p-1">▶</button>
+                </div>
+
+                <div className="grid grid-cols-7 mb-1">
+                  {['L','M','X','J','V','S','D'].map(d => (
+                    <div key={d} className="text-center text-xs font-semibold text-ink-soft py-1">{d}</div>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-7 gap-0.5">
+                  {Array.from({ length: offset }).map((_, i) => <div key={`e${i}`} />)}
+                  {dias.map(dia => {
+                    const sel  = isSameDay(dia, diaSeleccionado)
+                    const hoyD = isToday(dia)
+                    const tieneEvento = tieneDia(dia)
+                    return (
+                      <button
+                        key={dia.toISOString()}
+                        onClick={() => setDiaSeleccionado(dia)}
+                        className={`relative aspect-square flex items-center justify-center text-xs rounded-lg transition-all ${
+                          sel  ? 'bg-navy text-gold font-bold' :
+                          hoyD ? 'bg-gold/20 text-ink font-semibold' :
+                          'hover:bg-edge text-ink'
+                        }`}
+                      >
+                        {format(dia, 'd')}
+                        {tieneEvento && (
+                          <span className={`absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${sel ? 'bg-gold' : 'bg-navy'}`} />
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Panel del día */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-sm font-semibold text-ink capitalize">
+                    {format(diaSeleccionado, "EEEE d 'de' MMMM", { locale: es })}
+                  </div>
+                  <button onClick={() => setModalNuevo(true)} className="btn-gold text-xs py-1 px-3">+ Añadir</button>
+                </div>
+
+                {eventosDia.length === 0 ? (
+                  <div className="text-center text-ink-soft text-sm py-8 border border-dashed border-edge rounded-lg">
+                    Sin eventos para este día
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {eventosDia.map(ev => (
+                      <div key={ev.id} className="bg-page rounded-lg p-3 flex gap-3">
+                        <div className="w-1 rounded-full flex-shrink-0" style={{ background: TIPOS[ev.tipo]?.color }} />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-semibold text-ink truncate">{ev.titulo}</span>
+                            {ev.notificar_email && (
+                              <span className="text-gold text-xs flex-shrink-0" title="Alerta por email activa">🔔</span>
+                            )}
+                          </div>
+                          {ev.hora && (
+                            <div className="text-xs font-semibold text-gold-dark mt-0.5">🕐 {ev.hora.slice(0,5)}</div>
+                          )}
+                          {ev.descripcion && <div className="text-xs text-ink-soft mt-0.5">{ev.descripcion}</div>}
+                          <div className="text-xs text-stone-light mt-1">{TIPOS[ev.tipo]?.label}</div>
+                        </div>
+                        <div className="flex flex-col gap-1 flex-shrink-0 self-start">
+                          <button onClick={() => abrirEdicion(ev)} className="text-gold hover:text-gold-dark text-xs font-semibold">✏️</button>
+                          <button onClick={() => eliminar(ev.id)} className="text-ink-soft hover:text-red-500 text-xs">✕</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Modal nuevo evento */}
+          {modalNuevo && (
+            <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+              <div className="card w-full max-w-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-ink">
+                    {editando ? 'Editar evento' : `Nuevo evento — ${format(diaSeleccionado, "d 'de' MMMM", { locale: es })}`}
+                  </h3>
+                  <button onClick={() => { setModalNuevo(false); setEditando(null); setNuevo({ ...EVENTO_EMPTY }) }} className="text-ink-soft hover:text-ink text-xl leading-none">×</button>
+                </div>
+
+                <div className="space-y-3">
+                  <div>
+                    <label className="label">Título *</label>
+                    <input className="input" value={nuevo.titulo}
+                      onChange={e => setNuevo(p => ({ ...p, titulo: e.target.value }))}
+                      placeholder="Ej: Visita obra cliente" autoFocus />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="label">Tipo</label>
+                      <select className="input" value={nuevo.tipo}
+                        onChange={e => setNuevo(p => ({ ...p, tipo: e.target.value }))}>
+                        {Object.entries(TIPOS).map(([k, v]) => (
+                          <option key={k} value={k}>{v.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="label">Hora</label>
+                      <input className="input" type="time" value={nuevo.hora}
+                        onChange={e => setNuevo(p => ({ ...p, hora: e.target.value }))} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="label">Descripción (opcional)</label>
+                    <textarea className="input resize-none" rows={2} value={nuevo.descripcion}
+                      onChange={e => setNuevo(p => ({ ...p, descripcion: e.target.value }))}
+                      placeholder="Detalles adicionales…" />
+                  </div>
+
+                  {/* Toggle alerta email */}
+                  <div
+                    onClick={() => setNuevo(p => ({ ...p, notificar_email: !p.notificar_email }))}
+                    className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${
+                      nuevo.notificar_email
+                        ? 'border-gold bg-gold/10'
+                        : 'border-edge bg-page hover:border-stone/30'
+                    }`}
+                  >
+                    <div className={`w-10 h-6 rounded-full transition-colors flex items-center px-0.5 ${nuevo.notificar_email ? 'bg-gold' : 'bg-stone/30'}`}>
+                      <div className={`w-5 h-5 bg-surface rounded-full shadow transition-transform ${nuevo.notificar_email ? 'translate-x-4' : ''}`} />
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-ink">🔔 Alerta por email</div>
+                      <div className="text-xs text-ink-soft">Aviso 24h antes y 1h antes</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-2 mt-4">
+                  <button onClick={() => { setModalNuevo(false); setEditando(null); setNuevo({ ...EVENTO_EMPTY }) }} className="btn-secondary flex-1">Cancelar</button>
+                  <button onClick={guardar} disabled={guardando || !nuevo.titulo.trim()} className="btn-primary flex-1">
+                    {guardando ? 'Guardando…' : editando ? 'Guardar cambios' : 'Guardar'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}

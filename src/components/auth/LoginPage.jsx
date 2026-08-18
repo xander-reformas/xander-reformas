@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import GoogleButton from './GoogleButton'
+import ThemeToggle from '../dashboard/ThemeToggle'
 
 export default function LoginPage() {
   const { signIn } = useAuth()
@@ -20,7 +21,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-arena flex">
+    <div className="min-h-screen bg-page flex relative">
+      <div className="absolute top-4 right-4 z-10">
+        <ThemeToggle compact />
+      </div>
       {/* Panel izquierdo — branding */}
       <div className="hidden lg:flex w-1/2 bg-navy flex-col justify-between p-12">
         <div>
@@ -51,18 +55,18 @@ export default function LoginPage() {
         <div className="w-full max-w-sm">
           <div className="lg:hidden text-2xl font-black mb-8">
             <span className="text-gold">X</span>
-            <span className="text-navy">ANDER</span>
+            <span className="text-ink">ANDER</span>
           </div>
 
-          <h1 className="text-2xl font-bold text-navy mb-1">Bienvenido</h1>
-          <p className="text-sm text-stone mb-6">Accede a tu cuenta</p>
+          <h1 className="text-2xl font-bold text-ink mb-1">Bienvenido</h1>
+          <p className="text-sm text-ink-soft mb-6">Accede a tu cuenta</p>
 
           {/* Google */}
           <GoogleButton label="Continuar con Google" />
           <div className="flex items-center gap-3 my-5">
-            <div className="flex-1 h-px bg-arena-dark" />
-            <span className="text-xs text-stone">o con email</span>
-            <div className="flex-1 h-px bg-arena-dark" />
+            <div className="flex-1 h-px bg-edge" />
+            <span className="text-xs text-ink-soft">o con email</span>
+            <div className="flex-1 h-px bg-edge" />
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -105,7 +109,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-stone">
+          <div className="mt-6 text-center text-sm text-ink-soft">
             ¿No tienes cuenta?{' '}
             <Link to="/registro" className="text-gold font-semibold hover:underline">
               Regístrate gratis

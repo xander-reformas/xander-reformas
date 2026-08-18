@@ -63,7 +63,7 @@ export default function Resultados() {
   const fmt = v => v.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const anios = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
 
-  if (loading) return <div className="p-6 text-stone text-sm py-10 text-center">Calculando resultados…</div>
+  if (loading) return <div className="p-6 text-ink-soft text-sm py-10 text-center">Calculando resultados…</div>
 
   const maxBar = Math.max(...data.mesesData.map(m => Math.max(m.facturado, m.gastos)), 1)
 
@@ -71,13 +71,13 @@ export default function Resultados() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Resultados</h1>
-          <p className="text-sm text-stone mt-0.5">Cuenta de resultados del negocio</p>
+          <h1 className="text-2xl font-bold text-ink">Resultados</h1>
+          <p className="text-sm text-ink-soft mt-0.5">Cuenta de resultados del negocio</p>
         </div>
-        <div className="flex gap-1 bg-arena-dark rounded-xl p-1">
+        <div className="flex gap-1 bg-edge rounded-xl p-1">
           {anios.map(a => (
             <button key={a} onClick={() => setAnio(a)}
-              className={`px-4 py-1.5 text-sm font-semibold rounded-lg transition-colors ${anio === a ? 'bg-white text-navy shadow-sm' : 'text-stone hover:text-navy'}`}>
+              className={`px-4 py-1.5 text-sm font-semibold rounded-lg transition-colors ${anio === a ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
               {a}
             </button>
           ))}
@@ -87,7 +87,7 @@ export default function Resultados() {
       {/* KPIs principales */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {[
-          { label: 'Total facturado', value: fmt(data.totalFacturado), sub: 'todas las facturas', color: 'text-navy', border: 'border-l-navy' },
+          { label: 'Total facturado', value: fmt(data.totalFacturado), sub: 'todas las facturas', color: 'text-ink', border: 'border-l-navy' },
           { label: 'Ingresos reales', value: fmt(data.totalCobrado), sub: 'facturas cobradas', color: 'text-green-700', border: 'border-l-green-500' },
           { label: 'Gastos totales', value: fmt(data.totalGastos), sub: data.sinGastos ? 'tabla no configurada' : 'gastos registrados', color: 'text-red-600', border: 'border-l-red-400' },
           {
@@ -100,15 +100,15 @@ export default function Resultados() {
           },
         ].map(k => (
           <div key={k.label} className={`card border-l-4 ${k.border} ${k.highlight ? 'bg-navy' : ''}`}>
-            <div className={`text-xs font-semibold uppercase tracking-wide mb-1 ${k.highlight ? 'text-white/50' : 'text-stone'}`}>{k.label}</div>
+            <div className={`text-xs font-semibold uppercase tracking-wide mb-1 ${k.highlight ? 'text-white/50' : 'text-ink-soft'}`}>{k.label}</div>
             <div className={`text-xl font-bold ${k.highlight ? (data.resultado >= 0 ? 'text-green-400' : 'text-red-400') : k.color}`}>{k.value}</div>
-            <div className={`text-xs mt-1 ${k.highlight ? 'text-white/40' : 'text-stone'}`}>{k.sub}</div>
+            <div className={`text-xs mt-1 ${k.highlight ? 'text-white/40' : 'text-ink-soft'}`}>{k.sub}</div>
           </div>
         ))}
       </div>
 
       {data.sinGastos && (
-        <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-stone">
+        <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-ink-soft">
           ⚠️ La tabla de gastos no está configurada. Ve a <strong>Gastos</strong> y sigue las instrucciones para activarla.
         </div>
       )}
@@ -116,7 +116,7 @@ export default function Resultados() {
       {/* Gráfico de barras mensual */}
       <div className="card mb-6">
         <div className="flex items-center justify-between mb-6">
-          <div className="text-xs font-bold uppercase tracking-widest text-stone">Evolución mensual {anio}</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft">Evolución mensual {anio}</div>
           <div className="flex items-center gap-4 text-xs">
             <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-navy inline-block" />Facturado</span>
             <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-red-400 inline-block" />Gastos</span>
@@ -136,7 +136,7 @@ export default function Resultados() {
                   <div className="flex-1 bg-red-400 rounded-t-sm transition-all" style={{ height: `${Math.max(hGto, tieneData ? 2 : 0)}%`, minHeight: tieneData ? '2px' : '0' }} />
                   <div className="flex-1 bg-green-500 rounded-t-sm transition-all" style={{ height: `${Math.max(hCob, tieneData ? 2 : 0)}%`, minHeight: tieneData ? '2px' : '0' }} />
                 </div>
-                <div className="text-[10px] text-stone mt-1">{m.mes}</div>
+                <div className="text-[10px] text-ink-soft mt-1">{m.mes}</div>
               </div>
             )
           })}
@@ -146,26 +146,26 @@ export default function Resultados() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Tabla mensual */}
         <div className="card p-0 overflow-hidden">
-          <div className="px-4 py-3 bg-arena-dark text-xs font-bold uppercase tracking-widest text-stone">Detalle por mes</div>
+          <div className="px-4 py-3 bg-edge text-xs font-bold uppercase tracking-widest text-ink-soft">Detalle por mes</div>
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-arena-dark text-xs text-stone">
+              <tr className="border-b border-edge text-xs text-ink-soft">
                 <th className="text-left px-4 py-2">Mes</th>
                 <th className="text-right px-3 py-2">Facturado</th>
                 <th className="text-right px-3 py-2">Gastos</th>
                 <th className="text-right px-4 py-2">Resultado</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-arena-dark">
+            <tbody className="divide-y divide-edge">
               {data.mesesData.map((m, i) => {
                 const tieneData = m.facturado > 0 || m.ingresos > 0 || m.gastos > 0
                 if (!tieneData && i > new Date().getMonth()) return null
                 return (
                   <tr key={m.mes} className={`${!tieneData ? 'opacity-40' : ''}`}>
-                    <td className="px-4 py-2.5 font-medium text-navy">{m.mes}</td>
-                    <td className="px-3 py-2.5 text-right text-stone text-xs">{m.facturado > 0 ? fmt(m.facturado) : '—'}</td>
-                    <td className="px-3 py-2.5 text-right text-stone text-xs">{m.gastos > 0 ? fmt(m.gastos) : '—'}</td>
-                    <td className={`px-4 py-2.5 text-right font-bold text-xs ${m.resultado > 0 ? 'text-green-700' : m.resultado < 0 ? 'text-red-600' : 'text-stone'}`}>
+                    <td className="px-4 py-2.5 font-medium text-ink">{m.mes}</td>
+                    <td className="px-3 py-2.5 text-right text-ink-soft text-xs">{m.facturado > 0 ? fmt(m.facturado) : '—'}</td>
+                    <td className="px-3 py-2.5 text-right text-ink-soft text-xs">{m.gastos > 0 ? fmt(m.gastos) : '—'}</td>
+                    <td className={`px-4 py-2.5 text-right font-bold text-xs ${m.resultado > 0 ? 'text-green-700' : m.resultado < 0 ? 'text-red-600' : 'text-ink-soft'}`}>
                       {m.ingresos > 0 || m.gastos > 0 ? fmt(m.resultado) : '—'}
                     </td>
                   </tr>
@@ -173,9 +173,9 @@ export default function Resultados() {
               })}
             </tbody>
             <tfoot>
-              <tr className="bg-arena-dark border-t-2 border-arena font-bold">
-                <td className="px-4 py-2.5 text-xs uppercase text-stone">Total {anio}</td>
-                <td className="px-3 py-2.5 text-right text-xs text-navy">{fmt(data.totalFacturado)}</td>
+              <tr className="bg-edge border-t-2 border-page font-bold">
+                <td className="px-4 py-2.5 text-xs uppercase text-ink-soft">Total {anio}</td>
+                <td className="px-3 py-2.5 text-right text-xs text-ink">{fmt(data.totalFacturado)}</td>
                 <td className="px-3 py-2.5 text-right text-xs text-red-600">{fmt(data.totalGastos)}</td>
                 <td className={`px-4 py-2.5 text-right text-xs ${data.resultado >= 0 ? 'text-green-700' : 'text-red-600'}`}>{fmt(data.resultado)}</td>
               </tr>
@@ -185,9 +185,9 @@ export default function Resultados() {
 
         {/* Gastos por categoría */}
         <div className="card">
-          <div className="text-xs font-bold uppercase tracking-widest text-stone mb-4">Gastos por categoría</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">Gastos por categoría</div>
           {data.sinGastos || Object.keys(data.gastosPorCat).length === 0 ? (
-            <div className="text-sm text-stone text-center py-8">
+            <div className="text-sm text-ink-soft text-center py-8">
               {data.sinGastos ? 'Tabla de gastos no configurada' : 'Sin gastos registrados en ' + anio}
             </div>
           ) : (
@@ -197,14 +197,14 @@ export default function Resultados() {
                 return (
                   <div key={cat}>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-stone truncate max-w-[65%]">{cat}</span>
-                      <span className="font-semibold text-navy">{fmt(val)}</span>
+                      <span className="text-ink-soft truncate max-w-[65%]">{cat}</span>
+                      <span className="font-semibold text-ink">{fmt(val)}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 bg-arena-dark rounded-full">
+                      <div className="flex-1 h-2 bg-edge rounded-full">
                         <div className="h-2 bg-red-400 rounded-full" style={{ width: `${pct}%` }} />
                       </div>
-                      <span className="text-xs text-stone w-8 text-right">{pct.toFixed(0)}%</span>
+                      <span className="text-xs text-ink-soft w-8 text-right">{pct.toFixed(0)}%</span>
                     </div>
                   </div>
                 )

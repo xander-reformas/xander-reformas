@@ -22,7 +22,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-arena flex">
+    <div className="min-h-screen bg-page flex">
       {/* Panel izquierdo — branding */}
       <div className="hidden lg:flex w-1/2 bg-navy flex-col justify-between p-12">
         <div>
@@ -45,7 +45,7 @@ export default function ForgotPasswordPage() {
         <div className="w-full max-w-sm">
           <div className="lg:hidden text-2xl font-black mb-8">
             <span className="text-gold">X</span>
-            <span className="text-navy">ANDER</span>
+            <span className="text-ink">ANDER</span>
           </div>
 
           {sent ? (
@@ -56,12 +56,12 @@ export default function ForgotPasswordPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h1 className="text-2xl font-bold text-navy mb-2">Email enviado</h1>
-              <p className="text-sm text-stone mb-6">
+              <h1 className="text-2xl font-bold text-ink mb-2">Email enviado</h1>
+              <p className="text-sm text-ink-soft mb-6">
                 Hemos enviado un enlace de recuperación a <strong>{email}</strong>.
                 Revisa también la carpeta de spam.
               </p>
-              <p className="text-xs text-stone mb-6">
+              <p className="text-xs text-ink-soft mb-6">
                 El enlace caduca en 1 hora. Si no lo recibes, puedes volver a intentarlo.
               </p>
               <Link to="/login" className="btn-primary w-full block text-center">
@@ -71,8 +71,8 @@ export default function ForgotPasswordPage() {
           ) : (
             /* ── Formulario ── */
             <>
-              <h1 className="text-2xl font-bold text-navy mb-1">Recuperar contraseña</h1>
-              <p className="text-sm text-stone mb-8">
+              <h1 className="text-2xl font-bold text-ink mb-1">Recuperar contraseña</h1>
+              <p className="text-sm text-ink-soft mb-8">
                 Introduce tu email y te enviaremos un enlace para restablecer tu contraseña.
               </p>
 
@@ -100,7 +100,7 @@ export default function ForgotPasswordPage() {
                 </button>
               </form>
 
-              <div className="mt-6 text-center text-sm text-stone">
+              <div className="mt-6 text-center text-sm text-ink-soft">
                 <Link to="/login" className="text-gold font-semibold hover:underline">
                   ← Volver al inicio de sesión
                 </Link>

@@ -309,15 +309,15 @@ export default function Gastos() {
   // ── Setup ──────────────────────────────────────────────────────────────────
   if (setupNeeded) return (
     <div className="p-6 max-w-2xl">
-      <h1 className="text-2xl font-bold text-navy mb-6">Gastos</h1>
+      <h1 className="text-2xl font-bold text-ink mb-6">Gastos</h1>
       <div className="card border-gold border-2">
         <div className="flex items-start gap-4">
           <div className="text-3xl">⚙️</div>
           <div>
-            <div className="font-bold text-navy mb-2">Paso previo: crear tabla en Supabase</div>
-            <p className="text-sm text-stone mb-3">Ve a <strong>Supabase → SQL Editor</strong> y ejecuta:</p>
+            <div className="font-bold text-ink mb-2">Paso previo: crear tabla en Supabase</div>
+            <p className="text-sm text-ink-soft mb-3">Ve a <strong>Supabase → SQL Editor</strong> y ejecuta:</p>
             <div className="bg-navy text-gold font-mono text-sm px-4 py-3 rounded-xl mb-3">App/XANDER-SaaS/supabase/gastos.sql</div>
-            <p className="text-sm text-stone">Si la tabla ya existía, ejecuta las 2 líneas ALTER TABLE del final del archivo para añadir las columnas de IVA.</p>
+            <p className="text-sm text-ink-soft">Si la tabla ya existía, ejecuta las 2 líneas ALTER TABLE del final del archivo para añadir las columnas de IVA.</p>
           </div>
         </div>
       </div>
@@ -328,8 +328,8 @@ export default function Gastos() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Gastos</h1>
-          <p className="text-sm text-stone mt-0.5">{gastos.length} gasto{gastos.length !== 1 ? 's' : ''} · Total: {fmt(totalGeneral)}</p>
+          <h1 className="text-2xl font-bold text-ink">Gastos</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{gastos.length} gasto{gastos.length !== 1 ? 's' : ''} · Total: {fmt(totalGeneral)}</p>
         </div>
         <button onClick={openNew} className="btn-primary">+ Nuevo gasto</button>
       </div>
@@ -337,9 +337,9 @@ export default function Gastos() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         {/* Resumen categorías */}
         <div className="card lg:col-span-1">
-          <div className="text-xs font-bold uppercase tracking-widest text-stone mb-4">Por categoría</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">Por categoría</div>
           {catOrdenadas.length === 0 ? (
-            <div className="text-sm text-stone text-center py-6">Sin datos aún</div>
+            <div className="text-sm text-ink-soft text-center py-6">Sin datos aún</div>
           ) : (
             <div className="space-y-2.5">
               {catOrdenadas.slice(0, 7).map(([cat, val]) => {
@@ -347,10 +347,10 @@ export default function Gastos() {
                 return (
                   <div key={cat}>
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-stone truncate max-w-[65%]">{cat}</span>
-                      <span className="font-semibold text-navy">{fmt(val)}</span>
+                      <span className="text-ink-soft truncate max-w-[65%]">{cat}</span>
+                      <span className="font-semibold text-ink">{fmt(val)}</span>
                     </div>
-                    <div className="h-1.5 bg-arena-dark rounded-full">
+                    <div className="h-1.5 bg-edge rounded-full">
                       <div className="h-1.5 bg-gold rounded-full" style={{ width: `${pct}%` }} />
                     </div>
                   </div>
@@ -377,17 +377,17 @@ export default function Gastos() {
 
           {(search || filtroCat || filtroObra || mes) && (
             <div className="flex items-center justify-between bg-gold/10 border border-gold/30 rounded-xl px-4 py-2.5 mb-3 text-sm">
-              <span className="text-stone">{filtrados.length} resultado{filtrados.length !== 1 ? 's' : ''}</span>
-              <span className="font-bold text-navy">{fmt(totalFiltrado)}</span>
+              <span className="text-ink-soft">{filtrados.length} resultado{filtrados.length !== 1 ? 's' : ''}</span>
+              <span className="font-bold text-ink">{fmt(totalFiltrado)}</span>
             </div>
           )}
 
           {loading ? (
-            <div className="text-stone text-sm py-8 text-center">Cargando…</div>
+            <div className="text-ink-soft text-sm py-8 text-center">Cargando…</div>
           ) : filtrados.length === 0 ? (
             <div className="card text-center py-12">
               <div className="text-4xl mb-2">💸</div>
-              <div className="font-bold text-navy mb-1">{search || filtroCat || filtroObra || mes ? 'Sin resultados' : 'Sin gastos registrados'}</div>
+              <div className="font-bold text-ink mb-1">{search || filtroCat || filtroObra || mes ? 'Sin resultados' : 'Sin gastos registrados'}</div>
               {!search && !filtroCat && !filtroObra && !mes && (
                 <button onClick={openNew} className="btn-primary mt-4">+ Añadir gasto</button>
               )}
@@ -396,7 +396,7 @@ export default function Gastos() {
             <div className="card p-0 overflow-hidden">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-arena-dark text-stone text-xs uppercase tracking-wide">
+                  <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
                     <th className="text-left px-4 py-2.5">Descripción</th>
                     <th className="text-left px-3 py-2.5 hidden md:table-cell">Categoría</th>
                     <th className="text-left px-3 py-2.5 hidden lg:table-cell">Fecha</th>
@@ -406,39 +406,39 @@ export default function Gastos() {
                     <th className="px-3 py-2.5" />
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-arena-dark">
+                <tbody className="divide-y divide-edge">
                   {filtrados.map(g => (
-                    <tr key={g.id} className="hover:bg-arena/50 transition-colors">
+                    <tr key={g.id} className="hover:bg-page/50 transition-colors">
                       <td className="px-4 py-3">
-                        <div className="font-medium text-navy">{g.descripcion}</div>
-                        {g.proveedor && <div className="text-xs text-stone mt-0.5">{g.proveedor}</div>}
+                        <div className="font-medium text-ink">{g.descripcion}</div>
+                        {g.proveedor && <div className="text-xs text-ink-soft mt-0.5">{g.proveedor}</div>}
                       </td>
                       <td className="px-3 py-3 hidden md:table-cell">
-                        <span className="text-xs bg-arena-dark text-stone px-2 py-0.5 rounded-full">{g.categoria}</span>
+                        <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full">{g.categoria}</span>
                       </td>
-                      <td className="px-3 py-3 hidden lg:table-cell text-stone text-xs">
+                      <td className="px-3 py-3 hidden lg:table-cell text-ink-soft text-xs">
                         {g.fecha ? new Date(g.fecha + 'T12:00:00').toLocaleDateString('es-ES') : '—'}
                       </td>
-                      <td className="px-3 py-3 hidden lg:table-cell text-right text-stone text-xs">
+                      <td className="px-3 py-3 hidden lg:table-cell text-right text-ink-soft text-xs">
                         {g.importe_base ? fmt(g.importe_base) : '—'}
                       </td>
-                      <td className="px-2 py-3 hidden lg:table-cell text-center text-xs text-stone">
+                      <td className="px-2 py-3 hidden lg:table-cell text-center text-xs text-ink-soft">
                         {g.iva_pct != null ? `${g.iva_pct}%` : '—'}
                       </td>
-                      <td className="px-4 py-3 text-right font-bold text-navy">{fmt(g.importe)}</td>
+                      <td className="px-4 py-3 text-right font-bold text-ink">{fmt(g.importe)}</td>
                       <td className="px-3 py-3 text-right whitespace-nowrap">
                         <button onClick={() => openEdit(g)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">Editar</button>
-                        <button onClick={() => remove(g.id, g.descripcion)} className="text-stone/40 hover:text-red-500 text-xs">×</button>
+                        <button onClick={() => remove(g.id, g.descripcion)} className="text-ink-soft/40 hover:text-red-500 text-xs">×</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
                 <tfoot>
-                  <tr className="bg-arena-dark border-t-2 border-arena">
-                    <td colSpan="5" className="px-4 py-2.5 text-xs font-bold text-stone uppercase tracking-wide">
+                  <tr className="bg-edge border-t-2 border-page">
+                    <td colSpan="5" className="px-4 py-2.5 text-xs font-bold text-ink-soft uppercase tracking-wide">
                       Total ({filtrados.length})
                     </td>
-                    <td className="px-4 py-2.5 text-right font-bold text-navy">{fmt(totalFiltrado)}</td>
+                    <td className="px-4 py-2.5 text-right font-bold text-ink">{fmt(totalFiltrado)}</td>
                     <td />
                   </tr>
                 </tfoot>
@@ -472,10 +472,10 @@ export default function Gastos() {
       {/* ── Modal ───────────────────────────────────────────────────────────── */}
       {showForm && (
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[94vh] flex flex-col">
-            <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-navy">{editId ? 'Editar gasto' : 'Nuevo gasto'}</h2>
-              <button onClick={() => setShowForm(false)} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+          <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg max-h-[94vh] flex flex-col">
+            <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
+              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar gasto' : 'Nuevo gasto'}</h2>
+              <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
 
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
@@ -489,13 +489,13 @@ export default function Gastos() {
                   onDragLeave={() => setDragging(false)}
                   onDrop={onDrop}
                   className={`relative border-2 border-dashed rounded-xl cursor-pointer transition-colors overflow-hidden
-                    ${dragging ? 'border-gold bg-gold/10' : 'border-arena-dark hover:border-gold hover:bg-gold/5'}`}
+                    ${dragging ? 'border-gold bg-gold/10' : 'border-edge hover:border-gold hover:bg-gold/5'}`}
                 >
                   {imgPreview ? (
                     <div className="flex items-center gap-4 p-3">
                       {/* Miniatura con lupa */}
                       <div className="relative flex-shrink-0 group">
-                        <img src={imgPreview} alt="Factura" className="h-20 w-20 object-cover rounded-lg border border-arena-dark" />
+                        <img src={imgPreview} alt="Factura" className="h-20 w-20 object-cover rounded-lg border border-edge" />
                         <button
                           type="button"
                           onClick={e => { e.stopPropagation(); setLightbox(true) }}
@@ -507,7 +507,7 @@ export default function Gastos() {
                       </div>
                       <div className="flex-1 min-w-0">
                         {leyendo ? (
-                          <div className="flex items-center gap-2 text-sm text-navy">
+                          <div className="flex items-center gap-2 text-sm text-ink">
                             <div className="w-4 h-4 border-2 border-gold border-t-transparent rounded-full animate-spin" />
                             Analizando con IA…
                           </div>
@@ -518,20 +518,20 @@ export default function Gastos() {
                           <button type="button" onClick={e => { e.stopPropagation(); setLightbox(true) }}
                             className="text-xs text-gold hover:text-gold-dark font-semibold">🔍 Ampliar</button>
                           <button type="button" onClick={e => { e.stopPropagation(); resetOcr(); fileRef.current.value = '' }}
-                            className="text-xs text-stone hover:text-red-500">Cambiar archivo</button>
+                            className="text-xs text-ink-soft hover:text-red-500">Cambiar archivo</button>
                         </div>
                       </div>
                     </div>
                   ) : leyendo ? (
                     <div className="py-5 flex items-center justify-center gap-3">
                       <div className="w-5 h-5 border-2 border-gold border-t-transparent rounded-full animate-spin" />
-                      <span className="text-sm text-stone">{ocrMsg}</span>
+                      <span className="text-sm text-ink-soft">{ocrMsg}</span>
                     </div>
                   ) : (
                     <div className="py-6 text-center">
                       <div className="text-3xl mb-1">📄</div>
-                      <div className="text-sm text-stone">Arrastra aquí o haz clic para subir</div>
-                      <div className="text-xs text-stone/60 mt-0.5">JPG, PNG, WEBP, PDF · La IA extrae los datos automáticamente</div>
+                      <div className="text-sm text-ink-soft">Arrastra aquí o haz clic para subir</div>
+                      <div className="text-xs text-ink-soft/60 mt-0.5">JPG, PNG, WEBP, PDF · La IA extrae los datos automáticamente</div>
                     </div>
                   )}
                 </div>
@@ -574,11 +574,11 @@ export default function Gastos() {
               {/* Desglose BASE / IVA / TOTAL */}
               <div className="grid grid-cols-3 gap-2 bg-navy rounded-xl overflow-hidden text-center text-xs">
                 <div className="py-3">
-                  <div className="text-stone/60 uppercase tracking-widest mb-1">Base</div>
+                  <div className="text-ink-soft/60 uppercase tracking-widest mb-1">Base</div>
                   <div className="font-bold text-white">{fmt(baseN)}</div>
                 </div>
                 <div className="py-3 border-x border-white/10">
-                  <div className="text-stone/60 uppercase tracking-widest mb-1">IVA {pctN}%</div>
+                  <div className="text-ink-soft/60 uppercase tracking-widest mb-1">IVA {pctN}%</div>
                   <div className="font-bold text-white">{fmt(ivaN)}</div>
                 </div>
                 <div className="py-3">

@@ -42,12 +42,12 @@ export default function PlanGate({ feature, currentCount, children }) {
 
       {/* Banner de upgrade */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow-xl border border-stone/10 p-6 max-w-sm mx-4 text-center">
+        <div className="bg-surface rounded-2xl shadow-xl border border-stone/10 p-6 max-w-sm mx-4 text-center">
           <div className="text-3xl mb-3">🔒</div>
-          <h3 className="font-bold text-navy text-base mb-1">
+          <h3 className="font-bold text-ink text-base mb-1">
             Función exclusiva Pro
           </h3>
-          <p className="text-stone text-sm mb-4">
+          <p className="text-ink-soft text-sm mb-4">
             Para usar {FEATURE_LABELS[feature] || feature} necesitas el plan Pro.
           </p>
 
@@ -63,7 +63,7 @@ export default function PlanGate({ feature, currentCount, children }) {
           >
             Activar Plan Pro — {PRECIO_PRO}
           </a>
-          <p className="text-xs text-stone/50 mt-2">Sin permanencia · Cancela cuando quieras</p>
+          <p className="text-xs text-ink-soft/50 mt-2">Sin permanencia · Cancela cuando quieras</p>
         </div>
       </div>
     </div>

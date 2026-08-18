@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { supabase, getUID } from '../../lib/supabase'
 
 const ESTADOS = [
-  { value: 'borrador',  label: 'Borrador',  color: 'bg-stone/20 text-stone' },
+  { value: 'borrador',  label: 'Borrador',  color: 'bg-stone/20 text-ink-soft' },
   { value: 'enviada',   label: 'Enviada',   color: 'bg-blue-100 text-blue-700' },
   { value: 'vista',     label: 'Vista',     color: 'bg-purple-100 text-purple-700' },
   { value: 'pagada',    label: 'Pagada',    color: 'bg-green-100 text-green-700' },
@@ -136,15 +136,15 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
 
   return (
     <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl my-4">
-        <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between">
+      <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-4xl my-4">
+        <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-navy">{editData ? 'Editar factura' : 'Nueva factura'}</h2>
+            <h2 className="text-lg font-bold text-ink">{editData ? 'Editar factura' : 'Nueva factura'}</h2>
             {initialFromPres && !editData && (
               <p className="text-xs text-green-700 mt-0.5">📋 Creada desde presupuesto {initialFromPres.numero}</p>
             )}
           </div>
-          <button onClick={onCancel} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+          <button onClick={onCancel} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
 
         <form onSubmit={save} className="p-6 space-y-6">
@@ -203,41 +203,41 @@ function FormFactura({ editData, clientes, obras, presupuestos, onSave, onCancel
           {/* Líneas */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <label className="text-xs font-semibold uppercase tracking-wider text-stone">Líneas de factura</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Líneas de factura</label>
               <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">+ Añadir línea</button>
             </div>
             <div className="space-y-3">
               {items.map((item, i) => (
-                <div key={i} className="bg-arena rounded-xl p-4 relative">
-                  <button type="button" onClick={() => removeItem(i)} className="absolute top-3 right-3 text-stone/40 hover:text-red-500 text-lg leading-none">×</button>
+                <div key={i} className="bg-page rounded-xl p-4 relative">
+                  <button type="button" onClick={() => removeItem(i)} className="absolute top-3 right-3 text-ink-soft/40 hover:text-red-500 text-lg leading-none">×</button>
                   <div className="pr-6 space-y-3">
                     <div>
                       <label className="label">Descripción</label>
-                      <input className="input bg-white" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Trabajos ejecutados en reforma de baño" />
+                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Trabajos ejecutados en reforma de baño" />
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       <div>
                         <label className="label">Unidad</label>
-                        <select className="input bg-white" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)}>
+                        <select className="input bg-surface" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)}>
                           {UNIDADES.map(u => <option key={u} value={u}>{u}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="label">Cantidad</label>
-                        <input className="input bg-white" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" />
+                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" />
                       </div>
                       <div>
                         <label className="label">Precio / ud (€)</label>
-                        <input className="input bg-white" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" />
+                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" />
                       </div>
                       <div>
                         <label className="label">Importe (€)</label>
-                        <input className="input bg-white font-semibold text-navy" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" />
+                        <input className="input bg-surface font-semibold text-ink" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" />
                       </div>
                     </div>
                     <div>
                       <label className="label">Detalle (opcional)</label>
-                      <textarea className="input bg-white resize-none h-12 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} />
+                      <textarea className="input bg-surface resize-none h-12 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} />
                     </div>
                   </div>
                 </div>
@@ -394,8 +394,8 @@ export default function Facturas() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Facturas</h1>
-          <p className="text-sm text-stone mt-0.5">{facturas.length} factura{facturas.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-2xl font-bold text-ink">Facturas</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{facturas.length} factura{facturas.length !== 1 ? 's' : ''}</p>
         </div>
         <button onClick={openNew} className="btn-primary">+ Nueva factura</button>
       </div>
@@ -403,32 +403,32 @@ export default function Facturas() {
       {/* Métricas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="card border-l-4 border-l-navy">
-          <div className="text-xs font-semibold uppercase tracking-wide text-stone mb-1">Facturado (total)</div>
-          <div className="text-2xl font-bold text-navy">{fmt(totalFacturado)}</div>
-          <div className="text-xs text-stone mt-1">{facturas.length} facturas</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Facturado (total)</div>
+          <div className="text-2xl font-bold text-ink">{fmt(totalFacturado)}</div>
+          <div className="text-xs text-ink-soft mt-1">{facturas.length} facturas</div>
         </div>
         <div className="card border-l-4 border-l-green-500">
-          <div className="text-xs font-semibold uppercase tracking-wide text-stone mb-1">Cobrado</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Cobrado</div>
           <div className="text-2xl font-bold text-green-700">{fmt(totalCobrado)}</div>
-          <div className="text-xs text-stone mt-1">{facturas.filter(f => f.estado === 'pagada').length} pagadas</div>
+          <div className="text-xs text-ink-soft mt-1">{facturas.filter(f => f.estado === 'pagada').length} pagadas</div>
         </div>
         <div className="card border-l-4 border-l-gold">
-          <div className="text-xs font-semibold uppercase tracking-wide text-stone mb-1">Pendiente cobro</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Pendiente cobro</div>
           <div className="text-2xl font-bold text-gold-dark">{fmt(pendienteCobro)}</div>
-          <div className="text-xs text-stone mt-1">{facturas.filter(f => ['enviada', 'vista'].includes(f.estado)).length} en circulación</div>
+          <div className="text-xs text-ink-soft mt-1">{facturas.filter(f => ['enviada', 'vista'].includes(f.estado)).length} en circulación</div>
         </div>
       </div>
 
       {/* Filtros */}
       <div className="flex flex-wrap gap-2 mb-5">
-        <button onClick={() => setFiltroEstado('')} className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${!filtroEstado ? 'bg-navy text-white border-navy' : 'border-arena-dark text-stone hover:border-navy hover:text-navy'}`}>
+        <button onClick={() => setFiltroEstado('')} className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${!filtroEstado ? 'bg-navy text-white border-navy' : 'border-edge text-ink-soft hover:border-navy hover:text-ink'}`}>
           Todas ({facturas.length})
         </button>
         {ESTADOS.map(s => {
           const count = facturas.filter(f => f.estado === s.value).length
           return (
             <button key={s.value} onClick={() => setFiltroEstado(filtroEstado === s.value ? '' : s.value)}
-              className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${filtroEstado === s.value ? 'bg-navy text-white border-navy' : 'border-arena-dark text-stone hover:border-navy hover:text-navy'}`}>
+              className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${filtroEstado === s.value ? 'bg-navy text-white border-navy' : 'border-edge text-ink-soft hover:border-navy hover:text-ink'}`}>
               {s.label} ({count})
             </button>
           )
@@ -440,18 +440,18 @@ export default function Facturas() {
       </div>
 
       {loading ? (
-        <div className="text-stone text-sm py-10 text-center">Cargando facturas…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">Cargando facturas…</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">📄</div>
-          <div className="font-bold text-navy mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes facturas'}</div>
+          <div className="font-bold text-ink mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes facturas'}</div>
           {!search && !filtroEstado && <button onClick={openNew} className="btn-primary mt-4">+ Nueva factura</button>}
         </div>
       ) : (
         <div className="card p-0 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-arena-dark text-stone text-xs uppercase tracking-wide">
+              <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
                 <th className="text-left px-5 py-3">Número</th>
                 <th className="text-left px-4 py-3 hidden md:table-cell">Cliente</th>
                 <th className="text-left px-4 py-3 hidden lg:table-cell">Fecha</th>
@@ -461,23 +461,23 @@ export default function Facturas() {
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-arena-dark">
+            <tbody className="divide-y divide-edge">
               {filtered.map(f => {
                 const { total } = calculos(f.items || [], f.iva, f.descuento, f.retencion)
                 const vencida = f.vencimiento && f.estado !== 'pagada' && new Date(f.vencimiento) < new Date()
                 return (
-                  <tr key={f.id} className={`hover:bg-arena/50 transition-colors ${vencida ? 'bg-red-50/50' : ''}`}>
+                  <tr key={f.id} className={`hover:bg-page/50 transition-colors ${vencida ? 'bg-red-50/50' : ''}`}>
                     <td className="px-5 py-3.5">
-                      <div className="font-bold text-navy">{f.numero}</div>
-                      {f.obras?.nombre && <div className="text-xs text-stone mt-0.5">{f.obras.nombre}</div>}
+                      <div className="font-bold text-ink">{f.numero}</div>
+                      {f.obras?.nombre && <div className="text-xs text-ink-soft mt-0.5">{f.obras.nombre}</div>}
                     </td>
-                    <td className="px-4 py-3.5 hidden md:table-cell text-navy">{f.clientes?.nombre || '—'}</td>
-                    <td className="px-4 py-3.5 hidden lg:table-cell text-stone">
+                    <td className="px-4 py-3.5 hidden md:table-cell text-ink">{f.clientes?.nombre || '—'}</td>
+                    <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">
                       {f.fecha ? new Date(f.fecha).toLocaleDateString('es-ES') : '—'}
                     </td>
                     <td className="px-4 py-3.5 hidden lg:table-cell">
                       {f.vencimiento ? (
-                        <span className={vencida && f.estado !== 'pagada' ? 'text-red-600 font-semibold' : 'text-stone'}>
+                        <span className={vencida && f.estado !== 'pagada' ? 'text-red-600 font-semibold' : 'text-ink-soft'}>
                           {new Date(f.vencimiento).toLocaleDateString('es-ES')}
                         </span>
                       ) : '—'}
@@ -489,10 +489,10 @@ export default function Facturas() {
                         {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                       </select>
                     </td>
-                    <td className="px-5 py-3.5 text-right font-bold text-navy">{fmt(total)}</td>
+                    <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
                     <td className="px-4 py-3.5 text-right whitespace-nowrap">
                       <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">Editar</button>
-                      <button onClick={() => remove(f.id, f.numero)} className="text-stone/40 hover:text-red-500 text-xs">Eliminar</button>
+                      <button onClick={() => remove(f.id, f.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
                     </td>
                   </tr>
                 )

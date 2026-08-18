@@ -293,7 +293,7 @@ const BADGE_COLORS = {
   'Comunicación previa': 'bg-blue-100 text-blue-700 border border-blue-200',
   'Licencia': 'bg-purple-100 text-purple-700 border border-purple-200',
   'Acuerdo de Junta': 'bg-yellow-100 text-yellow-700 border border-yellow-200',
-  'Marco general': 'bg-navy/10 text-navy border border-navy/20',
+  'Marco general': 'bg-navy/10 text-ink border border-navy/20',
   'Recomendado siempre': 'bg-green-100 text-green-700 border border-green-200',
 }
 
@@ -304,8 +304,8 @@ export default function Legislacion() {
   return (
     <div className="p-6 max-w-5xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy">Legislación</h1>
-        <p className="text-sm text-stone mt-0.5">Marco legal para reformas de viviendas y locales en toda España</p>
+        <h1 className="text-2xl font-bold text-ink">Legislación</h1>
+        <p className="text-sm text-ink-soft mt-0.5">Marco legal para reformas de viviendas y locales en toda España</p>
       </div>
 
       {/* Selector CCAA */}
@@ -334,8 +334,8 @@ export default function Legislacion() {
           <div className="flex items-start justify-between gap-4 mb-4">
             <div>
               <div className="text-xs font-bold uppercase tracking-widest text-gold mb-1">Normativa autonómica</div>
-              <h2 className="text-xl font-bold text-navy">{ccaa.nombre}</h2>
-              <p className="text-sm text-stone mt-1">{ccaa.ley}</p>
+              <h2 className="text-xl font-bold text-ink">{ccaa.nombre}</h2>
+              <p className="text-sm text-ink-soft mt-1">{ccaa.ley}</p>
             </div>
             <a
               href={ccaa.enlace}
@@ -350,27 +350,27 @@ export default function Legislacion() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
               <div className="text-xs font-bold uppercase tracking-wide text-blue-600 mb-1">Obra menor</div>
-              <div className="font-semibold text-navy text-sm">{ccaa.menorNombre}</div>
-              <div className="text-xs text-stone mt-1">Trámite simplificado — sin estructura ni fachada</div>
+              <div className="font-semibold text-ink text-sm">{ccaa.menorNombre}</div>
+              <div className="text-xs text-ink-soft mt-1">Trámite simplificado — sin estructura ni fachada</div>
             </div>
             <div className="bg-purple-50 border border-purple-100 rounded-xl p-4">
               <div className="text-xs font-bold uppercase tracking-wide text-purple-600 mb-1">Obra mayor</div>
-              <div className="font-semibold text-navy text-sm">{ccaa.mayorNombre}</div>
-              <div className="text-xs text-stone mt-1">Requiere proyecto técnico y plazos más largos</div>
+              <div className="font-semibold text-ink text-sm">{ccaa.mayorNombre}</div>
+              <div className="text-xs text-ink-soft mt-1">Requiere proyecto técnico y plazos más largos</div>
             </div>
           </div>
 
-          <div className="bg-arena rounded-xl p-4 mb-3">
-            <div className="text-xs font-bold uppercase tracking-wide text-stone mb-2">Organismo competente</div>
-            <div className="text-sm text-navy">{ccaa.organismo}</div>
+          <div className="bg-page rounded-xl p-4 mb-3">
+            <div className="text-xs font-bold uppercase tracking-wide text-ink-soft mb-2">Organismo competente</div>
+            <div className="text-sm text-ink">{ccaa.organismo}</div>
           </div>
 
           <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 mb-3">
             <div className="text-xs font-bold uppercase tracking-wide text-amber-700 mb-2">⚠️ Aspectos destacados en {ccaa.nombre}</div>
-            <p className="text-sm text-stone leading-relaxed">{ccaa.notas}</p>
+            <p className="text-sm text-ink-soft leading-relaxed">{ccaa.notas}</p>
           </div>
 
-          <div className="text-xs text-stone/60 flex items-center gap-1.5">
+          <div className="text-xs text-ink-soft/60 flex items-center gap-1.5">
             <span>🏛️</span>
             <span>{ccaa.colegios}</span>
           </div>
@@ -378,7 +378,7 @@ export default function Legislacion() {
       )}
 
       {/* Aviso general */}
-      <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-8 text-sm text-stone">
+      <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-8 text-sm text-ink-soft">
         ℹ️ <strong>Guía orientativa.</strong> La normativa urbanística se modifica con frecuencia. Consulta siempre con el Ayuntamiento correspondiente y un técnico competente (arquitecto o aparejador) ante cualquier duda. Las condiciones pueden variar por municipio incluso dentro de la misma CCAA.
       </div>
 
@@ -389,8 +389,8 @@ export default function Legislacion() {
             <div className="flex items-center gap-3 mb-5">
               <span className="text-2xl">{sec.icon}</span>
               <div>
-                <h2 className="text-lg font-bold text-navy">{sec.titulo}</h2>
-                <div className="text-xs text-stone">Normativa estatal — aplica en toda España</div>
+                <h2 className="text-lg font-bold text-ink">{sec.titulo}</h2>
+                <div className="text-xs text-ink-soft">Normativa estatal — aplica en toda España</div>
               </div>
             </div>
             <div className="space-y-4">
@@ -398,22 +398,22 @@ export default function Legislacion() {
                 <div key={item.titulo} className="card">
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div className="flex-1">
-                      <h3 className="font-bold text-navy mb-1">{item.titulo}</h3>
-                      <p className="text-sm text-stone leading-relaxed">{item.desc}</p>
+                      <h3 className="font-bold text-ink mb-1">{item.titulo}</h3>
+                      <p className="text-sm text-ink-soft leading-relaxed">{item.desc}</p>
                     </div>
                     <div className="flex-shrink-0 text-right space-y-1">
-                      <div className={`text-xs font-semibold px-3 py-1 rounded-full ${BADGE_COLORS[item.tipo] || 'bg-navy/10 text-navy'}`}>
+                      <div className={`text-xs font-semibold px-3 py-1 rounded-full ${BADGE_COLORS[item.tipo] || 'bg-navy/10 text-ink'}`}>
                         {item.tipo}
                       </div>
-                      <div className="text-xs text-stone">{item.plazo}</div>
+                      <div className="text-xs text-ink-soft">{item.plazo}</div>
                     </div>
                   </div>
                   {item.incluye && (
-                    <div className="bg-arena rounded-xl p-3 mt-3">
-                      <div className="text-xs font-semibold text-stone uppercase tracking-wide mb-2">Incluye / Aplica a:</div>
+                    <div className="bg-page rounded-xl p-3 mt-3">
+                      <div className="text-xs font-semibold text-ink-soft uppercase tracking-wide mb-2">Incluye / Aplica a:</div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
                         {item.incluye.map((i, idx) => (
-                          <div key={idx} className="flex items-center gap-2 text-xs text-navy">
+                          <div key={idx} className="flex items-center gap-2 text-xs text-ink">
                             <span className="text-gold flex-shrink-0">✓</span>
                             {i}
                           </div>

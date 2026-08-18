@@ -106,12 +106,12 @@ export default function CalendarioWidget() {
       <button onClick={() => setAbierto(p => !p)} className="w-full flex items-center justify-between text-left">
         <div className="flex items-center gap-2">
           <span className="text-lg">📅</span>
-          <span className="font-semibold text-navy">Calendario de trabajo</span>
+          <span className="font-semibold text-ink">Calendario de trabajo</span>
           {eventos.length > 0 && (
             <span className="bg-gold text-navy text-xs font-bold px-2 py-0.5 rounded-full">{eventos.length}</span>
           )}
         </div>
-        <span className={`text-stone text-sm transition-transform ${abierto ? 'rotate-180' : ''}`}>▼</span>
+        <span className={`text-ink-soft text-sm transition-transform ${abierto ? 'rotate-180' : ''}`}>▼</span>
       </button>
 
       {/* Próximos (siempre visible) */}
@@ -120,11 +120,11 @@ export default function CalendarioWidget() {
           {proximos.map(e => (
             <div key={e.id} className="flex items-center gap-2 text-xs">
               <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: TIPOS[e.tipo]?.color }} />
-              <span className="text-stone w-16 flex-shrink-0">
+              <span className="text-ink-soft w-16 flex-shrink-0">
                 {isToday(new Date(e.fecha + 'T00:00:00')) ? 'Hoy' : format(new Date(e.fecha + 'T00:00:00'), 'dd MMM', { locale: es })}
                 {e.hora ? ` ${e.hora.slice(0,5)}` : ''}
               </span>
-              <span className="text-navy font-medium truncate">{e.titulo}</span>
+              <span className="text-ink font-medium truncate">{e.titulo}</span>
               {e.notificar_email && <span className="text-gold text-xs" title="Alerta por email">🔔</span>}
             </div>
           ))}
@@ -132,24 +132,24 @@ export default function CalendarioWidget() {
       )}
 
       {abierto && (
-        <div className="mt-4 border-t border-arena-dark pt-4">
+        <div className="mt-4 border-t border-edge pt-4">
           {cargando ? (
-            <div className="text-center text-stone text-sm py-8">Cargando…</div>
+            <div className="text-center text-ink-soft text-sm py-8">Cargando…</div>
           ) : (
             <div className="grid md:grid-cols-2 gap-6">
               {/* Calendario */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <button onClick={() => setMes(m => subMonths(m, 1))} className="text-stone hover:text-navy p-1">◀</button>
-                  <span className="text-sm font-semibold text-navy capitalize">
+                  <button onClick={() => setMes(m => subMonths(m, 1))} className="text-ink-soft hover:text-ink p-1">◀</button>
+                  <span className="text-sm font-semibold text-ink capitalize">
                     {format(mes, 'MMMM yyyy', { locale: es })}
                   </span>
-                  <button onClick={() => setMes(m => addMonths(m, 1))} className="text-stone hover:text-navy p-1">▶</button>
+                  <button onClick={() => setMes(m => addMonths(m, 1))} className="text-ink-soft hover:text-ink p-1">▶</button>
                 </div>
 
                 <div className="grid grid-cols-7 mb-1">
                   {['L','M','X','J','V','S','D'].map(d => (
-                    <div key={d} className="text-center text-xs font-semibold text-stone py-1">{d}</div>
+                    <div key={d} className="text-center text-xs font-semibold text-ink-soft py-1">{d}</div>
                   ))}
                 </div>
 
@@ -165,8 +165,8 @@ export default function CalendarioWidget() {
                         onClick={() => setDiaSeleccionado(dia)}
                         className={`relative aspect-square flex items-center justify-center text-xs rounded-lg transition-all ${
                           sel  ? 'bg-navy text-gold font-bold' :
-                          hoyD ? 'bg-gold/20 text-navy font-semibold' :
-                          'hover:bg-arena-dark text-navy'
+                          hoyD ? 'bg-gold/20 text-ink font-semibold' :
+                          'hover:bg-edge text-ink'
                         }`}
                       >
                         {format(dia, 'd')}
@@ -182,24 +182,24 @@ export default function CalendarioWidget() {
               {/* Panel del día */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="text-sm font-semibold text-navy capitalize">
+                  <div className="text-sm font-semibold text-ink capitalize">
                     {format(diaSeleccionado, "EEEE d 'de' MMMM", { locale: es })}
                   </div>
                   <button onClick={() => setModalNuevo(true)} className="btn-gold text-xs py-1 px-3">+ Añadir</button>
                 </div>
 
                 {eventosDia.length === 0 ? (
-                  <div className="text-center text-stone text-sm py-8 border border-dashed border-arena-dark rounded-lg">
+                  <div className="text-center text-ink-soft text-sm py-8 border border-dashed border-edge rounded-lg">
                     Sin eventos para este día
                   </div>
                 ) : (
                   <div className="space-y-2">
                     {eventosDia.map(ev => (
-                      <div key={ev.id} className="bg-arena rounded-lg p-3 flex gap-3">
+                      <div key={ev.id} className="bg-page rounded-lg p-3 flex gap-3">
                         <div className="w-1 rounded-full flex-shrink-0" style={{ background: TIPOS[ev.tipo]?.color }} />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-semibold text-navy truncate">{ev.titulo}</span>
+                            <span className="text-sm font-semibold text-ink truncate">{ev.titulo}</span>
                             {ev.notificar_email && (
                               <span className="text-gold text-xs flex-shrink-0" title="Alerta por email activa">🔔</span>
                             )}
@@ -207,12 +207,12 @@ export default function CalendarioWidget() {
                           {ev.hora && (
                             <div className="text-xs font-semibold text-gold-dark mt-0.5">🕐 {ev.hora.slice(0,5)}</div>
                           )}
-                          {ev.descripcion && <div className="text-xs text-stone mt-0.5">{ev.descripcion}</div>}
-                          <div className="text-xs text-stone-light mt-1">{TIPOS[ev.tipo]?.label}</div>
+                          {ev.descripcion && <div className="text-xs text-ink-soft mt-0.5">{ev.descripcion}</div>}
+                          <div className="text-xs text-ink-soft/70 mt-1">{TIPOS[ev.tipo]?.label}</div>
                         </div>
                         <div className="flex flex-col gap-1 flex-shrink-0 self-start">
                           <button onClick={() => abrirEdicion(ev)} className="text-gold hover:text-gold-dark text-xs font-semibold">✏️</button>
-                          <button onClick={() => eliminar(ev.id)} className="text-stone hover:text-red-500 text-xs">✕</button>
+                          <button onClick={() => eliminar(ev.id)} className="text-ink-soft hover:text-red-500 text-xs">✕</button>
                         </div>
                       </div>
                     ))}
@@ -227,10 +227,10 @@ export default function CalendarioWidget() {
             <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
               <div className="card w-full max-w-sm">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bold text-navy">
+                  <h3 className="font-bold text-ink">
                     {editando ? 'Editar evento' : `Nuevo evento — ${format(diaSeleccionado, "d 'de' MMMM", { locale: es })}`}
                   </h3>
-                  <button onClick={() => { setModalNuevo(false); setEditando(null); setNuevo({ ...EVENTO_EMPTY }) }} className="text-stone hover:text-navy text-xl leading-none">×</button>
+                  <button onClick={() => { setModalNuevo(false); setEditando(null); setNuevo({ ...EVENTO_EMPTY }) }} className="text-ink-soft hover:text-ink text-xl leading-none">×</button>
                 </div>
 
                 <div className="space-y-3">
@@ -271,15 +271,15 @@ export default function CalendarioWidget() {
                     className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${
                       nuevo.notificar_email
                         ? 'border-gold bg-gold/10'
-                        : 'border-arena-dark bg-arena hover:border-stone/30'
+                        : 'border-edge bg-page hover:border-stone/30'
                     }`}
                   >
                     <div className={`w-10 h-6 rounded-full transition-colors flex items-center px-0.5 ${nuevo.notificar_email ? 'bg-gold' : 'bg-stone/30'}`}>
-                      <div className={`w-5 h-5 bg-white rounded-full shadow transition-transform ${nuevo.notificar_email ? 'translate-x-4' : ''}`} />
+                      <div className={`w-5 h-5 bg-surface rounded-full shadow transition-transform ${nuevo.notificar_email ? 'translate-x-4' : ''}`} />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-navy">🔔 Alerta por email</div>
-                      <div className="text-xs text-stone">Aviso 24h antes y 1h antes</div>
+                      <div className="text-sm font-semibold text-ink">🔔 Alerta por email</div>
+                      <div className="text-xs text-ink-soft">Aviso 24h antes y 1h antes</div>
                     </div>
                   </div>
                 </div>

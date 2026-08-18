@@ -16,7 +16,7 @@ export default function GoogleButton({ label = 'Continuar con Google' }) {
       type="button"
       onClick={handleClick}
       disabled={loading}
-      className="w-full flex items-center justify-center gap-3 px-4 py-2.5 rounded-xl border border-arena-dark bg-white text-navy text-sm font-medium hover:bg-arena transition-colors disabled:opacity-60"
+      className="w-full flex items-center justify-center gap-3 px-4 py-2.5 rounded-xl border border-edge bg-surface text-ink text-sm font-medium hover:bg-page transition-colors disabled:opacity-60"
     >
       {/* Logo Google SVG */}
       <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg">

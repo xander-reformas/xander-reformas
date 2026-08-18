@@ -4,6 +4,8 @@ import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../lib/supabase'
 import CalendarioWidget from './CalendarioWidget'
 import AgenteChat from './AgenteChat'
+import NotificationBell from './NotificationBell'
+import ThemeToggle from './ThemeToggle'
 import AdminPanel from '../admin/AdminPanel'
 import Clientes from '../clientes/Clientes'
 import Obras from '../obras/Obras'
@@ -79,10 +81,10 @@ const NAV_GROUPS = [
 function Placeholder({ title }) {
   return (
     <div className="flex-1 flex items-center justify-center min-h-[60vh]">
-      <div className="text-center text-stone">
+      <div className="text-center text-ink-soft">
         <div className="text-5xl mb-4">🚧</div>
-        <div className="font-bold text-navy text-lg">{title}</div>
-        <div className="text-sm mt-1 text-stone">Próximamente</div>
+        <div className="font-bold text-ink text-lg">{title}</div>
+        <div className="text-sm mt-1 text-ink-soft">Próximamente</div>
       </div>
     </div>
   )
@@ -132,10 +134,10 @@ function HomePanel({ profile }) {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-navy">
+        <h1 className="text-2xl font-bold text-ink">
           Hola, {profile?.nombre || 'bienvenido'} 👋
         </h1>
-        <p className="text-sm text-stone mt-0.5">
+        <p className="text-sm text-ink-soft mt-0.5">
           {profile?.empresa_nombre || 'XANDER Gestión'} ·{' '}
           {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
         </p>
@@ -154,9 +156,9 @@ function HomePanel({ profile }) {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {cards.map(s => (
           <div key={s.label} className={`card text-center ${s.highlight ? 'border-gold border-2' : ''}`}>
-            <div className={`text-2xl font-bold ${s.highlight ? 'text-gold-dark' : 'text-navy'}`}>{s.value}</div>
-            <div className="text-sm font-semibold text-navy mt-1">{s.label}</div>
-            <div className="text-xs text-stone mt-0.5">{s.sub}</div>
+            <div className={`text-2xl font-bold ${s.highlight ? 'text-gold-dark' : 'text-ink'}`}>{s.value}</div>
+            <div className="text-sm font-semibold text-ink mt-1">{s.label}</div>
+            <div className="text-xs text-ink-soft mt-0.5">{s.sub}</div>
           </div>
         ))}
       </div>
@@ -192,7 +194,7 @@ export default function Dashboard() {
   }, [isAdmin])
 
   return (
-    <div className="min-h-screen flex bg-arena">
+    <div className="min-h-screen flex bg-page">
       {/* Sidebar */}
       <aside className={`${sidebarOpen ? 'w-56' : 'w-16'} bg-navy flex flex-col transition-all duration-200 flex-shrink-0`}>
         {/* Logo */}
@@ -311,30 +313,38 @@ export default function Dashboard() {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">
-        <Routes>
-          <Route index               element={<HomePanel profile={profile} />} />
-          <Route path="clientes"     element={<Clientes />} />
-          <Route path="obras"        element={<Obras />} />
-          <Route path="presupuestos" element={<Presupuestos />} />
-          <Route path="tarifas"      element={<Tarifas />} />
-          <Route path="mi-empresa"   element={<MiEmpresa />} />
-          <Route path="rentabilidad" element={<Rentabilidad />} />
-          <Route path="facturas"     element={<Facturas />} />
-          <Route path="cobros"       element={<Cobros />} />
-          <Route path="gastos"       element={<Gastos />} />
-          <Route path="hub-digital"  element={<HubDigital />} />
-          <Route path="fiscal"       element={<Fiscal />} />
-          <Route path="legislacion"  element={<Legislacion />} />
-          <Route path="resultados"   element={<Resultados />} />
-          <Route path="documentos"   element={<Documentos />} />
-          <Route path="empleados"    element={<Empleados />} />
-          <Route path="partes"       element={<PartesTrabajo />} />
-          <Route path="nominas"      element={<Nominas />} />
-          {isAdmin && (
-            <Route path="admin" element={<AdminPanel />} />
-          )}
-        </Routes>
+      <main className="flex-1 overflow-auto flex flex-col">
+        {/* Barra superior */}
+        <header className="flex items-center justify-end gap-2 px-6 py-3 border-b border-edge bg-surface flex-shrink-0">
+          <NotificationBell />
+          <ThemeToggle compact />
+        </header>
+
+        <div className="flex-1 overflow-auto">
+          <Routes>
+            <Route index               element={<HomePanel profile={profile} />} />
+            <Route path="clientes"     element={<Clientes />} />
+            <Route path="obras"        element={<Obras />} />
+            <Route path="presupuestos" element={<Presupuestos />} />
+            <Route path="tarifas"      element={<Tarifas />} />
+            <Route path="mi-empresa"   element={<MiEmpresa />} />
+            <Route path="rentabilidad" element={<Rentabilidad />} />
+            <Route path="facturas"     element={<Facturas />} />
+            <Route path="cobros"       element={<Cobros />} />
+            <Route path="gastos"       element={<Gastos />} />
+            <Route path="hub-digital"  element={<HubDigital />} />
+            <Route path="fiscal"       element={<Fiscal />} />
+            <Route path="legislacion"  element={<Legislacion />} />
+            <Route path="resultados"   element={<Resultados />} />
+            <Route path="documentos"   element={<Documentos />} />
+            <Route path="empleados"    element={<Empleados />} />
+            <Route path="partes"       element={<PartesTrabajo />} />
+            <Route path="nominas"      element={<Nominas />} />
+            {isAdmin && (
+              <Route path="admin" element={<AdminPanel />} />
+            )}
+          </Routes>
+        </div>
       </main>
 
       {/* Agente flotante */}

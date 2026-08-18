@@ -122,24 +122,24 @@ export default function Tarifas() {
       {/* Cabecera */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Tarifas & Precios</h1>
-          <p className="text-sm text-stone mt-0.5">Catálogo de precios orientativos para presupuestos</p>
+          <h1 className="text-2xl font-bold text-ink">Tarifas & Precios</h1>
+          <p className="text-sm text-ink-soft mt-0.5">Catálogo de precios orientativos para presupuestos</p>
         </div>
         <button onClick={openNew} className="btn-primary">+ Nueva tarifa</button>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-arena-dark rounded-xl p-1 w-fit mb-5">
-        <button onClick={() => setTab('base')} className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'base' ? 'bg-white text-navy shadow-sm' : 'text-stone hover:text-navy'}`}>
+      <div className="flex gap-1 bg-edge rounded-xl p-1 w-fit mb-5">
+        <button onClick={() => setTab('base')} className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'base' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
           Catálogo base ({tarifasBase.length})
         </button>
-        <button onClick={() => setTab('mis')} className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'mis' ? 'bg-white text-navy shadow-sm' : 'text-stone hover:text-navy'}`}>
+        <button onClick={() => setTab('mis')} className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'mis' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
           Mis tarifas ({tarifasUser.length})
         </button>
       </div>
 
       {tab === 'base' && (
-        <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-5 text-sm text-stone">
+        <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-5 text-sm text-ink-soft">
           📖 Precios orientativos del sector en Madrid. Úsalos como referencia o crea tus propias tarifas en la pestaña "Mis tarifas".
         </div>
       )}
@@ -154,13 +154,13 @@ export default function Tarifas() {
       </div>
 
       {loading ? (
-        <div className="text-stone text-sm py-10 text-center">Cargando tarifas…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">Cargando tarifas…</div>
       ) : filtradas.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">{tab === 'mis' ? '💰' : '📊'}</div>
-          <div className="font-bold text-navy mb-1">{search || catFiltro ? 'Sin resultados' : tab === 'mis' ? 'Aún no tienes tarifas propias' : 'Sin tarifas'}</div>
+          <div className="font-bold text-ink mb-1">{search || catFiltro ? 'Sin resultados' : tab === 'mis' ? 'Aún no tienes tarifas propias' : 'Sin tarifas'}</div>
           {tab === 'mis' && !search && !catFiltro && (
-            <div className="text-sm text-stone mb-5">Personaliza los precios según tu negocio</div>
+            <div className="text-sm text-ink-soft mb-5">Personaliza los precios según tu negocio</div>
           )}
           {tab === 'mis' && !search && !catFiltro && <button onClick={openNew} className="btn-primary">+ Nueva tarifa</button>}
         </div>
@@ -169,38 +169,38 @@ export default function Tarifas() {
           {Object.entries(porCategoria).filter(([, items]) => items.length > 0).map(([cat, items]) => (
             <div key={cat}>
               <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-stone">{cat}</h3>
-                <div className="flex-1 h-px bg-arena-dark" />
-                <span className="text-xs text-stone/50">{items.length} partidas</span>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-ink-soft">{cat}</h3>
+                <div className="flex-1 h-px bg-edge" />
+                <span className="text-xs text-ink-soft/50">{items.length} partidas</span>
               </div>
               <div className="card p-0 overflow-hidden">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-arena-dark/60 text-stone text-xs">
+                    <tr className="bg-edge/60 text-ink-soft text-xs">
                       <th className="text-left px-4 py-2.5">Descripción</th>
                       <th className="text-center px-3 py-2.5 hidden sm:table-cell">Ud.</th>
                       <th className="text-right px-3 py-2.5 hidden md:table-cell">Mat. (€)</th>
                       <th className="text-right px-3 py-2.5 hidden md:table-cell">M.O. (€)</th>
                       <th className="text-right px-3 py-2.5 hidden md:table-cell">Margen</th>
-                      <th className="text-right px-4 py-2.5 font-semibold text-navy">Precio cliente</th>
+                      <th className="text-right px-4 py-2.5 font-semibold text-ink">Precio cliente</th>
                       {tab === 'mis' && <th className="px-3 py-2.5" />}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-arena-dark/60">
+                  <tbody className="divide-y divide-edge/60">
                     {items.map(t => (
-                      <tr key={t.id} className="hover:bg-arena/40 transition-colors">
-                        <td className="px-4 py-3 text-navy">{t.descripcion}</td>
-                        <td className="px-3 py-3 text-center text-stone hidden sm:table-cell">{t.unidad}</td>
-                        <td className="px-3 py-3 text-right text-stone hidden md:table-cell">{parseFloat(t.coste_material).toFixed(2)}</td>
-                        <td className="px-3 py-3 text-right text-stone hidden md:table-cell">{parseFloat(t.coste_mo).toFixed(2)}</td>
-                        <td className="px-3 py-3 text-right text-stone hidden md:table-cell">{t.margen}%</td>
-                        <td className="px-4 py-3 text-right font-bold text-navy">
-                          {precio(t).toFixed(2)} €<span className="text-xs font-normal text-stone">/{t.unidad}</span>
+                      <tr key={t.id} className="hover:bg-page/40 transition-colors">
+                        <td className="px-4 py-3 text-ink">{t.descripcion}</td>
+                        <td className="px-3 py-3 text-center text-ink-soft hidden sm:table-cell">{t.unidad}</td>
+                        <td className="px-3 py-3 text-right text-ink-soft hidden md:table-cell">{parseFloat(t.coste_material).toFixed(2)}</td>
+                        <td className="px-3 py-3 text-right text-ink-soft hidden md:table-cell">{parseFloat(t.coste_mo).toFixed(2)}</td>
+                        <td className="px-3 py-3 text-right text-ink-soft hidden md:table-cell">{t.margen}%</td>
+                        <td className="px-4 py-3 text-right font-bold text-ink">
+                          {precio(t).toFixed(2)} €<span className="text-xs font-normal text-ink-soft">/{t.unidad}</span>
                         </td>
                         {tab === 'mis' && (
                           <td className="px-3 py-3 text-right whitespace-nowrap">
                             <button onClick={() => openEdit(t)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">Editar</button>
-                            <button onClick={() => remove(t.id, t.descripcion)} className="text-stone/40 hover:text-red-500 text-xs">×</button>
+                            <button onClick={() => remove(t.id, t.descripcion)} className="text-ink-soft/40 hover:text-red-500 text-xs">×</button>
                           </td>
                         )}
                       </tr>
@@ -216,10 +216,10 @@ export default function Tarifas() {
       {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col">
-            <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-navy">{editId ? 'Editar tarifa' : 'Nueva tarifa'}</h2>
-              <button onClick={() => setShowForm(false)} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+          <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col">
+            <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
+              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar tarifa' : 'Nueva tarifa'}</h2>
+              <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
               <div className="grid grid-cols-2 gap-3">

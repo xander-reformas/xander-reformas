@@ -54,7 +54,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-arena flex">
+    <div className="min-h-screen bg-page flex">
       {/* Panel izquierdo — branding */}
       <div className="hidden lg:flex w-1/2 bg-navy flex-col justify-between p-12">
         <div>
@@ -77,7 +77,7 @@ export default function ResetPasswordPage() {
         <div className="w-full max-w-sm">
           <div className="lg:hidden text-2xl font-black mb-8">
             <span className="text-gold">X</span>
-            <span className="text-navy">ANDER</span>
+            <span className="text-ink">ANDER</span>
           </div>
 
           {done ? (
@@ -88,16 +88,16 @@ export default function ResetPasswordPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h1 className="text-2xl font-bold text-navy mb-2">Contraseña actualizada</h1>
-              <p className="text-sm text-stone">Redirigiendo a tu cuenta...</p>
+              <h1 className="text-2xl font-bold text-ink mb-2">Contraseña actualizada</h1>
+              <p className="text-sm text-ink-soft">Redirigiendo a tu cuenta...</p>
               <div className="mt-4 w-6 h-6 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto" />
             </div>
           ) : !ready ? (
             /* ── Esperando el token de Supabase ── */
             <div className="text-center">
               <div className="w-6 h-6 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-sm text-stone">Verificando enlace de recuperación...</p>
-              <p className="text-xs text-stone mt-4">
+              <p className="text-sm text-ink-soft">Verificando enlace de recuperación...</p>
+              <p className="text-xs text-ink-soft mt-4">
                 Si ves este mensaje durante más de 10 segundos, el enlace puede haber caducado.{' '}
                 <a href="/recuperar-password" className="text-gold hover:underline">Solicita uno nuevo.</a>
               </p>
@@ -105,8 +105,8 @@ export default function ResetPasswordPage() {
           ) : (
             /* ── Formulario nueva contraseña ── */
             <>
-              <h1 className="text-2xl font-bold text-navy mb-1">Nueva contraseña</h1>
-              <p className="text-sm text-stone mb-8">Elige una nueva contraseña para tu cuenta.</p>
+              <h1 className="text-2xl font-bold text-ink mb-1">Nueva contraseña</h1>
+              <p className="text-sm text-ink-soft mb-8">Elige una nueva contraseña para tu cuenta.</p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>

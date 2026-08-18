@@ -69,7 +69,7 @@ export default function AdminPanel() {
       <div className="p-8 flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <div className="text-stone text-sm">Cargando panel de administración...</div>
+          <div className="text-ink-soft text-sm">Cargando panel de administración...</div>
         </div>
       </div>
     )
@@ -80,14 +80,14 @@ export default function AdminPanel() {
       {/* Cabecera */}
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-ink flex items-center gap-2">
             🛡️ Panel de Administración
           </h1>
-          <p className="text-stone text-sm mt-0.5">Autónomos registrados en XANDER Gestión</p>
+          <p className="text-ink-soft text-sm mt-0.5">Autónomos registrados en XANDER Gestión</p>
         </div>
         <button
           onClick={loadAll}
-          className="text-xs text-stone hover:text-navy border border-stone/20 rounded-lg px-3 py-1.5 transition-colors"
+          className="text-xs text-ink-soft hover:text-ink border border-stone/20 rounded-lg px-3 py-1.5 transition-colors"
         >
           ↻ Actualizar
         </button>
@@ -95,17 +95,17 @@ export default function AdminPanel() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-xl p-5 border border-stone/10">
-          <div className="text-3xl font-black text-navy">{stats.total}</div>
-          <div className="text-sm text-stone mt-1">Total registrados</div>
+        <div className="bg-surface rounded-xl p-5 border border-stone/10">
+          <div className="text-3xl font-black text-ink">{stats.total}</div>
+          <div className="text-sm text-ink-soft mt-1">Total registrados</div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-stone/10">
+        <div className="bg-surface rounded-xl p-5 border border-stone/10">
           <div className="text-3xl font-black text-green-600">{stats.semana}</div>
-          <div className="text-sm text-stone mt-1">Nuevos esta semana</div>
+          <div className="text-sm text-ink-soft mt-1">Nuevos esta semana</div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-stone/10">
+        <div className="bg-surface rounded-xl p-5 border border-stone/10">
           <div className="text-3xl font-black text-gold">{stats.activos}</div>
-          <div className="text-sm text-stone mt-1">Con perfil completo</div>
+          <div className="text-sm text-ink-soft mt-1">Con perfil completo</div>
         </div>
       </div>
 
@@ -120,8 +120,8 @@ export default function AdminPanel() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
               activeTab === tab.id
-                ? 'border-gold text-navy'
-                : 'border-transparent text-stone hover:text-navy'
+                ? 'border-gold text-ink'
+                : 'border-transparent text-ink-soft hover:text-ink'
             }`}
           >
             {tab.icon} {tab.label}
@@ -136,9 +136,9 @@ export default function AdminPanel() {
 
       {/* Tab: Usuarios */}
       {activeTab === 'usuarios' && (
-        <div className="bg-white rounded-xl border border-stone/10 overflow-hidden">
+        <div className="bg-surface rounded-xl border border-stone/10 overflow-hidden">
           {users.length === 0 ? (
-            <div className="py-16 text-center text-stone">
+            <div className="py-16 text-center text-ink-soft">
               <div className="text-4xl mb-3">👤</div>
               <div className="font-medium">Aún no hay usuarios registrados</div>
               <div className="text-sm mt-1">Aquí aparecerán los autónomos que se den de alta</div>
@@ -147,33 +147,33 @@ export default function AdminPanel() {
             <table className="w-full text-sm">
               <thead className="bg-navy/5 border-b border-stone/10">
                 <tr>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">NOMBRE</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">EMAIL</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">EMPRESA</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">CIUDAD</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">REGISTRO</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">ÚLTIMO ACCESO</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-stone tracking-wider">ESTADO</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">NOMBRE</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">EMAIL</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">EMPRESA</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">CIUDAD</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">REGISTRO</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">ÚLTIMO ACCESO</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">ESTADO</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-stone/5">
                 {users.map(u => (
                   <tr key={u.id} className="hover:bg-stone/5 transition-colors">
-                    <td className="px-4 py-3 font-medium text-navy">
+                    <td className="px-4 py-3 font-medium text-ink">
                       {u.nombre || u.apellidos
                         ? `${u.nombre || ''} ${u.apellidos || ''}`.trim()
-                        : <span className="text-stone/50 italic">Sin nombre</span>
+                        : <span className="text-ink-soft/50 italic">Sin nombre</span>
                       }
                     </td>
-                    <td className="px-4 py-3 text-stone">{u.email}</td>
-                    <td className="px-4 py-3 text-stone">{u.empresa_nombre || '—'}</td>
-                    <td className="px-4 py-3 text-stone">{u.empresa_ciudad || '—'}</td>
-                    <td className="px-4 py-3 text-stone">
+                    <td className="px-4 py-3 text-ink-soft">{u.email}</td>
+                    <td className="px-4 py-3 text-ink-soft">{u.empresa_nombre || '—'}</td>
+                    <td className="px-4 py-3 text-ink-soft">{u.empresa_ciudad || '—'}</td>
+                    <td className="px-4 py-3 text-ink-soft">
                       {new Date(u.created_at).toLocaleDateString('es-ES', {
                         day: '2-digit', month: 'short', year: 'numeric'
                       })}
                     </td>
-                    <td className="px-4 py-3 text-stone">
+                    <td className="px-4 py-3 text-ink-soft">
                       {u.last_sign_in_at
                         ? new Date(u.last_sign_in_at).toLocaleDateString('es-ES', {
                             day: '2-digit', month: 'short', year: 'numeric'
@@ -197,9 +197,9 @@ export default function AdminPanel() {
 
       {/* Tab: Notificaciones */}
       {activeTab === 'notificaciones' && (
-        <div className="bg-white rounded-xl border border-stone/10 overflow-hidden">
+        <div className="bg-surface rounded-xl border border-stone/10 overflow-hidden">
           {notifs.length === 0 ? (
-            <div className="py-16 text-center text-stone">
+            <div className="py-16 text-center text-ink-soft">
               <div className="text-4xl mb-3">🔔</div>
               <div className="font-medium">Sin notificaciones</div>
               <div className="text-sm mt-1">Aquí aparecerán los nuevos registros</div>
@@ -208,7 +208,7 @@ export default function AdminPanel() {
             <>
               {noLeidas > 0 && (
                 <div className="px-4 py-2.5 border-b border-stone/10 flex items-center justify-between bg-gold/5">
-                  <span className="text-xs text-stone">{noLeidas} notificaciones sin leer</span>
+                  <span className="text-xs text-ink-soft">{noLeidas} notificaciones sin leer</span>
                   <button
                     onClick={marcarTodasLeidas}
                     className="text-xs text-gold hover:text-gold/70 font-medium transition-colors"
@@ -229,9 +229,9 @@ export default function AdminPanel() {
                       {n.tipo === 'nuevo_registro' ? '👤' : '🔔'}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-medium text-navy text-sm">{n.titulo}</div>
-                      <div className="text-xs text-stone mt-0.5">{n.mensaje}</div>
-                      <div className="text-xs text-stone/50 mt-1">
+                      <div className="font-medium text-ink text-sm">{n.titulo}</div>
+                      <div className="text-xs text-ink-soft mt-0.5">{n.mensaje}</div>
+                      <div className="text-xs text-ink-soft/50 mt-1">
                         {new Date(n.created_at).toLocaleString('es-ES', {
                           day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
                         })}
@@ -240,7 +240,7 @@ export default function AdminPanel() {
                     {!n.leida && (
                       <button
                         onClick={() => marcarLeida(n.id)}
-                        className="text-xs text-stone hover:text-navy transition-colors flex-shrink-0 mt-1"
+                        className="text-xs text-ink-soft hover:text-ink transition-colors flex-shrink-0 mt-1"
                         title="Marcar como leída"
                       >
                         ✓

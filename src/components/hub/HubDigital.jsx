@@ -87,8 +87,8 @@ export default function HubDigital() {
   return (
     <div className="p-6 max-w-4xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy">Hub Digital</h1>
-        <p className="text-sm text-stone mt-0.5">Estrategia de captación y presencia online para tu negocio de reformas</p>
+        <h1 className="text-2xl font-bold text-ink">Hub Digital</h1>
+        <p className="text-sm text-ink-soft mt-0.5">Estrategia de captación y presencia online para tu negocio de reformas</p>
       </div>
 
       <div className="bg-navy rounded-xl p-5 mb-8 flex items-start gap-4">
@@ -106,28 +106,28 @@ export default function HubDigital() {
           <div key={sec.titulo}>
             <div className="flex items-center gap-3 mb-4">
               <span className="text-2xl">{sec.icon}</span>
-              <h2 className="text-lg font-bold text-navy">{sec.titulo}</h2>
+              <h2 className="text-lg font-bold text-ink">{sec.titulo}</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {sec.items.map(item => (
                 <div key={item.titulo} className="card hover:shadow-md transition-shadow">
                   <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="font-bold text-navy">{item.titulo}</h3>
+                    <h3 className="font-bold text-ink">{item.titulo}</h3>
                     <div className="flex flex-wrap gap-1 flex-shrink-0">
                       {item.tags.map(t => (
                         <span key={t} className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                           t === 'Gratis' ? 'bg-green-100 text-green-700' :
                           t === 'Prioritario' ? 'bg-gold/20 text-gold-dark' :
                           t === 'De pago' ? 'bg-red-100 text-red-600' :
-                          'bg-arena-dark text-stone'
+                          'bg-edge text-ink-soft'
                         }`}>{t}</span>
                       ))}
                     </div>
                   </div>
-                  <p className="text-sm text-stone mb-3">{item.desc}</p>
+                  <p className="text-sm text-ink-soft mb-3">{item.desc}</p>
                   <div className="space-y-1">
                     {item.tips.map((tip, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-stone">
+                      <div key={i} className="flex items-start gap-2 text-xs text-ink-soft">
                         <span className="text-gold mt-0.5 flex-shrink-0">→</span>
                         <span>{tip}</span>
                       </div>

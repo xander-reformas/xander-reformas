@@ -403,18 +403,18 @@ export default function Documentos() {
     <div className="p-6 max-w-5xl">
       {/* Cabecera */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy">Centro de Documentos</h1>
-        <p className="text-sm text-stone mt-0.5">Plantillas profesionales y gestión de archivos</p>
+        <h1 className="text-2xl font-bold text-ink">Centro de Documentos</h1>
+        <p className="text-sm text-ink-soft mt-0.5">Plantillas profesionales y gestión de archivos</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-arena-dark rounded-xl p-1 w-fit mb-6">
+      <div className="flex gap-1 bg-edge rounded-xl p-1 w-fit mb-6">
         <button onClick={() => setTab('plantillas')}
-          className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'plantillas' ? 'bg-white text-navy shadow-sm' : 'text-stone hover:text-navy'}`}>
+          className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'plantillas' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
           📄 Plantillas ({PLANTILLAS.length})
         </button>
         <button onClick={() => setTab('mis-docs')}
-          className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'mis-docs' ? 'bg-white text-navy shadow-sm' : 'text-stone hover:text-navy'}`}>
+          className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'mis-docs' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
           📁 Mis documentos {!loading && `(${docs.length})`}
         </button>
       </div>
@@ -436,13 +436,13 @@ export default function Documentos() {
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
-          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-5 text-sm text-stone">
+          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-5 text-sm text-ink-soft">
             📋 Plantillas editables para tu día a día. Cópialas, personalízalas y úsalas libremente.
           </div>
           {plantillasFiltradas.length === 0 ? (
             <div className="card text-center py-12">
               <div className="text-4xl mb-2">🔍</div>
-              <div className="font-bold text-navy">Sin resultados</div>
+              <div className="font-bold text-ink">Sin resultados</div>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -451,11 +451,11 @@ export default function Documentos() {
                   <div className="flex items-start gap-3 mb-3">
                     <span className="text-2xl flex-shrink-0">{p.icon}</span>
                     <div className="flex-1 min-w-0">
-                      <div className="font-bold text-navy">{p.titulo}</div>
-                      <span className="text-xs bg-arena-dark text-stone px-2 py-0.5 rounded-full mt-0.5 inline-block">{p.categoria}</span>
+                      <div className="font-bold text-ink">{p.titulo}</div>
+                      <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full mt-0.5 inline-block">{p.categoria}</span>
                     </div>
                   </div>
-                  <p className="text-sm text-stone flex-1 mb-4">{p.desc}</p>
+                  <p className="text-sm text-ink-soft flex-1 mb-4">{p.desc}</p>
                   <div className="flex gap-2 mt-auto">
                     <button onClick={() => setPlantillaVista(p)} className="btn-secondary text-sm flex-1 py-2">Ver plantilla</button>
                     <button onClick={() => copiarPlantilla(p.contenido)} className="btn-primary text-sm flex-1 py-2">📋 Copiar</button>
@@ -475,9 +475,9 @@ export default function Documentos() {
             <div className="flex items-start gap-4">
               <div className="text-3xl">⚙️</div>
               <div className="flex-1">
-                <div className="font-bold text-navy mb-2">Paso previo: crear el bucket de almacenamiento</div>
-                <p className="text-sm text-stone mb-4">
-                  Ve a <strong>Supabase → Storage</strong> y crea un bucket llamado <code className="bg-arena px-1.5 py-0.5 rounded font-mono text-xs">documentos-empresa</code>.
+                <div className="font-bold text-ink mb-2">Paso previo: crear el bucket de almacenamiento</div>
+                <p className="text-sm text-ink-soft mb-4">
+                  Ve a <strong>Supabase → Storage</strong> y crea un bucket llamado <code className="bg-page px-1.5 py-0.5 rounded font-mono text-xs">documentos-empresa</code>.
                   Márcalo como <strong>Public</strong> y guarda. Luego ejecuta la migración SQL indicada abajo.
                 </p>
                 <div className="bg-navy text-gold font-mono text-xs px-4 py-3 rounded-xl mb-4 whitespace-pre">
@@ -495,7 +495,7 @@ ALTER TABLE public.documentos
             </div>
           </div>
         ) : loading ? (
-          <div className="text-stone text-sm py-10 text-center">Cargando archivos…</div>
+          <div className="text-ink-soft text-sm py-10 text-center">Cargando archivos…</div>
         ) : (
           <div className="space-y-8">
 
@@ -520,8 +520,8 @@ ALTER TABLE public.documentos
                     <div className="flex items-start gap-3 mb-2">
                       <span className="text-xl flex-shrink-0">{c.icon}</span>
                       <div>
-                        <div className="font-bold text-navy text-sm leading-tight">{c.cat}</div>
-                        <div className={`text-xs mt-0.5 font-semibold ${archivos.length ? 'text-gold' : 'text-stone'}`}>
+                        <div className="font-bold text-ink text-sm leading-tight">{c.cat}</div>
+                        <div className={`text-xs mt-0.5 font-semibold ${archivos.length ? 'text-gold' : 'text-ink-soft'}`}>
                           {archivos.length
                             ? `${archivos.length} archivo${archivos.length > 1 ? 's' : ''}`
                             : 'Sin archivos'}
@@ -530,23 +530,23 @@ ALTER TABLE public.documentos
                     </div>
 
                     {/* Descripción */}
-                    <p className="text-xs text-stone leading-relaxed mb-3">{c.desc}</p>
+                    <p className="text-xs text-ink-soft leading-relaxed mb-3">{c.desc}</p>
 
                     {/* Lista de archivos */}
                     {archivos.length > 0 && (
                       <div className="space-y-1 mb-3">
                         {archivos.map(f => (
-                          <div key={f.id} className="flex items-center gap-2 bg-arena rounded-lg px-2 py-1.5">
+                          <div key={f.id} className="flex items-center gap-2 bg-page rounded-lg px-2 py-1.5">
                             <span className="text-sm flex-shrink-0">{fileIcon(f.nombre)}</span>
-                            <span className="text-xs text-navy truncate flex-1 min-w-0">{f.nombre}</span>
+                            <span className="text-xs text-ink truncate flex-1 min-w-0">{f.nombre}</span>
                             {f.file_size ? (
-                              <span className="text-xs text-stone flex-shrink-0">{fmtSize(f.file_size)}</span>
+                              <span className="text-xs text-ink-soft flex-shrink-0">{fmtSize(f.file_size)}</span>
                             ) : null}
                             <div className="flex items-center gap-1 flex-shrink-0">
                               {f.url && (
                                 <a href={f.url} target="_blank" rel="noopener noreferrer"
                                   title="Ver archivo"
-                                  className="w-5 h-5 flex items-center justify-center text-stone hover:text-navy transition-colors">
+                                  className="w-5 h-5 flex items-center justify-center text-ink-soft hover:text-ink transition-colors">
                                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -576,7 +576,7 @@ ALTER TABLE public.documentos
                       ) : (
                         <button onClick={() => triggerUpload(c.cat)}
                           disabled={isUp}
-                          className="w-full text-xs text-stone hover:text-navy font-semibold text-center py-1.5 border border-dashed border-stone/30 rounded-lg hover:border-navy/40 transition-colors disabled:opacity-60">
+                          className="w-full text-xs text-ink-soft hover:text-ink font-semibold text-center py-1.5 border border-dashed border-stone/30 rounded-lg hover:border-navy/40 transition-colors disabled:opacity-60">
                           {isUp
                             ? <span className="flex items-center justify-center gap-1"><span className="w-3 h-3 border-2 border-stone border-t-transparent rounded-full animate-spin" /> Subiendo…</span>
                             : '+ Añadir otro'}
@@ -592,8 +592,8 @@ ALTER TABLE public.documentos
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xl">🎓</span>
-                <h2 className="text-base font-bold text-navy">Formación y Certificados</h2>
-                <div className="flex-1 h-px bg-arena-dark" />
+                <h2 className="text-base font-bold text-ink">Formación y Certificados</h2>
+                <div className="flex-1 h-px bg-edge" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {CARPETAS_FORMACION.map(c => {
@@ -615,8 +615,8 @@ ALTER TABLE public.documentos
                         <div className="flex items-start gap-3">
                           <span className="text-xl flex-shrink-0">{c.icon}</span>
                           <div>
-                            <div className="font-bold text-navy text-sm leading-tight">{c.cat}</div>
-                            <div className={`text-xs mt-0.5 font-semibold ${archivos.length ? 'text-gold' : 'text-stone'}`}>
+                            <div className="font-bold text-ink text-sm leading-tight">{c.cat}</div>
+                            <div className={`text-xs mt-0.5 font-semibold ${archivos.length ? 'text-gold' : 'text-ink-soft'}`}>
                               {archivos.length
                                 ? `${archivos.length} certificado${archivos.length > 1 ? 's' : ''}`
                                 : 'Sin certificados'}
@@ -630,19 +630,19 @@ ALTER TABLE public.documentos
                         </button>
                       </div>
 
-                      <p className="text-xs text-stone leading-relaxed mb-3">{c.desc}</p>
+                      <p className="text-xs text-ink-soft leading-relaxed mb-3">{c.desc}</p>
 
                       {archivos.length > 0 ? (
                         <div className="space-y-1">
                           {archivos.map(f => (
-                            <div key={f.id} className="flex items-center gap-2 bg-arena rounded-lg px-2 py-1.5">
+                            <div key={f.id} className="flex items-center gap-2 bg-page rounded-lg px-2 py-1.5">
                               <span className="text-sm flex-shrink-0">{fileIcon(f.nombre)}</span>
-                              <span className="text-xs text-navy truncate flex-1 min-w-0">{f.nombre}</span>
-                              {f.file_size ? <span className="text-xs text-stone flex-shrink-0">{fmtSize(f.file_size)}</span> : null}
+                              <span className="text-xs text-ink truncate flex-1 min-w-0">{f.nombre}</span>
+                              {f.file_size ? <span className="text-xs text-ink-soft flex-shrink-0">{fmtSize(f.file_size)}</span> : null}
                               <div className="flex items-center gap-1 flex-shrink-0">
                                 {f.url && (
                                   <a href={f.url} target="_blank" rel="noopener noreferrer"
-                                    className="w-5 h-5 flex items-center justify-center text-stone hover:text-navy transition-colors">
+                                    className="w-5 h-5 flex items-center justify-center text-ink-soft hover:text-ink transition-colors">
                                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -658,7 +658,7 @@ ALTER TABLE public.documentos
                           ))}
                         </div>
                       ) : (
-                        <div className="text-xs text-stone/40 text-center py-4">
+                        <div className="text-xs text-ink-soft/40 text-center py-4">
                           Ningún certificado añadido aún
                         </div>
                       )}
@@ -675,17 +675,17 @@ ALTER TABLE public.documentos
       {/* ── Modal ver plantilla ──────────────────────────────────────────── */}
       {plantillaVista && (
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl my-4">
-            <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between">
+          <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-2xl my-4">
+            <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-bold text-navy">{plantillaVista.titulo}</h2>
-                <span className="text-xs bg-arena-dark text-stone px-2 py-0.5 rounded-full">{plantillaVista.categoria}</span>
+                <h2 className="text-lg font-bold text-ink">{plantillaVista.titulo}</h2>
+                <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full">{plantillaVista.categoria}</span>
               </div>
               <button onClick={() => setPlantillaVista(null)}
-                className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+                className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <div className="p-6">
-              <pre className="text-xs text-navy font-mono whitespace-pre-wrap bg-arena rounded-xl p-4 max-h-[60vh] overflow-y-auto leading-relaxed">
+              <pre className="text-xs text-ink font-mono whitespace-pre-wrap bg-page rounded-xl p-4 max-h-[60vh] overflow-y-auto leading-relaxed">
                 {plantillaVista.contenido}
               </pre>
               <div className="flex gap-3 mt-4">

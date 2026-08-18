@@ -68,8 +68,8 @@ export default function Clientes() {
       {/* Cabecera */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Clientes</h1>
-          <p className="text-sm text-stone mt-0.5">{clientes.length} cliente{clientes.length !== 1 ? 's' : ''} en total</p>
+          <h1 className="text-2xl font-bold text-ink">Clientes</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{clientes.length} cliente{clientes.length !== 1 ? 's' : ''} en total</p>
         </div>
         <button onClick={openNew} className="btn-primary">+ Nuevo cliente</button>
       </div>
@@ -81,19 +81,19 @@ export default function Clientes() {
 
       {/* Contenido */}
       {loading ? (
-        <div className="text-stone text-sm py-10 text-center">Cargando clientes…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">Cargando clientes…</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">👤</div>
-          <div className="font-bold text-navy mb-1">{search ? 'Sin resultados' : 'Aún no tienes clientes'}</div>
-          <div className="text-sm text-stone mb-5">{search ? 'Prueba otra búsqueda' : 'Añade tu primer cliente para empezar a gestionar obras y presupuestos'}</div>
+          <div className="font-bold text-ink mb-1">{search ? 'Sin resultados' : 'Aún no tienes clientes'}</div>
+          <div className="text-sm text-ink-soft mb-5">{search ? 'Prueba otra búsqueda' : 'Añade tu primer cliente para empezar a gestionar obras y presupuestos'}</div>
           {!search && <button onClick={openNew} className="btn-primary">+ Añadir cliente</button>}
         </div>
       ) : (
         <div className="card p-0 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-arena-dark text-stone text-xs uppercase tracking-wide">
+              <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
                 <th className="text-left px-5 py-3">Nombre / NIF</th>
                 <th className="text-left px-4 py-3 hidden md:table-cell">Teléfono</th>
                 <th className="text-left px-4 py-3 hidden lg:table-cell">Email</th>
@@ -101,19 +101,19 @@ export default function Clientes() {
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-arena-dark">
+            <tbody className="divide-y divide-edge">
               {filtered.map(c => (
-                <tr key={c.id} className="hover:bg-arena/50 transition-colors">
+                <tr key={c.id} className="hover:bg-page/50 transition-colors">
                   <td className="px-5 py-3.5">
-                    <div className="font-semibold text-navy">{c.nombre}</div>
-                    {c.nif && <div className="text-xs text-stone mt-0.5">{c.nif}</div>}
+                    <div className="font-semibold text-ink">{c.nombre}</div>
+                    {c.nif && <div className="text-xs text-ink-soft mt-0.5">{c.nif}</div>}
                   </td>
-                  <td className="px-4 py-3.5 hidden md:table-cell text-stone">{c.telefono || '—'}</td>
-                  <td className="px-4 py-3.5 hidden lg:table-cell text-stone">{c.email || '—'}</td>
-                  <td className="px-4 py-3.5 hidden lg:table-cell text-stone">{c.ciudad || '—'}</td>
+                  <td className="px-4 py-3.5 hidden md:table-cell text-ink-soft">{c.telefono || '—'}</td>
+                  <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">{c.email || '—'}</td>
+                  <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">{c.ciudad || '—'}</td>
                   <td className="px-4 py-3.5 text-right whitespace-nowrap">
                     <button onClick={() => openEdit(c)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">Editar</button>
-                    <button onClick={() => remove(c.id, c.nombre)} className="text-stone/50 hover:text-red-500 text-xs transition-colors">Eliminar</button>
+                    <button onClick={() => remove(c.id, c.nombre)} className="text-ink-soft/50 hover:text-red-500 text-xs transition-colors">Eliminar</button>
                   </td>
                 </tr>
               ))}
@@ -125,10 +125,10 @@ export default function Clientes() {
       {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col">
-            <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-navy">{editId ? 'Editar cliente' : 'Nuevo cliente'}</h2>
-              <button onClick={() => setShowForm(false)} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+          <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col">
+            <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
+              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar cliente' : 'Nuevo cliente'}</h2>
+              <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
               <div>

@@ -105,8 +105,8 @@ export default function PartesTrabajo() {
       {/* Cabecera */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Partes de trabajo</h1>
-          <p className="text-sm text-stone mt-0.5">Registro diario de horas por empleado y obra</p>
+          <h1 className="text-2xl font-bold text-ink">Partes de trabajo</h1>
+          <p className="text-sm text-ink-soft mt-0.5">Registro diario de horas por empleado y obra</p>
         </div>
         <button onClick={openNew} className="btn-primary">+ Nuevo parte</button>
       </div>
@@ -140,9 +140,9 @@ export default function PartesTrabajo() {
               {obras.map(o=><option key={o.id} value={o.id}>{o.nombre}</option>)}
             </select>
           </div>
-          <div className="ml-auto flex gap-1 bg-arena-dark rounded-xl p-1 self-end">
-            <button onClick={()=>setVista('lista')} className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${vista==='lista'?'bg-white text-navy shadow-sm':'text-stone hover:text-navy'}`}>Lista</button>
-            <button onClick={()=>setVista('resumen')} className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${vista==='resumen'?'bg-white text-navy shadow-sm':'text-stone hover:text-navy'}`}>Resumen</button>
+          <div className="ml-auto flex gap-1 bg-edge rounded-xl p-1 self-end">
+            <button onClick={()=>setVista('lista')} className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${vista==='lista'?'bg-surface text-ink shadow-sm':'text-ink-soft hover:text-ink'}`}>Lista</button>
+            <button onClick={()=>setVista('resumen')} className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${vista==='resumen'?'bg-surface text-ink shadow-sm':'text-ink-soft hover:text-ink'}`}>Resumen</button>
           </div>
         </div>
       </div>
@@ -150,12 +150,12 @@ export default function PartesTrabajo() {
       {/* KPIs */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="card text-center py-3">
-          <div className="text-2xl font-black text-navy">{filtrados.length}</div>
-          <div className="text-xs text-stone">Partes en {MESES[filtroMes-1]}</div>
+          <div className="text-2xl font-black text-ink">{filtrados.length}</div>
+          <div className="text-xs text-ink-soft">Partes en {MESES[filtroMes-1]}</div>
         </div>
         <div className="card text-center py-3">
-          <div className="text-2xl font-black text-navy">{fmt2(totalHoras)}</div>
-          <div className="text-xs text-stone">Horas registradas</div>
+          <div className="text-2xl font-black text-ink">{fmt2(totalHoras)}</div>
+          <div className="text-xs text-ink-soft">Horas registradas</div>
         </div>
         <div className="card bg-navy text-center py-3">
           <div className="text-2xl font-black text-gold">{resumenEmp.length}</div>
@@ -164,14 +164,14 @@ export default function PartesTrabajo() {
       </div>
 
       {loading ? (
-        <div className="text-stone text-sm py-10 text-center">Cargando partes…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">Cargando partes…</div>
       ) : vista === 'lista' ? (
         /* ── Vista lista ── */
         filtrados.length === 0 ? (
           <div className="card text-center py-14">
             <div className="text-5xl mb-3">📋</div>
-            <div className="font-bold text-navy mb-1">Sin partes en {MESES[filtroMes-1]} {filtroAño}</div>
-            <div className="text-sm text-stone mb-5">Empieza a registrar las horas del equipo</div>
+            <div className="font-bold text-ink mb-1">Sin partes en {MESES[filtroMes-1]} {filtroAño}</div>
+            <div className="text-sm text-ink-soft mb-5">Empieza a registrar las horas del equipo</div>
             <button onClick={openNew} className="btn-primary">+ Nuevo parte</button>
           </div>
         ) : (
@@ -179,23 +179,23 @@ export default function PartesTrabajo() {
             {filtrados.map(p => (
               <div key={p.id} className="card py-3 flex items-center gap-4">
                 <div className="text-center flex-shrink-0 w-12">
-                  <div className="text-sm font-black text-navy">{new Date(p.fecha+'T12:00:00').getDate()}</div>
-                  <div className="text-xs text-stone">{MESES[new Date(p.fecha+'T12:00:00').getMonth()].slice(0,3)}</div>
+                  <div className="text-sm font-black text-ink">{new Date(p.fecha+'T12:00:00').getDate()}</div>
+                  <div className="text-xs text-ink-soft">{MESES[new Date(p.fecha+'T12:00:00').getMonth()].slice(0,3)}</div>
                 </div>
-                <div className="w-px h-10 bg-arena-dark flex-shrink-0" />
+                <div className="w-px h-10 bg-edge flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-navy">{p.empleados ? `${p.empleados.nombre} ${p.empleados.apellidos}` : empNombre(p.empleado_id)}</div>
-                  <div className="text-xs text-stone flex gap-3 mt-0.5">
+                  <div className="font-semibold text-ink">{p.empleados ? `${p.empleados.nombre} ${p.empleados.apellidos}` : empNombre(p.empleado_id)}</div>
+                  <div className="text-xs text-ink-soft flex gap-3 mt-0.5">
                     {p.obras && <span>🔨 {p.obras.nombre}</span>}
                     {p.descripcion && <span>· {p.descripcion}</span>}
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <div className="text-xl font-black text-navy">{fmt2(p.horas)}<span className="text-xs font-normal text-stone ml-1">h</span></div>
+                  <div className="text-xl font-black text-ink">{fmt2(p.horas)}<span className="text-xs font-normal text-ink-soft ml-1">h</span></div>
                 </div>
                 <div className="flex gap-2 flex-shrink-0">
                   <button onClick={()=>openEdit(p)} className="text-gold hover:text-gold-dark text-xs font-semibold">Editar</button>
-                  <button onClick={()=>remove(p.id)} className="text-stone/30 hover:text-red-500 text-lg leading-none">×</button>
+                  <button onClick={()=>remove(p.id)} className="text-ink-soft/30 hover:text-red-500 text-lg leading-none">×</button>
                 </div>
               </div>
             ))}
@@ -206,18 +206,18 @@ export default function PartesTrabajo() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Por empleado */}
           <div>
-            <h3 className="text-sm font-bold text-stone uppercase tracking-widest mb-3">Por empleado</h3>
+            <h3 className="text-sm font-bold text-ink-soft uppercase tracking-widest mb-3">Por empleado</h3>
             {resumenEmp.length === 0
-              ? <div className="card text-center py-8 text-stone text-sm">Sin datos</div>
+              ? <div className="card text-center py-8 text-ink-soft text-sm">Sin datos</div>
               : <div className="space-y-2">
                   {resumenEmp.sort((a,b)=>b.horas-a.horas).map(e=>(
                     <div key={e.id} className="card py-3 flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-sm flex-shrink-0">👷</div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-navy text-sm">{e.nombre} {e.apellidos}</div>
-                        <div className="text-xs text-stone">{e.dias} día{e.dias!==1?'s':''}</div>
+                        <div className="font-semibold text-ink text-sm">{e.nombre} {e.apellidos}</div>
+                        <div className="text-xs text-ink-soft">{e.dias} día{e.dias!==1?'s':''}</div>
                       </div>
-                      <div className="font-black text-navy">{fmt2(e.horas)}<span className="text-xs font-normal text-stone ml-1">h</span></div>
+                      <div className="font-black text-ink">{fmt2(e.horas)}<span className="text-xs font-normal text-ink-soft ml-1">h</span></div>
                     </div>
                   ))}
                   <div className="card bg-navy py-3 flex justify-between items-center">
@@ -229,18 +229,18 @@ export default function PartesTrabajo() {
           </div>
           {/* Por obra */}
           <div>
-            <h3 className="text-sm font-bold text-stone uppercase tracking-widest mb-3">Por obra</h3>
+            <h3 className="text-sm font-bold text-ink-soft uppercase tracking-widest mb-3">Por obra</h3>
             {resumenObra.length === 0
-              ? <div className="card text-center py-8 text-stone text-sm">Sin obras con partes</div>
+              ? <div className="card text-center py-8 text-ink-soft text-sm">Sin obras con partes</div>
               : <div className="space-y-2">
                   {resumenObra.sort((a,b)=>b.horas-a.horas).map(o=>(
                     <div key={o.id} className="card py-3 flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-sm flex-shrink-0">🔨</div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-navy text-sm truncate">{o.nombre}</div>
-                        <div className="text-xs text-stone">{o.personas} persona{o.personas!==1?'s':''}</div>
+                        <div className="font-semibold text-ink text-sm truncate">{o.nombre}</div>
+                        <div className="text-xs text-ink-soft">{o.personas} persona{o.personas!==1?'s':''}</div>
                       </div>
-                      <div className="font-black text-navy">{fmt2(o.horas)}<span className="text-xs font-normal text-stone ml-1">h</span></div>
+                      <div className="font-black text-ink">{fmt2(o.horas)}<span className="text-xs font-normal text-ink-soft ml-1">h</span></div>
                     </div>
                   ))}
                 </div>
@@ -252,10 +252,10 @@ export default function PartesTrabajo() {
       {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md flex flex-col">
-            <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between">
-              <h2 className="text-lg font-bold text-navy">{editId ? 'Editar parte' : 'Nuevo parte de trabajo'}</h2>
-              <button onClick={()=>setShowForm(false)} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+          <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-md flex flex-col">
+            <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
+              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar parte' : 'Nuevo parte de trabajo'}</h2>
+              <button onClick={()=>setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4">
               <div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { supabase, getUID } from '../../lib/supabase'
 
 const ESTADOS = [
-  { value: 'borrador',   label: 'Borrador',   color: 'bg-stone/20 text-stone' },
+  { value: 'borrador',   label: 'Borrador',   color: 'bg-stone/20 text-ink-soft' },
   { value: 'enviado',    label: 'Enviado',    color: 'bg-blue-100 text-blue-700' },
   { value: 'aceptado',   label: 'Aceptado',   color: 'bg-green-100 text-green-700' },
   { value: 'rechazado',  label: 'Rechazado',  color: 'bg-red-100 text-red-600' },
@@ -107,11 +107,11 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
 
   return (
     <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl my-4">
+      <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-4xl my-4">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-arena-dark flex items-center justify-between">
-          <h2 className="text-lg font-bold text-navy">{editData ? 'Editar presupuesto' : 'Nuevo presupuesto'}</h2>
-          <button onClick={onCancel} className="text-stone hover:text-navy text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+        <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
+          <h2 className="text-lg font-bold text-ink">{editData ? 'Editar presupuesto' : 'Nuevo presupuesto'}</h2>
+          <button onClick={onCancel} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
 
         <form onSubmit={save} className="p-6 space-y-6">
@@ -161,44 +161,44 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
           {/* Partidas */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <label className="text-xs font-semibold uppercase tracking-wider text-stone">Partidas del presupuesto</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Partidas del presupuesto</label>
               <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">+ Añadir partida</button>
             </div>
             <div className="space-y-3">
               {items.map((item, i) => (
-                <div key={i} className="bg-arena rounded-xl p-4 relative">
-                  <button type="button" onClick={() => removeItem(i)} className="absolute top-3 right-3 text-stone/40 hover:text-red-500 text-lg leading-none">×</button>
+                <div key={i} className="bg-page rounded-xl p-4 relative">
+                  <button type="button" onClick={() => removeItem(i)} className="absolute top-3 right-3 text-ink-soft/40 hover:text-red-500 text-lg leading-none">×</button>
                   <div className="pr-6 space-y-3">
                     {/* Fila 1: Descripción */}
                     <div>
                       <label className="label">Descripción / título</label>
-                      <input className="input bg-white" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Reforma de baño — demolición y alicatado" />
+                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Reforma de baño — demolición y alicatado" />
                     </div>
                     {/* Fila 2: Ud · Cantidad · Precio/ud · Importe */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       <div>
                         <label className="label">Unidad</label>
-                        <select className="input bg-white" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)}>
+                        <select className="input bg-surface" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)}>
                           {UNIDADES.map(u => <option key={u} value={u}>{u}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="label">Cantidad</label>
-                        <input className="input bg-white" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" />
+                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" />
                       </div>
                       <div>
                         <label className="label">Precio / ud (€)</label>
-                        <input className="input bg-white" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" />
+                        <input className="input bg-surface" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" />
                       </div>
                       <div>
                         <label className="label">Importe (€)</label>
-                        <input className="input bg-white font-semibold text-navy" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" />
+                        <input className="input bg-surface font-semibold text-ink" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" />
                       </div>
                     </div>
                     {/* Fila 3: Detalle */}
                     <div>
                       <label className="label">Detalle (opcional)</label>
-                      <textarea className="input bg-white resize-none h-14 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} placeholder="Incluye: levantado de alicatado existente, nuevo alicatado hasta techo…" />
+                      <textarea className="input bg-surface resize-none h-14 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} placeholder="Incluye: levantado de alicatado existente, nuevo alicatado hasta techo…" />
                     </div>
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export default function Presupuestos() {
     if (dias < 0) return { label: 'Vencido', cls: 'text-red-600 font-semibold' }
     if (dias === 0) return { label: 'Vence hoy', cls: 'text-orange-600 font-semibold' }
     if (dias <= 3) return { label: `${dias}d restante${dias !== 1 ? 's' : ''}`, cls: 'text-orange-500 font-semibold' }
-    return { label: `${dias}d restantes`, cls: 'text-stone' }
+    return { label: `${dias}d restantes`, cls: 'text-ink-soft' }
   }
 
   async function remove(id, numero) {
@@ -369,8 +369,8 @@ export default function Presupuestos() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy">Presupuestos</h1>
-          <p className="text-sm text-stone mt-0.5">{presupuestos.length} presupuesto{presupuestos.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-2xl font-bold text-ink">Presupuestos</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{presupuestos.length} presupuesto{presupuestos.length !== 1 ? 's' : ''}</p>
         </div>
         <button onClick={openNew} className="btn-primary">+ Nuevo presupuesto</button>
       </div>
@@ -381,7 +381,7 @@ export default function Presupuestos() {
           const count = presupuestos.filter(p => p.estado === s.value).length
           return (
             <div key={s.value} className="card text-center py-3 cursor-pointer hover:shadow-md transition-shadow" onClick={() => setFiltroEstado(filtroEstado === s.value ? '' : s.value)}>
-              <div className="text-xl font-bold text-navy">{count}</div>
+              <div className="text-xl font-bold text-ink">{count}</div>
               <div className="mt-1"><span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${s.color}`}>{s.label}</span></div>
             </div>
           )
@@ -405,13 +405,13 @@ export default function Presupuestos() {
       </div>
 
       {loading ? (
-        <div className="text-stone text-sm py-10 text-center">Cargando presupuestos…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">Cargando presupuestos…</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">📋</div>
-          <div className="font-bold text-navy mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes presupuestos'}</div>
+          <div className="font-bold text-ink mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes presupuestos'}</div>
           {!search && !filtroEstado && (
-            <><div className="text-sm text-stone mb-5">Crea tu primer presupuesto profesional</div>
+            <><div className="text-sm text-ink-soft mb-5">Crea tu primer presupuesto profesional</div>
             <button onClick={openNew} className="btn-primary">+ Nuevo presupuesto</button></>
           )}
         </div>
@@ -419,7 +419,7 @@ export default function Presupuestos() {
         <div className="card p-0 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-arena-dark text-stone text-xs uppercase tracking-wide">
+              <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
                 <th className="text-left px-5 py-3">Número</th>
                 <th className="text-left px-4 py-3 hidden md:table-cell">Cliente / Obra</th>
                 <th className="text-left px-4 py-3 hidden lg:table-cell">Fecha</th>
@@ -429,28 +429,28 @@ export default function Presupuestos() {
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-arena-dark">
+            <tbody className="divide-y divide-edge">
               {filtered.map(p => {
                 const { total } = calculos(p.items || [], p.iva, p.descuento)
                 const vence = infoVencimiento(p)
                 return (
-                  <tr key={p.id} className="hover:bg-arena/50 transition-colors">
+                  <tr key={p.id} className="hover:bg-page/50 transition-colors">
                     <td className="px-5 py-3.5">
-                      <div className="font-bold text-navy">{p.numero}</div>
-                      {p.referencia && <div className="text-xs text-stone mt-0.5">{p.referencia}</div>}
+                      <div className="font-bold text-ink">{p.numero}</div>
+                      {p.referencia && <div className="text-xs text-ink-soft mt-0.5">{p.referencia}</div>}
                     </td>
                     <td className="px-4 py-3.5 hidden md:table-cell">
-                      <div className="text-navy">{p.clientes?.nombre || '—'}</div>
-                      {p.obras?.nombre && <div className="text-xs text-stone mt-0.5">{p.obras.nombre}</div>}
+                      <div className="text-ink">{p.clientes?.nombre || '—'}</div>
+                      {p.obras?.nombre && <div className="text-xs text-ink-soft mt-0.5">{p.obras.nombre}</div>}
                     </td>
-                    <td className="px-4 py-3.5 hidden lg:table-cell text-stone">
+                    <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">
                       {p.fecha ? new Date(p.fecha).toLocaleDateString('es-ES') : '—'}
                     </td>
                     <td className="px-4 py-3.5 hidden xl:table-cell text-xs">
-                      {vence ? <span className={vence.cls}>{vence.label}</span> : <span className="text-stone/40">—</span>}
+                      {vence ? <span className={vence.cls}>{vence.label}</span> : <span className="text-ink-soft/40">—</span>}
                     </td>
                     <td className="px-4 py-3.5"><EstadoBadge estado={p.estado} /></td>
-                    <td className="px-5 py-3.5 text-right font-bold text-navy">{fmt(total)}</td>
+                    <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
                     <td className="px-4 py-3.5 text-right whitespace-nowrap">
                       {p.estado === 'aceptado' && (
                         <button
@@ -462,7 +462,7 @@ export default function Presupuestos() {
                         </button>
                       )}
                       <button onClick={() => openEdit(p)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">Editar</button>
-                      <button onClick={() => remove(p.id, p.numero)} className="text-stone/40 hover:text-red-500 text-xs">Eliminar</button>
+                      <button onClick={() => remove(p.id, p.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
                     </td>
                   </tr>
                 )

@@ -22,6 +22,7 @@ dist-ssr/
 # Sistema
 .DS_Store
 Thumbs.db
+.fuse_hidden*
 
 # Scripts locales de despliegue
 PUBLICAR_EN_VERCEL.bat
