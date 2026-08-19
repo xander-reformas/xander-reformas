@@ -94,3 +94,26 @@
 
 .dark .bg-teal-100   { background-color: rgb(20 184 166 / 0.15); }
 .dark .text-teal-700 { color: rgb(94 234 212); }
+
+/* ============================================================
+   Impresión de documentos (facturas, presupuestos, recibos…)
+   Cualquier bloque marcado con .print-area es lo único que se
+   imprime; todo lo demás (sidebar, barra superior, botones) se
+   oculta. Los elementos con .no-print nunca se imprimen aunque
+   estén dentro de .print-area.
+   ============================================================ */
+@media print {
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .no-print { display: none !important; }
+}

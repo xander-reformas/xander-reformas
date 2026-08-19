@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { supabase, getUID } from '../../lib/supabase'
+import { useAuth } from '../../hooks/useAuth'
 
 const ESTADOS = [
   { value: 'borrador',  label: 'Borrador',  color: 'bg-stone/20 text-ink-soft' },
@@ -359,6 +360,174 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
   )
 }
 
+function FacturaVista({ factura, obra, onClose }) {
+  const { profile } = useAuth()
+  const [cliente, setCliente] = useState(null)
+  const [registro, setRegistro] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let cancelled = false
+    async function cargar() {
+      setLoading(true)
+      const [{ data: cli }, { data: reg }] = await Promise.all([
+        factura.cliente_id
+          ? supabase.from('clientes').select('*').eq('id', factura.cliente_id).single()
+          : Promise.resolve({ data: null }),
+        supabase.from('registro_facturacion')
+          .select('hash, verifacti_estado, verifacti_uuid, verifacti_qr, verifacti_error')
+          .eq('factura_id', factura.id).eq('tipo_registro', 'alta')
+          .maybeSingle(),
+      ])
+      if (cancelled) return
+      setCliente(cli || null)
+      setRegistro(reg || null)
+      setLoading(false)
+    }
+    cargar()
+    return () => { cancelled = true }
+  }, [factura.id])
+
+  const { base, dto, ivaImporte, retImporte, total } = calculos(factura.items || [], factura.iva, factura.descuento, factura.retencion)
+  const fmt = v => (v || 0).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })
+  const registrada = !!registro
+  const enviada = registro?.verifacti_estado && registro.verifacti_estado !== 'no_enviado'
+  const verificable = !!registro?.verifacti_qr && ['pendiente', 'aceptado', 'aceptado_con_errores'].includes(registro?.verifacti_estado)
+
+  return (
+    <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto">
+      <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-2xl my-4">
+        <div className="px-6 py-4 border-b border-edge flex items-center justify-between no-print">
+          <h2 className="text-lg font-bold text-ink">Factura {factura.numero}</h2>
+          <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+        </div>
+
+        {loading ? (
+          <div className="p-10 text-center text-ink-soft text-sm">Cargando…</div>
+        ) : (
+          <div className="print-area p-8 text-sm text-ink">
+            {/* Cabecera: empresa vs cliente */}
+            <div className="flex justify-between items-start gap-6 mb-8">
+              <div>
+                <div className="text-lg font-black text-ink">{profile?.empresa_nombre || 'Mi empresa'}</div>
+                {profile?.empresa_nif && <div className="text-ink-soft">NIF: {profile.empresa_nif}</div>}
+                {profile?.empresa_direccion && <div className="text-ink-soft">{profile.empresa_direccion}</div>}
+                {(profile?.empresa_cp || profile?.empresa_ciudad) && (
+                  <div className="text-ink-soft">{[profile?.empresa_cp, profile?.empresa_ciudad].filter(Boolean).join(' ')}</div>
+                )}
+                {profile?.empresa_telefono && <div className="text-ink-soft">Tel: {profile.empresa_telefono}</div>}
+                {profile?.empresa_email && <div className="text-ink-soft">{profile.empresa_email}</div>}
+              </div>
+              <div className="text-right">
+                <div className="text-2xl font-black text-navy">FACTURA</div>
+                <div className="font-bold text-ink">{factura.numero}</div>
+                <div className="text-ink-soft mt-1">Fecha: {factura.fecha ? new Date(factura.fecha).toLocaleDateString('es-ES') : '—'}</div>
+                {factura.vencimiento && <div className="text-ink-soft">Vencimiento: {new Date(factura.vencimiento).toLocaleDateString('es-ES')}</div>}
+              </div>
+            </div>
+
+            {/* Cliente */}
+            <div className="bg-page rounded-xl p-4 mb-6">
+              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5">Facturar a</div>
+              <div className="font-bold text-ink">{cliente?.nombre || factura.clientes?.nombre || 'Sin cliente'}</div>
+              {cliente?.nif && <div className="text-ink-soft">NIF: {cliente.nif}</div>}
+              {cliente?.direccion && <div className="text-ink-soft">{cliente.direccion}</div>}
+              {(cliente?.cp || cliente?.ciudad) && <div className="text-ink-soft">{[cliente?.cp, cliente?.ciudad].filter(Boolean).join(' ')}</div>}
+              {obra?.nombre && <div className="text-ink-soft mt-1">Obra: {obra.nombre}</div>}
+            </div>
+
+            {/* Líneas */}
+            <table className="w-full mb-6">
+              <thead>
+                <tr className="border-b-2 border-ink/20 text-xs uppercase tracking-wide text-ink-soft">
+                  <th className="text-left py-2">Descripción</th>
+                  <th className="text-right py-2">Cant.</th>
+                  <th className="text-right py-2">Precio/ud</th>
+                  <th className="text-right py-2">Importe</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(factura.items || []).map((item, i) => (
+                  <tr key={i} className="border-b border-edge">
+                    <td className="py-2 pr-2">
+                      <div className="font-medium text-ink">{item.titulo}</div>
+                      {item.detalle && <div className="text-xs text-ink-soft">{item.detalle}</div>}
+                    </td>
+                    <td className="text-right py-2 text-ink-soft">{item.cantidad} {item.unidad}</td>
+                    <td className="text-right py-2 text-ink-soft">{item.precio_unitario ? fmt(item.precio_unitario) : '—'}</td>
+                    <td className="text-right py-2 font-semibold">{fmt(item.importe)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Totales */}
+            <div className="flex justify-end mb-6">
+              <div className="w-64 space-y-1.5">
+                <div className="flex justify-between text-ink-soft">
+                  <span>Base imponible</span><span>{fmt(base)}</span>
+                </div>
+                {dto > 0 && (
+                  <div className="flex justify-between text-ink-soft">
+                    <span>Descuento ({factura.descuento}%)</span><span>−{fmt(dto)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between text-ink-soft">
+                  <span>IVA ({factura.iva}%)</span><span>+{fmt(ivaImporte)}</span>
+                </div>
+                {retImporte > 0 && (
+                  <div className="flex justify-between text-ink-soft">
+                    <span>Ret. IRPF ({factura.retencion}%)</span><span>−{fmt(retImporte)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between font-black text-base border-t-2 border-ink/20 pt-1.5 mt-1.5">
+                  <span>TOTAL</span><span>{fmt(total)}</span>
+                </div>
+              </div>
+            </div>
+
+            {factura.notas && (
+              <div className="text-xs text-ink-soft border-t border-edge pt-3 mb-6 whitespace-pre-line">{factura.notas}</div>
+            )}
+
+            {/* Pie Verifactu: QR + leyenda normativa (RD 1007/2023) */}
+            {registrada && (
+              <div className="border-t border-edge pt-4 flex items-center gap-4">
+                {verificable ? (
+                  <>
+                    <img
+                      src={`data:image/png;base64,${registro.verifacti_qr}`}
+                      alt="Código QR Verifactu"
+                      className="w-20 h-20 shrink-0"
+                    />
+                    <div className="text-[10px] leading-tight text-ink-soft">
+                      <div className="font-bold text-ink">VERI*FACTU</div>
+                      <div>Factura verificable en la sede electrónica de la AEAT.</div>
+                      {registro.verifacti_uuid && <div className="mt-0.5">Ref.: {registro.verifacti_uuid}</div>}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-[10px] leading-tight text-ink-soft">
+                    <div className="font-bold text-ink">Factura registrada en el sistema Verifactu (RD 1007/2023)</div>
+                    <div>Hash: {registro.hash?.slice(0, 24)}…</div>
+                    {!enviada && <div className="no-print mt-1 text-gold-dark">⚠️ Aún no se ha enviado a la AEAT — revisa el estado antes de entregarla al cliente.</div>}
+                    {registro.verifacti_error && <div className="no-print mt-1 text-red-600">⚠️ AEAT: {registro.verifacti_error}</div>}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="px-6 pb-6 pt-2 flex gap-3 no-print">
+          <button onClick={onClose} className="btn-secondary flex-1">Cerrar</button>
+          <button onClick={() => window.print()} className="btn-primary flex-1">🖨️ Imprimir / PDF</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Facturas() {
   const location = useLocation()
   const [facturas, setFacturas] = useState([])
@@ -373,6 +542,7 @@ export default function Facturas() {
   const [showForm, setShowForm] = useState(false)
   const [editData, setEditData] = useState(null)
   const [fromPresupuesto, setFromPresupuesto] = useState(null)
+  const [verData, setVerData] = useState(null)
 
   useEffect(() => {
     load()
@@ -548,6 +718,9 @@ export default function Facturas() {
                     </td>
                     <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
                     <td className="px-4 py-3.5 text-right whitespace-nowrap">
+                      <button onClick={() => setVerData(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
+                        🧾 Factura
+                      </button>
                       <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">
                         {lockedIds.has(f.id) ? 'Ver' : 'Editar'}
                       </button>
@@ -575,6 +748,14 @@ export default function Facturas() {
           onSave={() => { setShowForm(false); setFromPresupuesto(null); load() }}
           onCancel={() => { setShowForm(false); setFromPresupuesto(null) }}
           initialFromPres={fromPresupuesto}
+        />
+      )}
+
+      {verData && (
+        <FacturaVista
+          factura={verData}
+          obra={obras.find(o => o.id === verData.obra_id)}
+          onClose={() => setVerData(null)}
         />
       )}
     </div>
