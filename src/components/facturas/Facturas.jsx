@@ -126,15 +126,27 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
       retencion: parseFloat(form.retencion) || 0,
       notas: form.notas || null,
     }
-    const { error: err } = editData
-      ? await supabase.from('facturas').update(payload).eq('id', editData.id)
-      : await supabase.from('facturas').insert(payload)
+    const wasBorrador = !editData || editData.estado === 'borrador'
+    const seEmite = wasBorrador && form.estado !== 'borrador'
+
+    const { data: saved, error: err } = editData
+      ? await supabase.from('facturas').update(payload).eq('id', editData.id).select('id').single()
+      : await supabase.from('facturas').insert(payload).select('id').single()
     setSaving(false)
     if (err) {
       // El trigger de Verifactu ya devuelve mensajes en español listos para mostrar
       setError(err.message)
       return
     }
+
+    // La factura ya quedó registrada localmente (hash Verifactu) gracias al trigger.
+    // Ahora la enviamos a la AEAT vía Verifacti. Es un paso adicional: si falla,
+    // la factura sigue siendo válida y se puede reintentar el envío más tarde.
+    if (seEmite && saved?.id) {
+      supabase.functions.invoke('verifactu-enviar', { body: { factura_id: saved.id } })
+        .catch(e => console.error('Error enviando a Verifacti:', e))
+    }
+
     onSave()
   }
 
@@ -354,6 +366,7 @@ export default function Facturas() {
   const [obras, setObras] = useState([])
   const [presupuestos, setPresupuestos] = useState([])
   const [lockedIds, setLockedIds] = useState(new Set())
+  const [verifactiEstados, setVerifactiEstados] = useState({})
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('')
@@ -380,13 +393,14 @@ export default function Facturas() {
       supabase.from('clientes').select('id, nombre').order('nombre'),
       supabase.from('obras').select('id, nombre, cliente_id').order('nombre'),
       supabase.from('presupuestos').select('id, numero, cliente_id, obra_id, items, iva, descuento, estado, clientes(nombre)').eq('estado', 'aceptado').order('created_at', { ascending: false }),
-      supabase.from('registro_facturacion').select('factura_id').eq('tipo_registro', 'alta'),
+      supabase.from('registro_facturacion').select('factura_id, verifacti_estado').eq('tipo_registro', 'alta'),
     ])
     setFacturas(facs || [])
     setClientes(clis || [])
     setObras(obs || [])
     setPresupuestos(pres || [])
     setLockedIds(new Set((reg || []).map(r => r.factura_id)))
+    setVerifactiEstados(Object.fromEntries((reg || []).map(r => [r.factura_id, r.verifacti_estado])))
     setLoading(false)
   }
 
@@ -501,6 +515,15 @@ export default function Facturas() {
                         {f.numero}
                         {lockedIds.has(f.id) && (
                           <span title="Registrada en el libro Verifactu — datos económicos bloqueados" className="text-[10px] font-semibold bg-navy text-gold px-1.5 py-0.5 rounded-full">🔒</span>
+                        )}
+                        {verifactiEstados[f.id] === 'pendiente' && (
+                          <span title="Enviada a la AEAT, esperando confirmación" className="text-[10px]">🕓</span>
+                        )}
+                        {verifactiEstados[f.id] === 'aceptado' && (
+                          <span title="Aceptada por la AEAT" className="text-[10px]">✅</span>
+                        )}
+                        {(verifactiEstados[f.id] === 'rechazado' || verifactiEstados[f.id] === 'error' || verifactiEstados[f.id] === 'aceptado_con_errores') && (
+                          <span title={`AEAT: ${verifactiEstados[f.id]}`} className="text-[10px]">⚠️</span>
                         )}
                       </div>
                       {f.obras?.nombre && <div className="text-xs text-ink-soft mt-0.5">{f.obras.nombre}</div>}
