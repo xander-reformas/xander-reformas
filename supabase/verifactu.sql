@@ -63,7 +63,7 @@ create unique index if not exists idx_registro_fact_factura_alta
 create or replace function public.verifactu_registrar_emision()
 returns trigger
 security definer
-set search_path = public
+set search_path = public, extensions
 language plpgsql
 as $$
 declare
@@ -113,7 +113,7 @@ begin
               coalesce(new.fecha::text, '') || '|' || coalesce(v_importe::text, '') || '|' ||
               coalesce(v_hash_anterior, '');
 
-  v_hash := encode(digest(v_cadena, 'sha256'), 'hex');
+  v_hash := encode(extensions.digest(v_cadena, 'sha256'), 'hex');
 
   insert into public.registro_facturacion
     (user_id, factura_id, tipo_registro, nif_emisor, numero_serie, fecha_expedicion, importe_total, hash_anterior, hash, datos_registro)
@@ -131,7 +131,7 @@ $$;
 
 drop trigger if exists trg_01_verifactu_emision on public.facturas;
 create trigger trg_01_verifactu_emision
-  before insert or update on public.facturas
+  after insert or update on public.facturas
   for each row
   execute procedure public.verifactu_registrar_emision();
 
