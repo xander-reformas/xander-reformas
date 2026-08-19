@@ -528,6 +528,36 @@ function FacturaVista({ factura, obra, onClose }) {
   )
 }
 
+function CobroModal({ factura, url, onClose }) {
+  const [copiado, setCopiado] = useState(false)
+  function copiar() {
+    navigator.clipboard?.writeText(url)
+    setCopiado(true)
+    setTimeout(() => setCopiado(false), 2000)
+  }
+  return (
+    <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+      <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-md">
+        <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
+          <h2 className="text-lg font-bold text-ink">💳 Cobro con tarjeta — {factura.numero}</h2>
+          <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+        </div>
+        <div className="p-6 space-y-4">
+          <p className="text-sm text-ink-soft">
+            Comparte este enlace con el cliente para que pague la factura con tarjeta. Cuando Stripe confirme el pago,
+            la factura pasará automáticamente a estado <strong className="text-ink">Pagada</strong>.
+          </p>
+          <div className="bg-page rounded-xl p-3 text-xs break-all text-ink-soft border border-edge">{url}</div>
+          <div className="flex gap-3">
+            <button onClick={copiar} className="btn-secondary flex-1">{copiado ? '✓ Copiado' : '📋 Copiar enlace'}</button>
+            <a href={url} target="_blank" rel="noreferrer" className="btn-primary flex-1 text-center">Abrir enlace de pago</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Facturas() {
   const location = useLocation()
   const [facturas, setFacturas] = useState([])
@@ -543,6 +573,8 @@ export default function Facturas() {
   const [editData, setEditData] = useState(null)
   const [fromPresupuesto, setFromPresupuesto] = useState(null)
   const [verData, setVerData] = useState(null)
+  const [cobrando, setCobrando] = useState(null)
+  const [cobroLink, setCobroLink] = useState(null)
 
   useEffect(() => {
     load()
@@ -581,6 +613,17 @@ export default function Facturas() {
     const { error: err } = await supabase.from('facturas').update({ estado }).eq('id', id)
     if (err) { alert(err.message); return }
     load()
+  }
+
+  async function cobrarConTarjeta(f) {
+    setCobrando(f.id)
+    const { data, error: err } = await supabase.functions.invoke('stripe-crear-cobro', { body: { factura_id: f.id } })
+    setCobrando(null)
+    if (err || data?.error) {
+      alert(data?.error || err.message || 'No se pudo generar el enlace de pago.')
+      return
+    }
+    setCobroLink({ factura: f, url: data.url })
   }
 
   async function remove(id, numero) {
@@ -721,6 +764,15 @@ export default function Facturas() {
                       <button onClick={() => setVerData(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
                         🧾 Factura
                       </button>
+                      {f.estado !== 'pagada' && (
+                        <button
+                          onClick={() => cobrarConTarjeta(f)}
+                          disabled={cobrando === f.id}
+                          className="text-green-700 hover:text-green-800 text-xs font-semibold mr-4 disabled:opacity-50"
+                        >
+                          {cobrando === f.id ? 'Generando…' : '💳 Cobrar'}
+                        </button>
+                      )}
                       <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">
                         {lockedIds.has(f.id) ? 'Ver' : 'Editar'}
                       </button>
@@ -756,6 +808,14 @@ export default function Facturas() {
           factura={verData}
           obra={obras.find(o => o.id === verData.obra_id)}
           onClose={() => setVerData(null)}
+        />
+      )}
+
+      {cobroLink && (
+        <CobroModal
+          factura={cobroLink.factura}
+          url={cobroLink.url}
+          onClose={() => setCobroLink(null)}
         />
       )}
     </div>
