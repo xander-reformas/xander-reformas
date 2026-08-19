@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase, getUID } from '../../lib/supabase'
+import FirmaModal from '../shared/FirmaModal'
 
 const ESTADOS = [
   { value: 'borrador',   label: 'Borrador',   color: 'bg-stone/20 text-ink-soft' },
@@ -298,8 +299,19 @@ export default function Presupuestos() {
   const [filtroEstado, setFiltroEstado] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [editData, setEditData] = useState(null)
+  const [firmando, setFirmando] = useState(null)
 
   useEffect(() => { load() }, [])
+
+  async function guardarFirma(datos) {
+    if (!firmando) return
+    const { error: err } = await supabase.from('presupuestos')
+      .update({ ...datos, estado: 'aceptado' })
+      .eq('id', firmando.id)
+    if (err) { alert(err.message); return }
+    setFirmando(null)
+    load()
+  }
 
   async function expirarVencidos(lista) {
     const hoy = new Date(); hoy.setHours(0, 0, 0, 0)
@@ -436,7 +448,12 @@ export default function Presupuestos() {
                 return (
                   <tr key={p.id} className="hover:bg-page/50 transition-colors">
                     <td className="px-5 py-3.5">
-                      <div className="font-bold text-ink">{p.numero}</div>
+                      <div className="font-bold text-ink flex items-center gap-1.5">
+                        {p.numero}
+                        {p.firma_png && (
+                          <span title={`Firmado por ${p.firma_nombre || ''} el ${p.firma_fecha ? new Date(p.firma_fecha).toLocaleDateString('es-ES') : ''}`} className="text-[10px]">✍️</span>
+                        )}
+                      </div>
                       {p.referencia && <div className="text-xs text-ink-soft mt-0.5">{p.referencia}</div>}
                     </td>
                     <td className="px-4 py-3.5 hidden md:table-cell">
@@ -461,6 +478,15 @@ export default function Presupuestos() {
                           📄 Factura
                         </button>
                       )}
+                      {!['aceptado', 'rechazado'].includes(p.estado) && (
+                        <button
+                          onClick={() => setFirmando(p)}
+                          className="text-xs font-bold px-3 py-1 rounded-lg bg-gold/20 text-gold-dark hover:bg-gold/30 transition-colors mr-3"
+                          title="Firmar y aceptar este presupuesto"
+                        >
+                          ✍️ Firmar
+                        </button>
+                      )}
                       <button onClick={() => openEdit(p)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">Editar</button>
                       <button onClick={() => remove(p.id, p.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
                     </td>
@@ -479,6 +505,15 @@ export default function Presupuestos() {
           obras={obras}
           onSave={() => { setShowForm(false); load() }}
           onCancel={() => setShowForm(false)}
+        />
+      )}
+
+      {firmando && (
+        <FirmaModal
+          titulo={`Firmar presupuesto ${firmando.numero}`}
+          nombreDefault={firmando.clientes?.nombre}
+          onGuardar={guardarFirma}
+          onCancel={() => setFirmando(null)}
         />
       )}
     </div>

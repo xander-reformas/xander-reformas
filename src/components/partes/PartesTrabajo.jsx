@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase, getUID } from '../../lib/supabase'
+import FirmaModal from '../shared/FirmaModal'
 
 const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 
@@ -26,8 +27,17 @@ export default function PartesTrabajo() {
   const [filtroMes, setFiltroMes] = useState(hoy.getMonth() + 1)
   const [filtroAño, setFiltroAño] = useState(hoy.getFullYear())
   const [vista,     setVista]     = useState('lista') // 'lista' | 'resumen'
+  const [firmando,  setFirmando]  = useState(null)
 
   useEffect(() => { load() }, [])
+
+  async function guardarFirma(datos) {
+    if (!firmando) return
+    const { error: err } = await supabase.from('partes_trabajo').update(datos).eq('id', firmando.id)
+    if (err) { alert(err.message); return }
+    setFirmando(null)
+    load()
+  }
 
   async function load() {
     setLoading(true)
@@ -184,7 +194,12 @@ export default function PartesTrabajo() {
                 </div>
                 <div className="w-px h-10 bg-edge flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-ink">{p.empleados ? `${p.empleados.nombre} ${p.empleados.apellidos}` : empNombre(p.empleado_id)}</div>
+                  <div className="font-semibold text-ink flex items-center gap-1.5">
+                    {p.empleados ? `${p.empleados.nombre} ${p.empleados.apellidos}` : empNombre(p.empleado_id)}
+                    {p.firma_png && (
+                      <span title={`Firmado por ${p.firma_nombre || ''} el ${p.firma_fecha ? new Date(p.firma_fecha).toLocaleDateString('es-ES') : ''}`} className="text-[10px]">✍️</span>
+                    )}
+                  </div>
                   <div className="text-xs text-ink-soft flex gap-3 mt-0.5">
                     {p.obras && <span>🔨 {p.obras.nombre}</span>}
                     {p.descripcion && <span>· {p.descripcion}</span>}
@@ -193,7 +208,10 @@ export default function PartesTrabajo() {
                 <div className="text-right flex-shrink-0">
                   <div className="text-xl font-black text-ink">{fmt2(p.horas)}<span className="text-xs font-normal text-ink-soft ml-1">h</span></div>
                 </div>
-                <div className="flex gap-2 flex-shrink-0">
+                <div className="flex gap-2 flex-shrink-0 items-center">
+                  {!p.firma_png && (
+                    <button onClick={()=>setFirmando(p)} className="text-xs font-bold px-2.5 py-1 rounded-lg bg-gold/20 text-gold-dark hover:bg-gold/30 transition-colors" title="Firmar de conformidad">✍️ Firmar</button>
+                  )}
                   <button onClick={()=>openEdit(p)} className="text-gold hover:text-gold-dark text-xs font-semibold">Editar</button>
                   <button onClick={()=>remove(p.id)} className="text-ink-soft/30 hover:text-red-500 text-lg leading-none">×</button>
                 </div>
@@ -294,6 +312,15 @@ export default function PartesTrabajo() {
             </form>
           </div>
         </div>
+      )}
+
+      {firmando && (
+        <FirmaModal
+          titulo={`Firmar parte de trabajo — ${empNombre(firmando.empleado_id)}`}
+          nombreDefault={empNombre(firmando.empleado_id) !== '—' ? empNombre(firmando.empleado_id) : ''}
+          onGuardar={guardarFirma}
+          onCancel={() => setFirmando(null)}
+        />
       )}
     </div>
   )
