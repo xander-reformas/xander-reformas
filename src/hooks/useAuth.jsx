@@ -41,8 +41,8 @@ export function AuthProvider({ children }) {
     return { error }
   }
 
-  async function signUp(email, password) {
-    const { error } = await supabase.auth.signUp({ email, password })
+  async function signUp(email, password, metadata = {}) {
+    const { error } = await supabase.auth.signUp({ email, password, options: { data: metadata } })
     return { error }
   }
 

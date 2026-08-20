@@ -24,7 +24,9 @@ export default function RegisterPage() {
       return
     }
     setLoading(true)
-    const { error } = await signUp(form.email, form.password)
+    let refCode = ''
+    try { refCode = localStorage.getItem('xander_ref') || '' } catch { /* noop */ }
+    const { error } = await signUp(form.email, form.password, refCode ? { ref_code: refCode } : {})
     setLoading(false)
     if (error) setError(error.message)
     else setDone(true)

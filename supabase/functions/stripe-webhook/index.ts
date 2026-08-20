@@ -40,6 +40,61 @@ const STRIPE_CONNECT_WEBHOOK_SECRET = Deno.env.get('STRIPE_CONNECT_WEBHOOK_SECRE
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' })
 
+// Programa de referidos: si el usuario que acaba de hacerse Pro (referidoId)
+// fue invitado por otro suscriptor, se marca el referido como "convertido" y
+// se intenta dar un mes gratis (crédito de 19€) a quien le invitó. Si el
+// referidor todavía no tiene cuenta de facturación en Stripe (nunca ha
+// pagado), el crédito queda pendiente y se puede aplicar manualmente más
+// adelante.
+async function recompensarReferido(referidoId: string) {
+  const { data: refRow } = await supabase
+    .from('referidos')
+    .select('id, referrer_id, recompensa_aplicada')
+    .eq('referido_id', referidoId)
+    .maybeSingle()
+
+  if (!refRow || refRow.recompensa_aplicada) return
+
+  const { data: referrer } = await supabase
+    .from('profiles')
+    .select('stripe_customer_id')
+    .eq('id', refRow.referrer_id)
+    .single()
+
+  let aplicada = false
+  let detalle = 'Pendiente: el referidor todavía no tiene cuenta de facturación en Stripe.'
+
+  if (referrer?.stripe_customer_id) {
+    const balBody = new URLSearchParams()
+    balBody.set('amount', '-1900')
+    balBody.set('currency', 'eur')
+    balBody.set('description', 'Recompensa por referido — 1 mes gratis de XANDER Pro')
+    const balRes = await fetch(
+      `https://api.stripe.com/v1/customers/${referrer.stripe_customer_id}/balance_transactions`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${STRIPE_SECRET_KEY}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: balBody,
+      }
+    )
+    aplicada = balRes.ok
+    detalle = aplicada
+      ? 'Crédito de 19€ aplicado al saldo de Stripe del referidor.'
+      : 'Error aplicando el crédito en Stripe — revisar manualmente.'
+    if (!aplicada) console.error('Error crédito referido:', await balRes.text())
+  }
+
+  await supabase.from('referidos').update({
+    estado: 'convertido',
+    convertido_at: new Date().toISOString(),
+    recompensa_aplicada: aplicada,
+    recompensa_detalle: detalle,
+  }).eq('id', refRow.id)
+}
+
 Deno.serve(async (req) => {
   const signature = req.headers.get('stripe-signature')
   const body = await req.text()
@@ -80,6 +135,11 @@ Deno.serve(async (req) => {
             stripe_subscription_id: session.subscription as string,
             plan_expires_at: null,
           }).eq('id', userId)
+
+          // Programa de referidos: si quien se acaba de hacer Pro fue
+          // invitado por alguien, se le da un mes gratis (crédito de 19€
+          // en el saldo de Stripe) a quien le invitó.
+          await recompensarReferido(userId)
         }
       } else {
         // Cobro de un suscriptor a uno de sus clientes (factura)
