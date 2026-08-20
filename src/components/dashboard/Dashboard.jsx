@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase'
 import CalendarioWidget from './CalendarioWidget'
 import AgenteChat from './AgenteChat'
 import NotificationBell from './NotificationBell'
+import OnboardingChecklist from './OnboardingChecklist'
 import ThemeToggle from './ThemeToggle'
 import OfflineBadge from '../shared/OfflineBadge'
 import AdminPanel from '../admin/AdminPanel'
@@ -145,6 +146,8 @@ function HomePanel({ profile }) {
           {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
         </p>
       </div>
+
+      <OnboardingChecklist />
 
       {profile?.tarifa_reducida && (
         <div className="bg-navy rounded-xl p-4 flex items-center gap-4">
