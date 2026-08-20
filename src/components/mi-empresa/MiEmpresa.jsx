@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
+import { PRECIO_PRO, PRECIO_PRO_ANUAL } from '../../hooks/usePlan'
 
 const ESPECIALIDADES = [
   'Reforma integral', 'Reforma de baño', 'Reforma de cocina', 'Cambio de uso',
@@ -17,6 +18,11 @@ export default function MiEmpresa() {
   const [stripeStatus, setStripeStatus] = useState(null) // { connected, charges_enabled, details_submitted }
   const [stripeLoading, setStripeLoading] = useState(false)
   const [stripeError, setStripeError] = useState('')
+
+  const [planInfo, setPlanInfo] = useState(null) // override tras volver de Stripe Checkout / Portal
+  const [planLoading, setPlanLoading] = useState('') // '' | 'mensual' | 'anual' | 'portal'
+  const [planError, setPlanError] = useState('')
+  const [suscripcionMsg, setSuscripcionMsg] = useState('')
 
   useEffect(() => {
     if (profile) {
@@ -54,6 +60,52 @@ export default function MiEmpresa() {
       window.history.replaceState({}, '', window.location.pathname + (rest ? `?${rest}` : ''))
     }
   }, [])
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const flag = params.get('suscripcion')
+    if (flag === 'ok' || flag === 'cancelado') {
+      if (flag === 'ok') refreshPlan()
+      setSuscripcionMsg(flag)
+      params.delete('suscripcion')
+      const rest = params.toString()
+      window.history.replaceState({}, '', window.location.pathname + (rest ? `?${rest}` : ''))
+    }
+  }, [])
+
+  async function refreshPlan() {
+    if (!profile?.id) return
+    const { data } = await supabase
+      .from('profiles')
+      .select('plan, trial_ends_at, plan_expires_at, stripe_customer_id, stripe_subscription_id')
+      .eq('id', profile.id)
+      .single()
+    if (data) setPlanInfo(data)
+  }
+
+  async function actualizarAPro(ciclo) {
+    setPlanLoading(ciclo)
+    setPlanError('')
+    const { data, error: err } = await supabase.functions.invoke('stripe-crear-checkout-suscripcion', { body: { ciclo } })
+    setPlanLoading('')
+    if (err || data?.error) {
+      setPlanError(data?.error || err.message || 'No se pudo iniciar el pago de la suscripción.')
+      return
+    }
+    window.location.href = data.url
+  }
+
+  async function gestionarSuscripcion() {
+    setPlanLoading('portal')
+    setPlanError('')
+    const { data, error: err } = await supabase.functions.invoke('stripe-portal-suscripcion', { body: {} })
+    setPlanLoading('')
+    if (err || data?.error) {
+      setPlanError(data?.error || err.message || 'No se pudo abrir el portal de facturación.')
+      return
+    }
+    window.location.href = data.url
+  }
 
   async function refreshStripeStatus() {
     setStripeLoading(true)
@@ -106,6 +158,11 @@ export default function MiEmpresa() {
   }
 
   if (!form) return <div className="p-6 text-ink-soft text-sm">Cargando…</div>
+
+  const plan = planInfo || profile
+  const esPro = plan?.plan === 'pro' || plan?.plan === 'pro_annual'
+  const trialActivo = !esPro && plan?.trial_ends_at && new Date(plan.trial_ends_at) > new Date()
+  const trialDias = trialActivo ? Math.max(0, Math.ceil((new Date(plan.trial_ends_at) - new Date()) / (1000 * 60 * 60 * 24))) : 0
 
   return (
     <div className="p-6 max-w-3xl">
@@ -208,6 +265,56 @@ export default function MiEmpresa() {
               })}
             </div>
           </div>
+        </div>
+
+        {/* Mi plan */}
+        <div className="card space-y-4">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Mi plan</h2>
+
+          {suscripcionMsg === 'ok' && (
+            <div className="text-green-700 text-sm bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+              ✓ Pago confirmado. Tu plan se actualizará en unos segundos.
+            </div>
+          )}
+          {suscripcionMsg === 'cancelado' && (
+            <div className="text-sm text-ink-soft bg-surface border border-edge rounded-xl px-4 py-3">
+              Has cancelado el proceso de pago. Puedes intentarlo de nuevo cuando quieras.
+            </div>
+          )}
+
+          {esPro ? (
+            <div className="text-green-700 text-sm bg-green-50 border border-green-200 rounded-xl px-4 py-3 flex items-center gap-2">
+              ✓ Plan Pro activo{plan?.plan === 'pro_annual' ? ' (anual)' : ' (mensual)'}. Gracias por confiar en XANDER.
+            </div>
+          ) : trialActivo ? (
+            <div className="text-amber-700 text-sm bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+              ⏳ Estás en periodo de prueba gratuita — te quedan {trialDias} día{trialDias === 1 ? '' : 's'}.
+            </div>
+          ) : (
+            <div className="text-sm text-ink-soft bg-surface border border-edge rounded-xl px-4 py-3">
+              Plan gratuito. Actualiza a Pro para acceso completo sin límites.
+            </div>
+          )}
+
+          {planError && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-3">{planError}</div>}
+
+          {esPro ? (
+            <div className="flex gap-3">
+              <button type="button" onClick={gestionarSuscripcion} disabled={planLoading === 'portal'} className="btn-secondary px-6">
+                {planLoading === 'portal' ? 'Abriendo…' : 'Gestionar suscripción'}
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-3">
+              <button type="button" onClick={() => actualizarAPro('mensual')} disabled={!!planLoading} className="btn-primary px-6">
+                {planLoading === 'mensual' ? 'Redirigiendo…' : `Actualizar a Pro — ${PRECIO_PRO}`}
+              </button>
+              <button type="button" onClick={() => actualizarAPro('anual')} disabled={!!planLoading} className="btn-secondary px-6">
+                {planLoading === 'anual' ? 'Redirigiendo…' : `Plan anual — ${PRECIO_PRO_ANUAL}`}
+              </button>
+            </div>
+          )}
+          <p className="text-xs text-ink-soft/70">Sin permanencia · Cancela cuando quieras desde el portal de facturación</p>
         </div>
 
         {/* Cobros online */}

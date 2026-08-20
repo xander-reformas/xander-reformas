@@ -52,7 +52,10 @@ export const PLAN_LIMITS = {
 }
 
 // Precio orientativo (para mostrar en banners de upgrade)
+// Mantener sincronizado con PRECIO_CENTIMOS en
+// supabase/functions/stripe-crear-checkout-suscripcion/index.ts
 export const PRECIO_PRO = '19 €/mes'
+export const PRECIO_PRO_ANUAL = '190 €/año'
 
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 export function usePlan() {
