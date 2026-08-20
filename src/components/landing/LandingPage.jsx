@@ -1,8 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { supabase } from '../../lib/supabase'
 import ThemeToggle from '../dashboard/ThemeToggle'
 import { PRECIO_PRO } from '../../hooks/usePlan'
+
+const WHATSAPP_NUMERO = '34640689121'
+const WHATSAPP_MENSAJE = encodeURIComponent('Hola, he visto XANDER Gestión y me gustaría saber más.')
 
 const FUNCIONES = [
   { icon: '📋', title: 'Presupuestos', desc: 'Crea presupuestos profesionales por partidas en minutos, listos para enviar.' },
@@ -44,6 +48,67 @@ function useRefCapture() {
       try { localStorage.setItem('xander_ref', ref) } catch { /* noop */ }
     }
   }, [])
+}
+
+function LeadForm() {
+  const [form, setForm] = useState({ nombre: '', contacto: '', mensaje: '' })
+  const [enviando, setEnviando] = useState(false)
+  const [enviado, setEnviado] = useState(false)
+  const [error, setError] = useState('')
+
+  const set = (k, v) => setForm(p => ({ ...p, [k]: v }))
+
+  async function enviar(e) {
+    e.preventDefault()
+    if (!form.nombre.trim() || !form.contacto.trim()) {
+      setError('Necesitamos al menos tu nombre y un email o teléfono para poder contactarte.')
+      return
+    }
+    setError('')
+    setEnviando(true)
+    const esEmail = form.contacto.includes('@')
+    const { error: err } = await supabase.from('leads_saas').insert({
+      nombre: form.nombre.trim(),
+      email: esEmail ? form.contacto.trim() : null,
+      telefono: esEmail ? null : form.contacto.trim(),
+      mensaje: form.mensaje.trim() || null,
+      origen: 'landing',
+    })
+    setEnviando(false)
+    if (err) { setError('No se ha podido enviar. Prueba de nuevo o escríbenos por WhatsApp.'); return }
+    setEnviado(true)
+  }
+
+  if (enviado) {
+    return (
+      <div className="card text-center py-8">
+        <div className="text-3xl mb-2">✓</div>
+        <div className="font-bold text-ink">¡Gracias, {form.nombre.split(' ')[0]}!</div>
+        <p className="text-sm text-ink-soft mt-1">Te contactamos en menos de 24h.</p>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={enviar} className="card space-y-4">
+      <div>
+        <label className="label">Nombre</label>
+        <input className="input" value={form.nombre} onChange={e => set('nombre', e.target.value)} placeholder="Tu nombre" />
+      </div>
+      <div>
+        <label className="label">Email o teléfono</label>
+        <input className="input" value={form.contacto} onChange={e => set('contacto', e.target.value)} placeholder="tu@email.com o 6XX XXX XXX" />
+      </div>
+      <div>
+        <label className="label">Mensaje <span className="text-ink-soft font-normal">(opcional)</span></label>
+        <textarea className="input" rows={3} value={form.mensaje} onChange={e => set('mensaje', e.target.value)} placeholder="Cuéntanos qué necesitas" />
+      </div>
+      {error && <p className="text-red-500 text-xs">{error}</p>}
+      <button type="submit" disabled={enviando} className="btn-primary w-full">
+        {enviando ? 'Enviando...' : 'Quiero que me contacten'}
+      </button>
+    </form>
+  )
 }
 
 export default function LandingPage() {
@@ -168,23 +233,56 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Contacto / footer */}
-      <footer id="contacto" className="border-t border-edge">
-        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <div className="text-lg font-black">
-              <span className="text-gold">X</span>
-              <span className="text-ink">ANDER</span>
-            </div>
-            <p className="text-sm text-ink-soft mt-1">XANDER Reformas de Interiores · Madrid</p>
+      {/* Contacto */}
+      <section id="contacto" className="max-w-4xl mx-auto px-6 py-16 border-t border-edge">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-black text-ink">¿Tienes dudas antes de empezar?</h2>
+          <p className="text-ink-soft mt-2">Déjanos tus datos o escríbenos directamente por WhatsApp.</p>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-6 items-start">
+          <LeadForm />
+          <div className="card">
+            <div className="font-bold text-ink mb-3">Contacto directo</div>
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMERO}?text=${WHATSAPP_MENSAJE}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary w-full flex items-center justify-center gap-2 mb-3"
+            >
+              <span>💬</span> Escribir por WhatsApp
+            </a>
+            <a href="mailto:reformasxander@gmail.com" className="text-sm text-ink-soft hover:text-ink transition-colors block">
+              reformasxander@gmail.com
+            </a>
+            <a href="tel:+34640689121" className="text-sm text-ink-soft hover:text-ink transition-colors block mt-1">
+              640 689 121
+            </a>
           </div>
-          <div className="text-sm text-ink-soft text-center md:text-right">
-            <a href="mailto:reformasxander@gmail.com" className="hover:text-ink transition-colors block">reformasxander@gmail.com</a>
-            <a href="tel:+34640689121" className="hover:text-ink transition-colors block mt-1">640 689 121</a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-edge">
+        <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-lg font-black">
+            <span className="text-gold">X</span>
+            <span className="text-ink">ANDER</span>
           </div>
+          <p className="text-sm text-ink-soft">XANDER Reformas de Interiores · Madrid</p>
         </div>
         <div className="text-center text-xs text-ink-soft/60 pb-6">© 2026 XANDER Gestión</div>
       </footer>
+
+      {/* Botón flotante WhatsApp */}
+      <a
+        href={`https://wa.me/${WHATSAPP_NUMERO}?text=${WHATSAPP_MENSAJE}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-5 right-5 z-30 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-105 transition-transform"
+        aria-label="Escribir por WhatsApp"
+      >
+        💬
+      </a>
     </div>
   )
 }

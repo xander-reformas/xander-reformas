@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase'
 export default function AdminPanel() {
   const [users, setUsers]           = useState([])
   const [notifs, setNotifs]         = useState([])
+  const [leads, setLeads]           = useState([])
   const [loading, setLoading]       = useState(true)
   const [activeTab, setActiveTab]   = useState('usuarios')
   const [stats, setStats]           = useState({ total: 0, semana: 0, activos: 0 })
@@ -26,14 +27,19 @@ export default function AdminPanel() {
 
   async function loadAll() {
     setLoading(true)
-    const [{ data: usersData }, { data: notifsData }] = await Promise.all([
+    const [{ data: usersData }, { data: notifsData }, { data: leadsData }] = await Promise.all([
       supabase.rpc('admin_get_all_profiles'),
       supabase
         .from('admin_notificaciones')
         .select('*')
         .order('created_at', { ascending: false })
         .limit(50),
+      supabase
+        .from('leads_saas')
+        .select('*')
+        .order('created_at', { ascending: false }),
     ])
+    if (leadsData) setLeads(leadsData)
 
     if (usersData) {
       setUsers(usersData)
@@ -62,7 +68,13 @@ export default function AdminPanel() {
     setNotifs(prev => prev.map(n => ({ ...n, leida: true })))
   }
 
+  async function toggleAtendido(id, valorActual) {
+    setLeads(prev => prev.map(l => l.id === id ? { ...l, atendido: !valorActual } : l))
+    await supabase.from('leads_saas').update({ atendido: !valorActual }).eq('id', id)
+  }
+
   const noLeidas = notifs.filter(n => !n.leida).length
+  const leadsPendientes = leads.filter(l => !l.atendido).length
 
   if (loading) {
     return (
@@ -113,6 +125,7 @@ export default function AdminPanel() {
       <div className="flex gap-1 mb-4 border-b border-stone/10">
         {[
           { id: 'usuarios',        label: 'Usuarios',        icon: '👤' },
+          { id: 'leads',           label: 'Leads',           icon: '📨', badge: leadsPendientes },
           { id: 'notificaciones',  label: 'Notificaciones',  icon: '🔔', badge: noLeidas },
         ].map(tab => (
           <button
@@ -191,6 +204,48 @@ export default function AdminPanel() {
                 ))}
               </tbody>
             </table>
+          )}
+        </div>
+      )}
+
+      {/* Tab: Leads */}
+      {activeTab === 'leads' && (
+        <div className="bg-surface rounded-xl border border-stone/10 overflow-hidden">
+          {leads.length === 0 ? (
+            <div className="py-16 text-center text-ink-soft">
+              <div className="text-4xl mb-3">📨</div>
+              <div className="font-medium">Aún no hay leads</div>
+              <div className="text-sm mt-1">Aquí aparecerán los contactos dejados en la landing</div>
+            </div>
+          ) : (
+            <div className="divide-y divide-stone/5">
+              {leads.map(l => (
+                <div key={l.id} className={`flex items-start gap-3 px-4 py-3.5 transition-colors ${l.atendido ? 'opacity-50' : ''}`}>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-ink text-sm">{l.nombre}</div>
+                    <div className="text-xs text-ink-soft mt-0.5">
+                      {[l.email, l.telefono].filter(Boolean).join(' · ') || 'Sin datos de contacto'}
+                    </div>
+                    {l.mensaje && <div className="text-xs text-ink mt-1.5 bg-page rounded-lg px-3 py-2">{l.mensaje}</div>}
+                    <div className="text-xs text-ink-soft/50 mt-1.5">
+                      {new Date(l.created_at).toLocaleString('es-ES', {
+                        day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+                      })}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => toggleAtendido(l.id, l.atendido)}
+                    className={`text-xs font-medium px-2.5 py-1 rounded-full flex-shrink-0 transition-colors ${
+                      l.atendido
+                        ? 'bg-green-50 text-green-700'
+                        : 'bg-gold/10 text-gold hover:bg-gold/20'
+                    }`}
+                  >
+                    {l.atendido ? '✓ Atendido' : 'Marcar atendido'}
+                  </button>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       )}
