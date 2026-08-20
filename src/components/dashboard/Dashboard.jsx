@@ -6,6 +6,7 @@ import CalendarioWidget from './CalendarioWidget'
 import AgenteChat from './AgenteChat'
 import NotificationBell from './NotificationBell'
 import ThemeToggle from './ThemeToggle'
+import OfflineBadge from '../shared/OfflineBadge'
 import AdminPanel from '../admin/AdminPanel'
 import Clientes from '../clientes/Clientes'
 import Obras from '../obras/Obras'
@@ -316,6 +317,7 @@ export default function Dashboard() {
       <main className="flex-1 overflow-auto flex flex-col">
         {/* Barra superior */}
         <header className="flex items-center justify-end gap-2 px-6 py-3 border-b border-edge bg-surface flex-shrink-0">
+          <OfflineBadge />
           <NotificationBell />
           <ThemeToggle compact />
         </header>

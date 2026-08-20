@@ -1,11 +1,14 @@
 // Supabase Edge Function — stripe-crear-cobro
 // Se invoca desde el frontend (botón "💳 Cobrar con tarjeta" en Facturas).
-// Crea una Stripe Checkout Session por el importe pendiente de la factura
-// y devuelve la URL de pago para compartir con el cliente.
+// Crea una Stripe Checkout Session EN LA CUENTA STRIPE CONNECT del
+// suscriptor dueño de la factura (Direct charge vía header Stripe-Account),
+// para que el dinero del cliente entre directo en SU banco, no en el de
+// la plataforma. Requiere que el suscriptor haya conectado su cuenta
+// (profiles.stripe_account_id + stripe_charges_enabled = true).
 //
-// Requiere el secreto STRIPE_SECRET_KEY (clave secreta de Stripe, test o
-// live) configurado en Supabase → Edge Functions → Secrets. Si no está
-// configurado, la función devuelve un error explicativo (no rompe la app).
+// Requiere el secreto STRIPE_SECRET_KEY (clave de la PLATAFORMA, la misma
+// que gestiona las conexiones) configurado en Supabase → Edge Functions →
+// Secrets. Si no está configurado, la función devuelve un error explicativo.
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
@@ -46,7 +49,7 @@ Deno.serve(async (req) => {
 
     const { data: factura, error: errF } = await supabase
       .from('facturas')
-      .select('id, numero, items, iva, descuento, retencion, estado, cliente_id, clientes(nombre, email)')
+      .select('id, numero, items, iva, descuento, retencion, estado, cliente_id, user_id, clientes(nombre, email)')
       .eq('id', factura_id)
       .single()
     if (errF) throw errF
@@ -56,6 +59,19 @@ Deno.serve(async (req) => {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
+
+    const { data: propietario, error: errP } = await supabase
+      .from('profiles')
+      .select('stripe_account_id, stripe_charges_enabled')
+      .eq('id', factura.user_id)
+      .single()
+    if (errP) throw errP
+    if (!propietario?.stripe_account_id || !propietario.stripe_charges_enabled) {
+      return new Response(JSON.stringify({
+        error: 'Todavía no has conectado tu cuenta de Stripe. Ve a Mi Empresa → Cobros online para conectarla (tarda 5 minutos) antes de poder cobrar con tarjeta.',
+      }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+    }
+    const stripeAccountId = propietario.stripe_account_id as string
 
     const total = calcularTotal(factura.items || [], factura.iva, factura.descuento, factura.retencion)
     if (total <= 0) throw new Error('El importe de la factura debe ser mayor que 0')
@@ -73,11 +89,14 @@ Deno.serve(async (req) => {
     body.set('metadata[factura_id]', factura.id)
     if (clienteEmail) body.set('customer_email', clienteEmail)
 
+    // Direct charge: la sesión se crea EN la cuenta conectada del suscriptor
+    // (cabecera Stripe-Account) para que el dinero del cliente vaya a su banco.
     const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${STRIPE_SECRET_KEY}`,
         'Content-Type': 'application/x-www-form-urlencoded',
+        'Stripe-Account': stripeAccountId,
       },
       body,
     })

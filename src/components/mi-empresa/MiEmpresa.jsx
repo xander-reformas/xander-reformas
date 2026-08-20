@@ -14,6 +14,9 @@ export default function MiEmpresa() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState('')
+  const [stripeStatus, setStripeStatus] = useState(null) // { connected, charges_enabled, details_submitted }
+  const [stripeLoading, setStripeLoading] = useState(false)
+  const [stripeError, setStripeError] = useState('')
 
   useEffect(() => {
     if (profile) {
@@ -34,8 +37,47 @@ export default function MiEmpresa() {
         tarifa_reducida: profile.tarifa_reducida || false,
         especialidades: profile.especialidades || [],
       })
+      setStripeStatus({
+        connected: !!profile.stripe_account_id,
+        charges_enabled: !!profile.stripe_charges_enabled,
+      })
     }
   }, [profile])
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const flag = params.get('stripe')
+    if (flag === 'return' || flag === 'refresh') {
+      refreshStripeStatus()
+      params.delete('stripe')
+      const rest = params.toString()
+      window.history.replaceState({}, '', window.location.pathname + (rest ? `?${rest}` : ''))
+    }
+  }, [])
+
+  async function refreshStripeStatus() {
+    setStripeLoading(true)
+    setStripeError('')
+    const { data, error: err } = await supabase.functions.invoke('stripe-connect-status', { body: {} })
+    setStripeLoading(false)
+    if (err || data?.error) {
+      setStripeError(data?.error || err.message || 'No se pudo consultar el estado de Stripe.')
+      return
+    }
+    setStripeStatus(data)
+  }
+
+  async function conectarStripe() {
+    setStripeLoading(true)
+    setStripeError('')
+    const { data, error: err } = await supabase.functions.invoke('stripe-connect-onboarding', { body: {} })
+    setStripeLoading(false)
+    if (err || data?.error) {
+      setStripeError(data?.error || err.message || 'No se pudo iniciar la conexión con Stripe.')
+      return
+    }
+    window.location.href = data.url
+  }
 
   function setF(f, v) { setForm(p => ({ ...p, [f]: v })) }
 
@@ -165,6 +207,41 @@ export default function MiEmpresa() {
                 )
               })}
             </div>
+          </div>
+        </div>
+
+        {/* Cobros online */}
+        <div className="card space-y-4">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Cobros online</h2>
+          <p className="text-sm text-ink-soft">
+            Conecta tu cuenta de Stripe para poder cobrar tus facturas con tarjeta. El dinero de tus clientes entra directamente en tu banco — XANDER nunca lo gestiona.
+          </p>
+
+          {stripeStatus?.charges_enabled ? (
+            <div className="text-green-700 text-sm bg-green-50 border border-green-200 rounded-xl px-4 py-3 flex items-center gap-2">
+              ✓ Cuenta de Stripe conectada y activa. Ya puedes cobrar facturas con tarjeta.
+            </div>
+          ) : stripeStatus?.connected ? (
+            <div className="text-amber-700 text-sm bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+              Tu cuenta de Stripe está creada pero todavía no ha terminado la verificación. Completa el proceso para empezar a cobrar.
+            </div>
+          ) : (
+            <div className="text-sm text-ink-soft bg-surface border border-edge rounded-xl px-4 py-3">
+              Todavía no has conectado ninguna cuenta de Stripe.
+            </div>
+          )}
+
+          {stripeError && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-3">{stripeError}</div>}
+
+          <div className="flex gap-3">
+            <button type="button" onClick={conectarStripe} disabled={stripeLoading} className="btn-primary px-6">
+              {stripeLoading ? 'Cargando…' : stripeStatus?.connected ? 'Completar / revisar conexión' : 'Conectar con Stripe'}
+            </button>
+            {stripeStatus?.connected && (
+              <button type="button" onClick={refreshStripeStatus} disabled={stripeLoading} className="btn-secondary px-6">
+                Actualizar estado
+              </button>
+            )}
           </div>
         </div>
 

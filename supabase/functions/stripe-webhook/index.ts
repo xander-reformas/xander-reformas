@@ -1,23 +1,28 @@
 // Supabase Edge Function — stripe-webhook
 // Endpoint público que Stripe llama cuando cambia el estado de un pago.
 // Al recibir "checkout.session.completed" marca la factura correspondiente
-// como pagada.
+// como pagada. Recibe eventos de DOS destinos distintos configurados en
+// Stripe, cada uno con su propia firma:
+//   - "Tu cuenta" (los cobros de la propia plataforma)
+//   - "Cuentas conectadas" (los cobros de cada suscriptor vía Connect)
 //
-// Configurar en Stripe → Developers → Webhooks:
-//   URL:    https://ligpevuofniwzuujjgor.supabase.co/functions/v1/stripe-webhook
-//   Evento: checkout.session.completed
+// Configurar en Stripe → Developers → Webhooks, dos destinos apuntando
+// a la misma URL:
+//   https://ligpevuofniwzuujjgor.supabase.co/functions/v1/stripe-webhook
+//   Evento en ambos: checkout.session.completed
 //
-// Requiere los secretos STRIPE_SECRET_KEY y STRIPE_WEBHOOK_SECRET
-// (este último lo genera Stripe al crear el webhook) en Supabase →
-// Edge Functions → Secrets.
+// Requiere los secretos STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET (firma
+// del destino "Tu cuenta") y STRIPE_CONNECT_WEBHOOK_SECRET (firma del
+// destino "Cuentas conectadas") en Supabase → Edge Functions → Secrets.
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import Stripe from 'https://esm.sh/stripe@17?target=deno'
 
-const SUPABASE_URL          = Deno.env.get('SUPABASE_URL')!
-const SUPABASE_KEY          = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-const STRIPE_SECRET_KEY     = Deno.env.get('STRIPE_SECRET_KEY')!
-const STRIPE_WEBHOOK_SECRET = Deno.env.get('STRIPE_WEBHOOK_SECRET')!
+const SUPABASE_URL                  = Deno.env.get('SUPABASE_URL')!
+const SUPABASE_KEY                  = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+const STRIPE_SECRET_KEY             = Deno.env.get('STRIPE_SECRET_KEY')!
+const STRIPE_WEBHOOK_SECRET         = Deno.env.get('STRIPE_WEBHOOK_SECRET')!
+const STRIPE_CONNECT_WEBHOOK_SECRET = Deno.env.get('STRIPE_CONNECT_WEBHOOK_SECRET') || ''
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' })
@@ -31,11 +36,20 @@ Deno.serve(async (req) => {
     return new Response('Webhook no configurado', { status: 500 })
   }
 
-  let event: Stripe.Event
-  try {
-    event = await stripe.webhooks.constructEventAsync(body, signature!, STRIPE_WEBHOOK_SECRET)
-  } catch (err) {
-    console.error('Firma de webhook inválida:', err)
+  // El evento puede venir firmado con el secreto de "Tu cuenta" o con el
+  // de "Cuentas conectadas" — probamos los dos.
+  let event: Stripe.Event | null = null
+  for (const secret of [STRIPE_WEBHOOK_SECRET, STRIPE_CONNECT_WEBHOOK_SECRET]) {
+    if (!secret) continue
+    try {
+      event = await stripe.webhooks.constructEventAsync(body, signature!, secret)
+      break
+    } catch (_err) {
+      // probar el siguiente secreto
+    }
+  }
+  if (!event) {
+    console.error('Firma de webhook inválida (no coincide con ningún secreto configurado)')
     return new Response('Firma inválida', { status: 400 })
   }
 
