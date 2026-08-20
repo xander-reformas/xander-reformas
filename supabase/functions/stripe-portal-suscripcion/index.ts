@@ -6,6 +6,18 @@
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
+// Los errores de Postgrest/Supabase no son instancias de Error, así que
+// String(err) los convierte en el inútil "[object Object]". Ver el mismo
+// helper en stripe-crear-checkout-suscripcion/index.ts.
+function errMsg(err: unknown): string {
+  if (err instanceof Error) return err.message
+  if (err && typeof err === 'object') {
+    const e = err as Record<string, unknown>
+    return String(e.message || e.details || e.hint || JSON.stringify(err))
+  }
+  return String(err)
+}
+
 const SUPABASE_URL      = Deno.env.get('SUPABASE_URL')!
 const SUPABASE_KEY      = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 const STRIPE_SECRET_KEY = Deno.env.get('STRIPE_SECRET_KEY')
@@ -40,7 +52,7 @@ Deno.serve(async (req) => {
       .select('stripe_customer_id')
       .eq('id', userData.user.id)
       .single()
-    if (perfErr) throw perfErr
+    if (perfErr) return json({ error: 'DB profiles: ' + errMsg(perfErr) }, 400)
     if (!profile?.stripe_customer_id) {
       return json({ error: 'Todavía no tienes una suscripción de pago activa.' }, 400)
     }
@@ -63,6 +75,6 @@ Deno.serve(async (req) => {
     return json({ url: session.url })
   } catch (err) {
     console.error(err)
-    return json({ error: String(err instanceof Error ? err.message : err) }, 400)
+    return json({ error: 'Unhandled: ' + errMsg(err) }, 400)
   }
 })

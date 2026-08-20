@@ -11,6 +11,19 @@
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
+// Los errores de Postgrest/Supabase no son instancias de Error (son objetos
+// planos { message, details, hint, code }), así que String(err) los
+// convierte en el inútil "[object Object]". Este helper extrae siempre un
+// mensaje legible, venga de donde venga el error.
+function errMsg(err: unknown): string {
+  if (err instanceof Error) return err.message
+  if (err && typeof err === 'object') {
+    const e = err as Record<string, unknown>
+    return String(e.message || e.details || e.hint || JSON.stringify(err))
+  }
+  return String(err)
+}
+
 const SUPABASE_URL      = Deno.env.get('SUPABASE_URL')!
 const SUPABASE_KEY      = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 const STRIPE_SECRET_KEY = Deno.env.get('STRIPE_SECRET_KEY')
@@ -44,7 +57,8 @@ Deno.serve(async (req) => {
     const authHeader = req.headers.get('authorization') || ''
     const token = authHeader.replace('Bearer ', '')
     const { data: userData, error: userErr } = await supabase.auth.getUser(token)
-    if (userErr || !userData?.user) return json({ error: 'No autenticado' }, 401)
+    if (userErr) return json({ error: 'Auth error: ' + errMsg(userErr) }, 401)
+    if (!userData?.user) return json({ error: 'No autenticado' }, 401)
     const user = userData.user
 
     const body_in = await req.json().catch(() => ({}))
@@ -55,7 +69,7 @@ Deno.serve(async (req) => {
       .select('id, stripe_customer_id, empresa_nombre, nombre')
       .eq('id', user.id)
       .single()
-    if (perfErr) throw perfErr
+    if (perfErr) return json({ error: 'DB profiles: ' + errMsg(perfErr) }, 400)
 
     let customerId = profile?.stripe_customer_id as string | null
 
@@ -74,9 +88,10 @@ Deno.serve(async (req) => {
         body: custBody,
       })
       const customer = await custRes.json()
-      if (!custRes.ok) throw new Error(customer?.error?.message || 'Error creando el cliente en Stripe')
+      if (!custRes.ok) return json({ error: 'Stripe customer: ' + errMsg(customer?.error || customer) }, 400)
       customerId = customer.id
-      await supabase.from('profiles').update({ stripe_customer_id: customerId }).eq('id', user.id)
+      const { error: updErr } = await supabase.from('profiles').update({ stripe_customer_id: customerId }).eq('id', user.id)
+      if (updErr) return json({ error: 'DB update: ' + errMsg(updErr) }, 400)
     }
 
     const body = new URLSearchParams()
@@ -103,11 +118,11 @@ Deno.serve(async (req) => {
       body,
     })
     const session = await stripeRes.json()
-    if (!stripeRes.ok) throw new Error(session?.error?.message || 'Error creando la sesión de pago en Stripe')
+    if (!stripeRes.ok) return json({ error: 'Stripe checkout: ' + errMsg(session?.error || session) }, 400)
 
     return json({ url: session.url })
   } catch (err) {
     console.error(err)
-    return json({ error: String(err instanceof Error ? err.message : err) }, 400)
+    return json({ error: 'Unhandled: ' + errMsg(err) }, 400)
   }
 })
