@@ -6,6 +6,7 @@ import ForgotPasswordPage from './components/auth/ForgotPasswordPage'
 import ResetPasswordPage from './components/auth/ResetPasswordPage'
 import OnboardingWizard from './components/onboarding/OnboardingWizard'
 import Dashboard from './components/dashboard/Dashboard'
+import LandingPage from './components/landing/LandingPage'
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
@@ -40,6 +41,7 @@ export default function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={
         <PublicRoute><LoginPage /></PublicRoute>
       } />
