@@ -73,19 +73,36 @@ export default function OnboardingChecklist() {
     cargar()
   }, [profile?.empresa_nif, profile?.stripe_account_id])
 
-  if (profile?.onboarding_checklist_dismissed) return null
   if (loading || !estado) return null
 
   const completados = PASOS.filter(p => estado[p.key]).length
   const total = PASOS.length
+  const colapsado = !!profile?.onboarding_checklist_dismissed
+  const completo = completados === total
 
-  // Si ya lo completó todo, no seguimos ocupando espacio en el dashboard.
-  if (completados === total) return null
-
-  async function ocultar() {
+  async function toggle() {
     setOcultando(true)
-    await updateProfile({ onboarding_checklist_dismissed: true })
+    await updateProfile({ onboarding_checklist_dismissed: !colapsado })
     setOcultando(false)
+  }
+
+  // Colapsado: barra compacta que se puede volver a abrir con un clic —
+  // nunca desaparece del todo, siempre queda accesible desde el Dashboard.
+  if (colapsado) {
+    return (
+      <button
+        onClick={toggle}
+        disabled={ocultando}
+        className="card mb-2 w-full flex items-center justify-between text-left hover:bg-surface-alt transition-colors"
+      >
+        <div className="flex items-center gap-2.5">
+          <span className="text-base">{completo ? '🎉' : '🚀'}</span>
+          <span className="text-sm font-medium text-ink">Primeros pasos en XANDER</span>
+          <span className="text-xs text-ink-soft">{completados}/{total}</span>
+        </div>
+        <span className="text-xs text-gold font-medium whitespace-nowrap ml-4">Mostrar ▾</span>
+      </button>
+    )
   }
 
   return (
@@ -94,15 +111,17 @@ export default function OnboardingChecklist() {
         <div>
           <h2 className="font-semibold text-ink">Primeros pasos en XANDER</h2>
           <p className="text-xs text-ink-soft mt-0.5">
-            {completados} de {total} completados — te acompañamos hasta que la app forme parte de tu rutina.
+            {completo
+              ? '¡Completados! Ya conoces las bases de XANDER.'
+              : `${completados} de ${total} completados — te acompañamos hasta que la app forme parte de tu rutina.`}
           </p>
         </div>
         <button
-          onClick={ocultar}
+          onClick={toggle}
           disabled={ocultando}
           className="text-xs text-ink-soft hover:text-ink whitespace-nowrap ml-4"
         >
-          Ocultar
+          Ocultar ▴
         </button>
       </div>
 
