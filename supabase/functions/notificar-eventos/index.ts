@@ -10,26 +10,51 @@ const SUPABASE_KEY    = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
+// Los errores de Postgrest/Supabase no son instancias de Error: String(err)
+// devuelve "[object Object]" y oculta la causa real. Serializamos a mano.
+function errMsg(err: unknown): string {
+  if (err instanceof Error) return err.message
+  try { return JSON.stringify(err) } catch { return String(err) }
+}
+
 Deno.serve(async () => {
   try {
     const ahora = new Date()
 
-    // Buscar eventos con alerta activa y fecha/hora en las próximas 25h (margen)
+    // Buscar eventos con alerta activa y fecha en las próximas ~25h (margen).
+    // OJO: no se puede hacer un embed `profiles:user_id(email, nombre)` aquí —
+    // calendario_eventos.user_id referencia auth.users(id), no public.profiles(id),
+    // y profiles no tiene columna email. Cargamos nombre/email aparte más abajo.
     const { data: eventos, error } = await supabase
       .from('calendario_eventos')
-      .select('*, profiles:user_id(email, nombre)')
+      .select('*')
       .eq('notificar_email', true)
       .gte('fecha', ahora.toISOString().split('T')[0])
 
-    if (error) throw error
+    if (error) return new Response('DB calendario_eventos: ' + errMsg(error), { status: 500 })
     if (!eventos?.length) return new Response('Sin eventos', { status: 200 })
+
+    const userIds = [...new Set(eventos.map((e) => e.user_id))]
+
+    // Nombre desde profiles
+    const { data: perfiles, error: perfErr } = await supabase
+      .from('profiles')
+      .select('id, nombre')
+      .in('id', userIds)
+    if (perfErr) return new Response('DB profiles: ' + errMsg(perfErr), { status: 500 })
+    const nombresPorId = new Map((perfiles || []).map((p) => [p.id, p.nombre]))
+
+    // Email desde auth.users (no existe en profiles)
+    const { data: usersData, error: usersErr } = await supabase.auth.admin.listUsers({ perPage: 1000 })
+    if (usersErr) return new Response('Auth listUsers: ' + errMsg(usersErr), { status: 500 })
+    const emailsPorId = new Map(usersData.users.map((u) => [u.id, u.email]))
 
     let enviados = 0
 
     for (const ev of eventos) {
       if (!ev.hora) continue                          // sin hora = sin alerta
-      const email = ev.profiles?.email
-      const nombre = ev.profiles?.nombre || 'Profesional'
+      const email = emailsPorId.get(ev.user_id)
+      const nombre = nombresPorId.get(ev.user_id) || 'Profesional'
       if (!email) continue
 
       // Construir datetime del evento
@@ -44,23 +69,31 @@ Deno.serve(async () => {
 
       // Aviso 24h — entre 23h y 25h restantes, no enviado aún
       if (diffH >= 23 && diffH <= 25 && !ev.notificado_24h) {
-        await enviarEmail(email, nombre, ev, tipoLabel, '24 horas')
-        await supabase.from('calendario_eventos').update({ notificado_24h: true }).eq('id', ev.id)
-        enviados++
+        const r = await enviarEmail(email, nombre, ev, tipoLabel, '24 horas')
+        if (r.ok) {
+          await supabase.from('calendario_eventos').update({ notificado_24h: true }).eq('id', ev.id)
+          enviados++
+        } else {
+          console.error('Resend 24h', ev.id, r.status, r.body)
+        }
       }
 
       // Aviso 1h — entre 45min y 75min restantes, no enviado aún
       if (diffH >= 0.75 && diffH <= 1.25 && !ev.notificado_1h) {
-        await enviarEmail(email, nombre, ev, tipoLabel, '1 hora')
-        await supabase.from('calendario_eventos').update({ notificado_1h: true }).eq('id', ev.id)
-        enviados++
+        const r = await enviarEmail(email, nombre, ev, tipoLabel, '1 hora')
+        if (r.ok) {
+          await supabase.from('calendario_eventos').update({ notificado_1h: true }).eq('id', ev.id)
+          enviados++
+        } else {
+          console.error('Resend 1h', ev.id, r.status, r.body)
+        }
       }
     }
 
     return new Response(`Emails enviados: ${enviados}`, { status: 200 })
   } catch (err) {
     console.error(err)
-    return new Response(String(err), { status: 500 })
+    return new Response('Unhandled: ' + errMsg(err), { status: 500 })
   }
 })
 
@@ -70,7 +103,7 @@ async function enviarEmail(
   ev: Record<string, string>,
   tipoLabel: string,
   anticipacion: string
-) {
+): Promise<{ ok: boolean; status: number; body: string }> {
   const hora = ev.hora?.slice(0, 5) || ''
   const fecha = new Date(ev.fecha + 'T00:00:00').toLocaleDateString('es-ES', {
     weekday: 'long', day: 'numeric', month: 'long'
@@ -96,17 +129,23 @@ async function enviarEmail(
     </div>
   `
 
-  await fetch('https://api.resend.com/emails', {
+  const resp = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${RESEND_API_KEY}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'XANDER Gestión <avisos@tudominio.com>',  // cambia por tu dominio verificado en Resend
+      // TODO: sustituir por un remitente de tu dominio verificado en Resend
+      // (Ajustes → Domains) en cuanto lo verifiques. onboarding@resend.dev
+      // funciona sin verificación mientras tanto, para que los avisos no se rompan.
+      from: 'XANDER Gestión <onboarding@resend.dev>',
       to: email,
       subject: `⏰ En ${anticipacion}: ${ev.titulo}`,
       html,
     }),
   })
+
+  const body = await resp.text()
+  return { ok: resp.ok, status: resp.status, body }
 }
