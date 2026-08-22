@@ -27,6 +27,7 @@ import Empleados from '../empleados/Empleados'
 import PartesTrabajo from '../partes/PartesTrabajo'
 import Nominas from '../nominas/Nominas'
 import Referidos from '../referidos/Referidos'
+import CopiasSeguridad from '../backups/CopiasSeguridad'
 
 const ADMIN_EMAIL = 'reformasxander@gmail.com'
 
@@ -78,6 +79,7 @@ const NAV_GROUPS = [
       { to: 'mi-empresa',         label: 'Mi Empresa',        icon: '🏢' },
       { to: 'tarifas',            label: 'Tarifas & Precios', icon: '💰' },
       { to: 'documentos',         label: 'Documentos',        icon: '📁' },
+      { to: 'copias-seguridad',   label: 'Copias de seguridad', icon: '💾' },
     ],
   },
 ]
@@ -348,6 +350,7 @@ export default function Dashboard() {
             <Route path="partes"       element={<PartesTrabajo />} />
             <Route path="nominas"      element={<Nominas />} />
             <Route path="referidos"    element={<Referidos />} />
+            <Route path="copias-seguridad" element={<CopiasSeguridad />} />
             {isAdmin && (
               <Route path="admin" element={<AdminPanel />} />
             )}
