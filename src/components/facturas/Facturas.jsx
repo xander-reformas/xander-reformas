@@ -9,6 +9,7 @@ const ESTADOS = [
   { value: 'vista',     label: 'Vista',     color: 'bg-purple-100 text-purple-700' },
   { value: 'pagada',    label: 'Pagada',    color: 'bg-green-100 text-green-700' },
   { value: 'vencida',   label: 'Vencida',   color: 'bg-red-100 text-red-600' },
+  { value: 'anulada',   label: 'Anulada',   color: 'bg-stone/30 text-ink-soft line-through' },
 ]
 
 const UNIDADES = ['ud', 'm²', 'm³', 'ml', 'm', 'h', 'kg', 'l', 'pa', 'gl']
@@ -628,11 +629,19 @@ export default function Facturas() {
 
   async function remove(id, numero) {
     if (lockedIds.has(id)) {
-      alert('Esta factura ya está registrada en el libro Verifactu y no se puede eliminar. Emite una factura rectificativa.')
+      alert('Esta factura ya está registrada en el libro Verifactu y no se puede eliminar. Emite una factura rectificativa o anúlala.')
       return
     }
     if (!confirm(`¿Eliminar la factura ${numero}?`)) return
     const { error: err } = await supabase.from('facturas').delete().eq('id', id)
+    if (err) { alert(err.message); return }
+    load()
+  }
+
+  async function anular(id, numero) {
+    const motivo = prompt(`Vas a anular la factura ${numero}. Queda registrada como anulada en el libro Verifactu (no se borra). ¿Motivo? (opcional)`)
+    if (motivo === null) return // cancelado
+    const { error: err } = await supabase.rpc('verifactu_anular_factura', { p_factura_id: id, p_motivo: motivo || null })
     if (err) { alert(err.message); return }
     load()
   }
@@ -642,9 +651,10 @@ export default function Facturas() {
     .filter(f => [f.numero, f.clientes?.nombre, f.obras?.nombre].some(v => v?.toLowerCase().includes(search.toLowerCase())))
 
   const fmt = v => v.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })
-  const totalFacturado = facturas.reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
-  const totalCobrado = facturas.filter(f => f.estado === 'pagada').reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
-  const pendienteCobro = facturas.filter(f => ['enviada', 'vista'].includes(f.estado)).reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
+  const facturasValidas = facturas.filter(f => f.estado !== 'anulada')
+  const totalFacturado = facturasValidas.reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
+  const totalCobrado = facturasValidas.filter(f => f.estado === 'pagada').reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
+  const pendienteCobro = facturasValidas.filter(f => ['enviada', 'vista'].includes(f.estado)).reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
 
   return (
     <div className="p-6 max-w-6xl">
@@ -724,8 +734,11 @@ export default function Facturas() {
                 return (
                   <tr key={f.id} className={`hover:bg-page/50 transition-colors ${vencida ? 'bg-red-50/50' : ''}`}>
                     <td className="px-5 py-3.5">
-                      <div className="font-bold text-ink flex items-center gap-1.5">
+                      <div className={`font-bold text-ink flex items-center gap-1.5 ${f.estado === 'anulada' ? 'line-through opacity-50' : ''}`}>
                         {f.numero}
+                        {f.estado === 'anulada' && (
+                          <span title="Factura anulada" className="text-[10px] font-semibold bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full">🚫 anulada</span>
+                        )}
                         {lockedIds.has(f.id) && (
                           <span title="Registrada en el libro Verifactu — datos económicos bloqueados" className="text-[10px] font-semibold bg-navy text-gold px-1.5 py-0.5 rounded-full">🔒</span>
                         )}
@@ -754,9 +767,10 @@ export default function Facturas() {
                     </td>
                     <td className="px-4 py-3.5">
                       <select value={f.estado} onChange={e => cambiarEstado(f.id, e.target.value)}
-                        className="text-xs font-semibold bg-transparent border-none focus:outline-none cursor-pointer"
+                        disabled={f.estado === 'anulada'}
+                        className="text-xs font-semibold bg-transparent border-none focus:outline-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
                         onClick={e => e.stopPropagation()}>
-                        {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                        {ESTADOS.filter(s => s.value !== 'anulada' || f.estado === 'anulada').map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                       </select>
                     </td>
                     <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
@@ -764,7 +778,7 @@ export default function Facturas() {
                       <button onClick={() => setVerData(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
                         🧾 Factura
                       </button>
-                      {f.estado !== 'pagada' && (
+                      {f.estado !== 'pagada' && f.estado !== 'anulada' && (
                         <button
                           onClick={() => cobrarConTarjeta(f)}
                           disabled={cobrando === f.id}
@@ -777,7 +791,17 @@ export default function Facturas() {
                         {lockedIds.has(f.id) ? 'Ver' : 'Editar'}
                       </button>
                       {lockedIds.has(f.id) ? (
-                        <span title="No se puede eliminar: registrada en Verifactu" className="text-ink-soft/20 text-xs cursor-not-allowed">Eliminar</span>
+                        f.estado === 'anulada' ? (
+                          <span className="text-ink-soft/40 text-xs">Anulada</span>
+                        ) : (
+                          <button
+                            onClick={() => anular(f.id, f.numero)}
+                            title="Anular esta factura (queda registrada como anulada, no se borra)"
+                            className="text-ink-soft/60 hover:text-red-500 text-xs font-semibold"
+                          >
+                            🚫 Anular
+                          </button>
+                        )
                       ) : (
                         <button onClick={() => remove(f.id, f.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
                       )}
