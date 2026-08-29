@@ -512,7 +512,7 @@ ALTER TABLE public.documentos
                       multiple
                       ref={el => { fileInputRefs.current[c.cat] = el }}
                       onChange={e => handleUpload(c.cat, e.target.files)}
-                      className="hidden"
+                      className="sr-only"
                       accept="*/*"
                     />
 

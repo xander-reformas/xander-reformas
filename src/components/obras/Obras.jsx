@@ -537,7 +537,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{subiendo ? '⏳' : '📷'}</div>
                 <div className="font-semibold text-ink mb-1">{subiendo ? 'Subiendo fotos…' : 'Toca para añadir fotos'}</div>
                 <div className="text-xs text-ink-soft">JPG, PNG, WEBP · Máx 10 MB por foto</div>
-                <input ref={fileRef} type="file" multiple accept="image/*" className="hidden" onChange={subirFotos} disabled={subiendo} />
+                <input ref={fileRef} type="file" multiple accept="image/*" className="sr-only" onChange={subirFotos} disabled={subiendo} />
               </div>
               {errorFoto && (
                 <div className="text-red-700 text-xs bg-red-50 border border-red-200 rounded-lg px-3 py-2 mb-4">
@@ -611,7 +611,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                   type="file"
                   multiple
                   accept=".pdf,.dwg,.dxf,.rvt,.ifc,.png,.jpg,.jpeg,.tif,.tiff,.zip"
-                  className="hidden"
+                  className="sr-only"
                   onChange={subirPlanos}
                   disabled={subiendoPlano}
                 />

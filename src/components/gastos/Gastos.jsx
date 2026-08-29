@@ -535,7 +535,7 @@ export default function Gastos() {
                     </div>
                   )}
                 </div>
-                <input ref={fileRef} type="file" accept="image/*,.pdf,application/pdf" className="hidden" onChange={onFileChange} />
+                <input ref={fileRef} type="file" accept="image/*,.pdf,application/pdf" className="sr-only" onChange={onFileChange} />
               </div>
 
               {/* ── Campos ── */}

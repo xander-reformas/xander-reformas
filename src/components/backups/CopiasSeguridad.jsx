@@ -279,7 +279,7 @@ export default function CopiasSeguridad() {
         <p className="text-xs text-ink-soft mb-4">
           Si guardaste una copia descargada anteriormente, súbela aquí para recuperar esos datos.
         </p>
-        <input ref={fileInputRef} type="file" accept="application/json" onChange={handleArchivoSeleccionado} className="hidden" />
+        <input ref={fileInputRef} type="file" accept="application/json" onChange={handleArchivoSeleccionado} className="sr-only" />
         <button onClick={() => fileInputRef.current?.click()} className="btn-secondary">
           📤 Subir archivo de copia (.json)
         </button>
