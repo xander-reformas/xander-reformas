@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 
 const FORM_EMPTY = { nombre: '', nif: '', telefono: '', email: '', direccion: '', cp: '', ciudad: '', notas: '' }
 
 export default function Clientes() {
+  const { t } = useTranslation()
   const [clientes, setClientes] = useState([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -54,7 +56,7 @@ export default function Clientes() {
   }
 
   async function remove(id, nombre) {
-    if (!confirm(`¿Eliminar a "${nombre}"? Esta acción no se puede deshacer.`)) return
+    if (!confirm(t('clientes.confirmDelete', { nombre }))) return
     await supabase.from('clientes').delete().eq('id', id)
     load()
   }
@@ -68,36 +70,38 @@ export default function Clientes() {
       {/* Cabecera */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-ink">Clientes</h1>
-          <p className="text-sm text-ink-soft mt-0.5">{clientes.length} cliente{clientes.length !== 1 ? 's' : ''} en total</p>
+          <h1 className="text-2xl font-bold text-ink">{t('clientes.title')}</h1>
+          <p className="text-sm text-ink-soft mt-0.5">
+            {t(clientes.length === 1 ? 'clientes.countOne' : 'clientes.countOther', { count: clientes.length })}
+          </p>
         </div>
-        <button onClick={openNew} className="btn-primary">+ Nuevo cliente</button>
+        <button onClick={openNew} className="btn-primary">{t('clientes.newCliente')}</button>
       </div>
 
       {/* Buscador */}
       <div className="mb-5">
-        <input className="input max-w-sm" placeholder="🔍  Buscar por nombre, email, ciudad…" value={search} onChange={e => setSearch(e.target.value)} />
+        <input className="input max-w-sm" placeholder={t('clientes.searchPlaceholder')} value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
       {/* Contenido */}
       {loading ? (
-        <div className="text-ink-soft text-sm py-10 text-center">Cargando clientes…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">{t('clientes.loading')}</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">👤</div>
-          <div className="font-bold text-ink mb-1">{search ? 'Sin resultados' : 'Aún no tienes clientes'}</div>
-          <div className="text-sm text-ink-soft mb-5">{search ? 'Prueba otra búsqueda' : 'Añade tu primer cliente para empezar a gestionar obras y presupuestos'}</div>
-          {!search && <button onClick={openNew} className="btn-primary">+ Añadir cliente</button>}
+          <div className="font-bold text-ink mb-1">{search ? t('clientes.noResultsTitle') : t('clientes.noClientesTitle')}</div>
+          <div className="text-sm text-ink-soft mb-5">{search ? t('clientes.noResultsHint') : t('clientes.noClientesHint')}</div>
+          {!search && <button onClick={openNew} className="btn-primary">{t('clientes.addFirst')}</button>}
         </div>
       ) : (
         <div className="card p-0 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
-                <th className="text-left px-5 py-3">Nombre / NIF</th>
-                <th className="text-left px-4 py-3 hidden md:table-cell">Teléfono</th>
-                <th className="text-left px-4 py-3 hidden lg:table-cell">Email</th>
-                <th className="text-left px-4 py-3 hidden lg:table-cell">Ciudad</th>
+                <th className="text-left px-5 py-3">{t('clientes.table.nombreNif')}</th>
+                <th className="text-left px-4 py-3 hidden md:table-cell">{t('clientes.table.telefono')}</th>
+                <th className="text-left px-4 py-3 hidden lg:table-cell">{t('clientes.table.email')}</th>
+                <th className="text-left px-4 py-3 hidden lg:table-cell">{t('clientes.table.ciudad')}</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -112,8 +116,8 @@ export default function Clientes() {
                   <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">{c.email || '—'}</td>
                   <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">{c.ciudad || '—'}</td>
                   <td className="px-4 py-3.5 text-right whitespace-nowrap">
-                    <button onClick={() => openEdit(c)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">Editar</button>
-                    <button onClick={() => remove(c.id, c.nombre)} className="text-ink-soft/50 hover:text-red-500 text-xs transition-colors">Eliminar</button>
+                    <button onClick={() => openEdit(c)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">{t('clientes.editar')}</button>
+                    <button onClick={() => remove(c.id, c.nombre)} className="text-ink-soft/50 hover:text-red-500 text-xs transition-colors">{t('clientes.eliminar')}</button>
                   </td>
                 </tr>
               ))}
@@ -127,50 +131,50 @@ export default function Clientes() {
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg max-h-[92vh] flex flex-col">
             <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar cliente' : 'Nuevo cliente'}</h2>
+              <h2 className="text-lg font-bold text-ink">{editId ? t('clientes.form.editTitle') : t('clientes.form.newTitle')}</h2>
               <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
               <div>
-                <label className="label">Nombre *</label>
+                <label className="label">{t('clientes.form.nombreLabel')}</label>
                 <input className="input" value={form.nombre} onChange={e => set('nombre', e.target.value)} required autoFocus />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">NIF / CIF</label>
+                  <label className="label">{t('clientes.form.nifLabel')}</label>
                   <input className="input" value={form.nif} onChange={e => set('nif', e.target.value)} />
                 </div>
                 <div>
-                  <label className="label">Teléfono</label>
+                  <label className="label">{t('clientes.form.telefonoLabel')}</label>
                   <input className="input" type="tel" value={form.telefono} onChange={e => set('telefono', e.target.value)} />
                 </div>
               </div>
               <div>
-                <label className="label">Email</label>
+                <label className="label">{t('clientes.form.emailLabel')}</label>
                 <input className="input" type="email" value={form.email} onChange={e => set('email', e.target.value)} />
               </div>
               <div>
-                <label className="label">Dirección</label>
+                <label className="label">{t('clientes.form.direccionLabel')}</label>
                 <input className="input" value={form.direccion} onChange={e => set('direccion', e.target.value)} />
               </div>
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="label">CP</label>
+                  <label className="label">{t('clientes.form.cpLabel')}</label>
                   <input className="input" value={form.cp} onChange={e => set('cp', e.target.value)} />
                 </div>
                 <div className="col-span-2">
-                  <label className="label">Ciudad</label>
+                  <label className="label">{t('clientes.form.ciudadLabel')}</label>
                   <input className="input" value={form.ciudad} onChange={e => set('ciudad', e.target.value)} />
                 </div>
               </div>
               <div>
-                <label className="label">Notas internas</label>
+                <label className="label">{t('clientes.form.notasLabel')}</label>
                 <textarea className="input resize-none h-20" value={form.notas} onChange={e => set('notas', e.target.value)} />
               </div>
               {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">Cancelar</button>
-                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Guardando…' : 'Guardar cliente'}</button>
+                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">{t('clientes.form.cancel')}</button>
+                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? t('clientes.form.saving') : t('clientes.form.save')}</button>
               </div>
             </form>
           </div>

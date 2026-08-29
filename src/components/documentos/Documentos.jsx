@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 
-// ── Plantillas ──────────────────────────────────────────────────────────────
+// ── Plantillas — contenido legal en español, se mantiene en español ────────
 const PLANTILLAS = [
   {
     id: 'contrato-obra',
@@ -266,22 +267,22 @@ Al firmar el presente presupuesto/contrato, el cliente declara haber leído y co
   },
 ]
 
-// ── Carpetas de "Mis documentos" ────────────────────────────────────────────
+// ── Carpetas de "Mis documentos" — cat es el valor persistido en BD ────────
 const CARPETAS = [
-  { cat: 'Plan de Negocio',       icon: '📊', desc: 'Plan completo con módulos de organización, captación, presupuestos, precios, imagen y herramientas.' },
-  { cat: 'Fiscalidad',            icon: '💰', desc: 'Declaraciones de IVA, IRPF, modelos 303, 130, 100 y cualquier documento de la Agencia Tributaria.' },
-  { cat: 'SS y Hacienda',         icon: '🏛️', desc: 'Alta en autónomos, recibos de cuota RETA, notificaciones de la Seguridad Social y Hacienda.' },
-  { cat: 'Seguros',               icon: '🛡️', desc: 'Pólizas de seguro de responsabilidad civil, seguro de obra y cualquier otra cobertura contratada.' },
-  { cat: 'Contratos',             icon: '📝', desc: 'Contratos con clientes, acuerdos con proveedores, subcontratas y cualquier documento firmado.' },
-  { cat: 'Licencias de Obra',     icon: '🏗️', desc: 'Permisos municipales, comunicaciones previas, licencias de actividad y documentación urbanística.' },
-  { cat: 'Branding',              icon: '🎨', desc: 'Logo, wallpaper corporativo, imagen de marca y materiales de identidad visual.' },
-  { cat: 'Subcontratas',          icon: '🤝', desc: 'Contratos y acuerdos con subcontratistas, empresas colaboradoras y autónomos.' },
-  { cat: 'Otros Documentos',      icon: '📁', desc: 'Licencias, certificados, permisos y cualquier otro documento del negocio.' },
+  { cat: 'Plan de Negocio',       icon: '📊' },
+  { cat: 'Fiscalidad',            icon: '💰' },
+  { cat: 'SS y Hacienda',         icon: '🏛️' },
+  { cat: 'Seguros',               icon: '🛡️' },
+  { cat: 'Contratos',             icon: '📝' },
+  { cat: 'Licencias de Obra',     icon: '🏗️' },
+  { cat: 'Branding',              icon: '🎨' },
+  { cat: 'Subcontratas',          icon: '🤝' },
+  { cat: 'Otros Documentos',      icon: '📁' },
 ]
 
 const CARPETAS_FORMACION = [
-  { cat: 'Certificados Obligatorios', icon: '📜', desc: 'PRL construcción (obligatorio 60h), habilitaciones legales, carnets y acreditaciones exigidas por ley.' },
-  { cat: 'Formación Continua',        icon: '📚', desc: 'Cursos de mejora profesional: pladur, impermeabilización, electricidad, fontanería, gestión, presupuestos.' },
+  { cat: 'Certificados Obligatorios', icon: '📜' },
+  { cat: 'Formación Continua',        icon: '📚' },
 ]
 
 const BUCKET = 'documentos-empresa'
@@ -305,12 +306,14 @@ function fileIcon(nombre) {
   return '📄'
 }
 
-function copiarPlantilla(contenido) {
-  navigator.clipboard.writeText(contenido).then(() => alert('Plantilla copiada al portapapeles ✓'))
-}
-
 // ── Componente principal ─────────────────────────────────────────────────────
 export default function Documentos() {
+  const { t } = useTranslation()
+
+  function copiarPlantilla(contenido) {
+    navigator.clipboard.writeText(contenido).then(() => alert(t('documentos.plantillaCopiada')))
+  }
+
   const [tab, setTab] = useState('mis-docs')
   const [docs, setDocs] = useState([])
   const [loading, setLoading] = useState(true)
@@ -362,7 +365,7 @@ export default function Documentos() {
         if (upErr.message?.includes('Bucket not found') || upErr.statusCode === 400) {
           setStorageError(true)
         } else {
-          setError(`Error al subir "${file.name}": ${upErr.message}`)
+          setError(t('documentos.errorSubida', { nombre: file.name, msg: upErr.message }))
         }
         continue
       }
@@ -387,7 +390,7 @@ export default function Documentos() {
   }
 
   async function handleDelete(doc) {
-    if (!confirm(`¿Eliminar "${doc.nombre}"?`)) return
+    if (!confirm(t('documentos.confirmDeleteDoc', { nombre: doc.nombre }))) return
     if (doc.storage_path) {
       await supabase.storage.from(BUCKET).remove([doc.storage_path])
     }
@@ -403,19 +406,19 @@ export default function Documentos() {
     <div className="p-6 max-w-5xl">
       {/* Cabecera */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-ink">Centro de Documentos</h1>
-        <p className="text-sm text-ink-soft mt-0.5">Plantillas profesionales y gestión de archivos</p>
+        <h1 className="text-2xl font-bold text-ink">{t('documentos.title')}</h1>
+        <p className="text-sm text-ink-soft mt-0.5">{t('documentos.subtitle')}</p>
       </div>
 
       {/* Tabs */}
       <div className="flex gap-1 bg-edge rounded-xl p-1 w-fit mb-6">
         <button onClick={() => setTab('plantillas')}
           className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'plantillas' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
-          📄 Plantillas ({PLANTILLAS.length})
+          {t('documentos.tabs.plantillas', { count: PLANTILLAS.length })}
         </button>
         <button onClick={() => setTab('mis-docs')}
           className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'mis-docs' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
-          📁 Mis documentos {!loading && `(${docs.length})`}
+          {t('documentos.tabs.misDocumentos', { count: !loading ? `(${docs.length})` : '' })}
         </button>
       </div>
 
@@ -432,17 +435,17 @@ export default function Documentos() {
         <div>
           <input
             className="input max-w-xs mb-5"
-            placeholder="🔍  Buscar plantilla…"
+            placeholder={t('documentos.buscarPlantilla')}
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
           <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-5 text-sm text-ink-soft">
-            📋 Plantillas editables para tu día a día. Cópialas, personalízalas y úsalas libremente.
+            {t('documentos.disclaimerPlantillas')}
           </div>
           {plantillasFiltradas.length === 0 ? (
             <div className="card text-center py-12">
               <div className="text-4xl mb-2">🔍</div>
-              <div className="font-bold text-ink">Sin resultados</div>
+              <div className="font-bold text-ink">{t('documentos.sinResultados')}</div>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -457,8 +460,8 @@ export default function Documentos() {
                   </div>
                   <p className="text-sm text-ink-soft flex-1 mb-4">{p.desc}</p>
                   <div className="flex gap-2 mt-auto">
-                    <button onClick={() => setPlantillaVista(p)} className="btn-secondary text-sm flex-1 py-2">Ver plantilla</button>
-                    <button onClick={() => copiarPlantilla(p.contenido)} className="btn-primary text-sm flex-1 py-2">📋 Copiar</button>
+                    <button onClick={() => setPlantillaVista(p)} className="btn-secondary text-sm flex-1 py-2">{t('documentos.verPlantilla')}</button>
+                    <button onClick={() => copiarPlantilla(p.contenido)} className="btn-primary text-sm flex-1 py-2">{t('documentos.copiar')}</button>
                   </div>
                 </div>
               ))}
@@ -475,11 +478,8 @@ export default function Documentos() {
             <div className="flex items-start gap-4">
               <div className="text-3xl">⚙️</div>
               <div className="flex-1">
-                <div className="font-bold text-ink mb-2">Paso previo: crear el bucket de almacenamiento</div>
-                <p className="text-sm text-ink-soft mb-4">
-                  Ve a <strong>Supabase → Storage</strong> y crea un bucket llamado <code className="bg-page px-1.5 py-0.5 rounded font-mono text-xs">documentos-empresa</code>.
-                  Márcalo como <strong>Public</strong> y guarda. Luego ejecuta la migración SQL indicada abajo.
-                </p>
+                <div className="font-bold text-ink mb-2">{t('documentos.storageStep')}</div>
+                <p className="text-sm text-ink-soft mb-4" dangerouslySetInnerHTML={{ __html: t('documentos.storageDesc') }} />
                 <div className="bg-navy text-gold font-mono text-xs px-4 py-3 rounded-xl mb-4 whitespace-pre">
 {`-- En Supabase SQL Editor:
 -- (archivo: supabase/documentos_v2.sql)
@@ -489,13 +489,13 @@ ALTER TABLE public.documentos
   ADD COLUMN IF NOT EXISTS file_size    bigint;`}
                 </div>
                 <button onClick={() => { setStorageError(false); load() }} className="btn-primary text-sm">
-                  Ya está configurado — reintentar
+                  {t('documentos.yaConfigurado')}
                 </button>
               </div>
             </div>
           </div>
         ) : loading ? (
-          <div className="text-ink-soft text-sm py-10 text-center">Cargando archivos…</div>
+          <div className="text-ink-soft text-sm py-10 text-center">{t('documentos.cargandoArchivos')}</div>
         ) : (
           <div className="space-y-8">
 
@@ -520,17 +520,17 @@ ALTER TABLE public.documentos
                     <div className="flex items-start gap-3 mb-2">
                       <span className="text-xl flex-shrink-0">{c.icon}</span>
                       <div>
-                        <div className="font-bold text-ink text-sm leading-tight">{c.cat}</div>
+                        <div className="font-bold text-ink text-sm leading-tight">{t(`documentos.carpeta.${c.cat}.titulo`, c.cat)}</div>
                         <div className={`text-xs mt-0.5 font-semibold ${archivos.length ? 'text-gold' : 'text-ink-soft'}`}>
                           {archivos.length
-                            ? `${archivos.length} archivo${archivos.length > 1 ? 's' : ''}`
-                            : 'Sin archivos'}
+                            ? t(archivos.length === 1 ? 'documentos.archivosCountOne' : 'documentos.archivosCountOther', { count: archivos.length })
+                            : t('documentos.sinArchivos')}
                         </div>
                       </div>
                     </div>
 
                     {/* Descripción */}
-                    <p className="text-xs text-ink-soft leading-relaxed mb-3">{c.desc}</p>
+                    <p className="text-xs text-ink-soft leading-relaxed mb-3">{t(`documentos.carpeta.${c.cat}.desc`, '')}</p>
 
                     {/* Lista de archivos */}
                     {archivos.length > 0 && (
@@ -545,7 +545,7 @@ ALTER TABLE public.documentos
                             <div className="flex items-center gap-1 flex-shrink-0">
                               {f.url && (
                                 <a href={f.url} target="_blank" rel="noopener noreferrer"
-                                  title="Ver archivo"
+                                  title={t('documentos.verArchivo')}
                                   className="w-5 h-5 flex items-center justify-center text-ink-soft hover:text-ink transition-colors">
                                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -553,7 +553,7 @@ ALTER TABLE public.documentos
                                   </svg>
                                 </a>
                               )}
-                              <button onClick={() => handleDelete(f)} title="Eliminar"
+                              <button onClick={() => handleDelete(f)} title={t('documentos.eliminar')}
                                 className="w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded flex items-center justify-center text-xs font-bold transition-colors">
                                 ×
                               </button>
@@ -570,16 +570,16 @@ ALTER TABLE public.documentos
                           disabled={isUp}
                           className="btn-gold w-full text-xs py-2 flex items-center justify-center gap-2 disabled:opacity-60">
                           {isUp
-                            ? <><span className="w-3 h-3 border-2 border-navy border-t-transparent rounded-full animate-spin" /> Subiendo…</>
-                            : '📎 Subir archivo'}
+                            ? <><span className="w-3 h-3 border-2 border-navy border-t-transparent rounded-full animate-spin" /> {t('documentos.subiendo')}</>
+                            : t('documentos.subirArchivo')}
                         </button>
                       ) : (
                         <button onClick={() => triggerUpload(c.cat)}
                           disabled={isUp}
                           className="w-full text-xs text-ink-soft hover:text-ink font-semibold text-center py-1.5 border border-dashed border-stone/30 rounded-lg hover:border-navy/40 transition-colors disabled:opacity-60">
                           {isUp
-                            ? <span className="flex items-center justify-center gap-1"><span className="w-3 h-3 border-2 border-stone border-t-transparent rounded-full animate-spin" /> Subiendo…</span>
-                            : '+ Añadir otro'}
+                            ? <span className="flex items-center justify-center gap-1"><span className="w-3 h-3 border-2 border-stone border-t-transparent rounded-full animate-spin" /> {t('documentos.subiendo')}</span>
+                            : t('documentos.anadirOtro')}
                         </button>
                       )}
                     </div>
@@ -592,7 +592,7 @@ ALTER TABLE public.documentos
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xl">🎓</span>
-                <h2 className="text-base font-bold text-ink">Formación y Certificados</h2>
+                <h2 className="text-base font-bold text-ink">{t('documentos.formacionTitulo')}</h2>
                 <div className="flex-1 h-px bg-edge" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -615,22 +615,22 @@ ALTER TABLE public.documentos
                         <div className="flex items-start gap-3">
                           <span className="text-xl flex-shrink-0">{c.icon}</span>
                           <div>
-                            <div className="font-bold text-ink text-sm leading-tight">{c.cat}</div>
+                            <div className="font-bold text-ink text-sm leading-tight">{t(`documentos.carpetaFormacion.${c.cat}.titulo`, c.cat)}</div>
                             <div className={`text-xs mt-0.5 font-semibold ${archivos.length ? 'text-gold' : 'text-ink-soft'}`}>
                               {archivos.length
-                                ? `${archivos.length} certificado${archivos.length > 1 ? 's' : ''}`
-                                : 'Sin certificados'}
+                                ? t(archivos.length === 1 ? 'documentos.certificadosCountOne' : 'documentos.certificadosCountOther', { count: archivos.length })
+                                : t('documentos.sinCertificados')}
                             </div>
                           </div>
                         </div>
                         <button onClick={() => triggerUpload(c.cat)}
                           disabled={isUp}
                           className="btn-gold text-xs px-3 py-1 flex-shrink-0 disabled:opacity-60">
-                          {isUp ? '…' : '+ Añadir'}
+                          {isUp ? '…' : t('documentos.anadir')}
                         </button>
                       </div>
 
-                      <p className="text-xs text-ink-soft leading-relaxed mb-3">{c.desc}</p>
+                      <p className="text-xs text-ink-soft leading-relaxed mb-3">{t(`documentos.carpetaFormacion.${c.cat}.desc`, '')}</p>
 
                       {archivos.length > 0 ? (
                         <div className="space-y-1">
@@ -659,7 +659,7 @@ ALTER TABLE public.documentos
                         </div>
                       ) : (
                         <div className="text-xs text-ink-soft/40 text-center py-4">
-                          Ningún certificado añadido aún
+                          {t('documentos.ningunCertificado')}
                         </div>
                       )}
                     </div>
@@ -689,8 +689,8 @@ ALTER TABLE public.documentos
                 {plantillaVista.contenido}
               </pre>
               <div className="flex gap-3 mt-4">
-                <button onClick={() => setPlantillaVista(null)} className="btn-secondary flex-1">Cerrar</button>
-                <button onClick={() => copiarPlantilla(plantillaVista.contenido)} className="btn-primary flex-1">📋 Copiar al portapapeles</button>
+                <button onClick={() => setPlantillaVista(null)} className="btn-secondary flex-1">{t('documentos.cerrar')}</button>
+                <button onClick={() => copiarPlantilla(plantillaVista.contenido)} className="btn-primary flex-1">{t('documentos.copiarPortapapeles')}</button>
               </div>
             </div>
           </div>

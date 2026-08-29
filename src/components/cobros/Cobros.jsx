@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../../lib/supabase'
 
 const METODOS = ['Transferencia', 'Efectivo', 'Bizum', 'Cheque', 'Tarjeta']
@@ -33,14 +34,15 @@ function nivelAlerta(f) {
   return 'verde'
 }
 
-const SEMAFORO_CONFIG = {
-  rojo:     { color: 'bg-red-500',    text: 'text-red-600',    bg: 'bg-red-50 border-red-200',    label: 'Vencida' },
-  naranja:  { color: 'bg-orange-400', text: 'text-orange-600', bg: 'bg-orange-50 border-orange-200', label: 'Urgente (≤7 días)' },
-  amarillo: { color: 'bg-yellow-400', text: 'text-yellow-700', bg: 'bg-yellow-50 border-yellow-200', label: 'Próxima (8-30 días)' },
-  verde:    { color: 'bg-green-400',  text: 'text-green-700',  bg: 'bg-green-50 border-green-200', label: 'Al día (>30 días)' },
+const SEMAFORO_COLORS = {
+  rojo:     { color: 'bg-red-500',    text: 'text-red-600',    bg: 'bg-red-50 border-red-200' },
+  naranja:  { color: 'bg-orange-400', text: 'text-orange-600', bg: 'bg-orange-50 border-orange-200' },
+  amarillo: { color: 'bg-yellow-400', text: 'text-yellow-700', bg: 'bg-yellow-50 border-yellow-200' },
+  verde:    { color: 'bg-green-400',  text: 'text-green-700',  bg: 'bg-green-50 border-green-200' },
 }
 
 export default function Cobros() {
+  const { t } = useTranslation()
   const [facturas, setFacturas] = useState([])
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState('pendientes') // pendientes | cobrados
@@ -71,11 +73,12 @@ export default function Cobros() {
   async function confirmarCobro(e) {
     e.preventDefault()
     setSaving(true)
+    const notaCobrado = t('cobros.notaCobrado', { fecha: formCobro.fecha_cobro, metodo: t(`cobros.metodo.${formCobro.metodo}`) })
     await supabase.from('facturas').update({
       estado: 'pagada',
       notas: facturaActiva.notas
-        ? `${facturaActiva.notas}\n✓ Cobrado el ${formCobro.fecha_cobro} via ${formCobro.metodo}`
-        : `✓ Cobrado el ${formCobro.fecha_cobro} via ${formCobro.metodo}`,
+        ? `${facturaActiva.notas}\n${notaCobrado}`
+        : notaCobrado,
     }).eq('id', facturaActiva.id)
     setSaving(false)
     setShowModal(false)
@@ -83,7 +86,7 @@ export default function Cobros() {
   }
 
   async function desmarcarPagada(id) {
-    if (!confirm('¿Marcar esta factura como enviada (pendiente de cobro)?')) return
+    if (!confirm(t('cobros.confirmarDesmarcar'))) return
     await supabase.from('facturas').update({ estado: 'enviada' }).eq('id', id)
     load()
   }
@@ -117,38 +120,40 @@ export default function Cobros() {
   const meses = Object.entries(cobrosPorMes).sort(([a], [b]) => b.localeCompare(a)).slice(0, 6)
   const maxMes = Math.max(...meses.map(([, v]) => v), 1)
 
+  const urgentesCount = porNivel.rojo.length + porNivel.naranja.length
+
   return (
     <div className="p-6 max-w-5xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-ink">Cobros</h1>
-        <p className="text-sm text-ink-soft mt-0.5">Control de facturas pendientes y pagadas</p>
+        <h1 className="text-2xl font-bold text-ink">{t('cobros.title')}</h1>
+        <p className="text-sm text-ink-soft mt-0.5">{t('cobros.subtitle')}</p>
       </div>
 
       {/* Métricas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="card border-l-4 border-l-gold">
-          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Pendiente cobro</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">{t('cobros.pendienteCobroLabel')}</div>
           <div className="text-2xl font-bold text-gold-dark">
             {totalPendiente.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
           </div>
-          <div className="text-xs text-ink-soft mt-1">{pendientes.length} factura{pendientes.length !== 1 ? 's' : ''}</div>
+          <div className="text-xs text-ink-soft mt-1">{t(pendientes.length === 1 ? 'cobros.facturaCountOne' : 'cobros.facturaCountOther', { count: pendientes.length })}</div>
         </div>
         <div className="card border-l-4 border-l-green-500">
-          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Total cobrado</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">{t('cobros.totalCobradoLabel')}</div>
           <div className="text-2xl font-bold text-green-700">
             {totalCobrado.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
           </div>
-          <div className="text-xs text-ink-soft mt-1">{cobradas.length} factura{cobradas.length !== 1 ? 's' : ''} pagada{cobradas.length !== 1 ? 's' : ''}</div>
+          <div className="text-xs text-ink-soft mt-1">{t(cobradas.length === 1 ? 'cobros.facturaPagadaCountOne' : 'cobros.facturaPagadaCountOther', { count: cobradas.length })}</div>
         </div>
         <div className={`card border-l-4 ${vencidasSinCobrar.length > 0 ? 'border-l-red-500' : 'border-l-stone/30'}`}>
-          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Vencidas sin cobrar</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">{t('cobros.vencidasSinCobrarLabel')}</div>
           <div className={`text-2xl font-bold ${vencidasSinCobrar.length > 0 ? 'text-red-600' : 'text-ink-soft'}`}>
             {vencidasSinCobrar.length}
           </div>
           <div className="text-xs text-ink-soft mt-1">
             {vencidasSinCobrar.length > 0
               ? vencidasSinCobrar.reduce((s, f) => s + totalFactura(f), 0).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })
-              : 'Todo al día ✓'}
+              : t('cobros.todoAlDia')}
           </div>
         </div>
       </div>
@@ -159,21 +164,21 @@ export default function Cobros() {
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center text-lg">🚦</div>
             <div>
-              <div className="font-bold text-ink text-sm">Alertas de cobro</div>
-              <div className="text-xs text-ink-soft">{porNivel.rojo.length + porNivel.naranja.length} factura{porNivel.rojo.length+porNivel.naranja.length!==1?'s':''} urgente{porNivel.rojo.length+porNivel.naranja.length!==1?'s':''}</div>
+              <div className="font-bold text-ink text-sm">{t('cobros.alertas.title')}</div>
+              <div className="text-xs text-ink-soft">{t(urgentesCount === 1 ? 'cobros.alertas.urgentesOne' : 'cobros.alertas.urgentesOther', { count: urgentesCount })}</div>
             </div>
           </div>
 
           {/* Mini semáforo visual */}
           <div className="flex gap-2 mb-4">
             {['rojo','naranja','amarillo','verde'].map(nivel => {
-              const cfg = SEMAFORO_CONFIG[nivel]
+              const cfg = SEMAFORO_COLORS[nivel]
               const count = porNivel[nivel]?.length || 0
               return (
                 <div key={nivel} className={`flex-1 rounded-xl border px-3 py-2 text-center ${count>0?cfg.bg:'bg-page/30 border-edge'}`}>
                   <div className={`w-3 h-3 rounded-full mx-auto mb-1 ${count>0?cfg.color:'bg-stone/20'}`} />
                   <div className={`text-lg font-black ${count>0?cfg.text:'text-ink-soft/40'}`}>{count}</div>
-                  <div className="text-[10px] text-ink-soft leading-tight">{cfg.label}</div>
+                  <div className="text-[10px] text-ink-soft leading-tight">{t(`cobros.alertas.${nivel}`)}</div>
                 </div>
               )
             })}
@@ -183,7 +188,7 @@ export default function Cobros() {
           {[...porNivel.rojo, ...porNivel.naranja].map(f => {
             const dias = diasRestantes(vencimientoFactura(f))
             const nivel = nivelAlerta(f)
-            const cfg = SEMAFORO_CONFIG[nivel]
+            const cfg = SEMAFORO_COLORS[nivel]
             return (
               <div key={f.id} className={`flex items-center gap-3 rounded-xl border px-3 py-2 mb-2 ${cfg.bg}`}>
                 <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${cfg.color}`} />
@@ -194,11 +199,11 @@ export default function Cobros() {
                 <div className="text-right flex-shrink-0">
                   <div className="font-bold text-ink text-sm">{totalFactura(f).toLocaleString('es-ES',{style:'currency',currency:'EUR'})}</div>
                   <div className={`text-xs font-semibold ${cfg.text}`}>
-                    {dias < 0 ? `Vencida hace ${Math.abs(dias)}d` : dias === 0 ? 'Vence hoy' : `Vence en ${dias}d`}
+                    {dias < 0 ? t('cobros.alertas.vencidaHace', { dias: Math.abs(dias) }) : dias === 0 ? t('cobros.alertas.venceHoy') : t('cobros.alertas.venceEn', { dias })}
                   </div>
                 </div>
                 <button onClick={() => abrirCobro(f)} className="flex-shrink-0 text-xs font-semibold bg-green-600 text-white px-2.5 py-1 rounded-lg hover:bg-green-700 transition-colors">
-                  Cobrar
+                  {t('cobros.alertas.cobrar')}
                 </button>
               </div>
             )
@@ -209,7 +214,7 @@ export default function Cobros() {
       {/* Gráfico de cobros por mes */}
       {meses.length > 0 && (
         <div className="card mb-6">
-          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">Cobros por mes</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">{t('cobros.graficoTitle')}</div>
           <div className="flex items-end gap-3 h-28">
             {meses.reverse().map(([mes, valor]) => {
               const altura = Math.round((valor / maxMes) * 100)
@@ -233,25 +238,25 @@ export default function Cobros() {
       <div className="flex gap-1 bg-edge rounded-xl p-1 w-fit mb-5">
         <button onClick={() => setTab('pendientes')}
           className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'pendientes' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
-          Pendientes ({pendientes.length})
+          {t('cobros.tabPendientesOther', { count: pendientes.length })}
         </button>
         <button onClick={() => setTab('cobrados')}
           className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === 'cobrados' ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
-          Cobradas ({cobradas.length})
+          {t('cobros.tabCobradasOther', { count: cobradas.length })}
         </button>
       </div>
 
       {/* Lista */}
       {loading ? (
-        <div className="text-ink-soft text-sm py-10 text-center">Cargando…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">{t('cobros.loading')}</div>
       ) : lista.length === 0 ? (
         <div className="card text-center py-14">
           <div className="text-5xl mb-3">{tab === 'pendientes' ? '✅' : '💳'}</div>
           <div className="font-bold text-ink mb-1">
-            {tab === 'pendientes' ? '¡Todo cobrado! Sin facturas pendientes' : 'Aún no hay cobros registrados'}
+            {tab === 'pendientes' ? t('cobros.emptyPendientesTitle') : t('cobros.emptyCobradasTitle')}
           </div>
           <div className="text-sm text-ink-soft">
-            {tab === 'pendientes' ? 'Buen trabajo 💪' : 'Las facturas marcadas como pagadas aparecerán aquí'}
+            {tab === 'pendientes' ? t('cobros.emptyPendientesHint') : t('cobros.emptyCobradasHint')}
           </div>
         </div>
       ) : (
@@ -261,7 +266,7 @@ export default function Cobros() {
             const venc = vencimientoFactura(f)
             const dias = diasRestantes(venc)
             const nivel = nivelAlerta(f)
-            const cfg = nivel ? SEMAFORO_CONFIG[nivel] : null
+            const cfg = nivel ? SEMAFORO_COLORS[nivel] : null
             const vencida = nivel === 'rojo'
             const urgente = nivel === 'naranja'
             return (
@@ -276,14 +281,14 @@ export default function Cobros() {
                     {f.obras?.nombre && <span className="text-xs text-ink-soft/60 hidden md:inline">· {f.obras.nombre}</span>}
                   </div>
                   <div className="flex flex-wrap gap-x-4 gap-y-0.5 mt-1 text-xs text-ink-soft">
-                    {f.fecha && <span>Emitida: {new Date(f.fecha).toLocaleDateString('es-ES')}</span>}
+                    {f.fecha && <span>{t('cobros.emitida', { fecha: new Date(f.fecha).toLocaleDateString('es-ES') })}</span>}
                     {venc && (
                       <span className={cfg ? cfg.text + ' font-semibold' : ''}>
-                        Vence: {new Date(venc).toLocaleDateString('es-ES')}
+                        {t('cobros.vence', { fecha: new Date(venc).toLocaleDateString('es-ES') })}
                         {dias !== null && f.estado !== 'pagada' && (
-                          dias < 0 ? ` (vencida hace ${Math.abs(dias)} días)` :
-                          dias === 0 ? ' (vence hoy)' :
-                          ` (en ${dias} días)`
+                          dias < 0 ? t('cobros.venceVencidaHace', { dias: Math.abs(dias) }) :
+                          dias === 0 ? t('cobros.venceHoyParen') :
+                          t('cobros.venceEnDias', { dias })
                         )}
                       </span>
                     )}
@@ -297,12 +302,12 @@ export default function Cobros() {
                   {tab === 'pendientes' ? (
                     <button onClick={() => abrirCobro(f)}
                       className="mt-1 text-xs font-semibold bg-green-600 text-white px-3 py-1 rounded-lg hover:bg-green-700 transition-colors">
-                      ✓ Marcar cobrada
+                      {t('cobros.marcarCobrada')}
                     </button>
                   ) : (
                     <button onClick={() => desmarcarPagada(f.id)}
                       className="mt-1 text-xs text-ink-soft/50 hover:text-ink-soft transition-colors">
-                      Desmarcar
+                      {t('cobros.desmarcar')}
                     </button>
                   )}
                 </div>
@@ -317,7 +322,7 @@ export default function Cobros() {
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-sm">
             <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
-              <h2 className="text-lg font-bold text-ink">Confirmar cobro</h2>
+              <h2 className="text-lg font-bold text-ink">{t('cobros.modal.title')}</h2>
               <button onClick={() => setShowModal(false)} className="text-ink-soft hover:text-ink text-2xl leading-none">×</button>
             </div>
             <form onSubmit={confirmarCobro} className="p-6 space-y-4">
@@ -328,22 +333,22 @@ export default function Cobros() {
                 </div>
               </div>
               <div>
-                <label className="label">Fecha de cobro</label>
+                <label className="label">{t('cobros.modal.fechaLabel')}</label>
                 <input className="input" type="date" value={formCobro.fecha_cobro}
                   onChange={e => setFormCobro(p => ({ ...p, fecha_cobro: e.target.value }))} required />
               </div>
               <div>
-                <label className="label">Método de pago</label>
+                <label className="label">{t('cobros.modal.metodoLabel')}</label>
                 <select className="input" value={formCobro.metodo}
                   onChange={e => setFormCobro(p => ({ ...p, metodo: e.target.value }))}>
-                  {METODOS.map(m => <option key={m} value={m}>{m}</option>)}
+                  {METODOS.map(m => <option key={m} value={m}>{t(`cobros.metodo.${m}`)}</option>)}
                 </select>
               </div>
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setShowModal(false)} className="btn-secondary flex-1">Cancelar</button>
+                <button type="button" onClick={() => setShowModal(false)} className="btn-secondary flex-1">{t('cobros.modal.cancel')}</button>
                 <button type="submit" disabled={saving}
                   className="flex-1 bg-green-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50">
-                  {saving ? 'Guardando…' : '✓ Confirmar cobro'}
+                  {saving ? t('cobros.modal.saving') : t('cobros.modal.confirmar')}
                 </button>
               </div>
             </form>

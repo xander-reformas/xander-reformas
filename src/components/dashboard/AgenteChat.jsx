@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import i18n from '../../i18n'
 import { supabase, getUID } from '../../lib/supabase'
+
+const IDIOMA_NOMBRE = {
+  es: 'español', en: 'English', uk: 'українською', ro: 'română', ar: 'العربية', pt: 'português', zh: '中文',
+}
 
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY
 const GROQ_MODEL = 'llama-3.1-8b-instant'
@@ -19,7 +25,7 @@ Puedes ayudar con:
 DATOS ACTUALES DEL NEGOCIO:
 {context}
 
-Responde siempre en español. Sé conciso y práctico. Cuando hagas listas, usa puntos o pasos numerados. Si no tienes información suficiente para responder con certeza, indícalo claramente y sugiere qué dato necesitas.`
+Responde siempre en {idioma}. Sé conciso y práctico. Cuando hagas listas, usa puntos o pasos numerados. Si no tienes información suficiente para responder con certeza, indícalo claramente y sugiere qué dato necesitas.`
 
 async function obtenerContexto() {
   try {
@@ -61,7 +67,8 @@ ${obrasTexto || '  (ninguna)'}
 }
 
 async function llamarGroq(mensajes, contexto) {
-  const systemPrompt = SYSTEM_PROMPT.replace('{context}', contexto)
+  const idioma = IDIOMA_NOMBRE[i18n.language] || IDIOMA_NOMBRE.es
+  const systemPrompt = SYSTEM_PROMPT.replace('{context}', contexto).replace('{idioma}', idioma)
 
   const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
@@ -90,6 +97,7 @@ async function llamarGroq(mensajes, contexto) {
 }
 
 export default function AgenteChat() {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const [msgs, setMsgs] = useState([])
   const [input, setInput] = useState('')
@@ -128,7 +136,7 @@ export default function AgenteChat() {
 
     const historial = data || []
     if (historial.length === 0) {
-      setMsgs([{ role: 'assistant', content: '¡Hola! Soy tu asistente XANDER. Puedo ayudarte con clientes, obras, presupuestos, preguntas fiscales o redactar cualquier comunicación. ¿En qué te ayudo?' }])
+      setMsgs([{ role: 'assistant', content: t('agenteChat.bienvenida') }])
     } else {
       setMsgs(historial.map(m => ({ role: m.role, content: m.content })))
     }
@@ -169,16 +177,16 @@ export default function AgenteChat() {
       await guardarMensaje('assistant', respuesta)
       setMsgs(prev => [...prev, { role: 'assistant', content: respuesta }])
     } catch (e) {
-      setError(e.message || 'Error al conectar con el agente.')
+      setError(e.message || t('agenteChat.errorConectar'))
     } finally {
       setPensando(false)
     }
   }
 
   async function nuevaConversacion() {
-    if (!confirm('¿Borrar el historial de esta conversación?')) return
+    if (!confirm(t('agenteChat.confirmBorrarHistorial'))) return
     await supabase.from('chat_mensajes').delete().neq('id', '00000000-0000-0000-0000-000000000000')
-    setMsgs([{ role: 'assistant', content: '¡Conversación nueva! ¿En qué puedo ayudarte?' }])
+    setMsgs([{ role: 'assistant', content: t('agenteChat.conversacionNueva') }])
   }
 
   // Formato básico de texto con negritas y saltos de línea
@@ -206,13 +214,13 @@ export default function AgenteChat() {
           <div className="bg-navy px-4 py-3 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-2">
               <div className={`w-2 h-2 rounded-full ${setupNeeded ? 'bg-red-400' : 'bg-green-400 animate-pulse'}`} />
-              <span className="text-white text-sm font-bold">Agente XANDER</span>
+              <span className="text-white text-sm font-bold">{t('agenteChat.titulo')}</span>
               {!setupNeeded && <span className="text-white/40 text-xs">· Groq AI</span>}
             </div>
             <div className="flex items-center gap-3">
               {!setupNeeded && !tablaFalta && (
-                <button onClick={nuevaConversacion} className="text-white/40 hover:text-white/80 text-xs" title="Nueva conversación">
-                  ↺ Limpiar
+                <button onClick={nuevaConversacion} className="text-white/40 hover:text-white/80 text-xs" title={t('agenteChat.limpiarTooltip')}>
+                  {t('agenteChat.limpiar')}
                 </button>
               )}
               <button onClick={() => setOpen(false)} className="text-white/50 hover:text-white text-xl leading-none">×</button>
@@ -224,26 +232,26 @@ export default function AgenteChat() {
             <div className="flex-1 p-5 flex flex-col justify-center">
               <div className="text-center mb-4">
                 <div className="text-3xl mb-2">🔑</div>
-                <div className="font-bold text-ink mb-2">Falta configurar la API key</div>
-                <p className="text-xs text-ink-soft mb-4">Para activar el agente, crea el archivo <code className="bg-page px-1 rounded">.env</code> en la raíz del proyecto con:</p>
+                <div className="font-bold text-ink mb-2">{t('agenteChat.faltaApiKey')}</div>
+                <p className="text-xs text-ink-soft mb-4" dangerouslySetInnerHTML={{ __html: t('agenteChat.faltaApiKeyDesc') }} />
               </div>
               <div className="bg-navy text-gold font-mono text-xs px-4 py-3 rounded-xl mb-4 leading-relaxed">
                 VITE_GROQ_API_KEY=gsk_xxxxxxxxxxxx
               </div>
               <ol className="text-xs text-ink-soft space-y-1 list-decimal list-inside">
-                <li>Ve a <span className="font-semibold text-ink">console.groq.com</span></li>
-                <li>Crea una cuenta gratuita</li>
-                <li>API Keys → Create API Key</li>
-                <li>Copia la key en el archivo .env</li>
-                <li>Reinicia el servidor de desarrollo</li>
+                <li dangerouslySetInnerHTML={{ __html: t('agenteChat.pasoGroq1') }} />
+                <li>{t('agenteChat.pasoGroq2')}</li>
+                <li>{t('agenteChat.pasoGroq3')}</li>
+                <li>{t('agenteChat.pasoGroq4')}</li>
+                <li>{t('agenteChat.pasoGroq5')}</li>
               </ol>
             </div>
           ) : tablaFalta ? (
             <div className="flex-1 p-5 flex flex-col justify-center">
               <div className="text-center mb-4">
                 <div className="text-3xl mb-2">⚙️</div>
-                <div className="font-bold text-ink mb-2">Paso previo en Supabase</div>
-                <p className="text-xs text-ink-soft mb-4">Ejecuta en el SQL Editor de Supabase:</p>
+                <div className="font-bold text-ink mb-2">{t('agenteChat.pasoPrevioSupabase')}</div>
+                <p className="text-xs text-ink-soft mb-4">{t('agenteChat.ejecutaSql')}</p>
               </div>
               <div className="bg-navy text-gold font-mono text-xs px-4 py-3 rounded-xl">
                 supabase/chat_mensajes.sql
@@ -293,7 +301,7 @@ export default function AgenteChat() {
                 <input
                   ref={inputRef}
                   className="flex-1 text-sm border border-edge rounded-xl px-3 py-2 focus:outline-none focus:border-gold resize-none"
-                  placeholder="Escribe tu consulta…"
+                  placeholder={t('agenteChat.placeholder')}
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); enviar() } }}
@@ -317,7 +325,7 @@ export default function AgenteChat() {
         onClick={() => setOpen(p => !p)}
         className="fixed bottom-5 right-5 w-13 h-13 bg-gold rounded-full shadow-lg flex items-center justify-center text-navy text-2xl hover:bg-gold-dark transition-all hover:scale-110 z-50"
         style={{ width: 52, height: 52 }}
-        title="Agente XANDER"
+        title={t('agenteChat.titulo')}
       >
         {open ? '✕' : '💬'}
       </button>

@@ -1,20 +1,32 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { format, startOfMonth, endOfMonth, eachDayOfInterval,
-         isSameMonth, isToday, isSameDay, addMonths, subMonths } from 'date-fns'
-import { es } from 'date-fns/locale'
+         isSameMonth, isToday, isSameDay, addMonths, subMonths, startOfWeek, addDays } from 'date-fns'
+import { es, enUS, uk, ro, arSA, pt, zhCN } from 'date-fns/locale'
 import { supabase, getUID } from '../../lib/supabase'
 
-const TIPOS = {
-  trabajo:       { label: 'Trabajo',       color: '#1A1A2E' },
-  reunion:       { label: 'Reunión',       color: '#C9A84C' },
-  cobro:         { label: 'Cobro',         color: '#16a34a' },
-  recordatorio:  { label: 'Recordatorio', color: '#9333ea' },
-  visita:        { label: 'Visita obra',  color: '#ea580c' },
+const DATEFNS_LOCALES = { es, en: enUS, uk, ro, ar: arSA, pt, zh: zhCN }
+
+const TIPOS_COLOR = {
+  trabajo: '#1A1A2E',
+  reunion: '#C9A84C',
+  cobro: '#16a34a',
+  recordatorio: '#9333ea',
+  visita: '#ea580c',
 }
 
 const EVENTO_EMPTY = { titulo: '', tipo: 'trabajo', hora: '', descripcion: '', notificar_email: false }
 
 export default function CalendarioWidget() {
+  const { t, i18n } = useTranslation()
+  const dfLocale = DATEFNS_LOCALES[i18n.language] || es
+  const TIPOS = {
+    trabajo:      { label: t('calendarioWidget.tipo.trabajo'),      color: TIPOS_COLOR.trabajo },
+    reunion:      { label: t('calendarioWidget.tipo.reunion'),      color: TIPOS_COLOR.reunion },
+    cobro:        { label: t('calendarioWidget.tipo.cobro'),        color: TIPOS_COLOR.cobro },
+    recordatorio: { label: t('calendarioWidget.tipo.recordatorio'), color: TIPOS_COLOR.recordatorio },
+    visita:       { label: t('calendarioWidget.tipo.visita'),       color: TIPOS_COLOR.visita },
+  }
   const [abierto,         setAbierto]         = useState(false)
   const [mes,             setMes]             = useState(new Date())
   const [diaSeleccionado, setDiaSeleccionado] = useState(new Date())
@@ -83,6 +95,9 @@ export default function CalendarioWidget() {
     setEventos(p => p.filter(e => e.id !== id))
   }
 
+  const diasSemana = Array.from({ length: 7 }, (_, i) =>
+    format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), i), 'eeeeee', { locale: dfLocale })
+  )
   const dias = eachDayOfInterval({ start: startOfMonth(mes), end: endOfMonth(mes) })
   const offset = (() => { const d = startOfMonth(mes).getDay(); return d === 0 ? 6 : d - 1 })()
 
@@ -106,7 +121,7 @@ export default function CalendarioWidget() {
       <button onClick={() => setAbierto(p => !p)} className="w-full flex items-center justify-between text-left">
         <div className="flex items-center gap-2">
           <span className="text-lg">📅</span>
-          <span className="font-semibold text-ink">Calendario de trabajo</span>
+          <span className="font-semibold text-ink">{t('calendarioWidget.calendarioTrabajo')}</span>
           {eventos.length > 0 && (
             <span className="bg-gold text-navy text-xs font-bold px-2 py-0.5 rounded-full">{eventos.length}</span>
           )}
@@ -121,11 +136,11 @@ export default function CalendarioWidget() {
             <div key={e.id} className="flex items-center gap-2 text-xs">
               <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: TIPOS[e.tipo]?.color }} />
               <span className="text-ink-soft w-16 flex-shrink-0">
-                {isToday(new Date(e.fecha + 'T00:00:00')) ? 'Hoy' : format(new Date(e.fecha + 'T00:00:00'), 'dd MMM', { locale: es })}
+                {isToday(new Date(e.fecha + 'T00:00:00')) ? t('calendarioWidget.hoy') : format(new Date(e.fecha + 'T00:00:00'), 'dd MMM', { locale: dfLocale })}
                 {e.hora ? ` ${e.hora.slice(0,5)}` : ''}
               </span>
               <span className="text-ink font-medium truncate">{e.titulo}</span>
-              {e.notificar_email && <span className="text-gold text-xs" title="Alerta por email">🔔</span>}
+              {e.notificar_email && <span className="text-gold text-xs" title={t('calendarioWidget.alertaEmailTitle')}>🔔</span>}
             </div>
           ))}
         </div>
@@ -134,7 +149,7 @@ export default function CalendarioWidget() {
       {abierto && (
         <div className="mt-4 border-t border-edge pt-4">
           {cargando ? (
-            <div className="text-center text-ink-soft text-sm py-8">Cargando…</div>
+            <div className="text-center text-ink-soft text-sm py-8">{t('calendarioWidget.cargando')}</div>
           ) : (
             <div className="grid md:grid-cols-2 gap-6">
               {/* Calendario */}
@@ -142,14 +157,14 @@ export default function CalendarioWidget() {
                 <div className="flex items-center justify-between mb-3">
                   <button onClick={() => setMes(m => subMonths(m, 1))} className="text-ink-soft hover:text-ink p-1">◀</button>
                   <span className="text-sm font-semibold text-ink capitalize">
-                    {format(mes, 'MMMM yyyy', { locale: es })}
+                    {format(mes, 'MMMM yyyy', { locale: dfLocale })}
                   </span>
                   <button onClick={() => setMes(m => addMonths(m, 1))} className="text-ink-soft hover:text-ink p-1">▶</button>
                 </div>
 
                 <div className="grid grid-cols-7 mb-1">
-                  {['L','M','X','J','V','S','D'].map(d => (
-                    <div key={d} className="text-center text-xs font-semibold text-ink-soft py-1">{d}</div>
+                  {diasSemana.map((d, i) => (
+                    <div key={i} className="text-center text-xs font-semibold text-ink-soft py-1 capitalize">{d}</div>
                   ))}
                 </div>
 
@@ -183,14 +198,14 @@ export default function CalendarioWidget() {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="text-sm font-semibold text-ink capitalize">
-                    {format(diaSeleccionado, "EEEE d 'de' MMMM", { locale: es })}
+                    {format(diaSeleccionado, "EEEE d 'de' MMMM", { locale: dfLocale })}
                   </div>
-                  <button onClick={() => setModalNuevo(true)} className="btn-gold text-xs py-1 px-3">+ Añadir</button>
+                  <button onClick={() => setModalNuevo(true)} className="btn-gold text-xs py-1 px-3">{t('calendarioWidget.anadir')}</button>
                 </div>
 
                 {eventosDia.length === 0 ? (
                   <div className="text-center text-ink-soft text-sm py-8 border border-dashed border-edge rounded-lg">
-                    Sin eventos para este día
+                    {t('calendarioWidget.sinEventos')}
                   </div>
                 ) : (
                   <div className="space-y-2">
@@ -201,7 +216,7 @@ export default function CalendarioWidget() {
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-semibold text-ink truncate">{ev.titulo}</span>
                             {ev.notificar_email && (
-                              <span className="text-gold text-xs flex-shrink-0" title="Alerta por email activa">🔔</span>
+                              <span className="text-gold text-xs flex-shrink-0" title={t('calendarioWidget.alertaEmailTitle')}>🔔</span>
                             )}
                           </div>
                           {ev.hora && (
@@ -228,22 +243,22 @@ export default function CalendarioWidget() {
               <div className="card w-full max-w-sm">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-ink">
-                    {editando ? 'Editar evento' : `Nuevo evento — ${format(diaSeleccionado, "d 'de' MMMM", { locale: es })}`}
+                    {editando ? t('calendarioWidget.editarEvento') : t('calendarioWidget.nuevoEvento', { fecha: format(diaSeleccionado, "d 'de' MMMM", { locale: dfLocale }) })}
                   </h3>
                   <button onClick={() => { setModalNuevo(false); setEditando(null); setNuevo({ ...EVENTO_EMPTY }) }} className="text-ink-soft hover:text-ink text-xl leading-none">×</button>
                 </div>
 
                 <div className="space-y-3">
                   <div>
-                    <label className="label">Título *</label>
+                    <label className="label">{t('calendarioWidget.tituloLabel')}</label>
                     <input className="input" value={nuevo.titulo}
                       onChange={e => setNuevo(p => ({ ...p, titulo: e.target.value }))}
-                      placeholder="Ej: Visita obra cliente" autoFocus />
+                      placeholder={t('calendarioWidget.tituloPlaceholder')} autoFocus />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="label">Tipo</label>
+                      <label className="label">{t('calendarioWidget.tipoLabel')}</label>
                       <select className="input" value={nuevo.tipo}
                         onChange={e => setNuevo(p => ({ ...p, tipo: e.target.value }))}>
                         {Object.entries(TIPOS).map(([k, v]) => (
@@ -252,17 +267,17 @@ export default function CalendarioWidget() {
                       </select>
                     </div>
                     <div>
-                      <label className="label">Hora</label>
+                      <label className="label">{t('calendarioWidget.horaLabel')}</label>
                       <input className="input" type="time" value={nuevo.hora}
                         onChange={e => setNuevo(p => ({ ...p, hora: e.target.value }))} />
                     </div>
                   </div>
 
                   <div>
-                    <label className="label">Descripción (opcional)</label>
+                    <label className="label">{t('calendarioWidget.descripcionLabel')}</label>
                     <textarea className="input resize-none" rows={2} value={nuevo.descripcion}
                       onChange={e => setNuevo(p => ({ ...p, descripcion: e.target.value }))}
-                      placeholder="Detalles adicionales…" />
+                      placeholder={t('calendarioWidget.descripcionPlaceholder')} />
                   </div>
 
                   {/* Toggle alerta email */}
@@ -278,16 +293,16 @@ export default function CalendarioWidget() {
                       <div className={`w-5 h-5 bg-surface rounded-full shadow transition-transform ${nuevo.notificar_email ? 'translate-x-4' : ''}`} />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-ink">🔔 Alerta por email</div>
-                      <div className="text-xs text-ink-soft">Aviso 24h antes y 1h antes</div>
+                      <div className="text-sm font-semibold text-ink">{t('calendarioWidget.alertaEmailToggleTitle')}</div>
+                      <div className="text-xs text-ink-soft">{t('calendarioWidget.alertaEmailSub')}</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex gap-2 mt-4">
-                  <button onClick={() => { setModalNuevo(false); setEditando(null); setNuevo({ ...EVENTO_EMPTY }) }} className="btn-secondary flex-1">Cancelar</button>
+                  <button onClick={() => { setModalNuevo(false); setEditando(null); setNuevo({ ...EVENTO_EMPTY }) }} className="btn-secondary flex-1">{t('calendarioWidget.cancelar')}</button>
                   <button onClick={guardar} disabled={guardando || !nuevo.titulo.trim()} className="btn-primary flex-1">
-                    {guardando ? 'Guardando…' : editando ? 'Guardar cambios' : 'Guardar'}
+                    {guardando ? t('calendarioWidget.guardando') : editando ? t('calendarioWidget.guardarCambios') : t('calendarioWidget.guardar')}
                   </button>
                 </div>
               </div>

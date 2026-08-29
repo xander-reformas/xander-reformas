@@ -151,5 +151,1693 @@
         "until": "До"
       }
     }
+  },
+  "clientes": {
+    "title": "Клієнти",
+    "countOne": "{{count}} клієнт загалом",
+    "countOther": "{{count}} клієнтів загалом",
+    "newCliente": "+ Новий клієнт",
+    "searchPlaceholder": "🔍  Пошук за іменем, ел. поштою, містом…",
+    "loading": "Завантаження клієнтів…",
+    "noResultsTitle": "Немає результатів",
+    "noResultsHint": "Спробуйте інший пошук",
+    "noClientesTitle": "У вас ще немає клієнтів",
+    "noClientesHint": "Додайте першого клієнта, щоб почати керувати проєктами та кошторисами",
+    "addFirst": "+ Додати клієнта",
+    "table": {
+      "nombreNif": "Ім'я / ІПН",
+      "telefono": "Телефон",
+      "email": "Ел. пошта",
+      "ciudad": "Місто"
+    },
+    "editar": "Редагувати",
+    "eliminar": "Видалити",
+    "confirmDelete": "Видалити «{{nombre}}»? Цю дію неможливо скасувати.",
+    "form": {
+      "editTitle": "Редагувати клієнта",
+      "newTitle": "Новий клієнт",
+      "nombreLabel": "Ім'я *",
+      "nifLabel": "ІПН / Податковий номер",
+      "telefonoLabel": "Телефон",
+      "emailLabel": "Ел. пошта",
+      "direccionLabel": "Адреса",
+      "cpLabel": "Індекс",
+      "ciudadLabel": "Місто",
+      "notasLabel": "Внутрішні нотатки",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "save": "Зберегти клієнта"
+    }
+  },
+  "rentabilidad": {
+    "title": "Рентабельність за проєктами",
+    "subtitle": "Порівняння бюджету з фактичними витратами · маржа кожного проєкту",
+    "totalPresupuestado": "Загальний бюджет",
+    "costeRealAcumulado": "Накопичені фактичні витрати",
+    "beneficioNeto": "Чистий прибуток",
+    "margenGlobal": "Загальна маржа",
+    "distribucionTitle": "Розподіл рентабельності",
+    "dist": {
+      "excelente": "Відмінна",
+      "buena": "Добра",
+      "justa": "Помірна",
+      "negativa": "Негативна"
+    },
+    "allStates": "Усі статуси",
+    "orden": {
+      "margenDesc": "Спочатку найбільша маржа",
+      "margenAsc": "Спочатку найменша маржа",
+      "presupuestoDesc": "Спочатку найбільший бюджет",
+      "nombre": "За назвою"
+    },
+    "loading": "Завантаження проєктів…",
+    "emptyTitle": "Немає проєктів для аналізу",
+    "emptyHint": "Створіть проєкти та додайте витрати, щоб побачити рентабельність",
+    "presupuestado": "Заплановано",
+    "costeReal": "Фактичні витрати",
+    "facturado": "Виставлено рахунків",
+    "beneficio": "Прибуток",
+    "sinDato": "Немає даних",
+    "sinFactura": "Немає рахунку",
+    "margen": "маржа",
+    "tipFaltaInfo": "💡 Додайте загальний бюджет і фактичні витрати проєкту, щоб побачити рентабельність"
+  },
+  "presupuestos": {
+    "estado": {
+      "borrador": "Чернетка",
+      "enviado": "Надіслано",
+      "aceptado": "Прийнято",
+      "rechazado": "Відхилено",
+      "expirado": "Прострочено"
+    },
+    "form": {
+      "editTitle": "Редагувати кошторис",
+      "newTitle": "Новий кошторис",
+      "numeroLabel": "Номер *",
+      "referenciaLabel": "Референс",
+      "fechaLabel": "Дата",
+      "validezLabel": "Термін дії (днів)",
+      "clienteLabel": "Клієнт",
+      "sinCliente": "Без клієнта",
+      "obraLabel": "Проєкт",
+      "sinObra": "Без проєкту",
+      "estadoLabel": "Статус",
+      "partidasLabel": "Позиції кошторису",
+      "addPartida": "+ Додати позицію",
+      "tituloLabel": "Опис / назва",
+      "tituloPlaceholder": "Ремонт ванної кімнати — демонтаж і облицювання",
+      "unidadLabel": "Одиниця",
+      "cantidadLabel": "Кількість",
+      "precioUdLabel": "Ціна / од. (€)",
+      "importeLabel": "Сума (€)",
+      "detalleLabel": "Деталі (необов'язково)",
+      "detallePlaceholder": "Включає: демонтаж наявного облицювання, нове облицювання до стелі…",
+      "noIncluidoLabel": "Не включено (по одному пункту в рядку)",
+      "condicionesLabel": "Умови (по одному пункту в рядку)",
+      "notasLabel": "Внутрішні нотатки",
+      "ivaLabel": "ПДВ (%)",
+      "ivaOptions": {
+        "sinIva": "0% — Без ПДВ",
+        "residencial": "10% — Житлове",
+        "general": "21% — Комерційне / Новобудова / Компанія / Інвестор"
+      },
+      "descuentoLabel": "Знижка (%)",
+      "baseImponible": "Оподатковувана база",
+      "descuentoLine": "Знижка ({{pct}}%)",
+      "ivaLine": "ПДВ ({{pct}}%)",
+      "total": "РАЗОМ",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "save": "Зберегти кошторис",
+      "numeroRequerido": "Номер кошторису є обов'язковим"
+    },
+    "list": {
+      "title": "Кошториси",
+      "countOne": "{{count}} кошторис",
+      "countOther": "{{count}} кошторисів",
+      "newPresupuesto": "+ Новий кошторис",
+      "aceptados": "✓ Прийняті кошториси:",
+      "searchPlaceholder": "🔍  Пошук за номером, клієнтом, проєктом…",
+      "allStates": "Усі статуси",
+      "loading": "Завантаження кошторисів…",
+      "noResultsTitle": "Немає результатів",
+      "noPresupuestosTitle": "У вас ще немає кошторисів",
+      "noPresupuestosHint": "Створіть свій перший професійний кошторис",
+      "table": {
+        "numero": "Номер",
+        "clienteObra": "Клієнт / Проєкт",
+        "fecha": "Дата",
+        "vence": "Термін",
+        "estado": "Статус",
+        "total": "Разом"
+      },
+      "firmadoTitle": "Підписано {{nombre}} {{fecha}}",
+      "vencido": "Прострочено",
+      "venceHoy": "Закінчується сьогодні",
+      "diasRestanteOne": "Залишилось {{count}} дн.",
+      "diasRestanteOther": "Залишилось {{count}} дн.",
+      "crearFactura": "📄 Рахунок",
+      "crearFacturaTitle": "Створити рахунок з цього кошторису",
+      "firmar": "✍️ Підписати",
+      "firmarTitle": "Підписати та прийняти цей кошторис",
+      "editar": "Редагувати",
+      "eliminar": "Видалити",
+      "confirmDelete": "Видалити кошторис {{numero}}?"
+    },
+    "firmarModalTitle": "Підписати кошторис {{numero}}"
+  },
+  "facturas": {
+    "estado": {
+      "borrador": "Чернетка",
+      "enviada": "Надіслано",
+      "vista": "Переглянуто",
+      "pagada": "Оплачено",
+      "vencida": "Прострочено",
+      "anulada": "Анульовано"
+    },
+    "form": {
+      "editTitle": "Редагувати рахунок",
+      "newTitle": "Новий рахунок",
+      "verifactuBadge": "🔒 Verifactu",
+      "fromPresupuesto": "📋 Створено з кошторису {{numero}}",
+      "lockedNotice": "🔒 Цей рахунок вже зареєстровано в реєстрі Verifactu (RD 1007/2023): номер, дату, рядки, ПДВ, знижку, утримання та клієнта не можна змінити. Можна змінити лише статус, пов'язаний проєкт, термін оплати або нотатки. Щоб виправити фінансові дані, оформіть коригувальний рахунок.",
+      "importarPresupuestoLabel": "⚡ Імпортувати з прийнятого кошторису",
+      "crearDesdeCero": "Створити рахунок з нуля",
+      "numeroLabel": "Номер *",
+      "estadoLabel": "Статус",
+      "fechaEmisionLabel": "Дата видачі",
+      "vencimientoLabel": "Термін оплати",
+      "clienteLabel": "Клієнт",
+      "sinCliente": "Без клієнта",
+      "obraLabel": "Проєкт",
+      "sinObra": "Без проєкту",
+      "lineasLabel": "Рядки рахунку",
+      "addLinea": "+ Додати рядок",
+      "descripcionLabel": "Опис",
+      "descripcionPlaceholder": "Виконані роботи з ремонту ванної кімнати",
+      "unidadLabel": "Одиниця",
+      "cantidadLabel": "Кількість",
+      "precioUdLabel": "Ціна / од. (€)",
+      "importeLabel": "Сума (€)",
+      "detalleLabel": "Деталі (необов'язково)",
+      "notasLabel": "Нотатки / зауваження",
+      "notasPlaceholder": "Умови оплати, номер рахунку тощо",
+      "ivaLabel": "ПДВ (%)",
+      "ivaOptions": {
+        "sinIva": "0% — Без ПДВ",
+        "residencial": "10% — Житлове",
+        "general": "21% — Комерційне / Новобудова / Компанія / Інвестор"
+      },
+      "dtoLabel": "Знижка (%)",
+      "retLabel": "Податок, що утримується (%)",
+      "baseImponible": "Оподатковувана база",
+      "descuentoLine": "Знижка ({{pct}}%)",
+      "ivaLine": "ПДВ ({{pct}}%)",
+      "retLine": "Утримання ({{pct}}%)",
+      "total": "РАЗОМ",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "save": "Зберегти рахунок",
+      "numeroRequerido": "Номер рахунку є обов'язковим"
+    },
+    "vista": {
+      "title": "Рахунок {{numero}}",
+      "loading": "Завантаження…",
+      "facturarA": "Виставлено на",
+      "sinCliente": "Без клієнта",
+      "descripcionCol": "Опис",
+      "cantidadCol": "К-ть",
+      "precioUdCol": "Ціна/од.",
+      "importeCol": "Сума",
+      "baseImponible": "Оподатковувана база",
+      "descuentoLine": "Знижка ({{pct}}%)",
+      "ivaLine": "ПДВ ({{pct}}%)",
+      "retLine": "Утримання ({{pct}}%)",
+      "total": "РАЗОМ",
+      "fecha": "Дата: {{fecha}}",
+      "vencimiento": "Термін оплати: {{fecha}}",
+      "obra": "Проєкт: {{nombre}}",
+      "tel": "Тел.: {{tel}}",
+      "nif": "ІПН: {{nif}}",
+      "empresaDefault": "Моя компанія",
+      "veriTitle": "VERI*FACTU",
+      "veriDesc": "Рахунок можна перевірити на електронному сайті AEAT.",
+      "veriRef": "Реф.: {{uuid}}",
+      "registradaTitle": "Рахунок зареєстровано в системі Verifactu (RD 1007/2023)",
+      "hashLabel": "Хеш: {{hash}}…",
+      "noEnviada": "⚠️ Ще не надіслано до AEAT — перевірте статус перед видачею клієнту.",
+      "aeatError": "⚠️ AEAT: {{error}}",
+      "cerrar": "Закрити",
+      "imprimir": "🖨️ Друк / PDF"
+    },
+    "cobro": {
+      "title": "💳 Оплата карткою — {{numero}}",
+      "desc": "Поділіться цим посиланням з клієнтом, щоб він міг оплатити рахунок карткою. Коли Stripe підтвердить оплату, рахунок автоматично перейде у статус «Оплачено».",
+      "copiado": "✓ Скопійовано",
+      "copiar": "📋 Копіювати посилання",
+      "abrirEnlace": "Відкрити посилання на оплату"
+    },
+    "list": {
+      "title": "Рахунки",
+      "countOne": "{{count}} рахунок",
+      "countOther": "{{count}} рахунків",
+      "newFactura": "+ Новий рахунок",
+      "facturadoLabel": "Виставлено (всього)",
+      "cobradoLabel": "Отримано",
+      "pendienteLabel": "Очікує оплати",
+      "facturasCountOne": "{{count}} рахунок",
+      "facturasCountOther": "{{count}} рахунків",
+      "pagadasCountOne": "{{count}} оплачено",
+      "pagadasCountOther": "{{count}} оплачено",
+      "circulacionCountOne": "{{count}} в обігу",
+      "circulacionCountOther": "{{count}} в обігу",
+      "todas": "Усі ({{count}})",
+      "searchPlaceholder": "🔍  Пошук за номером, клієнтом…",
+      "loading": "Завантаження рахунків…",
+      "noResultsTitle": "Немає результатів",
+      "noFacturasTitle": "У вас ще немає рахунків",
+      "table": {
+        "numero": "Номер",
+        "cliente": "Клієнт",
+        "fecha": "Дата",
+        "vencimiento": "Термін оплати",
+        "estado": "Статус",
+        "total": "Разом"
+      },
+      "anuladaBadge": "🚫 анульовано",
+      "anuladaTitle": "Анульований рахунок",
+      "lockedTitle": "Зареєстровано в реєстрі Verifactu — фінансові дані заблоковано",
+      "pendienteAeatTitle": "Надіслано до AEAT, очікує підтвердження",
+      "aceptadaAeatTitle": "Прийнято AEAT",
+      "aeatEstadoTitle": "AEAT: {{estado}}",
+      "verFactura": "🧾 Рахунок",
+      "cobrando": "Генерація…",
+      "cobrar": "💳 Стягнути",
+      "editar": "Редагувати",
+      "ver": "Переглянути",
+      "anuladaLabel": "Анульовано",
+      "anularBtn": "🚫 Анулювати",
+      "anularTitle": "Анулювати цей рахунок (залишається в записах як анульований, не видаляється)",
+      "eliminar": "Видалити",
+      "confirmDelete": "Видалити рахунок {{numero}}?",
+      "cannotDeleteLocked": "Цей рахунок вже зареєстровано в реєстрі Verifactu і не може бути видалений. Оформіть коригувальний рахунок або анулюйте його.",
+      "anularPrompt": "Ви анулюєте рахунок {{numero}}. Він залишиться в записах як анульований у реєстрі Verifactu (не видаляється). Причина? (необов'язково)",
+      "noEnlacePago": "Не вдалося створити посилання на оплату."
+    }
+  },
+  "cobros": {
+    "title": "Надходження",
+    "subtitle": "Контроль неоплачених і оплачених рахунків",
+    "pendienteCobroLabel": "Очікує оплати",
+    "totalCobradoLabel": "Всього отримано",
+    "vencidasSinCobrarLabel": "Прострочені неоплачені",
+    "facturaCountOne": "{{count}} рахунок",
+    "facturaCountOther": "{{count}} рахунків",
+    "facturaPagadaCountOne": "{{count}} оплачений рахунок",
+    "facturaPagadaCountOther": "{{count}} оплачених рахунків",
+    "todoAlDia": "Все в порядку ✓",
+    "alertas": {
+      "title": "Сповіщення про оплату",
+      "urgentesOne": "{{count}} терміновий рахунок",
+      "urgentesOther": "{{count}} термінових рахунків",
+      "rojo": "Прострочено",
+      "naranja": "Терміново (≤7 днів)",
+      "amarillo": "Незабаром (8-30 днів)",
+      "verde": "Вчасно (>30 днів)",
+      "vencidaHace": "Прострочено на {{dias}} дн.",
+      "venceHoy": "Термін сьогодні",
+      "venceEn": "Термін через {{dias}} дн.",
+      "cobrar": "Отримати"
+    },
+    "graficoTitle": "Надходження по місяцях",
+    "tabPendientesOne": "Очікують ({{count}})",
+    "tabPendientesOther": "Очікують ({{count}})",
+    "tabCobradasOne": "Отримано ({{count}})",
+    "tabCobradasOther": "Отримано ({{count}})",
+    "loading": "Завантаження…",
+    "emptyPendientesTitle": "Все оплачено! Немає рахунків, що очікують",
+    "emptyPendientesHint": "Чудова робота 💪",
+    "emptyCobradasTitle": "Ще немає зареєстрованих надходжень",
+    "emptyCobradasHint": "Рахунки, позначені як оплачені, з'являться тут",
+    "emitida": "Видано: {{fecha}}",
+    "vence": "Термін: {{fecha}}",
+    "venceVencidaHace": " (прострочено на {{dias}} дн.)",
+    "venceHoyParen": " (термін сьогодні)",
+    "venceEnDias": " (через {{dias}} дн.)",
+    "marcarCobrada": "✓ Позначити оплаченим",
+    "desmarcar": "Скасувати позначку",
+    "confirmarDesmarcar": "Позначити цей рахунок як надісланий (очікує оплати)?",
+    "modal": {
+      "title": "Підтвердити надходження",
+      "fechaLabel": "Дата надходження",
+      "metodoLabel": "Спосіб оплати",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "confirmar": "✓ Підтвердити надходження"
+    },
+    "metodo": {
+      "Transferencia": "Банківський переказ",
+      "Efectivo": "Готівка",
+      "Bizum": "Bizum",
+      "Cheque": "Чек",
+      "Tarjeta": "Картка"
+    },
+    "notaCobrado": "✓ Отримано {{fecha}} через {{metodo}}"
+  },
+  "gastos": {
+    "categoria": {
+      "Materiales": "Матеріали",
+      "Mano de obra / Subcontratas": "Робоча сила / Субпідрядники",
+      "Herramientas y equipos": "Інструменти та обладнання",
+      "Transporte y combustible": "Транспорт і паливо",
+      "Publicidad y marketing": "Реклама та маркетинг",
+      "Seguros": "Страхування",
+      "Gestoría / Asesoría": "Бухгалтерія / Консультації",
+      "Alquiler": "Оренда",
+      "Formación": "Навчання",
+      "Comunicaciones": "Зв'язок",
+      "Otros": "Інше"
+    },
+    "ivaOpts": {
+      "exento": "0% — Звільнено",
+      "superreducido": "4% — Суперзнижена",
+      "reducido": "10% — Знижена (житло)",
+      "general": "21% — Загальна (комерція / компанія)"
+    },
+    "setup": {
+      "title": "Витрати",
+      "stepTitle": "Попередній крок: створити таблицю в Supabase",
+      "stepDescPre": "Перейдіть до",
+      "stepDescPost": "і виконайте:",
+      "hintAlter": "Якщо таблиця вже існувала, виконайте 2 рядки ALTER TABLE в кінці файлу, щоб додати колонки ПДВ."
+    },
+    "title": "Витрати",
+    "headerCountOne": "{{count}} витрата",
+    "headerCountOther": "{{count}} витрат",
+    "headerTotal": "Всього: {{total}}",
+    "newGasto": "+ Нова витрата",
+    "porCategoriaTitle": "За категорією",
+    "sinDatos": "Ще немає даних",
+    "searchPlaceholder": "🔍  Пошук…",
+    "allCategorias": "Усі категорії",
+    "allObras": "Усі проєкти",
+    "resultadosOne": "{{count}} результат",
+    "resultadosOther": "{{count}} результатів",
+    "loading": "Завантаження…",
+    "noResultsTitle": "Немає результатів",
+    "noGastosTitle": "Немає зареєстрованих витрат",
+    "addFirst": "+ Додати витрату",
+    "table": {
+      "descripcion": "Опис",
+      "categoria": "Категорія",
+      "fecha": "Дата",
+      "base": "База",
+      "iva": "ПДВ",
+      "total": "Разом"
+    },
+    "totalRow": "Разом ({{count}})",
+    "editar": "Редагувати",
+    "confirmDelete": "Видалити «{{desc}}»?",
+    "lightboxAlt": "Збільшений рахунок",
+    "form": {
+      "editTitle": "Редагувати витрату",
+      "newTitle": "Нова витрата",
+      "uploadLabel": "📎 Фото рахунку / чека або PDF (автозаповнення полів)",
+      "analizando": "Аналіз за допомогою ШІ…",
+      "ampliar": "🔍 Збільшити",
+      "cambiarArchivo": "Змінити файл",
+      "dropHint": "Перетягніть сюди або натисніть, щоб завантажити",
+      "dropSubhint": "JPG, PNG, WEBP, PDF · ШІ автоматично витягує дані",
+      "leyendoPdf": "📄 Читання PDF… (може зайняти кілька секунд)",
+      "leyendoFactura": "🔍 Читання рахунку…",
+      "soloImagenesPdf": "⚠️ Лише зображення або PDF",
+      "datosExtraidos": "✅ Дані витягнуто. Перевірте та скоригуйте за потреби.",
+      "noPudoLeer": "⚠️ Не вдалося прочитати автоматично. Заповніть поля вручну.",
+      "fechaLabel": "Дата *",
+      "categoriaLabel": "Категорія *",
+      "descripcionLabel": "Опис / Призначення *",
+      "descripcionPlaceholder": "Що було придбано?",
+      "baseLabel": "Базова сума (без ПДВ) *",
+      "ivaLabel": "ПДВ %",
+      "baseCol": "База",
+      "ivaCol": "ПДВ {{pct}}%",
+      "totalCol": "Разом",
+      "proveedorLabel": "Постачальник",
+      "proveedorPlaceholder": "Leroy Merlin тощо",
+      "facturaNumLabel": "№ рахунку / чека",
+      "obraLabel": "Пов'язаний проєкт",
+      "sinObra": "Без проєкту",
+      "notasLabel": "Нотатки",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "save": "Зберегти витрату"
+    }
+  },
+  "empleados": {
+    "title": "Співробітники та команда",
+    "subtitle": "Управління командою, витратами на персонал і колективним договором",
+    "newEmpleado": "+ Новий співробітник",
+    "kpi": {
+      "activos": "Активні співробітники",
+      "salarioBruto": "Місячна брутто-зарплата",
+      "costeEmpresa": "Витрати компанії / місяць"
+    },
+    "tabs": {
+      "equipo": "👥 Команда",
+      "costes": "💰 Витрати",
+      "convenio": "📋 Угода"
+    },
+    "setup": {
+      "title": "Створити таблицю в Supabase",
+      "descPre": "Виконайте файл",
+      "descPost": "у SQL Editor Supabase.",
+      "reload": "Вже виконано — перезавантажити"
+    },
+    "loading": "Завантаження команди…",
+    "searchPlaceholder": "🔍  Пошук…",
+    "filtros": {
+      "activos": "Активні",
+      "bajaTemporal": "Тимчасова відпустка",
+      "bajaDefinitiva": "Постійне звільнення",
+      "todos": "Усі"
+    },
+    "noResultsTitle": "Немає результатів",
+    "noEmpleadosTitle": "Немає зареєстрованих співробітників",
+    "noEmpleadosHint": "Додайте першого співробітника або співпрацівника",
+    "grupoCC": "Група {{grupo}} КД",
+    "alta": "Дата прийому: {{fecha}}",
+    "jornadaPct": "{{pct}}% зайнятості",
+    "bruto": "{{monto}} брутто",
+    "masSS": "+ {{monto}} соцвнесків",
+    "porMes": "{{monto}} / місяць",
+    "editar": "Редагувати",
+    "bajaTemporalBtn": "↓ Відпустка",
+    "bajaTemporalTitle": "Оформити тимчасову відпустку",
+    "altaBtn": "↑ Поновити",
+    "altaTitle": "Поновити на роботі",
+    "confirmDelete": "Видалити {{nombre}}?",
+    "puesto": {
+      "encargado": "Виконроб",
+      "oficial_1": "Кваліфікований робітник 1-го розряду",
+      "oficial_2": "Кваліфікований робітник 2-го розряду",
+      "ayudante": "Помічник",
+      "peon": "Різноробочий",
+      "fontanero": "Сантехнік",
+      "electricista": "Електрик",
+      "pintor": "Маляр",
+      "yesero": "Штукатур",
+      "carpintero": "Тесляр",
+      "alicatador": "Плиточник",
+      "impermeabilizador": "Спеціаліст з гідроізоляції",
+      "administrativo": "Адміністративний персонал",
+      "otro": "Інше"
+    },
+    "tipoContrato": {
+      "indefinido": "Безстроковий",
+      "fijo_discontinuo": "Постійний сезонний",
+      "temporal_obra": "Тимчасовий (на проєкт)",
+      "temporal_6m": "Тимчасовий (≤6 місяців)",
+      "formacion": "Учнівський договір",
+      "autonomo": "Самозайнятий співпрацівник"
+    },
+    "grupoConvenio": {
+      "I": "Група I — Випускники ВНЗ вищого/середнього рівня",
+      "II": "Група II — Керівники об'єктів / кваліфікований адмінперсонал",
+      "III": "Група III — Виконроби / Бригадири",
+      "IV": "Група IV — Кваліфіковані робітники 1-го та 2-го розряду",
+      "V": "Група V — Помічники",
+      "VI": "Група VI — Різноробочі"
+    },
+    "costes": {
+      "calculadoraTitle": "Калькулятор витрат компанії",
+      "resumenTitle": "Зведення по активній команді",
+      "table": {
+        "empleado": "Співробітник",
+        "puesto": "Посада",
+        "brutoMes": "Брутто / місяць",
+        "ssEmpresa": "Соцвнески компанії",
+        "costeTotalMes": "Загальні витрати / місяць",
+        "anualEstimado": "Орієнтовно на рік"
+      },
+      "totalEquipo": "РАЗОМ ПО КОМАНДІ",
+      "nota": "* Соцвнески компанії розраховуються за ставкою {{pct}}% від брутто-зарплати (загальні внески + внесок за нещасні випадки/профзахворювання у будівництві + безробіття + FOGASA + професійне навчання + MEI). Реальна вартість може відрізнятися залежно від бази нарахування та провінційної угоди.",
+      "emptyHint": "Додайте співробітників на вкладці «Команда», щоб побачити зведення витрат.",
+      "calc": {
+        "salarioLabel": "Місячна брутто-зарплата (€)",
+        "totalSS": "Всього соцвнесків компанії ({{pct}}%)",
+        "costeEmpresaMes": "Витрати компанії / місяць",
+        "brutoMasSS": "{{bruto}} брутто + {{ss}} соцвнесків",
+        "costeAnual": "Річні витрати (×12)",
+        "con2Pagas": "З 2 додатковими виплатами",
+        "introduceSalario": "Введіть брутто-зарплату, щоб розрахувати реальну вартість"
+      }
+    },
+    "convenio": {
+      "disclaimerPre": "ℹ️ Довідковий посібник.",
+      "disclaimerPost": "На основі VI Загальної колективної угоди будівельного сектору (2022-2026). Завжди перевіряйте актуальні суми з вашим консультантом з трудового права або в BOE / провінційній угоді.",
+      "recursosTitle": "Корисні ресурси та посилання"
+    },
+    "form": {
+      "editTitle": "Редагувати співробітника",
+      "newTitle": "Новий співробітник",
+      "nombreLabel": "Ім'я *",
+      "apellidosLabel": "Прізвище *",
+      "puestoLabel": "Посада *",
+      "tipoContratoLabel": "Тип договору *",
+      "especialidadLabel": "Спеціалізація / деталі",
+      "especialidadPlaceholder": "Напр.: Сантехніка та газ, гіпсокартон…",
+      "grupoLabel": "Професійна група (Угода)",
+      "salarioLabel": "Місячна брутто-зарплата (€) *",
+      "costeEmpresaPreview": "Витрати компанії: {{monto}} / місяць",
+      "jornadaLabel": "% зайнятості",
+      "jornadaHint": "100% = повний робочий день",
+      "fechaAltaLabel": "Дата прийому *",
+      "fechaBajaLabel": "Дата звільнення",
+      "estadoLabel": "Статус",
+      "estadoOpts": {
+        "activo": "Активний",
+        "baja_temporal": "Тимчасова відпустка",
+        "baja_definitiva": "Постійне звільнення"
+      },
+      "telefonoLabel": "Телефон",
+      "numSsLabel": "Номер соц. страхування",
+      "dniLabel": "Посвідчення особи / NIE",
+      "emailLabel": "Ел. пошта",
+      "notasLabel": "Нотатки",
+      "notasPlaceholder": "Примітки, особливі домовленості…",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "save": "Зберегти"
+    }
+  },
+  "partes": {
+    "title": "Табелі роботи",
+    "subtitle": "Щоденний облік годин за співробітником та проєктом",
+    "newParte": "+ Новий табель",
+    "mesLabel": "Місяць",
+    "anioLabel": "Рік",
+    "empleadoLabel": "Співробітник",
+    "obraLabel": "Проєкт",
+    "todos": "Усі",
+    "todas": "Усі",
+    "vistaLista": "Список",
+    "vistaResumen": "Зведення",
+    "kpi": {
+      "partesEnMes": "Табелі за {{mes}}",
+      "horasRegistradas": "Зареєстровано годин",
+      "empleadosActivosMes": "Активних співробітників за місяць"
+    },
+    "loading": "Завантаження табелів…",
+    "emptyTitle": "Немає табелів за {{mes}} {{anio}}",
+    "emptyHint": "Почніть реєструвати години команди",
+    "firmadoTitle": "Підписано {{nombre}} {{fecha}}",
+    "firmar": "✍️ Підписати",
+    "firmarTitle": "Підписати на підтвердження",
+    "editar": "Редагувати",
+    "confirmDelete": "Видалити цей табель?",
+    "porEmpleado": "За співробітником",
+    "sinDatos": "Немає даних",
+    "diaOne": "{{count}} день",
+    "diaOther": "{{count}} днів",
+    "total": "РАЗОМ",
+    "porObra": "За проєктом",
+    "sinObrasConPartes": "Немає проєктів з табелями",
+    "personaOne": "{{count}} особа",
+    "personaOther": "{{count}} осіб",
+    "form": {
+      "editTitle": "Редагувати табель",
+      "newTitle": "Новий табель роботи",
+      "empleadoLabel": "Співробітник *",
+      "empleadoPlaceholder": "Обрати співробітника",
+      "fechaLabel": "Дата *",
+      "horasLabel": "Години *",
+      "obraLabel": "Проєкт",
+      "sinObraAsignada": "Без призначеного проєкту",
+      "descripcionLabel": "Опис роботи",
+      "descripcionPlaceholder": "Облицювання ванної, електромонтаж…",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "save": "Зберегти"
+    },
+    "firmarModalTitle": "Підписати табель роботи — {{nombre}}",
+    "meses": {
+      "enero": "Січень",
+      "febrero": "Лютий",
+      "marzo": "Березень",
+      "abril": "Квітень",
+      "mayo": "Травень",
+      "junio": "Червень",
+      "julio": "Липень",
+      "agosto": "Серпень",
+      "septiembre": "Вересень",
+      "octubre": "Жовтень",
+      "noviembre": "Листопад",
+      "diciembre": "Грудень"
+    }
+  },
+  "nominas": {
+    "title": "Зарплатні відомості",
+    "subtitle": "Генератор розрахункових листків і контроль виплат",
+    "generarOne": "Створити {{count}} розрахунковий листок",
+    "generarOther": "Створити {{count}} розрахункових листків",
+    "generando": "Створення…",
+    "historial": "Історія",
+    "loading": "Завантаження розрахункових листків…",
+    "totalBruto": "Загальна брутто-сума",
+    "totalNeto": "Загальна сума до виплати",
+    "costeEmpresaTotal": "Загальні витрати компанії",
+    "sinNominaOne": "{{count}} співробітник",
+    "sinNominaOther": "{{count}} співробітників",
+    "sinNominaSuffix": "без розрахункового листка за {{mes}}: {{lista}}",
+    "generarTodas": "Створити всі",
+    "emptyTitle": "Немає розрахункових листків за {{mes}} {{anio}}",
+    "emptySinEmpleados": "Спочатку додайте співробітників у модулі «Співробітники»",
+    "emptyConEmpleadosOne": "Є {{count}} активний співробітник. Натисніть «Створити», щоб згенерувати листки.",
+    "emptyConEmpleadosOther": "Є {{count}} активних співробітників. Натисніть «Створити», щоб згенерувати листки.",
+    "generarNominas": "Створити листки",
+    "pagadaBadge": "✓ Виплачено {{fecha}}",
+    "pendienteBadge": "Очікує виплати",
+    "salarioBruto": "Брутто-зарплата",
+    "ssTrabajador": "Соцвнесок працівника ({{pct}}%)",
+    "irpf": "ПДФО ({{pct}}%)",
+    "otrasDeducciones": "Інші відрахування",
+    "netoPercibir": "До виплати (нетто)",
+    "costeEmpresaLine": "Витрати компанії: брутто {{bruto}} + соцвнесок {{ss}} = {{total}}",
+    "desmarcar": "Скасувати позначку",
+    "marcarPagada": "✓ Позначити оплаченим",
+    "editar": "Редагувати",
+    "eliminar": "Видалити",
+    "verRecibo": "Переглянути листок",
+    "confirmDelete": "Видалити цей розрахунковий листок?",
+    "edit": {
+      "salarioLabel": "Брутто-зарплата (€)",
+      "irpfLabel": "ПДФО %",
+      "otrasLabel": "Інші відрахування (€)",
+      "ssTrabajadorPreview": "Соцвнесок працівника: {{monto}}",
+      "irpfPreview": "ПДФО: {{monto}}",
+      "netoPreview": "Нетто: {{monto}}",
+      "notasLabel": "Нотатки",
+      "notasPlaceholder": "Понаднормові, аванс…",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "save": "Зберегти"
+    },
+    "historialTable": {
+      "periodo": "Період",
+      "empleado": "Співробітник",
+      "bruto": "Брутто",
+      "neto": "Нетто",
+      "estado": "Статус"
+    },
+    "sinHistorial": "Немає історії розрахункових листків",
+    "pagadaLabel": "Виплачено",
+    "pendienteLabel": "Очікує",
+    "recibo": {
+      "title": "Розрахунковий листок — {{periodo}}",
+      "puesto": "Посада: {{v}}",
+      "dni": "Посвідчення особи: {{v}}",
+      "numSs": "№ соц. страхування: {{v}}",
+      "grupoConvenio": "Група угоди: {{v}}",
+      "devengosTitle": "I. НАРАХУВАННЯ",
+      "salarioBase": "Базова зарплата",
+      "totalDevengado": "Всього нараховано",
+      "deduccionesTitle": "II. ВІДРАХУВАННЯ",
+      "cotizacionSS": "Соцвнесок (працівник {{pct}}%)",
+      "retencionIrpf": "Утримання ПДФО ({{pct}}%)",
+      "otrasDeducciones": "Інші відрахування",
+      "totalDeducciones": "Всього відрахувань",
+      "liquidoPercibir": "ДО ВИПЛАТИ",
+      "costeEmpresaLine": "Витрати компанії: {{total}} (вкл. соцвнесок компанії {{ss}})",
+      "cerrar": "Закрити",
+      "imprimir": "🖨️ Друк"
+    }
+  },
+  "hub": {
+    "title": "Цифровий хаб",
+    "subtitle": "Стратегія залучення клієнтів та онлайн-присутність для вашого бізнесу з ремонту",
+    "objetivoTitle": "Ваша ціль: клієнт середнього-високого класу в Мадриді",
+    "objetivoText": "Цей тип клієнта шукає якість і довіру, а не ціну. Надавайте пріоритет Google Business і Houzz перед платформами з низькими цінами. Кожне якісне фото завершеного об'єкта коштує більше, ніж будь-яка реклама.",
+    "abrirPlataforma": "Відкрити платформу →",
+    "tag": {
+      "gratis": "Безкоштовно",
+      "prioritario": "Пріоритет",
+      "pago": "Платно",
+      "pagoPorLead": "Оплата за лід",
+      "claseMediaAlta": "Середній-високий клас",
+      "volumenAlto": "Великий обсяг",
+      "visual": "Візуал",
+      "b2b": "B2B",
+      "gratisPro": "Безкоштовно / Pro"
+    },
+    "secciones": {
+      "presenciaLocal": {
+        "titulo": "Локальна присутність (Google)",
+        "items": {
+          "gbp": {
+            "titulo": "Google Business Profile",
+            "desc": "Ваша картка в Google Maps. Важлива, щоб місцеві клієнти в Мадриді могли вас знайти.",
+            "tips": [
+              "Завантажуйте фото завершених об'єктів (до і після)",
+              "Відповідайте на всі відгуки, хороші й погані",
+              "Публікуйте кожен завершений ремонт як оновлення"
+            ]
+          },
+          "adsLocal": {
+            "titulo": "Google Ads local",
+            "desc": "Геолокаційна реклама в Мадриді, щоб з'являтися, коли хтось шукає \"фірма з ремонту Мадрид\".",
+            "tips": [
+              "Почніть з 5-10€/день і коригуйте",
+              "Таргетуйте за поштовим індексом цільових районів",
+              "Використовуйте розширення прямого дзвінка"
+            ]
+          }
+        }
+      },
+      "plataformas": {
+        "titulo": "Платформи для ремонту",
+        "items": {
+          "habitissimo": {
+            "titulo": "Habitissimo",
+            "desc": "Провідна платформа в Іспанії для залучення клієнтів на ремонт. Висока видимість із хорошими відгуками.",
+            "tips": [
+              "Відповідайте на запити менш ніж за 1 годину (алгоритм це винагороджує)",
+              "Просіть відгук у кожного задоволеного клієнта",
+              "Заповніть профіль на 100% реальними фото"
+            ]
+          },
+          "houzz": {
+            "titulo": "Houzz",
+            "desc": "Соціальна мережа дизайну інтер'єрів і ремонту. Дуже добре підходить для середнього-високого сегменту.",
+            "tips": [
+              "Завантажуйте повні проєкти з детальними описами",
+              "Використовуйте теги стилю та матеріалів",
+              "Клієнт Houzz цінує якість, а не ціну"
+            ]
+          },
+          "milanuncios": {
+            "titulo": "Milanuncios / Wallapop",
+            "desc": "Для невеликих робіт та обслуговування. Великий попит, але ціна більш стиснута.",
+            "tips": [
+              "Розділяйте оголошення за типом роботи",
+              "Вказуйте орієнтовну ціну для фільтрації клієнтів",
+              "Оновлюйте оголошення щотижня для видимості"
+            ]
+          }
+        }
+      },
+      "redesSociales": {
+        "titulo": "Соціальні мережі",
+        "items": {
+          "instagram": {
+            "titulo": "Instagram",
+            "desc": "Візуальний і потужний інструмент для ремонту. Клієнти середнього-високого класу використовують Instagram для натхнення перед наймом.",
+            "tips": [
+              "Публікуйте до/після кожного об'єкта",
+              "Використовуйте Reels із процесом ремонту (30-60 сек)",
+              "Хештеги: #reformasMadrid #reformaIntegral #interiorismo",
+              "Історії з буднів об'єкта пов'язують з аудиторією"
+            ]
+          },
+          "linkedin": {
+            "titulo": "LinkedIn",
+            "desc": "Щоб позиціонувати себе як професіонала та залучати корпоративних клієнтів (зміна призначення, комерційні приміщення).",
+            "tips": [
+              "Діліться успішними кейсами з метриками (м² відремонтовано, дотримано термін)",
+              "Зв'язуйтесь з архітекторами та керуючими нерухомістю",
+              "Статті про тенденції в ремонті додають авторитету"
+            ]
+          }
+        }
+      },
+      "productividad": {
+        "titulo": "Інструменти продуктивності",
+        "items": {
+          "whatsapp": {
+            "titulo": "WhatsApp Business",
+            "desc": "Необхідний. Профіль компанії, каталог послуг, автоматизовані швидкі відповіді.",
+            "tips": [
+              "Налаштуйте автоматичне вітальне повідомлення",
+              "Створіть мітки: Новий лід, Кошторис надіслано, Активний клієнт",
+              "Повідомлення про відсутність поза робочим часом"
+            ]
+          },
+          "canva": {
+            "titulo": "Canva",
+            "desc": "Дизайн візуальних кошторисів, презентацій та контенту для соцмереж.",
+            "tips": [
+              "Використовуйте шаблони \"до і після\"",
+              "Створіть шаблон досьє компанії з брендингом XANDER"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "fiscal": {
+    "title": "Податки",
+    "subtitle": "Податковий гід для самозайнятих у сфері ремонту в Іспанії",
+    "disclaimer": "⚠️ Цей гід має орієнтовний характер. Завжди консультуйтеся з вашим бухгалтером чи податковим консультантом перед прийняттям рішень.",
+    "conciliacion": {
+      "cardTitle": "📄 Звірка з вашою бухгалтерією",
+      "cardDesc": "Створіть документ із вашими рахунками, витратами та зведенням ПДВ/ПДФО за період, готовий для звірки перед поданням відповідної форми.",
+      "generarDocumento": "Створити документ"
+    },
+    "calendarioTitle": "📅 Календар подання декларацій",
+    "proximoBadge": "Наступний",
+    "modelosTitle": "📋 Форми для подання",
+    "tipsTitle": "💡 Ключові витрати, що підлягають відрахуванню",
+    "modal": {
+      "title": "Податкова звірка — {{periodo}}",
+      "anio": "Рік {{anio}}",
+      "loading": "Завантаження даних періоду…",
+      "empresaDefault": "Моя компанія",
+      "nif": "ІПН: {{v}}",
+      "tituloDoc": "ПОДАТКОВА ЗВІРКА",
+      "delAl": "З {{desde}} по {{hasta}}",
+      "generado": "Створено: {{fecha}}",
+      "disclaimerModal": "⚠️ Орієнтовний документ, автоматично створений на основі ваших зареєстрованих рахунків і витрат. Поділіться ним із бухгалтерією для звірки цифр перед поданням форм — він не замінює їхні розрахунки чи професійну консультацію.",
+      "facturasEmitidas": "Виставлені рахунки ({{count}})",
+      "sinFacturas": "У цьому періоді рахунків не виставлено.",
+      "gastosRegistrados": "Зареєстровані витрати ({{count}})",
+      "moduloNoConfigurado": "Модуль витрат ще не налаштовано.",
+      "sinGastos": "У цьому періоді витрат не зареєстровано.",
+      "tabla": {
+        "fecha": "Дата",
+        "numero": "№",
+        "cliente": "Клієнт",
+        "estado": "Статус",
+        "base": "База",
+        "iva": "ПДВ",
+        "ret": "Утрим.",
+        "total": "Разом",
+        "proveedor": "Постачальник",
+        "categoria": "Категорія",
+        "ivaSoport": "ПДВ сплач."
+      },
+      "totalRow": "Разом",
+      "sinCliente": "—",
+      "resumenTitle": "Зведення для форм 303 / 130{{extra}}",
+      "ivaRepercutido": "Нарахований ПДВ (продажі)",
+      "ivaSoportadoLabel": "Сплачений ПДВ (витрати)",
+      "resultadoIva": "Результат ПДВ (Форма 303)",
+      "aIngresar": "До сплати: {{v}}",
+      "aCompensar": "До заліку: {{v}}",
+      "ingresosBase": "Дохід (база)",
+      "gastosBase": "Витрати (база)",
+      "rendimientoNeto": "Орієнтовний чистий дохід",
+      "retencionesPracticadas": "Вже утримані податки на дохід",
+      "pago130": "Авансовий платіж 20% (Форма 130, орієнтовно)",
+      "cerrar": "Закрити",
+      "imprimir": "🖨️ Друк / PDF"
+    },
+    "selector": {
+      "title": "Документ звірки",
+      "desc": "Оберіть період і створіть документ із деталізацією рахунків, витрат та зведенням ПДВ/ПДФО для звірки з бухгалтерією.",
+      "tipoDocumento": "Тип документа",
+      "trimestral": "Квартальний (130/303)",
+      "anual": "Річний (390/100)",
+      "anioLabel": "Рік",
+      "trimestreLabel": "Квартал",
+      "cancelar": "Скасувати",
+      "generarDocumento": "Створити документ"
+    }
+  },
+  "legislacion": {
+    "title": "Законодавство",
+    "subtitle": "Правова база для ремонту житлових і комерційних приміщень по всій Іспанії",
+    "selector": {
+      "label": "Ваш автономний регіон",
+      "desc": "Оберіть свій регіон, щоб побачити конкретні містобудівні норми",
+      "placeholder": "— Оберіть регіон —"
+    },
+    "ccaa": {
+      "badgeNormativa": "Регіональні норми",
+      "portalOficial": "Офіційний портал ↗",
+      "obraMenor": "Незначні роботи",
+      "obraMenorDesc": "Спрощена процедура — без зачіпання конструкцій чи фасаду",
+      "obraMayor": "Капітальні роботи",
+      "obraMayorDesc": "Потребує технічного проєкту та довших термінів",
+      "organismoCompetente": "Компетентний орган",
+      "aspectosDestacados": "⚠️ Основні особливості в {{nombre}}"
+    },
+    "avisoTitle": "Орієнтовний гід.",
+    "avisoText": "Містобудівні норми часто змінюються. Завжди звертайтеся до відповідної мерії та кваліфікованого фахівця (архітектора чи техніка) у разі сумнівів. Умови можуть відрізнятися навіть у межах одного регіону.",
+    "estatalCaption": "Державні норми — діють по всій Іспанії",
+    "incluyeAplica": "Включає / Застосовується до:",
+    "recursosUtiles": "Корисні ресурси (державні)"
+  },
+  "resultados": {
+    "title": "Результати",
+    "subtitle": "Звіт про фінансові результати бізнесу",
+    "calculando": "Розрахунок результатів…",
+    "kpi": {
+      "totalFacturado": "Всього виставлено",
+      "todasFacturas": "всі рахунки",
+      "ingresosReales": "Реальний дохід",
+      "facturasCobradas": "оплачені рахунки",
+      "gastosTotales": "Загальні витрати",
+      "tablaNoConfigurada": "таблиця не налаштована",
+      "gastosRegistrados": "зареєстровані витрати",
+      "resultadoNeto": "Чистий результат",
+      "beneficio": "прибуток",
+      "perdida": "збиток"
+    },
+    "evolucionMensual": "Динаміка по місяцях {{anio}}",
+    "leyenda": {
+      "facturado": "Виставлено",
+      "gastos": "Витрати",
+      "cobrado": "Отримано"
+    },
+    "detallePorMes": "Деталі по місяцях",
+    "tabla": {
+      "mes": "Місяць",
+      "facturado": "Виставлено",
+      "gastos": "Витрати",
+      "resultado": "Результат"
+    },
+    "totalAnio": "Всього за {{anio}}",
+    "gastosPorCategoria": "Витрати за категоріями",
+    "tablaNoConfiguradaLarga": "Таблиця витрат не налаштована",
+    "sinGastosEnAnio": "Немає зареєстрованих витрат у {{anio}}",
+    "meses": {
+      "ene": "Січ",
+      "feb": "Лют",
+      "mar": "Бер",
+      "abr": "Кві",
+      "may": "Тра",
+      "jun": "Чер",
+      "jul": "Лип",
+      "ago": "Сер",
+      "sep": "Вер",
+      "oct": "Жов",
+      "nov": "Лис",
+      "dic": "Гру"
+    },
+    "avisoGastosPre": "⚠️ Таблиця витрат не налаштована. Перейдіть до ",
+    "avisoGastosPost": " та дотримуйтесь інструкцій, щоб її активувати."
+  },
+  "referidos": {
+    "title": "Реферали",
+    "subtitle": "Запрошуйте інших самозайнятих фахівців з ремонту. Коли вони перейдуть на Pro, ви отримаєте безкоштовний місяць.",
+    "recompensaTexto": "1 безкоштовний місяць (19 €)",
+    "tuEnlace": "Ваше реферальне посилання",
+    "generando": "Генеруємо ваш код...",
+    "copiarEnlace": "Скопіювати посилання",
+    "copiado": "✓ Скопійовано",
+    "tuCodigo": "Ваш код:",
+    "copiar": "копіювати",
+    "copiadoMin": "✓ скопійовано",
+    "compartirWhatsapp": "💬 Поділитися через WhatsApp",
+    "mensajeWhatsapp": "Я використовую XANDER Gestión для управління кошторисами, рахунками та об'єктами — рекомендую, якщо ви самозайнятий у ремонті. Зареєструйтесь безкоштовно за моїм посиланням, і виграємо обидва: {{enlace}}",
+    "comoFunciona": "Як це працює",
+    "pasos": {
+      "p1t": "Поділіться своїм посиланням",
+      "p1d": "Надішліть його іншому самозайнятому фахівцю з ремонту, якому може знадобитися цей інструмент.",
+      "p2t": "Реєструється безкоштовно",
+      "p2d": "Заходить за вашим посиланням і створює обліковий запис — автоматично прив'язується до вас.",
+      "p3t": "Переходить на Pro, а ви заробляєте",
+      "p3d": "Щойно він оплатить свій перший внесок Pro, ви отримаєте {{recompensa}} як кредит у вашому рахунку."
+    },
+    "tusReferidos": "Ваші реферали",
+    "registrados": "Зареєстровано",
+    "convertidosPro": "Перейшли на Pro",
+    "mesesGanados": "Зароблено місяців",
+    "cargando": "Завантаження...",
+    "sinInvitados": "Ви ще нікого не запросили. Поділіться посиланням вище, щоб почати.",
+    "registradoEl": "Зареєстровано {{fecha}}",
+    "badgePro": "✓ Pro",
+    "badgePendiente": "Очікує"
+  },
+  "miEmpresa": {
+    "title": "Моя компанія",
+    "subtitle": "Ця інформація буде відображатися у ваших кошторисах і рахунках",
+    "cargando": "Завантаження…",
+    "datosPersonales": "Особисті дані",
+    "nombre": "Ім'я",
+    "apellidos": "Прізвище",
+    "dniNie": "Номер посвідчення особи",
+    "telefonoPersonal": "Особистий телефон",
+    "datosEmpresa": "Дані компанії / діяльності",
+    "nombreComercial": "Комерційна назва / компанія *",
+    "nif": "Податковий номер",
+    "telefonoEmpresa": "Телефон компанії",
+    "emailEmpresa": "Email компанії",
+    "direccionFiscal": "Юридична адреса",
+    "cp": "Поштовий індекс",
+    "ciudad": "Місто",
+    "web": "Вебсайт",
+    "actividadProfesional": "Професійна діяльність",
+    "fechaInicio": "Дата початку діяльності",
+    "tarifaReducida": "Активний пільговий тариф",
+    "tarifaReducidaSub": "Перші 2 роки як самозайнятий",
+    "especialidades": "Спеціалізації",
+    "especialidad": {
+      "Reforma integral": "Комплексний ремонт",
+      "Reforma de baño": "Ремонт ванної кімнати",
+      "Reforma de cocina": "Ремонт кухні",
+      "Cambio de uso": "Зміна призначення",
+      "Reforma de local": "Ремонт комерційного приміщення",
+      "Distribuciones internas": "Зміна внутрішнього планування",
+      "Fontanería": "Сантехніка",
+      "Electricidad": "Електрика",
+      "Alicatados y solados": "Плитка та підлога",
+      "Pladur": "Гіпсокартон",
+      "Pintura": "Малярні роботи",
+      "Carpintería": "Столярні роботи",
+      "Impermeabilización": "Гідроізоляція"
+    },
+    "miPlan": "Мій план",
+    "pagoConfirmado": "✓ Оплату підтверджено. Ваш план оновиться за кілька секунд.",
+    "pagoCancelado": "Ви скасували процес оплати. Можете спробувати знову будь-коли.",
+    "planProActivo": "✓ План Pro активний{{ciclo}}. Дякуємо, що обрали XANDER.",
+    "cicloAnual": " (річний)",
+    "cicloMensual": " (щомісячний)",
+    "trialActivo": "⏳ Ви на безкоштовному пробному періоді — залишилось {{dias}} дн.",
+    "planGratuito": "Безкоштовний план. Перейдіть на Pro для повного необмеженого доступу.",
+    "abriendo": "Відкриття…",
+    "gestionarSuscripcion": "Керувати підпискою",
+    "redirigiendo": "Перенаправлення…",
+    "actualizarPro": "Оновити до Pro — {{precio}}",
+    "planAnual": "Річний план — {{precio}}",
+    "sinPermanencia": "Без зобов'язань · Скасуйте будь-коли через портал оплати",
+    "cobrosOnline": "Онлайн-платежі",
+    "cobrosOnlineDesc": "Підключіть обліковий запис Stripe, щоб приймати оплату рахунків карткою. Гроші клієнтів надходять прямо на ваш банківський рахунок — XANDER їх не обробляє.",
+    "stripeActiva": "✓ Обліковий запис Stripe підключено та активовано. Тепер ви можете приймати оплату карткою.",
+    "stripeVerificacion": "Ваш обліковий запис Stripe створено, але перевірку ще не завершено. Завершіть процес, щоб почати приймати оплату.",
+    "stripeNoConectada": "Ви ще не підключили обліковий запис Stripe.",
+    "cargandoBtn": "Завантаження…",
+    "completarConexion": "Завершити / переглянути підключення",
+    "conectarStripe": "Підключити Stripe",
+    "actualizarEstado": "Оновити статус",
+    "datosGuardados": "✓ Дані успішно збережено",
+    "guardando": "Збереження…",
+    "guardarCambios": "Зберегти зміни",
+    "errores": {
+      "checkout": "Не вдалося розпочати оплату підписки.",
+      "portal": "Не вдалося відкрити портал оплати.",
+      "stripeStatus": "Не вдалося перевірити статус Stripe.",
+      "stripeConnect": "Не вдалося розпочати підключення до Stripe."
+    }
+  },
+  "tarifas": {
+    "title": "Тарифи та ціни",
+    "subtitle": "Каталог орієнтовних цін для кошторисів",
+    "nuevaTarifa": "+ Новий тариф",
+    "tabs": {
+      "catalogoBase": "Базовий каталог ({{count}})",
+      "misTarifas": "Мої тарифи ({{count}})"
+    },
+    "disclaimer": "📖 Орієнтовні галузеві ціни для Мадрида. Використовуйте як довідку або створіть власні тарифи на вкладці \"Мої тарифи\".",
+    "buscarPlaceholder": "🔍  Пошук позиції…",
+    "todasCategorias": "Усі категорії",
+    "cargando": "Завантаження тарифів…",
+    "sinResultados": "Немає результатів",
+    "sinTarifasPropias": "У вас ще немає власних тарифів",
+    "sinTarifas": "Немає тарифів",
+    "personalizaPrecios": "Налаштуйте ціни під свій бізнес",
+    "partidas": "{{count}} позицій",
+    "tabla": {
+      "descripcion": "Опис",
+      "ud": "Од.",
+      "mat": "Матер. (€)",
+      "mo": "Роб. (€)",
+      "margen": "Маржа",
+      "precioCliente": "Ціна для клієнта"
+    },
+    "editar": "Редагувати",
+    "confirmDelete": "Видалити \"{{desc}}\"?",
+    "modal": {
+      "editarTarifa": "Редагувати тариф",
+      "nuevaTarifa": "Новий тариф",
+      "categoria": "Категорія *",
+      "unidad": "Одиниця",
+      "descripcion": "Опис *",
+      "costeMaterial": "Вартість матеріалів (€)",
+      "manoDeObra": "Робота (€)",
+      "margen": "Маржа (%)",
+      "precioAlCliente": "Ціна для клієнта",
+      "notas": "Примітки",
+      "cancelar": "Скасувати",
+      "guardando": "Збереження…",
+      "guardarTarifa": "Зберегти тариф"
+    },
+    "categoria": {
+      "Demolición": "Демонтаж",
+      "Albañilería": "Мурування",
+      "Impermeabilización": "Гідроізоляція",
+      "Alicatados y Solados": "Плитка та підлога",
+      "Fontanería": "Сантехніка",
+      "Electricidad": "Електрика",
+      "Pintura": "Малярні роботи",
+      "Carpintería y Remates": "Столярні та оздоблювальні роботи",
+      "Gestión y Logística": "Управління та логістика",
+      "Reforma Integral": "Комплексний ремонт"
+    }
+  },
+  "documentos": {
+    "title": "Центр документів",
+    "subtitle": "Професійні шаблони та управління файлами",
+    "tabs": {
+      "plantillas": "📄 Шаблони ({{count}})",
+      "misDocumentos": "📁 Мої документи {{count}}"
+    },
+    "buscarPlantilla": "🔍  Пошук шаблону…",
+    "disclaimerPlantillas": "📋 Редаговані шаблони для щоденного використання. Копіюйте, налаштовуйте та використовуйте вільно.",
+    "sinResultados": "Немає результатів",
+    "verPlantilla": "Переглянути шаблон",
+    "copiar": "📋 Копіювати",
+    "storageStep": "Попередній крок: створити сховище (bucket)",
+    "storageDesc": "Перейдіть до <strong>Supabase → Storage</strong> і створіть сховище під назвою <code>documentos-empresa</code>. Позначте його як <strong>Public</strong> і збережіть. Потім виконайте SQL-міграцію нижче.",
+    "yaConfigurado": "Вже налаштовано — повторити",
+    "cargandoArchivos": "Завантаження файлів…",
+    "archivosCountOne": "{{count}} файл",
+    "archivosCountOther": "{{count}} файлів",
+    "sinArchivos": "Немає файлів",
+    "verArchivo": "Переглянути файл",
+    "eliminar": "Видалити",
+    "subiendo": "Завантаження…",
+    "subirArchivo": "📎 Завантажити файл",
+    "anadirOtro": "+ Додати ще",
+    "formacionTitulo": "Навчання та сертифікати",
+    "certificadosCountOne": "{{count}} сертифікат",
+    "certificadosCountOther": "{{count}} сертифікатів",
+    "sinCertificados": "Немає сертифікатів",
+    "anadir": "+ Додати",
+    "ningunCertificado": "Ще не додано жодного сертифіката",
+    "cerrar": "Закрити",
+    "copiarPortapapeles": "📋 Копіювати в буфер обміну",
+    "confirmDeleteDoc": "Видалити \"{{nombre}}\"?",
+    "plantillaCopiada": "Шаблон скопійовано в буфер обміну ✓",
+    "errorSubida": "Помилка завантаження \"{{nombre}}\": {{msg}}",
+    "carpeta": {
+      "Plan de Negocio": {
+        "titulo": "Бізнес-план",
+        "desc": "Повний план з модулями організації, залучення клієнтів, кошторисів, цін, іміджу та інструментів."
+      },
+      "Fiscalidad": {
+        "titulo": "Оподаткування",
+        "desc": "Декларації з ПДВ, ПДФО, форми 303, 130, 100 та будь-які документи податкової служби."
+      },
+      "SS y Hacienda": {
+        "titulo": "Соцстрахування та податкова",
+        "desc": "Реєстрація самозайнятості, квитанції внесків RETA, повідомлення соціального страхування та податкової."
+      },
+      "Seguros": {
+        "titulo": "Страхування",
+        "desc": "Поліси страхування цивільної відповідальності, страхування об’єкта та інше оформлене покриття."
+      },
+      "Contratos": {
+        "titulo": "Договори",
+        "desc": "Договори з клієнтами, угоди з постачальниками, субпідрядниками та будь-які підписані документи."
+      },
+      "Licencias de Obra": {
+        "titulo": "Дозволи на будівництво",
+        "desc": "Муніципальні дозволи, попередні повідомлення, ліцензії на діяльність та містобудівна документація."
+      },
+      "Branding": {
+        "titulo": "Брендинг",
+        "desc": "Логотип, корпоративні шаблони, імідж бренду та матеріали візуальної ідентичності."
+      },
+      "Subcontratas": {
+        "titulo": "Субпідрядники",
+        "desc": "Договори та угоди з субпідрядниками, компаніями-партнерами та самозайнятими фахівцями."
+      },
+      "Otros Documentos": {
+        "titulo": "Інші документи",
+        "desc": "Ліцензії, сертифікати, дозволи та будь-які інші бізнес-документи."
+      }
+    },
+    "carpetaFormacion": {
+      "Certificados Obligatorios": {
+        "titulo": "Обов’язкові сертифікати",
+        "desc": "Охорона праці в будівництві (обов’язково 60 год), законні кваліфікації, посвідчення та акредитації, що вимагаються законом."
+      },
+      "Formación Continua": {
+        "titulo": "Постійне навчання",
+        "desc": "Курси професійного розвитку: гіпсокартон, гідроізоляція, електрика, сантехніка, менеджмент, кошторисування."
+      }
+    }
+  },
+  "copias": {
+    "title": "Резервні копії",
+    "subtitle": "Збережіть знімок усіх ваших робочих даних (клієнти, об'єкти, кошториси, рахунки, платежі, витрати, співробітники...) і відновіть їх, якщо щось буде випадково видалено чи пошкоджено.",
+    "mensajeErrorAlmacen": "Не вдалося отримати доступ до сховища резервних копій: {{msg}}",
+    "crearAhoraTitle": "Створити копію зараз",
+    "crearAhoraDesc": "Копія зберігається у вашому обліковому записі (щоб ви могли відновити її звідси будь-коли), а також завантажується на ваш комп'ютер, якщо ви вважаєте за краще зберігати її самостійно в іншому місці.",
+    "crearBtn": "💾 Створити резервну копію зараз",
+    "creando": "Створення копії...",
+    "restaurarArchivoTitle": "Відновити з файлу",
+    "restaurarArchivoDesc": "Якщо ви раніше завантажили резервну копію, завантажте її сюди, щоб відновити ці дані.",
+    "subirArchivoBtn": "📤 Завантажити файл копії (.json)",
+    "tusCopiasTitle": "Ваші збережені копії",
+    "cargando": "Завантаження...",
+    "sinCopias": "У вас ще немає збережених копій. Створіть першу вище.",
+    "copiaAutomatica": "🔄 Автоматична копія",
+    "copiaManual": "💾 Ручна копія",
+    "restaurar": "Відновити",
+    "descargar": "Завантажити",
+    "eliminar": "Видалити",
+    "resultadoRestoreTitle": "Результат відновлення",
+    "errorLabel": "Помилка: {{msg}}",
+    "filaOne": "{{count}} рядок",
+    "filaOther": "{{count}} рядків",
+    "confirmarRestauracionTitle": "Підтвердити відновлення",
+    "vasARestaurar": "Ви збираєтесь відновити <strong>{{nombre}}</strong> (загалом {{total}} записів).",
+    "notas": [
+      "• Це <strong>відновлює/оновлює</strong> записи з копії — нічого зі створеного пізніше не видаляється.",
+      "• Якщо запису з копії більше не існує (ви його видалили), він буде відтворений з початковими даними.",
+      "• Документи відновлюють лише запис (назву, категорію, посилання); якщо файл також видалено зі сховища, посилання не працюватиме."
+    ],
+    "siRestaurarBtn": "Так, відновити цю копію",
+    "restaurando": "Відновлення...",
+    "confirmDeleteCopia": "Видалити копію \"{{nombre}}\"? Цю дію неможливо скасувати.",
+    "errorDescargar": "Не вдалося завантажити: {{msg}}",
+    "errorGuardarCuenta": "Не вдалося зберегти копію у вашому обліковому записі: {{msg}}",
+    "copiaCreadaOk": "Резервну копію створено та збережено у вашому обліковому записі.",
+    "errorCrear": "Помилка при створенні копії: {{msg}}",
+    "errorLeerCopia": "Не вдалося прочитати копію: {{msg}}",
+    "archivoDanado": "Файл резервної копії пошкоджений або недійсний.",
+    "archivoInvalido": "Обраний файл не є дійсною резервною копією (JSON).",
+    "tabla": {
+      "clientes": "Клієнти",
+      "empleados": "Співробітники",
+      "obras": "Об’єкти",
+      "tarifas": "Тарифи та ціни",
+      "calendario_notas": "Нотатки календаря",
+      "calendario_eventos": "Події календаря",
+      "presupuestos": "Кошториси",
+      "facturas": "Рахунки",
+      "gastos": "Витрати",
+      "documentos": "Документи (лише запис, без файлу)",
+      "partes_trabajo": "Наряди роботи",
+      "nominas": "Зарплати",
+      "obra_empleados": "Команда, призначена на об’єкти"
+    }
+  },
+  "admin": {
+    "cargandoPanel": "Завантаження панелі адміністратора...",
+    "title": "🛡️ Панель адміністратора",
+    "subtitle": "Самозайняті користувачі, зареєстровані в XANDER Gestión",
+    "actualizar": "↻ Оновити",
+    "stats": {
+      "totalRegistrados": "Всього зареєстровано",
+      "nuevosSemana": "Нові цього тижня",
+      "perfilCompleto": "З повним профілем"
+    },
+    "tabs": {
+      "usuarios": "Користувачі",
+      "leads": "Ліди",
+      "notificaciones": "Сповіщення"
+    },
+    "usuarios": {
+      "sinUsuarios": "Ще немає зареєстрованих користувачів",
+      "sinUsuariosSub": "Тут з'являтимуться зареєстровані самозайняті користувачі",
+      "nombre": "ІМ'Я",
+      "email": "EMAIL",
+      "empresa": "КОМПАНІЯ",
+      "ciudad": "МІСТО",
+      "registro": "РЕЄСТРАЦІЯ",
+      "ultimoAcceso": "ОСТАННІЙ ВХІД",
+      "estado": "СТАТУС",
+      "sinNombre": "Без імені",
+      "activo": "✓ Активний",
+      "pendiente": "⏳ Очікує"
+    },
+    "leads": {
+      "sinLeads": "Ще немає лідів",
+      "sinLeadsSub": "Тут з'являтимуться контакти, залишені на цільовій сторінці",
+      "sinDatosContacto": "Немає контактних даних",
+      "atendido": "✓ Опрацьовано",
+      "marcarAtendido": "Позначити як опрацьоване"
+    },
+    "notif": {
+      "sinNotificaciones": "Немає сповіщень",
+      "sinNotificacionesSub": "Тут з'являтимуться нові реєстрації",
+      "sinLeerOne": "{{count}} непрочитане сповіщення",
+      "sinLeerOther": "{{count}} непрочитаних сповіщень",
+      "marcarTodasLeidas": "Позначити всі як прочитані",
+      "marcarLeida": "Позначити як прочитане"
+    }
+  },
+  "themeToggle": {
+    "claro": "Перейти на світлу тему",
+    "oscuro": "Перейти на темну тему"
+  },
+  "planGate": {
+    "feature": {
+      "clientes": "понад 3 клієнти",
+      "obras": "понад 3 об'єкти",
+      "presupuestos": "понад 5 кошторисів",
+      "facturas": "понад 5 рахунків",
+      "empleados": "управління співробітниками",
+      "agente_ia": "AI-агента",
+      "exportar_pdf": "експорт у PDF",
+      "nominas": "генератор зарплат",
+      "rentabilidad": "аналіз прибутковості"
+    },
+    "funcionExclusiva": "Ексклюзивна функція Pro",
+    "paraUsar": "Щоб використовувати {{feature}}, потрібен план Pro.",
+    "pruebaTermina": "⏳ Ваш безкоштовний пробний період закінчується через {{dias}} дн.",
+    "activarPlan": "Активувати план Pro — {{precio}}",
+    "sinPermanencia": "Без зобов'язань · Скасуйте будь-коли",
+    "trialBannerText": "Ваш пробний період закінчується через <strong>{{dias}} дн.</strong> Активуйте план Pro, щоб не втратити доступ.",
+    "verPlanes": "Переглянути плани"
+  },
+  "notifBell": {
+    "notificaciones": "Сповіщення",
+    "descartarTodas": "Відхилити всі",
+    "cargando": "Завантаження…",
+    "todoAlDia": "Все актуально, немає очікуваних сповіщень",
+    "descartar": "Відхилити"
+  },
+  "pwaUpdate": {
+    "nuevaVersion": "Доступна нова версія XANDER.",
+    "actualizar": "Оновити",
+    "ahoraNo": "Не зараз",
+    "yaFuncionaOffline": "XANDER тепер працює офлайн."
+  },
+  "agenteChat": {
+    "titulo": "Agente XANDER",
+    "limpiarTooltip": "Нова розмова",
+    "limpiar": "↺ Очистити",
+    "faltaApiKey": "API-ключ ще не налаштовано",
+    "faltaApiKeyDesc": "Щоб активувати агента, створіть файл <code>.env</code> у кореневій теці проєкту з:",
+    "pasoGroq1": "Перейдіть на <b>console.groq.com</b>",
+    "pasoGroq2": "Створіть безкоштовний обліковий запис",
+    "pasoGroq3": "API Keys → Create API Key",
+    "pasoGroq4": "Скопіюйте ключ у файл .env",
+    "pasoGroq5": "Перезапустіть сервер розробки",
+    "pasoPrevioSupabase": "Попередній крок у Supabase",
+    "ejecutaSql": "Виконайте в SQL Editor Supabase:",
+    "placeholder": "Введіть ваше запитання…",
+    "bienvenida": "Привіт! Я ваш асистент XANDER. Можу допомогти з клієнтами, об'єктами, кошторисами, податковими питаннями або скласти будь-яке повідомлення. Чим можу допомогти?",
+    "confirmBorrarHistorial": "Видалити історію цієї розмови?",
+    "conversacionNueva": "Нова розмова! Чим можу допомогти?",
+    "errorConectar": "Помилка з'єднання з агентом."
+  },
+  "calendarioWidget": {
+    "tipo": {
+      "trabajo": "Робота",
+      "reunion": "Зустріч",
+      "cobro": "Оплата",
+      "recordatorio": "Нагадування",
+      "visita": "Відвідування об'єкта"
+    },
+    "calendarioTrabajo": "Робочий календар",
+    "hoy": "Сьогодні",
+    "alertaEmailTitle": "Сповіщення поштою",
+    "cargando": "Завантаження…",
+    "anadir": "+ Додати",
+    "sinEventos": "Немає подій на цей день",
+    "editarEvento": "Редагувати подію",
+    "nuevoEvento": "Нова подія — {{fecha}}",
+    "tituloLabel": "Назва *",
+    "tituloPlaceholder": "Напр.: Відвідування об'єкта клієнта",
+    "tipoLabel": "Тип",
+    "horaLabel": "Час",
+    "descripcionLabel": "Опис (необов'язково)",
+    "descripcionPlaceholder": "Додаткові деталі…",
+    "alertaEmailToggleTitle": "🔔 Сповіщення поштою",
+    "alertaEmailSub": "Сповіщення за 24 год і за 1 год",
+    "cancelar": "Скасувати",
+    "guardando": "Збереження…",
+    "guardarCambios": "Зберегти зміни",
+    "guardar": "Зберегти"
+  },
+  "firmaModal": {
+    "firmarDocumento": "Підписати документ",
+    "nombreQuienFirma": "Ім'я особи, що підписує",
+    "nombrePlaceholder": "Ім'я та прізвище",
+    "firmaLabel": "Підпис",
+    "borrarRepetir": "Очистити та повторити",
+    "disclaimer": "Підписуючи, особа підтверджує згоду зі змістом цього документа. Підпис зберігається з датою й часом як доказ прийняття (це не кваліфікований електронний підпис eIDAS).",
+    "cancelar": "Скасувати",
+    "guardando": "Збереження…",
+    "confirmarFirma": "✍️ Підтвердити підпис"
+  },
+  "onboarding": {
+    "pasos": {
+      "cliente": {
+        "titulo": "Додайте свого першого клієнта",
+        "desc": "Контактна картка, яка згодом пов'язується з об'єктами, кошторисами та рахунками."
+      },
+      "obra": {
+        "titulo": "Створіть свій перший об'єкт",
+        "desc": "Прив'яжіть до клієнта, щоб відстежувати фото, етапи та команду."
+      },
+      "presupuesto": {
+        "titulo": "Складіть свій перший кошторис",
+        "desc": "Використовуйте позиції з Тарифів та цін, щоб створити його за хвилини."
+      },
+      "fiscal": {
+        "titulo": "Заповніть свої податкові дані",
+        "desc": "ІПН, адреса та режим — необхідні для дійсних кошторисів і рахунків."
+      },
+      "cobros": {
+        "titulo": "Підключіть оплату карткою",
+        "desc": "Необов'язково: підключіть обліковий запис Stripe, щоб приймати оплату рахунків прямо з XANDER."
+      }
+    },
+    "primerosPasos": "Перші кроки в XANDER",
+    "mostrar": "Показати ▾",
+    "ocultar": "Приховати ▴",
+    "completados": "Готово! Тепер ви знаєте основи XANDER.",
+    "progreso": "{{completados}} з {{total}} виконано — ми супроводжуватимемо вас, поки застосунок не стане частиною вашої рутини."
+  },
+  "auth": {
+    "tagline": "УПРАВЛІННЯ РЕМОНТОМ",
+    "footer": "© 2026 XANDER Gestión · Мадрид",
+    "orConEmail": "або через email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "login": {
+      "quote": "\"Інструмент, який потрібен кожному самозайнятому в галузі, створений кимось із галузі.\"",
+      "features": [
+        "Кошториси",
+        "Рахунки",
+        "Об'єкти",
+        "Тарифи"
+      ],
+      "bienvenido": "Ласкаво просимо",
+      "accedeCuenta": "Увійдіть у свій обліковий запис",
+      "continuarGoogle": "Продовжити з Google",
+      "contrasena": "Пароль",
+      "olvidasteContrasena": "Забули пароль?",
+      "errorCredenciales": "Неправильний email або пароль.",
+      "entrando": "Вхід...",
+      "entrar": "Увійти",
+      "noTienesCuenta": "Немає облікового запису?",
+      "registrateGratis": "Зареєструватися безкоштовно"
+    },
+    "register": {
+      "features": [
+        {
+          "icon": "📋",
+          "text": "Професійні кошториси за хвилини"
+        },
+        {
+          "icon": "🔨",
+          "text": "Відстеження об'єктів і клієнтів"
+        },
+        {
+          "icon": "📊",
+          "text": "Тарифи та прибутковість по об'єкту"
+        },
+        {
+          "icon": "📧",
+          "text": "Рахунки надсилаються прямо з додатку"
+        }
+      ],
+      "gratisBeta": "Безкоштовно під час бета-тестування · Без кредитної картки",
+      "creaTuCuenta": "Створіть обліковий запис",
+      "gratisSinLimites": "Безкоштовно під час бета-тестування · Без обмежень",
+      "registrarseGoogle": "Зареєструватися через Google",
+      "emailProfesional": "Робочий email",
+      "contrasena": "Пароль",
+      "minimoCaracteres": "Мінімум 8 символів",
+      "confirmarContrasena": "Підтвердіть пароль",
+      "repiteContrasena": "Повторіть пароль",
+      "passwordsNoCoinciden": "Паролі не збігаються.",
+      "passwordCorta": "Пароль має містити щонайменше 8 символів.",
+      "creandoCuenta": "Створення облікового запису...",
+      "crearCuentaGratuita": "Створити безкоштовний обліковий запис",
+      "aceptasTerminosPre": "Реєструючись, ви приймаєте наші",
+      "terminosUso": "Умови використання",
+      "y": "та",
+      "politicaPrivacidad": "Політика конфіденційності",
+      "yaTienesCuenta": "Вже маєте обліковий запис?",
+      "accedeAqui": "Увійдіть тут",
+      "revisaEmail": "Перевірте свою пошту",
+      "enlaceConfirmacion": "Ми надіслали посилання для підтвердження на <strong>{{email}}</strong>. Підтвердіть обліковий запис, щоб почати налаштування профілю.",
+      "irLogin": "Перейти до входу"
+    },
+    "forgot": {
+      "sidebarText": "Ми надішлемо посилання, щоб ви могли безпечно встановити новий пароль.",
+      "emailEnviado": "Лист надіслано",
+      "enlaceEnviadoA": "Ми надіслали посилання для відновлення на <strong>{{email}}</strong>. Перевірте також папку спаму.",
+      "enlaceCaduca": "Термін дії посилання — 1 година. Якщо ви його не отримали, спробуйте ще раз.",
+      "volverInicioSesion": "Повернутися до входу",
+      "flechaVolver": "← Повернутися до входу",
+      "recuperarContrasena": "Відновити пароль",
+      "introduceEmail": "Введіть свій email, і ми надішлемо посилання для скидання пароля.",
+      "errorEnvio": "Не вдалося надіслати лист. Перевірте адресу та спробуйте ще раз.",
+      "enviando": "Надсилання...",
+      "enviarEnlace": "Надіслати посилання для відновлення"
+    },
+    "reset": {
+      "sidebarText": "Оберіть надійний пароль. Рекомендуємо щонайменше 8 символів, поєднуючи літери та цифри.",
+      "passwordActualizada": "Пароль оновлено",
+      "redirigiendo": "Перенаправлення до вашого облікового запису...",
+      "verificandoEnlace": "Перевірка посилання для відновлення...",
+      "enlaceCaducadoAviso": "Якщо ви бачите це повідомлення понад 10 секунд, посилання могло закінчитися.",
+      "solicitaUnoNuevo": "Запросіть нове.",
+      "nuevaContrasena": "Новий пароль",
+      "eligeNuevaPassword": "Оберіть новий пароль для свого облікового запису.",
+      "confirmarContrasena": "Підтвердіть пароль",
+      "repiteContrasena": "Повторіть пароль",
+      "minimoCaracteres": "Мінімум 8 символів",
+      "passwordCorta": "Пароль має містити щонайменше 8 символів.",
+      "passwordsNoCoinciden": "Паролі не збігаються.",
+      "errorActualizar": "Не вдалося оновити пароль. Посилання могло закінчитися.",
+      "guardando": "Збереження...",
+      "establecerNuevaContrasena": "Встановити новий пароль"
+    }
+  },
+  "onboardingWizard": {
+    "cuentanosQuienEres": "Розкажіть, хто ви — лише найважливіше",
+    "bienvenido": "Ласкаво просимо до XANDER",
+    "rellenaDatos": "Заповніть два поля, і ви готові почати. Решту профілю можна заповнити пізніше.",
+    "nombreLabel": "Ім'я",
+    "apellidosLabel": "Прізвище",
+    "nombreEmpresaLabel": "Назва компанії",
+    "nombreObligatorio": "Ім'я обов'язкове.",
+    "empresaObligatoria": "Назва компанії обов'язкова.",
+    "especialidadesLabel": "Спеціалізації",
+    "opcional": "(необов'язково)",
+    "queTrabajos": "Яку роботу ви зазвичай виконуєте?",
+    "especialidad": {
+      "Reformas integrales": "Комплексні ремонти",
+      "Baños": "Ванні кімнати",
+      "Cocinas": "Кухні",
+      "Pintura": "Малярні роботи",
+      "Pladur": "Гіпсокартон",
+      "Electricidad": "Електрика",
+      "Fontanería": "Сантехніка",
+      "Carpintería": "Столярні роботи",
+      "Alicatados": "Плитка",
+      "Fachadas": "Фасади"
+    },
+    "avisoDatosAdicionales": "Ви можете додати ІПН, адресу, телефони та інше в розділі <strong>Моя компанія</strong> будь-коли. Вони необхідні для друку повних кошторисів і рахунків.",
+    "salir": "Вийти",
+    "guardando": "Збереження...",
+    "empezar": "Почати! →"
+  },
+  "landing": {
+    "nav": {
+      "funciones": "Можливості",
+      "planes": "Плани",
+      "contacto": "Контакти"
+    },
+    "miCuenta": "Мій обліковий запис",
+    "entrar": "Увійти",
+    "pruebaGratis": "Безкоштовна пробна версія",
+    "iraMiCuenta": "Перейти до мого облікового запису",
+    "pruebaGratis30": "Безкоштовна пробна версія на 30 днів",
+    "heroTag": "Управління для внутрішніх ремонтів",
+    "heroTitle": "Кошториси, рахунки та об'єкти.<br />Все в одному місці.",
+    "heroDesc": "Інструмент управління, створений самозайнятими фахівцями з ремонту для таких самих фахівців: кошториси за хвилини, виставлення рахунків з Verifactu, оплата карткою та реальне відстеження кожного об'єкта.",
+    "verFunciones": "Переглянути можливості",
+    "sinTarjeta": "Без картки · Без зобов'язань · Скасуйте будь-коли",
+    "funciones": [
+      {
+        "icon": "📋",
+        "title": "Кошториси",
+        "desc": "Створюйте професійні кошториси за позиціями за хвилини, готові до надсилання."
+      },
+      {
+        "icon": "🧾",
+        "title": "Рахунки",
+        "desc": "Рахунки з вбудованим Verifactu — ланцюговий хеш, QR-код і подання до податкової."
+      },
+      {
+        "icon": "🏗️",
+        "title": "Об'єкти",
+        "desc": "Відстеження об'єкта з фото, етапами, командою та нарядами роботи."
+      },
+      {
+        "icon": "💳",
+        "title": "Оплата карткою",
+        "desc": "Ваші клієнти оплачують рахунок онлайн. Гроші надходять прямо на ваш рахунок."
+      },
+      {
+        "icon": "💶",
+        "title": "Витрати та результати",
+        "desc": "Реєструйте витрати по об'єкту та бачте реальну прибутковість кожного проєкту."
+      },
+      {
+        "icon": "📊",
+        "title": "Податки",
+        "desc": "Документ звірки, готовий для вашої бухгалтерії перед кожним кварталом."
+      },
+      {
+        "icon": "👷",
+        "title": "Співробітники та зарплати",
+        "desc": "Облік годин по об'єкту та генератор розрахункових листків."
+      },
+      {
+        "icon": "📱",
+        "title": "Застосунок для встановлення",
+        "desc": "Встановіть на телефон чи комп'ютер, працює навіть без інтернету."
+      }
+    ],
+    "funcionesTitle": "Все необхідне для управління вашим бізнесом",
+    "funcionesSubtitle": "Без розрізнених таблиць, без папок WhatsApp з кошторисами.",
+    "testimonioAutor": "— XANDER Внутрішні ремонти, Мадрид",
+    "planesTitle": "Прості плани",
+    "planesSubtitle": "Почніть безкоштовно. Без сюрпризів.",
+    "recomendado": "Рекомендовано",
+    "planPrueba": {
+      "nombre": "Безкоштовна пробна версія",
+      "periodo": "30 днів",
+      "desc": "Повний доступ, без картки.",
+      "features": [
+        "Усі модулі",
+        "Без обмежень клієнтів чи об'єктів",
+        "AI-агент включено"
+      ],
+      "cta": "Почати безкоштовно"
+    },
+    "planPro": {
+      "nombre": "Pro",
+      "periodo": "за самозайнятого",
+      "desc": "Коли ви вирішите залишитися.",
+      "features": [
+        "Все з безкоштовного плану",
+        "Без обмежень використання",
+        "Пряма підтримка"
+      ],
+      "cta": "Почати безкоштовно"
+    },
+    "contactoTitle": "Маєте запитання перед початком?",
+    "contactoSubtitle": "Залиште свої дані або напишіть нам прямо в WhatsApp.",
+    "form": {
+      "nombre": "Ім'я",
+      "nombrePlaceholder": "Ваше ім'я",
+      "emailOTelefono": "Email або телефон",
+      "contactoPlaceholder": "you@email.com або номер телефону",
+      "mensaje": "Повідомлення",
+      "opcional": "(необов'язково)",
+      "mensajePlaceholder": "Розкажіть, що вам потрібно",
+      "errorRequerido": "Нам потрібне принаймні ваше ім'я та email або телефон, щоб зв'язатися з вами.",
+      "errorEnvio": "Не вдалося надіслати. Спробуйте ще раз або напишіть нам у WhatsApp.",
+      "gracias": "Дякуємо, {{nombre}}!",
+      "contactamos24h": "Ми зв'яжемося з вами протягом 24 годин.",
+      "enviando": "Надсилання...",
+      "quieroContacten": "Хочу, щоб зі мною зв'язалися"
+    },
+    "contactoDirecto": "Прямий контакт",
+    "escribirWhatsapp": "Написати у WhatsApp",
+    "footerText": "XANDER Внутрішні ремонти · Мадрид",
+    "footerCopyright": "© 2026 XANDER Gestión"
   }
 }

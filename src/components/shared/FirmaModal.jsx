@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 // Modal reutilizable de firma manuscrita digital (canvas).
 // No es firma electrónica cualificada (eIDAS) — es una firma dibujada en
@@ -13,6 +14,7 @@ import { useRef, useState } from 'react'
 //     onCancel={() => ...}
 //   />
 export default function FirmaModal({ titulo, nombreDefault, onGuardar, onCancel }) {
+  const { t } = useTranslation()
   const canvasRef = useRef(null)
   const drawing = useRef(false)
   const last = useRef({ x: 0, y: 0 })
@@ -72,18 +74,18 @@ export default function FirmaModal({ titulo, nombreDefault, onGuardar, onCancel 
     <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
       <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-md">
         <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
-          <h2 className="text-lg font-bold text-ink">{titulo || 'Firmar documento'}</h2>
+          <h2 className="text-lg font-bold text-ink">{titulo || t('firmaModal.firmarDocumento')}</h2>
           <button onClick={onCancel} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
 
         <div className="p-6 space-y-4">
           <div>
-            <label className="label">Nombre de quien firma</label>
-            <input className="input" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre y apellidos" />
+            <label className="label">{t('firmaModal.nombreQuienFirma')}</label>
+            <input className="input" value={nombre} onChange={e => setNombre(e.target.value)} placeholder={t('firmaModal.nombrePlaceholder')} />
           </div>
 
           <div>
-            <label className="label mb-2">Firma</label>
+            <label className="label mb-2">{t('firmaModal.firmaLabel')}</label>
             <canvas
               ref={canvasRef}
               width={600}
@@ -92,24 +94,23 @@ export default function FirmaModal({ titulo, nombreDefault, onGuardar, onCancel 
               onMouseDown={start} onMouseMove={move} onMouseUp={end} onMouseLeave={end}
               onTouchStart={start} onTouchMove={move} onTouchEnd={end}
             />
-            <button type="button" onClick={limpiar} className="text-xs text-ink-soft hover:text-ink mt-1.5">Borrar y repetir</button>
+            <button type="button" onClick={limpiar} className="text-xs text-ink-soft hover:text-ink mt-1.5">{t('firmaModal.borrarRepetir')}</button>
           </div>
 
           <p className="text-[11px] text-ink-soft leading-snug">
-            Al firmar, quien firma confirma su conformidad con el contenido de este documento. La firma queda
-            guardada con fecha y hora como evidencia de aceptación (no es una firma electrónica cualificada eIDAS).
+            {t('firmaModal.disclaimer')}
           </p>
         </div>
 
         <div className="px-6 pb-6 flex gap-3">
-          <button type="button" onClick={onCancel} className="btn-secondary flex-1">Cancelar</button>
+          <button type="button" onClick={onCancel} className="btn-secondary flex-1">{t('firmaModal.cancelar')}</button>
           <button
             type="button"
             onClick={confirmar}
             disabled={!hasDrawn || !nombre.trim() || guardando}
             className="btn-primary flex-1"
           >
-            {guardando ? 'Guardando…' : '✍️ Confirmar firma'}
+            {guardando ? t('firmaModal.guardando') : t('firmaModal.confirmarFirma')}
           </button>
         </div>
       </div>

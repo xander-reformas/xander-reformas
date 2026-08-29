@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 // ─── Normativa estatal (aplica en toda España) ────────────────────────────────
 const NORMATIVA_ESTATAL = [
@@ -298,29 +299,30 @@ const BADGE_COLORS = {
 }
 
 export default function Legislacion() {
+  const { t } = useTranslation()
   const [ccaaId, setCcaaId] = useState('')
   const ccaa = COMUNIDADES.find(c => c.id === ccaaId)
 
   return (
     <div className="p-6 max-w-5xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-ink">Legislación</h1>
-        <p className="text-sm text-ink-soft mt-0.5">Marco legal para reformas de viviendas y locales en toda España</p>
+        <h1 className="text-2xl font-bold text-ink">{t('legislacion.title')}</h1>
+        <p className="text-sm text-ink-soft mt-0.5">{t('legislacion.subtitle')}</p>
       </div>
 
       {/* Selector CCAA */}
       <div className="card mb-6 bg-navy text-white">
         <div className="flex flex-col md:flex-row md:items-center gap-4">
           <div className="flex-1">
-            <div className="text-xs font-bold uppercase tracking-widest text-gold mb-1">Tu comunidad autónoma</div>
-            <p className="text-sm text-white/70">Selecciona tu CCAA para ver la normativa urbanística específica de tu región</p>
+            <div className="text-xs font-bold uppercase tracking-widest text-gold mb-1">{t('legislacion.selector.label')}</div>
+            <p className="text-sm text-white/70">{t('legislacion.selector.desc')}</p>
           </div>
           <select
             value={ccaaId}
             onChange={e => setCcaaId(e.target.value)}
             className="bg-white text-navy border border-white/20 rounded-xl px-4 py-2.5 text-sm min-w-[220px] focus:outline-none focus:ring-2 focus:ring-gold"
           >
-            <option value="">— Selecciona tu CCAA —</option>
+            <option value="">{t('legislacion.selector.placeholder')}</option>
             {COMUNIDADES.map(c => (
               <option key={c.id} value={c.id}>{c.nombre}</option>
             ))}
@@ -328,12 +330,12 @@ export default function Legislacion() {
         </div>
       </div>
 
-      {/* Ficha CCAA seleccionada */}
+      {/* Ficha CCAA seleccionada — contenido normativo específico de España, se mantiene en español */}
       {ccaa && (
         <div className="card border-2 border-gold/40 mb-8">
           <div className="flex items-start justify-between gap-4 mb-4">
             <div>
-              <div className="text-xs font-bold uppercase tracking-widest text-gold mb-1">Normativa autonómica</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-gold mb-1">{t('legislacion.ccaa.badgeNormativa')}</div>
               <h2 className="text-xl font-bold text-ink">{ccaa.nombre}</h2>
               <p className="text-sm text-ink-soft mt-1">{ccaa.ley}</p>
             </div>
@@ -343,30 +345,30 @@ export default function Legislacion() {
               rel="noopener noreferrer"
               className="btn-gold text-xs whitespace-nowrap flex-shrink-0"
             >
-              Portal oficial ↗
+              {t('legislacion.ccaa.portalOficial')}
             </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
-              <div className="text-xs font-bold uppercase tracking-wide text-blue-600 mb-1">Obra menor</div>
+              <div className="text-xs font-bold uppercase tracking-wide text-blue-600 mb-1">{t('legislacion.ccaa.obraMenor')}</div>
               <div className="font-semibold text-ink text-sm">{ccaa.menorNombre}</div>
-              <div className="text-xs text-ink-soft mt-1">Trámite simplificado — sin estructura ni fachada</div>
+              <div className="text-xs text-ink-soft mt-1">{t('legislacion.ccaa.obraMenorDesc')}</div>
             </div>
             <div className="bg-purple-50 border border-purple-100 rounded-xl p-4">
-              <div className="text-xs font-bold uppercase tracking-wide text-purple-600 mb-1">Obra mayor</div>
+              <div className="text-xs font-bold uppercase tracking-wide text-purple-600 mb-1">{t('legislacion.ccaa.obraMayor')}</div>
               <div className="font-semibold text-ink text-sm">{ccaa.mayorNombre}</div>
-              <div className="text-xs text-ink-soft mt-1">Requiere proyecto técnico y plazos más largos</div>
+              <div className="text-xs text-ink-soft mt-1">{t('legislacion.ccaa.obraMayorDesc')}</div>
             </div>
           </div>
 
           <div className="bg-page rounded-xl p-4 mb-3">
-            <div className="text-xs font-bold uppercase tracking-wide text-ink-soft mb-2">Organismo competente</div>
+            <div className="text-xs font-bold uppercase tracking-wide text-ink-soft mb-2">{t('legislacion.ccaa.organismoCompetente')}</div>
             <div className="text-sm text-ink">{ccaa.organismo}</div>
           </div>
 
           <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 mb-3">
-            <div className="text-xs font-bold uppercase tracking-wide text-amber-700 mb-2">⚠️ Aspectos destacados en {ccaa.nombre}</div>
+            <div className="text-xs font-bold uppercase tracking-wide text-amber-700 mb-2">{t('legislacion.ccaa.aspectosDestacados', { nombre: ccaa.nombre })}</div>
             <p className="text-sm text-ink-soft leading-relaxed">{ccaa.notas}</p>
           </div>
 
@@ -379,10 +381,10 @@ export default function Legislacion() {
 
       {/* Aviso general */}
       <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-8 text-sm text-ink-soft">
-        ℹ️ <strong>Guía orientativa.</strong> La normativa urbanística se modifica con frecuencia. Consulta siempre con el Ayuntamiento correspondiente y un técnico competente (arquitecto o aparejador) ante cualquier duda. Las condiciones pueden variar por municipio incluso dentro de la misma CCAA.
+        ℹ️ <strong>{t('legislacion.avisoTitle')}</strong> {t('legislacion.avisoText')}
       </div>
 
-      {/* Normativa estatal */}
+      {/* Normativa estatal — contenido normativo español, se mantiene en español */}
       <div className="space-y-10">
         {NORMATIVA_ESTATAL.map(sec => (
           <div key={sec.titulo}>
@@ -390,7 +392,7 @@ export default function Legislacion() {
               <span className="text-2xl">{sec.icon}</span>
               <div>
                 <h2 className="text-lg font-bold text-ink">{sec.titulo}</h2>
-                <div className="text-xs text-ink-soft">Normativa estatal — aplica en toda España</div>
+                <div className="text-xs text-ink-soft">{t('legislacion.estatalCaption')}</div>
               </div>
             </div>
             <div className="space-y-4">
@@ -410,7 +412,7 @@ export default function Legislacion() {
                   </div>
                   {item.incluye && (
                     <div className="bg-page rounded-xl p-3 mt-3">
-                      <div className="text-xs font-semibold text-ink-soft uppercase tracking-wide mb-2">Incluye / Aplica a:</div>
+                      <div className="text-xs font-semibold text-ink-soft uppercase tracking-wide mb-2">{t('legislacion.incluyeAplica')}</div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
                         {item.incluye.map((i, idx) => (
                           <div key={idx} className="flex items-center gap-2 text-xs text-ink">
@@ -430,7 +432,7 @@ export default function Legislacion() {
 
       {/* Footer recursos */}
       <div className="mt-12 card bg-navy">
-        <div className="text-xs font-bold uppercase tracking-widest text-gold mb-4">Recursos útiles (estatal)</div>
+        <div className="text-xs font-bold uppercase tracking-widest text-gold mb-4">{t('legislacion.recursosUtiles')}</div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {[
             { label: 'Código Técnico de la Edificación', url: 'https://www.codigotecnico.org' },

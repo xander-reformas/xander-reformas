@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
+import ThemeToggle from '../dashboard/ThemeToggle'
+import LanguageSwitcher from '../shared/LanguageSwitcher'
 
 /**
  * ResetPasswordPage
@@ -11,6 +14,7 @@ import { supabase } from '../../lib/supabase'
  * sesión, lo que nos permite llamar a updateUser para cambiar la contraseña.
  */
 export default function ResetPasswordPage() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [form, setForm]           = useState({ password: '', confirm: '' })
   const [loading, setLoading]     = useState(false)
@@ -34,10 +38,10 @@ export default function ResetPasswordPage() {
     setError('')
 
     if (form.password.length < 8) {
-      return setError('La contraseña debe tener al menos 8 caracteres.')
+      return setError(t('auth.reset.passwordCorta'))
     }
     if (form.password !== form.confirm) {
-      return setError('Las contraseñas no coinciden.')
+      return setError(t('auth.reset.passwordsNoCoinciden'))
     }
 
     setLoading(true)
@@ -45,7 +49,7 @@ export default function ResetPasswordPage() {
     setLoading(false)
 
     if (error) {
-      setError('No se pudo actualizar la contraseña. El enlace puede haber caducado.')
+      setError(t('auth.reset.errorActualizar'))
     } else {
       setDone(true)
       // Redirigir al dashboard tras 2 segundos
@@ -54,7 +58,11 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-page flex">
+    <div className="min-h-screen bg-page flex relative">
+      <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+        <LanguageSwitcher />
+        <ThemeToggle compact />
+      </div>
       {/* Panel izquierdo — branding */}
       <div className="hidden lg:flex w-1/2 bg-navy flex-col justify-between p-12">
         <div>
@@ -62,14 +70,14 @@ export default function ResetPasswordPage() {
             <span className="text-gold">X</span>
             <span className="text-white">ANDER</span>
           </div>
-          <div className="text-xs tracking-widest text-stone-light mt-1">GESTIÓN DE REFORMAS</div>
+          <div className="text-xs tracking-widest text-stone-light mt-1">{t('auth.tagline')}</div>
         </div>
         <div>
           <p className="text-white text-lg font-light leading-relaxed">
-            Elige una contraseña segura. Te recomendamos usar al menos 8 caracteres combinando letras y números.
+            {t('auth.reset.sidebarText')}
           </p>
         </div>
-        <div className="text-xs text-stone-light">© 2026 XANDER Gestión · Madrid</div>
+        <div className="text-xs text-stone-light">{t('auth.footer')}</div>
       </div>
 
       {/* Panel derecho */}
@@ -88,33 +96,33 @@ export default function ResetPasswordPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h1 className="text-2xl font-bold text-ink mb-2">Contraseña actualizada</h1>
-              <p className="text-sm text-ink-soft">Redirigiendo a tu cuenta...</p>
+              <h1 className="text-2xl font-bold text-ink mb-2">{t('auth.reset.passwordActualizada')}</h1>
+              <p className="text-sm text-ink-soft">{t('auth.reset.redirigiendo')}</p>
               <div className="mt-4 w-6 h-6 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto" />
             </div>
           ) : !ready ? (
             /* ── Esperando el token de Supabase ── */
             <div className="text-center">
               <div className="w-6 h-6 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-sm text-ink-soft">Verificando enlace de recuperación...</p>
+              <p className="text-sm text-ink-soft">{t('auth.reset.verificandoEnlace')}</p>
               <p className="text-xs text-ink-soft mt-4">
-                Si ves este mensaje durante más de 10 segundos, el enlace puede haber caducado.{' '}
-                <a href="/recuperar-password" className="text-gold hover:underline">Solicita uno nuevo.</a>
+                {t('auth.reset.enlaceCaducadoAviso')}{' '}
+                <a href="/recuperar-password" className="text-gold hover:underline">{t('auth.reset.solicitaUnoNuevo')}</a>
               </p>
             </div>
           ) : (
             /* ── Formulario nueva contraseña ── */
             <>
-              <h1 className="text-2xl font-bold text-ink mb-1">Nueva contraseña</h1>
-              <p className="text-sm text-ink-soft mb-8">Elige una nueva contraseña para tu cuenta.</p>
+              <h1 className="text-2xl font-bold text-ink mb-1">{t('auth.reset.nuevaContrasena')}</h1>
+              <p className="text-sm text-ink-soft mb-8">{t('auth.reset.eligeNuevaPassword')}</p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="label">Nueva contraseña</label>
+                  <label className="label">{t('auth.reset.nuevaContrasena')}</label>
                   <input
                     type="password"
                     className="input"
-                    placeholder="Mínimo 8 caracteres"
+                    placeholder={t('auth.reset.minimoCaracteres')}
                     value={form.password}
                     onChange={e => setForm(p => ({ ...p, password: e.target.value }))}
                     required
@@ -122,11 +130,11 @@ export default function ResetPasswordPage() {
                   />
                 </div>
                 <div>
-                  <label className="label">Confirmar contraseña</label>
+                  <label className="label">{t('auth.reset.confirmarContrasena')}</label>
                   <input
                     type="password"
                     className="input"
-                    placeholder="Repite la contraseña"
+                    placeholder={t('auth.reset.repiteContrasena')}
                     value={form.confirm}
                     onChange={e => setForm(p => ({ ...p, confirm: e.target.value }))}
                     required
@@ -140,7 +148,7 @@ export default function ResetPasswordPage() {
                 )}
 
                 <button type="submit" disabled={loading} className="btn-primary w-full mt-2">
-                  {loading ? 'Guardando...' : 'Establecer nueva contraseña'}
+                  {loading ? t('auth.reset.guardando') : t('auth.reset.establecerNuevaContrasena')}
                 </button>
               </form>
             </>

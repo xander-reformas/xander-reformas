@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 
 const BUCKET = 'backups'
@@ -6,19 +7,19 @@ const BUCKET = 'backups'
 // Tablas que se incluyen en la copia, en el orden seguro para restaurarlas
 // (primero las que no dependen de nada, luego las que enlazan con ellas).
 const TABLAS = [
-  { key: 'clientes',           label: 'Clientes' },
-  { key: 'empleados',          label: 'Empleados' },
-  { key: 'obras',              label: 'Obras' },
-  { key: 'tarifas',            label: 'Tarifas y precios', omitir: ['precio_cliente'] },
-  { key: 'calendario_notas',   label: 'Notas de calendario' },
-  { key: 'calendario_eventos', label: 'Eventos de calendario' },
-  { key: 'presupuestos',       label: 'Presupuestos' },
-  { key: 'facturas',           label: 'Facturas' },
-  { key: 'gastos',             label: 'Gastos' },
-  { key: 'documentos',         label: 'Documentos (solo la ficha, no el archivo)' },
-  { key: 'partes_trabajo',     label: 'Partes de trabajo' },
-  { key: 'nominas',            label: 'Nóminas' },
-  { key: 'obra_empleados',     label: 'Equipo asignado a obras' },
+  { key: 'clientes' },
+  { key: 'empleados' },
+  { key: 'obras' },
+  { key: 'tarifas', omitir: ['precio_cliente'] },
+  { key: 'calendario_notas' },
+  { key: 'calendario_eventos' },
+  { key: 'presupuestos' },
+  { key: 'facturas' },
+  { key: 'gastos' },
+  { key: 'documentos' },
+  { key: 'partes_trabajo' },
+  { key: 'nominas' },
+  { key: 'obra_empleados' },
 ]
 
 function fmtSize(bytes) {
@@ -73,6 +74,7 @@ function descargarJSON(obj, nombre) {
 }
 
 export default function CopiasSeguridad() {
+  const { t } = useTranslation()
   const [uid, setUid] = useState(null)
   const [copias, setCopias] = useState([])
   const [loading, setLoading] = useState(true)
@@ -97,7 +99,7 @@ export default function CopiasSeguridad() {
       sortBy: { column: 'created_at', order: 'desc' },
     })
     if (error) {
-      setMensaje({ tipo: 'error', texto: `No se pudo acceder al almacén de copias: ${error.message}` })
+      setMensaje({ tipo: 'error', texto: t('copias.mensajeErrorAlmacen', { msg: error.message }) })
       setCopias([])
     } else {
       setCopias(data || [])
@@ -126,16 +128,16 @@ export default function CopiasSeguridad() {
         .upload(path, new Blob([JSON.stringify(backup)], { type: 'application/json' }), { upsert: false })
 
       if (upErr) {
-        setMensaje({ tipo: 'error', texto: `No se pudo guardar la copia en tu cuenta: ${upErr.message}` })
+        setMensaje({ tipo: 'error', texto: t('copias.errorGuardarCuenta', { msg: upErr.message }) })
       } else {
-        setMensaje({ tipo: 'ok', texto: 'Copia de seguridad creada y guardada en tu cuenta.' })
+        setMensaje({ tipo: 'ok', texto: t('copias.copiaCreadaOk') })
         await listar(id)
       }
 
       // Además, siempre se descarga una copia local por si acaso
       descargarJSON(backup, `xander-backup-${new Date().toISOString().split('T')[0]}.json`)
     } catch (err) {
-      setMensaje({ tipo: 'error', texto: `Error al crear la copia: ${err.message}` })
+      setMensaje({ tipo: 'error', texto: t('copias.errorCrear', { msg: err.message }) })
     }
     setCreando(false)
   }
@@ -144,7 +146,7 @@ export default function CopiasSeguridad() {
     const id = uid || await getUID()
     const { data, error } = await supabase.storage.from(BUCKET).download(`${id}/${nombre}`)
     if (error) {
-      setMensaje({ tipo: 'error', texto: `No se pudo descargar: ${error.message}` })
+      setMensaje({ tipo: 'error', texto: t('copias.errorDescargar', { msg: error.message }) })
       return
     }
     const url = URL.createObjectURL(data)
@@ -158,7 +160,7 @@ export default function CopiasSeguridad() {
   }
 
   async function eliminar(nombre) {
-    if (!confirm(`¿Eliminar la copia "${nombre}"? Esta acción no se puede deshacer.`)) return
+    if (!confirm(t('copias.confirmDeleteCopia', { nombre }))) return
     const id = uid || await getUID()
     await supabase.storage.from(BUCKET).remove([`${id}/${nombre}`])
     await listar(id)
@@ -169,7 +171,7 @@ export default function CopiasSeguridad() {
     setMensaje(null)
     const { data, error } = await supabase.storage.from(BUCKET).download(`${id}/${nombre}`)
     if (error) {
-      setMensaje({ tipo: 'error', texto: `No se pudo leer la copia: ${error.message}` })
+      setMensaje({ tipo: 'error', texto: t('copias.errorLeerCopia', { msg: error.message }) })
       return
     }
     try {
@@ -177,7 +179,7 @@ export default function CopiasSeguridad() {
       const backup = JSON.parse(texto)
       setPendiente({ origen: 'storage', backup, nombre })
     } catch {
-      setMensaje({ tipo: 'error', texto: 'El archivo de copia está dañado o no es válido.' })
+      setMensaje({ tipo: 'error', texto: t('copias.archivoDanado') })
     }
   }
 
@@ -191,7 +193,7 @@ export default function CopiasSeguridad() {
         const backup = JSON.parse(reader.result)
         setPendiente({ origen: 'archivo', backup, nombre: file.name })
       } catch {
-        setMensaje({ tipo: 'error', texto: 'El archivo seleccionado no es una copia de seguridad válida (JSON).' })
+        setMensaje({ tipo: 'error', texto: t('copias.archivoInvalido') })
       }
     }
     reader.readAsText(file)
@@ -206,17 +208,17 @@ export default function CopiasSeguridad() {
     const backup = pendiente.backup
     const resumen = []
 
-    for (const t of TABLAS) {
-      const filas = backup.data[t.key]
+    for (const tb of TABLAS) {
+      const filas = backup.data[tb.key]
       if (!Array.isArray(filas) || filas.length === 0) {
-        resumen.push({ tabla: t.label, restauradas: 0, error: null })
+        resumen.push({ tabla: tb.key, restauradas: 0, error: null })
         continue
       }
 
       // Fuerza el user_id actual y quita columnas generadas/no insertables
       const limpias = filas.map(f => {
         const copia = { ...f, user_id: f.user_id ?? id }
-        ;(t.omitir || []).forEach(col => delete copia[col])
+        ;(tb.omitir || []).forEach(col => delete copia[col])
         return copia
       })
 
@@ -224,12 +226,12 @@ export default function CopiasSeguridad() {
       let errorTabla = null
       for (const lote of chunk(limpias, 300)) {
         const { error } = await supabase
-          .from(t.key)
+          .from(tb.key)
           .upsert(lote, { onConflict: 'id' })
         if (error) { errorTabla = error.message; break }
         restauradas += lote.length
       }
-      resumen.push({ tabla: t.label, restauradas, error: errorTabla })
+      resumen.push({ tabla: tb.key, restauradas, error: errorTabla })
     }
 
     setResumenRestore(resumen)
@@ -238,17 +240,14 @@ export default function CopiasSeguridad() {
   }
 
   const totalFilas = pendiente
-    ? TABLAS.reduce((acc, t) => acc + (pendiente.backup?.data?.[t.key]?.length || 0), 0)
+    ? TABLAS.reduce((acc, tb) => acc + (pendiente.backup?.data?.[tb.key]?.length || 0), 0)
     : 0
 
   return (
     <div className="p-6 space-y-6 max-w-3xl">
       <div>
-        <h1 className="text-2xl font-bold text-ink">Copias de seguridad</h1>
-        <p className="text-sm text-ink-soft mt-0.5">
-          Guarda una foto de todos tus datos de trabajo (clientes, obras, presupuestos, facturas,
-          cobros, gastos, empleados...) y recupérala si algo se borra o se estropea por error.
-        </p>
+        <h1 className="text-2xl font-bold text-ink">{t('copias.title')}</h1>
+        <p className="text-sm text-ink-soft mt-0.5">{t('copias.subtitle')}</p>
       </div>
 
       {mensaje && (
@@ -263,44 +262,37 @@ export default function CopiasSeguridad() {
 
       {/* Crear copia */}
       <div className="card">
-        <h2 className="font-semibold text-ink mb-2">Crear una copia ahora</h2>
-        <p className="text-xs text-ink-soft mb-4">
-          Se guarda en tu cuenta (para poder restaurarla desde aquí cuando quieras) y además se
-          descarga una copia a tu ordenador, por si prefieres guardarla tú mismo en otro sitio.
-        </p>
+        <h2 className="font-semibold text-ink mb-2">{t('copias.crearAhoraTitle')}</h2>
+        <p className="text-xs text-ink-soft mb-4">{t('copias.crearAhoraDesc')}</p>
         <button onClick={crearCopia} disabled={creando} className="btn-primary">
-          {creando ? 'Creando copia...' : '💾 Crear copia de seguridad ahora'}
+          {creando ? t('copias.creando') : t('copias.crearBtn')}
         </button>
       </div>
 
       {/* Restaurar desde archivo */}
       <div className="card">
-        <h2 className="font-semibold text-ink mb-2">Restaurar desde un archivo</h2>
-        <p className="text-xs text-ink-soft mb-4">
-          Si guardaste una copia descargada anteriormente, súbela aquí para recuperar esos datos.
-        </p>
+        <h2 className="font-semibold text-ink mb-2">{t('copias.restaurarArchivoTitle')}</h2>
+        <p className="text-xs text-ink-soft mb-4">{t('copias.restaurarArchivoDesc')}</p>
         <input ref={fileInputRef} type="file" accept="application/json" onChange={handleArchivoSeleccionado} className="sr-only" />
         <button onClick={() => fileInputRef.current?.click()} className="btn-secondary">
-          📤 Subir archivo de copia (.json)
+          {t('copias.subirArchivoBtn')}
         </button>
       </div>
 
       {/* Listado de copias guardadas */}
       <div className="card">
-        <h2 className="font-semibold text-ink mb-4">Tus copias guardadas</h2>
+        <h2 className="font-semibold text-ink mb-4">{t('copias.tusCopiasTitle')}</h2>
         {loading ? (
-          <p className="text-sm text-ink-soft">Cargando...</p>
+          <p className="text-sm text-ink-soft">{t('copias.cargando')}</p>
         ) : copias.length === 0 ? (
-          <p className="text-sm text-ink-soft">
-            Todavía no tienes ninguna copia guardada. Crea la primera arriba.
-          </p>
+          <p className="text-sm text-ink-soft">{t('copias.sinCopias')}</p>
         ) : (
           <div className="space-y-2">
             {copias.map(c => (
               <div key={c.name} className="flex items-center justify-between text-sm border-b border-edge py-2.5 last:border-0">
                 <div>
                   <div className="text-ink font-medium">
-                    {c.name.startsWith('auto-') ? '🔄 Copia automática' : '💾 Copia manual'}
+                    {c.name.startsWith('auto-') ? t('copias.copiaAutomatica') : t('copias.copiaManual')}
                   </div>
                   <div className="text-xs text-ink-soft mt-0.5">
                     {fmtFecha(c.created_at)} · {fmtSize(c.metadata?.size)}
@@ -308,13 +300,13 @@ export default function CopiasSeguridad() {
                 </div>
                 <div className="flex gap-3 flex-shrink-0">
                   <button onClick={() => prepararRestauracionDesdeStorage(c.name)} className="text-xs text-gold font-medium hover:underline">
-                    Restaurar
+                    {t('copias.restaurar')}
                   </button>
                   <button onClick={() => descargar(c.name)} className="text-xs text-ink-soft hover:text-ink">
-                    Descargar
+                    {t('copias.descargar')}
                   </button>
                   <button onClick={() => eliminar(c.name)} className="text-xs text-ink-soft hover:text-red-600">
-                    Eliminar
+                    {t('copias.eliminar')}
                   </button>
                 </div>
               </div>
@@ -325,14 +317,14 @@ export default function CopiasSeguridad() {
 
       {resumenRestore && (
         <div className="card">
-          <h2 className="font-semibold text-ink mb-3">Resultado de la restauración</h2>
+          <h2 className="font-semibold text-ink mb-3">{t('copias.resultadoRestoreTitle')}</h2>
           <div className="space-y-1.5">
             {resumenRestore.map(r => (
               <div key={r.tabla} className="flex items-center justify-between text-sm">
-                <span className="text-ink-soft">{r.tabla}</span>
+                <span className="text-ink-soft">{t(`copias.tabla.${r.tabla}`, r.tabla)}</span>
                 {r.error
-                  ? <span className="text-red-600 text-xs">Error: {r.error}</span>
-                  : <span className="text-ink">{r.restauradas} fila{r.restauradas === 1 ? '' : 's'}</span>}
+                  ? <span className="text-red-600 text-xs">{t('copias.errorLabel', { msg: r.error })}</span>
+                  : <span className="text-ink">{t(r.restauradas === 1 ? 'copias.filaOne' : 'copias.filaOther', { count: r.restauradas })}</span>}
               </div>
             ))}
           </div>
@@ -344,20 +336,18 @@ export default function CopiasSeguridad() {
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg max-h-[94vh] flex flex-col">
             <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-ink">Confirmar restauración</h2>
+              <h2 className="text-lg font-bold text-ink">{t('copias.confirmarRestauracionTitle')}</h2>
               <button onClick={() => setPendiente(null)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <div className="p-6 space-y-4 overflow-y-auto">
-              <p className="text-sm text-ink">
-                Vas a restaurar <strong>{pendiente.nombre}</strong> ({totalFilas} registros en total).
-              </p>
+              <p className="text-sm text-ink" dangerouslySetInnerHTML={{ __html: t('copias.vasARestaurar', { nombre: pendiente.nombre, total: totalFilas }) }} />
               <div className="bg-surface-alt rounded-lg px-4 py-3 text-xs text-ink-soft space-y-1">
-                <p>• Esto <strong>recupera/actualiza</strong> los registros de la copia — no borra nada que hayas creado después.</p>
-                <p>• Si un registro de la copia ya no existe (lo borraste), se vuelve a crear con sus datos originales.</p>
-                <p>• Los documentos solo restauran su ficha (nombre, categoría, enlace); si el archivo también se borró del almacén, el enlace no funcionará.</p>
+                {t('copias.notas', { returnObjects: true }).map((nota, i) => (
+                  <p key={i} dangerouslySetInnerHTML={{ __html: nota }} />
+                ))}
               </div>
               <button onClick={confirmarRestauracion} disabled={restaurando} className="btn-primary w-full">
-                {restaurando ? 'Restaurando...' : 'Sí, restaurar esta copia'}
+                {restaurando ? t('copias.restaurando') : t('copias.siRestaurarBtn')}
               </button>
             </div>
           </div>

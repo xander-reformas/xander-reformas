@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
 
-const ESTADOS = [
-  { value: 'borrador',  label: 'Borrador',  color: 'bg-stone/20 text-ink-soft' },
-  { value: 'enviada',   label: 'Enviada',   color: 'bg-blue-100 text-blue-700' },
-  { value: 'vista',     label: 'Vista',     color: 'bg-purple-100 text-purple-700' },
-  { value: 'pagada',    label: 'Pagada',    color: 'bg-green-100 text-green-700' },
-  { value: 'vencida',   label: 'Vencida',   color: 'bg-red-100 text-red-600' },
-  { value: 'anulada',   label: 'Anulada',   color: 'bg-stone/30 text-ink-soft line-through' },
+const ESTADOS_META = [
+  { value: 'borrador',  color: 'bg-stone/20 text-ink-soft' },
+  { value: 'enviada',   color: 'bg-blue-100 text-blue-700' },
+  { value: 'vista',     color: 'bg-purple-100 text-purple-700' },
+  { value: 'pagada',    color: 'bg-green-100 text-green-700' },
+  { value: 'vencida',   color: 'bg-red-100 text-red-600' },
+  { value: 'anulada',   color: 'bg-stone/30 text-ink-soft line-through' },
 ]
 
 const UNIDADES = ['ud', 'm²', 'm³', 'ml', 'm', 'h', 'kg', 'l', 'pa', 'gl']
@@ -27,6 +28,7 @@ function calculos(items, iva, descuento, retencion) {
 const ITEM_EMPTY = { titulo: '', detalle: '', cantidad: '1', unidad: 'ud', precio_unitario: '', importe: '' }
 
 function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, onCancel, initialFromPres }) {
+  const { t } = useTranslation()
   const hoy = new Date().toISOString().split('T')[0]
   const [form, setForm] = useState({
     numero: '', cliente_id: '', obra_id: '', presupuesto_id: '',
@@ -110,7 +112,7 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
 
   async function save(e) {
     e.preventDefault()
-    if (!form.numero.trim()) { setError('El número de factura es obligatorio'); return }
+    if (!form.numero.trim()) { setError(t('facturas.form.numeroRequerido')); return }
     setSaving(true); setError('')
     const user_id = await getUID()
     const payload = {
@@ -158,11 +160,11 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
         <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
           <div>
             <h2 className="text-lg font-bold text-ink flex items-center gap-2">
-              {editData ? 'Editar factura' : 'Nueva factura'}
-              {locked && <span className="text-xs font-semibold bg-navy text-gold px-2 py-0.5 rounded-full">🔒 Verifactu</span>}
+              {editData ? t('facturas.form.editTitle') : t('facturas.form.newTitle')}
+              {locked && <span className="text-xs font-semibold bg-navy text-gold px-2 py-0.5 rounded-full">{t('facturas.form.verifactuBadge')}</span>}
             </h2>
             {initialFromPres && !editData && (
-              <p className="text-xs text-green-700 mt-0.5">📋 Creada desde presupuesto {initialFromPres.numero}</p>
+              <p className="text-xs text-green-700 mt-0.5">{t('facturas.form.fromPresupuesto', { numero: initialFromPres.numero })}</p>
             )}
           </div>
           <button onClick={onCancel} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
@@ -171,20 +173,18 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
         <form onSubmit={save} className="p-6 space-y-6">
           {locked && (
             <div className="bg-navy/5 border border-navy/20 rounded-xl p-4 text-sm text-ink">
-              🔒 Esta factura ya está registrada en el libro Verifactu (RD 1007/2023): número, fecha, líneas, IVA, descuento, retención y cliente
-              no se pueden modificar. Solo puedes cambiar el estado, la obra asociada, el vencimiento o las notas. Para corregir un dato económico,
-              emite una factura rectificativa.
+              {t('facturas.form.lockedNotice')}
             </div>
           )}
 
           {/* Importar desde presupuesto (solo si no viene de navigate) */}
           {!editData && !initialFromPres && presFiltrados.length > 0 && (
             <div className="bg-gold/10 border border-gold/30 rounded-xl p-4">
-              <label className="label text-gold-dark">⚡ Importar desde presupuesto aceptado</label>
+              <label className="label text-gold-dark">{t('facturas.form.importarPresupuestoLabel')}</label>
               <select className="input mt-1" value={form.presupuesto_id} onChange={e => importarDesdePresupuesto(e.target.value)}>
-                <option value="">Crear factura desde cero</option>
+                <option value="">{t('facturas.form.crearDesdeCero')}</option>
                 {presFiltrados.map(p => (
-                  <option key={p.id} value={p.id}>{p.numero} — {p.clientes?.nombre || 'Sin cliente'}</option>
+                  <option key={p.id} value={p.id}>{p.numero} — {p.clientes?.nombre || t('facturas.form.sinCliente')}</option>
                 ))}
               </select>
             </div>
@@ -193,37 +193,37 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
           {/* Datos básicos */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div>
-              <label className="label">Número *</label>
+              <label className="label">{t('facturas.form.numeroLabel')}</label>
               <input className="input" value={form.numero} onChange={e => setF('numero', e.target.value)} placeholder="FAC-2026-001" required disabled={locked} />
             </div>
             <div>
-              <label className="label">Estado</label>
+              <label className="label">{t('facturas.form.estadoLabel')}</label>
               <select className="input" value={form.estado} onChange={e => setF('estado', e.target.value)}>
-                {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                {ESTADOS_META.map(s => <option key={s.value} value={s.value}>{t(`facturas.estado.${s.value}`)}</option>)}
               </select>
             </div>
             <div>
-              <label className="label">Fecha emisión</label>
+              <label className="label">{t('facturas.form.fechaEmisionLabel')}</label>
               <input className="input" type="date" value={form.fecha} onChange={e => setF('fecha', e.target.value)} disabled={locked} />
             </div>
             <div>
-              <label className="label">Vencimiento</label>
+              <label className="label">{t('facturas.form.vencimientoLabel')}</label>
               <input className="input" type="date" value={form.vencimiento} onChange={e => setF('vencimiento', e.target.value)} />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="label">Cliente</label>
+              <label className="label">{t('facturas.form.clienteLabel')}</label>
               <select className="input" value={form.cliente_id} onChange={e => { setF('cliente_id', e.target.value); setF('obra_id', '') }} disabled={locked}>
-                <option value="">Sin cliente</option>
+                <option value="">{t('facturas.form.sinCliente')}</option>
                 {clientes.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}
               </select>
             </div>
             <div>
-              <label className="label">Obra</label>
+              <label className="label">{t('facturas.form.obraLabel')}</label>
               <select className="input" value={form.obra_id} onChange={e => setF('obra_id', e.target.value)}>
-                <option value="">Sin obra</option>
+                <option value="">{t('facturas.form.sinObra')}</option>
                 {obrasFiltradas.map(o => <option key={o.id} value={o.id}>{o.nombre}</option>)}
               </select>
             </div>
@@ -232,8 +232,8 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
           {/* Líneas */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Líneas de factura</label>
-              {!locked && <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">+ Añadir línea</button>}
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">{t('facturas.form.lineasLabel')}</label>
+              {!locked && <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">{t('facturas.form.addLinea')}</button>}
             </div>
             <div className="space-y-3">
               {items.map((item, i) => (
@@ -243,31 +243,31 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
                   )}
                   <div className="pr-6 space-y-3">
                     <div>
-                      <label className="label">Descripción</label>
-                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Trabajos ejecutados en reforma de baño" disabled={locked} />
+                      <label className="label">{t('facturas.form.descripcionLabel')}</label>
+                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder={t('facturas.form.descripcionPlaceholder')} disabled={locked} />
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       <div>
-                        <label className="label">Unidad</label>
+                        <label className="label">{t('facturas.form.unidadLabel')}</label>
                         <select className="input bg-surface" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)} disabled={locked}>
                           {UNIDADES.map(u => <option key={u} value={u}>{u}</option>)}
                         </select>
                       </div>
                       <div>
-                        <label className="label">Cantidad</label>
+                        <label className="label">{t('facturas.form.cantidadLabel')}</label>
                         <input className="input bg-surface" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" disabled={locked} />
                       </div>
                       <div>
-                        <label className="label">Precio / ud (€)</label>
+                        <label className="label">{t('facturas.form.precioUdLabel')}</label>
                         <input className="input bg-surface" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" disabled={locked} />
                       </div>
                       <div>
-                        <label className="label">Importe (€)</label>
+                        <label className="label">{t('facturas.form.importeLabel')}</label>
                         <input className="input bg-surface font-semibold text-ink" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" disabled={locked} />
                       </div>
                     </div>
                     <div>
-                      <label className="label">Detalle (opcional)</label>
+                      <label className="label">{t('facturas.form.detalleLabel')}</label>
                       <textarea className="input bg-surface resize-none h-12 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} disabled={locked} />
                     </div>
                   </div>
@@ -279,27 +279,27 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
           {/* Totales */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div>
-              <label className="label">Notas / observaciones</label>
-              <textarea className="input resize-none h-24 text-sm" value={form.notas} onChange={e => setF('notas', e.target.value)} placeholder="Condiciones de pago, nº de cuenta, etc." />
+              <label className="label">{t('facturas.form.notasLabel')}</label>
+              <textarea className="input resize-none h-24 text-sm" value={form.notas} onChange={e => setF('notas', e.target.value)} placeholder={t('facturas.form.notasPlaceholder')} />
             </div>
 
             <div className="bg-navy rounded-xl p-5 text-white space-y-3">
               <div className="grid grid-cols-3 gap-2 mb-2">
                 <div>
-                  <label className="text-xs text-white/60 block mb-1.5 font-semibold">IVA (%)</label>
+                  <label className="text-xs text-white/60 block mb-1.5 font-semibold">{t('facturas.form.ivaLabel')}</label>
                   <select
                     className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none disabled:opacity-60"
                     value={form.iva}
                     onChange={e => setF('iva', e.target.value)}
                     disabled={locked}
                   >
-                    <option value="0">0% — Sin IVA</option>
-                    <option value="10">10% — Residencial</option>
-                    <option value="21">21% — Local / Obra nueva / Empresa / Inversor</option>
+                    <option value="0">{t('facturas.form.ivaOptions.sinIva')}</option>
+                    <option value="10">{t('facturas.form.ivaOptions.residencial')}</option>
+                    <option value="21">{t('facturas.form.ivaOptions.general')}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs text-white/60 block mb-1.5 font-semibold">Dto. (%)</label>
+                  <label className="text-xs text-white/60 block mb-1.5 font-semibold">{t('facturas.form.dtoLabel')}</label>
                   <input
                     className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none disabled:opacity-60"
                     type="number" min="0" max="100" step="0.5"
@@ -309,7 +309,7 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-white/60 block mb-1.5 font-semibold">Ret. IRPF (%)</label>
+                  <label className="text-xs text-white/60 block mb-1.5 font-semibold">{t('facturas.form.retLabel')}</label>
                   <input
                     className="w-full rounded-lg px-2 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none disabled:opacity-60"
                     type="number" min="0" max="25" step="0.5"
@@ -323,27 +323,27 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
 
               <div className="border-t border-white/10 pt-3 space-y-2">
                 <div className="flex justify-between text-sm text-white/70">
-                  <span>Base imponible</span>
+                  <span>{t('facturas.form.baseImponible')}</span>
                   <span>{base.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                 </div>
                 {dto > 0 && (
                   <div className="flex justify-between text-sm text-white/70">
-                    <span>Descuento ({form.descuento}%)</span>
+                    <span>{t('facturas.form.descuentoLine', { pct: form.descuento })}</span>
                     <span>−{dto.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm text-white/70">
-                  <span>IVA ({form.iva}%)</span>
+                  <span>{t('facturas.form.ivaLine', { pct: form.iva })}</span>
                   <span>+{ivaImporte.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                 </div>
                 {retImporte > 0 && (
                   <div className="flex justify-between text-sm text-white/70">
-                    <span>Ret. IRPF ({form.retencion}%)</span>
+                    <span>{t('facturas.form.retLine', { pct: form.retencion })}</span>
                     <span className="text-red-300">−{retImporte.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                   </div>
                 )}
                 <div className="border-t border-white/20 pt-2 flex justify-between font-bold text-lg">
-                  <span className="text-gold">TOTAL</span>
+                  <span className="text-gold">{t('facturas.form.total')}</span>
                   <span className="text-gold">{total.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                 </div>
               </div>
@@ -352,8 +352,8 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
 
           {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onCancel} className="btn-secondary flex-1">Cancelar</button>
-            <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Guardando…' : 'Guardar factura'}</button>
+            <button type="button" onClick={onCancel} className="btn-secondary flex-1">{t('facturas.form.cancel')}</button>
+            <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? t('facturas.form.saving') : t('facturas.form.save')}</button>
           </div>
         </form>
       </div>
@@ -362,6 +362,7 @@ function FormFactura({ editData, locked, clientes, obras, presupuestos, onSave, 
 }
 
 function FacturaVista({ factura, obra, onClose }) {
+  const { t } = useTranslation()
   const { profile } = useAuth()
   const [cliente, setCliente] = useState(null)
   const [registro, setRegistro] = useState(null)
@@ -399,52 +400,52 @@ function FacturaVista({ factura, obra, onClose }) {
     <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto">
       <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-2xl my-4">
         <div className="px-6 py-4 border-b border-edge flex items-center justify-between no-print">
-          <h2 className="text-lg font-bold text-ink">Factura {factura.numero}</h2>
+          <h2 className="text-lg font-bold text-ink">{t('facturas.vista.title', { numero: factura.numero })}</h2>
           <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
 
         {loading ? (
-          <div className="p-10 text-center text-ink-soft text-sm">Cargando…</div>
+          <div className="p-10 text-center text-ink-soft text-sm">{t('facturas.vista.loading')}</div>
         ) : (
           <div className="print-area p-8 text-sm text-ink">
             {/* Cabecera: empresa vs cliente */}
             <div className="flex justify-between items-start gap-6 mb-8">
               <div>
-                <div className="text-lg font-black text-ink">{profile?.empresa_nombre || 'Mi empresa'}</div>
-                {profile?.empresa_nif && <div className="text-ink-soft">NIF: {profile.empresa_nif}</div>}
+                <div className="text-lg font-black text-ink">{profile?.empresa_nombre || t('facturas.vista.empresaDefault')}</div>
+                {profile?.empresa_nif && <div className="text-ink-soft">{t('facturas.vista.nif', { nif: profile.empresa_nif })}</div>}
                 {profile?.empresa_direccion && <div className="text-ink-soft">{profile.empresa_direccion}</div>}
                 {(profile?.empresa_cp || profile?.empresa_ciudad) && (
                   <div className="text-ink-soft">{[profile?.empresa_cp, profile?.empresa_ciudad].filter(Boolean).join(' ')}</div>
                 )}
-                {profile?.empresa_telefono && <div className="text-ink-soft">Tel: {profile.empresa_telefono}</div>}
+                {profile?.empresa_telefono && <div className="text-ink-soft">{t('facturas.vista.tel', { tel: profile.empresa_telefono })}</div>}
                 {profile?.empresa_email && <div className="text-ink-soft">{profile.empresa_email}</div>}
               </div>
               <div className="text-right">
-                <div className="text-2xl font-black text-navy">FACTURA</div>
+                <div className="text-2xl font-black text-navy">{t('facturas.vista.title', { numero: '' }).split(' ')[0]}</div>
                 <div className="font-bold text-ink">{factura.numero}</div>
-                <div className="text-ink-soft mt-1">Fecha: {factura.fecha ? new Date(factura.fecha).toLocaleDateString('es-ES') : '—'}</div>
-                {factura.vencimiento && <div className="text-ink-soft">Vencimiento: {new Date(factura.vencimiento).toLocaleDateString('es-ES')}</div>}
+                <div className="text-ink-soft mt-1">{t('facturas.vista.fecha', { fecha: factura.fecha ? new Date(factura.fecha).toLocaleDateString('es-ES') : '—' })}</div>
+                {factura.vencimiento && <div className="text-ink-soft">{t('facturas.vista.vencimiento', { fecha: new Date(factura.vencimiento).toLocaleDateString('es-ES') })}</div>}
               </div>
             </div>
 
             {/* Cliente */}
             <div className="bg-page rounded-xl p-4 mb-6">
-              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5">Facturar a</div>
-              <div className="font-bold text-ink">{cliente?.nombre || factura.clientes?.nombre || 'Sin cliente'}</div>
-              {cliente?.nif && <div className="text-ink-soft">NIF: {cliente.nif}</div>}
+              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5">{t('facturas.vista.facturarA')}</div>
+              <div className="font-bold text-ink">{cliente?.nombre || factura.clientes?.nombre || t('facturas.vista.sinCliente')}</div>
+              {cliente?.nif && <div className="text-ink-soft">{t('facturas.vista.nif', { nif: cliente.nif })}</div>}
               {cliente?.direccion && <div className="text-ink-soft">{cliente.direccion}</div>}
               {(cliente?.cp || cliente?.ciudad) && <div className="text-ink-soft">{[cliente?.cp, cliente?.ciudad].filter(Boolean).join(' ')}</div>}
-              {obra?.nombre && <div className="text-ink-soft mt-1">Obra: {obra.nombre}</div>}
+              {obra?.nombre && <div className="text-ink-soft mt-1">{t('facturas.vista.obra', { nombre: obra.nombre })}</div>}
             </div>
 
             {/* Líneas */}
             <table className="w-full mb-6">
               <thead>
                 <tr className="border-b-2 border-ink/20 text-xs uppercase tracking-wide text-ink-soft">
-                  <th className="text-left py-2">Descripción</th>
-                  <th className="text-right py-2">Cant.</th>
-                  <th className="text-right py-2">Precio/ud</th>
-                  <th className="text-right py-2">Importe</th>
+                  <th className="text-left py-2">{t('facturas.vista.descripcionCol')}</th>
+                  <th className="text-right py-2">{t('facturas.vista.cantidadCol')}</th>
+                  <th className="text-right py-2">{t('facturas.vista.precioUdCol')}</th>
+                  <th className="text-right py-2">{t('facturas.vista.importeCol')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -466,23 +467,23 @@ function FacturaVista({ factura, obra, onClose }) {
             <div className="flex justify-end mb-6">
               <div className="w-64 space-y-1.5">
                 <div className="flex justify-between text-ink-soft">
-                  <span>Base imponible</span><span>{fmt(base)}</span>
+                  <span>{t('facturas.vista.baseImponible')}</span><span>{fmt(base)}</span>
                 </div>
                 {dto > 0 && (
                   <div className="flex justify-between text-ink-soft">
-                    <span>Descuento ({factura.descuento}%)</span><span>−{fmt(dto)}</span>
+                    <span>{t('facturas.vista.descuentoLine', { pct: factura.descuento })}</span><span>−{fmt(dto)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-ink-soft">
-                  <span>IVA ({factura.iva}%)</span><span>+{fmt(ivaImporte)}</span>
+                  <span>{t('facturas.vista.ivaLine', { pct: factura.iva })}</span><span>+{fmt(ivaImporte)}</span>
                 </div>
                 {retImporte > 0 && (
                   <div className="flex justify-between text-ink-soft">
-                    <span>Ret. IRPF ({factura.retencion}%)</span><span>−{fmt(retImporte)}</span>
+                    <span>{t('facturas.vista.retLine', { pct: factura.retencion })}</span><span>−{fmt(retImporte)}</span>
                   </div>
                 )}
                 <div className="flex justify-between font-black text-base border-t-2 border-ink/20 pt-1.5 mt-1.5">
-                  <span>TOTAL</span><span>{fmt(total)}</span>
+                  <span>{t('facturas.vista.total')}</span><span>{fmt(total)}</span>
                 </div>
               </div>
             </div>
@@ -502,17 +503,17 @@ function FacturaVista({ factura, obra, onClose }) {
                       className="w-20 h-20 shrink-0"
                     />
                     <div className="text-[10px] leading-tight text-ink-soft">
-                      <div className="font-bold text-ink">VERI*FACTU</div>
-                      <div>Factura verificable en la sede electrónica de la AEAT.</div>
-                      {registro.verifacti_uuid && <div className="mt-0.5">Ref.: {registro.verifacti_uuid}</div>}
+                      <div className="font-bold text-ink">{t('facturas.vista.veriTitle')}</div>
+                      <div>{t('facturas.vista.veriDesc')}</div>
+                      {registro.verifacti_uuid && <div className="mt-0.5">{t('facturas.vista.veriRef', { uuid: registro.verifacti_uuid })}</div>}
                     </div>
                   </>
                 ) : (
                   <div className="text-[10px] leading-tight text-ink-soft">
-                    <div className="font-bold text-ink">Factura registrada en el sistema Verifactu (RD 1007/2023)</div>
-                    <div>Hash: {registro.hash?.slice(0, 24)}…</div>
-                    {!enviada && <div className="no-print mt-1 text-gold-dark">⚠️ Aún no se ha enviado a la AEAT — revisa el estado antes de entregarla al cliente.</div>}
-                    {registro.verifacti_error && <div className="no-print mt-1 text-red-600">⚠️ AEAT: {registro.verifacti_error}</div>}
+                    <div className="font-bold text-ink">{t('facturas.vista.registradaTitle')}</div>
+                    <div>{t('facturas.vista.hashLabel', { hash: registro.hash?.slice(0, 24) })}</div>
+                    {!enviada && <div className="no-print mt-1 text-gold-dark">{t('facturas.vista.noEnviada')}</div>}
+                    {registro.verifacti_error && <div className="no-print mt-1 text-red-600">{t('facturas.vista.aeatError', { error: registro.verifacti_error })}</div>}
                   </div>
                 )}
               </div>
@@ -521,8 +522,8 @@ function FacturaVista({ factura, obra, onClose }) {
         )}
 
         <div className="px-6 pb-6 pt-2 flex gap-3 no-print">
-          <button onClick={onClose} className="btn-secondary flex-1">Cerrar</button>
-          <button onClick={() => window.print()} className="btn-primary flex-1">🖨️ Imprimir / PDF</button>
+          <button onClick={onClose} className="btn-secondary flex-1">{t('facturas.vista.cerrar')}</button>
+          <button onClick={() => window.print()} className="btn-primary flex-1">{t('facturas.vista.imprimir')}</button>
         </div>
       </div>
     </div>
@@ -530,6 +531,7 @@ function FacturaVista({ factura, obra, onClose }) {
 }
 
 function CobroModal({ factura, url, onClose }) {
+  const { t } = useTranslation()
   const [copiado, setCopiado] = useState(false)
   function copiar() {
     navigator.clipboard?.writeText(url)
@@ -540,18 +542,15 @@ function CobroModal({ factura, url, onClose }) {
     <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
       <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-md">
         <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
-          <h2 className="text-lg font-bold text-ink">💳 Cobro con tarjeta — {factura.numero}</h2>
+          <h2 className="text-lg font-bold text-ink">{t('facturas.cobro.title', { numero: factura.numero })}</h2>
           <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
         <div className="p-6 space-y-4">
-          <p className="text-sm text-ink-soft">
-            Comparte este enlace con el cliente para que pague la factura con tarjeta. Cuando Stripe confirme el pago,
-            la factura pasará automáticamente a estado <strong className="text-ink">Pagada</strong>.
-          </p>
+          <p className="text-sm text-ink-soft">{t('facturas.cobro.desc')}</p>
           <div className="bg-page rounded-xl p-3 text-xs break-all text-ink-soft border border-edge">{url}</div>
           <div className="flex gap-3">
-            <button onClick={copiar} className="btn-secondary flex-1">{copiado ? '✓ Copiado' : '📋 Copiar enlace'}</button>
-            <a href={url} target="_blank" rel="noreferrer" className="btn-primary flex-1 text-center">Abrir enlace de pago</a>
+            <button onClick={copiar} className="btn-secondary flex-1">{copiado ? t('facturas.cobro.copiado') : t('facturas.cobro.copiar')}</button>
+            <a href={url} target="_blank" rel="noreferrer" className="btn-primary flex-1 text-center">{t('facturas.cobro.abrirEnlace')}</a>
           </div>
         </div>
       </div>
@@ -560,6 +559,7 @@ function CobroModal({ factura, url, onClose }) {
 }
 
 export default function Facturas() {
+  const { t } = useTranslation()
   const location = useLocation()
   const [facturas, setFacturas] = useState([])
   const [clientes, setClientes] = useState([])
@@ -621,7 +621,7 @@ export default function Facturas() {
     const { data, error: err } = await supabase.functions.invoke('stripe-crear-cobro', { body: { factura_id: f.id } })
     setCobrando(null)
     if (err || data?.error) {
-      alert(data?.error || err.message || 'No se pudo generar el enlace de pago.')
+      alert(data?.error || err.message || t('facturas.list.noEnlacePago'))
       return
     }
     setCobroLink({ factura: f, url: data.url })
@@ -629,17 +629,17 @@ export default function Facturas() {
 
   async function remove(id, numero) {
     if (lockedIds.has(id)) {
-      alert('Esta factura ya está registrada en el libro Verifactu y no se puede eliminar. Emite una factura rectificativa o anúlala.')
+      alert(t('facturas.list.cannotDeleteLocked'))
       return
     }
-    if (!confirm(`¿Eliminar la factura ${numero}?`)) return
+    if (!confirm(t('facturas.list.confirmDelete', { numero }))) return
     const { error: err } = await supabase.from('facturas').delete().eq('id', id)
     if (err) { alert(err.message); return }
     load()
   }
 
   async function anular(id, numero) {
-    const motivo = prompt(`Vas a anular la factura ${numero}. Queda registrada como anulada en el libro Verifactu (no se borra). ¿Motivo? (opcional)`)
+    const motivo = prompt(t('facturas.list.anularPrompt', { numero }))
     if (motivo === null) return // cancelado
     const { error: err } = await supabase.rpc('verifactu_anular_factura', { p_factura_id: id, p_motivo: motivo || null })
     if (err) { alert(err.message); return }
@@ -655,75 +655,79 @@ export default function Facturas() {
   const totalFacturado = facturasValidas.reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
   const totalCobrado = facturasValidas.filter(f => f.estado === 'pagada').reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
   const pendienteCobro = facturasValidas.filter(f => ['enviada', 'vista'].includes(f.estado)).reduce((s, f) => s + calculos(f.items || [], f.iva, f.descuento, f.retencion).total, 0)
+  const pagadasCount = facturas.filter(f => f.estado === 'pagada').length
+  const circulacionCount = facturas.filter(f => ['enviada', 'vista'].includes(f.estado)).length
 
   return (
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-ink">Facturas</h1>
-          <p className="text-sm text-ink-soft mt-0.5">{facturas.length} factura{facturas.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-2xl font-bold text-ink">{t('facturas.list.title')}</h1>
+          <p className="text-sm text-ink-soft mt-0.5">
+            {t(facturas.length === 1 ? 'facturas.list.countOne' : 'facturas.list.countOther', { count: facturas.length })}
+          </p>
         </div>
-        <button onClick={openNew} className="btn-primary">+ Nueva factura</button>
+        <button onClick={openNew} className="btn-primary">{t('facturas.list.newFactura')}</button>
       </div>
 
       {/* Métricas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="card border-l-4 border-l-navy">
-          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Facturado (total)</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">{t('facturas.list.facturadoLabel')}</div>
           <div className="text-2xl font-bold text-ink">{fmt(totalFacturado)}</div>
-          <div className="text-xs text-ink-soft mt-1">{facturas.length} facturas</div>
+          <div className="text-xs text-ink-soft mt-1">{t(facturas.length === 1 ? 'facturas.list.facturasCountOne' : 'facturas.list.facturasCountOther', { count: facturas.length })}</div>
         </div>
         <div className="card border-l-4 border-l-green-500">
-          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Cobrado</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">{t('facturas.list.cobradoLabel')}</div>
           <div className="text-2xl font-bold text-green-700">{fmt(totalCobrado)}</div>
-          <div className="text-xs text-ink-soft mt-1">{facturas.filter(f => f.estado === 'pagada').length} pagadas</div>
+          <div className="text-xs text-ink-soft mt-1">{t(pagadasCount === 1 ? 'facturas.list.pagadasCountOne' : 'facturas.list.pagadasCountOther', { count: pagadasCount })}</div>
         </div>
         <div className="card border-l-4 border-l-gold">
-          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">Pendiente cobro</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft mb-1">{t('facturas.list.pendienteLabel')}</div>
           <div className="text-2xl font-bold text-gold-dark">{fmt(pendienteCobro)}</div>
-          <div className="text-xs text-ink-soft mt-1">{facturas.filter(f => ['enviada', 'vista'].includes(f.estado)).length} en circulación</div>
+          <div className="text-xs text-ink-soft mt-1">{t(circulacionCount === 1 ? 'facturas.list.circulacionCountOne' : 'facturas.list.circulacionCountOther', { count: circulacionCount })}</div>
         </div>
       </div>
 
       {/* Filtros */}
       <div className="flex flex-wrap gap-2 mb-5">
         <button onClick={() => setFiltroEstado('')} className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${!filtroEstado ? 'bg-navy text-white border-navy' : 'border-edge text-ink-soft hover:border-navy hover:text-ink'}`}>
-          Todas ({facturas.length})
+          {t('facturas.list.todas', { count: facturas.length })}
         </button>
-        {ESTADOS.map(s => {
+        {ESTADOS_META.map(s => {
           const count = facturas.filter(f => f.estado === s.value).length
           return (
             <button key={s.value} onClick={() => setFiltroEstado(filtroEstado === s.value ? '' : s.value)}
               className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${filtroEstado === s.value ? 'bg-navy text-white border-navy' : 'border-edge text-ink-soft hover:border-navy hover:text-ink'}`}>
-              {s.label} ({count})
+              {t(`facturas.estado.${s.value}`)} ({count})
             </button>
           )
         })}
       </div>
 
       <div className="mb-5">
-        <input className="input max-w-xs" placeholder="🔍  Buscar nº, cliente…" value={search} onChange={e => setSearch(e.target.value)} />
+        <input className="input max-w-xs" placeholder={t('facturas.list.searchPlaceholder')} value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
       {loading ? (
-        <div className="text-ink-soft text-sm py-10 text-center">Cargando facturas…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">{t('facturas.list.loading')}</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">📄</div>
-          <div className="font-bold text-ink mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes facturas'}</div>
-          {!search && !filtroEstado && <button onClick={openNew} className="btn-primary mt-4">+ Nueva factura</button>}
+          <div className="font-bold text-ink mb-1">{search || filtroEstado ? t('facturas.list.noResultsTitle') : t('facturas.list.noFacturasTitle')}</div>
+          {!search && !filtroEstado && <button onClick={openNew} className="btn-primary mt-4">{t('facturas.list.newFactura')}</button>}
         </div>
       ) : (
         <div className="card p-0 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
-                <th className="text-left px-5 py-3">Número</th>
-                <th className="text-left px-4 py-3 hidden md:table-cell">Cliente</th>
-                <th className="text-left px-4 py-3 hidden lg:table-cell">Fecha</th>
-                <th className="text-left px-4 py-3 hidden lg:table-cell">Vencimiento</th>
-                <th className="text-left px-4 py-3">Estado</th>
-                <th className="text-right px-5 py-3">Total</th>
+                <th className="text-left px-5 py-3">{t('facturas.list.table.numero')}</th>
+                <th className="text-left px-4 py-3 hidden md:table-cell">{t('facturas.list.table.cliente')}</th>
+                <th className="text-left px-4 py-3 hidden lg:table-cell">{t('facturas.list.table.fecha')}</th>
+                <th className="text-left px-4 py-3 hidden lg:table-cell">{t('facturas.list.table.vencimiento')}</th>
+                <th className="text-left px-4 py-3">{t('facturas.list.table.estado')}</th>
+                <th className="text-right px-5 py-3">{t('facturas.list.table.total')}</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -737,19 +741,19 @@ export default function Facturas() {
                       <div className={`font-bold text-ink flex items-center gap-1.5 ${f.estado === 'anulada' ? 'line-through opacity-50' : ''}`}>
                         {f.numero}
                         {f.estado === 'anulada' && (
-                          <span title="Factura anulada" className="text-[10px] font-semibold bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full">🚫 anulada</span>
+                          <span title={t('facturas.list.anuladaTitle')} className="text-[10px] font-semibold bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full">{t('facturas.list.anuladaBadge')}</span>
                         )}
                         {lockedIds.has(f.id) && (
-                          <span title="Registrada en el libro Verifactu — datos económicos bloqueados" className="text-[10px] font-semibold bg-navy text-gold px-1.5 py-0.5 rounded-full">🔒</span>
+                          <span title={t('facturas.list.lockedTitle')} className="text-[10px] font-semibold bg-navy text-gold px-1.5 py-0.5 rounded-full">🔒</span>
                         )}
                         {verifactiEstados[f.id] === 'pendiente' && (
-                          <span title="Enviada a la AEAT, esperando confirmación" className="text-[10px]">🕓</span>
+                          <span title={t('facturas.list.pendienteAeatTitle')} className="text-[10px]">🕓</span>
                         )}
                         {verifactiEstados[f.id] === 'aceptado' && (
-                          <span title="Aceptada por la AEAT" className="text-[10px]">✅</span>
+                          <span title={t('facturas.list.aceptadaAeatTitle')} className="text-[10px]">✅</span>
                         )}
                         {(verifactiEstados[f.id] === 'rechazado' || verifactiEstados[f.id] === 'error' || verifactiEstados[f.id] === 'aceptado_con_errores') && (
-                          <span title={`AEAT: ${verifactiEstados[f.id]}`} className="text-[10px]">⚠️</span>
+                          <span title={t('facturas.list.aeatEstadoTitle', { estado: verifactiEstados[f.id] })} className="text-[10px]">⚠️</span>
                         )}
                       </div>
                       {f.obras?.nombre && <div className="text-xs text-ink-soft mt-0.5">{f.obras.nombre}</div>}
@@ -770,13 +774,13 @@ export default function Facturas() {
                         disabled={f.estado === 'anulada'}
                         className="text-xs font-semibold bg-transparent border-none focus:outline-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
                         onClick={e => e.stopPropagation()}>
-                        {ESTADOS.filter(s => s.value !== 'anulada' || f.estado === 'anulada').map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                        {ESTADOS_META.filter(s => s.value !== 'anulada' || f.estado === 'anulada').map(s => <option key={s.value} value={s.value}>{t(`facturas.estado.${s.value}`)}</option>)}
                       </select>
                     </td>
                     <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
                     <td className="px-4 py-3.5 text-right whitespace-nowrap">
                       <button onClick={() => setVerData(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
-                        🧾 Factura
+                        {t('facturas.list.verFactura')}
                       </button>
                       {f.estado !== 'pagada' && f.estado !== 'anulada' && (
                         <button
@@ -784,26 +788,26 @@ export default function Facturas() {
                           disabled={cobrando === f.id}
                           className="text-green-700 hover:text-green-800 text-xs font-semibold mr-4 disabled:opacity-50"
                         >
-                          {cobrando === f.id ? 'Generando…' : '💳 Cobrar'}
+                          {cobrando === f.id ? t('facturas.list.cobrando') : t('facturas.list.cobrar')}
                         </button>
                       )}
                       <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">
-                        {lockedIds.has(f.id) ? 'Ver' : 'Editar'}
+                        {lockedIds.has(f.id) ? t('facturas.list.ver') : t('facturas.list.editar')}
                       </button>
                       {lockedIds.has(f.id) ? (
                         f.estado === 'anulada' ? (
-                          <span className="text-ink-soft/40 text-xs">Anulada</span>
+                          <span className="text-ink-soft/40 text-xs">{t('facturas.list.anuladaLabel')}</span>
                         ) : (
                           <button
                             onClick={() => anular(f.id, f.numero)}
-                            title="Anular esta factura (queda registrada como anulada, no se borra)"
+                            title={t('facturas.list.anularTitle')}
                             className="text-ink-soft/60 hover:text-red-500 text-xs font-semibold"
                           >
-                            🚫 Anular
+                            {t('facturas.list.anularBtn')}
                           </button>
                         )
                       ) : (
-                        <button onClick={() => remove(f.id, f.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
+                        <button onClick={() => remove(f.id, f.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">{t('facturas.list.eliminar')}</button>
                       )}
                     </td>
                   </tr>

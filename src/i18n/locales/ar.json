@@ -151,5 +151,1693 @@
         "until": "حتى"
       }
     }
+  },
+  "clientes": {
+    "title": "العملاء",
+    "countOne": "{{count}} عميل إجمالاً",
+    "countOther": "{{count}} عملاء إجمالاً",
+    "newCliente": "+ عميل جديد",
+    "searchPlaceholder": "🔍  ابحث بالاسم أو البريد الإلكتروني أو المدينة…",
+    "loading": "جارٍ تحميل العملاء…",
+    "noResultsTitle": "لا توجد نتائج",
+    "noResultsHint": "جرّب بحثًا آخر",
+    "noClientesTitle": "ليس لديك أي عملاء بعد",
+    "noClientesHint": "أضف عميلك الأول لبدء إدارة المشاريع والعروض",
+    "addFirst": "+ إضافة عميل",
+    "table": {
+      "nombreNif": "الاسم / الرقم الضريبي",
+      "telefono": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "ciudad": "المدينة"
+    },
+    "editar": "تعديل",
+    "eliminar": "حذف",
+    "confirmDelete": "حذف \"{{nombre}}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "editTitle": "تعديل العميل",
+      "newTitle": "عميل جديد",
+      "nombreLabel": "الاسم *",
+      "nifLabel": "الرقم الضريبي",
+      "telefonoLabel": "الهاتف",
+      "emailLabel": "البريد الإلكتروني",
+      "direccionLabel": "العنوان",
+      "cpLabel": "الرمز البريدي",
+      "ciudadLabel": "المدينة",
+      "notasLabel": "ملاحظات داخلية",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ العميل"
+    }
+  },
+  "rentabilidad": {
+    "title": "الربحية حسب المشروع",
+    "subtitle": "مقارنة الميزانية بالتكلفة الفعلية · هامش كل مشروع",
+    "totalPresupuestado": "إجمالي الميزانية",
+    "costeRealAcumulado": "التكلفة الفعلية المتراكمة",
+    "beneficioNeto": "صافي الربح",
+    "margenGlobal": "الهامش الإجمالي",
+    "distribucionTitle": "توزيع الربحية",
+    "dist": {
+      "excelente": "ممتاز",
+      "buena": "جيد",
+      "justa": "مقبول",
+      "negativa": "سلبي"
+    },
+    "allStates": "جميع الحالات",
+    "orden": {
+      "margenDesc": "الأعلى هامشًا أولاً",
+      "margenAsc": "الأقل هامشًا أولاً",
+      "presupuestoDesc": "الأعلى ميزانية أولاً",
+      "nombre": "حسب الاسم"
+    },
+    "loading": "جارٍ تحميل المشاريع…",
+    "emptyTitle": "لا توجد مشاريع للتحليل",
+    "emptyHint": "أنشئ مشاريع وأضف التكاليف لعرض الربحية",
+    "presupuestado": "الميزانية",
+    "costeReal": "التكلفة الفعلية",
+    "facturado": "المفوتر",
+    "beneficio": "الربح",
+    "sinDato": "لا توجد بيانات",
+    "sinFactura": "بدون فاتورة",
+    "margen": "الهامش",
+    "tipFaltaInfo": "💡 أضف الميزانية الإجمالية والتكلفة الفعلية للمشروع لعرض الربحية"
+  },
+  "presupuestos": {
+    "estado": {
+      "borrador": "مسودة",
+      "enviado": "مُرسل",
+      "aceptado": "مقبول",
+      "rechazado": "مرفوض",
+      "expirado": "منتهي الصلاحية"
+    },
+    "form": {
+      "editTitle": "تعديل عرض السعر",
+      "newTitle": "عرض سعر جديد",
+      "numeroLabel": "الرقم *",
+      "referenciaLabel": "المرجع",
+      "fechaLabel": "التاريخ",
+      "validezLabel": "مدة الصلاحية (أيام)",
+      "clienteLabel": "العميل",
+      "sinCliente": "بدون عميل",
+      "obraLabel": "المشروع",
+      "sinObra": "بدون مشروع",
+      "estadoLabel": "الحالة",
+      "partidasLabel": "بنود عرض السعر",
+      "addPartida": "+ إضافة بند",
+      "tituloLabel": "الوصف / العنوان",
+      "tituloPlaceholder": "تجديد الحمام — الهدم والتبليط",
+      "unidadLabel": "الوحدة",
+      "cantidadLabel": "الكمية",
+      "precioUdLabel": "السعر / الوحدة (€)",
+      "importeLabel": "المبلغ (€)",
+      "detalleLabel": "التفاصيل (اختياري)",
+      "detallePlaceholder": "يشمل: إزالة البلاط الحالي، تبليط جديد حتى السقف…",
+      "noIncluidoLabel": "غير مشمول (سطر لكل بند)",
+      "condicionesLabel": "الشروط (سطر لكل بند)",
+      "notasLabel": "ملاحظات داخلية",
+      "ivaLabel": "ضريبة القيمة المضافة (%)",
+      "ivaOptions": {
+        "sinIva": "0% — بدون ضريبة",
+        "residencial": "10% — سكني",
+        "general": "21% — تجاري / بناء جديد / شركة / مستثمر"
+      },
+      "descuentoLabel": "الخصم (%)",
+      "baseImponible": "الوعاء الضريبي",
+      "descuentoLine": "الخصم ({{pct}}%)",
+      "ivaLine": "الضريبة ({{pct}}%)",
+      "total": "الإجمالي",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ عرض السعر",
+      "numeroRequerido": "رقم عرض السعر مطلوب"
+    },
+    "list": {
+      "title": "عروض الأسعار",
+      "countOne": "{{count}} عرض سعر",
+      "countOther": "{{count}} عروض أسعار",
+      "newPresupuesto": "+ عرض سعر جديد",
+      "aceptados": "✓ عروض الأسعار المقبولة:",
+      "searchPlaceholder": "🔍  ابحث بالرقم أو العميل أو المشروع…",
+      "allStates": "جميع الحالات",
+      "loading": "جارٍ تحميل عروض الأسعار…",
+      "noResultsTitle": "لا توجد نتائج",
+      "noPresupuestosTitle": "ليس لديك أي عروض أسعار بعد",
+      "noPresupuestosHint": "أنشئ أول عرض سعر احترافي لك",
+      "table": {
+        "numero": "الرقم",
+        "clienteObra": "العميل / المشروع",
+        "fecha": "التاريخ",
+        "vence": "تاريخ الانتهاء",
+        "estado": "الحالة",
+        "total": "الإجمالي"
+      },
+      "firmadoTitle": "وقّعه {{nombre}} بتاريخ {{fecha}}",
+      "vencido": "منتهي الصلاحية",
+      "venceHoy": "ينتهي اليوم",
+      "diasRestanteOne": "متبقٍ {{count}} يوم",
+      "diasRestanteOther": "متبقٍ {{count}} أيام",
+      "crearFactura": "📄 فاتورة",
+      "crearFacturaTitle": "إنشاء فاتورة من عرض السعر هذا",
+      "firmar": "✍️ توقيع",
+      "firmarTitle": "توقيع وقبول عرض السعر هذا",
+      "editar": "تعديل",
+      "eliminar": "حذف",
+      "confirmDelete": "حذف عرض السعر {{numero}}؟"
+    },
+    "firmarModalTitle": "توقيع عرض السعر {{numero}}"
+  },
+  "facturas": {
+    "estado": {
+      "borrador": "مسودة",
+      "enviada": "مُرسلة",
+      "vista": "تمت المشاهدة",
+      "pagada": "مدفوعة",
+      "vencida": "متأخرة",
+      "anulada": "ملغاة"
+    },
+    "form": {
+      "editTitle": "تعديل الفاتورة",
+      "newTitle": "فاتورة جديدة",
+      "verifactuBadge": "🔒 Verifactu",
+      "fromPresupuesto": "📋 أُنشئت من عرض السعر {{numero}}",
+      "lockedNotice": "🔒 هذه الفاتورة مسجلة بالفعل في سجل Verifactu (RD 1007/2023): لا يمكن تعديل الرقم أو التاريخ أو البنود أو الضريبة أو الخصم أو الاستقطاع أو العميل. يمكنك فقط تغيير الحالة أو المشروع المرتبط أو تاريخ الاستحقاق أو الملاحظات. لتصحيح بيانات مالية، أصدر فاتورة تصحيحية.",
+      "importarPresupuestoLabel": "⚡ الاستيراد من عرض سعر مقبول",
+      "crearDesdeCero": "إنشاء فاتورة من الصفر",
+      "numeroLabel": "الرقم *",
+      "estadoLabel": "الحالة",
+      "fechaEmisionLabel": "تاريخ الإصدار",
+      "vencimientoLabel": "تاريخ الاستحقاق",
+      "clienteLabel": "العميل",
+      "sinCliente": "بدون عميل",
+      "obraLabel": "المشروع",
+      "sinObra": "بدون مشروع",
+      "lineasLabel": "بنود الفاتورة",
+      "addLinea": "+ إضافة بند",
+      "descripcionLabel": "الوصف",
+      "descripcionPlaceholder": "أعمال منفذة في تجديد الحمام",
+      "unidadLabel": "الوحدة",
+      "cantidadLabel": "الكمية",
+      "precioUdLabel": "السعر / الوحدة (€)",
+      "importeLabel": "المبلغ (€)",
+      "detalleLabel": "التفاصيل (اختياري)",
+      "notasLabel": "ملاحظات",
+      "notasPlaceholder": "شروط الدفع، رقم الحساب، إلخ.",
+      "ivaLabel": "ضريبة القيمة المضافة (%)",
+      "ivaOptions": {
+        "sinIva": "0% — بدون ضريبة",
+        "residencial": "10% — سكني",
+        "general": "21% — تجاري / بناء جديد / شركة / مستثمر"
+      },
+      "dtoLabel": "الخصم (%)",
+      "retLabel": "الضريبة المستقطعة (%)",
+      "baseImponible": "الوعاء الضريبي",
+      "descuentoLine": "الخصم ({{pct}}%)",
+      "ivaLine": "الضريبة ({{pct}}%)",
+      "retLine": "الاستقطاع ({{pct}}%)",
+      "total": "الإجمالي",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ الفاتورة",
+      "numeroRequerido": "رقم الفاتورة مطلوب"
+    },
+    "vista": {
+      "title": "فاتورة {{numero}}",
+      "loading": "جارٍ التحميل…",
+      "facturarA": "الفاتورة إلى",
+      "sinCliente": "بدون عميل",
+      "descripcionCol": "الوصف",
+      "cantidadCol": "الكمية",
+      "precioUdCol": "السعر/الوحدة",
+      "importeCol": "المبلغ",
+      "baseImponible": "الوعاء الضريبي",
+      "descuentoLine": "الخصم ({{pct}}%)",
+      "ivaLine": "الضريبة ({{pct}}%)",
+      "retLine": "الاستقطاع ({{pct}}%)",
+      "total": "الإجمالي",
+      "fecha": "التاريخ: {{fecha}}",
+      "vencimiento": "الاستحقاق: {{fecha}}",
+      "obra": "المشروع: {{nombre}}",
+      "tel": "الهاتف: {{tel}}",
+      "nif": "الرقم الضريبي: {{nif}}",
+      "empresaDefault": "شركتي",
+      "veriTitle": "VERI*FACTU",
+      "veriDesc": "فاتورة قابلة للتحقق في الموقع الإلكتروني لهيئة الضرائب AEAT.",
+      "veriRef": "المرجع: {{uuid}}",
+      "registradaTitle": "فاتورة مسجلة في نظام Verifactu (RD 1007/2023)",
+      "hashLabel": "التجزئة: {{hash}}…",
+      "noEnviada": "⚠️ لم تُرسل بعد إلى AEAT — تحقق من الحالة قبل تسليمها للعميل.",
+      "aeatError": "⚠️ AEAT: {{error}}",
+      "cerrar": "إغلاق",
+      "imprimir": "🖨️ طباعة / PDF"
+    },
+    "cobro": {
+      "title": "💳 الدفع بالبطاقة — {{numero}}",
+      "desc": "شارك هذا الرابط مع العميل ليتمكن من دفع الفاتورة بالبطاقة. عند تأكيد Stripe للدفع، ستتحول الفاتورة تلقائيًا إلى حالة مدفوعة.",
+      "copiado": "✓ تم النسخ",
+      "copiar": "📋 نسخ الرابط",
+      "abrirEnlace": "فتح رابط الدفع"
+    },
+    "list": {
+      "title": "الفواتير",
+      "countOne": "{{count}} فاتورة",
+      "countOther": "{{count}} فواتير",
+      "newFactura": "+ فاتورة جديدة",
+      "facturadoLabel": "المفوتر (الإجمالي)",
+      "cobradoLabel": "المُحصَّل",
+      "pendienteLabel": "في انتظار التحصيل",
+      "facturasCountOne": "{{count}} فاتورة",
+      "facturasCountOther": "{{count}} فواتير",
+      "pagadasCountOne": "{{count}} مدفوعة",
+      "pagadasCountOther": "{{count}} مدفوعة",
+      "circulacionCountOne": "{{count}} قيد التداول",
+      "circulacionCountOther": "{{count}} قيد التداول",
+      "todas": "الكل ({{count}})",
+      "searchPlaceholder": "🔍  ابحث بالرقم أو العميل…",
+      "loading": "جارٍ تحميل الفواتير…",
+      "noResultsTitle": "لا توجد نتائج",
+      "noFacturasTitle": "ليس لديك أي فواتير بعد",
+      "table": {
+        "numero": "الرقم",
+        "cliente": "العميل",
+        "fecha": "التاريخ",
+        "vencimiento": "الاستحقاق",
+        "estado": "الحالة",
+        "total": "الإجمالي"
+      },
+      "anuladaBadge": "🚫 ملغاة",
+      "anuladaTitle": "فاتورة ملغاة",
+      "lockedTitle": "مسجلة في سجل Verifactu — البيانات المالية مقفلة",
+      "pendienteAeatTitle": "أُرسلت إلى AEAT، بانتظار التأكيد",
+      "aceptadaAeatTitle": "مقبولة من AEAT",
+      "aeatEstadoTitle": "AEAT: {{estado}}",
+      "verFactura": "🧾 الفاتورة",
+      "cobrando": "جارٍ الإنشاء…",
+      "cobrar": "💳 تحصيل",
+      "editar": "تعديل",
+      "ver": "عرض",
+      "anuladaLabel": "ملغاة",
+      "anularBtn": "🚫 إلغاء",
+      "anularTitle": "إلغاء هذه الفاتورة (تبقى مسجلة كملغاة، لا تُحذف)",
+      "eliminar": "حذف",
+      "confirmDelete": "حذف الفاتورة {{numero}}؟",
+      "cannotDeleteLocked": "هذه الفاتورة مسجلة بالفعل في سجل Verifactu ولا يمكن حذفها. أصدر فاتورة تصحيحية أو ألغِها.",
+      "anularPrompt": "أنت على وشك إلغاء الفاتورة {{numero}}. ستبقى مسجلة كملغاة في سجل Verifactu (لا تُحذف). السبب؟ (اختياري)",
+      "noEnlacePago": "تعذّر إنشاء رابط الدفع."
+    }
+  },
+  "cobros": {
+    "title": "التحصيلات",
+    "subtitle": "متابعة الفواتير المعلقة والمدفوعة",
+    "pendienteCobroLabel": "في انتظار التحصيل",
+    "totalCobradoLabel": "إجمالي المحصَّل",
+    "vencidasSinCobrarLabel": "متأخرة وغير محصَّلة",
+    "facturaCountOne": "{{count}} فاتورة",
+    "facturaCountOther": "{{count}} فواتير",
+    "facturaPagadaCountOne": "{{count}} فاتورة مدفوعة",
+    "facturaPagadaCountOther": "{{count}} فواتير مدفوعة",
+    "todoAlDia": "كل شيء محدّث ✓",
+    "alertas": {
+      "title": "تنبيهات التحصيل",
+      "urgentesOne": "{{count}} فاتورة عاجلة",
+      "urgentesOther": "{{count}} فواتير عاجلة",
+      "rojo": "متأخرة",
+      "naranja": "عاجلة (≤7 أيام)",
+      "amarillo": "قريبة (8-30 يومًا)",
+      "verde": "منتظمة (>30 يومًا)",
+      "vencidaHace": "متأخرة منذ {{dias}} يوم",
+      "venceHoy": "تستحق اليوم",
+      "venceEn": "تستحق خلال {{dias}} يوم",
+      "cobrar": "تحصيل"
+    },
+    "graficoTitle": "التحصيلات حسب الشهر",
+    "tabPendientesOne": "معلقة ({{count}})",
+    "tabPendientesOther": "معلقة ({{count}})",
+    "tabCobradasOne": "محصَّلة ({{count}})",
+    "tabCobradasOther": "محصَّلة ({{count}})",
+    "loading": "جارٍ التحميل…",
+    "emptyPendientesTitle": "تم تحصيل كل شيء! لا توجد فواتير معلقة",
+    "emptyPendientesHint": "عمل رائع 💪",
+    "emptyCobradasTitle": "لا توجد تحصيلات مسجلة بعد",
+    "emptyCobradasHint": "ستظهر هنا الفواتير التي تم وضع علامة مدفوعة عليها",
+    "emitida": "أُصدرت: {{fecha}}",
+    "vence": "الاستحقاق: {{fecha}}",
+    "venceVencidaHace": " (متأخرة منذ {{dias}} يوم)",
+    "venceHoyParen": " (تستحق اليوم)",
+    "venceEnDias": " (خلال {{dias}} يوم)",
+    "marcarCobrada": "✓ وضع علامة محصَّلة",
+    "desmarcar": "إلغاء العلامة",
+    "confirmarDesmarcar": "هل تريد وضع علامة على هذه الفاتورة كمُرسلة (في انتظار التحصيل)؟",
+    "modal": {
+      "title": "تأكيد التحصيل",
+      "fechaLabel": "تاريخ التحصيل",
+      "metodoLabel": "طريقة الدفع",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "confirmar": "✓ تأكيد التحصيل"
+    },
+    "metodo": {
+      "Transferencia": "تحويل بنكي",
+      "Efectivo": "نقدًا",
+      "Bizum": "Bizum",
+      "Cheque": "شيك",
+      "Tarjeta": "بطاقة"
+    },
+    "notaCobrado": "✓ تم التحصيل في {{fecha}} عبر {{metodo}}"
+  },
+  "gastos": {
+    "categoria": {
+      "Materiales": "مواد",
+      "Mano de obra / Subcontratas": "يد عاملة / مقاولون من الباطن",
+      "Herramientas y equipos": "أدوات ومعدات",
+      "Transporte y combustible": "نقل ووقود",
+      "Publicidad y marketing": "إعلان وتسويق",
+      "Seguros": "تأمينات",
+      "Gestoría / Asesoría": "محاسبة / استشارات",
+      "Alquiler": "إيجار",
+      "Formación": "تدريب",
+      "Comunicaciones": "اتصالات",
+      "Otros": "أخرى"
+    },
+    "ivaOpts": {
+      "exento": "0% — معفى",
+      "superreducido": "4% — مخفض جدًا",
+      "reducido": "10% — مخفض (سكني)",
+      "general": "21% — عام (تجاري / شركة)"
+    },
+    "setup": {
+      "title": "المصروفات",
+      "stepTitle": "خطوة أولية: إنشاء جدول في Supabase",
+      "stepDescPre": "اذهب إلى",
+      "stepDescPost": "ونفّذ:",
+      "hintAlter": "إذا كان الجدول موجودًا بالفعل، نفّذ سطري ALTER TABLE في نهاية الملف لإضافة أعمدة ضريبة القيمة المضافة."
+    },
+    "title": "المصروفات",
+    "headerCountOne": "{{count}} مصروف",
+    "headerCountOther": "{{count}} مصروفات",
+    "headerTotal": "الإجمالي: {{total}}",
+    "newGasto": "+ مصروف جديد",
+    "porCategoriaTitle": "حسب الفئة",
+    "sinDatos": "لا توجد بيانات بعد",
+    "searchPlaceholder": "🔍  بحث…",
+    "allCategorias": "جميع الفئات",
+    "allObras": "جميع المشاريع",
+    "resultadosOne": "{{count}} نتيجة",
+    "resultadosOther": "{{count}} نتائج",
+    "loading": "جارٍ التحميل…",
+    "noResultsTitle": "لا توجد نتائج",
+    "noGastosTitle": "لا توجد مصروفات مسجلة",
+    "addFirst": "+ إضافة مصروف",
+    "table": {
+      "descripcion": "الوصف",
+      "categoria": "الفئة",
+      "fecha": "التاريخ",
+      "base": "الوعاء",
+      "iva": "الضريبة",
+      "total": "الإجمالي"
+    },
+    "totalRow": "الإجمالي ({{count}})",
+    "editar": "تعديل",
+    "confirmDelete": "حذف \"{{desc}}\"؟",
+    "lightboxAlt": "فاتورة مكبّرة",
+    "form": {
+      "editTitle": "تعديل المصروف",
+      "newTitle": "مصروف جديد",
+      "uploadLabel": "📎 صورة فاتورة / إيصال أو PDF (يملأ الحقول تلقائيًا)",
+      "analizando": "جارٍ التحليل بالذكاء الاصطناعي…",
+      "ampliar": "🔍 تكبير",
+      "cambiarArchivo": "تغيير الملف",
+      "dropHint": "اسحب هنا أو انقر للتحميل",
+      "dropSubhint": "JPG, PNG, WEBP, PDF · يستخرج الذكاء الاصطناعي البيانات تلقائيًا",
+      "leyendoPdf": "📄 جارٍ قراءة PDF… (قد يستغرق بضع ثوانٍ)",
+      "leyendoFactura": "🔍 جارٍ قراءة الفاتورة…",
+      "soloImagenesPdf": "⚠️ الصور أو PDF فقط",
+      "datosExtraidos": "✅ تم استخراج البيانات. راجعها وعدّلها إذا لزم الأمر.",
+      "noPudoLeer": "⚠️ تعذّرت القراءة التلقائية. املأ الحقول يدويًا.",
+      "fechaLabel": "التاريخ *",
+      "categoriaLabel": "الفئة *",
+      "descripcionLabel": "الوصف / المفهوم *",
+      "descripcionPlaceholder": "ماذا تم شراؤه؟",
+      "baseLabel": "المبلغ الأساسي (بدون ضريبة) *",
+      "ivaLabel": "ضريبة القيمة المضافة %",
+      "baseCol": "الوعاء",
+      "ivaCol": "الضريبة {{pct}}%",
+      "totalCol": "الإجمالي",
+      "proveedorLabel": "المورّد",
+      "proveedorPlaceholder": "Leroy Merlin، إلخ.",
+      "facturaNumLabel": "رقم الفاتورة / الإيصال",
+      "obraLabel": "المشروع المرتبط",
+      "sinObra": "بدون مشروع",
+      "notasLabel": "ملاحظات",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ المصروف"
+    }
+  },
+  "empleados": {
+    "title": "الموظفون والفريق",
+    "subtitle": "إدارة فريق العمل وتكاليف العمالة والاتفاقية الجماعية",
+    "newEmpleado": "+ موظف جديد",
+    "kpi": {
+      "activos": "الموظفون النشطون",
+      "salarioBruto": "الراتب الإجمالي الشهري",
+      "costeEmpresa": "تكلفة الشركة / شهريًا"
+    },
+    "tabs": {
+      "equipo": "👥 الفريق",
+      "costes": "💰 التكاليف",
+      "convenio": "📋 الاتفاقية"
+    },
+    "setup": {
+      "title": "إنشاء جدول في Supabase",
+      "descPre": "نفّذ الملف",
+      "descPost": "في محرر SQL في Supabase.",
+      "reload": "تم التنفيذ بالفعل — إعادة التحميل"
+    },
+    "loading": "جارٍ تحميل الفريق…",
+    "searchPlaceholder": "🔍  بحث…",
+    "filtros": {
+      "activos": "نشطون",
+      "bajaTemporal": "إجازة مؤقتة",
+      "bajaDefinitiva": "إنهاء نهائي",
+      "todos": "الكل"
+    },
+    "noResultsTitle": "لا توجد نتائج",
+    "noEmpleadosTitle": "لا يوجد موظفون مسجلون",
+    "noEmpleadosHint": "أضف أول موظف أو متعاون",
+    "grupoCC": "المجموعة {{grupo}} من الاتفاقية",
+    "alta": "تاريخ التعيين: {{fecha}}",
+    "jornadaPct": "{{pct}}% من الدوام",
+    "bruto": "{{monto}} إجمالي",
+    "masSS": "+ {{monto}} ضمان اجتماعي",
+    "porMes": "{{monto}} / شهريًا",
+    "editar": "تعديل",
+    "bajaTemporalBtn": "↓ إجازة",
+    "bajaTemporalTitle": "وضع في إجازة مؤقتة",
+    "altaBtn": "↑ إعادة تعيين",
+    "altaTitle": "إعادة التعيين",
+    "confirmDelete": "حذف {{nombre}}؟",
+    "puesto": {
+      "encargado": "مشرف الموقع",
+      "oficial_1": "عامل ماهر درجة أولى",
+      "oficial_2": "عامل ماهر درجة ثانية",
+      "ayudante": "مساعد",
+      "peon": "عامل عادي",
+      "fontanero": "سباك",
+      "electricista": "كهربائي",
+      "pintor": "دهّان",
+      "yesero": "جصّاص",
+      "carpintero": "نجار",
+      "alicatador": "بلاّط",
+      "impermeabilizador": "فني عزل مائي",
+      "administrativo": "موظف إداري",
+      "otro": "أخرى"
+    },
+    "tipoContrato": {
+      "indefinido": "دائم",
+      "fijo_discontinuo": "ثابت متقطع",
+      "temporal_obra": "مؤقت (حسب المشروع)",
+      "temporal_6m": "مؤقت (≤6 أشهر)",
+      "formacion": "عقد تدريب",
+      "autonomo": "متعاون مستقل"
+    },
+    "grupoConvenio": {
+      "I": "المجموعة الأولى — خريجو التعليم العالي/المتوسط",
+      "II": "المجموعة الثانية — مديرو المواقع / الموظفون الإداريون المؤهلون",
+      "III": "المجموعة الثالثة — المشرفون / رؤساء العمال",
+      "IV": "المجموعة الرابعة — العمال المهرة درجة أولى وثانية",
+      "V": "المجموعة الخامسة — المساعدون",
+      "VI": "المجموعة السادسة — العمال العاديون"
+    },
+    "costes": {
+      "calculadoraTitle": "حاسبة تكلفة الشركة",
+      "resumenTitle": "ملخص الفريق النشط",
+      "table": {
+        "empleado": "الموظف",
+        "puesto": "الوظيفة",
+        "brutoMes": "الإجمالي / شهريًا",
+        "ssEmpresa": "ضمان اجتماعي الشركة",
+        "costeTotalMes": "التكلفة الإجمالية / شهريًا",
+        "anualEstimado": "التقدير السنوي"
+      },
+      "totalEquipo": "إجمالي الفريق",
+      "nota": "* يُحسب الضمان الاجتماعي للشركة بنسبة {{pct}}% من الراتب الإجمالي (مساهمات عامة + معدل حوادث العمل/الأمراض المهنية في البناء + بطالة + FOGASA + تدريب مهني + MEI). قد تختلف التكلفة الفعلية حسب وعاء الاشتراك والاتفاقية الإقليمية.",
+      "emptyHint": "أضف موظفين في تبويب الفريق لعرض ملخص التكاليف.",
+      "calc": {
+        "salarioLabel": "الراتب الإجمالي الشهري (€)",
+        "totalSS": "إجمالي ضمان الشركة ({{pct}}%)",
+        "costeEmpresaMes": "تكلفة الشركة / شهريًا",
+        "brutoMasSS": "{{bruto}} إجمالي + {{ss}} ضمان اجتماعي",
+        "costeAnual": "التكلفة السنوية (×12)",
+        "con2Pagas": "مع دفعتين إضافيتين",
+        "introduceSalario": "أدخل الراتب الإجمالي لحساب التكلفة الفعلية"
+      }
+    },
+    "convenio": {
+      "disclaimerPre": "ℹ️ دليل إرشادي.",
+      "disclaimerPost": "استنادًا إلى الاتفاقية الجماعية العامة السادسة لقطاع البناء (2022-2026). تحقق دائمًا من المبالغ المحدّثة مع مستشارك القانوني في العمل أو في الجريدة الرسمية الإسبانية / الاتفاقية الإقليمية.",
+      "recursosTitle": "موارد وروابط مفيدة"
+    },
+    "form": {
+      "editTitle": "تعديل الموظف",
+      "newTitle": "موظف جديد",
+      "nombreLabel": "الاسم *",
+      "apellidosLabel": "اللقب *",
+      "puestoLabel": "الوظيفة *",
+      "tipoContratoLabel": "نوع العقد *",
+      "especialidadLabel": "التخصص / التفاصيل",
+      "especialidadPlaceholder": "مثال: السباكة والغاز، الجبس…",
+      "grupoLabel": "المجموعة المهنية (الاتفاقية)",
+      "salarioLabel": "الراتب الإجمالي الشهري (€) *",
+      "costeEmpresaPreview": "تكلفة الشركة: {{monto}} / شهريًا",
+      "jornadaLabel": "% من الدوام",
+      "jornadaHint": "100% = دوام كامل",
+      "fechaAltaLabel": "تاريخ التعيين *",
+      "fechaBajaLabel": "تاريخ إنهاء الخدمة",
+      "estadoLabel": "الحالة",
+      "estadoOpts": {
+        "activo": "نشط",
+        "baja_temporal": "إجازة مؤقتة",
+        "baja_definitiva": "إنهاء نهائي"
+      },
+      "telefonoLabel": "الهاتف",
+      "numSsLabel": "رقم الضمان الاجتماعي",
+      "dniLabel": "الهوية / رقم الإقامة",
+      "emailLabel": "البريد الإلكتروني",
+      "notasLabel": "ملاحظات",
+      "notasPlaceholder": "ملاحظات، اتفاقيات خاصة…",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ"
+    }
+  },
+  "partes": {
+    "title": "تقارير العمل",
+    "subtitle": "سجل يومي للساعات حسب الموظف والمشروع",
+    "newParte": "+ تقرير جديد",
+    "mesLabel": "الشهر",
+    "anioLabel": "السنة",
+    "empleadoLabel": "الموظف",
+    "obraLabel": "المشروع",
+    "todos": "الكل",
+    "todas": "الكل",
+    "vistaLista": "قائمة",
+    "vistaResumen": "ملخص",
+    "kpi": {
+      "partesEnMes": "تقارير في {{mes}}",
+      "horasRegistradas": "الساعات المسجلة",
+      "empleadosActivosMes": "الموظفون النشطون هذا الشهر"
+    },
+    "loading": "جارٍ تحميل التقارير…",
+    "emptyTitle": "لا توجد تقارير في {{mes}} {{anio}}",
+    "emptyHint": "ابدأ بتسجيل ساعات الفريق",
+    "firmadoTitle": "وقّعه {{nombre}} بتاريخ {{fecha}}",
+    "firmar": "✍️ توقيع",
+    "firmarTitle": "التوقيع للموافقة",
+    "editar": "تعديل",
+    "confirmDelete": "حذف هذا التقرير؟",
+    "porEmpleado": "حسب الموظف",
+    "sinDatos": "لا توجد بيانات",
+    "diaOne": "{{count}} يوم",
+    "diaOther": "{{count}} أيام",
+    "total": "الإجمالي",
+    "porObra": "حسب المشروع",
+    "sinObrasConPartes": "لا توجد مشاريع بها تقارير",
+    "personaOne": "{{count}} شخص",
+    "personaOther": "{{count}} أشخاص",
+    "form": {
+      "editTitle": "تعديل التقرير",
+      "newTitle": "تقرير عمل جديد",
+      "empleadoLabel": "الموظف *",
+      "empleadoPlaceholder": "اختر موظفًا",
+      "fechaLabel": "التاريخ *",
+      "horasLabel": "الساعات *",
+      "obraLabel": "المشروع",
+      "sinObraAsignada": "بدون مشروع مُخصَّص",
+      "descripcionLabel": "وصف العمل",
+      "descripcionPlaceholder": "تبليط حمام، تمديدات كهربائية…",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ"
+    },
+    "firmarModalTitle": "توقيع تقرير العمل — {{nombre}}",
+    "meses": {
+      "enero": "يناير",
+      "febrero": "فبراير",
+      "marzo": "مارس",
+      "abril": "أبريل",
+      "mayo": "مايو",
+      "junio": "يونيو",
+      "julio": "يوليو",
+      "agosto": "أغسطس",
+      "septiembre": "سبتمبر",
+      "octubre": "أكتوبر",
+      "noviembre": "نوفمبر",
+      "diciembre": "ديسمبر"
+    }
+  },
+  "nominas": {
+    "title": "الرواتب",
+    "subtitle": "إنشاء كشوف الرواتب ومتابعة المدفوعات",
+    "generarOne": "إنشاء {{count}} كشف راتب",
+    "generarOther": "إنشاء {{count}} كشوف رواتب",
+    "generando": "جارٍ الإنشاء…",
+    "historial": "السجل",
+    "loading": "جارٍ تحميل كشوف الرواتب…",
+    "totalBruto": "الإجمالي قبل الخصم",
+    "totalNeto": "الإجمالي الصافي المستحق",
+    "costeEmpresaTotal": "إجمالي تكلفة الشركة",
+    "sinNominaOne": "{{count}} موظف",
+    "sinNominaOther": "{{count}} موظفين",
+    "sinNominaSuffix": "بدون كشف راتب في {{mes}}: {{lista}}",
+    "generarTodas": "إنشاء الكل",
+    "emptyTitle": "لا توجد كشوف رواتب في {{mes}} {{anio}}",
+    "emptySinEmpleados": "أضف الموظفين أولاً في وحدة الموظفين",
+    "emptyConEmpleadosOne": "يوجد {{count}} موظف نشط. اضغط \"إنشاء\" لإنشاء كشوف الرواتب.",
+    "emptyConEmpleadosOther": "يوجد {{count}} موظفين نشطين. اضغط \"إنشاء\" لإنشاء كشوف الرواتب.",
+    "generarNominas": "إنشاء كشوف الرواتب",
+    "pagadaBadge": "✓ مدفوع {{fecha}}",
+    "pendienteBadge": "بانتظار الدفع",
+    "salarioBruto": "الراتب الإجمالي",
+    "ssTrabajador": "ضمان اجتماعي الموظف ({{pct}}%)",
+    "irpf": "ضريبة الدخل ({{pct}}%)",
+    "otrasDeducciones": "خصومات أخرى",
+    "netoPercibir": "الصافي المستحق",
+    "costeEmpresaLine": "تكلفة الشركة: {{bruto}} إجمالي + {{ss}} ضمان اجتماعي = {{total}}",
+    "desmarcar": "إلغاء التحديد",
+    "marcarPagada": "✓ وضع علامة مدفوع",
+    "editar": "تعديل",
+    "eliminar": "حذف",
+    "verRecibo": "عرض كشف الراتب",
+    "confirmDelete": "حذف كشف الراتب هذا؟",
+    "edit": {
+      "salarioLabel": "الراتب الإجمالي (€)",
+      "irpfLabel": "ضريبة الدخل %",
+      "otrasLabel": "خصومات أخرى (€)",
+      "ssTrabajadorPreview": "ضمان اجتماعي الموظف: {{monto}}",
+      "irpfPreview": "ضريبة الدخل: {{monto}}",
+      "netoPreview": "الصافي: {{monto}}",
+      "notasLabel": "ملاحظات",
+      "notasPlaceholder": "ساعات إضافية، سلفة…",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ"
+    },
+    "historialTable": {
+      "periodo": "الفترة",
+      "empleado": "الموظف",
+      "bruto": "الإجمالي",
+      "neto": "الصافي",
+      "estado": "الحالة"
+    },
+    "sinHistorial": "لا يوجد سجل لكشوف الرواتب",
+    "pagadaLabel": "مدفوع",
+    "pendienteLabel": "معلّق",
+    "recibo": {
+      "title": "كشف راتب — {{periodo}}",
+      "puesto": "الوظيفة: {{v}}",
+      "dni": "الهوية: {{v}}",
+      "numSs": "رقم الضمان الاجتماعي: {{v}}",
+      "grupoConvenio": "مجموعة الاتفاقية: {{v}}",
+      "devengosTitle": "١. المستحقات",
+      "salarioBase": "الراتب الأساسي",
+      "totalDevengado": "إجمالي المستحقات",
+      "deduccionesTitle": "٢. الخصومات",
+      "cotizacionSS": "اشتراك الضمان الاجتماعي (الموظف {{pct}}%)",
+      "retencionIrpf": "استقطاع ضريبة الدخل ({{pct}}%)",
+      "otrasDeducciones": "خصومات أخرى",
+      "totalDeducciones": "إجمالي الخصومات",
+      "liquidoPercibir": "الصافي المستحق",
+      "costeEmpresaLine": "تكلفة الشركة: {{total}} (شامل ضمان الشركة {{ss}})",
+      "cerrar": "إغلاق",
+      "imprimir": "🖨️ طباعة"
+    }
+  },
+  "hub": {
+    "title": "المركز الرقمي",
+    "subtitle": "استراتيجية جذب العملاء والتواجد على الإنترنت لعملك في مجال التجديدات",
+    "objetivoTitle": "هدفك: عميل من الطبقة المتوسطة العليا في مدريد",
+    "objetivoText": "يبحث هذا النوع من العملاء عن الجودة والثقة قبل السعر. أعطِ الأولوية لـ Google Business وHouzz على المنصات ذات الأسعار المنخفضة. كل صورة لعمل منجز بإتقان تساوي أكثر من أي إعلان.",
+    "abrirPlataforma": "فتح المنصة ←",
+    "tag": {
+      "gratis": "مجاني",
+      "prioritario": "أولوية",
+      "pago": "مدفوع",
+      "pagoPorLead": "الدفع لكل عميل محتمل",
+      "claseMediaAlta": "الطبقة المتوسطة العليا",
+      "volumenAlto": "حجم مرتفع",
+      "visual": "بصري",
+      "b2b": "بين الشركات",
+      "gratisPro": "مجاني / احترافي"
+    },
+    "secciones": {
+      "presenciaLocal": {
+        "titulo": "التواجد المحلي (Google)",
+        "items": {
+          "gbp": {
+            "titulo": "Google Business Profile",
+            "desc": "ملفك على خرائط جوجل. أساسي كي يجدك العملاء المحليون في مدريد.",
+            "tips": [
+              "ارفع صورًا للأعمال المنجزة (قبل وبعد)",
+              "رد على جميع التقييمات، الجيدة والسيئة",
+              "انشر كل تجديد مكتمل كتحديث"
+            ]
+          },
+          "adsLocal": {
+            "titulo": "Google Ads local",
+            "desc": "إعلانات جغرافية في مدريد لتظهر عندما يبحث أحدهم عن \"شركة تجديدات مدريد\".",
+            "tips": [
+              "ابدأ بـ 5-10 يورو/يوم واضبط الميزانية",
+              "استهدف حسب الرمز البريدي لمناطقك المستهدفة",
+              "استخدم إضافات الاتصال المباشر"
+            ]
+          }
+        }
+      },
+      "plataformas": {
+        "titulo": "منصات التجديد",
+        "items": {
+          "habitissimo": {
+            "titulo": "Habitissimo",
+            "desc": "المنصة الرائدة في إسبانيا لجذب عملاء التجديد. ظهور عالٍ مع تقييمات جيدة.",
+            "tips": [
+              "رد على الطلبات خلال أقل من ساعة (الخوارزمية تكافئ ذلك)",
+              "اطلب تقييمًا من كل عميل راضٍ",
+              "أكمل ملفك الشخصي بنسبة 100% بصور حقيقية"
+            ]
+          },
+          "houzz": {
+            "titulo": "Houzz",
+            "desc": "شبكة اجتماعية للتصميم الداخلي والتجديد. مناسبة جدًا للشريحة المتوسطة العليا.",
+            "tips": [
+              "ارفع مشاريع كاملة مع أوصاف تفصيلية",
+              "استخدم وسوم الطراز والمواد",
+              "عميل Houzz يقدّر الجودة لا السعر"
+            ]
+          },
+          "milanuncios": {
+            "titulo": "Milanuncios / Wallapop",
+            "desc": "للأعمال الصغيرة والصيانة. طلب مرتفع لكن بأسعار أكثر تنافسية.",
+            "tips": [
+              "افصل الإعلانات حسب نوع العمل",
+              "ضع سعرًا تقريبيًا لتصفية العملاء",
+              "حدّث الإعلانات أسبوعيًا لزيادة الظهور"
+            ]
+          }
+        }
+      },
+      "redesSociales": {
+        "titulo": "وسائل التواصل الاجتماعي",
+        "items": {
+          "instagram": {
+            "titulo": "Instagram",
+            "desc": "بصري وقوي للتجديدات. يستخدم عملاء الطبقة المتوسطة العليا إنستغرام للاستلهام قبل التعاقد.",
+            "tips": [
+              "انشر قبل/بعد كل عمل",
+              "استخدم Reels لعرض مراحل العمل (30-60 ثانية)",
+              "الوسوم: #reformasMadrid #reformaIntegral #interiorismo",
+              "تتواصل قصص العمل اليومي مع الجمهور"
+            ]
+          },
+          "linkedin": {
+            "titulo": "LinkedIn",
+            "desc": "لتموضع نفسك كمحترف وجذب عملاء من الشركات (تغيير الاستخدام، المحلات التجارية).",
+            "tips": [
+              "شارك قصص نجاح مع أرقام (الأمتار المربعة المجددة، الالتزام بالموعد)",
+              "تواصل مع المهندسين المعماريين ومديري العقارات",
+              "المقالات عن اتجاهات التجديد تمنحك مصداقية"
+            ]
+          }
+        }
+      },
+      "productividad": {
+        "titulo": "أدوات الإنتاجية",
+        "items": {
+          "whatsapp": {
+            "titulo": "WhatsApp Business",
+            "desc": "أساسي. ملف تجاري، كتالوج خدمات، ردود سريعة آلية.",
+            "tips": [
+              "اضبط رسالة ترحيب تلقائية",
+              "أنشئ تصنيفات: عميل محتمل جديد، تم إرسال العرض، عميل نشط",
+              "رسالة غياب خارج ساعات العمل"
+            ]
+          },
+          "canva": {
+            "titulo": "Canva",
+            "desc": "تصميم عروض أسعار مرئية وعروض تقديمية ومحتوى لوسائل التواصل.",
+            "tips": [
+              "استخدم قوالب \"قبل وبعد\"",
+              "أنشئ قالب ملف تعريف للشركة بهوية XANDER"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "fiscal": {
+    "title": "الضرائب",
+    "subtitle": "دليل ضريبي للعاملين لحسابهم الخاص في قطاع التجديدات في إسبانيا",
+    "disclaimer": "⚠️ هذا الدليل إرشادي فقط. استشر دائمًا محاسبك أو مستشارك الضريبي قبل اتخاذ قرارات محددة.",
+    "conciliacion": {
+      "cardTitle": "📄 المطابقة مع مكتب المحاسبة",
+      "cardDesc": "أنشئ مستندًا يضم فواتيرك ومصاريفك وملخص ضريبة القيمة المضافة/ضريبة الدخل للفترة، جاهزًا للمطابقة قبل تقديم النموذج المطلوب.",
+      "generarDocumento": "إنشاء المستند"
+    },
+    "calendarioTitle": "📅 تقويم التصريحات",
+    "proximoBadge": "القادم",
+    "modelosTitle": "📋 النماذج الواجب تقديمها",
+    "tipsTitle": "💡 أهم المصاريف القابلة للخصم",
+    "modal": {
+      "title": "المطابقة الضريبية — {{periodo}}",
+      "anio": "سنة {{anio}}",
+      "loading": "جارٍ تحميل بيانات الفترة…",
+      "empresaDefault": "شركتي",
+      "nif": "الرقم الضريبي: {{v}}",
+      "tituloDoc": "المطابقة الضريبية",
+      "delAl": "من {{desde}} إلى {{hasta}}",
+      "generado": "تم الإنشاء: {{fecha}}",
+      "disclaimerModal": "⚠️ مستند إرشادي تم إنشاؤه تلقائيًا من فواتيرك ومصاريفك المسجّلة. شاركه مع مكتب المحاسبة لمطابقة الأرقام قبل تقديم النماذج — لا يغني عن حساباتهم أو استشارتهم المهنية.",
+      "facturasEmitidas": "الفواتير الصادرة ({{count}})",
+      "sinFacturas": "لا توجد فواتير صادرة في هذه الفترة.",
+      "gastosRegistrados": "المصاريف المسجلة ({{count}})",
+      "moduloNoConfigurado": "وحدة المصاريف لم يتم إعدادها بعد.",
+      "sinGastos": "لا توجد مصاريف مسجلة في هذه الفترة.",
+      "tabla": {
+        "fecha": "التاريخ",
+        "numero": "الرقم",
+        "cliente": "العميل",
+        "estado": "الحالة",
+        "base": "الأساس",
+        "iva": "الضريبة",
+        "ret": "الاستقطاع",
+        "total": "الإجمالي",
+        "proveedor": "المورد",
+        "categoria": "الفئة",
+        "ivaSoport": "الضريبة المدفوعة"
+      },
+      "totalRow": "الإجمالي",
+      "sinCliente": "—",
+      "resumenTitle": "ملخص للنماذج 303 / 130{{extra}}",
+      "ivaRepercutido": "ضريبة القيمة المضافة المحصّلة (المبيعات)",
+      "ivaSoportadoLabel": "ضريبة القيمة المضافة المدفوعة (المصاريف)",
+      "resultadoIva": "نتيجة ضريبة القيمة المضافة (النموذج 303)",
+      "aIngresar": "المستحق دفعه: {{v}}",
+      "aCompensar": "المستحق تعويضه: {{v}}",
+      "ingresosBase": "الإيرادات (الأساس)",
+      "gastosBase": "المصاريف (الأساس)",
+      "rendimientoNeto": "صافي الدخل التقديري",
+      "retencionesPracticadas": "الاستقطاعات الضريبية المطبقة مسبقًا",
+      "pago130": "الدفعة المجزأة 20% (النموذج 130، تقديري)",
+      "cerrar": "إغلاق",
+      "imprimir": "🖨️ طباعة / PDF"
+    },
+    "selector": {
+      "title": "مستند المطابقة",
+      "desc": "اختر الفترة وأنشئ مستندًا يضم تفاصيل الفواتير والمصاريف وملخص ضريبة القيمة المضافة/ضريبة الدخل لمطابقته مع مكتب المحاسبة.",
+      "tipoDocumento": "نوع المستند",
+      "trimestral": "ربع سنوي (130/303)",
+      "anual": "سنوي (390/100)",
+      "anioLabel": "السنة",
+      "trimestreLabel": "الربع",
+      "cancelar": "إلغاء",
+      "generarDocumento": "إنشاء المستند"
+    }
+  },
+  "legislacion": {
+    "title": "التشريعات",
+    "subtitle": "الإطار القانوني لتجديد المساكن والمحلات في جميع أنحاء إسبانيا",
+    "selector": {
+      "label": "منطقتك المستقلة",
+      "desc": "اختر منطقتك لعرض اللوائح العمرانية الخاصة بها",
+      "placeholder": "— اختر منطقتك —"
+    },
+    "ccaa": {
+      "badgeNormativa": "اللوائح الإقليمية",
+      "portalOficial": "البوابة الرسمية ↗",
+      "obraMenor": "أعمال بسيطة",
+      "obraMenorDesc": "إجراء مبسّط — دون المساس بالهيكل أو الواجهة",
+      "obraMayor": "أعمال كبرى",
+      "obraMayorDesc": "يتطلب مشروعًا فنيًا ومهلًا أطول",
+      "organismoCompetente": "الجهة المختصة",
+      "aspectosDestacados": "⚠️ نقاط بارزة في {{nombre}}"
+    },
+    "avisoTitle": "دليل إرشادي.",
+    "avisoText": "تتغير اللوائح العمرانية بشكل متكرر. استشر دائمًا البلدية المعنية وفنيًا مؤهلًا (مهندسًا معماريًا) عند أي شك. قد تختلف الشروط حسب البلدية حتى داخل نفس المنطقة.",
+    "estatalCaption": "لوائح وطنية — تُطبَّق في جميع أنحاء إسبانيا",
+    "incluyeAplica": "يشمل / ينطبق على:",
+    "recursosUtiles": "موارد مفيدة (وطنية)"
+  },
+  "resultados": {
+    "title": "النتائج",
+    "subtitle": "قائمة نتائج النشاط التجاري",
+    "calculando": "جارٍ حساب النتائج…",
+    "kpi": {
+      "totalFacturado": "إجمالي الفواتير",
+      "todasFacturas": "جميع الفواتير",
+      "ingresosReales": "الإيرادات الفعلية",
+      "facturasCobradas": "فواتير محصّلة",
+      "gastosTotales": "إجمالي المصاريف",
+      "tablaNoConfigurada": "الجدول غير مُعد",
+      "gastosRegistrados": "مصاريف مسجلة",
+      "resultadoNeto": "صافي النتيجة",
+      "beneficio": "ربح",
+      "perdida": "خسارة"
+    },
+    "evolucionMensual": "التطور الشهري {{anio}}",
+    "leyenda": {
+      "facturado": "مفوتر",
+      "gastos": "مصاريف",
+      "cobrado": "محصّل"
+    },
+    "detallePorMes": "التفاصيل الشهرية",
+    "tabla": {
+      "mes": "الشهر",
+      "facturado": "مفوتر",
+      "gastos": "مصاريف",
+      "resultado": "النتيجة"
+    },
+    "totalAnio": "إجمالي {{anio}}",
+    "gastosPorCategoria": "المصاريف حسب الفئة",
+    "tablaNoConfiguradaLarga": "جدول المصاريف غير مُعد",
+    "sinGastosEnAnio": "لا توجد مصاريف مسجلة في {{anio}}",
+    "meses": {
+      "ene": "يناير",
+      "feb": "فبراير",
+      "mar": "مارس",
+      "abr": "أبريل",
+      "may": "مايو",
+      "jun": "يونيو",
+      "jul": "يوليو",
+      "ago": "أغسطس",
+      "sep": "سبتمبر",
+      "oct": "أكتوبر",
+      "nov": "نوفمبر",
+      "dic": "ديسمبر"
+    },
+    "avisoGastosPre": "⚠️ جدول المصاريف غير مُعد. اذهب إلى ",
+    "avisoGastosPost": " واتبع التعليمات لتفعيله."
+  },
+  "referidos": {
+    "title": "الإحالات",
+    "subtitle": "ادعُ عاملين مستقلين آخرين في مجال التجديدات. عندما يصبحون Pro، تحصل على شهر مجاني.",
+    "recompensaTexto": "شهر مجاني (19 يورو)",
+    "tuEnlace": "رابط الإحالة الخاص بك",
+    "generando": "جارٍ إنشاء رمزك...",
+    "copiarEnlace": "نسخ الرابط",
+    "copiado": "✓ تم النسخ",
+    "tuCodigo": "رمزك:",
+    "copiar": "نسخ",
+    "copiadoMin": "✓ تم النسخ",
+    "compartirWhatsapp": "💬 مشاركة عبر واتساب",
+    "mensajeWhatsapp": "أستخدم XANDER Gestión لإدارة عروض الأسعار والفواتير والأعمال — أنصحك به إذا كنت عاملاً مستقلاً في التجديدات. سجّل مجانًا برابطي ويربح كلانا: {{enlace}}",
+    "comoFunciona": "كيف يعمل",
+    "pasos": {
+      "p1t": "شارك رابطك",
+      "p1d": "أرسله إلى عامل مستقل آخر في التجديدات قد يحتاج إلى هذه الأداة.",
+      "p2t": "يسجّل مجانًا",
+      "p2d": "يدخل عبر رابطك وينشئ حسابه — يرتبط بك تلقائيًا.",
+      "p3t": "يصبح Pro وأنت تربح",
+      "p3d": "بمجرد أن يدفع اشتراكه الأول في Pro، تحصل على {{recompensa}} كرصيد في فواتيرك."
+    },
+    "tusReferidos": "إحالاتك",
+    "registrados": "المسجَّلون",
+    "convertidosPro": "تحوّلوا إلى Pro",
+    "mesesGanados": "الأشهر المكتسبة",
+    "cargando": "جارٍ التحميل...",
+    "sinInvitados": "لم تدعُ أحدًا بعد. شارك رابطك أعلاه للبدء.",
+    "registradoEl": "تم التسجيل في {{fecha}}",
+    "badgePro": "✓ Pro",
+    "badgePendiente": "قيد الانتظار"
+  },
+  "miEmpresa": {
+    "title": "شركتي",
+    "subtitle": "ستظهر هذه البيانات في عروض الأسعار والفواتير الخاصة بك",
+    "cargando": "جارٍ التحميل…",
+    "datosPersonales": "البيانات الشخصية",
+    "nombre": "الاسم",
+    "apellidos": "اللقب",
+    "dniNie": "رقم الهوية",
+    "telefonoPersonal": "الهاتف الشخصي",
+    "datosEmpresa": "بيانات الشركة / النشاط",
+    "nombreComercial": "الاسم التجاري / الشركة *",
+    "nif": "الرقم الضريبي",
+    "telefonoEmpresa": "هاتف الشركة",
+    "emailEmpresa": "البريد الإلكتروني للشركة",
+    "direccionFiscal": "العنوان الضريبي",
+    "cp": "الرمز البريدي",
+    "ciudad": "المدينة",
+    "web": "الموقع الإلكتروني",
+    "actividadProfesional": "النشاط المهني",
+    "fechaInicio": "تاريخ بدء النشاط",
+    "tarifaReducida": "التعرفة المخفضة نشطة",
+    "tarifaReducidaSub": "أول عامين كعامل مستقل",
+    "especialidades": "التخصصات",
+    "especialidad": {
+      "Reforma integral": "تجديد شامل",
+      "Reforma de baño": "تجديد الحمام",
+      "Reforma de cocina": "تجديد المطبخ",
+      "Cambio de uso": "تغيير الاستخدام",
+      "Reforma de local": "تجديد محل تجاري",
+      "Distribuciones internas": "تغييرات التوزيع الداخلي",
+      "Fontanería": "السباكة",
+      "Electricidad": "الكهرباء",
+      "Alicatados y solados": "البلاط والأرضيات",
+      "Pladur": "الجبس بورد",
+      "Pintura": "الدهان",
+      "Carpintería": "النجارة",
+      "Impermeabilización": "العزل المائي"
+    },
+    "miPlan": "خطتي",
+    "pagoConfirmado": "✓ تم تأكيد الدفع. سيتم تحديث خطتك خلال ثوانٍ.",
+    "pagoCancelado": "لقد ألغيت عملية الدفع. يمكنك المحاولة مرة أخرى في أي وقت.",
+    "planProActivo": "✓ خطة Pro نشطة{{ciclo}}. شكرًا لثقتك في XANDER.",
+    "cicloAnual": " (سنوي)",
+    "cicloMensual": " (شهري)",
+    "trialActivo": "⏳ أنت في فترة تجريبية مجانية — تبقّى {{dias}} يوم.",
+    "planGratuito": "خطة مجانية. قم بالترقية إلى Pro للوصول الكامل دون حدود.",
+    "abriendo": "جارٍ الفتح…",
+    "gestionarSuscripcion": "إدارة الاشتراك",
+    "redirigiendo": "جارٍ إعادة التوجيه…",
+    "actualizarPro": "الترقية إلى Pro — {{precio}}",
+    "planAnual": "الخطة السنوية — {{precio}}",
+    "sinPermanencia": "بدون التزام · ألغِ في أي وقت من بوابة الفوترة",
+    "cobrosOnline": "المدفوعات عبر الإنترنت",
+    "cobrosOnlineDesc": "اربط حساب Stripe الخاص بك لتحصيل الفواتير بالبطاقة. تذهب أموال عملائك مباشرة إلى بنكك — لا تتعامل XANDER معها أبدًا.",
+    "stripeActiva": "✓ تم ربط حساب Stripe وتفعيله. يمكنك الآن تحصيل الفواتير بالبطاقة.",
+    "stripeVerificacion": "تم إنشاء حساب Stripe الخاص بك ولكن التحقق لم يكتمل بعد. أكمل العملية لتبدأ التحصيل.",
+    "stripeNoConectada": "لم تقم بربط أي حساب Stripe بعد.",
+    "cargandoBtn": "جارٍ التحميل…",
+    "completarConexion": "إكمال / مراجعة الاتصال",
+    "conectarStripe": "الربط مع Stripe",
+    "actualizarEstado": "تحديث الحالة",
+    "datosGuardados": "✓ تم حفظ البيانات بنجاح",
+    "guardando": "جارٍ الحفظ…",
+    "guardarCambios": "حفظ التغييرات",
+    "errores": {
+      "checkout": "تعذّر بدء عملية الدفع للاشتراك.",
+      "portal": "تعذّر فتح بوابة الفوترة.",
+      "stripeStatus": "تعذّر التحقق من حالة Stripe.",
+      "stripeConnect": "تعذّر بدء الاتصال مع Stripe."
+    }
+  },
+  "tarifas": {
+    "title": "الأسعار والتسعير",
+    "subtitle": "كتالوج أسعار إرشادية لعروض الأسعار",
+    "nuevaTarifa": "+ تعرفة جديدة",
+    "tabs": {
+      "catalogoBase": "الكتالوج الأساسي ({{count}})",
+      "misTarifas": "أسعاري ({{count}})"
+    },
+    "disclaimer": "📖 أسعار إرشادية للقطاع في مدريد. استخدمها كمرجع أو أنشئ أسعارك الخاصة في تبويب \"أسعاري\".",
+    "buscarPlaceholder": "🔍  ابحث عن بند…",
+    "todasCategorias": "جميع الفئات",
+    "cargando": "جارٍ تحميل الأسعار…",
+    "sinResultados": "لا توجد نتائج",
+    "sinTarifasPropias": "ليس لديك أسعار خاصة بك بعد",
+    "sinTarifas": "لا توجد أسعار",
+    "personalizaPrecios": "خصّص الأسعار وفقًا لعملك",
+    "partidas": "{{count}} بند",
+    "tabla": {
+      "descripcion": "الوصف",
+      "ud": "الوحدة",
+      "mat": "المواد (€)",
+      "mo": "اليد العاملة (€)",
+      "margen": "الهامش",
+      "precioCliente": "سعر العميل"
+    },
+    "editar": "تعديل",
+    "confirmDelete": "حذف \"{{desc}}\"؟",
+    "modal": {
+      "editarTarifa": "تعديل السعر",
+      "nuevaTarifa": "سعر جديد",
+      "categoria": "الفئة *",
+      "unidad": "الوحدة",
+      "descripcion": "الوصف *",
+      "costeMaterial": "تكلفة المواد (€)",
+      "manoDeObra": "اليد العاملة (€)",
+      "margen": "الهامش (%)",
+      "precioAlCliente": "سعر العميل",
+      "notas": "ملاحظات",
+      "cancelar": "إلغاء",
+      "guardando": "جارٍ الحفظ…",
+      "guardarTarifa": "حفظ السعر"
+    },
+    "categoria": {
+      "Demolición": "الهدم",
+      "Albañilería": "البناء",
+      "Impermeabilización": "العزل المائي",
+      "Alicatados y Solados": "البلاط والأرضيات",
+      "Fontanería": "السباكة",
+      "Electricidad": "الكهرباء",
+      "Pintura": "الدهان",
+      "Carpintería y Remates": "النجارة والتشطيبات",
+      "Gestión y Logística": "الإدارة واللوجستيات",
+      "Reforma Integral": "التجديد الشامل"
+    }
+  },
+  "documentos": {
+    "title": "مركز المستندات",
+    "subtitle": "قوالب احترافية وإدارة الملفات",
+    "tabs": {
+      "plantillas": "📄 القوالب ({{count}})",
+      "misDocumentos": "📁 مستنداتي {{count}}"
+    },
+    "buscarPlantilla": "🔍  ابحث عن قالب…",
+    "disclaimerPlantillas": "📋 قوالب قابلة للتحرير للاستخدام اليومي. انسخها وخصّصها واستخدمها بحرية.",
+    "sinResultados": "لا توجد نتائج",
+    "verPlantilla": "عرض القالب",
+    "copiar": "📋 نسخ",
+    "storageStep": "خطوة أولية: إنشاء حاوية التخزين",
+    "storageDesc": "اذهب إلى <strong>Supabase → Storage</strong> وأنشئ حاوية باسم <code>documentos-empresa</code>. حددها كـ <strong>Public</strong> واحفظ. ثم نفّذ ترحيل SQL أدناه.",
+    "yaConfigurado": "تم الإعداد بالفعل — إعادة المحاولة",
+    "cargandoArchivos": "جارٍ تحميل الملفات…",
+    "archivosCountOne": "{{count}} ملف",
+    "archivosCountOther": "{{count}} ملفات",
+    "sinArchivos": "لا توجد ملفات",
+    "verArchivo": "عرض الملف",
+    "eliminar": "حذف",
+    "subiendo": "جارٍ الرفع…",
+    "subirArchivo": "📎 رفع ملف",
+    "anadirOtro": "+ إضافة آخر",
+    "formacionTitulo": "التدريب والشهادات",
+    "certificadosCountOne": "{{count}} شهادة",
+    "certificadosCountOther": "{{count}} شهادات",
+    "sinCertificados": "لا توجد شهادات",
+    "anadir": "+ إضافة",
+    "ningunCertificado": "لم تتم إضافة أي شهادة بعد",
+    "cerrar": "إغلاق",
+    "copiarPortapapeles": "📋 نسخ إلى الحافظة",
+    "confirmDeleteDoc": "حذف \"{{nombre}}\"؟",
+    "plantillaCopiada": "تم نسخ القالب إلى الحافظة ✓",
+    "errorSubida": "خطأ أثناء رفع \"{{nombre}}\": {{msg}}",
+    "carpeta": {
+      "Plan de Negocio": {
+        "titulo": "خطة العمل",
+        "desc": "خطة كاملة تضم وحدات التنظيم واستقطاب العملاء وعروض الأسعار والتسعير والصورة والأدوات."
+      },
+      "Fiscalidad": {
+        "titulo": "الضرائب",
+        "desc": "إقرارات ضريبة القيمة المضافة وضريبة الدخل، النماذج 303 و130 و100 وأي مستند من مصلحة الضرائب."
+      },
+      "SS y Hacienda": {
+        "titulo": "الضمان الاجتماعي والضرائب",
+        "desc": "التسجيل كعامل مستقل، إيصالات اشتراك RETA، إشعارات الضمان الاجتماعي ومصلحة الضرائب."
+      },
+      "Seguros": {
+        "titulo": "التأمين",
+        "desc": "بوالص التأمين ضد المسؤولية المدنية، تأمين الأعمال وأي تغطية أخرى متعاقد عليها."
+      },
+      "Contratos": {
+        "titulo": "العقود",
+        "desc": "عقود مع العملاء، اتفاقيات مع الموردين والمقاولين من الباطن وأي مستند موقّع."
+      },
+      "Licencias de Obra": {
+        "titulo": "تراخيص البناء",
+        "desc": "تصاريح بلدية، إخطارات مسبقة، تراخيص نشاط ووثائق التخطيط العمراني."
+      },
+      "Branding": {
+        "titulo": "الهوية التجارية",
+        "desc": "الشعار، خلفية الشركة، صورة العلامة التجارية ومواد الهوية البصرية."
+      },
+      "Subcontratas": {
+        "titulo": "المقاولون من الباطن",
+        "desc": "عقود واتفاقيات مع مقاولين من الباطن وشركات شريكة وعاملين مستقلين."
+      },
+      "Otros Documentos": {
+        "titulo": "مستندات أخرى",
+        "desc": "تراخيص وشهادات وتصاريح وأي مستند آخر خاص بالعمل."
+      }
+    },
+    "carpetaFormacion": {
+      "Certificados Obligatorios": {
+        "titulo": "الشهادات الإلزامية",
+        "desc": "السلامة والصحة المهنية في البناء (60 ساعة إلزامية)، المؤهلات القانونية، البطاقات والاعتمادات التي يتطلبها القانون."
+      },
+      "Formación Continua": {
+        "titulo": "التدريب المستمر",
+        "desc": "دورات تطوير مهني: الجبس بورد، العزل المائي، الكهرباء، السباكة، الإدارة، عروض الأسعار."
+      }
+    }
+  },
+  "copias": {
+    "title": "النسخ الاحتياطي",
+    "subtitle": "احفظ لقطة لجميع بيانات عملك (العملاء، الأعمال، عروض الأسعار، الفواتير، المدفوعات، المصاريف، الموظفون...) واستعدها إذا حُذف شيء أو تلف عن طريق الخطأ.",
+    "mensajeErrorAlmacen": "تعذّر الوصول إلى مخزن النسخ الاحتياطية: {{msg}}",
+    "crearAhoraTitle": "إنشاء نسخة الآن",
+    "crearAhoraDesc": "يتم حفظها في حسابك (لتتمكن من استعادتها من هنا في أي وقت) كما يتم تنزيل نسخة إلى جهاز الكمبيوتر الخاص بك، في حال كنت تفضل الاحتفاظ بها بنفسك في مكان آخر.",
+    "crearBtn": "💾 إنشاء نسخة احتياطية الآن",
+    "creando": "جارٍ إنشاء النسخة...",
+    "restaurarArchivoTitle": "الاستعادة من ملف",
+    "restaurarArchivoDesc": "إذا كنت قد نزّلت نسخة احتياطية سابقًا، فارفعها هنا لاستعادة تلك البيانات.",
+    "subirArchivoBtn": "📤 رفع ملف النسخة الاحتياطية (.json)",
+    "tusCopiasTitle": "نسخك المحفوظة",
+    "cargando": "جارٍ التحميل...",
+    "sinCopias": "ليس لديك أي نسخة محفوظة بعد. أنشئ الأولى أعلاه.",
+    "copiaAutomatica": "🔄 نسخة تلقائية",
+    "copiaManual": "💾 نسخة يدوية",
+    "restaurar": "استعادة",
+    "descargar": "تنزيل",
+    "eliminar": "حذف",
+    "resultadoRestoreTitle": "نتيجة الاستعادة",
+    "errorLabel": "خطأ: {{msg}}",
+    "filaOne": "{{count}} صف",
+    "filaOther": "{{count}} صفوف",
+    "confirmarRestauracionTitle": "تأكيد الاستعادة",
+    "vasARestaurar": "أنت على وشك استعادة <strong>{{nombre}}</strong> ({{total}} سجل إجمالاً).",
+    "notas": [
+      "• هذا <strong>يستعيد/يحدّث</strong> السجلات من النسخة الاحتياطية — لا يحذف أي شيء أنشأته لاحقًا.",
+      "• إذا لم يعد سجل من النسخة موجودًا (حذفته)، تتم إعادة إنشائه ببياناته الأصلية.",
+      "• المستندات تستعيد سجلها فقط (الاسم، الفئة، الرابط)؛ إذا حُذف الملف أيضًا من المخزن، فلن يعمل الرابط."
+    ],
+    "siRestaurarBtn": "نعم، استعادة هذه النسخة",
+    "restaurando": "جارٍ الاستعادة...",
+    "confirmDeleteCopia": "حذف النسخة \"{{nombre}}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "errorDescargar": "تعذّر التنزيل: {{msg}}",
+    "errorGuardarCuenta": "تعذّر حفظ النسخة في حسابك: {{msg}}",
+    "copiaCreadaOk": "تم إنشاء النسخة الاحتياطية وحفظها في حسابك.",
+    "errorCrear": "خطأ أثناء إنشاء النسخة: {{msg}}",
+    "errorLeerCopia": "تعذّر قراءة النسخة: {{msg}}",
+    "archivoDanado": "ملف النسخة الاحتياطية تالف أو غير صالح.",
+    "archivoInvalido": "الملف المحدد ليس نسخة احتياطية صالحة (JSON).",
+    "tabla": {
+      "clientes": "العملاء",
+      "empleados": "الموظفون",
+      "obras": "الأعمال",
+      "tarifas": "الأسعار والتسعير",
+      "calendario_notas": "ملاحظات التقويم",
+      "calendario_eventos": "أحداث التقويم",
+      "presupuestos": "عروض الأسعار",
+      "facturas": "الفواتير",
+      "gastos": "المصاريف",
+      "documentos": "المستندات (السجل فقط، وليس الملف)",
+      "partes_trabajo": "تقارير العمل",
+      "nominas": "الرواتب",
+      "obra_empleados": "الفريق المخصص للأعمال"
+    }
+  },
+  "admin": {
+    "cargandoPanel": "جارٍ تحميل لوحة الإدارة...",
+    "title": "🛡️ لوحة الإدارة",
+    "subtitle": "العاملون المستقلون المسجلون في XANDER Gestión",
+    "actualizar": "↻ تحديث",
+    "stats": {
+      "totalRegistrados": "إجمالي المسجلين",
+      "nuevosSemana": "جدد هذا الأسبوع",
+      "perfilCompleto": "لديهم ملف تعريف كامل"
+    },
+    "tabs": {
+      "usuarios": "المستخدمون",
+      "leads": "العملاء المحتملون",
+      "notificaciones": "الإشعارات"
+    },
+    "usuarios": {
+      "sinUsuarios": "لا يوجد مستخدمون مسجلون بعد",
+      "sinUsuariosSub": "سيظهر هنا العاملون المستقلون الذين يسجلون",
+      "nombre": "الاسم",
+      "email": "البريد الإلكتروني",
+      "empresa": "الشركة",
+      "ciudad": "المدينة",
+      "registro": "التسجيل",
+      "ultimoAcceso": "آخر دخول",
+      "estado": "الحالة",
+      "sinNombre": "بلا اسم",
+      "activo": "✓ نشط",
+      "pendiente": "⏳ قيد الانتظار"
+    },
+    "leads": {
+      "sinLeads": "لا يوجد عملاء محتملون بعد",
+      "sinLeadsSub": "ستظهر هنا جهات الاتصال المتروكة في الصفحة المقصودة",
+      "sinDatosContacto": "لا توجد بيانات اتصال",
+      "atendido": "✓ تم التعامل معه",
+      "marcarAtendido": "وضع علامة تم التعامل معه"
+    },
+    "notif": {
+      "sinNotificaciones": "لا توجد إشعارات",
+      "sinNotificacionesSub": "ستظهر هنا التسجيلات الجديدة",
+      "sinLeerOne": "{{count}} إشعار غير مقروء",
+      "sinLeerOther": "{{count}} إشعارات غير مقروءة",
+      "marcarTodasLeidas": "وضع علامة مقروء على الكل",
+      "marcarLeida": "وضع علامة كمقروء"
+    }
+  },
+  "themeToggle": {
+    "claro": "التبديل إلى الوضع الفاتح",
+    "oscuro": "التبديل إلى الوضع الداكن"
+  },
+  "planGate": {
+    "feature": {
+      "clientes": "أكثر من 3 عملاء",
+      "obras": "أكثر من 3 أعمال",
+      "presupuestos": "أكثر من 5 عروض أسعار",
+      "facturas": "أكثر من 5 فواتير",
+      "empleados": "إدارة الموظفين",
+      "agente_ia": "وكيل الذكاء الاصطناعي",
+      "exportar_pdf": "التصدير إلى PDF",
+      "nominas": "مولد الرواتب",
+      "rentabilidad": "تحليل الربحية"
+    },
+    "funcionExclusiva": "ميزة حصرية لـ Pro",
+    "paraUsar": "لاستخدام {{feature}} تحتاج إلى خطة Pro.",
+    "pruebaTermina": "⏳ تنتهي فترتك التجريبية المجانية خلال {{dias}} يومًا",
+    "activarPlan": "تفعيل خطة Pro — {{precio}}",
+    "sinPermanencia": "بدون التزام · ألغِ في أي وقت",
+    "trialBannerText": "تنتهي فترتك التجريبية خلال <strong>{{dias}} يوم</strong>. فعّل خطة Pro حتى لا تفقد الوصول.",
+    "verPlanes": "عرض الخطط"
+  },
+  "notifBell": {
+    "notificaciones": "الإشعارات",
+    "descartarTodas": "تجاهل الكل",
+    "cargando": "جارٍ التحميل…",
+    "todoAlDia": "كل شيء محدث، لا توجد تنبيهات معلقة",
+    "descartar": "تجاهل"
+  },
+  "pwaUpdate": {
+    "nuevaVersion": "يتوفر إصدار جديد من XANDER.",
+    "actualizar": "تحديث",
+    "ahoraNo": "ليس الآن",
+    "yaFuncionaOffline": "يعمل XANDER الآن دون اتصال بالإنترنت."
+  },
+  "agenteChat": {
+    "titulo": "Agente XANDER",
+    "limpiarTooltip": "محادثة جديدة",
+    "limpiar": "↺ مسح",
+    "faltaApiKey": "لم يتم إعداد مفتاح API بعد",
+    "faltaApiKeyDesc": "لتفعيل الوكيل، أنشئ ملف <code>.env</code> في جذر المشروع يحتوي على:",
+    "pasoGroq1": "اذهب إلى <b>console.groq.com</b>",
+    "pasoGroq2": "أنشئ حسابًا مجانيًا",
+    "pasoGroq3": "API Keys → Create API Key",
+    "pasoGroq4": "انسخ المفتاح إلى ملف .env",
+    "pasoGroq5": "أعد تشغيل خادم التطوير",
+    "pasoPrevioSupabase": "خطوة أولية في Supabase",
+    "ejecutaSql": "نفّذ في محرر SQL في Supabase:",
+    "placeholder": "اكتب استفسارك…",
+    "bienvenida": "مرحبًا! أنا مساعدك في XANDER. يمكنني مساعدتك في العملاء والأعمال وعروض الأسعار والأسئلة الضريبية أو صياغة أي مراسلة. كيف يمكنني مساعدتك؟",
+    "confirmBorrarHistorial": "هل تريد حذف سجل هذه المحادثة؟",
+    "conversacionNueva": "محادثة جديدة! كيف يمكنني مساعدتك؟",
+    "errorConectar": "خطأ في الاتصال بالوكيل."
+  },
+  "calendarioWidget": {
+    "tipo": {
+      "trabajo": "عمل",
+      "reunion": "اجتماع",
+      "cobro": "تحصيل",
+      "recordatorio": "تذكير",
+      "visita": "زيارة الموقع"
+    },
+    "calendarioTrabajo": "تقويم العمل",
+    "hoy": "اليوم",
+    "alertaEmailTitle": "تنبيه بالبريد الإلكتروني",
+    "cargando": "جارٍ التحميل…",
+    "anadir": "+ إضافة",
+    "sinEventos": "لا توجد أحداث لهذا اليوم",
+    "editarEvento": "تعديل الحدث",
+    "nuevoEvento": "حدث جديد — {{fecha}}",
+    "tituloLabel": "العنوان *",
+    "tituloPlaceholder": "مثال: زيارة موقع العميل",
+    "tipoLabel": "النوع",
+    "horaLabel": "الوقت",
+    "descripcionLabel": "الوصف (اختياري)",
+    "descripcionPlaceholder": "تفاصيل إضافية…",
+    "alertaEmailToggleTitle": "🔔 تنبيه بالبريد الإلكتروني",
+    "alertaEmailSub": "تنبيه قبل 24 ساعة وقبل ساعة واحدة",
+    "cancelar": "إلغاء",
+    "guardando": "جارٍ الحفظ…",
+    "guardarCambios": "حفظ التغييرات",
+    "guardar": "حفظ"
+  },
+  "firmaModal": {
+    "firmarDocumento": "توقيع المستند",
+    "nombreQuienFirma": "اسم الموقّع",
+    "nombrePlaceholder": "الاسم الكامل",
+    "firmaLabel": "التوقيع",
+    "borrarRepetir": "مسح وإعادة المحاولة",
+    "disclaimer": "بالتوقيع، يؤكد الموقّع موافقته على محتوى هذا المستند. يُحفظ التوقيع بالتاريخ والوقت كدليل على القبول (وهو ليس توقيعًا إلكترونيًا مؤهلاً وفق eIDAS).",
+    "cancelar": "إلغاء",
+    "guardando": "جارٍ الحفظ…",
+    "confirmarFirma": "✍️ تأكيد التوقيع"
+  },
+  "onboarding": {
+    "pasos": {
+      "cliente": {
+        "titulo": "أضف أول عميل لك",
+        "desc": "بطاقة الاتصال التي تُربط لاحقًا بالأعمال وعروض الأسعار والفواتير."
+      },
+      "obra": {
+        "titulo": "أنشئ أول عمل لك",
+        "desc": "اربطه بعميل لمتابعة الصور والمراحل والفريق."
+      },
+      "presupuesto": {
+        "titulo": "أنشئ أول عرض سعر لك",
+        "desc": "استخدم بنود الأسعار والتسعير لإنشائه في دقائق."
+      },
+      "fiscal": {
+        "titulo": "أكمل بياناتك الضريبية",
+        "desc": "الرقم الضريبي والعنوان والنظام الضريبي — ضرورية لصحة عروض الأسعار والفواتير."
+      },
+      "cobros": {
+        "titulo": "قم بربط الدفع بالبطاقة",
+        "desc": "اختياري: اربط حساب Stripe الخاص بك لتحصيل الفواتير مباشرة من XANDER."
+      }
+    },
+    "primerosPasos": "الخطوات الأولى في XANDER",
+    "mostrar": "إظهار ▾",
+    "ocultar": "إخفاء ▴",
+    "completados": "اكتملت! أنت الآن تعرف أساسيات XANDER.",
+    "progreso": "تم إنجاز {{completados}} من {{total}} — سنرافقك حتى يصبح التطبيق جزءًا من روتينك."
+  },
+  "auth": {
+    "tagline": "إدارة التجديدات",
+    "footer": "© 2026 XANDER Gestión · مدريد",
+    "orConEmail": "أو عبر البريد الإلكتروني",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "you@email.com",
+    "login": {
+      "quote": "\"الأداة التي يحتاجها كل عامل مستقل في هذا المجال، صنعها شخص من هذا المجال.\"",
+      "features": [
+        "عروض الأسعار",
+        "الفوترة",
+        "الأعمال",
+        "الأسعار"
+      ],
+      "bienvenido": "مرحبًا",
+      "accedeCuenta": "سجّل الدخول إلى حسابك",
+      "continuarGoogle": "المتابعة باستخدام Google",
+      "contrasena": "كلمة المرور",
+      "olvidasteContrasena": "هل نسيت كلمة المرور؟",
+      "errorCredenciales": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      "entrando": "جارٍ الدخول...",
+      "entrar": "تسجيل الدخول",
+      "noTienesCuenta": "ليس لديك حساب؟",
+      "registrateGratis": "سجّل مجانًا"
+    },
+    "register": {
+      "features": [
+        {
+          "icon": "📋",
+          "text": "عروض أسعار احترافية خلال دقائق"
+        },
+        {
+          "icon": "🔨",
+          "text": "متابعة الأعمال والعملاء"
+        },
+        {
+          "icon": "📊",
+          "text": "الأسعار والربحية لكل عمل"
+        },
+        {
+          "icon": "📧",
+          "text": "إرسال الفواتير مباشرة من التطبيق"
+        }
+      ],
+      "gratisBeta": "مجاني خلال فترة البيتا · دون بطاقة ائتمان",
+      "creaTuCuenta": "أنشئ حسابك",
+      "gratisSinLimites": "مجاني خلال فترة البيتا · بلا حدود",
+      "registrarseGoogle": "التسجيل باستخدام Google",
+      "emailProfesional": "البريد الإلكتروني المهني",
+      "contrasena": "كلمة المرور",
+      "minimoCaracteres": "8 أحرف على الأقل",
+      "confirmarContrasena": "تأكيد كلمة المرور",
+      "repiteContrasena": "أعد كتابة كلمة المرور",
+      "passwordsNoCoinciden": "كلمتا المرور غير متطابقتين.",
+      "passwordCorta": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
+      "creandoCuenta": "جارٍ إنشاء الحساب...",
+      "crearCuentaGratuita": "إنشاء حساب مجاني",
+      "aceptasTerminosPre": "بالتسجيل، فإنك توافق على",
+      "terminosUso": "شروط الاستخدام",
+      "y": "و",
+      "politicaPrivacidad": "سياسة الخصوصية",
+      "yaTienesCuenta": "لديك حساب بالفعل؟",
+      "accedeAqui": "سجّل الدخول هنا",
+      "revisaEmail": "تحقق من بريدك الإلكتروني",
+      "enlaceConfirmacion": "لقد أرسلنا رابط تأكيد إلى <strong>{{email}}</strong>. أكّد حسابك لتبدأ في إعداد ملفك الشخصي.",
+      "irLogin": "الذهاب لتسجيل الدخول"
+    },
+    "forgot": {
+      "sidebarText": "سنرسل لك رابطًا لتتمكن من تعيين كلمة مرور جديدة بأمان.",
+      "emailEnviado": "تم إرسال البريد الإلكتروني",
+      "enlaceEnviadoA": "لقد أرسلنا رابط استعادة إلى <strong>{{email}}</strong>. تحقق أيضًا من مجلد البريد العشوائي.",
+      "enlaceCaduca": "ينتهي صلاحية الرابط خلال ساعة واحدة. إذا لم تستلمه، يمكنك المحاولة مرة أخرى.",
+      "volverInicioSesion": "العودة لتسجيل الدخول",
+      "flechaVolver": "← العودة لتسجيل الدخول",
+      "recuperarContrasena": "استعادة كلمة المرور",
+      "introduceEmail": "أدخل بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+      "errorEnvio": "تعذّر إرسال البريد الإلكتروني. تحقق من العنوان وحاول مرة أخرى.",
+      "enviando": "جارٍ الإرسال...",
+      "enviarEnlace": "إرسال رابط الاستعادة"
+    },
+    "reset": {
+      "sidebarText": "اختر كلمة مرور آمنة. نوصي باستخدام 8 أحرف على الأقل تجمع بين الحروف والأرقام.",
+      "passwordActualizada": "تم تحديث كلمة المرور",
+      "redirigiendo": "جارٍ إعادة التوجيه إلى حسابك...",
+      "verificandoEnlace": "جارٍ التحقق من رابط الاستعادة...",
+      "enlaceCaducadoAviso": "إذا رأيت هذه الرسالة لأكثر من 10 ثوانٍ، فقد يكون الرابط منتهي الصلاحية.",
+      "solicitaUnoNuevo": "اطلب رابطًا جديدًا.",
+      "nuevaContrasena": "كلمة مرور جديدة",
+      "eligeNuevaPassword": "اختر كلمة مرور جديدة لحسابك.",
+      "confirmarContrasena": "تأكيد كلمة المرور",
+      "repiteContrasena": "أعد كتابة كلمة المرور",
+      "minimoCaracteres": "8 أحرف على الأقل",
+      "passwordCorta": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
+      "passwordsNoCoinciden": "كلمتا المرور غير متطابقتين.",
+      "errorActualizar": "تعذّر تحديث كلمة المرور. قد يكون الرابط منتهي الصلاحية.",
+      "guardando": "جارٍ الحفظ...",
+      "establecerNuevaContrasena": "تعيين كلمة مرور جديدة"
+    }
+  },
+  "onboardingWizard": {
+    "cuentanosQuienEres": "أخبرنا من أنت — الأساسيات فقط",
+    "bienvenido": "مرحبًا بك في XANDER",
+    "rellenaDatos": "املأ بيانين وستكون جاهزًا للبدء. يمكنك إكمال باقي ملفك الشخصي لاحقًا.",
+    "nombreLabel": "الاسم",
+    "apellidosLabel": "اللقب",
+    "nombreEmpresaLabel": "اسم الشركة",
+    "nombreObligatorio": "الاسم إلزامي.",
+    "empresaObligatoria": "اسم الشركة إلزامي.",
+    "especialidadesLabel": "التخصصات",
+    "opcional": "(اختياري)",
+    "queTrabajos": "ما الأعمال التي تقوم بها عادةً؟",
+    "especialidad": {
+      "Reformas integrales": "تجديدات شاملة",
+      "Baños": "الحمامات",
+      "Cocinas": "المطابخ",
+      "Pintura": "الدهان",
+      "Pladur": "الجبس بورد",
+      "Electricidad": "الكهرباء",
+      "Fontanería": "السباكة",
+      "Carpintería": "النجارة",
+      "Alicatados": "البلاط",
+      "Fachadas": "الواجهات"
+    },
+    "avisoDatosAdicionales": "يمكنك إضافة الرقم الضريبي والعنوان وأرقام الهاتف والمزيد في <strong>شركتي</strong> في أي وقت تشاء. وهي ضرورية لطباعة عروض أسعار وفواتير كاملة.",
+    "salir": "خروج",
+    "guardando": "جارٍ الحفظ...",
+    "empezar": "ابدأ! ←"
+  },
+  "landing": {
+    "nav": {
+      "funciones": "الميزات",
+      "planes": "الخطط",
+      "contacto": "اتصل بنا"
+    },
+    "miCuenta": "حسابي",
+    "entrar": "تسجيل الدخول",
+    "pruebaGratis": "تجربة مجانية",
+    "iraMiCuenta": "الذهاب إلى حسابي",
+    "pruebaGratis30": "تجربة مجانية لمدة 30 يومًا",
+    "heroTag": "إدارة لتجديدات المساحات الداخلية",
+    "heroTitle": "عروض الأسعار والفواتير والأعمال.<br />كل ذلك في مكان واحد.",
+    "heroDesc": "أداة الإدارة المصممة من قبل وللعاملين المستقلين في مجال التجديدات: عروض أسعار خلال دقائق، فوترة متوافقة مع Verifactu، الدفع بالبطاقة ومتابعة حقيقية لكل عمل.",
+    "verFunciones": "عرض الميزات",
+    "sinTarjeta": "بدون بطاقة · بدون التزام · ألغِ في أي وقت",
+    "funciones": [
+      {
+        "icon": "📋",
+        "title": "عروض الأسعار",
+        "desc": "أنشئ عروض أسعار احترافية بنودًا خلال دقائق، جاهزة للإرسال."
+      },
+      {
+        "icon": "🧾",
+        "title": "الفوترة",
+        "desc": "فواتير مع Verifactu مدمج — تجزئة متسلسلة ورمز QR وإرسال إلى مصلحة الضرائب."
+      },
+      {
+        "icon": "🏗️",
+        "title": "الأعمال",
+        "desc": "متابعة العمل بالصور والمراحل والفريق وتقارير العمل."
+      },
+      {
+        "icon": "💳",
+        "title": "الدفع بالبطاقة",
+        "desc": "يدفع عملاؤك الفاتورة عبر الإنترنت. تصل الأموال مباشرة إلى حسابك."
+      },
+      {
+        "icon": "💶",
+        "title": "المصاريف والنتائج",
+        "desc": "سجّل المصاريف لكل عمل واطّلع على الربحية الحقيقية لكل مشروع."
+      },
+      {
+        "icon": "📊",
+        "title": "الضرائب",
+        "desc": "مستند مطابقة جاهز لمكتب المحاسبة قبل كل ربع سنة."
+      },
+      {
+        "icon": "👷",
+        "title": "الموظفون والرواتب",
+        "desc": "سجلات ساعات العمل لكل عمل ومولد إيصالات الرواتب."
+      },
+      {
+        "icon": "📱",
+        "title": "تطبيق قابل للتثبيت",
+        "desc": "ثبّته على هاتفك أو حاسوبك، ويعمل حتى بدون اتصال بالإنترنت."
+      }
+    ],
+    "funcionesTitle": "كل ما تحتاجه لإدارة عملك",
+    "funcionesSubtitle": "دون جداول بيانات متفرقة، ودون مجلدات واتساب مليئة بعروض الأسعار.",
+    "testimonioAutor": "— XANDER لتجديدات المساحات الداخلية، مدريد",
+    "planesTitle": "خطط بسيطة",
+    "planesSubtitle": "ابدأ مجانًا. بدون مفاجآت.",
+    "recomendado": "موصى به",
+    "planPrueba": {
+      "nombre": "تجربة مجانية",
+      "periodo": "30 يومًا",
+      "desc": "وصول كامل، بدون بطاقة.",
+      "features": [
+        "جميع الوحدات",
+        "بلا حدود للعملاء أو الأعمال",
+        "وكيل الذكاء الاصطناعي مشمول"
+      ],
+      "cta": "ابدأ مجانًا"
+    },
+    "planPro": {
+      "nombre": "Pro",
+      "periodo": "لكل عامل مستقل",
+      "desc": "لعندما تقرر البقاء.",
+      "features": [
+        "كل ما في الخطة المجانية",
+        "بلا حدود للاستخدام",
+        "دعم مباشر"
+      ],
+      "cta": "ابدأ مجانًا"
+    },
+    "contactoTitle": "هل لديك أسئلة قبل البدء؟",
+    "contactoSubtitle": "اترك لنا بياناتك أو راسلنا مباشرة عبر واتساب.",
+    "form": {
+      "nombre": "الاسم",
+      "nombrePlaceholder": "اسمك",
+      "emailOTelefono": "البريد الإلكتروني أو الهاتف",
+      "contactoPlaceholder": "you@email.com أو رقم الهاتف",
+      "mensaje": "الرسالة",
+      "opcional": "(اختياري)",
+      "mensajePlaceholder": "أخبرنا بما تحتاجه",
+      "errorRequerido": "نحتاج على الأقل إلى اسمك وبريد إلكتروني أو هاتف للتواصل معك.",
+      "errorEnvio": "تعذّر الإرسال. حاول مرة أخرى أو راسلنا عبر واتساب.",
+      "gracias": "شكرًا لك، {{nombre}}!",
+      "contactamos24h": "سنتواصل معك خلال أقل من 24 ساعة.",
+      "enviando": "جارٍ الإرسال...",
+      "quieroContacten": "أريد أن يتم التواصل معي"
+    },
+    "contactoDirecto": "اتصال مباشر",
+    "escribirWhatsapp": "راسلنا عبر واتساب",
+    "footerText": "XANDER لتجديدات المساحات الداخلية · مدريد",
+    "footerCopyright": "© 2026 XANDER Gestión"
   }
 }

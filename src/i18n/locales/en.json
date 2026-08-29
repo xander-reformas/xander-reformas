@@ -151,5 +151,1693 @@
         "until": "Until"
       }
     }
+  },
+  "clientes": {
+    "title": "Clients",
+    "countOne": "{{count}} client in total",
+    "countOther": "{{count}} clients in total",
+    "newCliente": "+ New client",
+    "searchPlaceholder": "🔍  Search by name, email, city…",
+    "loading": "Loading clients…",
+    "noResultsTitle": "No results",
+    "noResultsHint": "Try another search",
+    "noClientesTitle": "You don't have any clients yet",
+    "noClientesHint": "Add your first client to start managing projects and quotes",
+    "addFirst": "+ Add client",
+    "table": {
+      "nombreNif": "Name / Tax ID",
+      "telefono": "Phone",
+      "email": "Email",
+      "ciudad": "City"
+    },
+    "editar": "Edit",
+    "eliminar": "Delete",
+    "confirmDelete": "Delete \"{{nombre}}\"? This action cannot be undone.",
+    "form": {
+      "editTitle": "Edit client",
+      "newTitle": "New client",
+      "nombreLabel": "Name *",
+      "nifLabel": "Tax ID",
+      "telefonoLabel": "Phone",
+      "emailLabel": "Email",
+      "direccionLabel": "Address",
+      "cpLabel": "Zip code",
+      "ciudadLabel": "City",
+      "notasLabel": "Internal notes",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "save": "Save client"
+    }
+  },
+  "rentabilidad": {
+    "title": "Profitability by project",
+    "subtitle": "Budget vs actual cost comparison · margin per project",
+    "totalPresupuestado": "Total budgeted",
+    "costeRealAcumulado": "Accumulated actual cost",
+    "beneficioNeto": "Net profit",
+    "margenGlobal": "Overall margin",
+    "distribucionTitle": "Profitability distribution",
+    "dist": {
+      "excelente": "Excellent",
+      "buena": "Good",
+      "justa": "Fair",
+      "negativa": "Negative"
+    },
+    "allStates": "All statuses",
+    "orden": {
+      "margenDesc": "Highest margin first",
+      "margenAsc": "Lowest margin first",
+      "presupuestoDesc": "Highest budget first",
+      "nombre": "By name"
+    },
+    "loading": "Loading projects…",
+    "emptyTitle": "No projects to analyze",
+    "emptyHint": "Create projects and add costs to see profitability",
+    "presupuestado": "Budgeted",
+    "costeReal": "Actual cost",
+    "facturado": "Invoiced",
+    "beneficio": "Profit",
+    "sinDato": "No data",
+    "sinFactura": "No invoice",
+    "margen": "margin",
+    "tipFaltaInfo": "💡 Add the total budget and actual cost to the project to see profitability"
+  },
+  "presupuestos": {
+    "estado": {
+      "borrador": "Draft",
+      "enviado": "Sent",
+      "aceptado": "Accepted",
+      "rechazado": "Rejected",
+      "expirado": "Expired"
+    },
+    "form": {
+      "editTitle": "Edit quote",
+      "newTitle": "New quote",
+      "numeroLabel": "Number *",
+      "referenciaLabel": "Reference",
+      "fechaLabel": "Date",
+      "validezLabel": "Validity (days)",
+      "clienteLabel": "Client",
+      "sinCliente": "No client",
+      "obraLabel": "Project",
+      "sinObra": "No project",
+      "estadoLabel": "Status",
+      "partidasLabel": "Quote line items",
+      "addPartida": "+ Add line item",
+      "tituloLabel": "Description / title",
+      "tituloPlaceholder": "Bathroom renovation — demolition and tiling",
+      "unidadLabel": "Unit",
+      "cantidadLabel": "Quantity",
+      "precioUdLabel": "Price / unit (€)",
+      "importeLabel": "Amount (€)",
+      "detalleLabel": "Detail (optional)",
+      "detallePlaceholder": "Includes: removal of existing tiling, new tiling up to ceiling…",
+      "noIncluidoLabel": "Not included (one line per item)",
+      "condicionesLabel": "Terms (one line per item)",
+      "notasLabel": "Internal notes",
+      "ivaLabel": "VAT (%)",
+      "ivaOptions": {
+        "sinIva": "0% — No VAT",
+        "residencial": "10% — Residential",
+        "general": "21% — Commercial / New build / Company / Investor"
+      },
+      "descuentoLabel": "Discount (%)",
+      "baseImponible": "Taxable base",
+      "descuentoLine": "Discount ({{pct}}%)",
+      "ivaLine": "VAT ({{pct}}%)",
+      "total": "TOTAL",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "save": "Save quote",
+      "numeroRequerido": "The quote number is required"
+    },
+    "list": {
+      "title": "Quotes",
+      "countOne": "{{count}} quote",
+      "countOther": "{{count}} quotes",
+      "newPresupuesto": "+ New quote",
+      "aceptados": "✓ Accepted quotes:",
+      "searchPlaceholder": "🔍  Search no., client, project…",
+      "allStates": "All statuses",
+      "loading": "Loading quotes…",
+      "noResultsTitle": "No results",
+      "noPresupuestosTitle": "You don't have any quotes yet",
+      "noPresupuestosHint": "Create your first professional quote",
+      "table": {
+        "numero": "Number",
+        "clienteObra": "Client / Project",
+        "fecha": "Date",
+        "vence": "Due",
+        "estado": "Status",
+        "total": "Total"
+      },
+      "firmadoTitle": "Signed by {{nombre}} on {{fecha}}",
+      "vencido": "Expired",
+      "venceHoy": "Due today",
+      "diasRestanteOne": "{{count}}d left",
+      "diasRestanteOther": "{{count}}d left",
+      "crearFactura": "📄 Invoice",
+      "crearFacturaTitle": "Create invoice from this quote",
+      "firmar": "✍️ Sign",
+      "firmarTitle": "Sign and accept this quote",
+      "editar": "Edit",
+      "eliminar": "Delete",
+      "confirmDelete": "Delete quote {{numero}}?"
+    },
+    "firmarModalTitle": "Sign quote {{numero}}"
+  },
+  "facturas": {
+    "estado": {
+      "borrador": "Draft",
+      "enviada": "Sent",
+      "vista": "Viewed",
+      "pagada": "Paid",
+      "vencida": "Overdue",
+      "anulada": "Voided"
+    },
+    "form": {
+      "editTitle": "Edit invoice",
+      "newTitle": "New invoice",
+      "verifactuBadge": "🔒 Verifactu",
+      "fromPresupuesto": "📋 Created from quote {{numero}}",
+      "lockedNotice": "🔒 This invoice is already registered in the Verifactu ledger (RD 1007/2023): the number, date, lines, VAT, discount, withholding and client cannot be changed. You can only change the status, associated project, due date or notes. To correct an economic figure, issue a corrective invoice.",
+      "importarPresupuestoLabel": "⚡ Import from accepted quote",
+      "crearDesdeCero": "Create invoice from scratch",
+      "numeroLabel": "Number *",
+      "estadoLabel": "Status",
+      "fechaEmisionLabel": "Issue date",
+      "vencimientoLabel": "Due date",
+      "clienteLabel": "Client",
+      "sinCliente": "No client",
+      "obraLabel": "Project",
+      "sinObra": "No project",
+      "lineasLabel": "Invoice lines",
+      "addLinea": "+ Add line",
+      "descripcionLabel": "Description",
+      "descripcionPlaceholder": "Work carried out in bathroom renovation",
+      "unidadLabel": "Unit",
+      "cantidadLabel": "Quantity",
+      "precioUdLabel": "Price / unit (€)",
+      "importeLabel": "Amount (€)",
+      "detalleLabel": "Detail (optional)",
+      "notasLabel": "Notes / remarks",
+      "notasPlaceholder": "Payment terms, account number, etc.",
+      "ivaLabel": "VAT (%)",
+      "ivaOptions": {
+        "sinIva": "0% — No VAT",
+        "residencial": "10% — Residential",
+        "general": "21% — Commercial / New build / Company / Investor"
+      },
+      "dtoLabel": "Disc. (%)",
+      "retLabel": "Withholding tax (%)",
+      "baseImponible": "Taxable base",
+      "descuentoLine": "Discount ({{pct}}%)",
+      "ivaLine": "VAT ({{pct}}%)",
+      "retLine": "Withholding tax ({{pct}}%)",
+      "total": "TOTAL",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "save": "Save invoice",
+      "numeroRequerido": "The invoice number is required"
+    },
+    "vista": {
+      "title": "Invoice {{numero}}",
+      "loading": "Loading…",
+      "facturarA": "Bill to",
+      "sinCliente": "No client",
+      "descripcionCol": "Description",
+      "cantidadCol": "Qty.",
+      "precioUdCol": "Price/unit",
+      "importeCol": "Amount",
+      "baseImponible": "Taxable base",
+      "descuentoLine": "Discount ({{pct}}%)",
+      "ivaLine": "VAT ({{pct}}%)",
+      "retLine": "Withholding tax ({{pct}}%)",
+      "total": "TOTAL",
+      "fecha": "Date: {{fecha}}",
+      "vencimiento": "Due: {{fecha}}",
+      "obra": "Project: {{nombre}}",
+      "tel": "Phone: {{tel}}",
+      "nif": "Tax ID: {{nif}}",
+      "empresaDefault": "My company",
+      "veriTitle": "VERI*FACTU",
+      "veriDesc": "Invoice verifiable at the AEAT electronic office.",
+      "veriRef": "Ref.: {{uuid}}",
+      "registradaTitle": "Invoice registered in the Verifactu system (RD 1007/2023)",
+      "hashLabel": "Hash: {{hash}}…",
+      "noEnviada": "⚠️ Not yet sent to the AEAT — check the status before delivering it to the client.",
+      "aeatError": "⚠️ AEAT: {{error}}",
+      "cerrar": "Close",
+      "imprimir": "🖨️ Print / PDF"
+    },
+    "cobro": {
+      "title": "💳 Card payment — {{numero}}",
+      "desc": "Share this link with the client so they can pay the invoice by card. Once Stripe confirms the payment, the invoice will automatically move to Paid status.",
+      "copiado": "✓ Copied",
+      "copiar": "📋 Copy link",
+      "abrirEnlace": "Open payment link"
+    },
+    "list": {
+      "title": "Invoices",
+      "countOne": "{{count}} invoice",
+      "countOther": "{{count}} invoices",
+      "newFactura": "+ New invoice",
+      "facturadoLabel": "Invoiced (total)",
+      "cobradoLabel": "Collected",
+      "pendienteLabel": "Pending collection",
+      "facturasCountOne": "{{count}} invoice",
+      "facturasCountOther": "{{count}} invoices",
+      "pagadasCountOne": "{{count}} paid",
+      "pagadasCountOther": "{{count}} paid",
+      "circulacionCountOne": "{{count}} outstanding",
+      "circulacionCountOther": "{{count}} outstanding",
+      "todas": "All ({{count}})",
+      "searchPlaceholder": "🔍  Search no., client…",
+      "loading": "Loading invoices…",
+      "noResultsTitle": "No results",
+      "noFacturasTitle": "You don't have any invoices yet",
+      "table": {
+        "numero": "Number",
+        "cliente": "Client",
+        "fecha": "Date",
+        "vencimiento": "Due date",
+        "estado": "Status",
+        "total": "Total"
+      },
+      "anuladaBadge": "🚫 voided",
+      "anuladaTitle": "Voided invoice",
+      "lockedTitle": "Registered in the Verifactu ledger — economic data locked",
+      "pendienteAeatTitle": "Sent to the AEAT, awaiting confirmation",
+      "aceptadaAeatTitle": "Accepted by the AEAT",
+      "aeatEstadoTitle": "AEAT: {{estado}}",
+      "verFactura": "🧾 Invoice",
+      "cobrando": "Generating…",
+      "cobrar": "💳 Charge",
+      "editar": "Edit",
+      "ver": "View",
+      "anuladaLabel": "Voided",
+      "anularBtn": "🚫 Void",
+      "anularTitle": "Void this invoice (kept on record as voided, not deleted)",
+      "eliminar": "Delete",
+      "confirmDelete": "Delete invoice {{numero}}?",
+      "cannotDeleteLocked": "This invoice is already registered in the Verifactu ledger and cannot be deleted. Issue a corrective invoice or void it.",
+      "anularPrompt": "You are about to void invoice {{numero}}. It will remain on record as voided in the Verifactu ledger (not deleted). Reason? (optional)",
+      "noEnlacePago": "Could not generate the payment link."
+    }
+  },
+  "cobros": {
+    "title": "Collections",
+    "subtitle": "Track pending and paid invoices",
+    "pendienteCobroLabel": "Pending collection",
+    "totalCobradoLabel": "Total collected",
+    "vencidasSinCobrarLabel": "Overdue uncollected",
+    "facturaCountOne": "{{count}} invoice",
+    "facturaCountOther": "{{count}} invoices",
+    "facturaPagadaCountOne": "{{count}} paid invoice",
+    "facturaPagadaCountOther": "{{count}} paid invoices",
+    "todoAlDia": "All up to date ✓",
+    "alertas": {
+      "title": "Collection alerts",
+      "urgentesOne": "{{count}} urgent invoice",
+      "urgentesOther": "{{count}} urgent invoices",
+      "rojo": "Overdue",
+      "naranja": "Urgent (≤7 days)",
+      "amarillo": "Upcoming (8-30 days)",
+      "verde": "On track (>30 days)",
+      "vencidaHace": "Overdue by {{dias}}d",
+      "venceHoy": "Due today",
+      "venceEn": "Due in {{dias}}d",
+      "cobrar": "Collect"
+    },
+    "graficoTitle": "Collections by month",
+    "tabPendientesOne": "Pending ({{count}})",
+    "tabPendientesOther": "Pending ({{count}})",
+    "tabCobradasOne": "Collected ({{count}})",
+    "tabCobradasOther": "Collected ({{count}})",
+    "loading": "Loading…",
+    "emptyPendientesTitle": "All collected! No pending invoices",
+    "emptyPendientesHint": "Great job 💪",
+    "emptyCobradasTitle": "No collections recorded yet",
+    "emptyCobradasHint": "Invoices marked as paid will appear here",
+    "emitida": "Issued: {{fecha}}",
+    "vence": "Due: {{fecha}}",
+    "venceVencidaHace": " (overdue by {{dias}} days)",
+    "venceHoyParen": " (due today)",
+    "venceEnDias": " (in {{dias}} days)",
+    "marcarCobrada": "✓ Mark collected",
+    "desmarcar": "Unmark",
+    "confirmarDesmarcar": "Mark this invoice as sent (pending collection)?",
+    "modal": {
+      "title": "Confirm collection",
+      "fechaLabel": "Collection date",
+      "metodoLabel": "Payment method",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "confirmar": "✓ Confirm collection"
+    },
+    "metodo": {
+      "Transferencia": "Bank transfer",
+      "Efectivo": "Cash",
+      "Bizum": "Bizum",
+      "Cheque": "Check",
+      "Tarjeta": "Card"
+    },
+    "notaCobrado": "✓ Collected on {{fecha}} via {{metodo}}"
+  },
+  "gastos": {
+    "categoria": {
+      "Materiales": "Materials",
+      "Mano de obra / Subcontratas": "Labour / Subcontractors",
+      "Herramientas y equipos": "Tools and equipment",
+      "Transporte y combustible": "Transport and fuel",
+      "Publicidad y marketing": "Advertising and marketing",
+      "Seguros": "Insurance",
+      "Gestoría / Asesoría": "Accounting / Consulting",
+      "Alquiler": "Rent",
+      "Formación": "Training",
+      "Comunicaciones": "Communications",
+      "Otros": "Other"
+    },
+    "ivaOpts": {
+      "exento": "0% — Exempt",
+      "superreducido": "4% — Super-reduced",
+      "reducido": "10% — Reduced (housing)",
+      "general": "21% — General (commercial / company)"
+    },
+    "setup": {
+      "title": "Expenses",
+      "stepTitle": "Prior step: create table in Supabase",
+      "stepDescPre": "Go to",
+      "stepDescPost": "and run:",
+      "hintAlter": "If the table already existed, run the 2 ALTER TABLE lines at the end of the file to add the VAT columns."
+    },
+    "title": "Expenses",
+    "headerCountOne": "{{count}} expense",
+    "headerCountOther": "{{count}} expenses",
+    "headerTotal": "Total: {{total}}",
+    "newGasto": "+ New expense",
+    "porCategoriaTitle": "By category",
+    "sinDatos": "No data yet",
+    "searchPlaceholder": "🔍  Search…",
+    "allCategorias": "All categories",
+    "allObras": "All projects",
+    "resultadosOne": "{{count}} result",
+    "resultadosOther": "{{count}} results",
+    "loading": "Loading…",
+    "noResultsTitle": "No results",
+    "noGastosTitle": "No expenses recorded",
+    "addFirst": "+ Add expense",
+    "table": {
+      "descripcion": "Description",
+      "categoria": "Category",
+      "fecha": "Date",
+      "base": "Base",
+      "iva": "VAT",
+      "total": "Total"
+    },
+    "totalRow": "Total ({{count}})",
+    "editar": "Edit",
+    "confirmDelete": "Delete \"{{desc}}\"?",
+    "lightboxAlt": "Enlarged invoice",
+    "form": {
+      "editTitle": "Edit expense",
+      "newTitle": "New expense",
+      "uploadLabel": "📎 Photo of invoice / receipt or PDF (auto-fills the fields)",
+      "analizando": "Analyzing with AI…",
+      "ampliar": "🔍 Enlarge",
+      "cambiarArchivo": "Change file",
+      "dropHint": "Drag here or click to upload",
+      "dropSubhint": "JPG, PNG, WEBP, PDF · AI extracts the data automatically",
+      "leyendoPdf": "📄 Reading PDF… (may take a few seconds)",
+      "leyendoFactura": "🔍 Reading invoice…",
+      "soloImagenesPdf": "⚠️ Images or PDF only",
+      "datosExtraidos": "✅ Data extracted. Review and adjust if needed.",
+      "noPudoLeer": "⚠️ Could not read automatically. Fill in the fields manually.",
+      "fechaLabel": "Date *",
+      "categoriaLabel": "Category *",
+      "descripcionLabel": "Description / Concept *",
+      "descripcionPlaceholder": "What was purchased?",
+      "baseLabel": "Base amount (excl. VAT) *",
+      "ivaLabel": "VAT %",
+      "baseCol": "Base",
+      "ivaCol": "VAT {{pct}}%",
+      "totalCol": "Total",
+      "proveedorLabel": "Supplier",
+      "proveedorPlaceholder": "Leroy Merlin, etc.",
+      "facturaNumLabel": "Invoice / receipt no.",
+      "obraLabel": "Linked project",
+      "sinObra": "No project",
+      "notasLabel": "Notes",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "save": "Save expense"
+    }
+  },
+  "empleados": {
+    "title": "Employees and team",
+    "subtitle": "Manage your team, labour costs and collective agreement",
+    "newEmpleado": "+ New employee",
+    "kpi": {
+      "activos": "Active employees",
+      "salarioBruto": "Monthly gross salary",
+      "costeEmpresa": "Company cost / month"
+    },
+    "tabs": {
+      "equipo": "👥 Team",
+      "costes": "💰 Costs",
+      "convenio": "📋 Agreement"
+    },
+    "setup": {
+      "title": "Create table in Supabase",
+      "descPre": "Run the file",
+      "descPost": "in the Supabase SQL Editor.",
+      "reload": "Already ran it — reload"
+    },
+    "loading": "Loading team…",
+    "searchPlaceholder": "🔍  Search…",
+    "filtros": {
+      "activos": "Active",
+      "bajaTemporal": "Temporary leave",
+      "bajaDefinitiva": "Permanent leave",
+      "todos": "All"
+    },
+    "noResultsTitle": "No results",
+    "noEmpleadosTitle": "No employees recorded",
+    "noEmpleadosHint": "Add your first employee or contractor",
+    "grupoCC": "Group {{grupo}} CA",
+    "alta": "Start date: {{fecha}}",
+    "jornadaPct": "{{pct}}% workday",
+    "bruto": "{{monto}} gross",
+    "masSS": "+ {{monto}} SS",
+    "porMes": "{{monto}} / month",
+    "editar": "Edit",
+    "bajaTemporalBtn": "↓ Leave",
+    "bajaTemporalTitle": "Set on temporary leave",
+    "altaBtn": "↑ Reinstate",
+    "altaTitle": "Reinstate",
+    "confirmDelete": "Delete {{nombre}}?",
+    "puesto": {
+      "encargado": "Site foreman",
+      "oficial_1": "Skilled tradesman (1st class)",
+      "oficial_2": "Skilled tradesman (2nd class)",
+      "ayudante": "Assistant",
+      "peon": "Laborer",
+      "fontanero": "Plumber",
+      "electricista": "Electrician",
+      "pintor": "Painter",
+      "yesero": "Plasterer",
+      "carpintero": "Carpenter",
+      "alicatador": "Tiler",
+      "impermeabilizador": "Waterproofer",
+      "administrativo": "Administrative staff",
+      "otro": "Other"
+    },
+    "tipoContrato": {
+      "indefinido": "Permanent",
+      "fijo_discontinuo": "Recurring seasonal",
+      "temporal_obra": "Temporary (per project)",
+      "temporal_6m": "Temporary (≤6 months)",
+      "formacion": "Training contract",
+      "autonomo": "Self-employed collaborator"
+    },
+    "grupoConvenio": {
+      "I": "Group I — Senior/mid-level graduates",
+      "II": "Group II — Site managers / qualified administrative staff",
+      "III": "Group III — Foremen / Supervisors",
+      "IV": "Group IV — Skilled tradesmen (1st and 2nd class)",
+      "V": "Group V — Assistants",
+      "VI": "Group VI — Laborers"
+    },
+    "costes": {
+      "calculadoraTitle": "Company cost calculator",
+      "resumenTitle": "Active team summary",
+      "table": {
+        "empleado": "Employee",
+        "puesto": "Position",
+        "brutoMes": "Gross / month",
+        "ssEmpresa": "Company SS",
+        "costeTotalMes": "Total cost / month",
+        "anualEstimado": "Estimated annual"
+      },
+      "totalEquipo": "TEAM TOTAL",
+      "nota": "* Company social security is calculated at {{pct}}% of gross salary (common contingencies + workplace accident/occupational disease construction rate + unemployment + FOGASA + vocational training + MEI). The actual cost may vary depending on the contribution base and provincial agreement.",
+      "emptyHint": "Add employees in the Team tab to see the cost summary.",
+      "calc": {
+        "salarioLabel": "Monthly gross salary (€)",
+        "totalSS": "Total company SS ({{pct}}%)",
+        "costeEmpresaMes": "Company cost / month",
+        "brutoMasSS": "{{bruto}} gross + {{ss}} SS",
+        "costeAnual": "Annual cost (×12)",
+        "con2Pagas": "With 2 extra payments",
+        "introduceSalario": "Enter the gross salary to calculate the actual cost"
+      }
+    },
+    "convenio": {
+      "disclaimerPre": "ℹ️ Reference guide.",
+      "disclaimerPost": "Based on the VI General Collective Agreement for the Construction Sector (2022-2026). Always verify the updated figures with your labour advisor or the BOE / provincial agreement.",
+      "recursosTitle": "Useful resources and links"
+    },
+    "form": {
+      "editTitle": "Edit employee",
+      "newTitle": "New employee",
+      "nombreLabel": "First name *",
+      "apellidosLabel": "Last name *",
+      "puestoLabel": "Position *",
+      "tipoContratoLabel": "Contract type *",
+      "especialidadLabel": "Specialty / detail",
+      "especialidadPlaceholder": "E.g.: Plumbing and gas, drywall…",
+      "grupoLabel": "Professional group (Agreement)",
+      "salarioLabel": "Monthly gross salary (€) *",
+      "costeEmpresaPreview": "Company cost: {{monto}} / month",
+      "jornadaLabel": "% of working day",
+      "jornadaHint": "100% = full time",
+      "fechaAltaLabel": "Start date *",
+      "fechaBajaLabel": "End date",
+      "estadoLabel": "Status",
+      "estadoOpts": {
+        "activo": "Active",
+        "baja_temporal": "Temporary leave",
+        "baja_definitiva": "Permanent leave"
+      },
+      "telefonoLabel": "Phone",
+      "numSsLabel": "Social security number",
+      "dniLabel": "ID / NIE",
+      "emailLabel": "Email",
+      "notasLabel": "Notes",
+      "notasPlaceholder": "Remarks, special agreements…",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "save": "Save"
+    }
+  },
+  "partes": {
+    "title": "Work logs",
+    "subtitle": "Daily record of hours by employee and project",
+    "newParte": "+ New log",
+    "mesLabel": "Month",
+    "anioLabel": "Year",
+    "empleadoLabel": "Employee",
+    "obraLabel": "Project",
+    "todos": "All",
+    "todas": "All",
+    "vistaLista": "List",
+    "vistaResumen": "Summary",
+    "kpi": {
+      "partesEnMes": "Logs in {{mes}}",
+      "horasRegistradas": "Hours logged",
+      "empleadosActivosMes": "Employees active this month"
+    },
+    "loading": "Loading logs…",
+    "emptyTitle": "No logs in {{mes}} {{anio}}",
+    "emptyHint": "Start logging the team's hours",
+    "firmadoTitle": "Signed by {{nombre}} on {{fecha}}",
+    "firmar": "✍️ Sign",
+    "firmarTitle": "Sign for agreement",
+    "editar": "Edit",
+    "confirmDelete": "Delete this log?",
+    "porEmpleado": "By employee",
+    "sinDatos": "No data",
+    "diaOne": "{{count}} day",
+    "diaOther": "{{count}} days",
+    "total": "TOTAL",
+    "porObra": "By project",
+    "sinObrasConPartes": "No projects with logs",
+    "personaOne": "{{count}} person",
+    "personaOther": "{{count}} people",
+    "form": {
+      "editTitle": "Edit log",
+      "newTitle": "New work log",
+      "empleadoLabel": "Employee *",
+      "empleadoPlaceholder": "Select employee",
+      "fechaLabel": "Date *",
+      "horasLabel": "Hours *",
+      "obraLabel": "Project",
+      "sinObraAsignada": "No project assigned",
+      "descripcionLabel": "Work description",
+      "descripcionPlaceholder": "Bathroom tiling, electrical installation…",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "save": "Save"
+    },
+    "firmarModalTitle": "Sign work log — {{nombre}}",
+    "meses": {
+      "enero": "January",
+      "febrero": "February",
+      "marzo": "March",
+      "abril": "April",
+      "mayo": "May",
+      "junio": "June",
+      "julio": "July",
+      "agosto": "August",
+      "septiembre": "September",
+      "octubre": "October",
+      "noviembre": "November",
+      "diciembre": "December"
+    }
+  },
+  "nominas": {
+    "title": "Payroll",
+    "subtitle": "Payslip generator and payment tracking",
+    "generarOne": "Generate {{count}} payslip",
+    "generarOther": "Generate {{count}} payslips",
+    "generando": "Generating…",
+    "historial": "History",
+    "loading": "Loading payslips…",
+    "totalBruto": "Total gross",
+    "totalNeto": "Total net to pay",
+    "costeEmpresaTotal": "Total company cost",
+    "sinNominaOne": "{{count}} employee",
+    "sinNominaOther": "{{count}} employees",
+    "sinNominaSuffix": "without a payslip in {{mes}}: {{lista}}",
+    "generarTodas": "Generate all",
+    "emptyTitle": "No payslips in {{mes}} {{anio}}",
+    "emptySinEmpleados": "First add employees in the Employees module",
+    "emptyConEmpleadosOne": "There is {{count}} active employee. Click \"Generate\" to create the payslips.",
+    "emptyConEmpleadosOther": "There are {{count}} active employees. Click \"Generate\" to create the payslips.",
+    "generarNominas": "Generate payslips",
+    "pagadaBadge": "✓ Paid {{fecha}}",
+    "pendienteBadge": "Payment pending",
+    "salarioBruto": "Gross salary",
+    "ssTrabajador": "Employee SS ({{pct}}%)",
+    "irpf": "Income tax ({{pct}}%)",
+    "otrasDeducciones": "Other deductions",
+    "netoPercibir": "Net pay",
+    "costeEmpresaLine": "Company cost: {{bruto}} gross + {{ss}} SS = {{total}}",
+    "desmarcar": "Unmark",
+    "marcarPagada": "✓ Mark as paid",
+    "editar": "Edit",
+    "eliminar": "Delete",
+    "verRecibo": "View payslip",
+    "confirmDelete": "Delete this payslip?",
+    "edit": {
+      "salarioLabel": "Gross salary (€)",
+      "irpfLabel": "Income tax %",
+      "otrasLabel": "Other deductions (€)",
+      "ssTrabajadorPreview": "Employee SS: {{monto}}",
+      "irpfPreview": "Income tax: {{monto}}",
+      "netoPreview": "Net: {{monto}}",
+      "notasLabel": "Notes",
+      "notasPlaceholder": "Overtime, advance…",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "save": "Save"
+    },
+    "historialTable": {
+      "periodo": "Period",
+      "empleado": "Employee",
+      "bruto": "Gross",
+      "neto": "Net",
+      "estado": "Status"
+    },
+    "sinHistorial": "No payslip history",
+    "pagadaLabel": "Paid",
+    "pendienteLabel": "Pending",
+    "recibo": {
+      "title": "Payslip — {{periodo}}",
+      "puesto": "Position: {{v}}",
+      "dni": "ID: {{v}}",
+      "numSs": "SS no.: {{v}}",
+      "grupoConvenio": "Agreement group: {{v}}",
+      "devengosTitle": "I. EARNINGS",
+      "salarioBase": "Base salary",
+      "totalDevengado": "Total earnings",
+      "deduccionesTitle": "II. DEDUCTIONS",
+      "cotizacionSS": "SS contribution (employee {{pct}}%)",
+      "retencionIrpf": "Income tax withholding ({{pct}}%)",
+      "otrasDeducciones": "Other deductions",
+      "totalDeducciones": "Total deductions",
+      "liquidoPercibir": "NET PAY",
+      "costeEmpresaLine": "Company cost: {{total}} (incl. company SS {{ss}})",
+      "cerrar": "Close",
+      "imprimir": "🖨️ Print"
+    }
+  },
+  "hub": {
+    "title": "Digital Hub",
+    "subtitle": "Client-acquisition strategy and online presence for your renovation business",
+    "objetivoTitle": "Your target: mid-to-upper-class clients in Madrid",
+    "objetivoText": "This client profile looks for quality and trust before price. Prioritize Google Business and Houzz over low-price platforms. Every well-executed finished-project photo is worth more than any ad.",
+    "abrirPlataforma": "Open platform →",
+    "tag": {
+      "gratis": "Free",
+      "prioritario": "Priority",
+      "pago": "Paid",
+      "pagoPorLead": "Pay per lead",
+      "claseMediaAlta": "Upper-middle class",
+      "volumenAlto": "High volume",
+      "visual": "Visual",
+      "b2b": "B2B",
+      "gratisPro": "Free / Pro"
+    },
+    "secciones": {
+      "presenciaLocal": {
+        "titulo": "Local presence (Google)",
+        "items": {
+          "gbp": {
+            "titulo": "Google Business Profile",
+            "desc": "Your Google Maps listing. Essential for local clients in Madrid to find you.",
+            "tips": [
+              "Upload photos of finished projects (before and after)",
+              "Reply to every review, good and bad",
+              "Post every completed renovation as an update"
+            ]
+          },
+          "adsLocal": {
+            "titulo": "Local Google Ads",
+            "desc": "Geo-targeted ads in Madrid to appear when someone searches \"renovation company Madrid\".",
+            "tips": [
+              "Start with €5-10/day and adjust",
+              "Target by postcode in your priority areas",
+              "Use direct call extensions"
+            ]
+          }
+        }
+      },
+      "plataformas": {
+        "titulo": "Renovation platforms",
+        "items": {
+          "habitissimo": {
+            "titulo": "Habitissimo",
+            "desc": "Spain's leading platform for finding renovation clients. High visibility with good ratings.",
+            "tips": [
+              "Respond to requests within 1 hour (the algorithm rewards it)",
+              "Ask every satisfied client for a review",
+              "Complete your profile 100% with real photos"
+            ]
+          },
+          "houzz": {
+            "titulo": "Houzz",
+            "desc": "Interior design and renovation social network. Great for the mid-to-upper segment.",
+            "tips": [
+              "Upload complete projects with detailed descriptions",
+              "Use style and material tags",
+              "Houzz clients value quality, not price"
+            ]
+          },
+          "milanuncios": {
+            "titulo": "Milanuncios / Wallapop",
+            "desc": "For small jobs and maintenance. High demand but tighter pricing.",
+            "tips": [
+              "Split listings by type of work",
+              "Include an indicative price to filter clients",
+              "Refresh listings weekly for visibility"
+            ]
+          }
+        }
+      },
+      "redesSociales": {
+        "titulo": "Social media",
+        "items": {
+          "instagram": {
+            "titulo": "Instagram",
+            "desc": "Visual and powerful for renovations. Mid-to-upper-class clients use Instagram for inspiration before hiring.",
+            "tips": [
+              "Post before/after of every project",
+              "Use Reels showing the renovation process (30-60 sec)",
+              "Hashtags: #reformasMadrid #reformaIntegral #interiorismo",
+              "Stories showing daily progress connect with the audience"
+            ]
+          },
+          "linkedin": {
+            "titulo": "LinkedIn",
+            "desc": "To position yourself as a professional and reach business clients (change of use, commercial premises).",
+            "tips": [
+              "Share success stories with metrics (m² renovated, deadline met)",
+              "Connect with architects and property managers",
+              "Articles on renovation trends build authority"
+            ]
+          }
+        }
+      },
+      "productividad": {
+        "titulo": "Productivity tools",
+        "items": {
+          "whatsapp": {
+            "titulo": "WhatsApp Business",
+            "desc": "Essential. Business profile, service catalog, automated quick replies.",
+            "tips": [
+              "Set up an automatic welcome message",
+              "Create labels: New lead, Quote sent, Active client",
+              "Out-of-hours away message"
+            ]
+          },
+          "canva": {
+            "titulo": "Canva",
+            "desc": "Design visual quotes, presentations and content for social media.",
+            "tips": [
+              "Use the \"before and after\" templates",
+              "Create a company dossier template with your XANDER branding"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "fiscal": {
+    "title": "Tax",
+    "subtitle": "Tax guide for self-employed professionals in the renovation sector in Spain",
+    "disclaimer": "⚠️ This guide is for guidance only. Always check with your accountant or tax advisor before making decisions.",
+    "conciliacion": {
+      "cardTitle": "📄 Reconciliation with your accountant",
+      "cardDesc": "Generate a document with your invoices, expenses and the VAT/income tax summary for the period, ready to cross-check before filing the relevant form.",
+      "generarDocumento": "Generate document"
+    },
+    "calendarioTitle": "📅 Filing calendar",
+    "proximoBadge": "Next",
+    "modelosTitle": "📋 Forms to file",
+    "tipsTitle": "💡 Key deductible expenses",
+    "modal": {
+      "title": "Tax reconciliation — {{periodo}}",
+      "anio": "Year {{anio}}",
+      "loading": "Loading period data…",
+      "empresaDefault": "My company",
+      "nif": "Tax ID: {{v}}",
+      "tituloDoc": "TAX RECONCILIATION",
+      "delAl": "From {{desde}} to {{hasta}}",
+      "generado": "Generated: {{fecha}}",
+      "disclaimerModal": "⚠️ Guidance document automatically generated from your recorded invoices and expenses. Share it with your accountant to cross-check figures before filing — it does not replace their calculation or professional advice.",
+      "facturasEmitidas": "Invoices issued ({{count}})",
+      "sinFacturas": "No invoices issued in this period.",
+      "gastosRegistrados": "Expenses recorded ({{count}})",
+      "moduloNoConfigurado": "The Expenses module is not set up yet.",
+      "sinGastos": "No expenses recorded in this period.",
+      "tabla": {
+        "fecha": "Date",
+        "numero": "No.",
+        "cliente": "Client",
+        "estado": "Status",
+        "base": "Base",
+        "iva": "VAT",
+        "ret": "W/h",
+        "total": "Total",
+        "proveedor": "Supplier",
+        "categoria": "Category",
+        "ivaSoport": "VAT paid"
+      },
+      "totalRow": "Total",
+      "sinCliente": "—",
+      "resumenTitle": "Summary for forms 303 / 130{{extra}}",
+      "ivaRepercutido": "VAT charged (sales)",
+      "ivaSoportadoLabel": "VAT paid (expenses)",
+      "resultadoIva": "VAT result (Form 303)",
+      "aIngresar": "To pay: {{v}}",
+      "aCompensar": "To offset: {{v}}",
+      "ingresosBase": "Income (base)",
+      "gastosBase": "Expenses (base)",
+      "rendimientoNeto": "Estimated net income",
+      "retencionesPracticadas": "Income tax withholdings already applied",
+      "pago130": "20% instalment payment (Form 130, estimated)",
+      "cerrar": "Close",
+      "imprimir": "🖨️ Print / PDF"
+    },
+    "selector": {
+      "title": "Reconciliation document",
+      "desc": "Choose the period and generate a document with the invoice and expense detail plus the VAT/income tax summary to cross-check with your accountant.",
+      "tipoDocumento": "Document type",
+      "trimestral": "Quarterly (130/303)",
+      "anual": "Annual (390/100)",
+      "anioLabel": "Year",
+      "trimestreLabel": "Quarter",
+      "cancelar": "Cancel",
+      "generarDocumento": "Generate document"
+    }
+  },
+  "legislacion": {
+    "title": "Legislation",
+    "subtitle": "Legal framework for home and commercial renovations across Spain",
+    "selector": {
+      "label": "Your autonomous community",
+      "desc": "Select your region to see the specific urban planning regulations that apply",
+      "placeholder": "— Select your region —"
+    },
+    "ccaa": {
+      "badgeNormativa": "Regional regulations",
+      "portalOficial": "Official portal ↗",
+      "obraMenor": "Minor works",
+      "obraMenorDesc": "Simplified process — no structure or facade involved",
+      "obraMayor": "Major works",
+      "obraMayorDesc": "Requires a technical project and longer timelines",
+      "organismoCompetente": "Competent authority",
+      "aspectosDestacados": "⚠️ Key points in {{nombre}}"
+    },
+    "avisoTitle": "Guidance only.",
+    "avisoText": "Urban planning regulations change frequently. Always check with the relevant Town Hall and a qualified professional (architect or building surveyor) if in doubt. Conditions may vary by municipality even within the same region.",
+    "estatalCaption": "National regulation — applies throughout Spain",
+    "incluyeAplica": "Includes / Applies to:",
+    "recursosUtiles": "Useful resources (national)"
+  },
+  "resultados": {
+    "title": "Results",
+    "subtitle": "Business income statement",
+    "calculando": "Calculating results…",
+    "kpi": {
+      "totalFacturado": "Total invoiced",
+      "todasFacturas": "all invoices",
+      "ingresosReales": "Actual income",
+      "facturasCobradas": "collected invoices",
+      "gastosTotales": "Total expenses",
+      "tablaNoConfigurada": "table not set up",
+      "gastosRegistrados": "recorded expenses",
+      "resultadoNeto": "Net result",
+      "beneficio": "profit",
+      "perdida": "loss"
+    },
+    "evolucionMensual": "Monthly trend {{anio}}",
+    "leyenda": {
+      "facturado": "Invoiced",
+      "gastos": "Expenses",
+      "cobrado": "Collected"
+    },
+    "detallePorMes": "Monthly detail",
+    "tabla": {
+      "mes": "Month",
+      "facturado": "Invoiced",
+      "gastos": "Expenses",
+      "resultado": "Result"
+    },
+    "totalAnio": "Total {{anio}}",
+    "gastosPorCategoria": "Expenses by category",
+    "tablaNoConfiguradaLarga": "Expenses table not set up",
+    "sinGastosEnAnio": "No expenses recorded in {{anio}}",
+    "meses": {
+      "ene": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "abr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "ago": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dic": "Dec"
+    },
+    "avisoGastosPre": "⚠️ The expenses table is not set up. Go to ",
+    "avisoGastosPost": " and follow the instructions to enable it."
+  },
+  "referidos": {
+    "title": "Referrals",
+    "subtitle": "Invite other self-employed renovation professionals. When they go Pro, you get a free month.",
+    "recompensaTexto": "1 free month (€19)",
+    "tuEnlace": "Your referral link",
+    "generando": "Generating your code...",
+    "copiarEnlace": "Copy link",
+    "copiado": "✓ Copied",
+    "tuCodigo": "Your code:",
+    "copiar": "copy",
+    "copiadoMin": "✓ copied",
+    "compartirWhatsapp": "💬 Share on WhatsApp",
+    "mensajeWhatsapp": "I use XANDER Gestión to manage my quotes, invoices and projects — I recommend it if you're a self-employed renovation professional. Sign up for free with my link and we both win: {{enlace}}",
+    "comoFunciona": "How it works",
+    "pasos": {
+      "p1t": "Share your link",
+      "p1d": "Send it to another self-employed renovation professional who could use the tool.",
+      "p2t": "They sign up for free",
+      "p2d": "They enter through your link and create their account — automatically linked to you.",
+      "p3t": "They go Pro and you earn",
+      "p3d": "As soon as they pay their first Pro fee, you get {{recompensa}} as credit on your billing."
+    },
+    "tusReferidos": "Your referrals",
+    "registrados": "Registered",
+    "convertidosPro": "Converted to Pro",
+    "mesesGanados": "Months earned",
+    "cargando": "Loading...",
+    "sinInvitados": "You haven't invited anyone yet. Share your link above to get started.",
+    "registradoEl": "Registered on {{fecha}}",
+    "badgePro": "✓ Pro",
+    "badgePendiente": "Pending"
+  },
+  "miEmpresa": {
+    "title": "My Company",
+    "subtitle": "This information will appear on your quotes and invoices",
+    "cargando": "Loading…",
+    "datosPersonales": "Personal details",
+    "nombre": "First name",
+    "apellidos": "Last name",
+    "dniNie": "National ID number",
+    "telefonoPersonal": "Personal phone",
+    "datosEmpresa": "Company / business details",
+    "nombreComercial": "Trade name / company *",
+    "nif": "Tax ID",
+    "telefonoEmpresa": "Company phone",
+    "emailEmpresa": "Company email",
+    "direccionFiscal": "Registered address",
+    "cp": "Postcode",
+    "ciudad": "City",
+    "web": "Website",
+    "actividadProfesional": "Professional activity",
+    "fechaInicio": "Activity start date",
+    "tarifaReducida": "Reduced flat-rate active",
+    "tarifaReducidaSub": "First 2 years as self-employed",
+    "especialidades": "Specialties",
+    "especialidad": {
+      "Reforma integral": "Full renovation",
+      "Reforma de baño": "Bathroom renovation",
+      "Reforma de cocina": "Kitchen renovation",
+      "Cambio de uso": "Change of use",
+      "Reforma de local": "Commercial premises renovation",
+      "Distribuciones internas": "Internal layout changes",
+      "Fontanería": "Plumbing",
+      "Electricidad": "Electrical work",
+      "Alicatados y solados": "Tiling and flooring",
+      "Pladur": "Drywall",
+      "Pintura": "Painting",
+      "Carpintería": "Carpentry",
+      "Impermeabilización": "Waterproofing"
+    },
+    "miPlan": "My plan",
+    "pagoConfirmado": "✓ Payment confirmed. Your plan will update in a few seconds.",
+    "pagoCancelado": "You cancelled the payment process. You can try again anytime.",
+    "planProActivo": "✓ Pro plan active{{ciclo}}. Thank you for trusting XANDER.",
+    "cicloAnual": " (annual)",
+    "cicloMensual": " (monthly)",
+    "trialActivo": "⏳ You're in your free trial period — {{dias}} day{{plural}} left.",
+    "planGratuito": "Free plan. Upgrade to Pro for full unlimited access.",
+    "abriendo": "Opening…",
+    "gestionarSuscripcion": "Manage subscription",
+    "redirigiendo": "Redirecting…",
+    "actualizarPro": "Upgrade to Pro — {{precio}}",
+    "planAnual": "Annual plan — {{precio}}",
+    "sinPermanencia": "No commitment · Cancel anytime from the billing portal",
+    "cobrosOnline": "Online payments",
+    "cobrosOnlineDesc": "Connect your Stripe account to charge invoices by card. Your clients' money goes straight to your bank — XANDER never handles it.",
+    "stripeActiva": "✓ Stripe account connected and active. You can now charge invoices by card.",
+    "stripeVerificacion": "Your Stripe account has been created but verification is not finished yet. Complete the process to start charging.",
+    "stripeNoConectada": "You haven't connected a Stripe account yet.",
+    "cargandoBtn": "Loading…",
+    "completarConexion": "Complete / review connection",
+    "conectarStripe": "Connect with Stripe",
+    "actualizarEstado": "Refresh status",
+    "datosGuardados": "✓ Details saved successfully",
+    "guardando": "Saving…",
+    "guardarCambios": "Save changes",
+    "errores": {
+      "checkout": "Could not start the subscription payment.",
+      "portal": "Could not open the billing portal.",
+      "stripeStatus": "Could not check Stripe status.",
+      "stripeConnect": "Could not start the Stripe connection."
+    }
+  },
+  "tarifas": {
+    "title": "Rates & Pricing",
+    "subtitle": "Indicative price catalog for quotes",
+    "nuevaTarifa": "+ New rate",
+    "tabs": {
+      "catalogoBase": "Base catalog ({{count}})",
+      "misTarifas": "My rates ({{count}})"
+    },
+    "disclaimer": "📖 Indicative sector prices for Madrid. Use them as a reference or create your own rates in the \"My rates\" tab.",
+    "buscarPlaceholder": "🔍  Search item…",
+    "todasCategorias": "All categories",
+    "cargando": "Loading rates…",
+    "sinResultados": "No results",
+    "sinTarifasPropias": "You don't have any of your own rates yet",
+    "sinTarifas": "No rates",
+    "personalizaPrecios": "Customize prices for your business",
+    "partidas": "{{count}} items",
+    "tabla": {
+      "descripcion": "Description",
+      "ud": "Unit",
+      "mat": "Mat. (€)",
+      "mo": "Labor (€)",
+      "margen": "Margin",
+      "precioCliente": "Client price"
+    },
+    "editar": "Edit",
+    "confirmDelete": "Delete \"{{desc}}\"?",
+    "modal": {
+      "editarTarifa": "Edit rate",
+      "nuevaTarifa": "New rate",
+      "categoria": "Category *",
+      "unidad": "Unit",
+      "descripcion": "Description *",
+      "costeMaterial": "Material cost (€)",
+      "manoDeObra": "Labor (€)",
+      "margen": "Margin (%)",
+      "precioAlCliente": "Client price",
+      "notas": "Notes",
+      "cancelar": "Cancel",
+      "guardando": "Saving…",
+      "guardarTarifa": "Save rate"
+    },
+    "categoria": {
+      "Demolición": "Demolition",
+      "Albañilería": "Masonry",
+      "Impermeabilización": "Waterproofing",
+      "Alicatados y Solados": "Tiling and Flooring",
+      "Fontanería": "Plumbing",
+      "Electricidad": "Electrical",
+      "Pintura": "Painting",
+      "Carpintería y Remates": "Carpentry and Finishing",
+      "Gestión y Logística": "Management and Logistics",
+      "Reforma Integral": "Full Renovation"
+    }
+  },
+  "documentos": {
+    "title": "Document Center",
+    "subtitle": "Professional templates and file management",
+    "tabs": {
+      "plantillas": "📄 Templates ({{count}})",
+      "misDocumentos": "📁 My documents {{count}}"
+    },
+    "buscarPlantilla": "🔍  Search template…",
+    "disclaimerPlantillas": "📋 Editable templates for everyday use. Copy them, customize them and use them freely.",
+    "sinResultados": "No results",
+    "verPlantilla": "View template",
+    "copiar": "📋 Copy",
+    "storageStep": "Preliminary step: create the storage bucket",
+    "storageDesc": "Go to <strong>Supabase → Storage</strong> and create a bucket named <code>documentos-empresa</code>. Mark it as <strong>Public</strong> and save. Then run the SQL migration shown below.",
+    "yaConfigurado": "Already configured — retry",
+    "cargandoArchivos": "Loading files…",
+    "archivosCountOne": "{{count}} file",
+    "archivosCountOther": "{{count}} files",
+    "sinArchivos": "No files",
+    "verArchivo": "View file",
+    "eliminar": "Delete",
+    "subiendo": "Uploading…",
+    "subirArchivo": "📎 Upload file",
+    "anadirOtro": "+ Add another",
+    "formacionTitulo": "Training and Certificates",
+    "certificadosCountOne": "{{count}} certificate",
+    "certificadosCountOther": "{{count}} certificates",
+    "sinCertificados": "No certificates",
+    "anadir": "+ Add",
+    "ningunCertificado": "No certificate added yet",
+    "cerrar": "Close",
+    "copiarPortapapeles": "📋 Copy to clipboard",
+    "confirmDeleteDoc": "Delete \"{{nombre}}\"?",
+    "plantillaCopiada": "Template copied to clipboard ✓",
+    "errorSubida": "Error uploading \"{{nombre}}\": {{msg}}",
+    "carpeta": {
+      "Plan de Negocio": {
+        "titulo": "Business Plan",
+        "desc": "Full plan with modules for organization, client acquisition, quotes, pricing, image and tools."
+      },
+      "Fiscalidad": {
+        "titulo": "Taxation",
+        "desc": "VAT and income tax returns, forms 303, 130, 100 and any Tax Agency document."
+      },
+      "SS y Hacienda": {
+        "titulo": "Social Security & Tax Office",
+        "desc": "Self-employment registration, RETA contribution receipts, Social Security and Tax Agency notifications."
+      },
+      "Seguros": {
+        "titulo": "Insurance",
+        "desc": "Liability insurance policies, project insurance and any other coverage taken out."
+      },
+      "Contratos": {
+        "titulo": "Contracts",
+        "desc": "Contracts with clients, agreements with suppliers, subcontractors and any signed document."
+      },
+      "Licencias de Obra": {
+        "titulo": "Building Permits",
+        "desc": "Municipal permits, prior notifications, activity licenses and urban planning documentation."
+      },
+      "Branding": {
+        "titulo": "Branding",
+        "desc": "Logo, corporate wallpaper, brand image and visual identity materials."
+      },
+      "Subcontratas": {
+        "titulo": "Subcontractors",
+        "desc": "Contracts and agreements with subcontractors, partner companies and self-employed professionals."
+      },
+      "Otros Documentos": {
+        "titulo": "Other Documents",
+        "desc": "Licenses, certificates, permits and any other business document."
+      }
+    },
+    "carpetaFormacion": {
+      "Certificados Obligatorios": {
+        "titulo": "Mandatory Certificates",
+        "desc": "Construction health & safety training (mandatory 60h), legal qualifications, cards and accreditations required by law."
+      },
+      "Formación Continua": {
+        "titulo": "Ongoing Training",
+        "desc": "Professional development courses: drywall, waterproofing, electrical, plumbing, management, quoting."
+      }
+    }
+  },
+  "copias": {
+    "title": "Backups",
+    "subtitle": "Save a snapshot of all your work data (clients, projects, quotes, invoices, payments, expenses, employees...) and recover it if something gets deleted or corrupted by mistake.",
+    "mensajeErrorAlmacen": "Could not access the backup storage: {{msg}}",
+    "crearAhoraTitle": "Create a backup now",
+    "crearAhoraDesc": "It's saved to your account (so you can restore it from here anytime) and a copy is also downloaded to your computer, in case you'd rather keep it somewhere else yourself.",
+    "crearBtn": "💾 Create backup now",
+    "creando": "Creating backup...",
+    "restaurarArchivoTitle": "Restore from a file",
+    "restaurarArchivoDesc": "If you previously downloaded a backup, upload it here to recover that data.",
+    "subirArchivoBtn": "📤 Upload backup file (.json)",
+    "tusCopiasTitle": "Your saved backups",
+    "cargando": "Loading...",
+    "sinCopias": "You don't have any backups yet. Create the first one above.",
+    "copiaAutomatica": "🔄 Automatic backup",
+    "copiaManual": "💾 Manual backup",
+    "restaurar": "Restore",
+    "descargar": "Download",
+    "eliminar": "Delete",
+    "resultadoRestoreTitle": "Restore results",
+    "errorLabel": "Error: {{msg}}",
+    "filaOne": "{{count}} row",
+    "filaOther": "{{count}} rows",
+    "confirmarRestauracionTitle": "Confirm restore",
+    "vasARestaurar": "You're about to restore <strong>{{nombre}}</strong> ({{total}} records in total).",
+    "notas": [
+      "• This <strong>recovers/updates</strong> the records from the backup — it doesn't delete anything you created afterwards.",
+      "• If a record from the backup no longer exists (you deleted it), it's recreated with its original data.",
+      "• Documents only restore their record (name, category, link); if the file was also deleted from storage, the link won't work."
+    ],
+    "siRestaurarBtn": "Yes, restore this backup",
+    "restaurando": "Restoring...",
+    "confirmDeleteCopia": "Delete the backup \"{{nombre}}\"? This action cannot be undone.",
+    "errorDescargar": "Could not download: {{msg}}",
+    "errorGuardarCuenta": "Could not save the backup to your account: {{msg}}",
+    "copiaCreadaOk": "Backup created and saved to your account.",
+    "errorCrear": "Error creating the backup: {{msg}}",
+    "errorLeerCopia": "Could not read the backup: {{msg}}",
+    "archivoDanado": "The backup file is corrupted or invalid.",
+    "archivoInvalido": "The selected file is not a valid backup (JSON).",
+    "tabla": {
+      "clientes": "Clients",
+      "empleados": "Employees",
+      "obras": "Projects",
+      "tarifas": "Rates and prices",
+      "calendario_notas": "Calendar notes",
+      "calendario_eventos": "Calendar events",
+      "presupuestos": "Quotes",
+      "facturas": "Invoices",
+      "gastos": "Expenses",
+      "documentos": "Documents (record only, not the file)",
+      "partes_trabajo": "Work reports",
+      "nominas": "Payroll",
+      "obra_empleados": "Team assigned to projects"
+    }
+  },
+  "admin": {
+    "cargandoPanel": "Loading admin panel...",
+    "title": "🛡️ Admin Panel",
+    "subtitle": "Self-employed users registered in XANDER Gestión",
+    "actualizar": "↻ Refresh",
+    "stats": {
+      "totalRegistrados": "Total registered",
+      "nuevosSemana": "New this week",
+      "perfilCompleto": "With complete profile"
+    },
+    "tabs": {
+      "usuarios": "Users",
+      "leads": "Leads",
+      "notificaciones": "Notifications"
+    },
+    "usuarios": {
+      "sinUsuarios": "No users registered yet",
+      "sinUsuariosSub": "Self-employed users who sign up will appear here",
+      "nombre": "NAME",
+      "email": "EMAIL",
+      "empresa": "COMPANY",
+      "ciudad": "CITY",
+      "registro": "SIGNUP",
+      "ultimoAcceso": "LAST LOGIN",
+      "estado": "STATUS",
+      "sinNombre": "No name",
+      "activo": "✓ Active",
+      "pendiente": "⏳ Pending"
+    },
+    "leads": {
+      "sinLeads": "No leads yet",
+      "sinLeadsSub": "Contacts left on the landing page will appear here",
+      "sinDatosContacto": "No contact details",
+      "atendido": "✓ Handled",
+      "marcarAtendido": "Mark as handled"
+    },
+    "notif": {
+      "sinNotificaciones": "No notifications",
+      "sinNotificacionesSub": "New signups will appear here",
+      "sinLeerOne": "{{count}} unread notification",
+      "sinLeerOther": "{{count}} unread notifications",
+      "marcarTodasLeidas": "Mark all as read",
+      "marcarLeida": "Mark as read"
+    }
+  },
+  "themeToggle": {
+    "claro": "Switch to light mode",
+    "oscuro": "Switch to dark mode"
+  },
+  "planGate": {
+    "feature": {
+      "clientes": "more than 3 clients",
+      "obras": "more than 3 projects",
+      "presupuestos": "more than 5 quotes",
+      "facturas": "more than 5 invoices",
+      "empleados": "employee management",
+      "agente_ia": "the AI Agent",
+      "exportar_pdf": "exporting to PDF",
+      "nominas": "payroll generator",
+      "rentabilidad": "profitability analysis"
+    },
+    "funcionExclusiva": "Pro-only feature",
+    "paraUsar": "You need the Pro plan to use {{feature}}.",
+    "pruebaTermina": "⏳ Your free trial ends in {{dias}} days",
+    "activarPlan": "Activate Pro Plan — {{precio}}",
+    "sinPermanencia": "No commitment · Cancel anytime",
+    "trialBannerText": "Your trial period ends in <strong>{{dias}} day{{plural}}</strong>. Activate the Pro plan to keep your access.",
+    "verPlanes": "View plans"
+  },
+  "notifBell": {
+    "notificaciones": "Notifications",
+    "descartarTodas": "Dismiss all",
+    "cargando": "Loading…",
+    "todoAlDia": "All caught up, no pending alerts",
+    "descartar": "Dismiss"
+  },
+  "pwaUpdate": {
+    "nuevaVersion": "A new version of XANDER is available.",
+    "actualizar": "Update",
+    "ahoraNo": "Not now",
+    "yaFuncionaOffline": "XANDER now works offline."
+  },
+  "agenteChat": {
+    "titulo": "Agente XANDER",
+    "limpiarTooltip": "New conversation",
+    "limpiar": "↺ Clear",
+    "faltaApiKey": "API key not configured yet",
+    "faltaApiKeyDesc": "To activate the agent, create a <code>.env</code> file in the project root with:",
+    "pasoGroq1": "Go to <b>console.groq.com</b>",
+    "pasoGroq2": "Create a free account",
+    "pasoGroq3": "API Keys → Create API Key",
+    "pasoGroq4": "Copy the key into the .env file",
+    "pasoGroq5": "Restart the development server",
+    "pasoPrevioSupabase": "Preliminary step in Supabase",
+    "ejecutaSql": "Run this in the Supabase SQL Editor:",
+    "placeholder": "Type your question…",
+    "bienvenida": "Hi! I'm your XANDER assistant. I can help with clients, projects, quotes, tax questions or drafting any communication. How can I help?",
+    "confirmBorrarHistorial": "Delete this conversation's history?",
+    "conversacionNueva": "New conversation! How can I help you?",
+    "errorConectar": "Error connecting to the agent."
+  },
+  "calendarioWidget": {
+    "tipo": {
+      "trabajo": "Work",
+      "reunion": "Meeting",
+      "cobro": "Payment",
+      "recordatorio": "Reminder",
+      "visita": "Site visit"
+    },
+    "calendarioTrabajo": "Work calendar",
+    "hoy": "Today",
+    "alertaEmailTitle": "Email alert",
+    "cargando": "Loading…",
+    "anadir": "+ Add",
+    "sinEventos": "No events for this day",
+    "editarEvento": "Edit event",
+    "nuevoEvento": "New event — {{fecha}}",
+    "tituloLabel": "Title *",
+    "tituloPlaceholder": "E.g.: Client site visit",
+    "tipoLabel": "Type",
+    "horaLabel": "Time",
+    "descripcionLabel": "Description (optional)",
+    "descripcionPlaceholder": "Additional details…",
+    "alertaEmailToggleTitle": "🔔 Email alert",
+    "alertaEmailSub": "Alert 24h and 1h before",
+    "cancelar": "Cancel",
+    "guardando": "Saving…",
+    "guardarCambios": "Save changes",
+    "guardar": "Save"
+  },
+  "firmaModal": {
+    "firmarDocumento": "Sign document",
+    "nombreQuienFirma": "Signer's name",
+    "nombrePlaceholder": "Full name",
+    "firmaLabel": "Signature",
+    "borrarRepetir": "Clear and redo",
+    "disclaimer": "By signing, the signer confirms agreement with the content of this document. The signature is stored with date and time as evidence of acceptance (this is not a qualified eIDAS electronic signature).",
+    "cancelar": "Cancel",
+    "guardando": "Saving…",
+    "confirmarFirma": "✍️ Confirm signature"
+  },
+  "onboarding": {
+    "pasos": {
+      "cliente": {
+        "titulo": "Add your first client",
+        "desc": "The contact record that later links to projects, quotes and invoices."
+      },
+      "obra": {
+        "titulo": "Create your first project",
+        "desc": "Link it to a client to track photos, stages and team."
+      },
+      "presupuesto": {
+        "titulo": "Create your first quote",
+        "desc": "Use the line items from Rates & Pricing to generate it in minutes."
+      },
+      "fiscal": {
+        "titulo": "Complete your tax details",
+        "desc": "Tax ID, address and tax regime — essential for valid quotes and invoices."
+      },
+      "cobros": {
+        "titulo": "Connect card payments",
+        "desc": "Optional: link your Stripe account to charge invoices directly from XANDER."
+      }
+    },
+    "primerosPasos": "Getting started with XANDER",
+    "mostrar": "Show ▾",
+    "ocultar": "Hide ▴",
+    "completados": "All done! You now know the basics of XANDER.",
+    "progreso": "{{completados}} of {{total}} completed — we'll guide you until the app becomes part of your routine."
+  },
+  "auth": {
+    "tagline": "RENOVATION MANAGEMENT",
+    "footer": "© 2026 XANDER Gestión · Madrid",
+    "orConEmail": "or with email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "login": {
+      "quote": "\"The tool every self-employed professional in the trade needs, built by someone from the trade.\"",
+      "features": [
+        "Quotes",
+        "Invoicing",
+        "Projects",
+        "Rates"
+      ],
+      "bienvenido": "Welcome",
+      "accedeCuenta": "Sign in to your account",
+      "continuarGoogle": "Continue with Google",
+      "contrasena": "Password",
+      "olvidasteContrasena": "Forgot your password?",
+      "errorCredenciales": "Incorrect email or password.",
+      "entrando": "Signing in...",
+      "entrar": "Sign in",
+      "noTienesCuenta": "Don't have an account?",
+      "registrateGratis": "Sign up for free"
+    },
+    "register": {
+      "features": [
+        {
+          "icon": "📋",
+          "text": "Professional quotes in minutes"
+        },
+        {
+          "icon": "🔨",
+          "text": "Project and client tracking"
+        },
+        {
+          "icon": "📊",
+          "text": "Rates and profitability per project"
+        },
+        {
+          "icon": "📧",
+          "text": "Invoices sent directly from the app"
+        }
+      ],
+      "gratisBeta": "Free during beta · No credit card",
+      "creaTuCuenta": "Create your account",
+      "gratisSinLimites": "Free during beta · No limits",
+      "registrarseGoogle": "Sign up with Google",
+      "emailProfesional": "Professional email",
+      "contrasena": "Password",
+      "minimoCaracteres": "At least 8 characters",
+      "confirmarContrasena": "Confirm password",
+      "repiteContrasena": "Repeat the password",
+      "passwordsNoCoinciden": "Passwords don't match.",
+      "passwordCorta": "The password must be at least 8 characters long.",
+      "creandoCuenta": "Creating account...",
+      "crearCuentaGratuita": "Create free account",
+      "aceptasTerminosPre": "By signing up you accept our",
+      "terminosUso": "Terms of use",
+      "y": "and",
+      "politicaPrivacidad": "Privacy policy",
+      "yaTienesCuenta": "Already have an account?",
+      "accedeAqui": "Sign in here",
+      "revisaEmail": "Check your email",
+      "enlaceConfirmacion": "We've sent a confirmation link to <strong>{{email}}</strong>. Confirm your account to start setting up your profile.",
+      "irLogin": "Go to login"
+    },
+    "forgot": {
+      "sidebarText": "We'll send you a link so you can securely set a new password.",
+      "emailEnviado": "Email sent",
+      "enlaceEnviadoA": "We've sent a recovery link to <strong>{{email}}</strong>. Also check your spam folder.",
+      "enlaceCaduca": "The link expires in 1 hour. If you don't receive it, you can try again.",
+      "volverInicioSesion": "Back to sign in",
+      "flechaVolver": "← Back to sign in",
+      "recuperarContrasena": "Recover password",
+      "introduceEmail": "Enter your email and we'll send you a link to reset your password.",
+      "errorEnvio": "Could not send the email. Check the address and try again.",
+      "enviando": "Sending...",
+      "enviarEnlace": "Send recovery link"
+    },
+    "reset": {
+      "sidebarText": "Choose a secure password. We recommend at least 8 characters combining letters and numbers.",
+      "passwordActualizada": "Password updated",
+      "redirigiendo": "Redirecting to your account...",
+      "verificandoEnlace": "Verifying recovery link...",
+      "enlaceCaducadoAviso": "If you see this message for more than 10 seconds, the link may have expired.",
+      "solicitaUnoNuevo": "Request a new one.",
+      "nuevaContrasena": "New password",
+      "eligeNuevaPassword": "Choose a new password for your account.",
+      "confirmarContrasena": "Confirm password",
+      "repiteContrasena": "Repeat the password",
+      "minimoCaracteres": "At least 8 characters",
+      "passwordCorta": "The password must be at least 8 characters long.",
+      "passwordsNoCoinciden": "Passwords don't match.",
+      "errorActualizar": "Could not update the password. The link may have expired.",
+      "guardando": "Saving...",
+      "establecerNuevaContrasena": "Set new password"
+    }
+  },
+  "onboardingWizard": {
+    "cuentanosQuienEres": "Tell us who you are — just the essentials",
+    "bienvenido": "Welcome to XANDER",
+    "rellenaDatos": "Fill in two details and you're ready to start. You can complete the rest of your profile later.",
+    "nombreLabel": "First name",
+    "apellidosLabel": "Last name",
+    "nombreEmpresaLabel": "Company name",
+    "nombreObligatorio": "Name is required.",
+    "empresaObligatoria": "Company name is required.",
+    "especialidadesLabel": "Specialties",
+    "opcional": "(optional)",
+    "queTrabajos": "What kind of work do you usually do?",
+    "especialidad": {
+      "Reformas integrales": "Full renovations",
+      "Baños": "Bathrooms",
+      "Cocinas": "Kitchens",
+      "Pintura": "Painting",
+      "Pladur": "Drywall",
+      "Electricidad": "Electrical",
+      "Fontanería": "Plumbing",
+      "Carpintería": "Carpentry",
+      "Alicatados": "Tiling",
+      "Fachadas": "Facades"
+    },
+    "avisoDatosAdicionales": "You can add your tax ID, address, phone numbers and more in <strong>My Company</strong> whenever you want. These are needed to print complete quotes and invoices.",
+    "salir": "Log out",
+    "guardando": "Saving...",
+    "empezar": "Get started! →"
+  },
+  "landing": {
+    "nav": {
+      "funciones": "Features",
+      "planes": "Plans",
+      "contacto": "Contact"
+    },
+    "miCuenta": "My account",
+    "entrar": "Sign in",
+    "pruebaGratis": "Free trial",
+    "iraMiCuenta": "Go to my account",
+    "pruebaGratis30": "Free 30-day trial",
+    "heroTag": "Management for interior renovations",
+    "heroTitle": "Quotes, invoices and projects.<br />All in one place.",
+    "heroDesc": "The management tool designed by and for self-employed renovation professionals: quotes in minutes, Verifactu-compliant invoicing, card payments and real project tracking.",
+    "verFunciones": "See features",
+    "sinTarjeta": "No card required · No commitment · Cancel anytime",
+    "funciones": [
+      {
+        "icon": "📋",
+        "title": "Quotes",
+        "desc": "Create professional line-item quotes in minutes, ready to send."
+      },
+      {
+        "icon": "🧾",
+        "title": "Invoicing",
+        "desc": "Invoices with built-in Verifactu — chained hash, QR code and submission to the tax agency."
+      },
+      {
+        "icon": "🏗️",
+        "title": "Projects",
+        "desc": "Project tracking with photos, stages, team and work reports."
+      },
+      {
+        "icon": "💳",
+        "title": "Card payments",
+        "desc": "Your clients pay the invoice online. The money goes straight to your account."
+      },
+      {
+        "icon": "💶",
+        "title": "Expenses and results",
+        "desc": "Record expenses per project and see the real profitability of each one."
+      },
+      {
+        "icon": "📊",
+        "title": "Tax",
+        "desc": "Reconciliation document ready for your accountant before each quarter."
+      },
+      {
+        "icon": "👷",
+        "title": "Employees and payroll",
+        "desc": "Hour logs per project and a payslip generator."
+      },
+      {
+        "icon": "📱",
+        "title": "Installable app",
+        "desc": "Install it on your phone or computer, it even works offline."
+      }
+    ],
+    "funcionesTitle": "Everything you need to manage your business",
+    "funcionesSubtitle": "No more loose spreadsheets, no more WhatsApp folders full of quotes.",
+    "testimonioAutor": "— XANDER Interior Renovations, Madrid",
+    "planesTitle": "Simple plans",
+    "planesSubtitle": "Start for free. No surprises.",
+    "recomendado": "Recommended",
+    "planPrueba": {
+      "nombre": "Free trial",
+      "periodo": "30 days",
+      "desc": "Full access, no card required.",
+      "features": [
+        "All modules",
+        "No limit on clients or projects",
+        "AI Agent included"
+      ],
+      "cta": "Start for free"
+    },
+    "planPro": {
+      "nombre": "Pro",
+      "periodo": "per self-employed user",
+      "desc": "For when you decide to stay.",
+      "features": [
+        "Everything in the free plan",
+        "No usage limits",
+        "Direct support"
+      ],
+      "cta": "Start for free"
+    },
+    "contactoTitle": "Have questions before you start?",
+    "contactoSubtitle": "Leave us your details or message us directly on WhatsApp.",
+    "form": {
+      "nombre": "Name",
+      "nombrePlaceholder": "Your name",
+      "emailOTelefono": "Email or phone",
+      "contactoPlaceholder": "you@email.com or phone number",
+      "mensaje": "Message",
+      "opcional": "(optional)",
+      "mensajePlaceholder": "Tell us what you need",
+      "errorRequerido": "We need at least your name and an email or phone number to contact you.",
+      "errorEnvio": "Could not send. Try again or message us on WhatsApp.",
+      "gracias": "Thanks, {{nombre}}!",
+      "contactamos24h": "We'll contact you within 24 hours.",
+      "enviando": "Sending...",
+      "quieroContacten": "I want to be contacted"
+    },
+    "contactoDirecto": "Direct contact",
+    "escribirWhatsapp": "Message on WhatsApp",
+    "footerText": "XANDER Interior Renovations · Madrid",
+    "footerCopyright": "© 2026 XANDER Gestión"
   }
 }

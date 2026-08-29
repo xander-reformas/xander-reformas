@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../../lib/supabase'
 
 export default function AdminPanel() {
+  const { t } = useTranslation()
   const [users, setUsers]           = useState([])
   const [notifs, setNotifs]         = useState([])
   const [leads, setLeads]           = useState([])
@@ -81,11 +83,17 @@ export default function AdminPanel() {
       <div className="p-8 flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <div className="text-ink-soft text-sm">Cargando panel de administración...</div>
+          <div className="text-ink-soft text-sm">{t('admin.cargandoPanel')}</div>
         </div>
       </div>
     )
   }
+
+  const TABS = [
+    { id: 'usuarios',        label: t('admin.tabs.usuarios'),        icon: '👤' },
+    { id: 'leads',           label: t('admin.tabs.leads'),           icon: '📨', badge: leadsPendientes },
+    { id: 'notificaciones',  label: t('admin.tabs.notificaciones'),  icon: '🔔', badge: noLeidas },
+  ]
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -93,15 +101,15 @@ export default function AdminPanel() {
       <div className="flex items-start justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-ink flex items-center gap-2">
-            🛡️ Panel de Administración
+            {t('admin.title')}
           </h1>
-          <p className="text-ink-soft text-sm mt-0.5">Autónomos registrados en XANDER Gestión</p>
+          <p className="text-ink-soft text-sm mt-0.5">{t('admin.subtitle')}</p>
         </div>
         <button
           onClick={loadAll}
           className="text-xs text-ink-soft hover:text-ink border border-stone/20 rounded-lg px-3 py-1.5 transition-colors"
         >
-          ↻ Actualizar
+          {t('admin.actualizar')}
         </button>
       </div>
 
@@ -109,25 +117,21 @@ export default function AdminPanel() {
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="bg-surface rounded-xl p-5 border border-stone/10">
           <div className="text-3xl font-black text-ink">{stats.total}</div>
-          <div className="text-sm text-ink-soft mt-1">Total registrados</div>
+          <div className="text-sm text-ink-soft mt-1">{t('admin.stats.totalRegistrados')}</div>
         </div>
         <div className="bg-surface rounded-xl p-5 border border-stone/10">
           <div className="text-3xl font-black text-green-600">{stats.semana}</div>
-          <div className="text-sm text-ink-soft mt-1">Nuevos esta semana</div>
+          <div className="text-sm text-ink-soft mt-1">{t('admin.stats.nuevosSemana')}</div>
         </div>
         <div className="bg-surface rounded-xl p-5 border border-stone/10">
           <div className="text-3xl font-black text-gold">{stats.activos}</div>
-          <div className="text-sm text-ink-soft mt-1">Con perfil completo</div>
+          <div className="text-sm text-ink-soft mt-1">{t('admin.stats.perfilCompleto')}</div>
         </div>
       </div>
 
       {/* Tabs */}
       <div className="flex gap-1 mb-4 border-b border-stone/10">
-        {[
-          { id: 'usuarios',        label: 'Usuarios',        icon: '👤' },
-          { id: 'leads',           label: 'Leads',           icon: '📨', badge: leadsPendientes },
-          { id: 'notificaciones',  label: 'Notificaciones',  icon: '🔔', badge: noLeidas },
-        ].map(tab => (
+        {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
@@ -153,20 +157,20 @@ export default function AdminPanel() {
           {users.length === 0 ? (
             <div className="py-16 text-center text-ink-soft">
               <div className="text-4xl mb-3">👤</div>
-              <div className="font-medium">Aún no hay usuarios registrados</div>
-              <div className="text-sm mt-1">Aquí aparecerán los autónomos que se den de alta</div>
+              <div className="font-medium">{t('admin.usuarios.sinUsuarios')}</div>
+              <div className="text-sm mt-1">{t('admin.usuarios.sinUsuariosSub')}</div>
             </div>
           ) : (
             <table className="w-full text-sm">
               <thead className="bg-navy/5 border-b border-stone/10">
                 <tr>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">NOMBRE</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">EMAIL</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">EMPRESA</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">CIUDAD</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">REGISTRO</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">ÚLTIMO ACCESO</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">ESTADO</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">{t('admin.usuarios.nombre')}</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">{t('admin.usuarios.email')}</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">{t('admin.usuarios.empresa')}</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">{t('admin.usuarios.ciudad')}</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">{t('admin.usuarios.registro')}</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">{t('admin.usuarios.ultimoAcceso')}</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-ink-soft tracking-wider">{t('admin.usuarios.estado')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-stone/5">
@@ -175,7 +179,7 @@ export default function AdminPanel() {
                     <td className="px-4 py-3 font-medium text-ink">
                       {u.nombre || u.apellidos
                         ? `${u.nombre || ''} ${u.apellidos || ''}`.trim()
-                        : <span className="text-ink-soft/50 italic">Sin nombre</span>
+                        : <span className="text-ink-soft/50 italic">{t('admin.usuarios.sinNombre')}</span>
                       }
                     </td>
                     <td className="px-4 py-3 text-ink-soft">{u.email}</td>
@@ -196,8 +200,8 @@ export default function AdminPanel() {
                     </td>
                     <td className="px-4 py-3">
                       {u.onboarding_completado
-                        ? <span className="px-2 py-0.5 bg-green-50 text-green-700 rounded-full text-xs font-medium">✓ Activo</span>
-                        : <span className="px-2 py-0.5 bg-yellow-50 text-yellow-700 rounded-full text-xs font-medium">⏳ Pendiente</span>
+                        ? <span className="px-2 py-0.5 bg-green-50 text-green-700 rounded-full text-xs font-medium">{t('admin.usuarios.activo')}</span>
+                        : <span className="px-2 py-0.5 bg-yellow-50 text-yellow-700 rounded-full text-xs font-medium">{t('admin.usuarios.pendiente')}</span>
                       }
                     </td>
                   </tr>
@@ -214,8 +218,8 @@ export default function AdminPanel() {
           {leads.length === 0 ? (
             <div className="py-16 text-center text-ink-soft">
               <div className="text-4xl mb-3">📨</div>
-              <div className="font-medium">Aún no hay leads</div>
-              <div className="text-sm mt-1">Aquí aparecerán los contactos dejados en la landing</div>
+              <div className="font-medium">{t('admin.leads.sinLeads')}</div>
+              <div className="text-sm mt-1">{t('admin.leads.sinLeadsSub')}</div>
             </div>
           ) : (
             <div className="divide-y divide-stone/5">
@@ -224,7 +228,7 @@ export default function AdminPanel() {
                   <div className="flex-1 min-w-0">
                     <div className="font-medium text-ink text-sm">{l.nombre}</div>
                     <div className="text-xs text-ink-soft mt-0.5">
-                      {[l.email, l.telefono].filter(Boolean).join(' · ') || 'Sin datos de contacto'}
+                      {[l.email, l.telefono].filter(Boolean).join(' · ') || t('admin.leads.sinDatosContacto')}
                     </div>
                     {l.mensaje && <div className="text-xs text-ink mt-1.5 bg-page rounded-lg px-3 py-2">{l.mensaje}</div>}
                     <div className="text-xs text-ink-soft/50 mt-1.5">
@@ -241,7 +245,7 @@ export default function AdminPanel() {
                         : 'bg-gold/10 text-gold hover:bg-gold/20'
                     }`}
                   >
-                    {l.atendido ? '✓ Atendido' : 'Marcar atendido'}
+                    {l.atendido ? t('admin.leads.atendido') : t('admin.leads.marcarAtendido')}
                   </button>
                 </div>
               ))}
@@ -256,19 +260,19 @@ export default function AdminPanel() {
           {notifs.length === 0 ? (
             <div className="py-16 text-center text-ink-soft">
               <div className="text-4xl mb-3">🔔</div>
-              <div className="font-medium">Sin notificaciones</div>
-              <div className="text-sm mt-1">Aquí aparecerán los nuevos registros</div>
+              <div className="font-medium">{t('admin.notif.sinNotificaciones')}</div>
+              <div className="text-sm mt-1">{t('admin.notif.sinNotificacionesSub')}</div>
             </div>
           ) : (
             <>
               {noLeidas > 0 && (
                 <div className="px-4 py-2.5 border-b border-stone/10 flex items-center justify-between bg-gold/5">
-                  <span className="text-xs text-ink-soft">{noLeidas} notificaciones sin leer</span>
+                  <span className="text-xs text-ink-soft">{t(noLeidas === 1 ? 'admin.notif.sinLeerOne' : 'admin.notif.sinLeerOther', { count: noLeidas })}</span>
                   <button
                     onClick={marcarTodasLeidas}
                     className="text-xs text-gold hover:text-gold/70 font-medium transition-colors"
                   >
-                    Marcar todas como leídas
+                    {t('admin.notif.marcarTodasLeidas')}
                   </button>
                 </div>
               )}
@@ -296,7 +300,7 @@ export default function AdminPanel() {
                       <button
                         onClick={() => marcarLeida(n.id)}
                         className="text-xs text-ink-soft hover:text-ink transition-colors flex-shrink-0 mt-1"
-                        title="Marcar como leída"
+                        title={t('admin.notif.marcarLeida')}
                       >
                         ✓
                       </button>

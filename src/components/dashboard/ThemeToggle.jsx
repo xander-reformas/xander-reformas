@@ -1,13 +1,15 @@
+import { useTranslation } from 'react-i18next'
 import { useTheme } from '../../hooks/useTheme'
 
 export default function ThemeToggle({ compact = false }) {
+  const { t } = useTranslation()
   const { theme, toggleTheme } = useTheme()
   const isDark = theme === 'dark'
 
   return (
     <button
       onClick={toggleTheme}
-      title={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+      title={isDark ? t('themeToggle.claro') : t('themeToggle.oscuro')}
       className={`relative flex items-center rounded-full transition-colors ${
         compact ? 'w-9 h-9 justify-center' : 'w-14 h-8 px-1'
       } ${isDark ? 'bg-navy' : 'bg-edge'}`}

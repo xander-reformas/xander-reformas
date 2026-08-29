@@ -1,47 +1,24 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { supabase, getUID } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
 
-const PASOS = [
-  {
-    key: 'cliente',
-    icon: '👤',
-    titulo: 'Añade tu primer cliente',
-    desc: 'La ficha de contacto que luego se enlaza a obras, presupuestos y facturas.',
-    to: 'clientes',
-  },
-  {
-    key: 'obra',
-    icon: '🔨',
-    titulo: 'Crea tu primera obra',
-    desc: 'Vincúlala a un cliente para llevar el seguimiento de fotos, etapas y equipo.',
-    to: 'obras',
-  },
-  {
-    key: 'presupuesto',
-    icon: '📋',
-    titulo: 'Haz tu primer presupuesto',
-    desc: 'Usa las partidas de Tarifas & Precios para generarlo en minutos.',
-    to: 'presupuestos',
-  },
-  {
-    key: 'fiscal',
-    icon: '🏢',
-    titulo: 'Completa tus datos fiscales',
-    desc: 'NIF, dirección y régimen — imprescindibles para presupuestos y facturas válidas.',
-    to: 'mi-empresa',
-  },
-  {
-    key: 'cobros',
-    icon: '💳',
-    titulo: 'Conecta el cobro con tarjeta',
-    desc: 'Opcional: enlaza tu cuenta de Stripe para cobrar facturas directamente desde XANDER.',
-    to: 'mi-empresa',
-  },
+const PASOS_META = [
+  { key: 'cliente',      icon: '👤', to: 'clientes' },
+  { key: 'obra',         icon: '🔨', to: 'obras' },
+  { key: 'presupuesto',  icon: '📋', to: 'presupuestos' },
+  { key: 'fiscal',       icon: '🏢', to: 'mi-empresa' },
+  { key: 'cobros',       icon: '💳', to: 'mi-empresa' },
 ]
 
 export default function OnboardingChecklist() {
+  const { t } = useTranslation()
+  const PASOS = PASOS_META.map(p => ({
+    ...p,
+    titulo: t(`onboarding.pasos.${p.key}.titulo`),
+    desc: t(`onboarding.pasos.${p.key}.desc`),
+  }))
   const { profile, updateProfile } = useAuth()
   const navigate = useNavigate()
   const [estado, setEstado] = useState(null)
@@ -97,10 +74,10 @@ export default function OnboardingChecklist() {
       >
         <div className="flex items-center gap-2.5">
           <span className="text-base">{completo ? '🎉' : '🚀'}</span>
-          <span className="text-sm font-medium text-ink">Primeros pasos en XANDER</span>
+          <span className="text-sm font-medium text-ink">{t('onboarding.primerosPasos')}</span>
           <span className="text-xs text-ink-soft">{completados}/{total}</span>
         </div>
-        <span className="text-xs text-gold font-medium whitespace-nowrap ml-4">Mostrar ▾</span>
+        <span className="text-xs text-gold font-medium whitespace-nowrap ml-4">{t('onboarding.mostrar')}</span>
       </button>
     )
   }
@@ -109,11 +86,11 @@ export default function OnboardingChecklist() {
     <div className="card mb-2">
       <div className="flex items-start justify-between mb-1">
         <div>
-          <h2 className="font-semibold text-ink">Primeros pasos en XANDER</h2>
+          <h2 className="font-semibold text-ink">{t('onboarding.primerosPasos')}</h2>
           <p className="text-xs text-ink-soft mt-0.5">
             {completo
-              ? '¡Completados! Ya conoces las bases de XANDER.'
-              : `${completados} de ${total} completados — te acompañamos hasta que la app forme parte de tu rutina.`}
+              ? t('onboarding.completados')
+              : t('onboarding.progreso', { completados, total })}
           </p>
         </div>
         <button
@@ -121,7 +98,7 @@ export default function OnboardingChecklist() {
           disabled={ocultando}
           className="text-xs text-ink-soft hover:text-ink whitespace-nowrap ml-4"
         >
-          Ocultar ▴
+          {t('onboarding.ocultar')}
         </button>
       </div>
 

@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import GoogleButton from './GoogleButton'
 import ThemeToggle from '../dashboard/ThemeToggle'
+import LanguageSwitcher from '../shared/LanguageSwitcher'
 
 export default function RegisterPage() {
+  const { t } = useTranslation()
   const { signUp } = useAuth()
   const navigate = useNavigate()
   const [form, setForm] = useState({ email: '', password: '', confirm: '' })
@@ -16,11 +19,11 @@ export default function RegisterPage() {
     e.preventDefault()
     setError('')
     if (form.password !== form.confirm) {
-      setError('Las contraseñas no coinciden.')
+      setError(t('auth.register.passwordsNoCoinciden'))
       return
     }
     if (form.password.length < 8) {
-      setError('La contraseña debe tener al menos 8 caracteres.')
+      setError(t('auth.register.passwordCorta'))
       return
     }
     setLoading(true)
@@ -38,19 +41,19 @@ export default function RegisterPage() {
         <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
           <span className="text-gold text-2xl">✓</span>
         </div>
-        <h2 className="text-xl font-bold text-ink mb-2">Revisa tu email</h2>
+        <h2 className="text-xl font-bold text-ink mb-2">{t('auth.register.revisaEmail')}</h2>
         <p className="text-sm text-ink-soft mb-6">
-          Te hemos enviado un enlace de confirmación a <strong>{form.email}</strong>.
-          Confirma tu cuenta y podrás empezar a configurar tu perfil.
+          <Trans i18nKey="auth.register.enlaceConfirmacion" values={{ email: form.email }} components={{ strong: <strong /> }} />
         </p>
-        <Link to="/login" className="btn-primary inline-block">Ir al login</Link>
+        <Link to="/login" className="btn-primary inline-block">{t('auth.register.irLogin')}</Link>
       </div>
     </div>
   )
 
   return (
     <div className="min-h-screen bg-page flex relative">
-      <div className="absolute top-4 right-4 z-10">
+      <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+        <LanguageSwitcher />
         <ThemeToggle compact />
       </div>
       <div className="hidden lg:flex w-1/2 bg-navy flex-col justify-between p-12">
@@ -59,22 +62,17 @@ export default function RegisterPage() {
             <span className="text-gold">X</span>
             <span className="text-white">ANDER</span>
           </div>
-          <div className="text-xs tracking-widest text-stone-light mt-1">GESTIÓN DE REFORMAS</div>
+          <div className="text-xs tracking-widest text-stone-light mt-1">{t('auth.tagline')}</div>
         </div>
         <div className="space-y-4">
-          {[
-            { icon: '📋', text: 'Presupuestos profesionales en minutos' },
-            { icon: '🔨', text: 'Seguimiento de obras y clientes' },
-            { icon: '📊', text: 'Tarifas y rentabilidad por obra' },
-            { icon: '📧', text: 'Facturas enviadas directamente desde la app' },
-          ].map(({ icon, text }) => (
+          {t('auth.register.features', { returnObjects: true }).map(({ icon, text }) => (
             <div key={text} className="flex items-center gap-3 text-white text-sm">
               <span className="text-lg">{icon}</span>
               {text}
             </div>
           ))}
         </div>
-        <div className="text-xs text-stone-light">Gratis durante la beta · Sin tarjeta de crédito</div>
+        <div className="text-xs text-stone-light">{t('auth.register.gratisBeta')}</div>
       </div>
 
       <div className="flex-1 flex items-center justify-center p-8">
@@ -84,31 +82,31 @@ export default function RegisterPage() {
             <span className="text-ink">ANDER</span>
           </div>
 
-          <h1 className="text-2xl font-bold text-ink mb-1">Crea tu cuenta</h1>
-          <p className="text-sm text-ink-soft mb-6">Gratis durante la beta · Sin límites</p>
+          <h1 className="text-2xl font-bold text-ink mb-1">{t('auth.register.creaTuCuenta')}</h1>
+          <p className="text-sm text-ink-soft mb-6">{t('auth.register.gratisSinLimites')}</p>
 
           {/* Google */}
-          <GoogleButton label="Registrarse con Google" />
+          <GoogleButton label={t('auth.register.registrarseGoogle')} />
           <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-edge" />
-            <span className="text-xs text-ink-soft">o con email</span>
+            <span className="text-xs text-ink-soft">{t('auth.orConEmail')}</span>
             <div className="flex-1 h-px bg-edge" />
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="label">Email profesional</label>
-              <input type="email" className="input" placeholder="tu@email.com"
+              <label className="label">{t('auth.register.emailProfesional')}</label>
+              <input type="email" className="input" placeholder={t('auth.emailPlaceholder')}
                 value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} required />
             </div>
             <div>
-              <label className="label">Contraseña</label>
-              <input type="password" className="input" placeholder="Mínimo 8 caracteres"
+              <label className="label">{t('auth.register.contrasena')}</label>
+              <input type="password" className="input" placeholder={t('auth.register.minimoCaracteres')}
                 value={form.password} onChange={e => setForm(p => ({ ...p, password: e.target.value }))} required />
             </div>
             <div>
-              <label className="label">Confirmar contraseña</label>
-              <input type="password" className="input" placeholder="Repite la contraseña"
+              <label className="label">{t('auth.register.confirmarContrasena')}</label>
+              <input type="password" className="input" placeholder={t('auth.register.repiteContrasena')}
                 value={form.confirm} onChange={e => setForm(p => ({ ...p, confirm: e.target.value }))} required />
             </div>
 
@@ -117,20 +115,20 @@ export default function RegisterPage() {
             )}
 
             <button type="submit" disabled={loading} className="btn-primary w-full mt-2">
-              {loading ? 'Creando cuenta...' : 'Crear cuenta gratuita'}
+              {loading ? t('auth.register.creandoCuenta') : t('auth.register.crearCuentaGratuita')}
             </button>
 
             <p className="text-xs text-ink-soft text-center">
-              Al registrarte aceptas nuestros{' '}
-              <a href="#" className="text-gold hover:underline">Términos de uso</a>
-              {' '}y{' '}
-              <a href="#" className="text-gold hover:underline">Política de privacidad</a>
+              {t('auth.register.aceptasTerminosPre')}{' '}
+              <a href="#" className="text-gold hover:underline">{t('auth.register.terminosUso')}</a>
+              {' '}{t('auth.register.y')}{' '}
+              <a href="#" className="text-gold hover:underline">{t('auth.register.politicaPrivacidad')}</a>
             </p>
           </form>
 
           <div className="mt-6 text-center text-sm text-ink-soft">
-            ¿Ya tienes cuenta?{' '}
-            <Link to="/login" className="text-gold font-semibold hover:underline">Accede aquí</Link>
+            {t('auth.register.yaTienesCuenta')}{' '}
+            <Link to="/login" className="text-gold font-semibold hover:underline">{t('auth.register.accedeAqui')}</Link>
           </div>
         </div>
       </div>

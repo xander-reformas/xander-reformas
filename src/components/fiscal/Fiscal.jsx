@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -71,6 +72,7 @@ function rangoAnio(anio) {
 const fmtEUR = v => (v || 0).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })
 
 function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
+  const { t } = useTranslation()
   const { profile } = useAuth()
   const [loading, setLoading] = useState(true)
   const [facturas, setFacturas] = useState([])
@@ -120,56 +122,56 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
   const rendimientoNeto = baseFacturado - baseGastos
   const pago130Estimado = Math.max(0, rendimientoNeto * 0.20 - retencionesPracticadas)
 
-  const etiquetaPeriodo = tipo === 'trimestral' ? `${trimestre}T ${anio}` : `Año ${anio}`
+  const etiquetaPeriodo = tipo === 'trimestral' ? `${trimestre}T ${anio}` : t('fiscal.modal.anio', { anio })
 
   return (
     <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto">
       <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-3xl my-4">
         <div className="px-6 py-4 border-b border-edge flex items-center justify-between no-print">
-          <h2 className="text-lg font-bold text-ink">Conciliación fiscal — {etiquetaPeriodo}</h2>
+          <h2 className="text-lg font-bold text-ink">{t('fiscal.modal.title', { periodo: etiquetaPeriodo })}</h2>
           <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
 
         {loading ? (
-          <div className="p-10 text-center text-ink-soft text-sm">Cargando datos del periodo…</div>
+          <div className="p-10 text-center text-ink-soft text-sm">{t('fiscal.modal.loading')}</div>
         ) : (
           <div className="print-area p-8 text-sm text-ink">
             {/* Cabecera */}
             <div className="flex justify-between items-start gap-6 mb-6">
               <div>
-                <div className="text-lg font-black text-ink">{profile?.empresa_nombre || 'Mi empresa'}</div>
-                {profile?.empresa_nif && <div className="text-ink-soft">NIF: {profile.empresa_nif}</div>}
+                <div className="text-lg font-black text-ink">{profile?.empresa_nombre || t('fiscal.modal.empresaDefault')}</div>
+                {profile?.empresa_nif && <div className="text-ink-soft">{t('fiscal.modal.nif', { v: profile.empresa_nif })}</div>}
                 {profile?.empresa_direccion && <div className="text-ink-soft">{profile.empresa_direccion}</div>}
               </div>
               <div className="text-right">
-                <div className="text-xl font-black text-navy">CONCILIACIÓN FISCAL</div>
+                <div className="text-xl font-black text-navy">{t('fiscal.modal.tituloDoc')}</div>
                 <div className="font-bold text-ink">{etiquetaPeriodo}</div>
-                <div className="text-ink-soft mt-1">Del {new Date(desde).toLocaleDateString('es-ES')} al {new Date(hasta).toLocaleDateString('es-ES')}</div>
-                <div className="text-ink-soft text-xs mt-0.5">Generado: {new Date().toLocaleDateString('es-ES')}</div>
+                <div className="text-ink-soft mt-1">{t('fiscal.modal.delAl', { desde: new Date(desde).toLocaleDateString('es-ES'), hasta: new Date(hasta).toLocaleDateString('es-ES') })}</div>
+                <div className="text-ink-soft text-xs mt-0.5">{t('fiscal.modal.generado', { fecha: new Date().toLocaleDateString('es-ES') })}</div>
               </div>
             </div>
 
             <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-2.5 mb-6 text-xs text-ink-soft">
-              ⚠️ Documento orientativo generado automáticamente a partir de tus facturas y gastos registrados. Compártelo con tu gestoría para cruzar cifras antes de presentar los modelos — no sustituye su cálculo ni asesoramiento profesional.
+              {t('fiscal.modal.disclaimerModal')}
             </div>
 
             {/* Facturas emitidas */}
             <div className="mb-6">
-              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-2">Facturas emitidas ({facturasCalc.length})</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-2">{t('fiscal.modal.facturasEmitidas', { count: facturasCalc.length })}</div>
               {facturasCalc.length === 0 ? (
-                <div className="text-ink-soft text-xs">Sin facturas emitidas en este periodo.</div>
+                <div className="text-ink-soft text-xs">{t('fiscal.modal.sinFacturas')}</div>
               ) : (
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="border-b-2 border-ink/20 text-ink-soft uppercase tracking-wide">
-                      <th className="text-left py-1.5">Fecha</th>
-                      <th className="text-left py-1.5">Nº</th>
-                      <th className="text-left py-1.5">Cliente</th>
-                      <th className="text-left py-1.5">Estado</th>
-                      <th className="text-right py-1.5">Base</th>
-                      <th className="text-right py-1.5">IVA</th>
-                      <th className="text-right py-1.5">Ret.</th>
-                      <th className="text-right py-1.5">Total</th>
+                      <th className="text-left py-1.5">{t('fiscal.modal.tabla.fecha')}</th>
+                      <th className="text-left py-1.5">{t('fiscal.modal.tabla.numero')}</th>
+                      <th className="text-left py-1.5">{t('fiscal.modal.tabla.cliente')}</th>
+                      <th className="text-left py-1.5">{t('fiscal.modal.tabla.estado')}</th>
+                      <th className="text-right py-1.5">{t('fiscal.modal.tabla.base')}</th>
+                      <th className="text-right py-1.5">{t('fiscal.modal.tabla.iva')}</th>
+                      <th className="text-right py-1.5">{t('fiscal.modal.tabla.ret')}</th>
+                      <th className="text-right py-1.5">{t('fiscal.modal.tabla.total')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-edge">
@@ -177,8 +179,8 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
                       <tr key={i}>
                         <td className="py-1.5">{new Date(f.fecha).toLocaleDateString('es-ES')}</td>
                         <td className="py-1.5">{f.numero}</td>
-                        <td className="py-1.5">{f.clientes?.nombre || '—'}</td>
-                        <td className="py-1.5 capitalize">{f.estado}</td>
+                        <td className="py-1.5">{f.clientes?.nombre || t('fiscal.modal.sinCliente')}</td>
+                        <td className="py-1.5 capitalize">{t(`facturas.estado.${f.estado}`, f.estado)}</td>
                         <td className="text-right py-1.5">{fmtEUR(f.baseConDto)}</td>
                         <td className="text-right py-1.5">{fmtEUR(f.ivaImporte)}</td>
                         <td className="text-right py-1.5">{f.retImporte > 0 ? `−${fmtEUR(f.retImporte)}` : '—'}</td>
@@ -188,7 +190,7 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
                   </tbody>
                   <tfoot>
                     <tr className="border-t-2 border-ink/20 font-bold">
-                      <td className="py-1.5" colSpan={4}>Total</td>
+                      <td className="py-1.5" colSpan={4}>{t('fiscal.modal.totalRow')}</td>
                       <td className="text-right py-1.5">{fmtEUR(baseFacturado)}</td>
                       <td className="text-right py-1.5">{fmtEUR(ivaRepercutido)}</td>
                       <td className="text-right py-1.5">{retencionesPracticadas > 0 ? `−${fmtEUR(retencionesPracticadas)}` : '—'}</td>
@@ -201,21 +203,21 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
 
             {/* Gastos */}
             <div className="mb-6">
-              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-2">Gastos registrados ({gastosCalc.length})</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-2">{t('fiscal.modal.gastosRegistrados', { count: gastosCalc.length })}</div>
               {errorGastos ? (
-                <div className="text-ink-soft text-xs">El módulo de Gastos no está configurado todavía.</div>
+                <div className="text-ink-soft text-xs">{t('fiscal.modal.moduloNoConfigurado')}</div>
               ) : gastosCalc.length === 0 ? (
-                <div className="text-ink-soft text-xs">Sin gastos registrados en este periodo.</div>
+                <div className="text-ink-soft text-xs">{t('fiscal.modal.sinGastos')}</div>
               ) : (
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="border-b-2 border-ink/20 text-ink-soft uppercase tracking-wide">
-                      <th className="text-left py-1.5">Fecha</th>
-                      <th className="text-left py-1.5">Proveedor</th>
-                      <th className="text-left py-1.5">Categoría</th>
-                      <th className="text-right py-1.5">Base</th>
-                      <th className="text-right py-1.5">IVA soport.</th>
-                      <th className="text-right py-1.5">Total</th>
+                      <th className="text-left py-1.5">{t('fiscal.modal.tabla.fecha')}</th>
+                      <th className="text-left py-1.5">{t('fiscal.modal.tabla.proveedor')}</th>
+                      <th className="text-left py-1.5">{t('fiscal.modal.tabla.categoria')}</th>
+                      <th className="text-right py-1.5">{t('fiscal.modal.tabla.base')}</th>
+                      <th className="text-right py-1.5">{t('fiscal.modal.tabla.ivaSoport')}</th>
+                      <th className="text-right py-1.5">{t('fiscal.modal.tabla.total')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-edge">
@@ -223,7 +225,7 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
                       <tr key={i}>
                         <td className="py-1.5">{new Date(g.fecha).toLocaleDateString('es-ES')}</td>
                         <td className="py-1.5">{g.proveedor || g.descripcion || '—'}</td>
-                        <td className="py-1.5">{g.categoria}</td>
+                        <td className="py-1.5">{g.categoria ? t(`gastos.categoria.${g.categoria}`, g.categoria) : ''}</td>
                         <td className="text-right py-1.5">{fmtEUR(g.base)}</td>
                         <td className="text-right py-1.5">{fmtEUR(g.ivaSoportado)}</td>
                         <td className="text-right py-1.5 font-semibold">{fmtEUR(g.importe)}</td>
@@ -232,7 +234,7 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
                   </tbody>
                   <tfoot>
                     <tr className="border-t-2 border-ink/20 font-bold">
-                      <td className="py-1.5" colSpan={3}>Total</td>
+                      <td className="py-1.5" colSpan={3}>{t('fiscal.modal.totalRow')}</td>
                       <td className="text-right py-1.5">{fmtEUR(baseGastos)}</td>
                       <td className="text-right py-1.5">{fmtEUR(ivaSoportado)}</td>
                       <td className="text-right py-1.5">{fmtEUR(totalGastos)}</td>
@@ -244,29 +246,29 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
 
             {/* Resumen fiscal */}
             <div className="bg-page rounded-xl p-4">
-              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-3">Resumen para modelos 303 / 130{tipo === 'anual' ? ' / 390' : ''}</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-3">{t('fiscal.modal.resumenTitle', { extra: tipo === 'anual' ? ' / 390' : '' })}</div>
               <div className="grid grid-cols-2 gap-x-8 gap-y-1.5">
-                <div className="flex justify-between"><span className="text-ink-soft">IVA repercutido (ventas)</span><span className="font-semibold">{fmtEUR(ivaRepercutido)}</span></div>
-                <div className="flex justify-between"><span className="text-ink-soft">IVA soportado (gastos)</span><span className="font-semibold">−{fmtEUR(ivaSoportado)}</span></div>
+                <div className="flex justify-between"><span className="text-ink-soft">{t('fiscal.modal.ivaRepercutido')}</span><span className="font-semibold">{fmtEUR(ivaRepercutido)}</span></div>
+                <div className="flex justify-between"><span className="text-ink-soft">{t('fiscal.modal.ivaSoportadoLabel')}</span><span className="font-semibold">−{fmtEUR(ivaSoportado)}</span></div>
                 <div className="flex justify-between col-span-2 border-t border-edge pt-1.5 mt-0.5">
-                  <span className="font-bold text-ink">Resultado IVA (Modelo 303)</span>
-                  <span className="font-black">{resultadoIVA >= 0 ? `A ingresar: ${fmtEUR(resultadoIVA)}` : `A compensar: ${fmtEUR(Math.abs(resultadoIVA))}`}</span>
+                  <span className="font-bold text-ink">{t('fiscal.modal.resultadoIva')}</span>
+                  <span className="font-black">{resultadoIVA >= 0 ? t('fiscal.modal.aIngresar', { v: fmtEUR(resultadoIVA) }) : t('fiscal.modal.aCompensar', { v: fmtEUR(Math.abs(resultadoIVA)) })}</span>
                 </div>
-                <div className="flex justify-between mt-2"><span className="text-ink-soft">Ingresos (base)</span><span className="font-semibold">{fmtEUR(baseFacturado)}</span></div>
-                <div className="flex justify-between mt-2"><span className="text-ink-soft">Gastos (base)</span><span className="font-semibold">−{fmtEUR(baseGastos)}</span></div>
+                <div className="flex justify-between mt-2"><span className="text-ink-soft">{t('fiscal.modal.ingresosBase')}</span><span className="font-semibold">{fmtEUR(baseFacturado)}</span></div>
+                <div className="flex justify-between mt-2"><span className="text-ink-soft">{t('fiscal.modal.gastosBase')}</span><span className="font-semibold">−{fmtEUR(baseGastos)}</span></div>
                 <div className="flex justify-between col-span-2 border-t border-edge pt-1.5 mt-0.5">
-                  <span className="font-bold text-ink">Rendimiento neto estimado</span><span className="font-black">{fmtEUR(rendimientoNeto)}</span>
+                  <span className="font-bold text-ink">{t('fiscal.modal.rendimientoNeto')}</span><span className="font-black">{fmtEUR(rendimientoNeto)}</span>
                 </div>
-                <div className="flex justify-between"><span className="text-ink-soft">Retenciones IRPF ya practicadas</span><span className="font-semibold">−{fmtEUR(retencionesPracticadas)}</span></div>
-                <div className="flex justify-between"><span className="text-ink-soft">Pago fraccionado 20% (Modelo 130, orientativo)</span><span className="font-semibold">{fmtEUR(pago130Estimado)}</span></div>
+                <div className="flex justify-between"><span className="text-ink-soft">{t('fiscal.modal.retencionesPracticadas')}</span><span className="font-semibold">−{fmtEUR(retencionesPracticadas)}</span></div>
+                <div className="flex justify-between"><span className="text-ink-soft">{t('fiscal.modal.pago130')}</span><span className="font-semibold">{fmtEUR(pago130Estimado)}</span></div>
               </div>
             </div>
           </div>
         )}
 
         <div className="px-6 pb-6 pt-4 flex gap-3 no-print">
-          <button onClick={onClose} className="btn-secondary flex-1">Cerrar</button>
-          <button onClick={() => window.print()} className="btn-primary flex-1">🖨️ Imprimir / PDF</button>
+          <button onClick={onClose} className="btn-secondary flex-1">{t('fiscal.modal.cerrar')}</button>
+          <button onClick={() => window.print()} className="btn-primary flex-1">{t('fiscal.modal.imprimir')}</button>
         </div>
       </div>
     </div>
@@ -274,6 +276,7 @@ function ConciliacionModal({ tipo, anio, trimestre, onClose }) {
 }
 
 function SelectorConciliacion({ onClose }) {
+  const { t } = useTranslation()
   const hoy = new Date()
   const [tipo, setTipo] = useState('trimestral')
   const [anio, setAnio] = useState(hoy.getFullYear())
@@ -290,36 +293,36 @@ function SelectorConciliacion({ onClose }) {
     <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-ink">Documento de conciliación</h2>
+          <h2 className="text-lg font-bold text-ink">{t('fiscal.selector.title')}</h2>
           <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
-        <p className="text-sm text-ink-soft mb-5">Elige el periodo y genera un documento con el detalle de facturas, gastos y el resumen de IVA/IRPF para cruzar con tu gestoría.</p>
+        <p className="text-sm text-ink-soft mb-5">{t('fiscal.selector.desc')}</p>
 
         <div className="space-y-4">
           <div>
-            <label className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5 block">Tipo de documento</label>
+            <label className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5 block">{t('fiscal.selector.tipoDocumento')}</label>
             <div className="grid grid-cols-2 gap-2">
               <button onClick={() => setTipo('trimestral')} className={`px-3 py-2 rounded-lg text-sm font-semibold border ${tipo === 'trimestral' ? 'bg-gold text-navy border-gold' : 'border-edge text-ink-soft'}`}>
-                Trimestral (130/303)
+                {t('fiscal.selector.trimestral')}
               </button>
               <button onClick={() => setTipo('anual')} className={`px-3 py-2 rounded-lg text-sm font-semibold border ${tipo === 'anual' ? 'bg-gold text-navy border-gold' : 'border-edge text-ink-soft'}`}>
-                Anual (390/100)
+                {t('fiscal.selector.anual')}
               </button>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5 block">Año</label>
+              <label className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5 block">{t('fiscal.selector.anioLabel')}</label>
               <select value={anio} onChange={e => setAnio(parseInt(e.target.value))} className="input w-full">
                 {anios.map(a => <option key={a} value={a}>{a}</option>)}
               </select>
             </div>
             {tipo === 'trimestral' && (
               <div>
-                <label className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5 block">Trimestre</label>
+                <label className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-1.5 block">{t('fiscal.selector.trimestreLabel')}</label>
                 <select value={trimestre} onChange={e => setTrimestre(parseInt(e.target.value))} className="input w-full">
-                  {[1, 2, 3, 4].map(t => <option key={t} value={t}>{t}T</option>)}
+                  {[1, 2, 3, 4].map(tr => <option key={tr} value={tr}>{tr}T</option>)}
                 </select>
               </div>
             )}
@@ -327,8 +330,8 @@ function SelectorConciliacion({ onClose }) {
         </div>
 
         <div className="flex gap-3 mt-6">
-          <button onClick={onClose} className="btn-secondary flex-1">Cancelar</button>
-          <button onClick={() => setGenerando(true)} className="btn-primary flex-1">Generar documento</button>
+          <button onClick={onClose} className="btn-secondary flex-1">{t('fiscal.selector.cancelar')}</button>
+          <button onClick={() => setGenerando(true)} className="btn-primary flex-1">{t('fiscal.selector.generarDocumento')}</button>
         </div>
       </div>
     </div>
@@ -336,52 +339,53 @@ function SelectorConciliacion({ onClose }) {
 }
 
 export default function Fiscal() {
+  const { t } = useTranslation()
   const [showConciliacion, setShowConciliacion] = useState(false)
 
   return (
     <div className="p-6 max-w-4xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-ink">Fiscal</h1>
-        <p className="text-sm text-ink-soft mt-0.5">Guía fiscal para autónomos del sector reformas en España</p>
+        <h1 className="text-2xl font-bold text-ink">{t('fiscal.title')}</h1>
+        <p className="text-sm text-ink-soft mt-0.5">{t('fiscal.subtitle')}</p>
       </div>
 
       <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-ink-soft">
-        ⚠️ Esta guía es orientativa. Consulta siempre con tu gestor o asesor fiscal para decisiones concretas.
+        {t('fiscal.disclaimer')}
       </div>
 
       <div className="card flex items-center justify-between gap-4 mb-8 bg-navy/5 border-navy/20">
         <div>
-          <div className="font-bold text-ink">📄 Conciliación con tu gestoría</div>
-          <p className="text-sm text-ink-soft mt-0.5">Genera un documento con tus facturas, gastos y el resumen de IVA/IRPF del periodo, listo para cruzar antes de presentar el modelo correspondiente.</p>
+          <div className="font-bold text-ink">{t('fiscal.conciliacion.cardTitle')}</div>
+          <p className="text-sm text-ink-soft mt-0.5">{t('fiscal.conciliacion.cardDesc')}</p>
         </div>
-        <button onClick={() => setShowConciliacion(true)} className="btn-primary whitespace-nowrap flex-shrink-0">Generar documento</button>
+        <button onClick={() => setShowConciliacion(true)} className="btn-primary whitespace-nowrap flex-shrink-0">{t('fiscal.conciliacion.generarDocumento')}</button>
       </div>
 
       {showConciliacion && <SelectorConciliacion onClose={() => setShowConciliacion(false)} />}
 
-      {/* Calendario trimestral */}
+      {/* Calendario trimestral — contenido normativo, se mantiene en español */}
       <div className="mb-8">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft mb-4">📅 Calendario de declaraciones</h2>
+        <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft mb-4">{t('fiscal.calendarioTitle')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {TRIMESTRES.map(t => {
+          {TRIMESTRES.map(tr => {
             const ahora = new Date()
             const mesActual = ahora.getMonth() + 1
-            const esActual = (t.t === '1T' && mesActual <= 4) || (t.t === '2T' && mesActual <= 7 && mesActual >= 4) || (t.t === '3T' && mesActual <= 10 && mesActual >= 7) || (t.t === '4T' && mesActual >= 10)
+            const esActual = (tr.t === '1T' && mesActual <= 4) || (tr.t === '2T' && mesActual <= 7 && mesActual >= 4) || (tr.t === '3T' && mesActual <= 10 && mesActual >= 7) || (tr.t === '4T' && mesActual >= 10)
             return (
-              <div key={t.t} className={`card text-center ${esActual ? 'border-gold border-2 bg-gold/5' : ''}`}>
-                <div className={`text-2xl font-black mb-1 ${esActual ? 'text-gold' : 'text-ink'}`}>{t.t}</div>
-                <div className="text-xs text-ink-soft mb-2">{t.meses}</div>
-                <div className={`text-xs font-semibold ${esActual ? 'text-gold-dark' : 'text-ink-soft'}`}>{t.presentacion}</div>
-                {esActual && <div className="mt-2 text-xs bg-gold text-navy font-bold px-2 py-0.5 rounded-full">Próximo</div>}
+              <div key={tr.t} className={`card text-center ${esActual ? 'border-gold border-2 bg-gold/5' : ''}`}>
+                <div className={`text-2xl font-black mb-1 ${esActual ? 'text-gold' : 'text-ink'}`}>{tr.t}</div>
+                <div className="text-xs text-ink-soft mb-2">{tr.meses}</div>
+                <div className={`text-xs font-semibold ${esActual ? 'text-gold-dark' : 'text-ink-soft'}`}>{tr.presentacion}</div>
+                {esActual && <div className="mt-2 text-xs bg-gold text-navy font-bold px-2 py-0.5 rounded-full">{t('fiscal.proximoBadge')}</div>}
               </div>
             )
           })}
         </div>
       </div>
 
-      {/* Modelos */}
+      {/* Modelos — contenido normativo español, se mantiene en español */}
       <div className="mb-8">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft mb-4">📋 Modelos a presentar</h2>
+        <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft mb-4">{t('fiscal.modelosTitle')}</h2>
         <div className="space-y-3">
           {MODELOS.map(m => (
             <div key={m.num} className="card flex items-start gap-4">
@@ -400,9 +404,9 @@ export default function Fiscal() {
         </div>
       </div>
 
-      {/* Tips deducibles */}
+      {/* Tips deducibles — contenido normativo fiscal español, se mantiene en español */}
       <div>
-        <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft mb-4">💡 Gastos deducibles clave</h2>
+        <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft mb-4">{t('fiscal.tipsTitle')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {TIPS.map(tip => (
             <div key={tip.titulo} className="card">

@@ -151,5 +151,1693 @@
         "until": "Até"
       }
     }
+  },
+  "clientes": {
+    "title": "Clientes",
+    "countOne": "{{count}} cliente no total",
+    "countOther": "{{count}} clientes no total",
+    "newCliente": "+ Novo cliente",
+    "searchPlaceholder": "🔍  Procurar por nome, email, cidade…",
+    "loading": "A carregar clientes…",
+    "noResultsTitle": "Sem resultados",
+    "noResultsHint": "Tente outra pesquisa",
+    "noClientesTitle": "Ainda não tem clientes",
+    "noClientesHint": "Adicione o seu primeiro cliente para começar a gerir obras e orçamentos",
+    "addFirst": "+ Adicionar cliente",
+    "table": {
+      "nombreNif": "Nome / NIF",
+      "telefono": "Telefone",
+      "email": "Email",
+      "ciudad": "Cidade"
+    },
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "confirmDelete": "Eliminar \"{{nombre}}\"? Esta ação não pode ser desfeita.",
+    "form": {
+      "editTitle": "Editar cliente",
+      "newTitle": "Novo cliente",
+      "nombreLabel": "Nome *",
+      "nifLabel": "NIF",
+      "telefonoLabel": "Telefone",
+      "emailLabel": "Email",
+      "direccionLabel": "Morada",
+      "cpLabel": "Código postal",
+      "ciudadLabel": "Cidade",
+      "notasLabel": "Notas internas",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "save": "Guardar cliente"
+    }
+  },
+  "rentabilidad": {
+    "title": "Rentabilidade por obra",
+    "subtitle": "Comparação orçamento vs custo real · margem de cada projeto",
+    "totalPresupuestado": "Total orçamentado",
+    "costeRealAcumulado": "Custo real acumulado",
+    "beneficioNeto": "Lucro líquido",
+    "margenGlobal": "Margem global",
+    "distribucionTitle": "Distribuição da rentabilidade",
+    "dist": {
+      "excelente": "Excelente",
+      "buena": "Boa",
+      "justa": "Razoável",
+      "negativa": "Negativa"
+    },
+    "allStates": "Todos os estados",
+    "orden": {
+      "margenDesc": "Maior margem primeiro",
+      "margenAsc": "Menor margem primeiro",
+      "presupuestoDesc": "Maior orçamento primeiro",
+      "nombre": "Por nome"
+    },
+    "loading": "A carregar obras…",
+    "emptyTitle": "Sem obras para analisar",
+    "emptyHint": "Crie obras e adicione custos para ver a rentabilidade",
+    "presupuestado": "Orçamentado",
+    "costeReal": "Custo real",
+    "facturado": "Faturado",
+    "beneficio": "Lucro",
+    "sinDato": "Sem dados",
+    "sinFactura": "Sem fatura",
+    "margen": "margem",
+    "tipFaltaInfo": "💡 Adicione o orçamento total e o custo real da obra para ver a rentabilidade"
+  },
+  "presupuestos": {
+    "estado": {
+      "borrador": "Rascunho",
+      "enviado": "Enviado",
+      "aceptado": "Aceite",
+      "rechazado": "Rejeitado",
+      "expirado": "Expirado"
+    },
+    "form": {
+      "editTitle": "Editar orçamento",
+      "newTitle": "Novo orçamento",
+      "numeroLabel": "Número *",
+      "referenciaLabel": "Referência",
+      "fechaLabel": "Data",
+      "validezLabel": "Validade (dias)",
+      "clienteLabel": "Cliente",
+      "sinCliente": "Sem cliente",
+      "obraLabel": "Obra",
+      "sinObra": "Sem obra",
+      "estadoLabel": "Estado",
+      "partidasLabel": "Itens do orçamento",
+      "addPartida": "+ Adicionar item",
+      "tituloLabel": "Descrição / título",
+      "tituloPlaceholder": "Renovação de casa de banho — demolição e azulejamento",
+      "unidadLabel": "Unidade",
+      "cantidadLabel": "Quantidade",
+      "precioUdLabel": "Preço / unidade (€)",
+      "importeLabel": "Valor (€)",
+      "detalleLabel": "Detalhe (opcional)",
+      "detallePlaceholder": "Inclui: remoção do azulejo existente, novo azulejo até ao teto…",
+      "noIncluidoLabel": "Não incluído (uma linha por ponto)",
+      "condicionesLabel": "Condições (uma linha por ponto)",
+      "notasLabel": "Notas internas",
+      "ivaLabel": "IVA (%)",
+      "ivaOptions": {
+        "sinIva": "0% — Sem IVA",
+        "residencial": "10% — Residencial",
+        "general": "21% — Comercial / Obra nova / Empresa / Investidor"
+      },
+      "descuentoLabel": "Desconto (%)",
+      "baseImponible": "Base tributável",
+      "descuentoLine": "Desconto ({{pct}}%)",
+      "ivaLine": "IVA ({{pct}}%)",
+      "total": "TOTAL",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "save": "Guardar orçamento",
+      "numeroRequerido": "O número do orçamento é obrigatório"
+    },
+    "list": {
+      "title": "Orçamentos",
+      "countOne": "{{count}} orçamento",
+      "countOther": "{{count}} orçamentos",
+      "newPresupuesto": "+ Novo orçamento",
+      "aceptados": "✓ Orçamentos aceites:",
+      "searchPlaceholder": "🔍  Procurar nº, cliente, obra…",
+      "allStates": "Todos os estados",
+      "loading": "A carregar orçamentos…",
+      "noResultsTitle": "Sem resultados",
+      "noPresupuestosTitle": "Ainda não tem orçamentos",
+      "noPresupuestosHint": "Crie o seu primeiro orçamento profissional",
+      "table": {
+        "numero": "Número",
+        "clienteObra": "Cliente / Obra",
+        "fecha": "Data",
+        "vence": "Vence",
+        "estado": "Estado",
+        "total": "Total"
+      },
+      "firmadoTitle": "Assinado por {{nombre}} em {{fecha}}",
+      "vencido": "Vencido",
+      "venceHoy": "Vence hoje",
+      "diasRestanteOne": "Falta {{count}} dia",
+      "diasRestanteOther": "Faltam {{count}} dias",
+      "crearFactura": "📄 Fatura",
+      "crearFacturaTitle": "Criar fatura a partir deste orçamento",
+      "firmar": "✍️ Assinar",
+      "firmarTitle": "Assinar e aceitar este orçamento",
+      "editar": "Editar",
+      "eliminar": "Eliminar",
+      "confirmDelete": "Eliminar o orçamento {{numero}}?"
+    },
+    "firmarModalTitle": "Assinar orçamento {{numero}}"
+  },
+  "facturas": {
+    "estado": {
+      "borrador": "Rascunho",
+      "enviada": "Enviada",
+      "vista": "Vista",
+      "pagada": "Paga",
+      "vencida": "Vencida",
+      "anulada": "Anulada"
+    },
+    "form": {
+      "editTitle": "Editar fatura",
+      "newTitle": "Nova fatura",
+      "verifactuBadge": "🔒 Verifactu",
+      "fromPresupuesto": "📋 Criada a partir do orçamento {{numero}}",
+      "lockedNotice": "🔒 Esta fatura já está registada no livro Verifactu (RD 1007/2023): número, data, linhas, IVA, desconto, retenção e cliente não podem ser alterados. Só pode alterar o estado, a obra associada, o vencimento ou as notas. Para corrigir um dado económico, emita uma fatura retificativa.",
+      "importarPresupuestoLabel": "⚡ Importar de orçamento aceite",
+      "crearDesdeCero": "Criar fatura do zero",
+      "numeroLabel": "Número *",
+      "estadoLabel": "Estado",
+      "fechaEmisionLabel": "Data de emissão",
+      "vencimientoLabel": "Vencimento",
+      "clienteLabel": "Cliente",
+      "sinCliente": "Sem cliente",
+      "obraLabel": "Obra",
+      "sinObra": "Sem obra",
+      "lineasLabel": "Linhas da fatura",
+      "addLinea": "+ Adicionar linha",
+      "descripcionLabel": "Descrição",
+      "descripcionPlaceholder": "Trabalhos executados na renovação da casa de banho",
+      "unidadLabel": "Unidade",
+      "cantidadLabel": "Quantidade",
+      "precioUdLabel": "Preço / unidade (€)",
+      "importeLabel": "Valor (€)",
+      "detalleLabel": "Detalhe (opcional)",
+      "notasLabel": "Notas / observações",
+      "notasPlaceholder": "Condições de pagamento, nº de conta, etc.",
+      "ivaLabel": "IVA (%)",
+      "ivaOptions": {
+        "sinIva": "0% — Sem IVA",
+        "residencial": "10% — Residencial",
+        "general": "21% — Comercial / Obra nova / Empresa / Investidor"
+      },
+      "dtoLabel": "Desc. (%)",
+      "retLabel": "Retenção na fonte (%)",
+      "baseImponible": "Base tributável",
+      "descuentoLine": "Desconto ({{pct}}%)",
+      "ivaLine": "IVA ({{pct}}%)",
+      "retLine": "Retenção ({{pct}}%)",
+      "total": "TOTAL",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "save": "Guardar fatura",
+      "numeroRequerido": "O número da fatura é obrigatório"
+    },
+    "vista": {
+      "title": "Fatura {{numero}}",
+      "loading": "A carregar…",
+      "facturarA": "Faturar a",
+      "sinCliente": "Sem cliente",
+      "descripcionCol": "Descrição",
+      "cantidadCol": "Qtd.",
+      "precioUdCol": "Preço/un.",
+      "importeCol": "Valor",
+      "baseImponible": "Base tributável",
+      "descuentoLine": "Desconto ({{pct}}%)",
+      "ivaLine": "IVA ({{pct}}%)",
+      "retLine": "Retenção ({{pct}}%)",
+      "total": "TOTAL",
+      "fecha": "Data: {{fecha}}",
+      "vencimiento": "Vencimento: {{fecha}}",
+      "obra": "Obra: {{nombre}}",
+      "tel": "Tel: {{tel}}",
+      "nif": "NIF: {{nif}}",
+      "empresaDefault": "A minha empresa",
+      "veriTitle": "VERI*FACTU",
+      "veriDesc": "Fatura verificável na sede eletrónica da AEAT.",
+      "veriRef": "Ref.: {{uuid}}",
+      "registradaTitle": "Fatura registada no sistema Verifactu (RD 1007/2023)",
+      "hashLabel": "Hash: {{hash}}…",
+      "noEnviada": "⚠️ Ainda não foi enviada à AEAT — verifique o estado antes de a entregar ao cliente.",
+      "aeatError": "⚠️ AEAT: {{error}}",
+      "cerrar": "Fechar",
+      "imprimir": "🖨️ Imprimir / PDF"
+    },
+    "cobro": {
+      "title": "💳 Pagamento com cartão — {{numero}}",
+      "desc": "Partilhe este link com o cliente para que pague a fatura com cartão. Quando o Stripe confirmar o pagamento, a fatura passará automaticamente para o estado Paga.",
+      "copiado": "✓ Copiado",
+      "copiar": "📋 Copiar link",
+      "abrirEnlace": "Abrir link de pagamento"
+    },
+    "list": {
+      "title": "Faturas",
+      "countOne": "{{count}} fatura",
+      "countOther": "{{count}} faturas",
+      "newFactura": "+ Nova fatura",
+      "facturadoLabel": "Faturado (total)",
+      "cobradoLabel": "Recebido",
+      "pendienteLabel": "Pendente de receber",
+      "facturasCountOne": "{{count}} fatura",
+      "facturasCountOther": "{{count}} faturas",
+      "pagadasCountOne": "{{count}} paga",
+      "pagadasCountOther": "{{count}} pagas",
+      "circulacionCountOne": "{{count}} em circulação",
+      "circulacionCountOther": "{{count}} em circulação",
+      "todas": "Todas ({{count}})",
+      "searchPlaceholder": "🔍  Procurar nº, cliente…",
+      "loading": "A carregar faturas…",
+      "noResultsTitle": "Sem resultados",
+      "noFacturasTitle": "Ainda não tem faturas",
+      "table": {
+        "numero": "Número",
+        "cliente": "Cliente",
+        "fecha": "Data",
+        "vencimiento": "Vencimento",
+        "estado": "Estado",
+        "total": "Total"
+      },
+      "anuladaBadge": "🚫 anulada",
+      "anuladaTitle": "Fatura anulada",
+      "lockedTitle": "Registada no livro Verifactu — dados económicos bloqueados",
+      "pendienteAeatTitle": "Enviada à AEAT, a aguardar confirmação",
+      "aceptadaAeatTitle": "Aceite pela AEAT",
+      "aeatEstadoTitle": "AEAT: {{estado}}",
+      "verFactura": "🧾 Fatura",
+      "cobrando": "A gerar…",
+      "cobrar": "💳 Cobrar",
+      "editar": "Editar",
+      "ver": "Ver",
+      "anuladaLabel": "Anulada",
+      "anularBtn": "🚫 Anular",
+      "anularTitle": "Anular esta fatura (fica registada como anulada, não é eliminada)",
+      "eliminar": "Eliminar",
+      "confirmDelete": "Eliminar a fatura {{numero}}?",
+      "cannotDeleteLocked": "Esta fatura já está registada no livro Verifactu e não pode ser eliminada. Emita uma fatura retificativa ou anule-a.",
+      "anularPrompt": "Vai anular a fatura {{numero}}. Fica registada como anulada no livro Verifactu (não é eliminada). Motivo? (opcional)",
+      "noEnlacePago": "Não foi possível gerar o link de pagamento."
+    }
+  },
+  "cobros": {
+    "title": "Cobranças",
+    "subtitle": "Controlo de faturas pendentes e pagas",
+    "pendienteCobroLabel": "Pendente de receber",
+    "totalCobradoLabel": "Total recebido",
+    "vencidasSinCobrarLabel": "Vencidas por receber",
+    "facturaCountOne": "{{count}} fatura",
+    "facturaCountOther": "{{count}} faturas",
+    "facturaPagadaCountOne": "{{count}} fatura paga",
+    "facturaPagadaCountOther": "{{count}} faturas pagas",
+    "todoAlDia": "Tudo em dia ✓",
+    "alertas": {
+      "title": "Alertas de cobrança",
+      "urgentesOne": "{{count}} fatura urgente",
+      "urgentesOther": "{{count}} faturas urgentes",
+      "rojo": "Vencida",
+      "naranja": "Urgente (≤7 dias)",
+      "amarillo": "Próxima (8-30 dias)",
+      "verde": "Em dia (>30 dias)",
+      "vencidaHace": "Vencida há {{dias}}d",
+      "venceHoy": "Vence hoje",
+      "venceEn": "Vence em {{dias}}d",
+      "cobrar": "Cobrar"
+    },
+    "graficoTitle": "Cobranças por mês",
+    "tabPendientesOne": "Pendentes ({{count}})",
+    "tabPendientesOther": "Pendentes ({{count}})",
+    "tabCobradasOne": "Recebidas ({{count}})",
+    "tabCobradasOther": "Recebidas ({{count}})",
+    "loading": "A carregar…",
+    "emptyPendientesTitle": "Tudo recebido! Sem faturas pendentes",
+    "emptyPendientesHint": "Bom trabalho 💪",
+    "emptyCobradasTitle": "Ainda não há cobranças registadas",
+    "emptyCobradasHint": "As faturas marcadas como pagas aparecerão aqui",
+    "emitida": "Emitida: {{fecha}}",
+    "vence": "Vence: {{fecha}}",
+    "venceVencidaHace": " (vencida há {{dias}} dias)",
+    "venceHoyParen": " (vence hoje)",
+    "venceEnDias": " (em {{dias}} dias)",
+    "marcarCobrada": "✓ Marcar como recebida",
+    "desmarcar": "Desmarcar",
+    "confirmarDesmarcar": "Marcar esta fatura como enviada (pendente de receber)?",
+    "modal": {
+      "title": "Confirmar cobrança",
+      "fechaLabel": "Data de receção",
+      "metodoLabel": "Método de pagamento",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "confirmar": "✓ Confirmar cobrança"
+    },
+    "metodo": {
+      "Transferencia": "Transferência bancária",
+      "Efectivo": "Dinheiro",
+      "Bizum": "Bizum",
+      "Cheque": "Cheque",
+      "Tarjeta": "Cartão"
+    },
+    "notaCobrado": "✓ Recebido em {{fecha}} via {{metodo}}"
+  },
+  "gastos": {
+    "categoria": {
+      "Materiales": "Materiais",
+      "Mano de obra / Subcontratas": "Mão de obra / Subcontratos",
+      "Herramientas y equipos": "Ferramentas e equipamentos",
+      "Transporte y combustible": "Transporte e combustível",
+      "Publicidad y marketing": "Publicidade e marketing",
+      "Seguros": "Seguros",
+      "Gestoría / Asesoría": "Contabilidade / Consultoria",
+      "Alquiler": "Renda",
+      "Formación": "Formação",
+      "Comunicaciones": "Comunicações",
+      "Otros": "Outros"
+    },
+    "ivaOpts": {
+      "exento": "0% — Isento",
+      "superreducido": "4% — Super-reduzido",
+      "reducido": "10% — Reduzido (habitação)",
+      "general": "21% — Geral (comercial / empresa)"
+    },
+    "setup": {
+      "title": "Despesas",
+      "stepTitle": "Passo prévio: criar tabela no Supabase",
+      "stepDescPre": "Vá a",
+      "stepDescPost": "e execute:",
+      "hintAlter": "Se a tabela já existia, execute as 2 linhas ALTER TABLE no final do ficheiro para adicionar as colunas de IVA."
+    },
+    "title": "Despesas",
+    "headerCountOne": "{{count}} despesa",
+    "headerCountOther": "{{count}} despesas",
+    "headerTotal": "Total: {{total}}",
+    "newGasto": "+ Nova despesa",
+    "porCategoriaTitle": "Por categoria",
+    "sinDatos": "Ainda sem dados",
+    "searchPlaceholder": "🔍  Procurar…",
+    "allCategorias": "Todas as categorias",
+    "allObras": "Todas as obras",
+    "resultadosOne": "{{count}} resultado",
+    "resultadosOther": "{{count}} resultados",
+    "loading": "A carregar…",
+    "noResultsTitle": "Sem resultados",
+    "noGastosTitle": "Sem despesas registadas",
+    "addFirst": "+ Adicionar despesa",
+    "table": {
+      "descripcion": "Descrição",
+      "categoria": "Categoria",
+      "fecha": "Data",
+      "base": "Base",
+      "iva": "IVA",
+      "total": "Total"
+    },
+    "totalRow": "Total ({{count}})",
+    "editar": "Editar",
+    "confirmDelete": "Eliminar \"{{desc}}\"?",
+    "lightboxAlt": "Fatura ampliada",
+    "form": {
+      "editTitle": "Editar despesa",
+      "newTitle": "Nova despesa",
+      "uploadLabel": "📎 Foto da fatura / recibo ou PDF (preenche automaticamente os campos)",
+      "analizando": "A analisar com IA…",
+      "ampliar": "🔍 Ampliar",
+      "cambiarArchivo": "Mudar ficheiro",
+      "dropHint": "Arraste aqui ou clique para carregar",
+      "dropSubhint": "JPG, PNG, WEBP, PDF · A IA extrai os dados automaticamente",
+      "leyendoPdf": "📄 A ler PDF… (pode demorar alguns segundos)",
+      "leyendoFactura": "🔍 A ler fatura…",
+      "soloImagenesPdf": "⚠️ Apenas imagens ou PDF",
+      "datosExtraidos": "✅ Dados extraídos. Reveja e ajuste se necessário.",
+      "noPudoLeer": "⚠️ Não foi possível ler automaticamente. Preencha os campos manualmente.",
+      "fechaLabel": "Data *",
+      "categoriaLabel": "Categoria *",
+      "descripcionLabel": "Descrição / Conceito *",
+      "descripcionPlaceholder": "O que foi comprado?",
+      "baseLabel": "Valor base (sem IVA) *",
+      "ivaLabel": "IVA %",
+      "baseCol": "Base",
+      "ivaCol": "IVA {{pct}}%",
+      "totalCol": "Total",
+      "proveedorLabel": "Fornecedor",
+      "proveedorPlaceholder": "Leroy Merlin, etc.",
+      "facturaNumLabel": "Nº fatura / recibo",
+      "obraLabel": "Obra associada",
+      "sinObra": "Sem obra",
+      "notasLabel": "Notas",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "save": "Guardar despesa"
+    }
+  },
+  "empleados": {
+    "title": "Funcionários e equipa",
+    "subtitle": "Gestão da equipa, custos laborais e convenção coletiva",
+    "newEmpleado": "+ Novo funcionário",
+    "kpi": {
+      "activos": "Funcionários ativos",
+      "salarioBruto": "Salário bruto mensal",
+      "costeEmpresa": "Custo empresa / mês"
+    },
+    "tabs": {
+      "equipo": "👥 Equipa",
+      "costes": "💰 Custos",
+      "convenio": "📋 Convenção"
+    },
+    "setup": {
+      "title": "Criar tabela no Supabase",
+      "descPre": "Execute o ficheiro",
+      "descPost": "no SQL Editor do Supabase.",
+      "reload": "Já executado — recarregar"
+    },
+    "loading": "A carregar equipa…",
+    "searchPlaceholder": "🔍  Procurar…",
+    "filtros": {
+      "activos": "Ativos",
+      "bajaTemporal": "Baixa temporária",
+      "bajaDefinitiva": "Baixa definitiva",
+      "todos": "Todos"
+    },
+    "noResultsTitle": "Sem resultados",
+    "noEmpleadosTitle": "Sem funcionários registados",
+    "noEmpleadosHint": "Adicione o seu primeiro funcionário ou colaborador",
+    "grupoCC": "Grupo {{grupo}} CC",
+    "alta": "Admissão: {{fecha}}",
+    "jornadaPct": "{{pct}}% jornada",
+    "bruto": "{{monto}} bruto",
+    "masSS": "+ {{monto}} SS",
+    "porMes": "{{monto}} / mês",
+    "editar": "Editar",
+    "bajaTemporalBtn": "↓ Baixa",
+    "bajaTemporalTitle": "Colocar em baixa temporária",
+    "altaBtn": "↑ Readmitir",
+    "altaTitle": "Readmitir",
+    "confirmDelete": "Eliminar {{nombre}}?",
+    "puesto": {
+      "encargado": "Encarregado de obra",
+      "oficial_1": "Oficial de 1ª",
+      "oficial_2": "Oficial de 2ª",
+      "ayudante": "Ajudante",
+      "peon": "Servente",
+      "fontanero": "Canalizador",
+      "electricista": "Eletricista",
+      "pintor": "Pintor",
+      "yesero": "Gesseiro",
+      "carpintero": "Carpinteiro",
+      "alicatador": "Azulejador",
+      "impermeabilizador": "Impermeabilizador",
+      "administrativo": "Administrativo",
+      "otro": "Outro"
+    },
+    "tipoContrato": {
+      "indefinido": "Sem termo",
+      "fijo_discontinuo": "Fixo descontínuo",
+      "temporal_obra": "Temporário por obra",
+      "temporal_6m": "Temporário (≤6 meses)",
+      "formacion": "Contrato de formação",
+      "autonomo": "Colaborador independente"
+    },
+    "grupoConvenio": {
+      "I": "Grupo I — Licenciados superiores / médios",
+      "II": "Grupo II — Chefes de obra / administrativos qualificados",
+      "III": "Grupo III — Encarregados / Capatazes",
+      "IV": "Grupo IV — Oficiais de 1ª e 2ª",
+      "V": "Grupo V — Ajudantes",
+      "VI": "Grupo VI — Serventes"
+    },
+    "costes": {
+      "calculadoraTitle": "Calculadora de custo empresa",
+      "resumenTitle": "Resumo da equipa ativa",
+      "table": {
+        "empleado": "Funcionário",
+        "puesto": "Cargo",
+        "brutoMes": "Bruto / mês",
+        "ssEmpresa": "SS empresa",
+        "costeTotalMes": "Custo total / mês",
+        "anualEstimado": "Anual estimado"
+      },
+      "totalEquipo": "TOTAL EQUIPA",
+      "nota": "* A SS da empresa é calculada a {{pct}}% sobre o salário bruto (contingências comuns + taxa de acidentes de trabalho/doenças profissionais da construção + desemprego + FOGASA + formação profissional + MEI). O custo real pode variar consoante a base de contribuição e a convenção provincial.",
+      "emptyHint": "Adicione funcionários no separador Equipa para ver o resumo de custos.",
+      "calc": {
+        "salarioLabel": "Salário bruto mensal (€)",
+        "totalSS": "Total SS empresa ({{pct}}%)",
+        "costeEmpresaMes": "Custo empresa / mês",
+        "brutoMasSS": "{{bruto}} bruto + {{ss}} SS",
+        "costeAnual": "Custo anual (×12)",
+        "con2Pagas": "Com 2 subsídios extra",
+        "introduceSalario": "Introduza o salário bruto para calcular o custo real"
+      }
+    },
+    "convenio": {
+      "disclaimerPre": "ℹ️ Guia orientativo.",
+      "disclaimerPost": "Baseado na VI Convenção Coletiva Geral do Setor da Construção (2022-2026). Verifique sempre os valores atualizados com o seu consultor laboral ou no BOE / convenção provincial.",
+      "recursosTitle": "Recursos e links úteis"
+    },
+    "form": {
+      "editTitle": "Editar funcionário",
+      "newTitle": "Novo funcionário",
+      "nombreLabel": "Nome *",
+      "apellidosLabel": "Apelidos *",
+      "puestoLabel": "Cargo *",
+      "tipoContratoLabel": "Tipo de contrato *",
+      "especialidadLabel": "Especialidade / detalhe",
+      "especialidadPlaceholder": "Ex.: Canalização e gás, pladur…",
+      "grupoLabel": "Grupo profissional (Convenção)",
+      "salarioLabel": "Salário bruto mensal (€) *",
+      "costeEmpresaPreview": "Custo empresa: {{monto}} / mês",
+      "jornadaLabel": "% de jornada",
+      "jornadaHint": "100% = jornada completa",
+      "fechaAltaLabel": "Data de admissão *",
+      "fechaBajaLabel": "Data de saída",
+      "estadoLabel": "Estado",
+      "estadoOpts": {
+        "activo": "Ativo",
+        "baja_temporal": "Baixa temporária",
+        "baja_definitiva": "Baixa definitiva"
+      },
+      "telefonoLabel": "Telefone",
+      "numSsLabel": "Nº segurança social",
+      "dniLabel": "BI / NIE",
+      "emailLabel": "Email",
+      "notasLabel": "Notas",
+      "notasPlaceholder": "Observações, acordos especiais…",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "save": "Guardar"
+    }
+  },
+  "partes": {
+    "title": "Registos de horas",
+    "subtitle": "Registo diário de horas por funcionário e obra",
+    "newParte": "+ Novo registo",
+    "mesLabel": "Mês",
+    "anioLabel": "Ano",
+    "empleadoLabel": "Funcionário",
+    "obraLabel": "Obra",
+    "todos": "Todos",
+    "todas": "Todas",
+    "vistaLista": "Lista",
+    "vistaResumen": "Resumo",
+    "kpi": {
+      "partesEnMes": "Registos em {{mes}}",
+      "horasRegistradas": "Horas registadas",
+      "empleadosActivosMes": "Funcionários ativos no mês"
+    },
+    "loading": "A carregar registos…",
+    "emptyTitle": "Sem registos em {{mes}} {{anio}}",
+    "emptyHint": "Comece a registar as horas da equipa",
+    "firmadoTitle": "Assinado por {{nombre}} em {{fecha}}",
+    "firmar": "✍️ Assinar",
+    "firmarTitle": "Assinar em conformidade",
+    "editar": "Editar",
+    "confirmDelete": "Eliminar este registo?",
+    "porEmpleado": "Por funcionário",
+    "sinDatos": "Sem dados",
+    "diaOne": "{{count}} dia",
+    "diaOther": "{{count}} dias",
+    "total": "TOTAL",
+    "porObra": "Por obra",
+    "sinObrasConPartes": "Sem obras com registos",
+    "personaOne": "{{count}} pessoa",
+    "personaOther": "{{count}} pessoas",
+    "form": {
+      "editTitle": "Editar registo",
+      "newTitle": "Novo registo de horas",
+      "empleadoLabel": "Funcionário *",
+      "empleadoPlaceholder": "Selecionar funcionário",
+      "fechaLabel": "Data *",
+      "horasLabel": "Horas *",
+      "obraLabel": "Obra",
+      "sinObraAsignada": "Sem obra atribuída",
+      "descripcionLabel": "Descrição do trabalho",
+      "descripcionPlaceholder": "Azulejamento wc, instalação elétrica…",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "save": "Guardar"
+    },
+    "firmarModalTitle": "Assinar registo de horas — {{nombre}}",
+    "meses": {
+      "enero": "Janeiro",
+      "febrero": "Fevereiro",
+      "marzo": "Março",
+      "abril": "Abril",
+      "mayo": "Maio",
+      "junio": "Junho",
+      "julio": "Julho",
+      "agosto": "Agosto",
+      "septiembre": "Setembro",
+      "octubre": "Outubro",
+      "noviembre": "Novembro",
+      "diciembre": "Dezembro"
+    }
+  },
+  "nominas": {
+    "title": "Folhas de pagamento",
+    "subtitle": "Gerador de recibos de vencimento e controlo de pagamentos",
+    "generarOne": "Gerar {{count}} recibo",
+    "generarOther": "Gerar {{count}} recibos",
+    "generando": "A gerar…",
+    "historial": "Histórico",
+    "loading": "A carregar folhas de pagamento…",
+    "totalBruto": "Total bruto",
+    "totalNeto": "Total líquido a pagar",
+    "costeEmpresaTotal": "Custo total empresa",
+    "sinNominaOne": "{{count}} funcionário",
+    "sinNominaOther": "{{count}} funcionários",
+    "sinNominaSuffix": "sem recibo em {{mes}}: {{lista}}",
+    "generarTodas": "Gerar todos",
+    "emptyTitle": "Sem recibos em {{mes}} {{anio}}",
+    "emptySinEmpleados": "Adicione primeiro funcionários no módulo Funcionários",
+    "emptyConEmpleadosOne": "Há {{count}} funcionário ativo. Clique em \"Gerar\" para criar os recibos.",
+    "emptyConEmpleadosOther": "Há {{count}} funcionários ativos. Clique em \"Gerar\" para criar os recibos.",
+    "generarNominas": "Gerar recibos",
+    "pagadaBadge": "✓ Pago {{fecha}}",
+    "pendienteBadge": "Pagamento pendente",
+    "salarioBruto": "Salário bruto",
+    "ssTrabajador": "SS trabalhador ({{pct}}%)",
+    "irpf": "IRS ({{pct}}%)",
+    "otrasDeducciones": "Outras deduções",
+    "netoPercibir": "Líquido a receber",
+    "costeEmpresaLine": "Custo empresa: bruto {{bruto}} + SS {{ss}} = {{total}}",
+    "desmarcar": "Desmarcar",
+    "marcarPagada": "✓ Marcar como pago",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "verRecibo": "Ver recibo",
+    "confirmDelete": "Eliminar este recibo?",
+    "edit": {
+      "salarioLabel": "Salário bruto (€)",
+      "irpfLabel": "IRS %",
+      "otrasLabel": "Outras deduções (€)",
+      "ssTrabajadorPreview": "SS trabalhador: {{monto}}",
+      "irpfPreview": "IRS: {{monto}}",
+      "netoPreview": "Líquido: {{monto}}",
+      "notasLabel": "Notas",
+      "notasPlaceholder": "Horas extra, adiantamento…",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "save": "Guardar"
+    },
+    "historialTable": {
+      "periodo": "Período",
+      "empleado": "Funcionário",
+      "bruto": "Bruto",
+      "neto": "Líquido",
+      "estado": "Estado"
+    },
+    "sinHistorial": "Sem histórico de recibos",
+    "pagadaLabel": "Pago",
+    "pendienteLabel": "Pendente",
+    "recibo": {
+      "title": "Recibo de vencimento — {{periodo}}",
+      "puesto": "Cargo: {{v}}",
+      "dni": "BI: {{v}}",
+      "numSs": "Nº SS: {{v}}",
+      "grupoConvenio": "Grupo convenção: {{v}}",
+      "devengosTitle": "I. VENCIMENTOS",
+      "salarioBase": "Salário base",
+      "totalDevengado": "Total vencimentos",
+      "deduccionesTitle": "II. DEDUÇÕES",
+      "cotizacionSS": "Contribuição SS (trabalhador {{pct}}%)",
+      "retencionIrpf": "Retenção IRS ({{pct}}%)",
+      "otrasDeducciones": "Outras deduções",
+      "totalDeducciones": "Total deduções",
+      "liquidoPercibir": "LÍQUIDO A RECEBER",
+      "costeEmpresaLine": "Custo empresa: {{total}} (incl. SS empresa {{ss}})",
+      "cerrar": "Fechar",
+      "imprimir": "🖨️ Imprimir"
+    }
+  },
+  "hub": {
+    "title": "Hub Digital",
+    "subtitle": "Estratégia de captação e presença online para o seu negócio de reformas",
+    "objetivoTitle": "O seu objetivo: cliente de classe média-alta em Madrid",
+    "objetivoText": "Este perfil de cliente procura qualidade e confiança antes do preço. Priorize o Google Business e o Houzz em detrimento de plataformas de preço baixo. Cada foto de obra concluída bem executada vale mais do que qualquer anúncio.",
+    "abrirPlataforma": "Abrir plataforma →",
+    "tag": {
+      "gratis": "Grátis",
+      "prioritario": "Prioritário",
+      "pago": "Pago",
+      "pagoPorLead": "Pago por lead",
+      "claseMediaAlta": "Classe média-alta",
+      "volumenAlto": "Volume alto",
+      "visual": "Visual",
+      "b2b": "B2B",
+      "gratisPro": "Grátis / Pro"
+    },
+    "secciones": {
+      "presenciaLocal": {
+        "titulo": "Presença local (Google)",
+        "items": {
+          "gbp": {
+            "titulo": "Google Business Profile",
+            "desc": "A sua ficha no Google Maps. Fundamental para que os clientes locais em Madrid o encontrem.",
+            "tips": [
+              "Carregue fotos de obras concluídas (antes e depois)",
+              "Responda a todas as avaliações, boas e más",
+              "Publique cada reforma concluída como atualização"
+            ]
+          },
+          "adsLocal": {
+            "titulo": "Google Ads local",
+            "desc": "Anúncios geolocalizados em Madrid para aparecer quando alguém procura \"empresa de reformas Madrid\".",
+            "tips": [
+              "Comece com 5-10€/dia e ajuste",
+              "Segmente por código postal das suas zonas-alvo",
+              "Use extensões de chamada direta"
+            ]
+          }
+        }
+      },
+      "plataformas": {
+        "titulo": "Plataformas de reformas",
+        "items": {
+          "habitissimo": {
+            "titulo": "Habitissimo",
+            "desc": "A plataforma líder em Espanha para captar clientes de reformas. Alta visibilidade com boas avaliações.",
+            "tips": [
+              "Responda a pedidos em menos de 1h (o algoritmo premeia)",
+              "Peça avaliação a cada cliente satisfeito",
+              "Complete o perfil a 100% com fotos reais"
+            ]
+          },
+          "houzz": {
+            "titulo": "Houzz",
+            "desc": "Rede social de design de interiores e reforma. Muito boa para o segmento médio-alto.",
+            "tips": [
+              "Carregue projetos completos com descrições detalhadas",
+              "Use etiquetas de estilo e materiais",
+              "O cliente do Houzz valoriza qualidade, não preço"
+            ]
+          },
+          "milanuncios": {
+            "titulo": "Milanuncios / Wallapop",
+            "desc": "Para obras pequenas e manutenção. Alta procura mas preço mais ajustado.",
+            "tips": [
+              "Separe anúncios por tipo de trabalho",
+              "Coloque preço orientativo para filtrar clientes",
+              "Atualize os anúncios todas as semanas para visibilidade"
+            ]
+          }
+        }
+      },
+      "redesSociales": {
+        "titulo": "Redes sociais",
+        "items": {
+          "instagram": {
+            "titulo": "Instagram",
+            "desc": "Visual e poderoso para reformas. O cliente de classe média-alta usa o Instagram para se inspirar antes de contratar.",
+            "tips": [
+              "Publique antes/depois de cada obra",
+              "Use Reels com o processo da obra (30-60 seg)",
+              "Hashtags: #reformasMadrid #reformaIntegral #interiorismo",
+              "Stories com o dia a dia da obra conectam com o público"
+            ]
+          },
+          "linkedin": {
+            "titulo": "LinkedIn",
+            "desc": "Para se posicionar como profissional e captar clientes empresariais (mudanças de uso, locais comerciais).",
+            "tips": [
+              "Partilhe casos de sucesso com métricas (m² reformados, prazo cumprido)",
+              "Conecte-se com arquitetos e administradores de condomínios",
+              "Artigos sobre tendências em reformas dão autoridade"
+            ]
+          }
+        }
+      },
+      "productividad": {
+        "titulo": "Ferramentas de produtividade",
+        "items": {
+          "whatsapp": {
+            "titulo": "WhatsApp Business",
+            "desc": "Imprescindível. Perfil de empresa, catálogo de serviços, respostas rápidas automatizadas.",
+            "tips": [
+              "Configure mensagem de boas-vindas automática",
+              "Crie etiquetas: Novo lead, Orçamento enviado, Cliente ativo",
+              "Mensagem de ausência fora do horário de trabalho"
+            ]
+          },
+          "canva": {
+            "titulo": "Canva",
+            "desc": "Design de orçamentos visuais, apresentações e conteúdo para redes sociais.",
+            "tips": [
+              "Use os modelos de \"antes e depois\"",
+              "Crie um modelo de dossiê de empresa com a sua marca XANDER"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "fiscal": {
+    "title": "Fiscal",
+    "subtitle": "Guia fiscal para trabalhadores independentes do setor de reformas em Espanha",
+    "disclaimer": "⚠️ Este guia é meramente indicativo. Consulte sempre o seu contabilista ou assessor fiscal para decisões concretas.",
+    "conciliacion": {
+      "cardTitle": "📄 Conciliação com a sua contabilidade",
+      "cardDesc": "Gere um documento com as suas faturas, despesas e o resumo de IVA/IRS do período, pronto para cruzar antes de apresentar o modelo correspondente.",
+      "generarDocumento": "Gerar documento"
+    },
+    "calendarioTitle": "📅 Calendário de declarações",
+    "proximoBadge": "Próximo",
+    "modelosTitle": "📋 Modelos a apresentar",
+    "tipsTitle": "💡 Despesas dedutíveis chave",
+    "modal": {
+      "title": "Conciliação fiscal — {{periodo}}",
+      "anio": "Ano {{anio}}",
+      "loading": "A carregar dados do período…",
+      "empresaDefault": "A minha empresa",
+      "nif": "NIF: {{v}}",
+      "tituloDoc": "CONCILIAÇÃO FISCAL",
+      "delAl": "De {{desde}} a {{hasta}}",
+      "generado": "Gerado: {{fecha}}",
+      "disclaimerModal": "⚠️ Documento indicativo gerado automaticamente a partir das suas faturas e despesas registadas. Partilhe-o com a sua contabilidade para cruzar valores antes de apresentar os modelos — não substitui o cálculo nem o aconselhamento profissional.",
+      "facturasEmitidas": "Faturas emitidas ({{count}})",
+      "sinFacturas": "Sem faturas emitidas neste período.",
+      "gastosRegistrados": "Despesas registadas ({{count}})",
+      "moduloNoConfigurado": "O módulo de Despesas ainda não está configurado.",
+      "sinGastos": "Sem despesas registadas neste período.",
+      "tabla": {
+        "fecha": "Data",
+        "numero": "Nº",
+        "cliente": "Cliente",
+        "estado": "Estado",
+        "base": "Base",
+        "iva": "IVA",
+        "ret": "Ret.",
+        "total": "Total",
+        "proveedor": "Fornecedor",
+        "categoria": "Categoria",
+        "ivaSoport": "IVA suportado"
+      },
+      "totalRow": "Total",
+      "sinCliente": "—",
+      "resumenTitle": "Resumo para modelos 303 / 130{{extra}}",
+      "ivaRepercutido": "IVA liquidado (vendas)",
+      "ivaSoportadoLabel": "IVA suportado (despesas)",
+      "resultadoIva": "Resultado do IVA (Modelo 303)",
+      "aIngresar": "A pagar: {{v}}",
+      "aCompensar": "A compensar: {{v}}",
+      "ingresosBase": "Receitas (base)",
+      "gastosBase": "Despesas (base)",
+      "rendimientoNeto": "Rendimento líquido estimado",
+      "retencionesPracticadas": "Retenções de IRS já praticadas",
+      "pago130": "Pagamento fracionado de 20% (Modelo 130, indicativo)",
+      "cerrar": "Fechar",
+      "imprimir": "🖨️ Imprimir / PDF"
+    },
+    "selector": {
+      "title": "Documento de conciliação",
+      "desc": "Escolha o período e gere um documento com o detalhe de faturas, despesas e o resumo de IVA/IRS para cruzar com a sua contabilidade.",
+      "tipoDocumento": "Tipo de documento",
+      "trimestral": "Trimestral (130/303)",
+      "anual": "Anual (390/100)",
+      "anioLabel": "Ano",
+      "trimestreLabel": "Trimestre",
+      "cancelar": "Cancelar",
+      "generarDocumento": "Gerar documento"
+    }
+  },
+  "legislacion": {
+    "title": "Legislação",
+    "subtitle": "Enquadramento legal para reformas de habitações e espaços comerciais em toda a Espanha",
+    "selector": {
+      "label": "A sua comunidade autónoma",
+      "desc": "Selecione a sua região para ver a regulamentação urbanística específica",
+      "placeholder": "— Selecione a sua região —"
+    },
+    "ccaa": {
+      "badgeNormativa": "Regulamentação regional",
+      "portalOficial": "Portal oficial ↗",
+      "obraMenor": "Obra menor",
+      "obraMenorDesc": "Procedimento simplificado — sem estrutura nem fachada",
+      "obraMayor": "Obra maior",
+      "obraMayorDesc": "Requer projeto técnico e prazos mais longos",
+      "organismoCompetente": "Organismo competente",
+      "aspectosDestacados": "⚠️ Aspetos a destacar em {{nombre}}"
+    },
+    "avisoTitle": "Guia indicativo.",
+    "avisoText": "A regulamentação urbanística é alterada com frequência. Consulte sempre a Câmara Municipal correspondente e um técnico competente (arquiteto ou engenheiro) em caso de dúvida. As condições podem variar por município mesmo dentro da mesma região.",
+    "estatalCaption": "Regulamentação nacional — aplica-se em toda a Espanha",
+    "incluyeAplica": "Inclui / Aplica-se a:",
+    "recursosUtiles": "Recursos úteis (nacionais)"
+  },
+  "resultados": {
+    "title": "Resultados",
+    "subtitle": "Demonstração de resultados do negócio",
+    "calculando": "A calcular resultados…",
+    "kpi": {
+      "totalFacturado": "Total faturado",
+      "todasFacturas": "todas as faturas",
+      "ingresosReales": "Receitas reais",
+      "facturasCobradas": "faturas recebidas",
+      "gastosTotales": "Despesas totais",
+      "tablaNoConfigurada": "tabela não configurada",
+      "gastosRegistrados": "despesas registadas",
+      "resultadoNeto": "Resultado líquido",
+      "beneficio": "lucro",
+      "perdida": "prejuízo"
+    },
+    "evolucionMensual": "Evolução mensal {{anio}}",
+    "leyenda": {
+      "facturado": "Faturado",
+      "gastos": "Despesas",
+      "cobrado": "Recebido"
+    },
+    "detallePorMes": "Detalhe por mês",
+    "tabla": {
+      "mes": "Mês",
+      "facturado": "Faturado",
+      "gastos": "Despesas",
+      "resultado": "Resultado"
+    },
+    "totalAnio": "Total {{anio}}",
+    "gastosPorCategoria": "Despesas por categoria",
+    "tablaNoConfiguradaLarga": "Tabela de despesas não configurada",
+    "sinGastosEnAnio": "Sem despesas registadas em {{anio}}",
+    "meses": {
+      "ene": "Jan",
+      "feb": "Fev",
+      "mar": "Mar",
+      "abr": "Abr",
+      "may": "Mai",
+      "jun": "Jun",
+      "jul": "Jul",
+      "ago": "Ago",
+      "sep": "Set",
+      "oct": "Out",
+      "nov": "Nov",
+      "dic": "Dez"
+    },
+    "avisoGastosPre": "⚠️ A tabela de despesas não está configurada. Vá a ",
+    "avisoGastosPost": " e siga as instruções para a ativar."
+  },
+  "referidos": {
+    "title": "Indicações",
+    "subtitle": "Convide outros trabalhadores independentes de reformas. Quando se tornarem Pro, você ganha um mês grátis.",
+    "recompensaTexto": "1 mês grátis (19 €)",
+    "tuEnlace": "O seu link de indicação",
+    "generando": "A gerar o seu código...",
+    "copiarEnlace": "Copiar link",
+    "copiado": "✓ Copiado",
+    "tuCodigo": "O seu código:",
+    "copiar": "copiar",
+    "copiadoMin": "✓ copiado",
+    "compartirWhatsapp": "💬 Partilhar pelo WhatsApp",
+    "mensajeWhatsapp": "Uso o XANDER Gestión para gerir os meus orçamentos, faturas e obras — recomendo-o se for trabalhador independente de reformas. Registe-se gratuitamente com o meu link e ambos ganhamos: {{enlace}}",
+    "comoFunciona": "Como funciona",
+    "pasos": {
+      "p1t": "Partilhe o seu link",
+      "p1d": "Envie-o a outro trabalhador independente de reformas que possa precisar da ferramenta.",
+      "p2t": "Regista-se gratuitamente",
+      "p2d": "Entra através do seu link e cria a conta — fica automaticamente associado a si.",
+      "p3t": "Torna-se Pro e você ganha",
+      "p3d": "Assim que pagar a primeira mensalidade Pro, você recebe {{recompensa}} como crédito na sua faturação."
+    },
+    "tusReferidos": "As suas indicações",
+    "registrados": "Registados",
+    "convertidosPro": "Convertidos em Pro",
+    "mesesGanados": "Meses ganhos",
+    "cargando": "A carregar...",
+    "sinInvitados": "Ainda não convidou ninguém. Partilhe o seu link acima para começar.",
+    "registradoEl": "Registado em {{fecha}}",
+    "badgePro": "✓ Pro",
+    "badgePendiente": "Pendente"
+  },
+  "miEmpresa": {
+    "title": "A Minha Empresa",
+    "subtitle": "Estes dados aparecerão nos seus orçamentos e faturas",
+    "cargando": "A carregar…",
+    "datosPersonales": "Dados pessoais",
+    "nombre": "Nome",
+    "apellidos": "Apelido",
+    "dniNie": "NIF / número de identificação",
+    "telefonoPersonal": "Telefone pessoal",
+    "datosEmpresa": "Dados da empresa / atividade",
+    "nombreComercial": "Nome comercial / empresa *",
+    "nif": "NIF",
+    "telefonoEmpresa": "Telefone da empresa",
+    "emailEmpresa": "Email da empresa",
+    "direccionFiscal": "Morada fiscal",
+    "cp": "Código postal",
+    "ciudad": "Cidade",
+    "web": "Website",
+    "actividadProfesional": "Atividade profissional",
+    "fechaInicio": "Data de início de atividade",
+    "tarifaReducida": "Tarifa reduzida ativa",
+    "tarifaReducidaSub": "Primeiros 2 anos como independente",
+    "especialidades": "Especialidades",
+    "especialidad": {
+      "Reforma integral": "Reforma integral",
+      "Reforma de baño": "Reforma de casa de banho",
+      "Reforma de cocina": "Reforma de cozinha",
+      "Cambio de uso": "Mudança de uso",
+      "Reforma de local": "Reforma de espaço comercial",
+      "Distribuciones internas": "Alterações de distribuição interna",
+      "Fontanería": "Canalização",
+      "Electricidad": "Eletricidade",
+      "Alicatados y solados": "Azulejos e pavimentos",
+      "Pladur": "Pladur",
+      "Pintura": "Pintura",
+      "Carpintería": "Carpintaria",
+      "Impermeabilización": "Impermeabilização"
+    },
+    "miPlan": "O meu plano",
+    "pagoConfirmado": "✓ Pagamento confirmado. O seu plano será atualizado em alguns segundos.",
+    "pagoCancelado": "Cancelou o processo de pagamento. Pode tentar novamente quando quiser.",
+    "planProActivo": "✓ Plano Pro ativo{{ciclo}}. Obrigado por confiar na XANDER.",
+    "cicloAnual": " (anual)",
+    "cicloMensual": " (mensal)",
+    "trialActivo": "⏳ Está no período de teste gratuito — faltam {{dias}} dia{{plural}}.",
+    "planGratuito": "Plano gratuito. Atualize para Pro para acesso completo sem limites.",
+    "abriendo": "A abrir…",
+    "gestionarSuscripcion": "Gerir subscrição",
+    "redirigiendo": "A redirecionar…",
+    "actualizarPro": "Atualizar para Pro — {{precio}}",
+    "planAnual": "Plano anual — {{precio}}",
+    "sinPermanencia": "Sem permanência · Cancele quando quiser no portal de faturação",
+    "cobrosOnline": "Pagamentos online",
+    "cobrosOnlineDesc": "Ligue a sua conta Stripe para cobrar faturas com cartão. O dinheiro dos seus clientes entra diretamente no seu banco — a XANDER nunca o gere.",
+    "stripeActiva": "✓ Conta Stripe ligada e ativa. Já pode cobrar faturas com cartão.",
+    "stripeVerificacion": "A sua conta Stripe foi criada mas a verificação ainda não terminou. Complete o processo para começar a cobrar.",
+    "stripeNoConectada": "Ainda não ligou nenhuma conta Stripe.",
+    "cargandoBtn": "A carregar…",
+    "completarConexion": "Completar / rever ligação",
+    "conectarStripe": "Ligar com Stripe",
+    "actualizarEstado": "Atualizar estado",
+    "datosGuardados": "✓ Dados guardados com sucesso",
+    "guardando": "A guardar…",
+    "guardarCambios": "Guardar alterações",
+    "errores": {
+      "checkout": "Não foi possível iniciar o pagamento da subscrição.",
+      "portal": "Não foi possível abrir o portal de faturação.",
+      "stripeStatus": "Não foi possível consultar o estado do Stripe.",
+      "stripeConnect": "Não foi possível iniciar a ligação com o Stripe."
+    }
+  },
+  "tarifas": {
+    "title": "Tarifas e Preços",
+    "subtitle": "Catálogo de preços indicativos para orçamentos",
+    "nuevaTarifa": "+ Nova tarifa",
+    "tabs": {
+      "catalogoBase": "Catálogo base ({{count}})",
+      "misTarifas": "As minhas tarifas ({{count}})"
+    },
+    "disclaimer": "📖 Preços indicativos do setor em Madrid. Use-os como referência ou crie as suas próprias tarifas no separador \"As minhas tarifas\".",
+    "buscarPlaceholder": "🔍  Procurar item…",
+    "todasCategorias": "Todas as categorias",
+    "cargando": "A carregar tarifas…",
+    "sinResultados": "Sem resultados",
+    "sinTarifasPropias": "Ainda não tem tarifas próprias",
+    "sinTarifas": "Sem tarifas",
+    "personalizaPrecios": "Personalize os preços de acordo com o seu negócio",
+    "partidas": "{{count}} itens",
+    "tabla": {
+      "descripcion": "Descrição",
+      "ud": "Un.",
+      "mat": "Mat. (€)",
+      "mo": "M.O. (€)",
+      "margen": "Margem",
+      "precioCliente": "Preço cliente"
+    },
+    "editar": "Editar",
+    "confirmDelete": "Eliminar \"{{desc}}\"?",
+    "modal": {
+      "editarTarifa": "Editar tarifa",
+      "nuevaTarifa": "Nova tarifa",
+      "categoria": "Categoria *",
+      "unidad": "Unidade",
+      "descripcion": "Descrição *",
+      "costeMaterial": "Custo material (€)",
+      "manoDeObra": "Mão de obra (€)",
+      "margen": "Margem (%)",
+      "precioAlCliente": "Preço ao cliente",
+      "notas": "Notas",
+      "cancelar": "Cancelar",
+      "guardando": "A guardar…",
+      "guardarTarifa": "Guardar tarifa"
+    },
+    "categoria": {
+      "Demolición": "Demolição",
+      "Albañilería": "Alvenaria",
+      "Impermeabilización": "Impermeabilização",
+      "Alicatados y Solados": "Azulejos e Pavimentos",
+      "Fontanería": "Canalização",
+      "Electricidad": "Eletricidade",
+      "Pintura": "Pintura",
+      "Carpintería y Remates": "Carpintaria e Acabamentos",
+      "Gestión y Logística": "Gestão e Logística",
+      "Reforma Integral": "Reforma Integral"
+    }
+  },
+  "documentos": {
+    "title": "Centro de Documentos",
+    "subtitle": "Modelos profissionais e gestão de ficheiros",
+    "tabs": {
+      "plantillas": "📄 Modelos ({{count}})",
+      "misDocumentos": "📁 Os meus documentos {{count}}"
+    },
+    "buscarPlantilla": "🔍  Procurar modelo…",
+    "disclaimerPlantillas": "📋 Modelos editáveis para o seu dia a dia. Copie-os, personalize-os e use-os livremente.",
+    "sinResultados": "Sem resultados",
+    "verPlantilla": "Ver modelo",
+    "copiar": "📋 Copiar",
+    "storageStep": "Passo prévio: criar o bucket de armazenamento",
+    "storageDesc": "Vá a <strong>Supabase → Storage</strong> e crie um bucket chamado <code>documentos-empresa</code>. Marque-o como <strong>Public</strong> e guarde. Depois execute a migração SQL indicada abaixo.",
+    "yaConfigurado": "Já está configurado — tentar novamente",
+    "cargandoArchivos": "A carregar ficheiros…",
+    "archivosCountOne": "{{count}} ficheiro",
+    "archivosCountOther": "{{count}} ficheiros",
+    "sinArchivos": "Sem ficheiros",
+    "verArchivo": "Ver ficheiro",
+    "eliminar": "Eliminar",
+    "subiendo": "A carregar…",
+    "subirArchivo": "📎 Carregar ficheiro",
+    "anadirOtro": "+ Adicionar outro",
+    "formacionTitulo": "Formação e Certificados",
+    "certificadosCountOne": "{{count}} certificado",
+    "certificadosCountOther": "{{count}} certificados",
+    "sinCertificados": "Sem certificados",
+    "anadir": "+ Adicionar",
+    "ningunCertificado": "Ainda não foi adicionado nenhum certificado",
+    "cerrar": "Fechar",
+    "copiarPortapapeles": "📋 Copiar para a área de transferência",
+    "confirmDeleteDoc": "Eliminar \"{{nombre}}\"?",
+    "plantillaCopiada": "Modelo copiado para a área de transferência ✓",
+    "errorSubida": "Erro ao carregar \"{{nombre}}\": {{msg}}",
+    "carpeta": {
+      "Plan de Negocio": {
+        "titulo": "Plano de Negócio",
+        "desc": "Plano completo com módulos de organização, captação, orçamentos, preços, imagem e ferramentas."
+      },
+      "Fiscalidad": {
+        "titulo": "Fiscalidade",
+        "desc": "Declarações de IVA, IRS, modelos 303, 130, 100 e qualquer documento da Agência Tributária."
+      },
+      "SS y Hacienda": {
+        "titulo": "Segurança Social e Finanças",
+        "desc": "Inscrição como independente, recibos de quota RETA, notificações da Segurança Social e Finanças."
+      },
+      "Seguros": {
+        "titulo": "Seguros",
+        "desc": "Apólices de seguro de responsabilidade civil, seguro de obra e qualquer outra cobertura contratada."
+      },
+      "Contratos": {
+        "titulo": "Contratos",
+        "desc": "Contratos com clientes, acordos com fornecedores, subcontratados e qualquer documento assinado."
+      },
+      "Licencias de Obra": {
+        "titulo": "Licenças de Obra",
+        "desc": "Licenças municipais, comunicações prévias, licenças de atividade e documentação urbanística."
+      },
+      "Branding": {
+        "titulo": "Branding",
+        "desc": "Logótipo, wallpaper corporativo, imagem de marca e materiais de identidade visual."
+      },
+      "Subcontratas": {
+        "titulo": "Subcontratados",
+        "desc": "Contratos e acordos com subcontratados, empresas parceiras e trabalhadores independentes."
+      },
+      "Otros Documentos": {
+        "titulo": "Outros Documentos",
+        "desc": "Licenças, certificados, autorizações e qualquer outro documento do negócio."
+      }
+    },
+    "carpetaFormacion": {
+      "Certificados Obligatorios": {
+        "titulo": "Certificados Obrigatórios",
+        "desc": "Segurança e saúde na construção (obrigatório 60h), habilitações legais, cartões e acreditações exigidas por lei."
+      },
+      "Formación Continua": {
+        "titulo": "Formação Contínua",
+        "desc": "Cursos de aperfeiçoamento profissional: pladur, impermeabilização, eletricidade, canalização, gestão, orçamentos."
+      }
+    }
+  },
+  "copias": {
+    "title": "Cópias de segurança",
+    "subtitle": "Guarde uma fotografia de todos os seus dados de trabalho (clientes, obras, orçamentos, faturas, cobranças, despesas, funcionários...) e recupere-a se algo for apagado ou corrompido por engano.",
+    "mensajeErrorAlmacen": "Não foi possível aceder ao armazenamento de cópias: {{msg}}",
+    "crearAhoraTitle": "Criar uma cópia agora",
+    "crearAhoraDesc": "É guardada na sua conta (para poder restaurá-la a partir daqui quando quiser) e também é transferida uma cópia para o seu computador, caso prefira guardá-la você mesmo noutro local.",
+    "crearBtn": "💾 Criar cópia de segurança agora",
+    "creando": "A criar cópia...",
+    "restaurarArchivoTitle": "Restaurar a partir de um ficheiro",
+    "restaurarArchivoDesc": "Se transferiu uma cópia anteriormente, carregue-a aqui para recuperar esses dados.",
+    "subirArchivoBtn": "📤 Carregar ficheiro de cópia (.json)",
+    "tusCopiasTitle": "As suas cópias guardadas",
+    "cargando": "A carregar...",
+    "sinCopias": "Ainda não tem nenhuma cópia guardada. Crie a primeira acima.",
+    "copiaAutomatica": "🔄 Cópia automática",
+    "copiaManual": "💾 Cópia manual",
+    "restaurar": "Restaurar",
+    "descargar": "Transferir",
+    "eliminar": "Eliminar",
+    "resultadoRestoreTitle": "Resultado da restauração",
+    "errorLabel": "Erro: {{msg}}",
+    "filaOne": "{{count}} linha",
+    "filaOther": "{{count}} linhas",
+    "confirmarRestauracionTitle": "Confirmar restauração",
+    "vasARestaurar": "Vai restaurar <strong>{{nombre}}</strong> ({{total}} registos no total).",
+    "notas": [
+      "• Isto <strong>recupera/atualiza</strong> os registos da cópia — não apaga nada que tenha criado depois.",
+      "• Se um registo da cópia já não existir (foi apagado), é recriado com os seus dados originais.",
+      "• Os documentos restauram apenas a ficha (nome, categoria, link); se o ficheiro também foi apagado do armazenamento, o link não funcionará."
+    ],
+    "siRestaurarBtn": "Sim, restaurar esta cópia",
+    "restaurando": "A restaurar...",
+    "confirmDeleteCopia": "Eliminar a cópia \"{{nombre}}\"? Esta ação não pode ser anulada.",
+    "errorDescargar": "Não foi possível transferir: {{msg}}",
+    "errorGuardarCuenta": "Não foi possível guardar a cópia na sua conta: {{msg}}",
+    "copiaCreadaOk": "Cópia de segurança criada e guardada na sua conta.",
+    "errorCrear": "Erro ao criar a cópia: {{msg}}",
+    "errorLeerCopia": "Não foi possível ler a cópia: {{msg}}",
+    "archivoDanado": "O ficheiro de cópia está danificado ou não é válido.",
+    "archivoInvalido": "O ficheiro selecionado não é uma cópia de segurança válida (JSON).",
+    "tabla": {
+      "clientes": "Clientes",
+      "empleados": "Funcionários",
+      "obras": "Obras",
+      "tarifas": "Tarifas e preços",
+      "calendario_notas": "Notas de calendário",
+      "calendario_eventos": "Eventos de calendário",
+      "presupuestos": "Orçamentos",
+      "facturas": "Faturas",
+      "gastos": "Despesas",
+      "documentos": "Documentos (apenas a ficha, não o ficheiro)",
+      "partes_trabajo": "Partes de trabalho",
+      "nominas": "Folhas de pagamento",
+      "obra_empleados": "Equipa atribuída às obras"
+    }
+  },
+  "admin": {
+    "cargandoPanel": "A carregar painel de administração...",
+    "title": "🛡️ Painel de Administração",
+    "subtitle": "Trabalhadores independentes registados no XANDER Gestión",
+    "actualizar": "↻ Atualizar",
+    "stats": {
+      "totalRegistrados": "Total registados",
+      "nuevosSemana": "Novos esta semana",
+      "perfilCompleto": "Com perfil completo"
+    },
+    "tabs": {
+      "usuarios": "Utilizadores",
+      "leads": "Leads",
+      "notificaciones": "Notificações"
+    },
+    "usuarios": {
+      "sinUsuarios": "Ainda não há utilizadores registados",
+      "sinUsuariosSub": "Aqui aparecerão os trabalhadores independentes que se registarem",
+      "nombre": "NOME",
+      "email": "EMAIL",
+      "empresa": "EMPRESA",
+      "ciudad": "CIDADE",
+      "registro": "REGISTO",
+      "ultimoAcceso": "ÚLTIMO ACESSO",
+      "estado": "ESTADO",
+      "sinNombre": "Sem nome",
+      "activo": "✓ Ativo",
+      "pendiente": "⏳ Pendente"
+    },
+    "leads": {
+      "sinLeads": "Ainda não há leads",
+      "sinLeadsSub": "Aqui aparecerão os contactos deixados na landing page",
+      "sinDatosContacto": "Sem dados de contacto",
+      "atendido": "✓ Atendido",
+      "marcarAtendido": "Marcar como atendido"
+    },
+    "notif": {
+      "sinNotificaciones": "Sem notificações",
+      "sinNotificacionesSub": "Aqui aparecerão os novos registos",
+      "sinLeerOne": "{{count}} notificação por ler",
+      "sinLeerOther": "{{count}} notificações por ler",
+      "marcarTodasLeidas": "Marcar todas como lidas",
+      "marcarLeida": "Marcar como lida"
+    }
+  },
+  "themeToggle": {
+    "claro": "Mudar para modo claro",
+    "oscuro": "Mudar para modo escuro"
+  },
+  "planGate": {
+    "feature": {
+      "clientes": "mais de 3 clientes",
+      "obras": "mais de 3 obras",
+      "presupuestos": "mais de 5 orçamentos",
+      "facturas": "mais de 5 faturas",
+      "empleados": "gestão de funcionários",
+      "agente_ia": "o Agente IA",
+      "exportar_pdf": "exportar para PDF",
+      "nominas": "gerador de folhas de pagamento",
+      "rentabilidad": "análise de rentabilidade"
+    },
+    "funcionExclusiva": "Funcionalidade exclusiva Pro",
+    "paraUsar": "Para usar {{feature}} precisa do plano Pro.",
+    "pruebaTermina": "⏳ O seu teste gratuito termina em {{dias}} dias",
+    "activarPlan": "Ativar Plano Pro — {{precio}}",
+    "sinPermanencia": "Sem permanência · Cancele quando quiser",
+    "trialBannerText": "O seu período de teste termina em <strong>{{dias}} dia{{plural}}</strong>. Ative o plano Pro para não perder o acesso.",
+    "verPlanes": "Ver planos"
+  },
+  "notifBell": {
+    "notificaciones": "Notificações",
+    "descartarTodas": "Dispensar todas",
+    "cargando": "A carregar…",
+    "todoAlDia": "Tudo em dia, sem avisos pendentes",
+    "descartar": "Dispensar"
+  },
+  "pwaUpdate": {
+    "nuevaVersion": "Há uma nova versão do XANDER disponível.",
+    "actualizar": "Atualizar",
+    "ahoraNo": "Agora não",
+    "yaFuncionaOffline": "O XANDER já funciona offline."
+  },
+  "agenteChat": {
+    "titulo": "Agente XANDER",
+    "limpiarTooltip": "Nova conversa",
+    "limpiar": "↺ Limpar",
+    "faltaApiKey": "Falta configurar a API key",
+    "faltaApiKeyDesc": "Para ativar o agente, crie o ficheiro <code>.env</code> na raiz do projeto com:",
+    "pasoGroq1": "Vá a <b>console.groq.com</b>",
+    "pasoGroq2": "Crie uma conta gratuita",
+    "pasoGroq3": "API Keys → Create API Key",
+    "pasoGroq4": "Copie a key para o ficheiro .env",
+    "pasoGroq5": "Reinicie o servidor de desenvolvimento",
+    "pasoPrevioSupabase": "Passo prévio no Supabase",
+    "ejecutaSql": "Execute no SQL Editor do Supabase:",
+    "placeholder": "Escreva a sua pergunta…",
+    "bienvenida": "Olá! Sou o seu assistente XANDER. Posso ajudar com clientes, obras, orçamentos, questões fiscais ou redigir qualquer comunicação. Em que posso ajudar?",
+    "confirmBorrarHistorial": "Apagar o histórico desta conversa?",
+    "conversacionNueva": "Nova conversa! Em que posso ajudar?",
+    "errorConectar": "Erro ao ligar ao agente."
+  },
+  "calendarioWidget": {
+    "tipo": {
+      "trabajo": "Trabalho",
+      "reunion": "Reunião",
+      "cobro": "Cobrança",
+      "recordatorio": "Lembrete",
+      "visita": "Visita à obra"
+    },
+    "calendarioTrabajo": "Calendário de trabalho",
+    "hoy": "Hoje",
+    "alertaEmailTitle": "Alerta por email",
+    "cargando": "A carregar…",
+    "anadir": "+ Adicionar",
+    "sinEventos": "Sem eventos para este dia",
+    "editarEvento": "Editar evento",
+    "nuevoEvento": "Novo evento — {{fecha}}",
+    "tituloLabel": "Título *",
+    "tituloPlaceholder": "Ex: Visita à obra do cliente",
+    "tipoLabel": "Tipo",
+    "horaLabel": "Hora",
+    "descripcionLabel": "Descrição (opcional)",
+    "descripcionPlaceholder": "Detalhes adicionais…",
+    "alertaEmailToggleTitle": "🔔 Alerta por email",
+    "alertaEmailSub": "Aviso 24h antes e 1h antes",
+    "cancelar": "Cancelar",
+    "guardando": "A guardar…",
+    "guardarCambios": "Guardar alterações",
+    "guardar": "Guardar"
+  },
+  "firmaModal": {
+    "firmarDocumento": "Assinar documento",
+    "nombreQuienFirma": "Nome de quem assina",
+    "nombrePlaceholder": "Nome completo",
+    "firmaLabel": "Assinatura",
+    "borrarRepetir": "Apagar e repetir",
+    "disclaimer": "Ao assinar, quem assina confirma a sua conformidade com o conteúdo deste documento. A assinatura fica guardada com data e hora como prova de aceitação (não é uma assinatura eletrónica qualificada eIDAS).",
+    "cancelar": "Cancelar",
+    "guardando": "A guardar…",
+    "confirmarFirma": "✍️ Confirmar assinatura"
+  },
+  "onboarding": {
+    "pasos": {
+      "cliente": {
+        "titulo": "Adicione o seu primeiro cliente",
+        "desc": "A ficha de contacto que depois se liga a obras, orçamentos e faturas."
+      },
+      "obra": {
+        "titulo": "Crie a sua primeira obra",
+        "desc": "Associe-a a um cliente para acompanhar fotos, etapas e equipa."
+      },
+      "presupuesto": {
+        "titulo": "Faça o seu primeiro orçamento",
+        "desc": "Use os itens de Tarifas e Preços para o gerar em minutos."
+      },
+      "fiscal": {
+        "titulo": "Complete os seus dados fiscais",
+        "desc": "NIF, morada e regime — imprescindíveis para orçamentos e faturas válidas."
+      },
+      "cobros": {
+        "titulo": "Ligue o pagamento com cartão",
+        "desc": "Opcional: ligue a sua conta Stripe para cobrar faturas diretamente do XANDER."
+      }
+    },
+    "primerosPasos": "Primeiros passos no XANDER",
+    "mostrar": "Mostrar ▾",
+    "ocultar": "Ocultar ▴",
+    "completados": "Concluído! Já conhece as bases do XANDER.",
+    "progreso": "{{completados}} de {{total}} concluídos — acompanhamo-lo até a app fazer parte da sua rotina."
+  },
+  "auth": {
+    "tagline": "GESTÃO DE REFORMAS",
+    "footer": "© 2026 XANDER Gestión · Madrid",
+    "orConEmail": "ou com email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "login": {
+      "quote": "\"A ferramenta que todo o trabalhador independente do setor precisa, construída por alguém do setor.\"",
+      "features": [
+        "Orçamentos",
+        "Faturação",
+        "Obras",
+        "Tarifas"
+      ],
+      "bienvenido": "Bem-vindo",
+      "accedeCuenta": "Aceda à sua conta",
+      "continuarGoogle": "Continuar com Google",
+      "contrasena": "Palavra-passe",
+      "olvidasteContrasena": "Esqueceu-se da palavra-passe?",
+      "errorCredenciales": "Email ou palavra-passe incorretos.",
+      "entrando": "A entrar...",
+      "entrar": "Entrar",
+      "noTienesCuenta": "Não tem conta?",
+      "registrateGratis": "Registe-se gratuitamente"
+    },
+    "register": {
+      "features": [
+        {
+          "icon": "📋",
+          "text": "Orçamentos profissionais em minutos"
+        },
+        {
+          "icon": "🔨",
+          "text": "Acompanhamento de obras e clientes"
+        },
+        {
+          "icon": "📊",
+          "text": "Tarifas e rentabilidade por obra"
+        },
+        {
+          "icon": "📧",
+          "text": "Faturas enviadas diretamente pela app"
+        }
+      ],
+      "gratisBeta": "Grátis durante a beta · Sem cartão de crédito",
+      "creaTuCuenta": "Crie a sua conta",
+      "gratisSinLimites": "Grátis durante a beta · Sem limites",
+      "registrarseGoogle": "Registar com Google",
+      "emailProfesional": "Email profissional",
+      "contrasena": "Palavra-passe",
+      "minimoCaracteres": "Mínimo 8 caracteres",
+      "confirmarContrasena": "Confirmar palavra-passe",
+      "repiteContrasena": "Repita a palavra-passe",
+      "passwordsNoCoinciden": "As palavras-passe não coincidem.",
+      "passwordCorta": "A palavra-passe deve ter pelo menos 8 caracteres.",
+      "creandoCuenta": "A criar conta...",
+      "crearCuentaGratuita": "Criar conta gratuita",
+      "aceptasTerminosPre": "Ao registar-se aceita os nossos",
+      "terminosUso": "Termos de utilização",
+      "y": "e",
+      "politicaPrivacidad": "Política de privacidade",
+      "yaTienesCuenta": "Já tem conta?",
+      "accedeAqui": "Aceda aqui",
+      "revisaEmail": "Verifique o seu email",
+      "enlaceConfirmacion": "Enviámos um link de confirmação para <strong>{{email}}</strong>. Confirme a sua conta e poderá começar a configurar o seu perfil.",
+      "irLogin": "Ir para o login"
+    },
+    "forgot": {
+      "sidebarText": "Enviaremos um link para que possa definir uma nova palavra-passe de forma segura.",
+      "emailEnviado": "Email enviado",
+      "enlaceEnviadoA": "Enviámos um link de recuperação para <strong>{{email}}</strong>. Verifique também a pasta de spam.",
+      "enlaceCaduca": "O link expira em 1 hora. Se não o receber, pode tentar novamente.",
+      "volverInicioSesion": "Voltar ao início de sessão",
+      "flechaVolver": "← Voltar ao início de sessão",
+      "recuperarContrasena": "Recuperar palavra-passe",
+      "introduceEmail": "Introduza o seu email e enviaremos um link para redefinir a sua palavra-passe.",
+      "errorEnvio": "Não foi possível enviar o email. Verifique o endereço e tente novamente.",
+      "enviando": "A enviar...",
+      "enviarEnlace": "Enviar link de recuperação"
+    },
+    "reset": {
+      "sidebarText": "Escolha uma palavra-passe segura. Recomendamos pelo menos 8 caracteres combinando letras e números.",
+      "passwordActualizada": "Palavra-passe atualizada",
+      "redirigiendo": "A redirecionar para a sua conta...",
+      "verificandoEnlace": "A verificar link de recuperação...",
+      "enlaceCaducadoAviso": "Se vir esta mensagem durante mais de 10 segundos, o link pode ter expirado.",
+      "solicitaUnoNuevo": "Solicite um novo.",
+      "nuevaContrasena": "Nova palavra-passe",
+      "eligeNuevaPassword": "Escolha uma nova palavra-passe para a sua conta.",
+      "confirmarContrasena": "Confirmar palavra-passe",
+      "repiteContrasena": "Repita a palavra-passe",
+      "minimoCaracteres": "Mínimo 8 caracteres",
+      "passwordCorta": "A palavra-passe deve ter pelo menos 8 caracteres.",
+      "passwordsNoCoinciden": "As palavras-passe não coincidem.",
+      "errorActualizar": "Não foi possível atualizar a palavra-passe. O link pode ter expirado.",
+      "guardando": "A guardar...",
+      "establecerNuevaContrasena": "Definir nova palavra-passe"
+    }
+  },
+  "onboardingWizard": {
+    "cuentanosQuienEres": "Diga-nos quem é — apenas o essencial",
+    "bienvenido": "Bem-vindo ao XANDER",
+    "rellenaDatos": "Preencha dois dados e já pode começar. Pode completar o resto do perfil mais tarde.",
+    "nombreLabel": "Nome",
+    "apellidosLabel": "Apelido",
+    "nombreEmpresaLabel": "Nome da empresa",
+    "nombreObligatorio": "O nome é obrigatório.",
+    "empresaObligatoria": "O nome da empresa é obrigatório.",
+    "especialidadesLabel": "Especialidades",
+    "opcional": "(opcional)",
+    "queTrabajos": "Que trabalhos realiza habitualmente?",
+    "especialidad": {
+      "Reformas integrales": "Reformas integrais",
+      "Baños": "Casas de banho",
+      "Cocinas": "Cozinhas",
+      "Pintura": "Pintura",
+      "Pladur": "Pladur",
+      "Electricidad": "Eletricidade",
+      "Fontanería": "Canalização",
+      "Carpintería": "Carpintaria",
+      "Alicatados": "Azulejos",
+      "Fachadas": "Fachadas"
+    },
+    "avisoDatosAdicionales": "Pode adicionar NIF, morada, telefones e mais em <strong>A Minha Empresa</strong> quando quiser. São necessários para imprimir orçamentos e faturas completos.",
+    "salir": "Sair",
+    "guardando": "A guardar...",
+    "empezar": "Começar! →"
+  },
+  "landing": {
+    "nav": {
+      "funciones": "Funcionalidades",
+      "planes": "Planos",
+      "contacto": "Contacto"
+    },
+    "miCuenta": "A minha conta",
+    "entrar": "Entrar",
+    "pruebaGratis": "Teste grátis",
+    "iraMiCuenta": "Ir para a minha conta",
+    "pruebaGratis30": "Teste grátis 30 dias",
+    "heroTag": "Gestão para reformas de interiores",
+    "heroTitle": "Orçamentos, faturas e obras.<br />Tudo num só lugar.",
+    "heroDesc": "A ferramenta de gestão pensada por e para trabalhadores independentes de reformas: orçamentos em minutos, faturação com Verifactu, pagamento com cartão e acompanhamento real de cada obra.",
+    "verFunciones": "Ver funcionalidades",
+    "sinTarjeta": "Sem cartão · Sem permanência · Cancele quando quiser",
+    "funciones": [
+      {
+        "icon": "📋",
+        "title": "Orçamentos",
+        "desc": "Crie orçamentos profissionais por itens em minutos, prontos a enviar."
+      },
+      {
+        "icon": "🧾",
+        "title": "Faturação",
+        "desc": "Faturas com Verifactu integrado — hash encadeado, QR e envio à AEAT."
+      },
+      {
+        "icon": "🏗️",
+        "title": "Obras",
+        "desc": "Acompanhamento de obra com fotos, etapas, equipa e partes de trabalho."
+      },
+      {
+        "icon": "💳",
+        "title": "Pagamentos com cartão",
+        "desc": "Os seus clientes pagam a fatura online. O dinheiro entra diretamente na sua conta."
+      },
+      {
+        "icon": "💶",
+        "title": "Despesas e resultados",
+        "desc": "Registe despesas por obra e veja a rentabilidade real de cada projeto."
+      },
+      {
+        "icon": "📊",
+        "title": "Fiscal",
+        "desc": "Documento de conciliação pronto para a sua contabilidade antes de cada trimestre."
+      },
+      {
+        "icon": "👷",
+        "title": "Funcionários e folhas de pagamento",
+        "desc": "Registo de horas por obra e gerador de recibos de vencimento."
+      },
+      {
+        "icon": "📱",
+        "title": "App instalável",
+        "desc": "Instale-a no telemóvel ou computador, funciona mesmo sem ligação."
+      }
+    ],
+    "funcionesTitle": "Tudo o que precisa para gerir o seu negócio",
+    "funcionesSubtitle": "Sem folhas de cálculo soltas, sem pastas de WhatsApp com orçamentos.",
+    "testimonioAutor": "— XANDER Reformas de Interiores, Madrid",
+    "planesTitle": "Planos simples",
+    "planesSubtitle": "Comece grátis. Sem surpresas.",
+    "recomendado": "Recomendado",
+    "planPrueba": {
+      "nombre": "Teste gratuito",
+      "periodo": "30 dias",
+      "desc": "Acesso completo, sem cartão.",
+      "features": [
+        "Todos os módulos",
+        "Sem limite de clientes nem obras",
+        "Agente IA incluído"
+      ],
+      "cta": "Começar grátis"
+    },
+    "planPro": {
+      "nombre": "Pro",
+      "periodo": "por trabalhador independente",
+      "desc": "Para quando decidir ficar.",
+      "features": [
+        "Tudo o que o plano gratuito tem",
+        "Sem limites de utilização",
+        "Suporte direto"
+      ],
+      "cta": "Começar grátis"
+    },
+    "contactoTitle": "Tem dúvidas antes de começar?",
+    "contactoSubtitle": "Deixe-nos os seus dados ou escreva-nos diretamente pelo WhatsApp.",
+    "form": {
+      "nombre": "Nome",
+      "nombrePlaceholder": "O seu nome",
+      "emailOTelefono": "Email ou telefone",
+      "contactoPlaceholder": "tu@email.com ou número de telefone",
+      "mensaje": "Mensagem",
+      "opcional": "(opcional)",
+      "mensajePlaceholder": "Diga-nos do que precisa",
+      "errorRequerido": "Precisamos pelo menos do seu nome e de um email ou telefone para o contactar.",
+      "errorEnvio": "Não foi possível enviar. Tente novamente ou escreva-nos pelo WhatsApp.",
+      "gracias": "Obrigado, {{nombre}}!",
+      "contactamos24h": "Contactamo-lo em menos de 24h.",
+      "enviando": "A enviar...",
+      "quieroContacten": "Quero que me contactem"
+    },
+    "contactoDirecto": "Contacto direto",
+    "escribirWhatsapp": "Escrever pelo WhatsApp",
+    "footerText": "XANDER Reformas de Interiores · Madrid",
+    "footerCopyright": "© 2026 XANDER Gestión"
   }
 }

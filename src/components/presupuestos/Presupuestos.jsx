@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 import FirmaModal from '../shared/FirmaModal'
 
-const ESTADOS = [
-  { value: 'borrador',   label: 'Borrador',   color: 'bg-stone/20 text-ink-soft' },
-  { value: 'enviado',    label: 'Enviado',    color: 'bg-blue-100 text-blue-700' },
-  { value: 'aceptado',   label: 'Aceptado',   color: 'bg-green-100 text-green-700' },
-  { value: 'rechazado',  label: 'Rechazado',  color: 'bg-red-100 text-red-600' },
-  { value: 'expirado',   label: 'Expirado',   color: 'bg-orange-100 text-orange-700' },
+const ESTADOS_META = [
+  { value: 'borrador',   color: 'bg-stone/20 text-ink-soft' },
+  { value: 'enviado',    color: 'bg-blue-100 text-blue-700' },
+  { value: 'aceptado',   color: 'bg-green-100 text-green-700' },
+  { value: 'rechazado',  color: 'bg-red-100 text-red-600' },
+  { value: 'expirado',   color: 'bg-orange-100 text-orange-700' },
 ]
 
 const UNIDADES = ['ud', 'm²', 'm³', 'ml', 'm', 'h', 'kg', 'l', 'pa', 'gl']
 
-function EstadoBadge({ estado }) {
-  const e = ESTADOS.find(s => s.value === estado) || ESTADOS[0]
-  return <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${e.color}`}>{e.label}</span>
+function EstadoBadge({ estado, t }) {
+  const e = ESTADOS_META.find(s => s.value === estado) || ESTADOS_META[0]
+  return <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${e.color}`}>{t(`presupuestos.estado.${e.value}`)}</span>
 }
 
 function calculos(items, iva, descuento) {
@@ -30,6 +31,7 @@ function calculos(items, iva, descuento) {
 const ITEM_EMPTY = { titulo: '', detalle: '', cantidad: '1', unidad: 'ud', precio_unitario: '', importe: '' }
 
 function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
+  const { t } = useTranslation()
   const hoy = new Date().toISOString().split('T')[0]
   const [form, setForm] = useState({
     numero: '', referencia: '', cliente_id: '', obra_id: '',
@@ -79,7 +81,7 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
 
   async function save(e) {
     e.preventDefault()
-    if (!form.numero.trim()) { setError('El número de presupuesto es obligatorio'); return }
+    if (!form.numero.trim()) { setError(t('presupuestos.form.numeroRequerido')); return }
     setSaving(true); setError('')
     const user_id = await getUID()
     const payload = {
@@ -111,7 +113,7 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
       <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-4xl my-4">
         {/* Header */}
         <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
-          <h2 className="text-lg font-bold text-ink">{editData ? 'Editar presupuesto' : 'Nuevo presupuesto'}</h2>
+          <h2 className="text-lg font-bold text-ink">{editData ? t('presupuestos.form.editTitle') : t('presupuestos.form.newTitle')}</h2>
           <button onClick={onCancel} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
         </div>
 
@@ -119,42 +121,42 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
           {/* Datos básicos */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div>
-              <label className="label">Número *</label>
+              <label className="label">{t('presupuestos.form.numeroLabel')}</label>
               <input className="input" value={form.numero} onChange={e => setF('numero', e.target.value)} placeholder="PRE-2026-001" required />
             </div>
             <div>
-              <label className="label">Referencia</label>
+              <label className="label">{t('presupuestos.form.referenciaLabel')}</label>
               <input className="input" value={form.referencia} onChange={e => setF('referencia', e.target.value)} />
             </div>
             <div>
-              <label className="label">Fecha</label>
+              <label className="label">{t('presupuestos.form.fechaLabel')}</label>
               <input className="input" type="date" value={form.fecha} onChange={e => setF('fecha', e.target.value)} />
             </div>
             <div>
-              <label className="label">Validez (días)</label>
+              <label className="label">{t('presupuestos.form.validezLabel')}</label>
               <input className="input" type="number" min="1" value={form.validez_dias} onChange={e => setF('validez_dias', e.target.value)} />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <label className="label">Cliente</label>
+              <label className="label">{t('presupuestos.form.clienteLabel')}</label>
               <select className="input" value={form.cliente_id} onChange={e => { setF('cliente_id', e.target.value); setF('obra_id', '') }}>
-                <option value="">Sin cliente</option>
+                <option value="">{t('presupuestos.form.sinCliente')}</option>
                 {clientes.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}
               </select>
             </div>
             <div>
-              <label className="label">Obra</label>
+              <label className="label">{t('presupuestos.form.obraLabel')}</label>
               <select className="input" value={form.obra_id} onChange={e => setF('obra_id', e.target.value)}>
-                <option value="">Sin obra</option>
+                <option value="">{t('presupuestos.form.sinObra')}</option>
                 {obrasFiltradas.map(o => <option key={o.id} value={o.id}>{o.nombre}</option>)}
               </select>
             </div>
             <div>
-              <label className="label">Estado</label>
+              <label className="label">{t('presupuestos.form.estadoLabel')}</label>
               <select className="input" value={form.estado} onChange={e => setF('estado', e.target.value)}>
-                {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                {ESTADOS_META.map(s => <option key={s.value} value={s.value}>{t(`presupuestos.estado.${s.value}`)}</option>)}
               </select>
             </div>
           </div>
@@ -162,8 +164,8 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
           {/* Partidas */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Partidas del presupuesto</label>
-              <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">+ Añadir partida</button>
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">{t('presupuestos.form.partidasLabel')}</label>
+              <button type="button" onClick={addItem} className="text-gold text-sm font-semibold hover:text-gold-dark">{t('presupuestos.form.addPartida')}</button>
             </div>
             <div className="space-y-3">
               {items.map((item, i) => (
@@ -172,34 +174,34 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
                   <div className="pr-6 space-y-3">
                     {/* Fila 1: Descripción */}
                     <div>
-                      <label className="label">Descripción / título</label>
-                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder="Reforma de baño — demolición y alicatado" />
+                      <label className="label">{t('presupuestos.form.tituloLabel')}</label>
+                      <input className="input bg-surface" value={item.titulo} onChange={e => setItem(i, 'titulo', e.target.value)} placeholder={t('presupuestos.form.tituloPlaceholder')} />
                     </div>
                     {/* Fila 2: Ud · Cantidad · Precio/ud · Importe */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       <div>
-                        <label className="label">Unidad</label>
+                        <label className="label">{t('presupuestos.form.unidadLabel')}</label>
                         <select className="input bg-surface" value={item.unidad || 'ud'} onChange={e => setItem(i, 'unidad', e.target.value)}>
                           {UNIDADES.map(u => <option key={u} value={u}>{u}</option>)}
                         </select>
                       </div>
                       <div>
-                        <label className="label">Cantidad</label>
+                        <label className="label">{t('presupuestos.form.cantidadLabel')}</label>
                         <input className="input bg-surface" type="number" min="0" step="0.01" value={item.cantidad || ''} onChange={e => setItem(i, 'cantidad', e.target.value)} placeholder="1" />
                       </div>
                       <div>
-                        <label className="label">Precio / ud (€)</label>
+                        <label className="label">{t('presupuestos.form.precioUdLabel')}</label>
                         <input className="input bg-surface" type="number" min="0" step="0.01" value={item.precio_unitario || ''} onChange={e => setItem(i, 'precio_unitario', e.target.value)} placeholder="0.00" />
                       </div>
                       <div>
-                        <label className="label">Importe (€)</label>
+                        <label className="label">{t('presupuestos.form.importeLabel')}</label>
                         <input className="input bg-surface font-semibold text-ink" type="number" min="0" step="0.01" value={item.importe || ''} onChange={e => setItem(i, 'importe', e.target.value)} placeholder="0.00" />
                       </div>
                     </div>
                     {/* Fila 3: Detalle */}
                     <div>
-                      <label className="label">Detalle (opcional)</label>
-                      <textarea className="input bg-surface resize-none h-14 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} placeholder="Incluye: levantado de alicatado existente, nuevo alicatado hasta techo…" />
+                      <label className="label">{t('presupuestos.form.detalleLabel')}</label>
+                      <textarea className="input bg-surface resize-none h-14 text-sm" value={item.detalle} onChange={e => setItem(i, 'detalle', e.target.value)} placeholder={t('presupuestos.form.detallePlaceholder')} />
                     </div>
                   </div>
                 </div>
@@ -212,15 +214,15 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
             {/* Izq: no incluido + condiciones */}
             <div className="space-y-3">
               <div>
-                <label className="label">No incluido (una línea por punto)</label>
+                <label className="label">{t('presupuestos.form.noIncluidoLabel')}</label>
                 <textarea className="input resize-none h-20 text-sm" value={form.no_incluido} onChange={e => setF('no_incluido', e.target.value)} placeholder="Suministro de sanitarios&#10;Gestión de licencias" />
               </div>
               <div>
-                <label className="label">Condiciones (una línea por punto)</label>
+                <label className="label">{t('presupuestos.form.condicionesLabel')}</label>
                 <textarea className="input resize-none h-20 text-sm" value={form.condiciones} onChange={e => setF('condiciones', e.target.value)} placeholder="Pago 30% a la firma&#10;Validez 30 días" />
               </div>
               <div>
-                <label className="label">Notas internas</label>
+                <label className="label">{t('presupuestos.form.notasLabel')}</label>
                 <textarea className="input resize-none h-16 text-sm" value={form.notas} onChange={e => setF('notas', e.target.value)} />
               </div>
             </div>
@@ -231,19 +233,19 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
                 {/* IVA y descuento — fondo sólido en selects para visibilidad */}
                 <div className="grid grid-cols-2 gap-3 mb-2">
                   <div>
-                    <label className="text-xs text-white/60 block mb-1.5 font-semibold">IVA (%)</label>
+                    <label className="text-xs text-white/60 block mb-1.5 font-semibold">{t('presupuestos.form.ivaLabel')}</label>
                     <select
                       className="w-full rounded-lg px-3 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none focus:ring-2 focus:ring-gold"
                       value={form.iva}
                       onChange={e => setF('iva', e.target.value)}
                     >
-                      <option value="0">0% — Sin IVA</option>
-                      <option value="10">10% — Residencial</option>
-                      <option value="21">21% — Local / Obra nueva / Empresa / Inversor</option>
+                      <option value="0">{t('presupuestos.form.ivaOptions.sinIva')}</option>
+                      <option value="10">{t('presupuestos.form.ivaOptions.residencial')}</option>
+                      <option value="21">{t('presupuestos.form.ivaOptions.general')}</option>
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-white/60 block mb-1.5 font-semibold">Descuento (%)</label>
+                    <label className="text-xs text-white/60 block mb-1.5 font-semibold">{t('presupuestos.form.descuentoLabel')}</label>
                     <input
                       className="w-full rounded-lg px-3 py-2 text-sm font-semibold bg-white text-navy border border-white/20 focus:outline-none focus:ring-2 focus:ring-gold"
                       type="number" min="0" max="100" step="0.5"
@@ -255,21 +257,21 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
 
                 <div className="border-t border-white/10 pt-3 space-y-2">
                   <div className="flex justify-between text-sm text-white/70">
-                    <span>Base imponible</span>
+                    <span>{t('presupuestos.form.baseImponible')}</span>
                     <span>{base.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                   </div>
                   {dto > 0 && (
                     <div className="flex justify-between text-sm text-white/70">
-                      <span>Descuento ({form.descuento}%)</span>
+                      <span>{t('presupuestos.form.descuentoLine', { pct: form.descuento })}</span>
                       <span>−{dto.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-sm text-white/70">
-                    <span>IVA ({form.iva}%)</span>
+                    <span>{t('presupuestos.form.ivaLine', { pct: form.iva })}</span>
                     <span>{ivaImporte.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                   </div>
                   <div className="border-t border-white/20 pt-2 flex justify-between font-bold text-lg">
-                    <span className="text-gold">TOTAL</span>
+                    <span className="text-gold">{t('presupuestos.form.total')}</span>
                     <span className="text-gold">{total.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span>
                   </div>
                 </div>
@@ -280,8 +282,8 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
           {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
 
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onCancel} className="btn-secondary flex-1">Cancelar</button>
-            <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Guardando…' : 'Guardar presupuesto'}</button>
+            <button type="button" onClick={onCancel} className="btn-secondary flex-1">{t('presupuestos.form.cancel')}</button>
+            <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? t('presupuestos.form.saving') : t('presupuestos.form.save')}</button>
           </div>
         </form>
       </div>
@@ -290,6 +292,7 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
 }
 
 export default function Presupuestos() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [presupuestos, setPresupuestos] = useState([])
   const [clientes, setClientes] = useState([])
@@ -352,14 +355,14 @@ export default function Presupuestos() {
     expira.setDate(expira.getDate() + p.validez_dias)
     const hoy = new Date(); hoy.setHours(0, 0, 0, 0)
     const dias = Math.round((expira - hoy) / 86400000)
-    if (dias < 0) return { label: 'Vencido', cls: 'text-red-600 font-semibold' }
-    if (dias === 0) return { label: 'Vence hoy', cls: 'text-orange-600 font-semibold' }
-    if (dias <= 3) return { label: `${dias}d restante${dias !== 1 ? 's' : ''}`, cls: 'text-orange-500 font-semibold' }
-    return { label: `${dias}d restantes`, cls: 'text-ink-soft' }
+    if (dias < 0) return { label: t('presupuestos.list.vencido'), cls: 'text-red-600 font-semibold' }
+    if (dias === 0) return { label: t('presupuestos.list.venceHoy'), cls: 'text-orange-600 font-semibold' }
+    if (dias <= 3) return { label: t('presupuestos.list.diasRestanteOther', { count: dias }), cls: 'text-orange-500 font-semibold' }
+    return { label: t('presupuestos.list.diasRestanteOther', { count: dias }), cls: 'text-ink-soft' }
   }
 
   async function remove(id, numero) {
-    if (!confirm(`¿Eliminar el presupuesto ${numero}?`)) return
+    if (!confirm(t('presupuestos.list.confirmDelete', { numero }))) return
     await supabase.from('presupuestos').delete().eq('id', id)
     load()
   }
@@ -381,20 +384,22 @@ export default function Presupuestos() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-ink">Presupuestos</h1>
-          <p className="text-sm text-ink-soft mt-0.5">{presupuestos.length} presupuesto{presupuestos.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-2xl font-bold text-ink">{t('presupuestos.list.title')}</h1>
+          <p className="text-sm text-ink-soft mt-0.5">
+            {t(presupuestos.length === 1 ? 'presupuestos.list.countOne' : 'presupuestos.list.countOther', { count: presupuestos.length })}
+          </p>
         </div>
-        <button onClick={openNew} className="btn-primary">+ Nuevo presupuesto</button>
+        <button onClick={openNew} className="btn-primary">{t('presupuestos.list.newPresupuesto')}</button>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
-        {ESTADOS.map(s => {
+        {ESTADOS_META.map(s => {
           const count = presupuestos.filter(p => p.estado === s.value).length
           return (
             <div key={s.value} className="card text-center py-3 cursor-pointer hover:shadow-md transition-shadow" onClick={() => setFiltroEstado(filtroEstado === s.value ? '' : s.value)}>
               <div className="text-xl font-bold text-ink">{count}</div>
-              <div className="mt-1"><span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${s.color}`}>{s.label}</span></div>
+              <div className="mt-1"><span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${s.color}`}>{t(`presupuestos.estado.${s.value}`)}</span></div>
             </div>
           )
         })}
@@ -402,29 +407,29 @@ export default function Presupuestos() {
 
       {totalAceptado > 0 && (
         <div className="bg-green-50 border border-green-200 rounded-xl px-5 py-3 mb-5 flex items-center gap-3">
-          <span className="text-green-700 font-semibold text-sm">✓ Presupuestos aceptados:</span>
+          <span className="text-green-700 font-semibold text-sm">{t('presupuestos.list.aceptados')}</span>
           <span className="text-green-800 font-bold">{fmt(totalAceptado)}</span>
         </div>
       )}
 
       {/* Filtros */}
       <div className="flex flex-wrap gap-3 mb-5">
-        <input className="input max-w-xs" placeholder="🔍  Buscar nº, cliente, obra…" value={search} onChange={e => setSearch(e.target.value)} />
+        <input className="input max-w-xs" placeholder={t('presupuestos.list.searchPlaceholder')} value={search} onChange={e => setSearch(e.target.value)} />
         <select className="input w-auto" value={filtroEstado} onChange={e => setFiltroEstado(e.target.value)}>
-          <option value="">Todos los estados</option>
-          {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+          <option value="">{t('presupuestos.list.allStates')}</option>
+          {ESTADOS_META.map(s => <option key={s.value} value={s.value}>{t(`presupuestos.estado.${s.value}`)}</option>)}
         </select>
       </div>
 
       {loading ? (
-        <div className="text-ink-soft text-sm py-10 text-center">Cargando presupuestos…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">{t('presupuestos.list.loading')}</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">📋</div>
-          <div className="font-bold text-ink mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes presupuestos'}</div>
+          <div className="font-bold text-ink mb-1">{search || filtroEstado ? t('presupuestos.list.noResultsTitle') : t('presupuestos.list.noPresupuestosTitle')}</div>
           {!search && !filtroEstado && (
-            <><div className="text-sm text-ink-soft mb-5">Crea tu primer presupuesto profesional</div>
-            <button onClick={openNew} className="btn-primary">+ Nuevo presupuesto</button></>
+            <><div className="text-sm text-ink-soft mb-5">{t('presupuestos.list.noPresupuestosHint')}</div>
+            <button onClick={openNew} className="btn-primary">{t('presupuestos.list.newPresupuesto')}</button></>
           )}
         </div>
       ) : (
@@ -432,12 +437,12 @@ export default function Presupuestos() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
-                <th className="text-left px-5 py-3">Número</th>
-                <th className="text-left px-4 py-3 hidden md:table-cell">Cliente / Obra</th>
-                <th className="text-left px-4 py-3 hidden lg:table-cell">Fecha</th>
-                <th className="text-left px-4 py-3 hidden xl:table-cell">Vence</th>
-                <th className="text-left px-4 py-3">Estado</th>
-                <th className="text-right px-5 py-3">Total</th>
+                <th className="text-left px-5 py-3">{t('presupuestos.list.table.numero')}</th>
+                <th className="text-left px-4 py-3 hidden md:table-cell">{t('presupuestos.list.table.clienteObra')}</th>
+                <th className="text-left px-4 py-3 hidden lg:table-cell">{t('presupuestos.list.table.fecha')}</th>
+                <th className="text-left px-4 py-3 hidden xl:table-cell">{t('presupuestos.list.table.vence')}</th>
+                <th className="text-left px-4 py-3">{t('presupuestos.list.table.estado')}</th>
+                <th className="text-right px-5 py-3">{t('presupuestos.list.table.total')}</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -451,7 +456,7 @@ export default function Presupuestos() {
                       <div className="font-bold text-ink flex items-center gap-1.5">
                         {p.numero}
                         {p.firma_png && (
-                          <span title={`Firmado por ${p.firma_nombre || ''} el ${p.firma_fecha ? new Date(p.firma_fecha).toLocaleDateString('es-ES') : ''}`} className="text-[10px]">✍️</span>
+                          <span title={t('presupuestos.list.firmadoTitle', { nombre: p.firma_nombre || '', fecha: p.firma_fecha ? new Date(p.firma_fecha).toLocaleDateString('es-ES') : '' })} className="text-[10px]">✍️</span>
                         )}
                       </div>
                       {p.referencia && <div className="text-xs text-ink-soft mt-0.5">{p.referencia}</div>}
@@ -466,29 +471,29 @@ export default function Presupuestos() {
                     <td className="px-4 py-3.5 hidden xl:table-cell text-xs">
                       {vence ? <span className={vence.cls}>{vence.label}</span> : <span className="text-ink-soft/40">—</span>}
                     </td>
-                    <td className="px-4 py-3.5"><EstadoBadge estado={p.estado} /></td>
+                    <td className="px-4 py-3.5"><EstadoBadge estado={p.estado} t={t} /></td>
                     <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
                     <td className="px-4 py-3.5 text-right whitespace-nowrap">
                       {p.estado === 'aceptado' && (
                         <button
                           onClick={() => crearFactura(p)}
                           className="text-xs font-bold px-3 py-1 rounded-lg bg-green-100 text-green-700 hover:bg-green-200 transition-colors mr-3"
-                          title="Crear factura desde este presupuesto"
+                          title={t('presupuestos.list.crearFacturaTitle')}
                         >
-                          📄 Factura
+                          {t('presupuestos.list.crearFactura')}
                         </button>
                       )}
                       {!['aceptado', 'rechazado'].includes(p.estado) && (
                         <button
                           onClick={() => setFirmando(p)}
                           className="text-xs font-bold px-3 py-1 rounded-lg bg-gold/20 text-gold-dark hover:bg-gold/30 transition-colors mr-3"
-                          title="Firmar y aceptar este presupuesto"
+                          title={t('presupuestos.list.firmarTitle')}
                         >
-                          ✍️ Firmar
+                          {t('presupuestos.list.firmar')}
                         </button>
                       )}
-                      <button onClick={() => openEdit(p)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">Editar</button>
-                      <button onClick={() => remove(p.id, p.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">Eliminar</button>
+                      <button onClick={() => openEdit(p)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">{t('presupuestos.list.editar')}</button>
+                      <button onClick={() => remove(p.id, p.numero)} className="text-ink-soft/40 hover:text-red-500 text-xs">{t('presupuestos.list.eliminar')}</button>
                     </td>
                   </tr>
                 )
@@ -510,7 +515,7 @@ export default function Presupuestos() {
 
       {firmando && (
         <FirmaModal
-          titulo={`Firmar presupuesto ${firmando.numero}`}
+          titulo={t('presupuestos.firmarModalTitle', { numero: firmando.numero })}
           nombreDefault={firmando.clientes?.nombre}
           onGuardar={guardarFirma}
           onCancel={() => setFirmando(null)}

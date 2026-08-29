@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 
 const GROQ_KEY = import.meta.env.VITE_GROQ_API_KEY
@@ -10,10 +11,10 @@ const CATEGORIAS = [
 ]
 
 const IVA_OPTS = [
-  { label: '0% — Exento', value: '0' },
-  { label: '4% — Superreducido', value: '4' },
-  { label: '10% — Reducido (vivienda)', value: '10' },
-  { label: '21% — General (local / empresa)', value: '21' },
+  { key: 'exento', value: '0' },
+  { key: 'superreducido', value: '4' },
+  { key: 'reducido', value: '10' },
+  { key: 'general', value: '21' },
 ]
 
 const FORM_EMPTY = {
@@ -140,6 +141,7 @@ async function extraerDatosFactura(file) {
 
 // ─── Componente principal ─────────────────────────────────────────────────────
 export default function Gastos() {
+  const { t } = useTranslation()
   const [gastos,      setGastos]      = useState([])
   const [obras,       setObras]       = useState([])
   const [loading,     setLoading]     = useState(true)
@@ -209,13 +211,13 @@ export default function Gastos() {
   async function procesarArchivo(file) {
     const esPdf = file.type === 'application/pdf'
     const esImg = file.type.startsWith('image/')
-    if (!esPdf && !esImg) { setOcrMsg('⚠️ Solo imágenes o PDF'); return }
+    if (!esPdf && !esImg) { setOcrMsg(t('gastos.form.soloImagenesPdf')); return }
 
     if (esImg) setImgPreview(URL.createObjectURL(file))
     else setImgPreview(null)
 
     setLeyendo(true)
-    setOcrMsg(esPdf ? '📄 Leyendo PDF… (puede tardar unos segundos)' : '🔍 Leyendo factura…')
+    setOcrMsg(esPdf ? t('gastos.form.leyendoPdf') : t('gastos.form.leyendoFactura'))
 
     try {
       const { datos, previewUrl } = await extraerDatosFactura(file)
@@ -244,10 +246,10 @@ export default function Gastos() {
         factura_num: datos.factura_num || prev.factura_num,
         categoria:   CATEGORIAS.includes(datos.categoria) ? datos.categoria : prev.categoria,
       }))
-      setOcrMsg('✅ Datos extraídos. Revisa y ajusta si es necesario.')
+      setOcrMsg(t('gastos.form.datosExtraidos'))
     } catch (err) {
       console.error('[OCR]', err)
-      setOcrMsg('⚠️ No se pudo leer automáticamente. Rellena los campos manualmente.')
+      setOcrMsg(t('gastos.form.noPudoLeer'))
     } finally {
       setLeyendo(false)
     }
@@ -280,7 +282,7 @@ export default function Gastos() {
   }
 
   async function remove(id, desc) {
-    if (!confirm(`¿Eliminar "${desc}"?`)) return
+    if (!confirm(t('gastos.confirmDelete', { desc }))) return
     await supabase.from('gastos').delete().eq('id', id)
     load()
   }
@@ -309,15 +311,15 @@ export default function Gastos() {
   // ── Setup ──────────────────────────────────────────────────────────────────
   if (setupNeeded) return (
     <div className="p-6 max-w-2xl">
-      <h1 className="text-2xl font-bold text-ink mb-6">Gastos</h1>
+      <h1 className="text-2xl font-bold text-ink mb-6">{t('gastos.setup.title')}</h1>
       <div className="card border-gold border-2">
         <div className="flex items-start gap-4">
           <div className="text-3xl">⚙️</div>
           <div>
-            <div className="font-bold text-ink mb-2">Paso previo: crear tabla en Supabase</div>
-            <p className="text-sm text-ink-soft mb-3">Ve a <strong>Supabase → SQL Editor</strong> y ejecuta:</p>
+            <div className="font-bold text-ink mb-2">{t('gastos.setup.stepTitle')}</div>
+            <p className="text-sm text-ink-soft mb-3">{t('gastos.setup.stepDescPre')} <strong>Supabase → SQL Editor</strong> {t('gastos.setup.stepDescPost')}</p>
             <div className="bg-navy text-gold font-mono text-sm px-4 py-3 rounded-xl mb-3">App/XANDER-SaaS/supabase/gastos.sql</div>
-            <p className="text-sm text-ink-soft">Si la tabla ya existía, ejecuta las 2 líneas ALTER TABLE del final del archivo para añadir las columnas de IVA.</p>
+            <p className="text-sm text-ink-soft">{t('gastos.setup.hintAlter')}</p>
           </div>
         </div>
       </div>
@@ -328,18 +330,20 @@ export default function Gastos() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-ink">Gastos</h1>
-          <p className="text-sm text-ink-soft mt-0.5">{gastos.length} gasto{gastos.length !== 1 ? 's' : ''} · Total: {fmt(totalGeneral)}</p>
+          <h1 className="text-2xl font-bold text-ink">{t('gastos.title')}</h1>
+          <p className="text-sm text-ink-soft mt-0.5">
+            {t(gastos.length === 1 ? 'gastos.headerCountOne' : 'gastos.headerCountOther', { count: gastos.length })} · {t('gastos.headerTotal', { total: fmt(totalGeneral) })}
+          </p>
         </div>
-        <button onClick={openNew} className="btn-primary">+ Nuevo gasto</button>
+        <button onClick={openNew} className="btn-primary">{t('gastos.newGasto')}</button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         {/* Resumen categorías */}
         <div className="card lg:col-span-1">
-          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">Por categoría</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">{t('gastos.porCategoriaTitle')}</div>
           {catOrdenadas.length === 0 ? (
-            <div className="text-sm text-ink-soft text-center py-6">Sin datos aún</div>
+            <div className="text-sm text-ink-soft text-center py-6">{t('gastos.sinDatos')}</div>
           ) : (
             <div className="space-y-2.5">
               {catOrdenadas.slice(0, 7).map(([cat, val]) => {
@@ -347,7 +351,7 @@ export default function Gastos() {
                 return (
                   <div key={cat}>
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-ink-soft truncate max-w-[65%]">{cat}</span>
+                      <span className="text-ink-soft truncate max-w-[65%]">{t(`gastos.categoria.${cat}`, cat)}</span>
                       <span className="font-semibold text-ink">{fmt(val)}</span>
                     </div>
                     <div className="h-1.5 bg-edge rounded-full">
@@ -363,13 +367,13 @@ export default function Gastos() {
         {/* Filtros y tabla */}
         <div className="lg:col-span-2">
           <div className="flex flex-wrap gap-2 mb-4">
-            <input className="input flex-1 min-w-[160px]" placeholder="🔍  Buscar…" value={search} onChange={e => setSearch(e.target.value)} />
+            <input className="input flex-1 min-w-[160px]" placeholder={t('gastos.searchPlaceholder')} value={search} onChange={e => setSearch(e.target.value)} />
             <select className="input w-auto" value={filtroCat} onChange={e => setFiltroCat(e.target.value)}>
-              <option value="">Todas las categorías</option>
-              {CATEGORIAS.map(c => <option key={c} value={c}>{c}</option>)}
+              <option value="">{t('gastos.allCategorias')}</option>
+              {CATEGORIAS.map(c => <option key={c} value={c}>{t(`gastos.categoria.${c}`, c)}</option>)}
             </select>
             <select className="input w-auto" value={filtroObra} onChange={e => setFiltroObra(e.target.value)}>
-              <option value="">Todas las obras</option>
+              <option value="">{t('gastos.allObras')}</option>
               {obras.map(o => <option key={o.id} value={o.id}>{o.nombre}</option>)}
             </select>
             <input className="input w-auto" type="month" value={mes} onChange={e => setMes(e.target.value)} />
@@ -377,19 +381,19 @@ export default function Gastos() {
 
           {(search || filtroCat || filtroObra || mes) && (
             <div className="flex items-center justify-between bg-gold/10 border border-gold/30 rounded-xl px-4 py-2.5 mb-3 text-sm">
-              <span className="text-ink-soft">{filtrados.length} resultado{filtrados.length !== 1 ? 's' : ''}</span>
+              <span className="text-ink-soft">{t(filtrados.length === 1 ? 'gastos.resultadosOne' : 'gastos.resultadosOther', { count: filtrados.length })}</span>
               <span className="font-bold text-ink">{fmt(totalFiltrado)}</span>
             </div>
           )}
 
           {loading ? (
-            <div className="text-ink-soft text-sm py-8 text-center">Cargando…</div>
+            <div className="text-ink-soft text-sm py-8 text-center">{t('gastos.loading')}</div>
           ) : filtrados.length === 0 ? (
             <div className="card text-center py-12">
               <div className="text-4xl mb-2">💸</div>
-              <div className="font-bold text-ink mb-1">{search || filtroCat || filtroObra || mes ? 'Sin resultados' : 'Sin gastos registrados'}</div>
+              <div className="font-bold text-ink mb-1">{search || filtroCat || filtroObra || mes ? t('gastos.noResultsTitle') : t('gastos.noGastosTitle')}</div>
               {!search && !filtroCat && !filtroObra && !mes && (
-                <button onClick={openNew} className="btn-primary mt-4">+ Añadir gasto</button>
+                <button onClick={openNew} className="btn-primary mt-4">{t('gastos.addFirst')}</button>
               )}
             </div>
           ) : (
@@ -397,12 +401,12 @@ export default function Gastos() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
-                    <th className="text-left px-4 py-2.5">Descripción</th>
-                    <th className="text-left px-3 py-2.5 hidden md:table-cell">Categoría</th>
-                    <th className="text-left px-3 py-2.5 hidden lg:table-cell">Fecha</th>
-                    <th className="text-right px-3 py-2.5 hidden lg:table-cell">Base</th>
-                    <th className="text-center px-2 py-2.5 hidden lg:table-cell">IVA</th>
-                    <th className="text-right px-4 py-2.5">Total</th>
+                    <th className="text-left px-4 py-2.5">{t('gastos.table.descripcion')}</th>
+                    <th className="text-left px-3 py-2.5 hidden md:table-cell">{t('gastos.table.categoria')}</th>
+                    <th className="text-left px-3 py-2.5 hidden lg:table-cell">{t('gastos.table.fecha')}</th>
+                    <th className="text-right px-3 py-2.5 hidden lg:table-cell">{t('gastos.table.base')}</th>
+                    <th className="text-center px-2 py-2.5 hidden lg:table-cell">{t('gastos.table.iva')}</th>
+                    <th className="text-right px-4 py-2.5">{t('gastos.table.total')}</th>
                     <th className="px-3 py-2.5" />
                   </tr>
                 </thead>
@@ -414,7 +418,7 @@ export default function Gastos() {
                         {g.proveedor && <div className="text-xs text-ink-soft mt-0.5">{g.proveedor}</div>}
                       </td>
                       <td className="px-3 py-3 hidden md:table-cell">
-                        <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full">{g.categoria}</span>
+                        <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full">{t(`gastos.categoria.${g.categoria}`, g.categoria)}</span>
                       </td>
                       <td className="px-3 py-3 hidden lg:table-cell text-ink-soft text-xs">
                         {g.fecha ? new Date(g.fecha + 'T12:00:00').toLocaleDateString('es-ES') : '—'}
@@ -427,7 +431,7 @@ export default function Gastos() {
                       </td>
                       <td className="px-4 py-3 text-right font-bold text-ink">{fmt(g.importe)}</td>
                       <td className="px-3 py-3 text-right whitespace-nowrap">
-                        <button onClick={() => openEdit(g)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">Editar</button>
+                        <button onClick={() => openEdit(g)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">{t('gastos.editar')}</button>
                         <button onClick={() => remove(g.id, g.descripcion)} className="text-ink-soft/40 hover:text-red-500 text-xs">×</button>
                       </td>
                     </tr>
@@ -436,7 +440,7 @@ export default function Gastos() {
                 <tfoot>
                   <tr className="bg-edge border-t-2 border-page">
                     <td colSpan="5" className="px-4 py-2.5 text-xs font-bold text-ink-soft uppercase tracking-wide">
-                      Total ({filtrados.length})
+                      {t('gastos.totalRow', { count: filtrados.length })}
                     </td>
                     <td className="px-4 py-2.5 text-right font-bold text-ink">{fmt(totalFiltrado)}</td>
                     <td />
@@ -457,7 +461,7 @@ export default function Gastos() {
           <div className="relative max-w-4xl max-h-[90vh] w-full" onClick={e => e.stopPropagation()}>
             <img
               src={imgPreview}
-              alt="Factura ampliada"
+              alt={t('gastos.lightboxAlt')}
               className="w-full h-full object-contain rounded-xl shadow-2xl"
               style={{ maxHeight: '85vh' }}
             />
@@ -474,7 +478,7 @@ export default function Gastos() {
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg max-h-[94vh] flex flex-col">
             <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar gasto' : 'Nuevo gasto'}</h2>
+              <h2 className="text-lg font-bold text-ink">{editId ? t('gastos.form.editTitle') : t('gastos.form.newTitle')}</h2>
               <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
 
@@ -482,7 +486,7 @@ export default function Gastos() {
 
               {/* ── Zona carga ── */}
               <div>
-                <label className="label">📎 Foto de factura / ticket o PDF (auto-rellena los campos)</label>
+                <label className="label">{t('gastos.form.uploadLabel')}</label>
                 <div
                   onClick={() => fileRef.current?.click()}
                   onDragOver={e => { e.preventDefault(); setDragging(true) }}
@@ -500,7 +504,7 @@ export default function Gastos() {
                           type="button"
                           onClick={e => { e.stopPropagation(); setLightbox(true) }}
                           className="absolute inset-0 flex items-center justify-center bg-navy/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
-                          title="Ampliar factura"
+                          title={t('gastos.form.ampliar')}
                         >
                           <span className="text-white text-xl">🔍</span>
                         </button>
@@ -509,16 +513,16 @@ export default function Gastos() {
                         {leyendo ? (
                           <div className="flex items-center gap-2 text-sm text-ink">
                             <div className="w-4 h-4 border-2 border-gold border-t-transparent rounded-full animate-spin" />
-                            Analizando con IA…
+                            {t('gastos.form.analizando')}
                           </div>
                         ) : (
                           <p className={`text-xs leading-relaxed ${ocrMsg.startsWith('✅') ? 'text-green-700' : 'text-orange-600'}`}>{ocrMsg}</p>
                         )}
                         <div className="flex items-center gap-3 mt-1">
                           <button type="button" onClick={e => { e.stopPropagation(); setLightbox(true) }}
-                            className="text-xs text-gold hover:text-gold-dark font-semibold">🔍 Ampliar</button>
+                            className="text-xs text-gold hover:text-gold-dark font-semibold">{t('gastos.form.ampliar')}</button>
                           <button type="button" onClick={e => { e.stopPropagation(); resetOcr(); fileRef.current.value = '' }}
-                            className="text-xs text-ink-soft hover:text-red-500">Cambiar archivo</button>
+                            className="text-xs text-ink-soft hover:text-red-500">{t('gastos.form.cambiarArchivo')}</button>
                         </div>
                       </div>
                     </div>
@@ -530,8 +534,8 @@ export default function Gastos() {
                   ) : (
                     <div className="py-6 text-center">
                       <div className="text-3xl mb-1">📄</div>
-                      <div className="text-sm text-ink-soft">Arrastra aquí o haz clic para subir</div>
-                      <div className="text-xs text-ink-soft/60 mt-0.5">JPG, PNG, WEBP, PDF · La IA extrae los datos automáticamente</div>
+                      <div className="text-sm text-ink-soft">{t('gastos.form.dropHint')}</div>
+                      <div className="text-xs text-ink-soft/60 mt-0.5">{t('gastos.form.dropSubhint')}</div>
                     </div>
                   )}
                 </div>
@@ -541,32 +545,32 @@ export default function Gastos() {
               {/* ── Campos ── */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Fecha *</label>
+                  <label className="label">{t('gastos.form.fechaLabel')}</label>
                   <input className="input" type="date" value={form.fecha} onChange={e => setF('fecha', e.target.value)} required />
                 </div>
                 <div>
-                  <label className="label">Categoría *</label>
+                  <label className="label">{t('gastos.form.categoriaLabel')}</label>
                   <select className="input" value={form.categoria} onChange={e => setF('categoria', e.target.value)}>
-                    {CATEGORIAS.map(c => <option key={c} value={c}>{c}</option>)}
+                    {CATEGORIAS.map(c => <option key={c} value={c}>{t(`gastos.categoria.${c}`, c)}</option>)}
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="label">Descripción / Concepto *</label>
-                <input className="input" value={form.descripcion} onChange={e => setF('descripcion', e.target.value)} required placeholder="¿Qué se compró?" />
+                <label className="label">{t('gastos.form.descripcionLabel')}</label>
+                <input className="input" value={form.descripcion} onChange={e => setF('descripcion', e.target.value)} required placeholder={t('gastos.form.descripcionPlaceholder')} />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Importe base (sin IVA) *</label>
+                  <label className="label">{t('gastos.form.baseLabel')}</label>
                   <input className="input" type="number" min="0" step="0.01" value={form.importe_base}
                     onChange={e => setF('importe_base', e.target.value)} required placeholder="0.00" />
                 </div>
                 <div>
-                  <label className="label">IVA %</label>
+                  <label className="label">{t('gastos.form.ivaLabel')}</label>
                   <select className="input" value={form.iva_pct} onChange={e => setF('iva_pct', e.target.value)}>
-                    {IVA_OPTS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+                    {IVA_OPTS.map(o => <option key={o.value} value={o.value}>{t(`gastos.ivaOpts.${o.key}`)}</option>)}
                   </select>
                 </div>
               </div>
@@ -574,49 +578,49 @@ export default function Gastos() {
               {/* Desglose BASE / IVA / TOTAL */}
               <div className="grid grid-cols-3 gap-2 bg-navy rounded-xl overflow-hidden text-center text-xs">
                 <div className="py-3">
-                  <div className="text-ink-soft/60 uppercase tracking-widest mb-1">Base</div>
+                  <div className="text-ink-soft/60 uppercase tracking-widest mb-1">{t('gastos.form.baseCol')}</div>
                   <div className="font-bold text-white">{fmt(baseN)}</div>
                 </div>
                 <div className="py-3 border-x border-white/10">
-                  <div className="text-ink-soft/60 uppercase tracking-widest mb-1">IVA {pctN}%</div>
+                  <div className="text-ink-soft/60 uppercase tracking-widest mb-1">{t('gastos.form.ivaCol', { pct: pctN })}</div>
                   <div className="font-bold text-white">{fmt(ivaN)}</div>
                 </div>
                 <div className="py-3">
-                  <div className="text-gold uppercase tracking-widest mb-1 font-semibold">Total</div>
+                  <div className="text-gold uppercase tracking-widest mb-1 font-semibold">{t('gastos.form.totalCol')}</div>
                   <div className="font-bold text-gold text-sm">{fmt(totalN)}</div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Proveedor</label>
-                  <input className="input" value={form.proveedor} onChange={e => setF('proveedor', e.target.value)} placeholder="Leroy Merlin, etc." />
+                  <label className="label">{t('gastos.form.proveedorLabel')}</label>
+                  <input className="input" value={form.proveedor} onChange={e => setF('proveedor', e.target.value)} placeholder={t('gastos.form.proveedorPlaceholder')} />
                 </div>
                 <div>
-                  <label className="label">Nº factura / ticket</label>
+                  <label className="label">{t('gastos.form.facturaNumLabel')}</label>
                   <input className="input" value={form.factura_num} onChange={e => setF('factura_num', e.target.value)} />
                 </div>
               </div>
 
               <div>
-                <label className="label">Obra vinculada</label>
+                <label className="label">{t('gastos.form.obraLabel')}</label>
                 <select className="input" value={form.obra_id} onChange={e => setF('obra_id', e.target.value)}>
-                  <option value="">Sin obra</option>
+                  <option value="">{t('gastos.form.sinObra')}</option>
                   {obras.map(o => <option key={o.id} value={o.id}>{o.nombre}</option>)}
                 </select>
               </div>
 
               <div>
-                <label className="label">Notas</label>
+                <label className="label">{t('gastos.form.notasLabel')}</label>
                 <textarea className="input resize-none h-14 text-sm" value={form.notas} onChange={e => setF('notas', e.target.value)} />
               </div>
 
               {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
 
               <div className="flex gap-3 pt-1">
-                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">Cancelar</button>
+                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">{t('gastos.form.cancel')}</button>
                 <button type="submit" disabled={saving || leyendo} className="btn-primary flex-1">
-                  {saving ? 'Guardando…' : 'Guardar gasto'}
+                  {saving ? t('gastos.form.saving') : t('gastos.form.save')}
                 </button>
               </div>
             </form>

@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 
-const ESPECIALIDADES = [
+const ESPECIALIDADES_KEYS = [
   'Reformas integrales', 'Baños', 'Cocinas', 'Pintura', 'Pladur',
   'Electricidad', 'Fontanería', 'Carpintería', 'Alicatados', 'Fachadas',
 ]
 
 export default function OnboardingWizard() {
+  const { t } = useTranslation()
   const { updateProfile, signOut } = useAuth()
   const navigate = useNavigate()
 
@@ -35,8 +37,8 @@ export default function OnboardingWizard() {
 
   function validate() {
     const errs = {}
-    if (!data.nombre.trim())        errs.nombre        = 'El nombre es obligatorio.'
-    if (!data.empresa_nombre.trim()) errs.empresa_nombre = 'El nombre de empresa es obligatorio.'
+    if (!data.nombre.trim())        errs.nombre        = t('onboardingWizard.nombreObligatorio')
+    if (!data.empresa_nombre.trim()) errs.empresa_nombre = t('onboardingWizard.empresaObligatoria')
     setErrors(errs)
     return Object.keys(errs).length === 0
   }
@@ -66,14 +68,14 @@ export default function OnboardingWizard() {
           <span className="text-gold">X</span>
           <span className="text-ink">ANDER</span>
         </div>
-        <p className="text-sm text-ink-soft">Cuéntanos quién eres — solo lo esencial</p>
+        <p className="text-sm text-ink-soft">{t('onboardingWizard.cuentanosQuienEres')}</p>
       </div>
 
       {/* Card */}
       <div className="card w-full max-w-md">
-        <h2 className="text-lg font-bold text-ink mb-1">Bienvenido a XANDER</h2>
+        <h2 className="text-lg font-bold text-ink mb-1">{t('onboardingWizard.bienvenido')}</h2>
         <p className="text-sm text-ink-soft mb-6">
-          Rellena dos datos y ya puedes empezar. Puedes completar el resto del perfil más tarde.
+          {t('onboardingWizard.rellenaDatos')}
         </p>
 
         <div className="space-y-5">
@@ -81,7 +83,7 @@ export default function OnboardingWizard() {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="label">
-                Nombre <span className="text-red-500">*</span>
+                {t('onboardingWizard.nombreLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 className={`input ${errors.nombre ? 'border-red-400 focus:ring-red-300' : ''}`}
@@ -92,7 +94,7 @@ export default function OnboardingWizard() {
               {errors.nombre && <p className="text-red-500 text-xs mt-1">{errors.nombre}</p>}
             </div>
             <div>
-              <label className="label">Apellidos</label>
+              <label className="label">{t('onboardingWizard.apellidosLabel')}</label>
               <input
                 className="input"
                 value={data.apellidos}
@@ -105,7 +107,7 @@ export default function OnboardingWizard() {
           {/* Empresa */}
           <div>
             <label className="label">
-              Nombre de empresa <span className="text-red-500">*</span>
+              {t('onboardingWizard.nombreEmpresaLabel')} <span className="text-red-500">*</span>
             </label>
             <input
               className={`input ${errors.empresa_nombre ? 'border-red-400 focus:ring-red-300' : ''}`}
@@ -119,12 +121,12 @@ export default function OnboardingWizard() {
           {/* Especialidades — opcional */}
           <div>
             <label className="label">
-              Especialidades
-              <span className="text-ink-soft font-normal ml-1">(opcional)</span>
+              {t('onboardingWizard.especialidadesLabel')}
+              <span className="text-ink-soft font-normal ml-1">{t('onboardingWizard.opcional')}</span>
             </label>
-            <p className="text-xs text-ink-soft mb-2">¿Qué trabajos realizas habitualmente?</p>
+            <p className="text-xs text-ink-soft mb-2">{t('onboardingWizard.queTrabajos')}</p>
             <div className="flex flex-wrap gap-2">
-              {ESPECIALIDADES.map(e => (
+              {ESPECIALIDADES_KEYS.map(e => (
                 <button key={e} type="button"
                   onClick={() => toggleEsp(e)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all border ${
@@ -132,7 +134,7 @@ export default function OnboardingWizard() {
                       ? 'bg-navy text-gold border-navy'
                       : 'bg-surface text-ink-soft border-edge hover:border-navy'
                   }`}>
-                  {e}
+                  {t(`onboardingWizard.especialidad.${e}`, e)}
                 </button>
               ))}
             </div>
@@ -142,16 +144,16 @@ export default function OnboardingWizard() {
         {/* Aviso datos adicionales */}
         <div className="mt-6 bg-page rounded-lg px-4 py-3 text-xs text-ink-soft flex gap-2">
           <span>ℹ️</span>
-          <span>Puedes añadir NIF, dirección, teléfonos y más en <strong>Mi Empresa</strong> cuando quieras. Son necesarios para imprimir presupuestos y facturas completos.</span>
+          <span><Trans i18nKey="onboardingWizard.avisoDatosAdicionales" components={{ strong: <strong /> }} /></span>
         </div>
 
         {/* Botones */}
         <div className="flex justify-between mt-6 pt-4 border-t border-edge">
           <button onClick={signOut} className="text-sm text-ink-soft hover:text-ink">
-            Salir
+            {t('onboardingWizard.salir')}
           </button>
           <button onClick={finish} disabled={saving} className="btn-gold">
-            {saving ? 'Guardando...' : '¡Empezar! →'}
+            {saving ? t('onboardingWizard.guardando') : t('onboardingWizard.empezar')}
           </button>
         </div>
       </div>

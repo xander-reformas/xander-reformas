@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 
 /**
@@ -8,6 +9,7 @@ import { useRegisterSW } from 'virtual:pwa-register/react'
  * Se monta una única vez, a nivel global (fuera de las rutas).
  */
 export default function PWAUpdateToast() {
+  const { t } = useTranslation()
   const [showOfflineReady, setShowOfflineReady] = useState(false)
 
   const {
@@ -52,20 +54,20 @@ export default function PWAUpdateToast() {
         <div className="bg-surface border border-edge rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 max-w-xs animate-in fade-in slide-in-from-bottom-2">
           <span className="text-lg flex-shrink-0">⬆️</span>
           <div className="flex-1 text-sm text-ink">
-            Hay una nueva versión de XANDER disponible.
+            {t('pwaUpdate.nuevaVersion')}
           </div>
           <div className="flex flex-col gap-1 flex-shrink-0">
             <button
               onClick={actualizar}
               className="bg-gold text-navy text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-gold-light transition-colors"
             >
-              Actualizar
+              {t('pwaUpdate.actualizar')}
             </button>
             <button
               onClick={descartarActualizacion}
               className="text-[11px] text-ink-soft hover:text-ink"
             >
-              Ahora no
+              {t('pwaUpdate.ahoraNo')}
             </button>
           </div>
         </div>
@@ -75,7 +77,7 @@ export default function PWAUpdateToast() {
         <div className="bg-surface border border-edge rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 max-w-xs">
           <span className="text-lg flex-shrink-0">✓</span>
           <div className="flex-1 text-sm text-ink">
-            XANDER ya funciona sin conexión.
+            {t('pwaUpdate.yaFuncionaOffline')}
           </div>
           <button onClick={cerrarOfflineReady} className="text-ink-soft hover:text-ink text-sm flex-shrink-0">
             ✕

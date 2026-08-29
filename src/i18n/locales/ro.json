@@ -151,5 +151,1693 @@
         "until": "Până la"
       }
     }
+  },
+  "clientes": {
+    "title": "Clienți",
+    "countOne": "{{count}} client în total",
+    "countOther": "{{count}} clienți în total",
+    "newCliente": "+ Client nou",
+    "searchPlaceholder": "🔍  Caută după nume, email, oraș…",
+    "loading": "Se încarcă clienții…",
+    "noResultsTitle": "Fără rezultate",
+    "noResultsHint": "Încearcă altă căutare",
+    "noClientesTitle": "Încă nu ai niciun client",
+    "noClientesHint": "Adaugă primul tău client pentru a începe să gestionezi proiecte și oferte",
+    "addFirst": "+ Adaugă client",
+    "table": {
+      "nombreNif": "Nume / CIF",
+      "telefono": "Telefon",
+      "email": "Email",
+      "ciudad": "Oraș"
+    },
+    "editar": "Editează",
+    "eliminar": "Șterge",
+    "confirmDelete": "Ștergi \"{{nombre}}\"? Această acțiune nu poate fi anulată.",
+    "form": {
+      "editTitle": "Editează clientul",
+      "newTitle": "Client nou",
+      "nombreLabel": "Nume *",
+      "nifLabel": "CIF / CNP",
+      "telefonoLabel": "Telefon",
+      "emailLabel": "Email",
+      "direccionLabel": "Adresă",
+      "cpLabel": "Cod poștal",
+      "ciudadLabel": "Oraș",
+      "notasLabel": "Note interne",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "save": "Salvează clientul"
+    }
+  },
+  "rentabilidad": {
+    "title": "Profitabilitate pe șantiere",
+    "subtitle": "Comparație buget vs cost real · marja fiecărui proiect",
+    "totalPresupuestado": "Total bugetat",
+    "costeRealAcumulado": "Cost real acumulat",
+    "beneficioNeto": "Profit net",
+    "margenGlobal": "Marjă globală",
+    "distribucionTitle": "Distribuția profitabilității",
+    "dist": {
+      "excelente": "Excelentă",
+      "buena": "Bună",
+      "justa": "Acceptabilă",
+      "negativa": "Negativă"
+    },
+    "allStates": "Toate stările",
+    "orden": {
+      "margenDesc": "Marjă mai mare mai întâi",
+      "margenAsc": "Marjă mai mică mai întâi",
+      "presupuestoDesc": "Buget mai mare mai întâi",
+      "nombre": "După nume"
+    },
+    "loading": "Se încarcă șantierele…",
+    "emptyTitle": "Niciun șantier de analizat",
+    "emptyHint": "Creează șantiere și adaugă costuri pentru a vedea profitabilitatea",
+    "presupuestado": "Bugetat",
+    "costeReal": "Cost real",
+    "facturado": "Facturat",
+    "beneficio": "Profit",
+    "sinDato": "Fără date",
+    "sinFactura": "Fără factură",
+    "margen": "marjă",
+    "tipFaltaInfo": "💡 Adaugă bugetul total și costul real al șantierului pentru a vedea profitabilitatea"
+  },
+  "presupuestos": {
+    "estado": {
+      "borrador": "Ciornă",
+      "enviado": "Trimisă",
+      "aceptado": "Acceptată",
+      "rechazado": "Respinsă",
+      "expirado": "Expirată"
+    },
+    "form": {
+      "editTitle": "Editează oferta",
+      "newTitle": "Ofertă nouă",
+      "numeroLabel": "Număr *",
+      "referenciaLabel": "Referință",
+      "fechaLabel": "Dată",
+      "validezLabel": "Valabilitate (zile)",
+      "clienteLabel": "Client",
+      "sinCliente": "Fără client",
+      "obraLabel": "Șantier",
+      "sinObra": "Fără șantier",
+      "estadoLabel": "Stare",
+      "partidasLabel": "Poziții ofertă",
+      "addPartida": "+ Adaugă poziție",
+      "tituloLabel": "Descriere / titlu",
+      "tituloPlaceholder": "Renovare baie — demolare și placare",
+      "unidadLabel": "Unitate",
+      "cantidadLabel": "Cantitate",
+      "precioUdLabel": "Preț / unitate (€)",
+      "importeLabel": "Sumă (€)",
+      "detalleLabel": "Detaliu (opțional)",
+      "detallePlaceholder": "Include: îndepărtarea placajului existent, placaj nou până la tavan…",
+      "noIncluidoLabel": "Neinclus (o linie per punct)",
+      "condicionesLabel": "Condiții (o linie per punct)",
+      "notasLabel": "Note interne",
+      "ivaLabel": "TVA (%)",
+      "ivaOptions": {
+        "sinIva": "0% — Fără TVA",
+        "residencial": "10% — Rezidențial",
+        "general": "21% — Comercial / Construcție nouă / Companie / Investitor"
+      },
+      "descuentoLabel": "Reducere (%)",
+      "baseImponible": "Bază impozabilă",
+      "descuentoLine": "Reducere ({{pct}}%)",
+      "ivaLine": "TVA ({{pct}}%)",
+      "total": "TOTAL",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "save": "Salvează oferta",
+      "numeroRequerido": "Numărul ofertei este obligatoriu"
+    },
+    "list": {
+      "title": "Oferte",
+      "countOne": "{{count}} ofertă",
+      "countOther": "{{count}} oferte",
+      "newPresupuesto": "+ Ofertă nouă",
+      "aceptados": "✓ Oferte acceptate:",
+      "searchPlaceholder": "🔍  Caută nr., client, șantier…",
+      "allStates": "Toate stările",
+      "loading": "Se încarcă ofertele…",
+      "noResultsTitle": "Fără rezultate",
+      "noPresupuestosTitle": "Încă nu ai nicio ofertă",
+      "noPresupuestosHint": "Creează prima ta ofertă profesională",
+      "table": {
+        "numero": "Număr",
+        "clienteObra": "Client / Șantier",
+        "fecha": "Dată",
+        "vence": "Expiră",
+        "estado": "Stare",
+        "total": "Total"
+      },
+      "firmadoTitle": "Semnat de {{nombre}} pe {{fecha}}",
+      "vencido": "Expirată",
+      "venceHoy": "Expiră azi",
+      "diasRestanteOne": "{{count}}z rămasă",
+      "diasRestanteOther": "{{count}}z rămase",
+      "crearFactura": "📄 Factură",
+      "crearFacturaTitle": "Creează factură din această ofertă",
+      "firmar": "✍️ Semnează",
+      "firmarTitle": "Semnează și acceptă această ofertă",
+      "editar": "Editează",
+      "eliminar": "Șterge",
+      "confirmDelete": "Ștergi oferta {{numero}}?"
+    },
+    "firmarModalTitle": "Semnează oferta {{numero}}"
+  },
+  "facturas": {
+    "estado": {
+      "borrador": "Ciornă",
+      "enviada": "Trimisă",
+      "vista": "Vizualizată",
+      "pagada": "Plătită",
+      "vencida": "Restantă",
+      "anulada": "Anulată"
+    },
+    "form": {
+      "editTitle": "Editează factura",
+      "newTitle": "Factură nouă",
+      "verifactuBadge": "🔒 Verifactu",
+      "fromPresupuesto": "📋 Creată din oferta {{numero}}",
+      "lockedNotice": "🔒 Această factură este deja înregistrată în registrul Verifactu (RD 1007/2023): numărul, data, liniile, TVA, reducerea, reținerea și clientul nu pot fi modificate. Poți schimba doar starea, șantierul asociat, scadența sau notele. Pentru a corecta o cifră economică, emite o factură rectificativă.",
+      "importarPresupuestoLabel": "⚡ Importă din ofertă acceptată",
+      "crearDesdeCero": "Creează factura de la zero",
+      "numeroLabel": "Număr *",
+      "estadoLabel": "Stare",
+      "fechaEmisionLabel": "Data emiterii",
+      "vencimientoLabel": "Scadență",
+      "clienteLabel": "Client",
+      "sinCliente": "Fără client",
+      "obraLabel": "Șantier",
+      "sinObra": "Fără șantier",
+      "lineasLabel": "Linii factură",
+      "addLinea": "+ Adaugă linie",
+      "descripcionLabel": "Descriere",
+      "descripcionPlaceholder": "Lucrări executate la renovarea băii",
+      "unidadLabel": "Unitate",
+      "cantidadLabel": "Cantitate",
+      "precioUdLabel": "Preț / unitate (€)",
+      "importeLabel": "Sumă (€)",
+      "detalleLabel": "Detaliu (opțional)",
+      "notasLabel": "Note / observații",
+      "notasPlaceholder": "Condiții de plată, cont bancar etc.",
+      "ivaLabel": "TVA (%)",
+      "ivaOptions": {
+        "sinIva": "0% — Fără TVA",
+        "residencial": "10% — Rezidențial",
+        "general": "21% — Comercial / Construcție nouă / Companie / Investitor"
+      },
+      "dtoLabel": "Reducere (%)",
+      "retLabel": "Reținere fiscală (%)",
+      "baseImponible": "Bază impozabilă",
+      "descuentoLine": "Reducere ({{pct}}%)",
+      "ivaLine": "TVA ({{pct}}%)",
+      "retLine": "Reținere fiscală ({{pct}}%)",
+      "total": "TOTAL",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "save": "Salvează factura",
+      "numeroRequerido": "Numărul facturii este obligatoriu"
+    },
+    "vista": {
+      "title": "Factura {{numero}}",
+      "loading": "Se încarcă…",
+      "facturarA": "Facturat către",
+      "sinCliente": "Fără client",
+      "descripcionCol": "Descriere",
+      "cantidadCol": "Cant.",
+      "precioUdCol": "Preț/unit.",
+      "importeCol": "Sumă",
+      "baseImponible": "Bază impozabilă",
+      "descuentoLine": "Reducere ({{pct}}%)",
+      "ivaLine": "TVA ({{pct}}%)",
+      "retLine": "Reținere fiscală ({{pct}}%)",
+      "total": "TOTAL",
+      "fecha": "Dată: {{fecha}}",
+      "vencimiento": "Scadență: {{fecha}}",
+      "obra": "Șantier: {{nombre}}",
+      "tel": "Tel: {{tel}}",
+      "nif": "CIF: {{nif}}",
+      "empresaDefault": "Compania mea",
+      "veriTitle": "VERI*FACTU",
+      "veriDesc": "Factură verificabilă pe portalul electronic al AEAT.",
+      "veriRef": "Ref.: {{uuid}}",
+      "registradaTitle": "Factură înregistrată în sistemul Verifactu (RD 1007/2023)",
+      "hashLabel": "Hash: {{hash}}…",
+      "noEnviada": "⚠️ Încă nu a fost trimisă la AEAT — verifică starea înainte de a o preda clientului.",
+      "aeatError": "⚠️ AEAT: {{error}}",
+      "cerrar": "Închide",
+      "imprimir": "🖨️ Imprimă / PDF"
+    },
+    "cobro": {
+      "title": "💳 Plată cu cardul — {{numero}}",
+      "desc": "Partajează acest link cu clientul pentru a plăti factura cu cardul. Când Stripe confirmă plata, factura trece automat în starea Plătită.",
+      "copiado": "✓ Copiat",
+      "copiar": "📋 Copiază linkul",
+      "abrirEnlace": "Deschide linkul de plată"
+    },
+    "list": {
+      "title": "Facturi",
+      "countOne": "{{count}} factură",
+      "countOther": "{{count}} facturi",
+      "newFactura": "+ Factură nouă",
+      "facturadoLabel": "Facturat (total)",
+      "cobradoLabel": "Încasat",
+      "pendienteLabel": "În așteptare de încasare",
+      "facturasCountOne": "{{count}} factură",
+      "facturasCountOther": "{{count}} facturi",
+      "pagadasCountOne": "{{count}} plătită",
+      "pagadasCountOther": "{{count}} plătite",
+      "circulacionCountOne": "{{count}} în circulație",
+      "circulacionCountOther": "{{count}} în circulație",
+      "todas": "Toate ({{count}})",
+      "searchPlaceholder": "🔍  Caută nr., client…",
+      "loading": "Se încarcă facturile…",
+      "noResultsTitle": "Fără rezultate",
+      "noFacturasTitle": "Încă nu ai nicio factură",
+      "table": {
+        "numero": "Număr",
+        "cliente": "Client",
+        "fecha": "Dată",
+        "vencimiento": "Scadență",
+        "estado": "Stare",
+        "total": "Total"
+      },
+      "anuladaBadge": "🚫 anulată",
+      "anuladaTitle": "Factură anulată",
+      "lockedTitle": "Înregistrată în registrul Verifactu — date economice blocate",
+      "pendienteAeatTitle": "Trimisă la AEAT, se așteaptă confirmarea",
+      "aceptadaAeatTitle": "Acceptată de AEAT",
+      "aeatEstadoTitle": "AEAT: {{estado}}",
+      "verFactura": "🧾 Factură",
+      "cobrando": "Se generează…",
+      "cobrar": "💳 Încasează",
+      "editar": "Editează",
+      "ver": "Vezi",
+      "anuladaLabel": "Anulată",
+      "anularBtn": "🚫 Anulează",
+      "anularTitle": "Anulează această factură (rămâne înregistrată ca anulată, nu se șterge)",
+      "eliminar": "Șterge",
+      "confirmDelete": "Ștergi factura {{numero}}?",
+      "cannotDeleteLocked": "Această factură este deja înregistrată în registrul Verifactu și nu poate fi ștearsă. Emite o factură rectificativă sau anuleaz-o.",
+      "anularPrompt": "Vei anula factura {{numero}}. Rămâne înregistrată ca anulată în registrul Verifactu (nu se șterge). Motiv? (opțional)",
+      "noEnlacePago": "Nu s-a putut genera linkul de plată."
+    }
+  },
+  "cobros": {
+    "title": "Încasări",
+    "subtitle": "Control facturi în așteptare și plătite",
+    "pendienteCobroLabel": "În așteptare de încasare",
+    "totalCobradoLabel": "Total încasat",
+    "vencidasSinCobrarLabel": "Restante neîncasate",
+    "facturaCountOne": "{{count}} factură",
+    "facturaCountOther": "{{count}} facturi",
+    "facturaPagadaCountOne": "{{count}} factură plătită",
+    "facturaPagadaCountOther": "{{count}} facturi plătite",
+    "todoAlDia": "Totul la zi ✓",
+    "alertas": {
+      "title": "Alerte de încasare",
+      "urgentesOne": "{{count}} factură urgentă",
+      "urgentesOther": "{{count}} facturi urgente",
+      "rojo": "Restantă",
+      "naranja": "Urgentă (≤7 zile)",
+      "amarillo": "Apropiată (8-30 zile)",
+      "verde": "La zi (>30 zile)",
+      "vencidaHace": "Restantă de {{dias}}z",
+      "venceHoy": "Scadentă azi",
+      "venceEn": "Scadentă în {{dias}}z",
+      "cobrar": "Încasează"
+    },
+    "graficoTitle": "Încasări pe lună",
+    "tabPendientesOne": "În așteptare ({{count}})",
+    "tabPendientesOther": "În așteptare ({{count}})",
+    "tabCobradasOne": "Încasate ({{count}})",
+    "tabCobradasOther": "Încasate ({{count}})",
+    "loading": "Se încarcă…",
+    "emptyPendientesTitle": "Totul încasat! Nicio factură în așteptare",
+    "emptyPendientesHint": "Bună treabă 💪",
+    "emptyCobradasTitle": "Încă nu există încasări înregistrate",
+    "emptyCobradasHint": "Facturile marcate ca plătite vor apărea aici",
+    "emitida": "Emisă: {{fecha}}",
+    "vence": "Scadență: {{fecha}}",
+    "venceVencidaHace": " (restantă de {{dias}} zile)",
+    "venceHoyParen": " (scadentă azi)",
+    "venceEnDias": " (în {{dias}} zile)",
+    "marcarCobrada": "✓ Marchează încasată",
+    "desmarcar": "Anulează marcajul",
+    "confirmarDesmarcar": "Marchezi această factură ca trimisă (în așteptarea încasării)?",
+    "modal": {
+      "title": "Confirmă încasarea",
+      "fechaLabel": "Data încasării",
+      "metodoLabel": "Metodă de plată",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "confirmar": "✓ Confirmă încasarea"
+    },
+    "metodo": {
+      "Transferencia": "Transfer bancar",
+      "Efectivo": "Numerar",
+      "Bizum": "Bizum",
+      "Cheque": "Cec",
+      "Tarjeta": "Card"
+    },
+    "notaCobrado": "✓ Încasat pe {{fecha}} prin {{metodo}}"
+  },
+  "gastos": {
+    "categoria": {
+      "Materiales": "Materiale",
+      "Mano de obra / Subcontratas": "Manoperă / Subcontractanți",
+      "Herramientas y equipos": "Unelte și echipamente",
+      "Transporte y combustible": "Transport și combustibil",
+      "Publicidad y marketing": "Publicitate și marketing",
+      "Seguros": "Asigurări",
+      "Gestoría / Asesoría": "Contabilitate / Consultanță",
+      "Alquiler": "Chirie",
+      "Formación": "Formare",
+      "Comunicaciones": "Comunicații",
+      "Otros": "Altele"
+    },
+    "ivaOpts": {
+      "exento": "0% — Scutit",
+      "superreducido": "4% — Super-redus",
+      "reducido": "10% — Redus (locuință)",
+      "general": "21% — General (comercial / companie)"
+    },
+    "setup": {
+      "title": "Cheltuieli",
+      "stepTitle": "Pas prealabil: creează tabelul în Supabase",
+      "stepDescPre": "Mergi la",
+      "stepDescPost": "și execută:",
+      "hintAlter": "Dacă tabelul exista deja, execută cele 2 linii ALTER TABLE de la finalul fișierului pentru a adăuga coloanele de TVA."
+    },
+    "title": "Cheltuieli",
+    "headerCountOne": "{{count}} cheltuială",
+    "headerCountOther": "{{count}} cheltuieli",
+    "headerTotal": "Total: {{total}}",
+    "newGasto": "+ Cheltuială nouă",
+    "porCategoriaTitle": "Pe categorie",
+    "sinDatos": "Încă fără date",
+    "searchPlaceholder": "🔍  Caută…",
+    "allCategorias": "Toate categoriile",
+    "allObras": "Toate șantierele",
+    "resultadosOne": "{{count}} rezultat",
+    "resultadosOther": "{{count}} rezultate",
+    "loading": "Se încarcă…",
+    "noResultsTitle": "Fără rezultate",
+    "noGastosTitle": "Nicio cheltuială înregistrată",
+    "addFirst": "+ Adaugă cheltuială",
+    "table": {
+      "descripcion": "Descriere",
+      "categoria": "Categorie",
+      "fecha": "Dată",
+      "base": "Bază",
+      "iva": "TVA",
+      "total": "Total"
+    },
+    "totalRow": "Total ({{count}})",
+    "editar": "Editează",
+    "confirmDelete": "Ștergi \"{{desc}}\"?",
+    "lightboxAlt": "Factură mărită",
+    "form": {
+      "editTitle": "Editează cheltuiala",
+      "newTitle": "Cheltuială nouă",
+      "uploadLabel": "📎 Fotografie factură / bon sau PDF (completează automat câmpurile)",
+      "analizando": "Se analizează cu AI…",
+      "ampliar": "🔍 Mărește",
+      "cambiarArchivo": "Schimbă fișierul",
+      "dropHint": "Trage aici sau apasă pentru a încărca",
+      "dropSubhint": "JPG, PNG, WEBP, PDF · AI extrage datele automat",
+      "leyendoPdf": "📄 Se citește PDF-ul… (poate dura câteva secunde)",
+      "leyendoFactura": "🔍 Se citește factura…",
+      "soloImagenesPdf": "⚠️ Doar imagini sau PDF",
+      "datosExtraidos": "✅ Date extrase. Verifică și ajustează dacă este necesar.",
+      "noPudoLeer": "⚠️ Nu s-a putut citi automat. Completează câmpurile manual.",
+      "fechaLabel": "Dată *",
+      "categoriaLabel": "Categorie *",
+      "descripcionLabel": "Descriere / Concept *",
+      "descripcionPlaceholder": "Ce s-a cumpărat?",
+      "baseLabel": "Sumă de bază (fără TVA) *",
+      "ivaLabel": "TVA %",
+      "baseCol": "Bază",
+      "ivaCol": "TVA {{pct}}%",
+      "totalCol": "Total",
+      "proveedorLabel": "Furnizor",
+      "proveedorPlaceholder": "Leroy Merlin etc.",
+      "facturaNumLabel": "Nr. factură / bon",
+      "obraLabel": "Șantier asociat",
+      "sinObra": "Fără șantier",
+      "notasLabel": "Note",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "save": "Salvează cheltuiala"
+    }
+  },
+  "empleados": {
+    "title": "Angajați și echipă",
+    "subtitle": "Gestionează echipa, costurile cu personalul și contractul colectiv",
+    "newEmpleado": "+ Angajat nou",
+    "kpi": {
+      "activos": "Angajați activi",
+      "salarioBruto": "Salariu brut lunar",
+      "costeEmpresa": "Cost companie / lună"
+    },
+    "tabs": {
+      "equipo": "👥 Echipă",
+      "costes": "💰 Costuri",
+      "convenio": "📋 Contract"
+    },
+    "setup": {
+      "title": "Creează tabelul în Supabase",
+      "descPre": "Execută fișierul",
+      "descPost": "în SQL Editor din Supabase.",
+      "reload": "Deja executat — reîncarcă"
+    },
+    "loading": "Se încarcă echipa…",
+    "searchPlaceholder": "🔍  Caută…",
+    "filtros": {
+      "activos": "Activi",
+      "bajaTemporal": "Concediu temporar",
+      "bajaDefinitiva": "Încetare definitivă",
+      "todos": "Toți"
+    },
+    "noResultsTitle": "Fără rezultate",
+    "noEmpleadosTitle": "Niciun angajat înregistrat",
+    "noEmpleadosHint": "Adaugă primul tău angajat sau colaborator",
+    "grupoCC": "Grupa {{grupo}} CC",
+    "alta": "Angajare: {{fecha}}",
+    "jornadaPct": "{{pct}}% normă",
+    "bruto": "{{monto}} brut",
+    "masSS": "+ {{monto}} CAS",
+    "porMes": "{{monto}} / lună",
+    "editar": "Editează",
+    "bajaTemporalBtn": "↓ Concediu",
+    "bajaTemporalTitle": "Trece în concediu temporar",
+    "altaBtn": "↑ Reactivează",
+    "altaTitle": "Reactivează",
+    "confirmDelete": "Ștergi pe {{nombre}}?",
+    "puesto": {
+      "encargado": "Șef de șantier",
+      "oficial_1": "Muncitor calificat cat. 1",
+      "oficial_2": "Muncitor calificat cat. 2",
+      "ayudante": "Ajutor",
+      "peon": "Muncitor necalificat",
+      "fontanero": "Instalator",
+      "electricista": "Electrician",
+      "pintor": "Zugrav",
+      "yesero": "Tencuitor / Ghipsar",
+      "carpintero": "Tâmplar",
+      "alicatador": "Faianțar / Placator",
+      "impermeabilizador": "Hidroizolator",
+      "administrativo": "Personal administrativ",
+      "otro": "Altele"
+    },
+    "tipoContrato": {
+      "indefinido": "Nedeterminat",
+      "fijo_discontinuo": "Fix discontinuu",
+      "temporal_obra": "Temporar (pe proiect)",
+      "temporal_6m": "Temporar (≤6 luni)",
+      "formacion": "Contract de ucenicie",
+      "autonomo": "Colaborator PFA"
+    },
+    "grupoConvenio": {
+      "I": "Grupa I — Absolvenți de studii superioare / medii",
+      "II": "Grupa II — Șefi de șantier / personal administrativ calificat",
+      "III": "Grupa III — Șefi de echipă / Maiștri",
+      "IV": "Grupa IV — Muncitori calificați cat. 1 și 2",
+      "V": "Grupa V — Ajutoare",
+      "VI": "Grupa VI — Muncitori necalificați"
+    },
+    "costes": {
+      "calculadoraTitle": "Calculator cost companie",
+      "resumenTitle": "Rezumatul echipei active",
+      "table": {
+        "empleado": "Angajat",
+        "puesto": "Poziție",
+        "brutoMes": "Brut / lună",
+        "ssEmpresa": "CAS companie",
+        "costeTotalMes": "Cost total / lună",
+        "anualEstimado": "Estimare anuală"
+      },
+      "totalEquipo": "TOTAL ECHIPĂ",
+      "nota": "* CAS-ul companiei se calculează la {{pct}}% din salariul brut (contribuții comune + rata de accidente de muncă/boli profesionale în construcții + șomaj + FOGASA + formare profesională + MEI). Costul real poate varia în funcție de baza de calcul și contractul provincial.",
+      "emptyHint": "Adaugă angajați în tab-ul Echipă pentru a vedea rezumatul costurilor.",
+      "calc": {
+        "salarioLabel": "Salariu brut lunar (€)",
+        "totalSS": "Total CAS companie ({{pct}}%)",
+        "costeEmpresaMes": "Cost companie / lună",
+        "brutoMasSS": "{{bruto}} brut + {{ss}} CAS",
+        "costeAnual": "Cost anual (×12)",
+        "con2Pagas": "Cu 2 plăți suplimentare",
+        "introduceSalario": "Introdu salariul brut pentru a calcula costul real"
+      }
+    },
+    "convenio": {
+      "disclaimerPre": "ℹ️ Ghid orientativ.",
+      "disclaimerPost": "Bazat pe al VI-lea Contract Colectiv General al Sectorului Construcțiilor (2022-2026). Verifică întotdeauna sumele actualizate cu consultantul tău de resurse umane sau în BOE / contractul provincial.",
+      "recursosTitle": "Resurse și linkuri utile"
+    },
+    "form": {
+      "editTitle": "Editează angajatul",
+      "newTitle": "Angajat nou",
+      "nombreLabel": "Prenume *",
+      "apellidosLabel": "Nume *",
+      "puestoLabel": "Poziție *",
+      "tipoContratoLabel": "Tip de contract *",
+      "especialidadLabel": "Specialitate / detaliu",
+      "especialidadPlaceholder": "Ex.: Instalații și gaz, gips-carton…",
+      "grupoLabel": "Grupă profesională (Contract)",
+      "salarioLabel": "Salariu brut lunar (€) *",
+      "costeEmpresaPreview": "Cost companie: {{monto}} / lună",
+      "jornadaLabel": "% normă de lucru",
+      "jornadaHint": "100% = normă întreagă",
+      "fechaAltaLabel": "Data angajării *",
+      "fechaBajaLabel": "Data încetării",
+      "estadoLabel": "Stare",
+      "estadoOpts": {
+        "activo": "Activ",
+        "baja_temporal": "Concediu temporar",
+        "baja_definitiva": "Încetare definitivă"
+      },
+      "telefonoLabel": "Telefon",
+      "numSsLabel": "Nr. asigurări sociale",
+      "dniLabel": "CI / NIE",
+      "emailLabel": "Email",
+      "notasLabel": "Note",
+      "notasPlaceholder": "Observații, acorduri speciale…",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "save": "Salvează"
+    }
+  },
+  "partes": {
+    "title": "Pontaje de lucru",
+    "subtitle": "Evidența zilnică a orelor pe angajat și șantier",
+    "newParte": "+ Pontaj nou",
+    "mesLabel": "Lună",
+    "anioLabel": "An",
+    "empleadoLabel": "Angajat",
+    "obraLabel": "Șantier",
+    "todos": "Toți",
+    "todas": "Toate",
+    "vistaLista": "Listă",
+    "vistaResumen": "Rezumat",
+    "kpi": {
+      "partesEnMes": "Pontaje în {{mes}}",
+      "horasRegistradas": "Ore înregistrate",
+      "empleadosActivosMes": "Angajați activi în lună"
+    },
+    "loading": "Se încarcă pontajele…",
+    "emptyTitle": "Niciun pontaj în {{mes}} {{anio}}",
+    "emptyHint": "Începe să înregistrezi orele echipei",
+    "firmadoTitle": "Semnat de {{nombre}} pe {{fecha}}",
+    "firmar": "✍️ Semnează",
+    "firmarTitle": "Semnează pentru conformitate",
+    "editar": "Editează",
+    "confirmDelete": "Ștergi acest pontaj?",
+    "porEmpleado": "Pe angajat",
+    "sinDatos": "Fără date",
+    "diaOne": "{{count}} zi",
+    "diaOther": "{{count}} zile",
+    "total": "TOTAL",
+    "porObra": "Pe șantier",
+    "sinObrasConPartes": "Niciun șantier cu pontaje",
+    "personaOne": "{{count}} persoană",
+    "personaOther": "{{count}} persoane",
+    "form": {
+      "editTitle": "Editează pontajul",
+      "newTitle": "Pontaj de lucru nou",
+      "empleadoLabel": "Angajat *",
+      "empleadoPlaceholder": "Selectează angajat",
+      "fechaLabel": "Dată *",
+      "horasLabel": "Ore *",
+      "obraLabel": "Șantier",
+      "sinObraAsignada": "Fără șantier alocat",
+      "descripcionLabel": "Descrierea lucrării",
+      "descripcionPlaceholder": "Placare baie, instalație electrică…",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "save": "Salvează"
+    },
+    "firmarModalTitle": "Semnează pontajul de lucru — {{nombre}}",
+    "meses": {
+      "enero": "Ianuarie",
+      "febrero": "Februarie",
+      "marzo": "Martie",
+      "abril": "Aprilie",
+      "mayo": "Mai",
+      "junio": "Iunie",
+      "julio": "Iulie",
+      "agosto": "August",
+      "septiembre": "Septembrie",
+      "octubre": "Octombrie",
+      "noviembre": "Noiembrie",
+      "diciembre": "Decembrie"
+    }
+  },
+  "nominas": {
+    "title": "State de plată",
+    "subtitle": "Generator de fluturași de salariu și control al plăților",
+    "generarOne": "Generează {{count}} fluturaș",
+    "generarOther": "Generează {{count}} fluturași",
+    "generando": "Se generează…",
+    "historial": "Istoric",
+    "loading": "Se încarcă fluturașii…",
+    "totalBruto": "Total brut",
+    "totalNeto": "Total net de plată",
+    "costeEmpresaTotal": "Cost total companie",
+    "sinNominaOne": "{{count}} angajat",
+    "sinNominaOther": "{{count}} angajați",
+    "sinNominaSuffix": "fără fluturaș în {{mes}}: {{lista}}",
+    "generarTodas": "Generează toate",
+    "emptyTitle": "Niciun fluturaș în {{mes}} {{anio}}",
+    "emptySinEmpleados": "Adaugă mai întâi angajați în modulul Angajați",
+    "emptyConEmpleadosOne": "Există {{count}} angajat activ. Apasă „Generează” pentru a crea fluturașii.",
+    "emptyConEmpleadosOther": "Există {{count}} angajați activi. Apasă „Generează” pentru a crea fluturașii.",
+    "generarNominas": "Generează fluturași",
+    "pagadaBadge": "✓ Plătit {{fecha}}",
+    "pendienteBadge": "În așteptarea plății",
+    "salarioBruto": "Salariu brut",
+    "ssTrabajador": "CAS angajat ({{pct}}%)",
+    "irpf": "Impozit pe venit ({{pct}}%)",
+    "otrasDeducciones": "Alte deduceri",
+    "netoPercibir": "Net de încasat",
+    "costeEmpresaLine": "Cost companie: {{bruto}} brut + {{ss}} CAS = {{total}}",
+    "desmarcar": "Anulează marcajul",
+    "marcarPagada": "✓ Marchează ca plătit",
+    "editar": "Editează",
+    "eliminar": "Șterge",
+    "verRecibo": "Vezi fluturașul",
+    "confirmDelete": "Ștergi acest fluturaș?",
+    "edit": {
+      "salarioLabel": "Salariu brut (€)",
+      "irpfLabel": "Impozit pe venit %",
+      "otrasLabel": "Alte deduceri (€)",
+      "ssTrabajadorPreview": "CAS angajat: {{monto}}",
+      "irpfPreview": "Impozit: {{monto}}",
+      "netoPreview": "Net: {{monto}}",
+      "notasLabel": "Note",
+      "notasPlaceholder": "Ore suplimentare, avans…",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "save": "Salvează"
+    },
+    "historialTable": {
+      "periodo": "Perioadă",
+      "empleado": "Angajat",
+      "bruto": "Brut",
+      "neto": "Net",
+      "estado": "Stare"
+    },
+    "sinHistorial": "Fără istoric de fluturași",
+    "pagadaLabel": "Plătit",
+    "pendienteLabel": "În așteptare",
+    "recibo": {
+      "title": "Fluturaș de salariu — {{periodo}}",
+      "puesto": "Poziție: {{v}}",
+      "dni": "CI: {{v}}",
+      "numSs": "Nr. CAS: {{v}}",
+      "grupoConvenio": "Grupă contract: {{v}}",
+      "devengosTitle": "I. VENITURI",
+      "salarioBase": "Salariu de bază",
+      "totalDevengado": "Total venituri",
+      "deduccionesTitle": "II. DEDUCERI",
+      "cotizacionSS": "Contribuție CAS (angajat {{pct}}%)",
+      "retencionIrpf": "Reținere impozit ({{pct}}%)",
+      "otrasDeducciones": "Alte deduceri",
+      "totalDeducciones": "Total deduceri",
+      "liquidoPercibir": "NET DE ÎNCASAT",
+      "costeEmpresaLine": "Cost companie: {{total}} (incl. CAS companie {{ss}})",
+      "cerrar": "Închide",
+      "imprimir": "🖨️ Imprimă"
+    }
+  },
+  "hub": {
+    "title": "Hub Digital",
+    "subtitle": "Strategie de atragere a clienților și prezență online pentru afacerea ta de renovări",
+    "objetivoTitle": "Obiectivul tău: client de clasă medie-superioară din Madrid",
+    "objetivoText": "Acest profil de client caută calitate și încredere înaintea prețului. Acordă prioritate Google Business și Houzz în locul platformelor cu prețuri mici. Fiecare fotografie a unei lucrări finalizate bine executate valorează mai mult decât orice reclamă.",
+    "abrirPlataforma": "Deschide platforma →",
+    "tag": {
+      "gratis": "Gratuit",
+      "prioritario": "Prioritar",
+      "pago": "Cu plată",
+      "pagoPorLead": "Plată per lead",
+      "claseMediaAlta": "Clasă medie-superioară",
+      "volumenAlto": "Volum ridicat",
+      "visual": "Vizual",
+      "b2b": "B2B",
+      "gratisPro": "Gratuit / Pro"
+    },
+    "secciones": {
+      "presenciaLocal": {
+        "titulo": "Prezență locală (Google)",
+        "items": {
+          "gbp": {
+            "titulo": "Google Business Profile",
+            "desc": "Fișa ta pe Google Maps. Esențială pentru ca clienții locali din Madrid să te găsească.",
+            "tips": [
+              "Încarcă fotografii cu lucrări finalizate (înainte și după)",
+              "Răspunde la toate recenziile, bune și rele",
+              "Publică fiecare renovare finalizată ca actualizare"
+            ]
+          },
+          "adsLocal": {
+            "titulo": "Google Ads local",
+            "desc": "Reclame geolocalizate în Madrid pentru a apărea când cineva caută \"firmă renovări Madrid\".",
+            "tips": [
+              "Începe cu 5-10€/zi și ajustează",
+              "Segmentează după codul poștal al zonelor tale țintă",
+              "Folosește extensii de apel direct"
+            ]
+          }
+        }
+      },
+      "plataformas": {
+        "titulo": "Platforme de renovări",
+        "items": {
+          "habitissimo": {
+            "titulo": "Habitissimo",
+            "desc": "Platforma lider în Spania pentru atragerea clienților de renovări. Vizibilitate ridicată cu recenzii bune.",
+            "tips": [
+              "Răspunde la cereri în mai puțin de 1h (algoritmul te recompensează)",
+              "Cere o recenzie fiecărui client mulțumit",
+              "Completează profilul 100% cu fotografii reale"
+            ]
+          },
+          "houzz": {
+            "titulo": "Houzz",
+            "desc": "Rețea socială de design interior și renovări. Foarte bună pentru segmentul mediu-superior.",
+            "tips": [
+              "Încarcă proiecte complete cu descrieri detaliate",
+              "Folosește etichete de stil și materiale",
+              "Clientul Houzz apreciază calitatea, nu prețul"
+            ]
+          },
+          "milanuncios": {
+            "titulo": "Milanuncios / Wallapop",
+            "desc": "Pentru lucrări mici și întreținere. Cerere mare dar preț mai ajustat.",
+            "tips": [
+              "Separă anunțurile după tipul lucrării",
+              "Pune un preț orientativ pentru a filtra clienții",
+              "Actualizează anunțurile săptămânal pentru vizibilitate"
+            ]
+          }
+        }
+      },
+      "redesSociales": {
+        "titulo": "Rețele sociale",
+        "items": {
+          "instagram": {
+            "titulo": "Instagram",
+            "desc": "Vizual și puternic pentru renovări. Clientul de clasă medie-superioară folosește Instagram pentru inspirație înainte de a angaja.",
+            "tips": [
+              "Publică înainte/după fiecare lucrare",
+              "Folosește Reels cu procesul lucrării (30-60 sec)",
+              "Hashtag-uri: #reformasMadrid #reformaIntegral #interiorismo",
+              "Poveștile cu ziua de lucru de pe șantier conectează cu publicul"
+            ]
+          },
+          "linkedin": {
+            "titulo": "LinkedIn",
+            "desc": "Pentru a te poziționa ca profesionist și a atrage clienți de afaceri (schimbări de destinație, spații comerciale).",
+            "tips": [
+              "Distribuie cazuri de succes cu cifre (m² renovați, termen respectat)",
+              "Conectează-te cu arhitecți și administratori de imobile",
+              "Articolele despre tendințele în renovări dau autoritate"
+            ]
+          }
+        }
+      },
+      "productividad": {
+        "titulo": "Instrumente de productivitate",
+        "items": {
+          "whatsapp": {
+            "titulo": "WhatsApp Business",
+            "desc": "Indispensabil. Profil de companie, catalog de servicii, răspunsuri rapide automate.",
+            "tips": [
+              "Configurează un mesaj automat de bun venit",
+              "Creează etichete: Lead nou, Ofertă trimisă, Client activ",
+              "Mesaj de absență în afara programului de lucru"
+            ]
+          },
+          "canva": {
+            "titulo": "Canva",
+            "desc": "Design de oferte vizuale, prezentări și conținut pentru rețelele sociale.",
+            "tips": [
+              "Folosește șabloanele \"înainte și după\"",
+              "Creează un șablon de dosar de companie cu brandingul XANDER"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "fiscal": {
+    "title": "Fiscal",
+    "subtitle": "Ghid fiscal pentru liber-profesioniștii din sectorul renovărilor din Spania",
+    "disclaimer": "⚠️ Acest ghid are caracter orientativ. Consultă întotdeauna contabilul sau consultantul fiscal pentru decizii concrete.",
+    "conciliacion": {
+      "cardTitle": "📄 Reconciliere cu contabilitatea ta",
+      "cardDesc": "Generează un document cu facturile, cheltuielile și rezumatul TVA/impozit pe venit al perioadei, gata de verificat înainte de depunerea formularului corespunzător.",
+      "generarDocumento": "Generează document"
+    },
+    "calendarioTitle": "📅 Calendar de declarații",
+    "proximoBadge": "Următor",
+    "modelosTitle": "📋 Formulare de depus",
+    "tipsTitle": "💡 Cheltuieli deductibile cheie",
+    "modal": {
+      "title": "Reconciliere fiscală — {{periodo}}",
+      "anio": "Anul {{anio}}",
+      "loading": "Se încarcă datele perioadei…",
+      "empresaDefault": "Compania mea",
+      "nif": "CIF: {{v}}",
+      "tituloDoc": "RECONCILIERE FISCALĂ",
+      "delAl": "De la {{desde}} până la {{hasta}}",
+      "generado": "Generat: {{fecha}}",
+      "disclaimerModal": "⚠️ Document orientativ generat automat pe baza facturilor și cheltuielilor înregistrate. Distribuie-l contabilității tale pentru a verifica cifrele înainte de depunerea formularelor — nu înlocuiește calculul sau consultanța lor profesională.",
+      "facturasEmitidas": "Facturi emise ({{count}})",
+      "sinFacturas": "Nicio factură emisă în această perioadă.",
+      "gastosRegistrados": "Cheltuieli înregistrate ({{count}})",
+      "moduloNoConfigurado": "Modulul de Cheltuieli nu este încă configurat.",
+      "sinGastos": "Nicio cheltuială înregistrată în această perioadă.",
+      "tabla": {
+        "fecha": "Data",
+        "numero": "Nr.",
+        "cliente": "Client",
+        "estado": "Stare",
+        "base": "Bază",
+        "iva": "TVA",
+        "ret": "Rețin.",
+        "total": "Total",
+        "proveedor": "Furnizor",
+        "categoria": "Categorie",
+        "ivaSoport": "TVA plătit"
+      },
+      "totalRow": "Total",
+      "sinCliente": "—",
+      "resumenTitle": "Rezumat pentru formularele 303 / 130{{extra}}",
+      "ivaRepercutido": "TVA colectată (vânzări)",
+      "ivaSoportadoLabel": "TVA deductibilă (cheltuieli)",
+      "resultadoIva": "Rezultat TVA (Formular 303)",
+      "aIngresar": "De plătit: {{v}}",
+      "aCompensar": "De compensat: {{v}}",
+      "ingresosBase": "Venituri (bază)",
+      "gastosBase": "Cheltuieli (bază)",
+      "rendimientoNeto": "Venit net estimat",
+      "retencionesPracticadas": "Rețineri de impozit deja aplicate",
+      "pago130": "Plată eșalonată 20% (Formular 130, orientativ)",
+      "cerrar": "Închide",
+      "imprimir": "🖨️ Imprimă / PDF"
+    },
+    "selector": {
+      "title": "Document de reconciliere",
+      "desc": "Alege perioada și generează un document cu detaliile facturilor, cheltuielilor și rezumatul TVA/impozit pe venit pentru a verifica cu contabilitatea ta.",
+      "tipoDocumento": "Tip de document",
+      "trimestral": "Trimestrial (130/303)",
+      "anual": "Anual (390/100)",
+      "anioLabel": "An",
+      "trimestreLabel": "Trimestru",
+      "cancelar": "Anulează",
+      "generarDocumento": "Generează document"
+    }
+  },
+  "legislacion": {
+    "title": "Legislație",
+    "subtitle": "Cadrul legal pentru renovări de locuințe și spații comerciale în toată Spania",
+    "selector": {
+      "label": "Comunitatea ta autonomă",
+      "desc": "Selectează regiunea ta pentru a vedea reglementările urbanistice specifice",
+      "placeholder": "— Selectează regiunea —"
+    },
+    "ccaa": {
+      "badgeNormativa": "Reglementări regionale",
+      "portalOficial": "Portal oficial ↗",
+      "obraMenor": "Lucrări minore",
+      "obraMenorDesc": "Procedură simplificată — fără structură sau fațadă",
+      "obraMayor": "Lucrări majore",
+      "obraMayorDesc": "Necesită proiect tehnic și termene mai lungi",
+      "organismoCompetente": "Autoritate competentă",
+      "aspectosDestacados": "⚠️ Aspecte importante în {{nombre}}"
+    },
+    "avisoTitle": "Ghid orientativ.",
+    "avisoText": "Reglementările urbanistice se modifică frecvent. Consultă întotdeauna primăria corespunzătoare și un tehnician competent (arhitect sau maistru) în caz de îndoială. Condițiile pot varia în funcție de municipiu, chiar și în aceeași regiune.",
+    "estatalCaption": "Reglementare națională — se aplică în toată Spania",
+    "incluyeAplica": "Include / Se aplică la:",
+    "recursosUtiles": "Resurse utile (naționale)"
+  },
+  "resultados": {
+    "title": "Rezultate",
+    "subtitle": "Contul de rezultate al afacerii",
+    "calculando": "Se calculează rezultatele…",
+    "kpi": {
+      "totalFacturado": "Total facturat",
+      "todasFacturas": "toate facturile",
+      "ingresosReales": "Venituri reale",
+      "facturasCobradas": "facturi încasate",
+      "gastosTotales": "Cheltuieli totale",
+      "tablaNoConfigurada": "tabel neconfigurat",
+      "gastosRegistrados": "cheltuieli înregistrate",
+      "resultadoNeto": "Rezultat net",
+      "beneficio": "profit",
+      "perdida": "pierdere"
+    },
+    "evolucionMensual": "Evoluție lunară {{anio}}",
+    "leyenda": {
+      "facturado": "Facturat",
+      "gastos": "Cheltuieli",
+      "cobrado": "Încasat"
+    },
+    "detallePorMes": "Detaliu pe luni",
+    "tabla": {
+      "mes": "Lună",
+      "facturado": "Facturat",
+      "gastos": "Cheltuieli",
+      "resultado": "Rezultat"
+    },
+    "totalAnio": "Total {{anio}}",
+    "gastosPorCategoria": "Cheltuieli pe categorii",
+    "tablaNoConfiguradaLarga": "Tabelul de cheltuieli nu este configurat",
+    "sinGastosEnAnio": "Nicio cheltuială înregistrată în {{anio}}",
+    "meses": {
+      "ene": "Ian",
+      "feb": "Feb",
+      "mar": "Mar",
+      "abr": "Apr",
+      "may": "Mai",
+      "jun": "Iun",
+      "jul": "Iul",
+      "ago": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Noi",
+      "dic": "Dec"
+    },
+    "avisoGastosPre": "⚠️ Tabelul de cheltuieli nu este configurat. Mergi la ",
+    "avisoGastosPost": " și urmează instrucțiunile pentru a-l activa."
+  },
+  "referidos": {
+    "title": "Recomandări",
+    "subtitle": "Invită alți liber-profesioniști din domeniul renovărilor. Când devin Pro, tu primești o lună gratuită.",
+    "recompensaTexto": "1 lună gratuită (19 €)",
+    "tuEnlace": "Linkul tău de recomandare",
+    "generando": "Se generează codul tău...",
+    "copiarEnlace": "Copiază linkul",
+    "copiado": "✓ Copiat",
+    "tuCodigo": "Codul tău:",
+    "copiar": "copiază",
+    "copiadoMin": "✓ copiat",
+    "compartirWhatsapp": "💬 Distribuie pe WhatsApp",
+    "mensajeWhatsapp": "Folosesc XANDER Gestión pentru a-mi gestiona ofertele, facturile și lucrările — ți-l recomand dacă ești liber-profesionist în renovări. Înregistrează-te gratuit cu linkul meu și câștigăm amândoi: {{enlace}}",
+    "comoFunciona": "Cum funcționează",
+    "pasos": {
+      "p1t": "Distribuie linkul tău",
+      "p1d": "Trimite-l altui liber-profesionist din renovări care ar putea avea nevoie de acest instrument.",
+      "p2t": "Se înregistrează gratuit",
+      "p2d": "Intră prin linkul tău și își creează contul — este legat automat de tine.",
+      "p3t": "Devine Pro și tu câștigi",
+      "p3d": "De îndată ce plătește prima taxă Pro, primești {{recompensa}} ca credit în facturarea ta."
+    },
+    "tusReferidos": "Recomandările tale",
+    "registrados": "Înregistrați",
+    "convertidosPro": "Convertiți la Pro",
+    "mesesGanados": "Luni câștigate",
+    "cargando": "Se încarcă...",
+    "sinInvitados": "Încă nu ai invitat pe nimeni. Distribuie linkul tău mai sus pentru a începe.",
+    "registradoEl": "Înregistrat pe {{fecha}}",
+    "badgePro": "✓ Pro",
+    "badgePendiente": "În așteptare"
+  },
+  "miEmpresa": {
+    "title": "Compania mea",
+    "subtitle": "Aceste date vor apărea pe ofertele și facturile tale",
+    "cargando": "Se încarcă…",
+    "datosPersonales": "Date personale",
+    "nombre": "Prenume",
+    "apellidos": "Nume",
+    "dniNie": "CNP / act de identitate",
+    "telefonoPersonal": "Telefon personal",
+    "datosEmpresa": "Date companie / activitate",
+    "nombreComercial": "Nume comercial / companie *",
+    "nif": "CIF",
+    "telefonoEmpresa": "Telefon companie",
+    "emailEmpresa": "Email companie",
+    "direccionFiscal": "Adresă fiscală",
+    "cp": "Cod poștal",
+    "ciudad": "Oraș",
+    "web": "Website",
+    "actividadProfesional": "Activitate profesională",
+    "fechaInicio": "Data începerii activității",
+    "tarifaReducida": "Tarif redus activ",
+    "tarifaReducidaSub": "Primii 2 ani ca liber-profesionist",
+    "especialidades": "Specializări",
+    "especialidad": {
+      "Reforma integral": "Renovare completă",
+      "Reforma de baño": "Renovare baie",
+      "Reforma de cocina": "Renovare bucătărie",
+      "Cambio de uso": "Schimbare de destinație",
+      "Reforma de local": "Renovare spațiu comercial",
+      "Distribuciones internas": "Modificări de compartimentare internă",
+      "Fontanería": "Instalații sanitare",
+      "Electricidad": "Electricitate",
+      "Alicatados y solados": "Faianță și pardoseli",
+      "Pladur": "Rigips",
+      "Pintura": "Vopsitorie",
+      "Carpintería": "Tâmplărie",
+      "Impermeabilización": "Hidroizolație"
+    },
+    "miPlan": "Planul meu",
+    "pagoConfirmado": "✓ Plată confirmată. Planul tău se va actualiza în câteva secunde.",
+    "pagoCancelado": "Ai anulat procesul de plată. Poți încerca din nou oricând.",
+    "planProActivo": "✓ Plan Pro activ{{ciclo}}. Îți mulțumim că ai ales XANDER.",
+    "cicloAnual": " (anual)",
+    "cicloMensual": " (lunar)",
+    "trialActivo": "⏳ Ești în perioada de probă gratuită — mai ai {{dias}} zi{{plural}}.",
+    "planGratuito": "Plan gratuit. Actualizează la Pro pentru acces complet nelimitat.",
+    "abriendo": "Se deschide…",
+    "gestionarSuscripcion": "Gestionează abonamentul",
+    "redirigiendo": "Se redirecționează…",
+    "actualizarPro": "Actualizează la Pro — {{precio}}",
+    "planAnual": "Plan anual — {{precio}}",
+    "sinPermanencia": "Fără angajament · Anulează oricând din portalul de facturare",
+    "cobrosOnline": "Plăți online",
+    "cobrosOnlineDesc": "Conectează-ți contul Stripe pentru a încasa facturi cu cardul. Banii clienților tăi ajung direct în banca ta — XANDER nu îi gestionează niciodată.",
+    "stripeActiva": "✓ Cont Stripe conectat și activ. Poți încasa acum facturi cu cardul.",
+    "stripeVerificacion": "Contul tău Stripe a fost creat, dar verificarea nu s-a încheiat. Finalizează procesul pentru a începe să încasezi.",
+    "stripeNoConectada": "Nu ai conectat încă niciun cont Stripe.",
+    "cargandoBtn": "Se încarcă…",
+    "completarConexion": "Finalizează / verifică conexiunea",
+    "conectarStripe": "Conectează-te cu Stripe",
+    "actualizarEstado": "Actualizează starea",
+    "datosGuardados": "✓ Date salvate cu succes",
+    "guardando": "Se salvează…",
+    "guardarCambios": "Salvează modificările",
+    "errores": {
+      "checkout": "Nu s-a putut iniția plata abonamentului.",
+      "portal": "Nu s-a putut deschide portalul de facturare.",
+      "stripeStatus": "Nu s-a putut verifica starea Stripe.",
+      "stripeConnect": "Nu s-a putut iniția conectarea cu Stripe."
+    }
+  },
+  "tarifas": {
+    "title": "Tarife și prețuri",
+    "subtitle": "Catalog de prețuri orientative pentru oferte",
+    "nuevaTarifa": "+ Tarif nou",
+    "tabs": {
+      "catalogoBase": "Catalog de bază ({{count}})",
+      "misTarifas": "Tarifele mele ({{count}})"
+    },
+    "disclaimer": "📖 Prețuri orientative ale sectorului din Madrid. Folosește-le ca referință sau creează-ți propriile tarife în fila \"Tarifele mele\".",
+    "buscarPlaceholder": "🔍  Caută articol…",
+    "todasCategorias": "Toate categoriile",
+    "cargando": "Se încarcă tarifele…",
+    "sinResultados": "Fără rezultate",
+    "sinTarifasPropias": "Nu ai încă tarife proprii",
+    "sinTarifas": "Fără tarife",
+    "personalizaPrecios": "Personalizează prețurile pentru afacerea ta",
+    "partidas": "{{count}} articole",
+    "tabla": {
+      "descripcion": "Descriere",
+      "ud": "U.M.",
+      "mat": "Mat. (€)",
+      "mo": "M.O. (€)",
+      "margen": "Marjă",
+      "precioCliente": "Preț client"
+    },
+    "editar": "Editează",
+    "confirmDelete": "Ștergi \"{{desc}}\"?",
+    "modal": {
+      "editarTarifa": "Editează tariful",
+      "nuevaTarifa": "Tarif nou",
+      "categoria": "Categorie *",
+      "unidad": "Unitate",
+      "descripcion": "Descriere *",
+      "costeMaterial": "Cost material (€)",
+      "manoDeObra": "Manoperă (€)",
+      "margen": "Marjă (%)",
+      "precioAlCliente": "Preț client",
+      "notas": "Note",
+      "cancelar": "Anulează",
+      "guardando": "Se salvează…",
+      "guardarTarifa": "Salvează tariful"
+    },
+    "categoria": {
+      "Demolición": "Demolare",
+      "Albañilería": "Zidărie",
+      "Impermeabilización": "Hidroizolație",
+      "Alicatados y Solados": "Faianță și pardoseli",
+      "Fontanería": "Instalații sanitare",
+      "Electricidad": "Electricitate",
+      "Pintura": "Vopsitorie",
+      "Carpintería y Remates": "Tâmplărie și finisaje",
+      "Gestión y Logística": "Management și logistică",
+      "Reforma Integral": "Renovare completă"
+    }
+  },
+  "documentos": {
+    "title": "Centrul de documente",
+    "subtitle": "Șabloane profesionale și gestionarea fișierelor",
+    "tabs": {
+      "plantillas": "📄 Șabloane ({{count}})",
+      "misDocumentos": "📁 Documentele mele {{count}}"
+    },
+    "buscarPlantilla": "🔍  Caută șablon…",
+    "disclaimerPlantillas": "📋 Șabloane editabile pentru uz zilnic. Copiază-le, personalizează-le și folosește-le liber.",
+    "sinResultados": "Fără rezultate",
+    "verPlantilla": "Vezi șablonul",
+    "copiar": "📋 Copiază",
+    "storageStep": "Pas prealabil: creează bucket-ul de stocare",
+    "storageDesc": "Mergi la <strong>Supabase → Storage</strong> și creează un bucket numit <code>documentos-empresa</code>. Marchează-l ca <strong>Public</strong> și salvează. Apoi rulează migrarea SQL de mai jos.",
+    "yaConfigurado": "Deja configurat — reîncearcă",
+    "cargandoArchivos": "Se încarcă fișierele…",
+    "archivosCountOne": "{{count}} fișier",
+    "archivosCountOther": "{{count}} fișiere",
+    "sinArchivos": "Fără fișiere",
+    "verArchivo": "Vezi fișierul",
+    "eliminar": "Șterge",
+    "subiendo": "Se încarcă…",
+    "subirArchivo": "📎 Încarcă fișier",
+    "anadirOtro": "+ Adaugă altul",
+    "formacionTitulo": "Formare și certificate",
+    "certificadosCountOne": "{{count}} certificat",
+    "certificadosCountOther": "{{count}} certificate",
+    "sinCertificados": "Fără certificate",
+    "anadir": "+ Adaugă",
+    "ningunCertificado": "Niciun certificat adăugat încă",
+    "cerrar": "Închide",
+    "copiarPortapapeles": "📋 Copiază în clipboard",
+    "confirmDeleteDoc": "Ștergi \"{{nombre}}\"?",
+    "plantillaCopiada": "Șablon copiat în clipboard ✓",
+    "errorSubida": "Eroare la încărcarea \"{{nombre}}\": {{msg}}",
+    "carpeta": {
+      "Plan de Negocio": {
+        "titulo": "Plan de afaceri",
+        "desc": "Plan complet cu module de organizare, atragere clienți, oferte, prețuri, imagine și instrumente."
+      },
+      "Fiscalidad": {
+        "titulo": "Fiscalitate",
+        "desc": "Declarații TVA, impozit pe venit, formularele 303, 130, 100 și orice document de la Agenția Fiscală."
+      },
+      "SS y Hacienda": {
+        "titulo": "Asigurări sociale și Fisc",
+        "desc": "Înregistrare ca liber-profesionist, chitanțe contribuție RETA, notificări de la Securitatea Socială și Fisc."
+      },
+      "Seguros": {
+        "titulo": "Asigurări",
+        "desc": "Polițe de asigurare de răspundere civilă, asigurare de lucrare și orice altă acoperire contractată."
+      },
+      "Contratos": {
+        "titulo": "Contracte",
+        "desc": "Contracte cu clienți, acorduri cu furnizori, subcontractanți și orice document semnat."
+      },
+      "Licencias de Obra": {
+        "titulo": "Autorizații de construcție",
+        "desc": "Permise municipale, comunicări prealabile, licențe de activitate și documentație urbanistică."
+      },
+      "Branding": {
+        "titulo": "Branding",
+        "desc": "Logo, șabloane corporative, imagine de brand și materiale de identitate vizuală."
+      },
+      "Subcontratas": {
+        "titulo": "Subcontractanți",
+        "desc": "Contracte și acorduri cu subcontractanți, companii partenere și liber-profesioniști."
+      },
+      "Otros Documentos": {
+        "titulo": "Alte documente",
+        "desc": "Licențe, certificate, permise și orice alt document al afacerii."
+      }
+    },
+    "carpetaFormacion": {
+      "Certificados Obligatorios": {
+        "titulo": "Certificate obligatorii",
+        "desc": "Sănătate și securitate în construcții (obligatoriu 60h), calificări legale, carnete și acreditări cerute de lege."
+      },
+      "Formación Continua": {
+        "titulo": "Formare continuă",
+        "desc": "Cursuri de perfecționare profesională: rigips, hidroizolații, electricitate, instalații sanitare, management, oferte."
+      }
+    }
+  },
+  "copias": {
+    "title": "Copii de siguranță",
+    "subtitle": "Salvează o instantanee a tuturor datelor tale de lucru (clienți, lucrări, oferte, facturi, plăți, cheltuieli, angajați...) și recuperă-le dacă ceva se șterge sau se strică din greșeală.",
+    "mensajeErrorAlmacen": "Nu s-a putut accesa stocarea copiilor de siguranță: {{msg}}",
+    "crearAhoraTitle": "Creează o copie acum",
+    "crearAhoraDesc": "Se salvează în contul tău (pentru a o putea restaura de aici oricând) și, de asemenea, se descarcă o copie pe calculatorul tău, în cazul în care preferi să o păstrezi tu însuți în altă parte.",
+    "crearBtn": "💾 Creează copia de siguranță acum",
+    "creando": "Se creează copia...",
+    "restaurarArchivoTitle": "Restaurează dintr-un fișier",
+    "restaurarArchivoDesc": "Dacă ai descărcat anterior o copie de siguranță, încarc-o aici pentru a recupera acele date.",
+    "subirArchivoBtn": "📤 Încarcă fișierul de copie (.json)",
+    "tusCopiasTitle": "Copiile tale salvate",
+    "cargando": "Se încarcă...",
+    "sinCopias": "Nu ai încă nicio copie salvată. Creează prima mai sus.",
+    "copiaAutomatica": "🔄 Copie automată",
+    "copiaManual": "💾 Copie manuală",
+    "restaurar": "Restaurează",
+    "descargar": "Descarcă",
+    "eliminar": "Șterge",
+    "resultadoRestoreTitle": "Rezultatul restaurării",
+    "errorLabel": "Eroare: {{msg}}",
+    "filaOne": "{{count}} rând",
+    "filaOther": "{{count}} rânduri",
+    "confirmarRestauracionTitle": "Confirmă restaurarea",
+    "vasARestaurar": "Urmează să restaurezi <strong>{{nombre}}</strong> ({{total}} înregistrări în total).",
+    "notas": [
+      "• Aceasta <strong>recuperează/actualizează</strong> înregistrările din copie — nu șterge nimic ce ai creat ulterior.",
+      "• Dacă o înregistrare din copie nu mai există (ai șters-o), va fi recreată cu datele originale.",
+      "• Documentele restaurează doar fișa (nume, categorie, link); dacă fișierul a fost și el șters din stocare, linkul nu va funcționa."
+    ],
+    "siRestaurarBtn": "Da, restaurează această copie",
+    "restaurando": "Se restaurează...",
+    "confirmDeleteCopia": "Ștergi copia \"{{nombre}}\"? Această acțiune nu poate fi anulată.",
+    "errorDescargar": "Nu s-a putut descărca: {{msg}}",
+    "errorGuardarCuenta": "Nu s-a putut salva copia în contul tău: {{msg}}",
+    "copiaCreadaOk": "Copie de siguranță creată și salvată în contul tău.",
+    "errorCrear": "Eroare la crearea copiei: {{msg}}",
+    "errorLeerCopia": "Nu s-a putut citi copia: {{msg}}",
+    "archivoDanado": "Fișierul de copie este deteriorat sau invalid.",
+    "archivoInvalido": "Fișierul selectat nu este o copie de siguranță validă (JSON).",
+    "tabla": {
+      "clientes": "Clienți",
+      "empleados": "Angajați",
+      "obras": "Lucrări",
+      "tarifas": "Tarife și prețuri",
+      "calendario_notas": "Note calendar",
+      "calendario_eventos": "Evenimente calendar",
+      "presupuestos": "Oferte",
+      "facturas": "Facturi",
+      "gastos": "Cheltuieli",
+      "documentos": "Documente (doar fișa, nu fișierul)",
+      "partes_trabajo": "Rapoarte de lucru",
+      "nominas": "Salarii",
+      "obra_empleados": "Echipă alocată lucrărilor"
+    }
+  },
+  "admin": {
+    "cargandoPanel": "Se încarcă panoul de administrare...",
+    "title": "🛡️ Panou de administrare",
+    "subtitle": "Liber-profesioniști înregistrați în XANDER Gestión",
+    "actualizar": "↻ Actualizează",
+    "stats": {
+      "totalRegistrados": "Total înregistrați",
+      "nuevosSemana": "Noi în această săptămână",
+      "perfilCompleto": "Cu profil complet"
+    },
+    "tabs": {
+      "usuarios": "Utilizatori",
+      "leads": "Leaduri",
+      "notificaciones": "Notificări"
+    },
+    "usuarios": {
+      "sinUsuarios": "Încă nu există utilizatori înregistrați",
+      "sinUsuariosSub": "Aici vor apărea liber-profesioniștii care se înregistrează",
+      "nombre": "NUME",
+      "email": "EMAIL",
+      "empresa": "COMPANIE",
+      "ciudad": "ORAȘ",
+      "registro": "ÎNREGISTRARE",
+      "ultimoAcceso": "ULTIMA AUTENTIFICARE",
+      "estado": "STARE",
+      "sinNombre": "Fără nume",
+      "activo": "✓ Activ",
+      "pendiente": "⏳ În așteptare"
+    },
+    "leads": {
+      "sinLeads": "Încă nu există leaduri",
+      "sinLeadsSub": "Aici vor apărea contactele lăsate pe pagina de destinație",
+      "sinDatosContacto": "Fără date de contact",
+      "atendido": "✓ Rezolvat",
+      "marcarAtendido": "Marchează ca rezolvat"
+    },
+    "notif": {
+      "sinNotificaciones": "Fără notificări",
+      "sinNotificacionesSub": "Aici vor apărea înregistrările noi",
+      "sinLeerOne": "{{count}} notificare necitită",
+      "sinLeerOther": "{{count}} notificări necitite",
+      "marcarTodasLeidas": "Marchează toate ca citite",
+      "marcarLeida": "Marchează ca citit"
+    }
+  },
+  "themeToggle": {
+    "claro": "Comută la modul luminos",
+    "oscuro": "Comută la modul întunecat"
+  },
+  "planGate": {
+    "feature": {
+      "clientes": "mai mult de 3 clienți",
+      "obras": "mai mult de 3 lucrări",
+      "presupuestos": "mai mult de 5 oferte",
+      "facturas": "mai mult de 5 facturi",
+      "empleados": "gestionarea angajaților",
+      "agente_ia": "Agentul AI",
+      "exportar_pdf": "exportul în PDF",
+      "nominas": "generatorul de salarii",
+      "rentabilidad": "analiza profitabilității"
+    },
+    "funcionExclusiva": "Funcție exclusivă Pro",
+    "paraUsar": "Pentru a folosi {{feature}} ai nevoie de planul Pro.",
+    "pruebaTermina": "⏳ Perioada ta de probă gratuită se termină în {{dias}} zile",
+    "activarPlan": "Activează planul Pro — {{precio}}",
+    "sinPermanencia": "Fără angajament · Anulează oricând",
+    "trialBannerText": "Perioada ta de probă se termină în <strong>{{dias}} zi{{plural}}</strong>. Activează planul Pro ca să nu pierzi accesul.",
+    "verPlanes": "Vezi planurile"
+  },
+  "notifBell": {
+    "notificaciones": "Notificări",
+    "descartarTodas": "Respinge toate",
+    "cargando": "Se încarcă…",
+    "todoAlDia": "Totul la zi, fără avertismente în așteptare",
+    "descartar": "Respinge"
+  },
+  "pwaUpdate": {
+    "nuevaVersion": "Este disponibilă o nouă versiune XANDER.",
+    "actualizar": "Actualizează",
+    "ahoraNo": "Nu acum",
+    "yaFuncionaOffline": "XANDER funcționează acum offline."
+  },
+  "agenteChat": {
+    "titulo": "Agente XANDER",
+    "limpiarTooltip": "Conversație nouă",
+    "limpiar": "↺ Șterge",
+    "faltaApiKey": "Cheia API nu este configurată încă",
+    "faltaApiKeyDesc": "Pentru a activa agentul, creează fișierul <code>.env</code> în rădăcina proiectului cu:",
+    "pasoGroq1": "Mergi la <b>console.groq.com</b>",
+    "pasoGroq2": "Creează un cont gratuit",
+    "pasoGroq3": "API Keys → Create API Key",
+    "pasoGroq4": "Copiază cheia în fișierul .env",
+    "pasoGroq5": "Repornește serverul de dezvoltare",
+    "pasoPrevioSupabase": "Pas prealabil în Supabase",
+    "ejecutaSql": "Rulează în SQL Editor din Supabase:",
+    "placeholder": "Scrie întrebarea ta…",
+    "bienvenida": "Bună! Sunt asistentul tău XANDER. Te pot ajuta cu clienți, lucrări, oferte, întrebări fiscale sau redactarea oricărei comunicări. Cu ce te pot ajuta?",
+    "confirmBorrarHistorial": "Ștergi istoricul acestei conversații?",
+    "conversacionNueva": "Conversație nouă! Cu ce te pot ajuta?",
+    "errorConectar": "Eroare la conectarea cu agentul."
+  },
+  "calendarioWidget": {
+    "tipo": {
+      "trabajo": "Lucrare",
+      "reunion": "Întâlnire",
+      "cobro": "Încasare",
+      "recordatorio": "Reamintire",
+      "visita": "Vizită șantier"
+    },
+    "calendarioTrabajo": "Calendar de lucru",
+    "hoy": "Azi",
+    "alertaEmailTitle": "Alertă prin email",
+    "cargando": "Se încarcă…",
+    "anadir": "+ Adaugă",
+    "sinEventos": "Fără evenimente în această zi",
+    "editarEvento": "Editează evenimentul",
+    "nuevoEvento": "Eveniment nou — {{fecha}}",
+    "tituloLabel": "Titlu *",
+    "tituloPlaceholder": "Ex: Vizită șantier client",
+    "tipoLabel": "Tip",
+    "horaLabel": "Oră",
+    "descripcionLabel": "Descriere (opțional)",
+    "descripcionPlaceholder": "Detalii suplimentare…",
+    "alertaEmailToggleTitle": "🔔 Alertă prin email",
+    "alertaEmailSub": "Alertă cu 24h și 1h înainte",
+    "cancelar": "Anulează",
+    "guardando": "Se salvează…",
+    "guardarCambios": "Salvează modificările",
+    "guardar": "Salvează"
+  },
+  "firmaModal": {
+    "firmarDocumento": "Semnează documentul",
+    "nombreQuienFirma": "Numele semnatarului",
+    "nombrePlaceholder": "Nume și prenume",
+    "firmaLabel": "Semnătură",
+    "borrarRepetir": "Șterge și repetă",
+    "disclaimer": "Prin semnare, semnatarul confirmă acordul cu conținutul acestui document. Semnătura este salvată cu dată și oră ca dovadă a acceptării (nu este o semnătură electronică calificată eIDAS).",
+    "cancelar": "Anulează",
+    "guardando": "Se salvează…",
+    "confirmarFirma": "✍️ Confirmă semnătura"
+  },
+  "onboarding": {
+    "pasos": {
+      "cliente": {
+        "titulo": "Adaugă primul tău client",
+        "desc": "Fișa de contact care ulterior se leagă de lucrări, oferte și facturi."
+      },
+      "obra": {
+        "titulo": "Creează prima ta lucrare",
+        "desc": "Asociaz-o unui client pentru a urmări fotografii, etape și echipă."
+      },
+      "presupuesto": {
+        "titulo": "Fă prima ta ofertă",
+        "desc": "Folosește articolele din Tarife și prețuri pentru a-l genera în câteva minute."
+      },
+      "fiscal": {
+        "titulo": "Completează-ți datele fiscale",
+        "desc": "CIF, adresă și regim — esențiale pentru oferte și facturi valide."
+      },
+      "cobros": {
+        "titulo": "Conectează plata cu cardul",
+        "desc": "Opțional: conectează-ți contul Stripe pentru a încasa facturi direct din XANDER."
+      }
+    },
+    "primerosPasos": "Primii pași în XANDER",
+    "mostrar": "Arată ▾",
+    "ocultar": "Ascunde ▴",
+    "completados": "Finalizat! Acum cunoști elementele de bază ale XANDER.",
+    "progreso": "{{completados}} din {{total}} finalizate — te ghidăm până când aplicația devine parte din rutina ta."
+  },
+  "auth": {
+    "tagline": "MANAGEMENT RENOVĂRI",
+    "footer": "© 2026 XANDER Gestión · Madrid",
+    "orConEmail": "sau cu email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "login": {
+      "quote": "\"Instrumentul de care are nevoie orice liber-profesionist din domeniu, creat de cineva din domeniu.\"",
+      "features": [
+        "Oferte",
+        "Facturare",
+        "Lucrări",
+        "Tarife"
+      ],
+      "bienvenido": "Bine ai venit",
+      "accedeCuenta": "Accesează-ți contul",
+      "continuarGoogle": "Continuă cu Google",
+      "contrasena": "Parolă",
+      "olvidasteContrasena": "Ai uitat parola?",
+      "errorCredenciales": "Email sau parolă incorecte.",
+      "entrando": "Se conectează...",
+      "entrar": "Conectare",
+      "noTienesCuenta": "Nu ai cont?",
+      "registrateGratis": "Înregistrează-te gratuit"
+    },
+    "register": {
+      "features": [
+        {
+          "icon": "📋",
+          "text": "Oferte profesionale în câteva minute"
+        },
+        {
+          "icon": "🔨",
+          "text": "Urmărirea lucrărilor și clienților"
+        },
+        {
+          "icon": "📊",
+          "text": "Tarife și profitabilitate pe lucrare"
+        },
+        {
+          "icon": "📧",
+          "text": "Facturi trimise direct din aplicație"
+        }
+      ],
+      "gratisBeta": "Gratuit în perioada beta · Fără card de credit",
+      "creaTuCuenta": "Creează-ți contul",
+      "gratisSinLimites": "Gratuit în perioada beta · Fără limite",
+      "registrarseGoogle": "Înregistrează-te cu Google",
+      "emailProfesional": "Email profesional",
+      "contrasena": "Parolă",
+      "minimoCaracteres": "Minimum 8 caractere",
+      "confirmarContrasena": "Confirmă parola",
+      "repiteContrasena": "Repetă parola",
+      "passwordsNoCoinciden": "Parolele nu coincid.",
+      "passwordCorta": "Parola trebuie să aibă cel puțin 8 caractere.",
+      "creandoCuenta": "Se creează contul...",
+      "crearCuentaGratuita": "Creează cont gratuit",
+      "aceptasTerminosPre": "Înregistrându-te accepți",
+      "terminosUso": "Termeni de utilizare",
+      "y": "și",
+      "politicaPrivacidad": "Politica de confidențialitate",
+      "yaTienesCuenta": "Ai deja cont?",
+      "accedeAqui": "Accesează aici",
+      "revisaEmail": "Verifică-ți emailul",
+      "enlaceConfirmacion": "Ți-am trimis un link de confirmare la <strong>{{email}}</strong>. Confirmă-ți contul pentru a putea configura profilul.",
+      "irLogin": "Mergi la autentificare"
+    },
+    "forgot": {
+      "sidebarText": "Îți vom trimite un link pentru a-ți putea stabili o parolă nouă în siguranță.",
+      "emailEnviado": "Email trimis",
+      "enlaceEnviadoA": "Am trimis un link de recuperare la <strong>{{email}}</strong>. Verifică și folderul de spam.",
+      "enlaceCaduca": "Linkul expiră în 1 oră. Dacă nu îl primești, poți încerca din nou.",
+      "volverInicioSesion": "Înapoi la autentificare",
+      "flechaVolver": "← Înapoi la autentificare",
+      "recuperarContrasena": "Recuperează parola",
+      "introduceEmail": "Introdu emailul tău și îți vom trimite un link pentru a-ți reseta parola.",
+      "errorEnvio": "Nu s-a putut trimite emailul. Verifică adresa și încearcă din nou.",
+      "enviando": "Se trimite...",
+      "enviarEnlace": "Trimite link de recuperare"
+    },
+    "reset": {
+      "sidebarText": "Alege o parolă sigură. Îți recomandăm cel puțin 8 caractere combinând litere și cifre.",
+      "passwordActualizada": "Parolă actualizată",
+      "redirigiendo": "Se redirecționează către contul tău...",
+      "verificandoEnlace": "Se verifică linkul de recuperare...",
+      "enlaceCaducadoAviso": "Dacă vezi acest mesaj mai mult de 10 secunde, linkul poate fi expirat.",
+      "solicitaUnoNuevo": "Solicită unul nou.",
+      "nuevaContrasena": "Parolă nouă",
+      "eligeNuevaPassword": "Alege o parolă nouă pentru contul tău.",
+      "confirmarContrasena": "Confirmă parola",
+      "repiteContrasena": "Repetă parola",
+      "minimoCaracteres": "Minimum 8 caractere",
+      "passwordCorta": "Parola trebuie să aibă cel puțin 8 caractere.",
+      "passwordsNoCoinciden": "Parolele nu coincid.",
+      "errorActualizar": "Nu s-a putut actualiza parola. Linkul poate fi expirat.",
+      "guardando": "Se salvează...",
+      "establecerNuevaContrasena": "Stabilește parola nouă"
+    }
+  },
+  "onboardingWizard": {
+    "cuentanosQuienEres": "Spune-ne cine ești — doar esențialul",
+    "bienvenido": "Bine ai venit la XANDER",
+    "rellenaDatos": "Completează două date și poți începe. Poți completa restul profilului mai târziu.",
+    "nombreLabel": "Prenume",
+    "apellidosLabel": "Nume",
+    "nombreEmpresaLabel": "Numele companiei",
+    "nombreObligatorio": "Numele este obligatoriu.",
+    "empresaObligatoria": "Numele companiei este obligatoriu.",
+    "especialidadesLabel": "Specializări",
+    "opcional": "(opțional)",
+    "queTrabajos": "Ce lucrări realizezi de obicei?",
+    "especialidad": {
+      "Reformas integrales": "Renovări complete",
+      "Baños": "Băi",
+      "Cocinas": "Bucătării",
+      "Pintura": "Vopsitorie",
+      "Pladur": "Rigips",
+      "Electricidad": "Electricitate",
+      "Fontanería": "Instalații sanitare",
+      "Carpintería": "Tâmplărie",
+      "Alicatados": "Faianță",
+      "Fachadas": "Fațade"
+    },
+    "avisoDatosAdicionales": "Poți adăuga CIF, adresă, telefoane și altele în <strong>Compania mea</strong> oricând dorești. Sunt necesare pentru a tipări oferte și facturi complete.",
+    "salir": "Ieșire",
+    "guardando": "Se salvează...",
+    "empezar": "Începe! →"
+  },
+  "landing": {
+    "nav": {
+      "funciones": "Funcționalități",
+      "planes": "Planuri",
+      "contacto": "Contact"
+    },
+    "miCuenta": "Contul meu",
+    "entrar": "Conectare",
+    "pruebaGratis": "Probă gratuită",
+    "iraMiCuenta": "Mergi la contul meu",
+    "pruebaGratis30": "Probă gratuită 30 de zile",
+    "heroTag": "Management pentru renovări interioare",
+    "heroTitle": "Oferte, facturi și lucrări.<br />Totul într-un singur loc.",
+    "heroDesc": "Instrumentul de management gândit de și pentru liber-profesioniștii din renovări: oferte în câteva minute, facturare cu Verifactu, plată cu cardul și urmărirea reală a fiecărei lucrări.",
+    "verFunciones": "Vezi funcționalitățile",
+    "sinTarjeta": "Fără card · Fără angajament · Anulează oricând",
+    "funciones": [
+      {
+        "icon": "📋",
+        "title": "Oferte",
+        "desc": "Creează oferte profesionale pe articole în câteva minute, gata de trimis."
+      },
+      {
+        "icon": "🧾",
+        "title": "Facturare",
+        "desc": "Facturi cu Verifactu integrat — hash înlănțuit, QR și trimitere către agenția fiscală."
+      },
+      {
+        "icon": "🏗️",
+        "title": "Lucrări",
+        "desc": "Urmărirea lucrării cu fotografii, etape, echipă și rapoarte de lucru."
+      },
+      {
+        "icon": "💳",
+        "title": "Plăți cu cardul",
+        "desc": "Clienții tăi plătesc factura online. Banii ajung direct în contul tău."
+      },
+      {
+        "icon": "💶",
+        "title": "Cheltuieli și rezultate",
+        "desc": "Înregistrează cheltuielile pe lucrare și vezi profitabilitatea reală a fiecărui proiect."
+      },
+      {
+        "icon": "📊",
+        "title": "Fiscal",
+        "desc": "Document de reconciliere gata pentru contabilitatea ta înainte de fiecare trimestru."
+      },
+      {
+        "icon": "👷",
+        "title": "Angajați și salarii",
+        "desc": "Pontaje pe lucrare și generator de fluturași de salariu."
+      },
+      {
+        "icon": "📱",
+        "title": "Aplicație instalabilă",
+        "desc": "Instaleaz-o pe telefon sau calculator, funcționează chiar și offline."
+      }
+    ],
+    "funcionesTitle": "Tot ce ai nevoie pentru a-ți gestiona afacerea",
+    "funcionesSubtitle": "Fără foi de calcul separate, fără foldere WhatsApp cu oferte.",
+    "testimonioAutor": "— XANDER Renovări Interioare, Madrid",
+    "planesTitle": "Planuri simple",
+    "planesSubtitle": "Începe gratuit. Fără surprize.",
+    "recomendado": "Recomandat",
+    "planPrueba": {
+      "nombre": "Probă gratuită",
+      "periodo": "30 de zile",
+      "desc": "Acces complet, fără card.",
+      "features": [
+        "Toate modulele",
+        "Fără limită de clienți sau lucrări",
+        "Agent AI inclus"
+      ],
+      "cta": "Începe gratuit"
+    },
+    "planPro": {
+      "nombre": "Pro",
+      "periodo": "per liber-profesionist",
+      "desc": "Pentru când decizi să rămâi.",
+      "features": [
+        "Tot ce oferă planul gratuit",
+        "Fără limite de utilizare",
+        "Suport direct"
+      ],
+      "cta": "Începe gratuit"
+    },
+    "contactoTitle": "Ai întrebări înainte de a începe?",
+    "contactoSubtitle": "Lasă-ne datele tale sau scrie-ne direct pe WhatsApp.",
+    "form": {
+      "nombre": "Nume",
+      "nombrePlaceholder": "Numele tău",
+      "emailOTelefono": "Email sau telefon",
+      "contactoPlaceholder": "tu@email.com sau număr de telefon",
+      "mensaje": "Mesaj",
+      "opcional": "(opțional)",
+      "mensajePlaceholder": "Spune-ne de ce ai nevoie",
+      "errorRequerido": "Avem nevoie de cel puțin numele tău și un email sau telefon pentru a te contacta.",
+      "errorEnvio": "Nu s-a putut trimite. Încearcă din nou sau scrie-ne pe WhatsApp.",
+      "gracias": "Mulțumim, {{nombre}}!",
+      "contactamos24h": "Te contactăm în mai puțin de 24h.",
+      "enviando": "Se trimite...",
+      "quieroContacten": "Vreau să fiu contactat"
+    },
+    "contactoDirecto": "Contact direct",
+    "escribirWhatsapp": "Scrie pe WhatsApp",
+    "footerText": "XANDER Renovări Interioare · Madrid",
+    "footerCopyright": "© 2026 XANDER Gestión"
   }
 }

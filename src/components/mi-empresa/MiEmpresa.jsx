@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
 import { PRECIO_PRO, PRECIO_PRO_ANUAL } from '../../hooks/usePlan'
@@ -10,6 +11,7 @@ const ESPECIALIDADES = [
 ]
 
 export default function MiEmpresa() {
+  const { t } = useTranslation()
   const { profile, updateProfile } = useAuth()
   const [form, setForm] = useState(null)
   const [saving, setSaving] = useState(false)
@@ -89,7 +91,7 @@ export default function MiEmpresa() {
     const { data, error: err } = await supabase.functions.invoke('stripe-crear-checkout-suscripcion', { body: { ciclo } })
     setPlanLoading('')
     if (err || data?.error) {
-      setPlanError(data?.error || err.message || 'No se pudo iniciar el pago de la suscripción.')
+      setPlanError(data?.error || err.message || t('miEmpresa.errores.checkout'))
       return
     }
     window.location.href = data.url
@@ -101,7 +103,7 @@ export default function MiEmpresa() {
     const { data, error: err } = await supabase.functions.invoke('stripe-portal-suscripcion', { body: {} })
     setPlanLoading('')
     if (err || data?.error) {
-      setPlanError(data?.error || err.message || 'No se pudo abrir el portal de facturación.')
+      setPlanError(data?.error || err.message || t('miEmpresa.errores.portal'))
       return
     }
     window.location.href = data.url
@@ -113,7 +115,7 @@ export default function MiEmpresa() {
     const { data, error: err } = await supabase.functions.invoke('stripe-connect-status', { body: {} })
     setStripeLoading(false)
     if (err || data?.error) {
-      setStripeError(data?.error || err.message || 'No se pudo consultar el estado de Stripe.')
+      setStripeError(data?.error || err.message || t('miEmpresa.errores.stripeStatus'))
       return
     }
     setStripeStatus(data)
@@ -125,7 +127,7 @@ export default function MiEmpresa() {
     const { data, error: err } = await supabase.functions.invoke('stripe-connect-onboarding', { body: {} })
     setStripeLoading(false)
     if (err || data?.error) {
-      setStripeError(data?.error || err.message || 'No se pudo iniciar la conexión con Stripe.')
+      setStripeError(data?.error || err.message || t('miEmpresa.errores.stripeConnect'))
       return
     }
     window.location.href = data.url
@@ -157,7 +159,7 @@ export default function MiEmpresa() {
     setTimeout(() => setSaved(false), 3000)
   }
 
-  if (!form) return <div className="p-6 text-ink-soft text-sm">Cargando…</div>
+  if (!form) return <div className="p-6 text-ink-soft text-sm">{t('miEmpresa.cargando')}</div>
 
   const plan = planInfo || profile
   const esPro = plan?.plan === 'pro' || plan?.plan === 'pro_annual'
@@ -167,29 +169,29 @@ export default function MiEmpresa() {
   return (
     <div className="p-6 max-w-3xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-ink">Mi Empresa</h1>
-        <p className="text-sm text-ink-soft mt-0.5">Estos datos aparecerán en tus presupuestos y facturas</p>
+        <h1 className="text-2xl font-bold text-ink">{t('miEmpresa.title')}</h1>
+        <p className="text-sm text-ink-soft mt-0.5">{t('miEmpresa.subtitle')}</p>
       </div>
 
       <form onSubmit={save} className="space-y-8">
         {/* Datos personales */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Datos personales</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">{t('miEmpresa.datosPersonales')}</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">Nombre</label>
+              <label className="label">{t('miEmpresa.nombre')}</label>
               <input className="input" value={form.nombre} onChange={e => setF('nombre', e.target.value)} />
             </div>
             <div>
-              <label className="label">Apellidos</label>
+              <label className="label">{t('miEmpresa.apellidos')}</label>
               <input className="input" value={form.apellidos} onChange={e => setF('apellidos', e.target.value)} />
             </div>
             <div>
-              <label className="label">DNI / NIE</label>
+              <label className="label">{t('miEmpresa.dniNie')}</label>
               <input className="input" value={form.dni_nie} onChange={e => setF('dni_nie', e.target.value)} />
             </div>
             <div>
-              <label className="label">Teléfono personal</label>
+              <label className="label">{t('miEmpresa.telefonoPersonal')}</label>
               <input className="input" type="tel" value={form.telefono_personal} onChange={e => setF('telefono_personal', e.target.value)} />
             </div>
           </div>
@@ -197,38 +199,38 @@ export default function MiEmpresa() {
 
         {/* Datos de empresa */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Datos de empresa / actividad</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">{t('miEmpresa.datosEmpresa')}</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
-              <label className="label">Nombre comercial / empresa *</label>
+              <label className="label">{t('miEmpresa.nombreComercial')}</label>
               <input className="input" value={form.empresa_nombre} onChange={e => setF('empresa_nombre', e.target.value)} />
             </div>
             <div>
-              <label className="label">NIF / CIF</label>
+              <label className="label">{t('miEmpresa.nif')}</label>
               <input className="input" value={form.empresa_nif} onChange={e => setF('empresa_nif', e.target.value)} />
             </div>
             <div>
-              <label className="label">Teléfono empresa</label>
+              <label className="label">{t('miEmpresa.telefonoEmpresa')}</label>
               <input className="input" type="tel" value={form.empresa_telefono} onChange={e => setF('empresa_telefono', e.target.value)} />
             </div>
             <div className="col-span-2">
-              <label className="label">Email de empresa</label>
+              <label className="label">{t('miEmpresa.emailEmpresa')}</label>
               <input className="input" type="email" value={form.empresa_email} onChange={e => setF('empresa_email', e.target.value)} />
             </div>
             <div className="col-span-2">
-              <label className="label">Dirección fiscal</label>
+              <label className="label">{t('miEmpresa.direccionFiscal')}</label>
               <input className="input" value={form.empresa_direccion} onChange={e => setF('empresa_direccion', e.target.value)} />
             </div>
             <div>
-              <label className="label">CP</label>
+              <label className="label">{t('miEmpresa.cp')}</label>
               <input className="input" value={form.empresa_cp} onChange={e => setF('empresa_cp', e.target.value)} />
             </div>
             <div>
-              <label className="label">Ciudad</label>
+              <label className="label">{t('miEmpresa.ciudad')}</label>
               <input className="input" value={form.empresa_ciudad} onChange={e => setF('empresa_ciudad', e.target.value)} />
             </div>
             <div className="col-span-2">
-              <label className="label">Web</label>
+              <label className="label">{t('miEmpresa.web')}</label>
               <input className="input" type="url" value={form.empresa_web} onChange={e => setF('empresa_web', e.target.value)} placeholder="https://" />
             </div>
           </div>
@@ -236,30 +238,30 @@ export default function MiEmpresa() {
 
         {/* Actividad */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Actividad profesional</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">{t('miEmpresa.actividadProfesional')}</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">Fecha inicio actividad</label>
+              <label className="label">{t('miEmpresa.fechaInicio')}</label>
               <input className="input" type="date" value={form.fecha_inicio_actividad} onChange={e => setF('fecha_inicio_actividad', e.target.value)} />
             </div>
             <div className="flex items-center gap-3 pt-5">
               <input type="checkbox" id="tarifa_red" checked={form.tarifa_reducida} onChange={e => setF('tarifa_reducida', e.target.checked)} className="w-4 h-4 accent-gold" />
               <label htmlFor="tarifa_red" className="text-sm text-ink cursor-pointer">
-                Tarifa plana / reducida activa
-                <span className="block text-xs text-ink-soft">Primeros 2 años como autónomo</span>
+                {t('miEmpresa.tarifaReducida')}
+                <span className="block text-xs text-ink-soft">{t('miEmpresa.tarifaReducidaSub')}</span>
               </label>
             </div>
           </div>
 
           <div>
-            <label className="label mb-2">Especialidades</label>
+            <label className="label mb-2">{t('miEmpresa.especialidades')}</label>
             <div className="flex flex-wrap gap-2">
               {ESPECIALIDADES.map(esp => {
                 const active = form.especialidades.includes(esp)
                 return (
                   <button key={esp} type="button" onClick={() => toggleEsp(esp)}
                     className={`text-xs px-3 py-1.5 rounded-full border font-medium transition-colors ${active ? 'bg-navy text-gold border-navy' : 'bg-surface text-ink-soft border-edge hover:border-navy hover:text-ink'}`}>
-                    {esp}
+                    {t(`miEmpresa.especialidad.${esp}`, esp)}
                   </button>
                 )
               })}
@@ -269,30 +271,30 @@ export default function MiEmpresa() {
 
         {/* Mi plan */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Mi plan</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">{t('miEmpresa.miPlan')}</h2>
 
           {suscripcionMsg === 'ok' && (
             <div className="text-green-700 text-sm bg-green-50 border border-green-200 rounded-xl px-4 py-3">
-              ✓ Pago confirmado. Tu plan se actualizará en unos segundos.
+              {t('miEmpresa.pagoConfirmado')}
             </div>
           )}
           {suscripcionMsg === 'cancelado' && (
             <div className="text-sm text-ink-soft bg-surface border border-edge rounded-xl px-4 py-3">
-              Has cancelado el proceso de pago. Puedes intentarlo de nuevo cuando quieras.
+              {t('miEmpresa.pagoCancelado')}
             </div>
           )}
 
           {esPro ? (
             <div className="text-green-700 text-sm bg-green-50 border border-green-200 rounded-xl px-4 py-3 flex items-center gap-2">
-              ✓ Plan Pro activo{plan?.plan === 'pro_annual' ? ' (anual)' : ' (mensual)'}. Gracias por confiar en XANDER.
+              {t('miEmpresa.planProActivo', { ciclo: plan?.plan === 'pro_annual' ? t('miEmpresa.cicloAnual') : t('miEmpresa.cicloMensual') })}
             </div>
           ) : trialActivo ? (
             <div className="text-amber-700 text-sm bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
-              ⏳ Estás en periodo de prueba gratuita — te quedan {trialDias} día{trialDias === 1 ? '' : 's'}.
+              {t('miEmpresa.trialActivo', { dias: trialDias, plural: trialDias === 1 ? '' : 's' })}
             </div>
           ) : (
             <div className="text-sm text-ink-soft bg-surface border border-edge rounded-xl px-4 py-3">
-              Plan gratuito. Actualiza a Pro para acceso completo sin límites.
+              {t('miEmpresa.planGratuito')}
             </div>
           )}
 
@@ -301,40 +303,38 @@ export default function MiEmpresa() {
           {esPro ? (
             <div className="flex gap-3">
               <button type="button" onClick={gestionarSuscripcion} disabled={planLoading === 'portal'} className="btn-secondary px-6">
-                {planLoading === 'portal' ? 'Abriendo…' : 'Gestionar suscripción'}
+                {planLoading === 'portal' ? t('miEmpresa.abriendo') : t('miEmpresa.gestionarSuscripcion')}
               </button>
             </div>
           ) : (
             <div className="flex flex-wrap gap-3">
               <button type="button" onClick={() => actualizarAPro('mensual')} disabled={!!planLoading} className="btn-primary px-6">
-                {planLoading === 'mensual' ? 'Redirigiendo…' : `Actualizar a Pro — ${PRECIO_PRO}`}
+                {planLoading === 'mensual' ? t('miEmpresa.redirigiendo') : t('miEmpresa.actualizarPro', { precio: PRECIO_PRO })}
               </button>
               <button type="button" onClick={() => actualizarAPro('anual')} disabled={!!planLoading} className="btn-secondary px-6">
-                {planLoading === 'anual' ? 'Redirigiendo…' : `Plan anual — ${PRECIO_PRO_ANUAL}`}
+                {planLoading === 'anual' ? t('miEmpresa.redirigiendo') : t('miEmpresa.planAnual', { precio: PRECIO_PRO_ANUAL })}
               </button>
             </div>
           )}
-          <p className="text-xs text-ink-soft/70">Sin permanencia · Cancela cuando quieras desde el portal de facturación</p>
+          <p className="text-xs text-ink-soft/70">{t('miEmpresa.sinPermanencia')}</p>
         </div>
 
         {/* Cobros online */}
         <div className="card space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">Cobros online</h2>
-          <p className="text-sm text-ink-soft">
-            Conecta tu cuenta de Stripe para poder cobrar tus facturas con tarjeta. El dinero de tus clientes entra directamente en tu banco — XANDER nunca lo gestiona.
-          </p>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">{t('miEmpresa.cobrosOnline')}</h2>
+          <p className="text-sm text-ink-soft">{t('miEmpresa.cobrosOnlineDesc')}</p>
 
           {stripeStatus?.charges_enabled ? (
             <div className="text-green-700 text-sm bg-green-50 border border-green-200 rounded-xl px-4 py-3 flex items-center gap-2">
-              ✓ Cuenta de Stripe conectada y activa. Ya puedes cobrar facturas con tarjeta.
+              {t('miEmpresa.stripeActiva')}
             </div>
           ) : stripeStatus?.connected ? (
             <div className="text-amber-700 text-sm bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
-              Tu cuenta de Stripe está creada pero todavía no ha terminado la verificación. Completa el proceso para empezar a cobrar.
+              {t('miEmpresa.stripeVerificacion')}
             </div>
           ) : (
             <div className="text-sm text-ink-soft bg-surface border border-edge rounded-xl px-4 py-3">
-              Todavía no has conectado ninguna cuenta de Stripe.
+              {t('miEmpresa.stripeNoConectada')}
             </div>
           )}
 
@@ -342,11 +342,11 @@ export default function MiEmpresa() {
 
           <div className="flex gap-3">
             <button type="button" onClick={conectarStripe} disabled={stripeLoading} className="btn-primary px-6">
-              {stripeLoading ? 'Cargando…' : stripeStatus?.connected ? 'Completar / revisar conexión' : 'Conectar con Stripe'}
+              {stripeLoading ? t('miEmpresa.cargandoBtn') : stripeStatus?.connected ? t('miEmpresa.completarConexion') : t('miEmpresa.conectarStripe')}
             </button>
             {stripeStatus?.connected && (
               <button type="button" onClick={refreshStripeStatus} disabled={stripeLoading} className="btn-secondary px-6">
-                Actualizar estado
+                {t('miEmpresa.actualizarEstado')}
               </button>
             )}
           </div>
@@ -356,13 +356,13 @@ export default function MiEmpresa() {
 
         {saved && (
           <div className="text-green-700 text-sm bg-green-50 border border-green-200 rounded-xl px-4 py-3 flex items-center gap-2">
-            ✓ Datos guardados correctamente
+            {t('miEmpresa.datosGuardados')}
           </div>
         )}
 
         <div className="flex gap-3">
           <button type="submit" disabled={saving} className="btn-primary px-8">
-            {saving ? 'Guardando…' : 'Guardar cambios'}
+            {saving ? t('miEmpresa.guardando') : t('miEmpresa.guardarCambios')}
           </button>
         </div>
       </form>

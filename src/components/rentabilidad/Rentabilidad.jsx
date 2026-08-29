@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../../lib/supabase'
 
 const ESTADOS_COLOR = {
@@ -26,6 +27,7 @@ function MargenBar({ margen }) {
 }
 
 export default function Rentabilidad() {
+  const { t } = useTranslation()
   const [obras, setObras] = useState([])
   const [loading, setLoading] = useState(true)
   const [orden, setOrden] = useState('margen_desc')
@@ -104,43 +106,43 @@ export default function Rentabilidad() {
   return (
     <div className="p-6 max-w-6xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-ink">Rentabilidad por obras</h1>
-        <p className="text-sm text-ink-soft mt-0.5">Comparativa presupuesto vs coste real · margen de cada proyecto</p>
+        <h1 className="text-2xl font-bold text-ink">{t('rentabilidad.title')}</h1>
+        <p className="text-sm text-ink-soft mt-0.5">{t('rentabilidad.subtitle')}</p>
       </div>
 
       {/* Resumen global */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div className="card text-center">
           <div className="text-xl font-bold text-ink">{fmt(totales.presupuestado)}</div>
-          <div className="text-xs text-ink-soft mt-1">Total presupuestado</div>
+          <div className="text-xs text-ink-soft mt-1">{t('rentabilidad.totalPresupuestado')}</div>
         </div>
         <div className="card text-center">
           <div className="text-xl font-bold text-ink">{fmt(totales.coste)}</div>
-          <div className="text-xs text-ink-soft mt-1">Coste real acumulado</div>
+          <div className="text-xs text-ink-soft mt-1">{t('rentabilidad.costeRealAcumulado')}</div>
         </div>
         <div className={`card text-center ${totales.beneficio >= 0 ? '' : 'border-red-200'}`}>
           <div className={`text-xl font-bold ${totales.beneficio >= 0 ? 'text-green-700' : 'text-red-600'}`}>
             {fmt(totales.beneficio)}
           </div>
-          <div className="text-xs text-ink-soft mt-1">Beneficio neto</div>
+          <div className="text-xs text-ink-soft mt-1">{t('rentabilidad.beneficioNeto')}</div>
         </div>
         <div className="card text-center bg-navy">
           <div className={`text-xl font-bold ${margenGlobal >= 30 ? 'text-green-400' : margenGlobal >= 15 ? 'text-gold' : 'text-orange-400'}`}>
             {margenGlobal.toFixed(1)}%
           </div>
-          <div className="text-xs text-white/50 mt-1">Margen global</div>
+          <div className="text-xs text-white/50 mt-1">{t('rentabilidad.margenGlobal')}</div>
         </div>
       </div>
 
       {/* Semáforo de obras */}
       <div className="card mb-6">
-        <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">Distribución de rentabilidad</div>
+        <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">{t('rentabilidad.distribucionTitle')}</div>
         <div className="grid grid-cols-4 gap-3 text-center">
           {[
-            { label: 'Excelente', sub: '≥ 35%', count: dist.buena, color: 'text-green-700', bg: 'bg-green-100' },
-            { label: 'Buena', sub: '20–35%', count: dist.media, color: 'text-gold-dark', bg: 'bg-gold/20' },
-            { label: 'Justa', sub: '0–20%', count: dist.baja, color: 'text-orange-600', bg: 'bg-orange-100' },
-            { label: 'Negativa', sub: '< 0%', count: dist.negat, color: 'text-red-600', bg: 'bg-red-100' },
+            { label: t('rentabilidad.dist.excelente'), sub: '≥ 35%', count: dist.buena, color: 'text-green-700', bg: 'bg-green-100' },
+            { label: t('rentabilidad.dist.buena'), sub: '20–35%', count: dist.media, color: 'text-gold-dark', bg: 'bg-gold/20' },
+            { label: t('rentabilidad.dist.justa'), sub: '0–20%', count: dist.baja, color: 'text-orange-600', bg: 'bg-orange-100' },
+            { label: t('rentabilidad.dist.negativa'), sub: '< 0%', count: dist.negat, color: 'text-red-600', bg: 'bg-red-100' },
           ].map(d => (
             <div key={d.label} className={`rounded-xl p-3 ${d.bg}`}>
               <div className={`text-2xl font-bold ${d.color}`}>{d.count}</div>
@@ -154,27 +156,27 @@ export default function Rentabilidad() {
       {/* Filtros */}
       <div className="flex flex-wrap gap-3 mb-5">
         <select className="input w-auto" value={filtroEstado} onChange={e => setFiltroEstado(e.target.value)}>
-          <option value="">Todos los estados</option>
+          <option value="">{t('rentabilidad.allStates')}</option>
           {['pendiente', 'en_curso', 'pausada', 'completada', 'cancelada'].map(s => (
-            <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1).replace('_', ' ')}</option>
+            <option key={s} value={s}>{t(`obras.estado.${s}`)}</option>
           ))}
         </select>
         <select className="input w-auto" value={orden} onChange={e => setOrden(e.target.value)}>
-          <option value="margen_desc">Mayor margen primero</option>
-          <option value="margen_asc">Menor margen primero</option>
-          <option value="presupuesto_desc">Mayor presupuesto primero</option>
-          <option value="nombre">Por nombre</option>
+          <option value="margen_desc">{t('rentabilidad.orden.margenDesc')}</option>
+          <option value="margen_asc">{t('rentabilidad.orden.margenAsc')}</option>
+          <option value="presupuesto_desc">{t('rentabilidad.orden.presupuestoDesc')}</option>
+          <option value="nombre">{t('rentabilidad.orden.nombre')}</option>
         </select>
       </div>
 
       {/* Tabla */}
       {loading ? (
-        <div className="text-ink-soft text-sm py-10 text-center">Cargando obras…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">{t('rentabilidad.loading')}</div>
       ) : ordenadas.length === 0 ? (
         <div className="card text-center py-14">
           <div className="text-5xl mb-3">📈</div>
-          <div className="font-bold text-ink mb-1">Sin obras que analizar</div>
-          <div className="text-sm text-ink-soft">Crea obras y añade costes para ver la rentabilidad</div>
+          <div className="font-bold text-ink mb-1">{t('rentabilidad.emptyTitle')}</div>
+          <div className="text-sm text-ink-soft">{t('rentabilidad.emptyHint')}</div>
         </div>
       ) : (
         <div className="space-y-3">
@@ -185,7 +187,7 @@ export default function Rentabilidad() {
                   <div className="flex items-center gap-3 flex-wrap">
                     <span className="font-bold text-ink text-base">{o.nombre}</span>
                     <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${ESTADOS_COLOR[o.estado] || ''}`}>
-                      {o.estado?.replace('_', ' ')}
+                      {t(`obras.estado.${o.estado}`, o.estado)}
                     </span>
                   </div>
                   {o.clientes?.nombre && <div className="text-sm text-ink-soft mt-0.5">👤 {o.clientes.nombre}</div>}
@@ -194,7 +196,7 @@ export default function Rentabilidad() {
                   <div className={`text-2xl font-black ${o.margen >= 35 ? 'text-green-700' : o.margen >= 20 ? 'text-gold-dark' : o.margen >= 0 ? 'text-orange-600' : 'text-red-600'}`}>
                     {o.margen.toFixed(1)}%
                   </div>
-                  <div className="text-xs text-ink-soft">margen</div>
+                  <div className="text-xs text-ink-soft">{t('rentabilidad.margen')}</div>
                 </div>
               </div>
 
@@ -204,27 +206,27 @@ export default function Rentabilidad() {
               {/* Desglose económico */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 pt-4 border-t border-edge">
                 <div>
-                  <div className="text-xs text-ink-soft uppercase tracking-wide">Presupuestado</div>
+                  <div className="text-xs text-ink-soft uppercase tracking-wide">{t('rentabilidad.presupuestado')}</div>
                   <div className="font-bold text-ink mt-0.5">
-                    {o.presupuestado > 0 ? fmt(o.presupuestado) : <span className="text-ink-soft/40">Sin dato</span>}
+                    {o.presupuestado > 0 ? fmt(o.presupuestado) : <span className="text-ink-soft/40">{t('rentabilidad.sinDato')}</span>}
                   </div>
                 </div>
                 <div>
-                  <div className="text-xs text-ink-soft uppercase tracking-wide">Coste real</div>
+                  <div className="text-xs text-ink-soft uppercase tracking-wide">{t('rentabilidad.costeReal')}</div>
                   <div className="font-bold text-ink mt-0.5">
-                    {o.coste > 0 ? fmt(o.coste) : <span className="text-ink-soft/40">Sin dato</span>}
+                    {o.coste > 0 ? fmt(o.coste) : <span className="text-ink-soft/40">{t('rentabilidad.sinDato')}</span>}
                   </div>
                 </div>
                 <div>
-                  <div className="text-xs text-ink-soft uppercase tracking-wide">Facturado</div>
+                  <div className="text-xs text-ink-soft uppercase tracking-wide">{t('rentabilidad.facturado')}</div>
                   <div className="font-bold text-ink mt-0.5">
-                    {o.facturado > 0 ? fmt(o.facturado) : <span className="text-ink-soft/40">Sin factura</span>}
+                    {o.facturado > 0 ? fmt(o.facturado) : <span className="text-ink-soft/40">{t('rentabilidad.sinFactura')}</span>}
                   </div>
                 </div>
                 <div>
-                  <div className="text-xs text-ink-soft uppercase tracking-wide">Beneficio</div>
+                  <div className="text-xs text-ink-soft uppercase tracking-wide">{t('rentabilidad.beneficio')}</div>
                   <div className={`font-bold mt-0.5 ${o.beneficio >= 0 ? 'text-green-700' : 'text-red-600'}`}>
-                    {o.presupuestado > 0 || o.coste > 0 ? fmt(o.beneficio) : <span className="text-ink-soft/40">Sin dato</span>}
+                    {o.presupuestado > 0 || o.coste > 0 ? fmt(o.beneficio) : <span className="text-ink-soft/40">{t('rentabilidad.sinDato')}</span>}
                   </div>
                 </div>
               </div>
@@ -232,7 +234,7 @@ export default function Rentabilidad() {
               {/* Alerta si falta info */}
               {o.presupuestado === 0 && o.coste === 0 && (
                 <div className="mt-3 text-xs text-ink-soft/60 bg-page rounded-lg px-3 py-2">
-                  💡 Añade presupuesto total y coste real en la obra para ver la rentabilidad
+                  {t('rentabilidad.tipFaltaInfo')}
                 </div>
               )}
             </div>

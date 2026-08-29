@@ -1,22 +1,14 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 
 // ── Catálogos ────────────────────────────────────────────────────────────────
 const PUESTOS = [
-  { value: 'encargado',     label: 'Encargado de obra' },
-  { value: 'oficial_1',     label: 'Oficial 1ª' },
-  { value: 'oficial_2',     label: 'Oficial 2ª' },
-  { value: 'ayudante',      label: 'Ayudante' },
-  { value: 'peon',          label: 'Peón' },
-  { value: 'fontanero',     label: 'Fontanero/a' },
-  { value: 'electricista',  label: 'Electricista' },
-  { value: 'pintor',        label: 'Pintor/a' },
-  { value: 'yesero',        label: 'Yesero / Escayolista' },
-  { value: 'carpintero',    label: 'Carpintero/a' },
-  { value: 'alicatador',    label: 'Alicatador/a Solador/a' },
-  { value: 'impermeabilizador', label: 'Impermeabilizador/a' },
-  { value: 'administrativo', label: 'Administrativo/a' },
-  { value: 'otro',          label: 'Otro' },
+  { value: 'encargado' }, { value: 'oficial_1' }, { value: 'oficial_2' },
+  { value: 'ayudante' }, { value: 'peon' }, { value: 'fontanero' },
+  { value: 'electricista' }, { value: 'pintor' }, { value: 'yesero' },
+  { value: 'carpintero' }, { value: 'alicatador' }, { value: 'impermeabilizador' },
+  { value: 'administrativo' }, { value: 'otro' },
 ]
 
 const PUESTO_ICON = {
@@ -27,22 +19,15 @@ const PUESTO_ICON = {
 }
 
 const TIPOS_CONTRATO = [
-  { value: 'indefinido',         label: 'Indefinido',               color: 'bg-green-100 text-green-700' },
-  { value: 'fijo_discontinuo',   label: 'Fijo discontinuo',         color: 'bg-teal-100 text-teal-700' },
-  { value: 'temporal_obra',      label: 'Temporal por obra',        color: 'bg-blue-100 text-blue-700' },
-  { value: 'temporal_6m',        label: 'Temporal (≤6 meses)',      color: 'bg-yellow-100 text-yellow-700' },
-  { value: 'formacion',          label: 'Formación y aprendizaje',  color: 'bg-orange-100 text-orange-700' },
-  { value: 'autonomo',           label: 'Autónomo colaborador',     color: 'bg-purple-100 text-purple-700' },
+  { value: 'indefinido',         color: 'bg-green-100 text-green-700' },
+  { value: 'fijo_discontinuo',   color: 'bg-teal-100 text-teal-700' },
+  { value: 'temporal_obra',      color: 'bg-blue-100 text-blue-700' },
+  { value: 'temporal_6m',        color: 'bg-yellow-100 text-yellow-700' },
+  { value: 'formacion',          color: 'bg-orange-100 text-orange-700' },
+  { value: 'autonomo',           color: 'bg-purple-100 text-purple-700' },
 ]
 
-const GRUPOS_CONVENIO = [
-  { value: 'I',   label: 'Grupo I — Titulados superiores / medios' },
-  { value: 'II',  label: 'Grupo II — Jefes de obra / administrativos titulados' },
-  { value: 'III', label: 'Grupo III — Encargados / Capataces' },
-  { value: 'IV',  label: 'Grupo IV — Oficiales 1ª y 2ª' },
-  { value: 'V',   label: 'Grupo V — Ayudantes' },
-  { value: 'VI',  label: 'Grupo VI — Peones' },
-]
+const GRUPOS_CONVENIO = ['I', 'II', 'III', 'IV', 'V', 'VI']
 
 // ── Coste empresa (construcción CNAE 43xx, 2024-2025) ────────────────────────
 const SS = {
@@ -145,6 +130,7 @@ const FORM_EMPTY = {
 
 // ── Componente principal ─────────────────────────────────────────────────────
 export default function Empleados() {
+  const { t } = useTranslation()
   const [tab, setTab]               = useState('equipo')
   const [empleados, setEmpleados]   = useState([])
   const [loading, setLoading]       = useState(true)
@@ -210,7 +196,7 @@ export default function Empleados() {
   }
 
   async function remove(emp) {
-    if (!confirm(`¿Eliminar a ${emp.nombre} ${emp.apellidos}?`)) return
+    if (!confirm(t('empleados.confirmDelete', { nombre: `${emp.nombre} ${emp.apellidos}` }))) return
     await supabase.from('empleados').delete().eq('id', emp.id)
     load()
   }
@@ -231,19 +217,19 @@ export default function Empleados() {
   const costeTotalMensual = activos.reduce((sum, e) => sum + (parseFloat(e.salario_bruto) || 0), 0)
   const { ss: ssTotalMensual, total: totalEmpresa } = costeEmpresa(costeTotalMensual)
 
-  const tipoContrato = (v) => TIPOS_CONTRATO.find(t => t.value === v)
-  const puestoLabel  = (v) => PUESTOS.find(p => p.value === v)?.label || v
+  const tipoContrato = (v) => TIPOS_CONTRATO.find(tc => tc.value === v)
+  const puestoLabel  = (v) => t(`empleados.puesto.${v}`, v)
 
   return (
     <div className="p-6 max-w-5xl">
       {/* Cabecera */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-ink">Empleados y equipo</h1>
-          <p className="text-sm text-ink-soft mt-0.5">Gestión del equipo de trabajo, costes laborales y convenio colectivo</p>
+          <h1 className="text-2xl font-bold text-ink">{t('empleados.title')}</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{t('empleados.subtitle')}</p>
         </div>
         {tab === 'equipo' && !setupNeeded && (
-          <button onClick={openNew} className="btn-primary">+ Nuevo empleado</button>
+          <button onClick={openNew} className="btn-primary">{t('empleados.newEmpleado')}</button>
         )}
       </div>
 
@@ -252,15 +238,15 @@ export default function Empleados() {
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="card text-center py-3">
             <div className="text-2xl font-black text-ink">{activos.length}</div>
-            <div className="text-xs text-ink-soft mt-0.5">Empleados activos</div>
+            <div className="text-xs text-ink-soft mt-0.5">{t('empleados.kpi.activos')}</div>
           </div>
           <div className="card text-center py-3">
             <div className="text-lg font-black text-ink">{fmt(costeTotalMensual)}</div>
-            <div className="text-xs text-ink-soft mt-0.5">Salario bruto mensual</div>
+            <div className="text-xs text-ink-soft mt-0.5">{t('empleados.kpi.salarioBruto')}</div>
           </div>
           <div className="card bg-navy text-center py-3">
             <div className="text-lg font-black text-gold">{fmt(totalEmpresa)}</div>
-            <div className="text-xs text-white/70 mt-0.5">Coste empresa / mes</div>
+            <div className="text-xs text-white/70 mt-0.5">{t('empleados.kpi.costeEmpresa')}</div>
           </div>
         </div>
       )}
@@ -268,13 +254,13 @@ export default function Empleados() {
       {/* Tabs */}
       <div className="flex gap-1 bg-edge rounded-xl p-1 w-fit mb-6">
         {[
-          { id: 'equipo',   label: '👥 Equipo' },
-          { id: 'costes',   label: '💰 Costes' },
-          { id: 'convenio', label: '📋 Convenio' },
-        ].map(t => (
-          <button key={t.id} onClick={() => setTab(t.id)}
-            className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === t.id ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
-            {t.label}
+          { id: 'equipo',   label: t('empleados.tabs.equipo') },
+          { id: 'costes',   label: t('empleados.tabs.costes') },
+          { id: 'convenio', label: t('empleados.tabs.convenio') },
+        ].map(tb => (
+          <button key={tb.id} onClick={() => setTab(tb.id)}
+            className={`px-5 py-2 text-sm font-semibold rounded-lg transition-colors ${tab === tb.id ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
+            {tb.label}
           </button>
         ))}
       </div>
@@ -286,25 +272,25 @@ export default function Empleados() {
             <div className="flex items-start gap-4">
               <div className="text-3xl">⚙️</div>
               <div>
-                <div className="font-bold text-ink mb-2">Crear tabla en Supabase</div>
-                <p className="text-sm text-ink-soft mb-3">Ejecuta el archivo <code className="bg-page px-1.5 py-0.5 rounded font-mono text-xs">supabase/empleados.sql</code> en el SQL Editor de Supabase.</p>
-                <button onClick={() => { setSetup(false); load() }} className="btn-primary text-sm">Ya ejecutado — recargar</button>
+                <div className="font-bold text-ink mb-2">{t('empleados.setup.title')}</div>
+                <p className="text-sm text-ink-soft mb-3">{t('empleados.setup.descPre')} <code className="bg-page px-1.5 py-0.5 rounded font-mono text-xs">supabase/empleados.sql</code> {t('empleados.setup.descPost')}</p>
+                <button onClick={() => { setSetup(false); load() }} className="btn-primary text-sm">{t('empleados.setup.reload')}</button>
               </div>
             </div>
           </div>
         ) : loading ? (
-          <div className="text-ink-soft text-sm py-10 text-center">Cargando equipo…</div>
+          <div className="text-ink-soft text-sm py-10 text-center">{t('empleados.loading')}</div>
         ) : (
           <div>
             {/* Filtros */}
             <div className="flex flex-wrap gap-3 mb-5">
-              <input className="input max-w-xs" placeholder="🔍  Buscar…" value={search} onChange={e => setSearch(e.target.value)} />
+              <input className="input max-w-xs" placeholder={t('empleados.searchPlaceholder')} value={search} onChange={e => setSearch(e.target.value)} />
               <div className="flex gap-1 bg-edge rounded-xl p-1">
                 {[
-                  { v: 'activo', l: 'Activos' },
-                  { v: 'baja_temporal', l: 'Baja temporal' },
-                  { v: 'baja_definitiva', l: 'Baja definitiva' },
-                  { v: 'todos', l: 'Todos' },
+                  { v: 'activo', l: t('empleados.filtros.activos') },
+                  { v: 'baja_temporal', l: t('empleados.filtros.bajaTemporal') },
+                  { v: 'baja_definitiva', l: t('empleados.filtros.bajaDefinitiva') },
+                  { v: 'todos', l: t('empleados.filtros.todos') },
                 ].map(o => (
                   <button key={o.v} onClick={() => setFiltro(o.v)}
                     className={`px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${filtroEstado === o.v ? 'bg-surface text-ink shadow-sm' : 'text-ink-soft hover:text-ink'}`}>
@@ -317,9 +303,9 @@ export default function Empleados() {
             {lista.length === 0 ? (
               <div className="card text-center py-14">
                 <div className="text-5xl mb-3">👷</div>
-                <div className="font-bold text-ink mb-1">{search ? 'Sin resultados' : 'Sin empleados registrados'}</div>
-                <div className="text-sm text-ink-soft mb-5">Añade tu primer empleado o colaborador</div>
-                {!search && <button onClick={openNew} className="btn-primary">+ Nuevo empleado</button>}
+                <div className="font-bold text-ink mb-1">{search ? t('empleados.noResultsTitle') : t('empleados.noEmpleadosTitle')}</div>
+                <div className="text-sm text-ink-soft mb-5">{t('empleados.noEmpleadosHint')}</div>
+                {!search && <button onClick={openNew} className="btn-primary">{t('empleados.newEmpleado')}</button>}
               </div>
             ) : (
               <div className="space-y-3">
@@ -340,23 +326,23 @@ export default function Empleados() {
                           <div className="flex items-center gap-3 flex-wrap">
                             <span className="font-bold text-ink">{emp.nombre} {emp.apellidos}</span>
                             {tc && (
-                              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${tc.color}`}>{tc.label}</span>
+                              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${tc.color}`}>{t(`empleados.tipoContrato.${tc.value}`)}</span>
                             )}
                             {emp.estado === 'baja_temporal' && (
-                              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">Baja temporal</span>
+                              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">{t('empleados.filtros.bajaTemporal')}</span>
                             )}
                             {emp.estado === 'baja_definitiva' && (
-                              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-red-100 text-red-700">Baja definitiva</span>
+                              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-red-100 text-red-700">{t('empleados.filtros.bajaDefinitiva')}</span>
                             )}
                           </div>
                           <div className="text-sm text-ink-soft mt-0.5">
                             {puestoLabel(emp.puesto)}{emp.especialidad ? ` · ${emp.especialidad}` : ''}
-                            {emp.grupo_convenio ? ` · Grupo ${emp.grupo_convenio} CC` : ''}
+                            {emp.grupo_convenio ? ` · ${t('empleados.grupoCC', { grupo: emp.grupo_convenio })}` : ''}
                           </div>
                           <div className="flex flex-wrap gap-4 mt-2 text-xs text-ink-soft">
                             {emp.telefono && <span>📞 {emp.telefono}</span>}
-                            {emp.fecha_alta && <span>📅 Alta: {new Date(emp.fecha_alta + 'T12:00:00').toLocaleDateString('es-ES')}</span>}
-                            {emp.jornada_pct < 100 && <span>⏱️ {emp.jornada_pct}% jornada</span>}
+                            {emp.fecha_alta && <span>📅 {t('empleados.alta', { fecha: new Date(emp.fecha_alta + 'T12:00:00').toLocaleDateString('es-ES') })}</span>}
+                            {emp.jornada_pct < 100 && <span>⏱️ {t('empleados.jornadaPct', { pct: emp.jornada_pct })}</span>}
                           </div>
                         </div>
 
@@ -364,21 +350,21 @@ export default function Empleados() {
                         <div className="text-right flex-shrink-0">
                           {bruto > 0 && (
                             <>
-                              <div className="text-sm text-ink-soft">{fmt(bruto)} bruto</div>
-                              <div className="text-xs text-ink-soft/60">+ {fmt(ss)} SS</div>
-                              <div className="font-bold text-ink text-base">{fmt(total)} / mes</div>
+                              <div className="text-sm text-ink-soft">{t('empleados.bruto', { monto: fmt(bruto) })}</div>
+                              <div className="text-xs text-ink-soft/60">{t('empleados.masSS', { monto: fmt(ss) })}</div>
+                              <div className="font-bold text-ink text-base">{t('empleados.porMes', { monto: fmt(total) })}</div>
                             </>
                           )}
                         </div>
 
                         {/* Acciones */}
                         <div className="flex items-center gap-2 flex-shrink-0 ml-2">
-                          <button onClick={() => openEdit(emp)} className="text-gold hover:text-gold-dark text-xs font-semibold">Editar</button>
+                          <button onClick={() => openEdit(emp)} className="text-gold hover:text-gold-dark text-xs font-semibold">{t('empleados.editar')}</button>
                           {emp.estado === 'activo' && (
-                            <button onClick={() => cambiarEstado(emp, 'baja_temporal')} className="text-xs text-ink-soft hover:text-orange-600" title="Dar de baja temporal">↓ Baja</button>
+                            <button onClick={() => cambiarEstado(emp, 'baja_temporal')} className="text-xs text-ink-soft hover:text-orange-600" title={t('empleados.bajaTemporalTitle')}>{t('empleados.bajaTemporalBtn')}</button>
                           )}
                           {emp.estado === 'baja_temporal' && (
-                            <button onClick={() => cambiarEstado(emp, 'activo')} className="text-xs text-ink-soft hover:text-green-600" title="Reincorporar">↑ Alta</button>
+                            <button onClick={() => cambiarEstado(emp, 'activo')} className="text-xs text-ink-soft hover:text-green-600" title={t('empleados.altaTitle')}>{t('empleados.altaBtn')}</button>
                           )}
                           <button onClick={() => remove(emp)} className="text-ink-soft/30 hover:text-red-500 text-lg leading-none">×</button>
                         </div>
@@ -397,24 +383,24 @@ export default function Empleados() {
         <div className="space-y-6">
           {/* Calculadora individual */}
           <div className="card border-2 border-gold/30">
-            <div className="text-xs font-bold uppercase tracking-widest text-gold mb-4">Calculadora de coste empresa</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-gold mb-4">{t('empleados.costes.calculadoraTitle')}</div>
             <CostCalculator />
           </div>
 
           {/* Resumen del equipo */}
           {activos.length > 0 && (
             <div>
-              <h2 className="text-base font-bold text-ink mb-4">Resumen del equipo activo</h2>
+              <h2 className="text-base font-bold text-ink mb-4">{t('empleados.costes.resumenTitle')}</h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-edge">
-                      <th className="text-left py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Empleado</th>
-                      <th className="text-left py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Puesto</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Bruto / mes</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">SS empresa</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Coste total / mes</th>
-                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">Anual estimado</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">{t('empleados.costes.table.empleado')}</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">{t('empleados.costes.table.puesto')}</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">{t('empleados.costes.table.brutoMes')}</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">{t('empleados.costes.table.ssEmpresa')}</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">{t('empleados.costes.table.costeTotalMes')}</th>
+                      <th className="text-right py-2 px-3 text-xs font-bold text-ink-soft uppercase tracking-wide">{t('empleados.costes.table.anualEstimado')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -435,7 +421,7 @@ export default function Empleados() {
                   </tbody>
                   <tfoot className="border-t-2 border-navy">
                     <tr className="bg-navy">
-                      <td colSpan={2} className="py-3 px-3 font-bold text-white">TOTAL EQUIPO</td>
+                      <td colSpan={2} className="py-3 px-3 font-bold text-white">{t('empleados.costes.totalEquipo')}</td>
                       <td className="py-3 px-3 text-right text-white">{fmt(costeTotalMensual)}</td>
                       <td className="py-3 px-3 text-right text-white/70">{fmt(ssTotalMensual)}</td>
                       <td className="py-3 px-3 text-right font-black text-gold text-base">{fmt(totalEmpresa)}</td>
@@ -445,14 +431,14 @@ export default function Empleados() {
                 </table>
               </div>
               <p className="text-xs text-ink-soft mt-3">
-                * La SS empresa se calcula al {SS_TOTAL.toFixed(2)}% sobre el salario bruto (contingencias + AT/EP construcción + desempleo + FOGASA + FP + MEI). El coste real puede variar según la base de cotización y convenio provincial.
+                {t('empleados.costes.nota', { pct: SS_TOTAL.toFixed(2) })}
               </p>
             </div>
           )}
 
           {activos.length === 0 && (
             <div className="card text-center py-10 text-ink-soft text-sm">
-              Añade empleados en la pestaña Equipo para ver el resumen de costes.
+              {t('empleados.costes.emptyHint')}
             </div>
           )}
         </div>
@@ -462,7 +448,7 @@ export default function Empleados() {
       {tab === 'convenio' && (
         <div>
           <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-ink-soft">
-            ℹ️ <strong>Guía orientativa.</strong> Basada en el VI Convenio Colectivo General del Sector de la Construcción (2022-2026). Verifica siempre los importes actualizados con tu asesoría laboral o en el BOE / convenio provincial.
+            <strong>{t('empleados.convenio.disclaimerPre')}</strong> {t('empleados.convenio.disclaimerPost')}
           </div>
           <div className="space-y-6">
             {CONVENIO_SECCIONES.map(sec => (
@@ -488,7 +474,7 @@ export default function Empleados() {
 
           {/* Recursos */}
           <div className="mt-8 card bg-navy">
-            <div className="text-xs font-bold uppercase tracking-widest text-gold mb-4">Recursos y links útiles</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-gold mb-4">{t('empleados.convenio.recursosTitle')}</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {[
                 { label: 'VI CGSC — BOE', url: 'https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-13559' },
@@ -513,34 +499,34 @@ export default function Empleados() {
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col">
             <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-ink">{editId ? 'Editar empleado' : 'Nuevo empleado'}</h2>
+              <h2 className="text-lg font-bold text-ink">{editId ? t('empleados.form.editTitle') : t('empleados.form.newTitle')}</h2>
               <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
               {/* Nombre */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Nombre *</label>
-                  <input className="input" value={form.nombre} onChange={e => setF('nombre', e.target.value)} required placeholder="Nombre" />
+                  <label className="label">{t('empleados.form.nombreLabel')}</label>
+                  <input className="input" value={form.nombre} onChange={e => setF('nombre', e.target.value)} required placeholder={t('empleados.form.nombreLabel')} />
                 </div>
                 <div>
-                  <label className="label">Apellidos *</label>
-                  <input className="input" value={form.apellidos} onChange={e => setF('apellidos', e.target.value)} required placeholder="Apellidos" />
+                  <label className="label">{t('empleados.form.apellidosLabel')}</label>
+                  <input className="input" value={form.apellidos} onChange={e => setF('apellidos', e.target.value)} required placeholder={t('empleados.form.apellidosLabel')} />
                 </div>
               </div>
 
               {/* Puesto y tipo contrato */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Puesto *</label>
+                  <label className="label">{t('empleados.form.puestoLabel')}</label>
                   <select className="input" value={form.puesto} onChange={e => setF('puesto', e.target.value)}>
-                    {PUESTOS.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
+                    {PUESTOS.map(p => <option key={p.value} value={p.value}>{t(`empleados.puesto.${p.value}`)}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="label">Tipo de contrato *</label>
+                  <label className="label">{t('empleados.form.tipoContratoLabel')}</label>
                   <select className="input" value={form.tipo_contrato} onChange={e => setF('tipo_contrato', e.target.value)}>
-                    {TIPOS_CONTRATO.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
+                    {TIPOS_CONTRATO.map(tcOpt => <option key={tcOpt.value} value={tcOpt.value}>{t(`empleados.tipoContrato.${tcOpt.value}`)}</option>)}
                   </select>
                 </div>
               </div>
@@ -548,13 +534,13 @@ export default function Empleados() {
               {/* Especialidad y grupo convenio */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Especialidad / detalle</label>
-                  <input className="input" value={form.especialidad} onChange={e => setF('especialidad', e.target.value)} placeholder="Ej: Fontanería y gas, pladur…" />
+                  <label className="label">{t('empleados.form.especialidadLabel')}</label>
+                  <input className="input" value={form.especialidad} onChange={e => setF('especialidad', e.target.value)} placeholder={t('empleados.form.especialidadPlaceholder')} />
                 </div>
                 <div>
-                  <label className="label">Grupo profesional (Convenio)</label>
+                  <label className="label">{t('empleados.form.grupoLabel')}</label>
                   <select className="input" value={form.grupo_convenio} onChange={e => setF('grupo_convenio', e.target.value)}>
-                    {GRUPOS_CONVENIO.map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
+                    {GRUPOS_CONVENIO.map(g => <option key={g} value={g}>{t(`empleados.grupoConvenio.${g}`)}</option>)}
                   </select>
                 </div>
               </div>
@@ -562,39 +548,39 @@ export default function Empleados() {
               {/* Salario y jornada */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Salario bruto mensual (€) *</label>
+                  <label className="label">{t('empleados.form.salarioLabel')}</label>
                   <input className="input" type="number" min="0" step="0.01" value={form.salario_bruto}
                     onChange={e => setF('salario_bruto', e.target.value)} required placeholder="1.500,00" />
                   {form.salario_bruto > 0 && (
                     <div className="text-xs text-ink-soft mt-1">
-                      Coste empresa: <strong>{fmt(costeEmpresa(parseFloat(form.salario_bruto) || 0).total)}</strong> / mes
+                      {t('empleados.form.costeEmpresaPreview', { monto: `${fmt(costeEmpresa(parseFloat(form.salario_bruto) || 0).total)}` })}
                     </div>
                   )}
                 </div>
                 <div>
-                  <label className="label">% de jornada</label>
+                  <label className="label">{t('empleados.form.jornadaLabel')}</label>
                   <input className="input" type="number" min="1" max="100" value={form.jornada_pct}
                     onChange={e => setF('jornada_pct', e.target.value)} />
-                  <div className="text-xs text-ink-soft mt-1">100% = jornada completa</div>
+                  <div className="text-xs text-ink-soft mt-1">{t('empleados.form.jornadaHint')}</div>
                 </div>
               </div>
 
               {/* Fechas y estado */}
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="label">Fecha de alta *</label>
+                  <label className="label">{t('empleados.form.fechaAltaLabel')}</label>
                   <input className="input" type="date" value={form.fecha_alta} onChange={e => setF('fecha_alta', e.target.value)} required />
                 </div>
                 <div>
-                  <label className="label">Fecha de baja</label>
+                  <label className="label">{t('empleados.form.fechaBajaLabel')}</label>
                   <input className="input" type="date" value={form.fecha_baja} onChange={e => setF('fecha_baja', e.target.value)} />
                 </div>
                 <div>
-                  <label className="label">Estado</label>
+                  <label className="label">{t('empleados.form.estadoLabel')}</label>
                   <select className="input" value={form.estado} onChange={e => setF('estado', e.target.value)}>
-                    <option value="activo">Activo</option>
-                    <option value="baja_temporal">Baja temporal</option>
-                    <option value="baja_definitiva">Baja definitiva</option>
+                    <option value="activo">{t('empleados.form.estadoOpts.activo')}</option>
+                    <option value="baja_temporal">{t('empleados.form.estadoOpts.baja_temporal')}</option>
+                    <option value="baja_definitiva">{t('empleados.form.estadoOpts.baja_definitiva')}</option>
                   </select>
                 </div>
               </div>
@@ -602,35 +588,35 @@ export default function Empleados() {
               {/* Contacto y SS */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Teléfono</label>
+                  <label className="label">{t('empleados.form.telefonoLabel')}</label>
                   <input className="input" type="tel" value={form.telefono} onChange={e => setF('telefono', e.target.value)} placeholder="6XX XXX XXX" />
                 </div>
                 <div>
-                  <label className="label">Nº afiliación SS</label>
+                  <label className="label">{t('empleados.form.numSsLabel')}</label>
                   <input className="input" value={form.num_ss} onChange={e => setF('num_ss', e.target.value)} placeholder="28/XXXXXXXXXXX/XX" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">DNI / NIE</label>
+                  <label className="label">{t('empleados.form.dniLabel')}</label>
                   <input className="input" value={form.dni} onChange={e => setF('dni', e.target.value)} placeholder="12345678A" />
                 </div>
                 <div>
-                  <label className="label">Email</label>
+                  <label className="label">{t('empleados.form.emailLabel')}</label>
                   <input className="input" type="email" value={form.email} onChange={e => setF('email', e.target.value)} placeholder="empleado@email.com" />
                 </div>
               </div>
 
               <div>
-                <label className="label">Notas</label>
-                <textarea className="input h-20 resize-none" value={form.notas} onChange={e => setF('notas', e.target.value)} placeholder="Observaciones, acuerdos especiales…" />
+                <label className="label">{t('empleados.form.notasLabel')}</label>
+                <textarea className="input h-20 resize-none" value={form.notas} onChange={e => setF('notas', e.target.value)} placeholder={t('empleados.form.notasPlaceholder')} />
               </div>
 
               {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">Cancelar</button>
-                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Guardando…' : 'Guardar'}</button>
+                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">{t('empleados.form.cancel')}</button>
+                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? t('empleados.form.saving') : t('empleados.form.save')}</button>
               </div>
             </form>
           </div>
@@ -642,6 +628,7 @@ export default function Empleados() {
 
 // ── Calculadora independiente ────────────────────────────────────────────────
 function CostCalculator() {
+  const { t } = useTranslation()
   const [bruto, setBruto] = useState('')
   const b = parseFloat(bruto) || 0
   const { ss, total } = costeEmpresa(b)
@@ -650,7 +637,7 @@ function CostCalculator() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="space-y-3">
         <div>
-          <label className="label">Salario bruto mensual (€)</label>
+          <label className="label">{t('empleados.costes.calc.salarioLabel')}</label>
           <input className="input" type="number" min="0" step="10" value={bruto}
             onChange={e => setBruto(e.target.value)} placeholder="1.500" />
         </div>
@@ -663,7 +650,7 @@ function CostCalculator() {
               </div>
             ))}
             <div className="border-t border-stone/20 pt-2 flex justify-between font-bold text-ink">
-              <span>Total SS empresa ({SS_TOTAL.toFixed(2)}%)</span>
+              <span>{t('empleados.costes.calc.totalSS', { pct: SS_TOTAL.toFixed(2) })}</span>
               <span>{fmt(ss)}</span>
             </div>
           </div>
@@ -673,25 +660,25 @@ function CostCalculator() {
         {b > 0 && (
           <>
             <div className="bg-navy rounded-xl p-4 text-center">
-              <div className="text-xs font-bold uppercase tracking-widest text-gold mb-1">Coste empresa / mes</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-gold mb-1">{t('empleados.costes.calc.costeEmpresaMes')}</div>
               <div className="text-3xl font-black text-white">{fmt(total)}</div>
-              <div className="text-xs text-white/60 mt-1">{fmt(b)} bruto + {fmt(ss)} SS</div>
+              <div className="text-xs text-white/60 mt-1">{t('empleados.costes.calc.brutoMasSS', { bruto: fmt(b), ss: fmt(ss) })}</div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="card text-center py-3">
                 <div className="text-sm font-bold text-ink">{fmt(total * 12)}</div>
-                <div className="text-xs text-ink-soft">Coste anual (×12)</div>
+                <div className="text-xs text-ink-soft">{t('empleados.costes.calc.costeAnual')}</div>
               </div>
               <div className="card text-center py-3">
                 <div className="text-sm font-bold text-ink">{fmt(total * 14)}</div>
-                <div className="text-xs text-ink-soft">Con 2 pagas extra</div>
+                <div className="text-xs text-ink-soft">{t('empleados.costes.calc.con2Pagas')}</div>
               </div>
             </div>
           </>
         )}
         {!b && (
           <div className="flex items-center justify-center h-full text-ink-soft text-sm text-center py-10">
-            Introduce el salario bruto para calcular el coste real
+            {t('empleados.costes.calc.introduceSalario')}
           </div>
         )}
       </div>

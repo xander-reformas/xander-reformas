@@ -151,5 +151,1693 @@
         "until": "截至"
       }
     }
+  },
+  "clientes": {
+    "title": "客户",
+    "countOne": "共 {{count}} 位客户",
+    "countOther": "共 {{count}} 位客户",
+    "newCliente": "+ 新建客户",
+    "searchPlaceholder": "🔍  按姓名、邮箱、城市搜索…",
+    "loading": "正在加载客户…",
+    "noResultsTitle": "无结果",
+    "noResultsHint": "请尝试其他搜索",
+    "noClientesTitle": "您还没有任何客户",
+    "noClientesHint": "添加您的第一位客户以开始管理项目和报价",
+    "addFirst": "+ 添加客户",
+    "table": {
+      "nombreNif": "姓名 / 税号",
+      "telefono": "电话",
+      "email": "邮箱",
+      "ciudad": "城市"
+    },
+    "editar": "编辑",
+    "eliminar": "删除",
+    "confirmDelete": "删除\"{{nombre}}\"？此操作无法撤销。",
+    "form": {
+      "editTitle": "编辑客户",
+      "newTitle": "新建客户",
+      "nombreLabel": "姓名 *",
+      "nifLabel": "税号",
+      "telefonoLabel": "电话",
+      "emailLabel": "邮箱",
+      "direccionLabel": "地址",
+      "cpLabel": "邮编",
+      "ciudadLabel": "城市",
+      "notasLabel": "内部备注",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "save": "保存客户"
+    }
+  },
+  "rentabilidad": {
+    "title": "项目盈利分析",
+    "subtitle": "预算与实际成本对比 · 各项目利润率",
+    "totalPresupuestado": "预算总额",
+    "costeRealAcumulado": "累计实际成本",
+    "beneficioNeto": "净利润",
+    "margenGlobal": "整体利润率",
+    "distribucionTitle": "盈利分布",
+    "dist": {
+      "excelente": "优秀",
+      "buena": "良好",
+      "justa": "一般",
+      "negativa": "亏损"
+    },
+    "allStates": "所有状态",
+    "orden": {
+      "margenDesc": "利润率从高到低",
+      "margenAsc": "利润率从低到高",
+      "presupuestoDesc": "预算从高到低",
+      "nombre": "按名称"
+    },
+    "loading": "正在加载项目…",
+    "emptyTitle": "暂无可分析的项目",
+    "emptyHint": "创建项目并添加成本以查看盈利情况",
+    "presupuestado": "预算",
+    "costeReal": "实际成本",
+    "facturado": "已开票",
+    "beneficio": "利润",
+    "sinDato": "无数据",
+    "sinFactura": "无发票",
+    "margen": "利润率",
+    "tipFaltaInfo": "💡 请在项目中添加总预算和实际成本以查看盈利情况"
+  },
+  "presupuestos": {
+    "estado": {
+      "borrador": "草稿",
+      "enviado": "已发送",
+      "aceptado": "已接受",
+      "rechazado": "已拒绝",
+      "expirado": "已过期"
+    },
+    "form": {
+      "editTitle": "编辑报价单",
+      "newTitle": "新建报价单",
+      "numeroLabel": "编号 *",
+      "referenciaLabel": "参考号",
+      "fechaLabel": "日期",
+      "validezLabel": "有效期（天）",
+      "clienteLabel": "客户",
+      "sinCliente": "无客户",
+      "obraLabel": "项目",
+      "sinObra": "无项目",
+      "estadoLabel": "状态",
+      "partidasLabel": "报价明细",
+      "addPartida": "+ 添加明细",
+      "tituloLabel": "描述 / 标题",
+      "tituloPlaceholder": "浴室翻新 — 拆除和贴砖",
+      "unidadLabel": "单位",
+      "cantidadLabel": "数量",
+      "precioUdLabel": "单价 (€)",
+      "importeLabel": "金额 (€)",
+      "detalleLabel": "详情（可选）",
+      "detallePlaceholder": "包括：拆除现有瓷砖、铺设新瓷砖至天花板…",
+      "noIncluidoLabel": "不包含项（每行一项）",
+      "condicionesLabel": "条款（每行一项）",
+      "notasLabel": "内部备注",
+      "ivaLabel": "增值税 (%)",
+      "ivaOptions": {
+        "sinIva": "0% — 免税",
+        "residencial": "10% — 住宅",
+        "general": "21% — 商用 / 新建 / 公司 / 投资者"
+      },
+      "descuentoLabel": "折扣 (%)",
+      "baseImponible": "计税基数",
+      "descuentoLine": "折扣 ({{pct}}%)",
+      "ivaLine": "增值税 ({{pct}}%)",
+      "total": "总计",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "save": "保存报价单",
+      "numeroRequerido": "报价单编号为必填项"
+    },
+    "list": {
+      "title": "报价单",
+      "countOne": "共 {{count}} 份报价单",
+      "countOther": "共 {{count}} 份报价单",
+      "newPresupuesto": "+ 新建报价单",
+      "aceptados": "✓ 已接受的报价单：",
+      "searchPlaceholder": "🔍  搜索编号、客户、项目…",
+      "allStates": "所有状态",
+      "loading": "正在加载报价单…",
+      "noResultsTitle": "无结果",
+      "noPresupuestosTitle": "您还没有任何报价单",
+      "noPresupuestosHint": "创建您的第一份专业报价单",
+      "table": {
+        "numero": "编号",
+        "clienteObra": "客户 / 项目",
+        "fecha": "日期",
+        "vence": "到期",
+        "estado": "状态",
+        "total": "总计"
+      },
+      "firmadoTitle": "由 {{nombre}} 于 {{fecha}} 签署",
+      "vencido": "已过期",
+      "venceHoy": "今日到期",
+      "diasRestanteOne": "剩 {{count}} 天",
+      "diasRestanteOther": "剩 {{count}} 天",
+      "crearFactura": "📄 发票",
+      "crearFacturaTitle": "根据此报价单创建发票",
+      "firmar": "✍️ 签署",
+      "firmarTitle": "签署并接受此报价单",
+      "editar": "编辑",
+      "eliminar": "删除",
+      "confirmDelete": "删除报价单 {{numero}}？"
+    },
+    "firmarModalTitle": "签署报价单 {{numero}}"
+  },
+  "facturas": {
+    "estado": {
+      "borrador": "草稿",
+      "enviada": "已发送",
+      "vista": "已查看",
+      "pagada": "已付款",
+      "vencida": "已逾期",
+      "anulada": "已作废"
+    },
+    "form": {
+      "editTitle": "编辑发票",
+      "newTitle": "新建发票",
+      "verifactuBadge": "🔒 Verifactu",
+      "fromPresupuesto": "📋 由报价单 {{numero}} 创建",
+      "lockedNotice": "🔒 此发票已在 Verifactu 账簿中登记（RD 1007/2023）：编号、日期、明细、增值税、折扣、代扣税和客户均不可修改。只能修改状态、关联项目、到期日或备注。如需更正经济数据，请开具更正发票。",
+      "importarPresupuestoLabel": "⚡ 从已接受的报价单导入",
+      "crearDesdeCero": "从零开始创建发票",
+      "numeroLabel": "编号 *",
+      "estadoLabel": "状态",
+      "fechaEmisionLabel": "开票日期",
+      "vencimientoLabel": "到期日",
+      "clienteLabel": "客户",
+      "sinCliente": "无客户",
+      "obraLabel": "项目",
+      "sinObra": "无项目",
+      "lineasLabel": "发票明细",
+      "addLinea": "+ 添加明细",
+      "descripcionLabel": "描述",
+      "descripcionPlaceholder": "浴室翻新中执行的工作",
+      "unidadLabel": "单位",
+      "cantidadLabel": "数量",
+      "precioUdLabel": "单价 (€)",
+      "importeLabel": "金额 (€)",
+      "detalleLabel": "详情（可选）",
+      "notasLabel": "备注",
+      "notasPlaceholder": "付款条件、账号等",
+      "ivaLabel": "增值税 (%)",
+      "ivaOptions": {
+        "sinIva": "0% — 免税",
+        "residencial": "10% — 住宅",
+        "general": "21% — 商用 / 新建 / 公司 / 投资者"
+      },
+      "dtoLabel": "折扣 (%)",
+      "retLabel": "预扣税 (%)",
+      "baseImponible": "计税基数",
+      "descuentoLine": "折扣 ({{pct}}%)",
+      "ivaLine": "增值税 ({{pct}}%)",
+      "retLine": "预扣税 ({{pct}}%)",
+      "total": "总计",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "save": "保存发票",
+      "numeroRequerido": "发票编号为必填项"
+    },
+    "vista": {
+      "title": "发票 {{numero}}",
+      "loading": "正在加载…",
+      "facturarA": "开票给",
+      "sinCliente": "无客户",
+      "descripcionCol": "描述",
+      "cantidadCol": "数量",
+      "precioUdCol": "单价",
+      "importeCol": "金额",
+      "baseImponible": "计税基数",
+      "descuentoLine": "折扣 ({{pct}}%)",
+      "ivaLine": "增值税 ({{pct}}%)",
+      "retLine": "预扣税 ({{pct}}%)",
+      "total": "总计",
+      "fecha": "日期：{{fecha}}",
+      "vencimiento": "到期日：{{fecha}}",
+      "obra": "项目：{{nombre}}",
+      "tel": "电话：{{tel}}",
+      "nif": "税号：{{nif}}",
+      "empresaDefault": "我的公司",
+      "veriTitle": "VERI*FACTU",
+      "veriDesc": "可在西班牙税务局（AEAT）电子网站上验证此发票。",
+      "veriRef": "参考号：{{uuid}}",
+      "registradaTitle": "发票已在 Verifactu 系统中登记（RD 1007/2023）",
+      "hashLabel": "哈希值：{{hash}}…",
+      "noEnviada": "⚠️ 尚未发送至 AEAT — 请在交付给客户前检查状态。",
+      "aeatError": "⚠️ AEAT：{{error}}",
+      "cerrar": "关闭",
+      "imprimir": "🖨️ 打印 / PDF"
+    },
+    "cobro": {
+      "title": "💳 银行卡付款 — {{numero}}",
+      "desc": "将此链接分享给客户，以便其用银行卡支付发票。Stripe 确认付款后，发票将自动变为已付款状态。",
+      "copiado": "✓ 已复制",
+      "copiar": "📋 复制链接",
+      "abrirEnlace": "打开付款链接"
+    },
+    "list": {
+      "title": "发票",
+      "countOne": "共 {{count}} 张发票",
+      "countOther": "共 {{count}} 张发票",
+      "newFactura": "+ 新建发票",
+      "facturadoLabel": "开票总额",
+      "cobradoLabel": "已收款",
+      "pendienteLabel": "待收款",
+      "facturasCountOne": "{{count}} 张发票",
+      "facturasCountOther": "{{count}} 张发票",
+      "pagadasCountOne": "{{count}} 张已付款",
+      "pagadasCountOther": "{{count}} 张已付款",
+      "circulacionCountOne": "{{count}} 张流转中",
+      "circulacionCountOther": "{{count}} 张流转中",
+      "todas": "全部 ({{count}})",
+      "searchPlaceholder": "🔍  搜索编号、客户…",
+      "loading": "正在加载发票…",
+      "noResultsTitle": "无结果",
+      "noFacturasTitle": "您还没有任何发票",
+      "table": {
+        "numero": "编号",
+        "cliente": "客户",
+        "fecha": "日期",
+        "vencimiento": "到期日",
+        "estado": "状态",
+        "total": "总计"
+      },
+      "anuladaBadge": "🚫 已作废",
+      "anuladaTitle": "已作废发票",
+      "lockedTitle": "已在 Verifactu 账簿中登记 — 经济数据已锁定",
+      "pendienteAeatTitle": "已发送至 AEAT，等待确认",
+      "aceptadaAeatTitle": "AEAT 已接受",
+      "aeatEstadoTitle": "AEAT：{{estado}}",
+      "verFactura": "🧾 发票",
+      "cobrando": "生成中…",
+      "cobrar": "💳 收款",
+      "editar": "编辑",
+      "ver": "查看",
+      "anuladaLabel": "已作废",
+      "anularBtn": "🚫 作废",
+      "anularTitle": "作废此发票（保留作废记录，不删除）",
+      "eliminar": "删除",
+      "confirmDelete": "删除发票 {{numero}}？",
+      "cannotDeleteLocked": "此发票已在 Verifactu 账簿中登记，无法删除。请开具更正发票或将其作废。",
+      "anularPrompt": "您即将作废发票 {{numero}}。它将在 Verifactu 账簿中保留作废记录（不会删除）。原因？（可选）",
+      "noEnlacePago": "无法生成付款链接。"
+    }
+  },
+  "cobros": {
+    "title": "收款",
+    "subtitle": "管理待收和已收发票",
+    "pendienteCobroLabel": "待收款",
+    "totalCobradoLabel": "已收总额",
+    "vencidasSinCobrarLabel": "逾期未收",
+    "facturaCountOne": "{{count}} 张发票",
+    "facturaCountOther": "{{count}} 张发票",
+    "facturaPagadaCountOne": "{{count}} 张已付发票",
+    "facturaPagadaCountOther": "{{count}} 张已付发票",
+    "todoAlDia": "一切正常 ✓",
+    "alertas": {
+      "title": "收款提醒",
+      "urgentesOne": "{{count}} 张紧急发票",
+      "urgentesOther": "{{count}} 张紧急发票",
+      "rojo": "已逾期",
+      "naranja": "紧急（≤7天）",
+      "amarillo": "临近（8-30天）",
+      "verde": "正常（>30天）",
+      "vencidaHace": "已逾期 {{dias}} 天",
+      "venceHoy": "今日到期",
+      "venceEn": "{{dias}} 天后到期",
+      "cobrar": "收款"
+    },
+    "graficoTitle": "按月收款",
+    "tabPendientesOne": "待收 ({{count}})",
+    "tabPendientesOther": "待收 ({{count}})",
+    "tabCobradasOne": "已收 ({{count}})",
+    "tabCobradasOther": "已收 ({{count}})",
+    "loading": "正在加载…",
+    "emptyPendientesTitle": "全部收讫！没有待收发票",
+    "emptyPendientesHint": "做得好 💪",
+    "emptyCobradasTitle": "尚无收款记录",
+    "emptyCobradasHint": "标记为已付款的发票将显示在这里",
+    "emitida": "开票日期：{{fecha}}",
+    "vence": "到期：{{fecha}}",
+    "venceVencidaHace": "（已逾期 {{dias}} 天）",
+    "venceHoyParen": "（今日到期）",
+    "venceEnDias": "（{{dias}} 天后）",
+    "marcarCobrada": "✓ 标记为已收款",
+    "desmarcar": "取消标记",
+    "confirmarDesmarcar": "将此发票标记为已发送（待收款）？",
+    "modal": {
+      "title": "确认收款",
+      "fechaLabel": "收款日期",
+      "metodoLabel": "付款方式",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "confirmar": "✓ 确认收款"
+    },
+    "metodo": {
+      "Transferencia": "银行转账",
+      "Efectivo": "现金",
+      "Bizum": "Bizum",
+      "Cheque": "支票",
+      "Tarjeta": "银行卡"
+    },
+    "notaCobrado": "✓ 于 {{fecha}} 通过 {{metodo}} 收款"
+  },
+  "gastos": {
+    "categoria": {
+      "Materiales": "材料",
+      "Mano de obra / Subcontratas": "人工 / 分包",
+      "Herramientas y equipos": "工具和设备",
+      "Transporte y combustible": "运输和燃油",
+      "Publicidad y marketing": "广告与营销",
+      "Seguros": "保险",
+      "Gestoría / Asesoría": "会计 / 咨询",
+      "Alquiler": "租金",
+      "Formación": "培训",
+      "Comunicaciones": "通讯",
+      "Otros": "其他"
+    },
+    "ivaOpts": {
+      "exento": "0% — 免税",
+      "superreducido": "4% — 超低税率",
+      "reducido": "10% — 优惠税率（住宅）",
+      "general": "21% — 一般税率（商用 / 公司）"
+    },
+    "setup": {
+      "title": "支出",
+      "stepTitle": "前置步骤：在 Supabase 中创建表",
+      "stepDescPre": "前往",
+      "stepDescPost": "并执行：",
+      "hintAlter": "如果该表已存在，请执行文件末尾的两行 ALTER TABLE 语句以添加增值税相关列。"
+    },
+    "title": "支出",
+    "headerCountOne": "{{count}} 笔支出",
+    "headerCountOther": "{{count}} 笔支出",
+    "headerTotal": "总计：{{total}}",
+    "newGasto": "+ 新建支出",
+    "porCategoriaTitle": "按类别",
+    "sinDatos": "暂无数据",
+    "searchPlaceholder": "🔍  搜索…",
+    "allCategorias": "所有类别",
+    "allObras": "所有项目",
+    "resultadosOne": "{{count}} 条结果",
+    "resultadosOther": "{{count}} 条结果",
+    "loading": "正在加载…",
+    "noResultsTitle": "无结果",
+    "noGastosTitle": "暂无支出记录",
+    "addFirst": "+ 添加支出",
+    "table": {
+      "descripcion": "描述",
+      "categoria": "类别",
+      "fecha": "日期",
+      "base": "基数",
+      "iva": "增值税",
+      "total": "总计"
+    },
+    "totalRow": "总计 ({{count}})",
+    "editar": "编辑",
+    "confirmDelete": "删除“{{desc}}”？",
+    "lightboxAlt": "放大的发票",
+    "form": {
+      "editTitle": "编辑支出",
+      "newTitle": "新建支出",
+      "uploadLabel": "📎 发票/收据照片或 PDF（自动填充字段）",
+      "analizando": "正在使用 AI 分析…",
+      "ampliar": "🔍 放大",
+      "cambiarArchivo": "更换文件",
+      "dropHint": "拖到此处或点击上传",
+      "dropSubhint": "JPG、PNG、WEBP、PDF · AI 自动提取数据",
+      "leyendoPdf": "📄 正在读取 PDF…（可能需要几秒钟）",
+      "leyendoFactura": "🔍 正在读取发票…",
+      "soloImagenesPdf": "⚠️ 仅支持图片或 PDF",
+      "datosExtraidos": "✅ 数据已提取。请检查并根据需要调整。",
+      "noPudoLeer": "⚠️ 无法自动读取。请手动填写字段。",
+      "fechaLabel": "日期 *",
+      "categoriaLabel": "类别 *",
+      "descripcionLabel": "描述 / 事项 *",
+      "descripcionPlaceholder": "购买了什么？",
+      "baseLabel": "基础金额（不含增值税）*",
+      "ivaLabel": "增值税 %",
+      "baseCol": "基数",
+      "ivaCol": "增值税 {{pct}}%",
+      "totalCol": "总计",
+      "proveedorLabel": "供应商",
+      "proveedorPlaceholder": "Leroy Merlin 等",
+      "facturaNumLabel": "发票 / 收据编号",
+      "obraLabel": "关联项目",
+      "sinObra": "无项目",
+      "notasLabel": "备注",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "save": "保存支出"
+    }
+  },
+  "empleados": {
+    "title": "员工与团队",
+    "subtitle": "管理团队、人工成本和集体合同",
+    "newEmpleado": "+ 新建员工",
+    "kpi": {
+      "activos": "在职员工",
+      "salarioBruto": "月度税前工资",
+      "costeEmpresa": "公司成本 / 月"
+    },
+    "tabs": {
+      "equipo": "👥 团队",
+      "costes": "💰 成本",
+      "convenio": "📋 合同"
+    },
+    "setup": {
+      "title": "在 Supabase 中创建表",
+      "descPre": "请在 Supabase 的 SQL 编辑器中执行文件",
+      "descPost": "。",
+      "reload": "已执行 — 重新加载"
+    },
+    "loading": "正在加载团队…",
+    "searchPlaceholder": "🔍  搜索…",
+    "filtros": {
+      "activos": "在职",
+      "bajaTemporal": "临时休假",
+      "bajaDefinitiva": "永久离职",
+      "todos": "全部"
+    },
+    "noResultsTitle": "无结果",
+    "noEmpleadosTitle": "暂无员工记录",
+    "noEmpleadosHint": "添加您的第一位员工或合作者",
+    "grupoCC": "第 {{grupo}} 组（集体合同）",
+    "alta": "入职日期：{{fecha}}",
+    "jornadaPct": "{{pct}}% 工时",
+    "bruto": "税前 {{monto}}",
+    "masSS": "+ 社保 {{monto}}",
+    "porMes": "{{monto}} / 月",
+    "editar": "编辑",
+    "bajaTemporalBtn": "↓ 休假",
+    "bajaTemporalTitle": "设为临时休假",
+    "altaBtn": "↑ 复职",
+    "altaTitle": "复职",
+    "confirmDelete": "删除 {{nombre}}？",
+    "puesto": {
+      "encargado": "工地负责人",
+      "oficial_1": "一级技工",
+      "oficial_2": "二级技工",
+      "ayudante": "助手",
+      "peon": "普工",
+      "fontanero": "水管工",
+      "electricista": "电工",
+      "pintor": "油漆工",
+      "yesero": "抹灰工",
+      "carpintero": "木工",
+      "alicatador": "贴砖工",
+      "impermeabilizador": "防水工",
+      "administrativo": "行政人员",
+      "otro": "其他"
+    },
+    "tipoContrato": {
+      "indefinido": "无固定期限",
+      "fijo_discontinuo": "固定间断性",
+      "temporal_obra": "临时（按项目）",
+      "temporal_6m": "临时（≤6个月）",
+      "formacion": "培训合同",
+      "autonomo": "自雇合作者"
+    },
+    "grupoConvenio": {
+      "I": "第一组 — 高级/中级学历人员",
+      "II": "第二组 — 项目经理 / 合格行政人员",
+      "III": "第三组 — 工头 / 领班",
+      "IV": "第四组 — 一级和二级技工",
+      "V": "第五组 — 助手",
+      "VI": "第六组 — 普工"
+    },
+    "costes": {
+      "calculadoraTitle": "公司成本计算器",
+      "resumenTitle": "在职团队汇总",
+      "table": {
+        "empleado": "员工",
+        "puesto": "职位",
+        "brutoMes": "税前 / 月",
+        "ssEmpresa": "公司社保",
+        "costeTotalMes": "总成本 / 月",
+        "anualEstimado": "预计年度"
+      },
+      "totalEquipo": "团队总计",
+      "nota": "* 公司社保按税前工资的 {{pct}}% 计算（一般缴款 + 建筑业工伤/职业病比例 + 失业保险 + FOGASA + 职业培训 + MEI）。实际成本可能因缴费基数和地区合同而异。",
+      "emptyHint": "在“团队”标签页中添加员工以查看成本汇总。",
+      "calc": {
+        "salarioLabel": "月度税前工资 (€)",
+        "totalSS": "公司社保总计 ({{pct}}%)",
+        "costeEmpresaMes": "公司成本 / 月",
+        "brutoMasSS": "税前 {{bruto}} + 社保 {{ss}}",
+        "costeAnual": "年度成本 (×12)",
+        "con2Pagas": "含2份额外薪资",
+        "introduceSalario": "输入税前工资以计算实际成本"
+      }
+    },
+    "convenio": {
+      "disclaimerPre": "ℹ️ 参考指南。",
+      "disclaimerPost": "基于第六期建筑行业总体集体合同（2022-2026）。请务必与您的劳动顾问核实最新金额，或查阅西班牙官方公报（BOE）/地区合同。",
+      "recursosTitle": "有用的资源和链接"
+    },
+    "form": {
+      "editTitle": "编辑员工",
+      "newTitle": "新建员工",
+      "nombreLabel": "名字 *",
+      "apellidosLabel": "姓氏 *",
+      "puestoLabel": "职位 *",
+      "tipoContratoLabel": "合同类型 *",
+      "especialidadLabel": "专长 / 详情",
+      "especialidadPlaceholder": "例如：管道和燃气、石膏板…",
+      "grupoLabel": "专业组别（合同）",
+      "salarioLabel": "月度税前工资 (€) *",
+      "costeEmpresaPreview": "公司成本：{{monto}} / 月",
+      "jornadaLabel": "工作时长 %",
+      "jornadaHint": "100% = 全职",
+      "fechaAltaLabel": "入职日期 *",
+      "fechaBajaLabel": "离职日期",
+      "estadoLabel": "状态",
+      "estadoOpts": {
+        "activo": "在职",
+        "baja_temporal": "临时休假",
+        "baja_definitiva": "永久离职"
+      },
+      "telefonoLabel": "电话",
+      "numSsLabel": "社保号码",
+      "dniLabel": "身份证 / 居留证",
+      "emailLabel": "邮箱",
+      "notasLabel": "备注",
+      "notasPlaceholder": "备注、特殊约定…",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "save": "保存"
+    }
+  },
+  "partes": {
+    "title": "工时记录",
+    "subtitle": "按员工和项目记录每日工时",
+    "newParte": "+ 新建记录",
+    "mesLabel": "月份",
+    "anioLabel": "年份",
+    "empleadoLabel": "员工",
+    "obraLabel": "项目",
+    "todos": "全部",
+    "todas": "全部",
+    "vistaLista": "列表",
+    "vistaResumen": "汇总",
+    "kpi": {
+      "partesEnMes": "{{mes}} 的记录",
+      "horasRegistradas": "已记录工时",
+      "empleadosActivosMes": "本月在职员工"
+    },
+    "loading": "正在加载记录…",
+    "emptyTitle": "{{mes}} {{anio}} 无记录",
+    "emptyHint": "开始记录团队工时",
+    "firmadoTitle": "由 {{nombre}} 于 {{fecha}} 签署",
+    "firmar": "✍️ 签署",
+    "firmarTitle": "签署确认",
+    "editar": "编辑",
+    "confirmDelete": "删除此记录？",
+    "porEmpleado": "按员工",
+    "sinDatos": "无数据",
+    "diaOne": "{{count}} 天",
+    "diaOther": "{{count}} 天",
+    "total": "总计",
+    "porObra": "按项目",
+    "sinObrasConPartes": "没有含记录的项目",
+    "personaOne": "{{count}} 人",
+    "personaOther": "{{count}} 人",
+    "form": {
+      "editTitle": "编辑记录",
+      "newTitle": "新建工时记录",
+      "empleadoLabel": "员工 *",
+      "empleadoPlaceholder": "选择员工",
+      "fechaLabel": "日期 *",
+      "horasLabel": "工时 *",
+      "obraLabel": "项目",
+      "sinObraAsignada": "未分配项目",
+      "descripcionLabel": "工作描述",
+      "descripcionPlaceholder": "浴室贴砖、电气安装…",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "save": "保存"
+    },
+    "firmarModalTitle": "签署工时记录 — {{nombre}}",
+    "meses": {
+      "enero": "一月",
+      "febrero": "二月",
+      "marzo": "三月",
+      "abril": "四月",
+      "mayo": "五月",
+      "junio": "六月",
+      "julio": "七月",
+      "agosto": "八月",
+      "septiembre": "九月",
+      "octubre": "十月",
+      "noviembre": "十一月",
+      "diciembre": "十二月"
+    }
+  },
+  "nominas": {
+    "title": "工资单",
+    "subtitle": "工资单生成与付款跟踪",
+    "generarOne": "生成 {{count}} 份工资单",
+    "generarOther": "生成 {{count}} 份工资单",
+    "generando": "生成中…",
+    "historial": "历史记录",
+    "loading": "正在加载工资单…",
+    "totalBruto": "税前总额",
+    "totalNeto": "应付净额总计",
+    "costeEmpresaTotal": "公司总成本",
+    "sinNominaOne": "{{count}} 名员工",
+    "sinNominaOther": "{{count}} 名员工",
+    "sinNominaSuffix": "在 {{mes}} 尚无工资单：{{lista}}",
+    "generarTodas": "生成全部",
+    "emptyTitle": "{{mes}} {{anio}} 无工资单",
+    "emptySinEmpleados": "请先在“员工”模块中添加员工",
+    "emptyConEmpleadosOne": "有 {{count}} 名在职员工。点击“生成”以创建工资单。",
+    "emptyConEmpleadosOther": "有 {{count}} 名在职员工。点击“生成”以创建工资单。",
+    "generarNominas": "生成工资单",
+    "pagadaBadge": "✓ 已支付 {{fecha}}",
+    "pendienteBadge": "待支付",
+    "salarioBruto": "税前工资",
+    "ssTrabajador": "员工社保 ({{pct}}%)",
+    "irpf": "个人所得税 ({{pct}}%)",
+    "otrasDeducciones": "其他扣除",
+    "netoPercibir": "实发净额",
+    "costeEmpresaLine": "公司成本：税前 {{bruto}} + 社保 {{ss}} = {{total}}",
+    "desmarcar": "取消标记",
+    "marcarPagada": "✓ 标记为已支付",
+    "editar": "编辑",
+    "eliminar": "删除",
+    "verRecibo": "查看工资单",
+    "confirmDelete": "删除此工资单？",
+    "edit": {
+      "salarioLabel": "税前工资 (€)",
+      "irpfLabel": "个人所得税 %",
+      "otrasLabel": "其他扣除 (€)",
+      "ssTrabajadorPreview": "员工社保：{{monto}}",
+      "irpfPreview": "个人所得税：{{monto}}",
+      "netoPreview": "净额：{{monto}}",
+      "notasLabel": "备注",
+      "notasPlaceholder": "加班、预支…",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "save": "保存"
+    },
+    "historialTable": {
+      "periodo": "周期",
+      "empleado": "员工",
+      "bruto": "税前",
+      "neto": "净额",
+      "estado": "状态"
+    },
+    "sinHistorial": "暂无工资单历史",
+    "pagadaLabel": "已支付",
+    "pendienteLabel": "待处理",
+    "recibo": {
+      "title": "工资单 — {{periodo}}",
+      "puesto": "职位：{{v}}",
+      "dni": "身份证：{{v}}",
+      "numSs": "社保号：{{v}}",
+      "grupoConvenio": "合同组别：{{v}}",
+      "devengosTitle": "一、应发项",
+      "salarioBase": "基本工资",
+      "totalDevengado": "应发总额",
+      "deduccionesTitle": "二、扣除项",
+      "cotizacionSS": "社保缴纳（员工 {{pct}}%）",
+      "retencionIrpf": "个税代扣 ({{pct}}%)",
+      "otrasDeducciones": "其他扣除",
+      "totalDeducciones": "扣除总额",
+      "liquidoPercibir": "实发净额",
+      "costeEmpresaLine": "公司成本：{{total}}（含公司社保 {{ss}}）",
+      "cerrar": "关闭",
+      "imprimir": "🖨️ 打印"
+    }
+  },
+  "hub": {
+    "title": "数字中心",
+    "subtitle": "为您的装修业务制定获客策略和线上形象",
+    "objetivoTitle": "您的目标客户：马德里中高端客户",
+    "objetivoText": "这类客户在意价格之前更看重品质与信任。优先使用 Google Business 和 Houzz，而非低价平台。一张精心完工的作品照片胜过任何广告。",
+    "abrirPlataforma": "打开平台 →",
+    "tag": {
+      "gratis": "免费",
+      "prioritario": "优先",
+      "pago": "付费",
+      "pagoPorLead": "按线索付费",
+      "claseMediaAlta": "中高端客户",
+      "volumenAlto": "高流量",
+      "visual": "视觉化",
+      "b2b": "企业对企业",
+      "gratisPro": "免费 / 专业版"
+    },
+    "secciones": {
+      "presenciaLocal": {
+        "titulo": "本地曝光（Google）",
+        "items": {
+          "gbp": {
+            "titulo": "Google Business Profile",
+            "desc": "您在 Google 地图上的资料。对马德里本地客户找到您至关重要。",
+            "tips": [
+              "上传已完工项目的照片（前后对比）",
+              "回复所有评价，无论好坏",
+              "将每个完工的装修项目发布为动态"
+            ]
+          },
+          "adsLocal": {
+            "titulo": "Google Ads local",
+            "desc": "在马德里投放地理定位广告，当有人搜索“马德里装修公司”时展示。",
+            "tips": [
+              "从每天 5-10 欧元开始并逐步调整",
+              "按目标区域邮编进行定位",
+              "使用直接拨打电话的广告附加信息"
+            ]
+          }
+        }
+      },
+      "plataformas": {
+        "titulo": "装修平台",
+        "items": {
+          "habitissimo": {
+            "titulo": "Habitissimo",
+            "desc": "西班牙领先的装修获客平台，曝光度高且评价良好。",
+            "tips": [
+              "在 1 小时内回复请求（算法会给予奖励）",
+              "请每位满意的客户留下评价",
+              "用真实照片将资料完善至 100%"
+            ]
+          },
+          "houzz": {
+            "titulo": "Houzz",
+            "desc": "室内设计与装修社交网络，非常适合中高端客户群。",
+            "tips": [
+              "上传带有详细说明的完整项目",
+              "使用风格和材料标签",
+              "Houzz 的客户看重品质而非价格"
+            ]
+          },
+          "milanuncios": {
+            "titulo": "Milanuncios / Wallapop",
+            "desc": "适用于小型工程和维护，需求量大但价格更为紧张。",
+            "tips": [
+              "按工作类型分类发布",
+              "标注参考价格以筛选客户",
+              "每周更新广告以保持曝光度"
+            ]
+          }
+        }
+      },
+      "redesSociales": {
+        "titulo": "社交媒体",
+        "items": {
+          "instagram": {
+            "titulo": "Instagram",
+            "desc": "视觉效果强，非常适合装修展示。中高端客户在委托前常在 Instagram 上寻找灵感。",
+            "tips": [
+              "发布每个项目的前后对比",
+              "用 Reels 展示装修过程（30-60 秒）",
+              "话题标签：#reformasMadrid #reformaIntegral #interiorismo",
+              "展示施工日常的 Stories 能与受众建立联系"
+            ]
+          },
+          "linkedin": {
+            "titulo": "LinkedIn",
+            "desc": "用于树立专业形象并吸引企业客户（用途变更、商业场所）。",
+            "tips": [
+              "分享带有数据的成功案例（改造面积、按期完工）",
+              "与建筑师和物业管理者建立联系",
+              "撰写关于装修趋势的文章可以建立权威性"
+            ]
+          }
+        }
+      },
+      "productividad": {
+        "titulo": "效率工具",
+        "items": {
+          "whatsapp": {
+            "titulo": "WhatsApp Business",
+            "desc": "必备工具。企业资料、服务目录、自动快速回复。",
+            "tips": [
+              "设置自动欢迎消息",
+              "创建标签：新线索、已发送报价、活跃客户",
+              "设置非工作时间的自动回复"
+            ]
+          },
+          "canva": {
+            "titulo": "Canva",
+            "desc": "设计可视化报价单、演示文稿以及社交媒体内容。",
+            "tips": [
+              "使用“前后对比”模板",
+              "创建带有 XANDER 品牌的公司资料模板"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "fiscal": {
+    "title": "税务",
+    "subtitle": "西班牙装修行业自由职业者税务指南",
+    "disclaimer": "⚠️ 本指南仅供参考。做出具体决定前请务必咨询您的会计师或税务顾问。",
+    "conciliacion": {
+      "cardTitle": "📄 与代理记账机构核对",
+      "cardDesc": "生成包含您本期发票、支出以及增值税/所得税汇总的文件，方便在申报相应表格前进行核对。",
+      "generarDocumento": "生成文件"
+    },
+    "calendarioTitle": "📅 申报日历",
+    "proximoBadge": "即将到期",
+    "modelosTitle": "📋 需申报的表格",
+    "tipsTitle": "💡 关键可抵扣支出",
+    "modal": {
+      "title": "税务核对 — {{periodo}}",
+      "anio": "{{anio}} 年",
+      "loading": "正在加载该期间数据…",
+      "empresaDefault": "我的公司",
+      "nif": "税号：{{v}}",
+      "tituloDoc": "税务核对",
+      "delAl": "从 {{desde}} 至 {{hasta}}",
+      "generado": "生成时间：{{fecha}}",
+      "disclaimerModal": "⚠️ 本文件根据您已登记的发票和支出自动生成，仅供参考。请与代理记账机构分享以在申报前核对数据——不能替代其计算或专业建议。",
+      "facturasEmitidas": "已开具发票（{{count}}）",
+      "sinFacturas": "本期间未开具发票。",
+      "gastosRegistrados": "已登记支出（{{count}}）",
+      "moduloNoConfigurado": "支出模块尚未配置。",
+      "sinGastos": "本期间未登记支出。",
+      "tabla": {
+        "fecha": "日期",
+        "numero": "编号",
+        "cliente": "客户",
+        "estado": "状态",
+        "base": "税基",
+        "iva": "增值税",
+        "ret": "预扣",
+        "total": "总计",
+        "proveedor": "供应商",
+        "categoria": "类别",
+        "ivaSoport": "已付增值税"
+      },
+      "totalRow": "合计",
+      "sinCliente": "—",
+      "resumenTitle": "303 / 130{{extra}} 表格汇总",
+      "ivaRepercutido": "销项增值税（销售）",
+      "ivaSoportadoLabel": "进项增值税（支出）",
+      "resultadoIva": "增值税结果（303 表）",
+      "aIngresar": "应缴：{{v}}",
+      "aCompensar": "可抵扣：{{v}}",
+      "ingresosBase": "收入（税基）",
+      "gastosBase": "支出（税基）",
+      "rendimientoNeto": "预计净收益",
+      "retencionesPracticadas": "已预扣的所得税",
+      "pago130": "20% 分期预缴（130 表，预估）",
+      "cerrar": "关闭",
+      "imprimir": "🖨️ 打印 / PDF"
+    },
+    "selector": {
+      "title": "核对文件",
+      "desc": "选择期间并生成包含发票、支出明细及增值税/所得税汇总的文件，用于与代理记账机构核对。",
+      "tipoDocumento": "文件类型",
+      "trimestral": "季度（130/303）",
+      "anual": "年度（390/100）",
+      "anioLabel": "年份",
+      "trimestreLabel": "季度",
+      "cancelar": "取消",
+      "generarDocumento": "生成文件"
+    }
+  },
+  "legislacion": {
+    "title": "法规",
+    "subtitle": "西班牙全境住宅及商业装修的法律框架",
+    "selector": {
+      "label": "您所在的自治区",
+      "desc": "选择您所在的地区以查看具体的城市规划法规",
+      "placeholder": "— 选择您的地区 —"
+    },
+    "ccaa": {
+      "badgeNormativa": "地区法规",
+      "portalOficial": "官方门户 ↗",
+      "obraMenor": "小型工程",
+      "obraMenorDesc": "简化程序——不涉及结构或外立面",
+      "obraMayor": "大型工程",
+      "obraMayorDesc": "需要技术项目文件，周期更长",
+      "organismoCompetente": "主管部门",
+      "aspectosDestacados": "⚠️ {{nombre}}的重点事项"
+    },
+    "avisoTitle": "参考指南。",
+    "avisoText": "城市规划法规经常变动。如有疑问，请务必咨询相关市政厅和合格的技术人员（建筑师或技师）。即使在同一地区，不同市镇的条件也可能有所不同。",
+    "estatalCaption": "国家级法规——适用于西班牙全境",
+    "incluyeAplica": "包含 / 适用于：",
+    "recursosUtiles": "实用资源（国家级）"
+  },
+  "resultados": {
+    "title": "经营成果",
+    "subtitle": "业务损益表",
+    "calculando": "正在计算结果…",
+    "kpi": {
+      "totalFacturado": "开票总额",
+      "todasFacturas": "所有发票",
+      "ingresosReales": "实际收入",
+      "facturasCobradas": "已收款发票",
+      "gastosTotales": "总支出",
+      "tablaNoConfigurada": "表未配置",
+      "gastosRegistrados": "已登记支出",
+      "resultadoNeto": "净结果",
+      "beneficio": "盈利",
+      "perdida": "亏损"
+    },
+    "evolucionMensual": "{{anio}} 年月度趋势",
+    "leyenda": {
+      "facturado": "开票",
+      "gastos": "支出",
+      "cobrado": "已收款"
+    },
+    "detallePorMes": "月度明细",
+    "tabla": {
+      "mes": "月份",
+      "facturado": "开票",
+      "gastos": "支出",
+      "resultado": "结果"
+    },
+    "totalAnio": "{{anio}} 年合计",
+    "gastosPorCategoria": "按类别划分的支出",
+    "tablaNoConfiguradaLarga": "支出表未配置",
+    "sinGastosEnAnio": "{{anio}} 年无支出记录",
+    "meses": {
+      "ene": "1月",
+      "feb": "2月",
+      "mar": "3月",
+      "abr": "4月",
+      "may": "5月",
+      "jun": "6月",
+      "jul": "7月",
+      "ago": "8月",
+      "sep": "9月",
+      "oct": "10月",
+      "nov": "11月",
+      "dic": "12月"
+    },
+    "avisoGastosPre": "⚠️ 支出表尚未配置。请前往",
+    "avisoGastosPost": "并按说明启用。"
+  },
+  "referidos": {
+    "title": "推荐奖励",
+    "subtitle": "邀请其他装修个体经营者。他们升级为专业版后，您将获得一个月免费使用。",
+    "recompensaTexto": "1 个月免费（19 欧元）",
+    "tuEnlace": "您的推荐链接",
+    "generando": "正在生成您的代码…",
+    "copiarEnlace": "复制链接",
+    "copiado": "✓ 已复制",
+    "tuCodigo": "您的代码：",
+    "copiar": "复制",
+    "copiadoMin": "✓ 已复制",
+    "compartirWhatsapp": "💬 通过 WhatsApp 分享",
+    "mensajeWhatsapp": "我使用 XANDER Gestión 管理我的报价单、发票和工程项目——如果您是装修个体经营者，我推荐给您。通过我的链接免费注册，我们都能获益：{{enlace}}",
+    "comoFunciona": "运作方式",
+    "pasos": {
+      "p1t": "分享您的链接",
+      "p1d": "将链接发给可能需要此工具的其他装修个体经营者。",
+      "p2t": "对方免费注册",
+      "p2d": "对方通过您的链接进入并创建账户——自动与您关联。",
+      "p3t": "对方升级为专业版，您获益",
+      "p3d": "对方一旦支付首笔专业版费用，您将获得 {{recompensa}} 作为账单抵扣。"
+    },
+    "tusReferidos": "您的推荐记录",
+    "registrados": "已注册",
+    "convertidosPro": "已转为专业版",
+    "mesesGanados": "已赚取月数",
+    "cargando": "加载中…",
+    "sinInvitados": "您还没有邀请任何人。请分享上方的链接开始吧。",
+    "registradoEl": "注册于 {{fecha}}",
+    "badgePro": "✓ 专业版",
+    "badgePendiente": "待定"
+  },
+  "miEmpresa": {
+    "title": "我的公司",
+    "subtitle": "这些信息将显示在您的报价单和发票中",
+    "cargando": "加载中…",
+    "datosPersonales": "个人信息",
+    "nombre": "名",
+    "apellidos": "姓",
+    "dniNie": "身份证号",
+    "telefonoPersonal": "个人电话",
+    "datosEmpresa": "公司/业务信息",
+    "nombreComercial": "商号/公司名称 *",
+    "nif": "税号",
+    "telefonoEmpresa": "公司电话",
+    "emailEmpresa": "公司电子邮箱",
+    "direccionFiscal": "税务地址",
+    "cp": "邮编",
+    "ciudad": "城市",
+    "web": "网站",
+    "actividadProfesional": "职业活动",
+    "fechaInicio": "活动开始日期",
+    "tarifaReducida": "减免税率生效中",
+    "tarifaReducidaSub": "作为个体经营者的前两年",
+    "especialidades": "专业领域",
+    "especialidad": {
+      "Reforma integral": "整体装修",
+      "Reforma de baño": "浴室装修",
+      "Reforma de cocina": "厨房装修",
+      "Cambio de uso": "用途变更",
+      "Reforma de local": "商业场所装修",
+      "Distribuciones internas": "内部布局改造",
+      "Fontanería": "管道工程",
+      "Electricidad": "电气工程",
+      "Alicatados y solados": "瓷砖与地板",
+      "Pladur": "石膏板",
+      "Pintura": "油漆",
+      "Carpintería": "木工",
+      "Impermeabilización": "防水工程"
+    },
+    "miPlan": "我的方案",
+    "pagoConfirmado": "✓ 付款已确认。您的方案将在几秒钟内更新。",
+    "pagoCancelado": "您已取消付款流程。您可以随时重试。",
+    "planProActivo": "✓ 专业版方案已激活{{ciclo}}。感谢您信任 XANDER。",
+    "cicloAnual": "（年付）",
+    "cicloMensual": "（月付）",
+    "trialActivo": "⏳ 您正处于免费试用期 — 还剩 {{dias}} 天。",
+    "planGratuito": "免费方案。升级到专业版以获得完整无限制的访问权限。",
+    "abriendo": "正在打开…",
+    "gestionarSuscripcion": "管理订阅",
+    "redirigiendo": "正在跳转…",
+    "actualizarPro": "升级到专业版 — {{precio}}",
+    "planAnual": "年度方案 — {{precio}}",
+    "sinPermanencia": "无合约限制 · 可随时在账单门户取消",
+    "cobrosOnline": "在线收款",
+    "cobrosOnlineDesc": "连接您的 Stripe 账户即可通过银行卡收取发票款项。客户的资金直接进入您的银行账户——XANDER 绝不经手。",
+    "stripeActiva": "✓ Stripe 账户已连接并激活。您现在可以通过银行卡收取发票款项。",
+    "stripeVerificacion": "您的 Stripe 账户已创建，但尚未完成验证。请完成流程以开始收款。",
+    "stripeNoConectada": "您尚未连接任何 Stripe 账户。",
+    "cargandoBtn": "加载中…",
+    "completarConexion": "完成/查看连接",
+    "conectarStripe": "连接 Stripe",
+    "actualizarEstado": "刷新状态",
+    "datosGuardados": "✓ 信息保存成功",
+    "guardando": "保存中…",
+    "guardarCambios": "保存更改",
+    "errores": {
+      "checkout": "无法启动订阅付款。",
+      "portal": "无法打开账单门户。",
+      "stripeStatus": "无法查询 Stripe 状态。",
+      "stripeConnect": "无法启动与 Stripe 的连接。"
+    }
+  },
+  "tarifas": {
+    "title": "价格表",
+    "subtitle": "用于报价的参考价格目录",
+    "nuevaTarifa": "+ 新增价格",
+    "tabs": {
+      "catalogoBase": "基础目录（{{count}}）",
+      "misTarifas": "我的价格（{{count}}）"
+    },
+    "disclaimer": "📖 马德里行业参考价格。可作为参考，或在“我的价格”标签页中创建您自己的价格。",
+    "buscarPlaceholder": "🔍 搜索项目…",
+    "todasCategorias": "所有类别",
+    "cargando": "正在加载价格…",
+    "sinResultados": "无结果",
+    "sinTarifasPropias": "您还没有自己的价格",
+    "sinTarifas": "暂无价格",
+    "personalizaPrecios": "根据您的业务定制价格",
+    "partidas": "{{count}} 项",
+    "tabla": {
+      "descripcion": "描述",
+      "ud": "单位",
+      "mat": "材料 (€)",
+      "mo": "人工 (€)",
+      "margen": "利润率",
+      "precioCliente": "客户价格"
+    },
+    "editar": "编辑",
+    "confirmDelete": "删除“{{desc}}”？",
+    "modal": {
+      "editarTarifa": "编辑价格",
+      "nuevaTarifa": "新增价格",
+      "categoria": "类别 *",
+      "unidad": "单位",
+      "descripcion": "描述 *",
+      "costeMaterial": "材料成本 (€)",
+      "manoDeObra": "人工 (€)",
+      "margen": "利润率 (%)",
+      "precioAlCliente": "客户价格",
+      "notas": "备注",
+      "cancelar": "取消",
+      "guardando": "保存中…",
+      "guardarTarifa": "保存价格"
+    },
+    "categoria": {
+      "Demolición": "拆除",
+      "Albañilería": "砌筑",
+      "Impermeabilización": "防水工程",
+      "Alicatados y Solados": "瓷砖与地板",
+      "Fontanería": "管道工程",
+      "Electricidad": "电气工程",
+      "Pintura": "油漆",
+      "Carpintería y Remates": "木工与收边",
+      "Gestión y Logística": "管理与物流",
+      "Reforma Integral": "整体装修"
+    }
+  },
+  "documentos": {
+    "title": "文档中心",
+    "subtitle": "专业模板与文件管理",
+    "tabs": {
+      "plantillas": "📄 模板（{{count}}）",
+      "misDocumentos": "📁 我的文件 {{count}}"
+    },
+    "buscarPlantilla": "🔍 搜索模板…",
+    "disclaimerPlantillas": "📋 日常使用的可编辑模板。复制、自定义并自由使用。",
+    "sinResultados": "无结果",
+    "verPlantilla": "查看模板",
+    "copiar": "📋 复制",
+    "storageStep": "前置步骤：创建存储桶",
+    "storageDesc": "前往 <strong>Supabase → Storage</strong> 创建名为 <code>documentos-empresa</code> 的存储桶，标记为 <strong>Public</strong> 并保存。然后运行下方的 SQL 迁移。",
+    "yaConfigurado": "已配置 — 重试",
+    "cargandoArchivos": "正在加载文件…",
+    "archivosCountOne": "{{count}} 个文件",
+    "archivosCountOther": "{{count}} 个文件",
+    "sinArchivos": "无文件",
+    "verArchivo": "查看文件",
+    "eliminar": "删除",
+    "subiendo": "上传中…",
+    "subirArchivo": "📎 上传文件",
+    "anadirOtro": "+ 添加更多",
+    "formacionTitulo": "培训与证书",
+    "certificadosCountOne": "{{count}} 个证书",
+    "certificadosCountOther": "{{count}} 个证书",
+    "sinCertificados": "暂无证书",
+    "anadir": "+ 添加",
+    "ningunCertificado": "尚未添加任何证书",
+    "cerrar": "关闭",
+    "copiarPortapapeles": "📋 复制到剪贴板",
+    "confirmDeleteDoc": "删除“{{nombre}}”？",
+    "plantillaCopiada": "模板已复制到剪贴板 ✓",
+    "errorSubida": "上传“{{nombre}}”时出错：{{msg}}",
+    "carpeta": {
+      "Plan de Negocio": {
+        "titulo": "商业计划",
+        "desc": "包含组织、获客、报价、定价、形象和工具模块的完整计划。"
+      },
+      "Fiscalidad": {
+        "titulo": "税务",
+        "desc": "增值税和所得税申报、303、130、100 表格以及税务局的任何文件。"
+      },
+      "SS y Hacienda": {
+        "titulo": "社保与税务局",
+        "desc": "个体经营者注册、RETA 缴费收据、社保和税务局通知。"
+      },
+      "Seguros": {
+        "titulo": "保险",
+        "desc": "公众责任险保单、工程保险及其他已投保的保障。"
+      },
+      "Contratos": {
+        "titulo": "合同",
+        "desc": "与客户的合同、与供应商和分包商的协议以及任何签署文件。"
+      },
+      "Licencias de Obra": {
+        "titulo": "施工许可",
+        "desc": "市政许可、事先申报、经营许可及城市规划文件。"
+      },
+      "Branding": {
+        "titulo": "品牌",
+        "desc": "标志、企业模板、品牌形象及视觉识别资料。"
+      },
+      "Subcontratas": {
+        "titulo": "分包商",
+        "desc": "与分包商、合作公司及个体经营者的合同和协议。"
+      },
+      "Otros Documentos": {
+        "titulo": "其他文件",
+        "desc": "许可证、证书、许可及其他业务文件。"
+      }
+    },
+    "carpetaFormacion": {
+      "Certificados Obligatorios": {
+        "titulo": "强制性证书",
+        "desc": "建筑安全卫生培训（强制60小时）、法定资格、法律要求的证件和认证。"
+      },
+      "Formación Continua": {
+        "titulo": "持续培训",
+        "desc": "专业提升课程：石膏板、防水、电气、管道、管理、报价。"
+      }
+    }
+  },
+  "copias": {
+    "title": "备份",
+    "subtitle": "保存所有工作数据（客户、工程、报价单、发票、收款、支出、员工等）的快照，如果不慎删除或损坏，可以随时恢复。",
+    "mensajeErrorAlmacen": "无法访问备份存储：{{msg}}",
+    "crearAhoraTitle": "立即创建备份",
+    "crearAhoraDesc": "备份会保存到您的账户中（以便随时从此处恢复），同时也会下载一份到您的电脑，方便您自行保存到其他位置。",
+    "crearBtn": "💾 立即创建备份",
+    "creando": "正在创建备份…",
+    "restaurarArchivoTitle": "从文件恢复",
+    "restaurarArchivoDesc": "如果您之前下载过备份，请在此处上传以恢复该数据。",
+    "subirArchivoBtn": "📤 上传备份文件（.json）",
+    "tusCopiasTitle": "已保存的备份",
+    "cargando": "加载中…",
+    "sinCopias": "您还没有任何备份。请在上方创建第一个备份。",
+    "copiaAutomatica": "🔄 自动备份",
+    "copiaManual": "💾 手动备份",
+    "restaurar": "恢复",
+    "descargar": "下载",
+    "eliminar": "删除",
+    "resultadoRestoreTitle": "恢复结果",
+    "errorLabel": "错误：{{msg}}",
+    "filaOne": "{{count}} 行",
+    "filaOther": "{{count}} 行",
+    "confirmarRestauracionTitle": "确认恢复",
+    "vasARestaurar": "您即将恢复 <strong>{{nombre}}</strong>（共 {{total}} 条记录）。",
+    "notas": [
+      "• 此操作会<strong>恢复/更新</strong>备份中的记录——不会删除您之后创建的任何内容。",
+      "• 如果备份中的记录已不存在（您已删除），将使用其原始数据重新创建。",
+      "• 文件仅恢复其记录（名称、类别、链接）；如果文件本身也已从存储中删除，链接将无法使用。"
+    ],
+    "siRestaurarBtn": "是的，恢复此备份",
+    "restaurando": "正在恢复…",
+    "confirmDeleteCopia": "删除备份“{{nombre}}”？此操作无法撤销。",
+    "errorDescargar": "无法下载：{{msg}}",
+    "errorGuardarCuenta": "无法将备份保存到您的账户：{{msg}}",
+    "copiaCreadaOk": "备份已创建并保存到您的账户。",
+    "errorCrear": "创建备份时出错：{{msg}}",
+    "errorLeerCopia": "无法读取备份：{{msg}}",
+    "archivoDanado": "备份文件已损坏或无效。",
+    "archivoInvalido": "所选文件不是有效的备份文件（JSON）。",
+    "tabla": {
+      "clientes": "客户",
+      "empleados": "员工",
+      "obras": "工程",
+      "tarifas": "价格与费率",
+      "calendario_notas": "日历备注",
+      "calendario_eventos": "日历事件",
+      "presupuestos": "报价单",
+      "facturas": "发票",
+      "gastos": "支出",
+      "documentos": "文件（仅记录，不含文件本身）",
+      "partes_trabajo": "工作日报",
+      "nominas": "薪资单",
+      "obra_empleados": "分配到工程的团队"
+    }
+  },
+  "admin": {
+    "cargandoPanel": "正在加载管理面板…",
+    "title": "🛡️ 管理面板",
+    "subtitle": "在 XANDER Gestión 注册的个体经营者",
+    "actualizar": "↻ 刷新",
+    "stats": {
+      "totalRegistrados": "注册总数",
+      "nuevosSemana": "本周新增",
+      "perfilCompleto": "资料完整"
+    },
+    "tabs": {
+      "usuarios": "用户",
+      "leads": "潜在客户",
+      "notificaciones": "通知"
+    },
+    "usuarios": {
+      "sinUsuarios": "尚无注册用户",
+      "sinUsuariosSub": "注册的个体经营者将显示在这里",
+      "nombre": "姓名",
+      "email": "邮箱",
+      "empresa": "公司",
+      "ciudad": "城市",
+      "registro": "注册日期",
+      "ultimoAcceso": "最后登录",
+      "estado": "状态",
+      "sinNombre": "无姓名",
+      "activo": "✓ 活跃",
+      "pendiente": "⏳ 待处理"
+    },
+    "leads": {
+      "sinLeads": "尚无潜在客户",
+      "sinLeadsSub": "落地页留下的联系人将显示在这里",
+      "sinDatosContacto": "无联系方式",
+      "atendido": "✓ 已处理",
+      "marcarAtendido": "标记为已处理"
+    },
+    "notif": {
+      "sinNotificaciones": "暂无通知",
+      "sinNotificacionesSub": "新注册将显示在这里",
+      "sinLeerOne": "{{count}} 条未读通知",
+      "sinLeerOther": "{{count}} 条未读通知",
+      "marcarTodasLeidas": "全部标记为已读",
+      "marcarLeida": "标记为已读"
+    }
+  },
+  "themeToggle": {
+    "claro": "切换到浅色模式",
+    "oscuro": "切换到深色模式"
+  },
+  "planGate": {
+    "feature": {
+      "clientes": "超过3个客户",
+      "obras": "超过3个工程",
+      "presupuestos": "超过5份报价单",
+      "facturas": "超过5张发票",
+      "empleados": "员工管理",
+      "agente_ia": "AI 助手",
+      "exportar_pdf": "导出为 PDF",
+      "nominas": "薪资生成器",
+      "rentabilidad": "盈利能力分析"
+    },
+    "funcionExclusiva": "专业版专属功能",
+    "paraUsar": "使用{{feature}}需要专业版方案。",
+    "pruebaTermina": "⏳ 您的免费试用还剩 {{dias}} 天",
+    "activarPlan": "激活专业版方案 — {{precio}}",
+    "sinPermanencia": "无合约限制 · 随时可取消",
+    "trialBannerText": "您的试用期还剩 <strong>{{dias}} 天</strong>。请激活专业版方案以保留访问权限。",
+    "verPlanes": "查看方案"
+  },
+  "notifBell": {
+    "notificaciones": "通知",
+    "descartarTodas": "全部忽略",
+    "cargando": "加载中…",
+    "todoAlDia": "一切就绪，没有待处理的提醒",
+    "descartar": "忽略"
+  },
+  "pwaUpdate": {
+    "nuevaVersion": "有新版本的 XANDER 可用。",
+    "actualizar": "更新",
+    "ahoraNo": "暂不",
+    "yaFuncionaOffline": "XANDER 现已支持离线使用。"
+  },
+  "agenteChat": {
+    "titulo": "Agente XANDER",
+    "limpiarTooltip": "新对话",
+    "limpiar": "↺ 清除",
+    "faltaApiKey": "尚未配置 API 密钥",
+    "faltaApiKeyDesc": "要启用助手，请在项目根目录创建 <code>.env</code> 文件并写入：",
+    "pasoGroq1": "访问 <b>console.groq.com</b>",
+    "pasoGroq2": "创建一个免费账户",
+    "pasoGroq3": "API Keys → Create API Key",
+    "pasoGroq4": "将密钥复制到 .env 文件中",
+    "pasoGroq5": "重启开发服务器",
+    "pasoPrevioSupabase": "Supabase 前置步骤",
+    "ejecutaSql": "在 Supabase 的 SQL 编辑器中运行：",
+    "placeholder": "输入您的问题…",
+    "bienvenida": "您好！我是您的 XANDER 助手。我可以帮您处理客户、工程、报价、税务问题或起草任何沟通内容。有什么可以帮您的吗？",
+    "confirmBorrarHistorial": "删除此对话的历史记录？",
+    "conversacionNueva": "新对话！有什么可以帮您的吗？",
+    "errorConectar": "连接助手时出错。"
+  },
+  "calendarioWidget": {
+    "tipo": {
+      "trabajo": "工作",
+      "reunion": "会议",
+      "cobro": "收款",
+      "recordatorio": "提醒",
+      "visita": "工地巡查"
+    },
+    "calendarioTrabajo": "工作日历",
+    "hoy": "今天",
+    "alertaEmailTitle": "邮件提醒",
+    "cargando": "加载中…",
+    "anadir": "+ 添加",
+    "sinEventos": "这一天没有安排",
+    "editarEvento": "编辑事件",
+    "nuevoEvento": "新建事件 — {{fecha}}",
+    "tituloLabel": "标题 *",
+    "tituloPlaceholder": "例如：客户工地巡查",
+    "tipoLabel": "类型",
+    "horaLabel": "时间",
+    "descripcionLabel": "描述（可选）",
+    "descripcionPlaceholder": "其他详情…",
+    "alertaEmailToggleTitle": "🔔 邮件提醒",
+    "alertaEmailSub": "提前24小时和1小时提醒",
+    "cancelar": "取消",
+    "guardando": "保存中…",
+    "guardarCambios": "保存更改",
+    "guardar": "保存"
+  },
+  "firmaModal": {
+    "firmarDocumento": "签署文件",
+    "nombreQuienFirma": "签署人姓名",
+    "nombrePlaceholder": "姓名",
+    "firmaLabel": "签名",
+    "borrarRepetir": "清除并重签",
+    "disclaimer": "签署即表示签署人确认同意本文件内容。签名将连同日期和时间一起保存，作为接受的证据（这不是 eIDAS 合格电子签名）。",
+    "cancelar": "取消",
+    "guardando": "保存中…",
+    "confirmarFirma": "✍️ 确认签名"
+  },
+  "onboarding": {
+    "pasos": {
+      "cliente": {
+        "titulo": "添加您的第一位客户",
+        "desc": "该联系人档案之后会关联到工程、报价单和发票。"
+      },
+      "obra": {
+        "titulo": "创建您的第一个工程",
+        "desc": "将其关联到客户以跟踪照片、阶段和团队。"
+      },
+      "presupuesto": {
+        "titulo": "制作您的第一份报价单",
+        "desc": "使用价格表中的条目在几分钟内生成报价单。"
+      },
+      "fiscal": {
+        "titulo": "完善您的税务信息",
+        "desc": "税号、地址和税制——有效报价单和发票所必需。"
+      },
+      "cobros": {
+        "titulo": "连接银行卡收款",
+        "desc": "可选：连接您的 Stripe 账户，直接从 XANDER 收取发票款项。"
+      }
+    },
+    "primerosPasos": "XANDER 入门指南",
+    "mostrar": "显示 ▾",
+    "ocultar": "隐藏 ▴",
+    "completados": "已完成！您已掌握 XANDER 的基本操作。",
+    "progreso": "已完成 {{completados}}/{{total}} — 我们会一路陪伴，直到该应用成为您日常工作的一部分。"
+  },
+  "auth": {
+    "tagline": "装修管理",
+    "footer": "© 2026 XANDER Gestión · 马德里",
+    "orConEmail": "或使用邮箱",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "you@email.com",
+    "login": {
+      "quote": "\"每一位该行业的自由职业者都需要的工具，由业内人士打造。\"",
+      "features": [
+        "报价单",
+        "开票",
+        "工程",
+        "价格"
+      ],
+      "bienvenido": "欢迎",
+      "accedeCuenta": "登录您的账户",
+      "continuarGoogle": "使用 Google 继续",
+      "contrasena": "密码",
+      "olvidasteContrasena": "忘记密码？",
+      "errorCredenciales": "邮箱或密码不正确。",
+      "entrando": "正在登录…",
+      "entrar": "登录",
+      "noTienesCuenta": "还没有账户？",
+      "registrateGratis": "免费注册"
+    },
+    "register": {
+      "features": [
+        {
+          "icon": "📋",
+          "text": "几分钟内生成专业报价单"
+        },
+        {
+          "icon": "🔨",
+          "text": "工程与客户跟踪"
+        },
+        {
+          "icon": "📊",
+          "text": "按工程核算价格与盈利能力"
+        },
+        {
+          "icon": "📧",
+          "text": "直接从应用发送发票"
+        }
+      ],
+      "gratisBeta": "测试期间免费 · 无需信用卡",
+      "creaTuCuenta": "创建您的账户",
+      "gratisSinLimites": "测试期间免费 · 无限制",
+      "registrarseGoogle": "使用 Google 注册",
+      "emailProfesional": "工作邮箱",
+      "contrasena": "密码",
+      "minimoCaracteres": "至少8个字符",
+      "confirmarContrasena": "确认密码",
+      "repiteContrasena": "重复输入密码",
+      "passwordsNoCoinciden": "两次输入的密码不一致。",
+      "passwordCorta": "密码至少需要8个字符。",
+      "creandoCuenta": "正在创建账户…",
+      "crearCuentaGratuita": "创建免费账户",
+      "aceptasTerminosPre": "注册即表示您同意我们的",
+      "terminosUso": "使用条款",
+      "y": "和",
+      "politicaPrivacidad": "隐私政策",
+      "yaTienesCuenta": "已有账户？",
+      "accedeAqui": "点击登录",
+      "revisaEmail": "请查收您的邮箱",
+      "enlaceConfirmacion": "我们已向 <strong>{{email}}</strong> 发送了确认链接。确认账户后即可开始设置您的资料。",
+      "irLogin": "前往登录"
+    },
+    "forgot": {
+      "sidebarText": "我们将向您发送一个链接，以便您安全地设置新密码。",
+      "emailEnviado": "邮件已发送",
+      "enlaceEnviadoA": "我们已向 <strong>{{email}}</strong> 发送了找回链接。请同时检查垃圾邮件文件夹。",
+      "enlaceCaduca": "链接将在1小时后过期。如未收到，可以重新尝试。",
+      "volverInicioSesion": "返回登录",
+      "flechaVolver": "← 返回登录",
+      "recuperarContrasena": "找回密码",
+      "introduceEmail": "请输入您的邮箱，我们将发送重置密码的链接。",
+      "errorEnvio": "无法发送邮件。请检查地址后重试。",
+      "enviando": "发送中…",
+      "enviarEnlace": "发送找回链接"
+    },
+    "reset": {
+      "sidebarText": "请设置一个安全的密码。建议至少8个字符，结合字母和数字。",
+      "passwordActualizada": "密码已更新",
+      "redirigiendo": "正在跳转到您的账户…",
+      "verificandoEnlace": "正在验证找回链接…",
+      "enlaceCaducadoAviso": "如果此消息显示超过10秒，链接可能已过期。",
+      "solicitaUnoNuevo": "请重新申请。",
+      "nuevaContrasena": "新密码",
+      "eligeNuevaPassword": "为您的账户设置新密码。",
+      "confirmarContrasena": "确认密码",
+      "repiteContrasena": "重复输入密码",
+      "minimoCaracteres": "至少8个字符",
+      "passwordCorta": "密码至少需要8个字符。",
+      "passwordsNoCoinciden": "两次输入的密码不一致。",
+      "errorActualizar": "无法更新密码。链接可能已过期。",
+      "guardando": "保存中…",
+      "establecerNuevaContrasena": "设置新密码"
+    }
+  },
+  "onboardingWizard": {
+    "cuentanosQuienEres": "告诉我们您是谁——仅需基本信息",
+    "bienvenido": "欢迎使用 XANDER",
+    "rellenaDatos": "填写两项信息即可开始使用。您可以稍后完善其余资料。",
+    "nombreLabel": "名",
+    "apellidosLabel": "姓",
+    "nombreEmpresaLabel": "公司名称",
+    "nombreObligatorio": "姓名为必填项。",
+    "empresaObligatoria": "公司名称为必填项。",
+    "especialidadesLabel": "专业领域",
+    "opcional": "（可选）",
+    "queTrabajos": "您通常从事哪些工作？",
+    "especialidad": {
+      "Reformas integrales": "整体装修",
+      "Baños": "浴室",
+      "Cocinas": "厨房",
+      "Pintura": "油漆",
+      "Pladur": "石膏板",
+      "Electricidad": "电气",
+      "Fontanería": "管道",
+      "Carpintería": "木工",
+      "Alicatados": "瓷砖",
+      "Fachadas": "外立面"
+    },
+    "avisoDatosAdicionales": "您可以随时在<strong>我的公司</strong>中添加税号、地址、电话等信息。这些是打印完整报价单和发票所必需的。",
+    "salir": "退出",
+    "guardando": "保存中…",
+    "empezar": "开始使用！→"
+  },
+  "landing": {
+    "nav": {
+      "funciones": "功能",
+      "planes": "方案",
+      "contacto": "联系我们"
+    },
+    "miCuenta": "我的账户",
+    "entrar": "登录",
+    "pruebaGratis": "免费试用",
+    "iraMiCuenta": "前往我的账户",
+    "pruebaGratis30": "30天免费试用",
+    "heroTag": "室内装修管理",
+    "heroTitle": "报价单、发票和工程管理，<br />尽在一处。",
+    "heroDesc": "这是一款由装修个体经营者为同行打造的管理工具：几分钟生成报价单、符合 Verifactu 的开票、银行卡收款以及每个工程的真实跟踪。",
+    "verFunciones": "查看功能",
+    "sinTarjeta": "无需信用卡 · 无合约限制 · 随时可取消",
+    "funciones": [
+      {
+        "icon": "📋",
+        "title": "报价单",
+        "desc": "几分钟内按项目创建专业报价单，随时可发送。"
+      },
+      {
+        "icon": "🧾",
+        "title": "开票",
+        "desc": "内置 Verifactu 的发票——链式哈希、二维码并提交给税务局。"
+      },
+      {
+        "icon": "🏗️",
+        "title": "工程",
+        "desc": "通过照片、阶段、团队和工作日报跟踪工程进度。"
+      },
+      {
+        "icon": "💳",
+        "title": "银行卡收款",
+        "desc": "客户可在线支付发票，款项直接进入您的账户。"
+      },
+      {
+        "icon": "💶",
+        "title": "支出与经营成果",
+        "desc": "按工程记录支出，查看每个项目的真实盈利能力。"
+      },
+      {
+        "icon": "📊",
+        "title": "税务",
+        "desc": "每季度前为您的会计准备好核对文件。"
+      },
+      {
+        "icon": "👷",
+        "title": "员工与薪资",
+        "desc": "按工程记录工时并生成工资单。"
+      },
+      {
+        "icon": "📱",
+        "title": "可安装应用",
+        "desc": "可安装在手机或电脑上，离线也能使用。"
+      }
+    ],
+    "funcionesTitle": "管理业务所需的一切",
+    "funcionesSubtitle": "告别零散的表格，告别装满报价的 WhatsApp 文件夹。",
+    "testimonioAutor": "— XANDER 室内装修，马德里",
+    "planesTitle": "简单的方案",
+    "planesSubtitle": "免费开始，没有隐藏费用。",
+    "recomendado": "推荐",
+    "planPrueba": {
+      "nombre": "免费试用",
+      "periodo": "30天",
+      "desc": "完整访问权限，无需信用卡。",
+      "features": [
+        "所有模块",
+        "客户和工程数量不限",
+        "包含 AI 助手"
+      ],
+      "cta": "免费开始"
+    },
+    "planPro": {
+      "nombre": "专业版",
+      "periodo": "每位个体经营者",
+      "desc": "适合决定长期使用的您。",
+      "features": [
+        "免费方案的全部内容",
+        "无使用限制",
+        "直接支持"
+      ],
+      "cta": "免费开始"
+    },
+    "contactoTitle": "开始前有疑问吗？",
+    "contactoSubtitle": "留下您的联系方式，或直接通过 WhatsApp 联系我们。",
+    "form": {
+      "nombre": "姓名",
+      "nombrePlaceholder": "您的姓名",
+      "emailOTelefono": "邮箱或电话",
+      "contactoPlaceholder": "you@email.com 或电话号码",
+      "mensaje": "留言",
+      "opcional": "（可选）",
+      "mensajePlaceholder": "告诉我们您的需求",
+      "errorRequerido": "我们至少需要您的姓名以及邮箱或电话才能联系您。",
+      "errorEnvio": "发送失败。请重试或通过 WhatsApp 联系我们。",
+      "gracias": "谢谢您，{{nombre}}！",
+      "contactamos24h": "我们将在24小时内与您联系。",
+      "enviando": "发送中…",
+      "quieroContacten": "希望有人联系我"
+    },
+    "contactoDirecto": "直接联系",
+    "escribirWhatsapp": "通过 WhatsApp 联系",
+    "footerText": "XANDER 室内装修 · 马德里",
+    "footerCopyright": "© 2026 XANDER Gestión"
   }
 }

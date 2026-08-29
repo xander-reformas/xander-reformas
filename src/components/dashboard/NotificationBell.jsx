@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useNotifications } from '../../hooks/useNotifications'
 
@@ -9,6 +10,7 @@ const PRIORIDAD_STYLE = {
 }
 
 export default function NotificationBell() {
+  const { t } = useTranslation()
   const { notificaciones, loading, descartar, descartarTodo } = useNotifications()
   const [abierto, setAbierto] = useState(false)
   const ref = useRef(null)
@@ -30,7 +32,7 @@ export default function NotificationBell() {
       <button
         onClick={() => setAbierto(p => !p)}
         className="relative w-9 h-9 rounded-full flex items-center justify-center text-ink-soft hover:text-ink hover:bg-surface-alt transition-colors"
-        title="Notificaciones"
+        title={t('notifBell.notificaciones')}
       >
         <span className="text-lg">🔔</span>
         {count > 0 && (
@@ -43,20 +45,20 @@ export default function NotificationBell() {
       {abierto && (
         <div className="absolute right-0 mt-2 w-80 max-h-[28rem] overflow-y-auto bg-surface border border-edge rounded-xl shadow-lg z-50">
           <div className="flex items-center justify-between px-4 py-3 border-b border-edge">
-            <span className="font-semibold text-ink text-sm">Notificaciones</span>
+            <span className="font-semibold text-ink text-sm">{t('notifBell.notificaciones')}</span>
             {count > 0 && (
               <button onClick={descartarTodo} className="text-xs text-ink-soft hover:text-ink">
-                Descartar todas
+                {t('notifBell.descartarTodas')}
               </button>
             )}
           </div>
 
           {loading ? (
-            <div className="text-center text-ink-soft text-sm py-8">Cargando…</div>
+            <div className="text-center text-ink-soft text-sm py-8">{t('notifBell.cargando')}</div>
           ) : count === 0 ? (
             <div className="text-center text-ink-soft text-sm py-8 px-4">
               <div className="text-2xl mb-1">✓</div>
-              Todo al día, sin avisos pendientes
+              {t('notifBell.todoAlDia')}
             </div>
           ) : (
             <div className="divide-y divide-edge">
@@ -76,7 +78,7 @@ export default function NotificationBell() {
                   <button
                     onClick={(e) => { e.stopPropagation(); descartar(n.id) }}
                     className="text-ink-soft hover:text-red-500 text-xs flex-shrink-0 self-start"
-                    title="Descartar"
+                    title={t('notifBell.descartar')}
                   >
                     ✕
                   </button>

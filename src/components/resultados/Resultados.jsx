@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../../lib/supabase'
 
 function totalFactura(f) {
@@ -10,9 +11,11 @@ function totalFactura(f) {
   return baseDto + iva - ret
 }
 
-const MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+const MESES_KEYS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
 
 export default function Resultados() {
+  const { t } = useTranslation()
+  const MESES = MESES_KEYS.map(k => t(`resultados.meses.${k}`))
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [anio, setAnio] = useState(new Date().getFullYear())
@@ -63,7 +66,7 @@ export default function Resultados() {
   const fmt = v => v.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const anios = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
 
-  if (loading) return <div className="p-6 text-ink-soft text-sm py-10 text-center">Calculando resultados…</div>
+  if (loading) return <div className="p-6 text-ink-soft text-sm py-10 text-center">{t('resultados.calculando')}</div>
 
   const maxBar = Math.max(...data.mesesData.map(m => Math.max(m.facturado, m.gastos)), 1)
 
@@ -71,8 +74,8 @@ export default function Resultados() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-ink">Resultados</h1>
-          <p className="text-sm text-ink-soft mt-0.5">Cuenta de resultados del negocio</p>
+          <h1 className="text-2xl font-bold text-ink">{t('resultados.title')}</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{t('resultados.subtitle')}</p>
         </div>
         <div className="flex gap-1 bg-edge rounded-xl p-1">
           {anios.map(a => (
@@ -87,13 +90,13 @@ export default function Resultados() {
       {/* KPIs principales */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {[
-          { label: 'Total facturado', value: fmt(data.totalFacturado), sub: 'todas las facturas', color: 'text-ink', border: 'border-l-navy' },
-          { label: 'Ingresos reales', value: fmt(data.totalCobrado), sub: 'facturas cobradas', color: 'text-green-700', border: 'border-l-green-500' },
-          { label: 'Gastos totales', value: fmt(data.totalGastos), sub: data.sinGastos ? 'tabla no configurada' : 'gastos registrados', color: 'text-red-600', border: 'border-l-red-400' },
+          { label: t('resultados.kpi.totalFacturado'), value: fmt(data.totalFacturado), sub: t('resultados.kpi.todasFacturas'), color: 'text-ink', border: 'border-l-navy' },
+          { label: t('resultados.kpi.ingresosReales'), value: fmt(data.totalCobrado), sub: t('resultados.kpi.facturasCobradas'), color: 'text-green-700', border: 'border-l-green-500' },
+          { label: t('resultados.kpi.gastosTotales'), value: fmt(data.totalGastos), sub: data.sinGastos ? t('resultados.kpi.tablaNoConfigurada') : t('resultados.kpi.gastosRegistrados'), color: 'text-red-600', border: 'border-l-red-400' },
           {
-            label: 'Resultado neto',
+            label: t('resultados.kpi.resultadoNeto'),
             value: fmt(data.resultado),
-            sub: data.resultado >= 0 ? 'beneficio' : 'pérdida',
+            sub: data.resultado >= 0 ? t('resultados.kpi.beneficio') : t('resultados.kpi.perdida'),
             color: data.resultado >= 0 ? 'text-green-700' : 'text-red-600',
             border: data.resultado >= 0 ? 'border-l-green-500' : 'border-l-red-500',
             highlight: true,
@@ -109,18 +112,18 @@ export default function Resultados() {
 
       {data.sinGastos && (
         <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-ink-soft">
-          ⚠️ La tabla de gastos no está configurada. Ve a <strong>Gastos</strong> y sigue las instrucciones para activarla.
+          {t('resultados.avisoGastosPre')}<strong>{t('gastos.title')}</strong>{t('resultados.avisoGastosPost')}
         </div>
       )}
 
       {/* Gráfico de barras mensual */}
       <div className="card mb-6">
         <div className="flex items-center justify-between mb-6">
-          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft">Evolución mensual {anio}</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft">{t('resultados.evolucionMensual', { anio })}</div>
           <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-navy inline-block" />Facturado</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-red-400 inline-block" />Gastos</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-green-500 inline-block" />Cobrado</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-navy inline-block" />{t('resultados.leyenda.facturado')}</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-red-400 inline-block" />{t('resultados.leyenda.gastos')}</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-green-500 inline-block" />{t('resultados.leyenda.cobrado')}</span>
           </div>
         </div>
         <div className="flex items-end gap-1 h-40">
@@ -130,7 +133,7 @@ export default function Resultados() {
             const hCob = Math.round((m.ingresos / maxBar) * 100)
             const tieneData = m.facturado > 0 || m.gastos > 0
             return (
-              <div key={m.mes} className="flex-1 flex flex-col items-center gap-0.5" title={`${m.mes}: Facturado ${fmt(m.facturado)}, Gastos ${fmt(m.gastos)}`}>
+              <div key={m.mes} className="flex-1 flex flex-col items-center gap-0.5" title={`${m.mes}: ${t('resultados.leyenda.facturado')} ${fmt(m.facturado)}, ${t('resultados.leyenda.gastos')} ${fmt(m.gastos)}`}>
                 <div className="w-full flex items-end justify-center gap-0.5 flex-1">
                   <div className="flex-1 bg-navy rounded-t-sm transition-all" style={{ height: `${Math.max(hFac, tieneData ? 2 : 0)}%`, minHeight: tieneData ? '2px' : '0' }} />
                   <div className="flex-1 bg-red-400 rounded-t-sm transition-all" style={{ height: `${Math.max(hGto, tieneData ? 2 : 0)}%`, minHeight: tieneData ? '2px' : '0' }} />
@@ -146,14 +149,14 @@ export default function Resultados() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Tabla mensual */}
         <div className="card p-0 overflow-hidden">
-          <div className="px-4 py-3 bg-edge text-xs font-bold uppercase tracking-widest text-ink-soft">Detalle por mes</div>
+          <div className="px-4 py-3 bg-edge text-xs font-bold uppercase tracking-widest text-ink-soft">{t('resultados.detallePorMes')}</div>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-edge text-xs text-ink-soft">
-                <th className="text-left px-4 py-2">Mes</th>
-                <th className="text-right px-3 py-2">Facturado</th>
-                <th className="text-right px-3 py-2">Gastos</th>
-                <th className="text-right px-4 py-2">Resultado</th>
+                <th className="text-left px-4 py-2">{t('resultados.tabla.mes')}</th>
+                <th className="text-right px-3 py-2">{t('resultados.tabla.facturado')}</th>
+                <th className="text-right px-3 py-2">{t('resultados.tabla.gastos')}</th>
+                <th className="text-right px-4 py-2">{t('resultados.tabla.resultado')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-edge">
@@ -174,7 +177,7 @@ export default function Resultados() {
             </tbody>
             <tfoot>
               <tr className="bg-edge border-t-2 border-page font-bold">
-                <td className="px-4 py-2.5 text-xs uppercase text-ink-soft">Total {anio}</td>
+                <td className="px-4 py-2.5 text-xs uppercase text-ink-soft">{t('resultados.totalAnio', { anio })}</td>
                 <td className="px-3 py-2.5 text-right text-xs text-ink">{fmt(data.totalFacturado)}</td>
                 <td className="px-3 py-2.5 text-right text-xs text-red-600">{fmt(data.totalGastos)}</td>
                 <td className={`px-4 py-2.5 text-right text-xs ${data.resultado >= 0 ? 'text-green-700' : 'text-red-600'}`}>{fmt(data.resultado)}</td>
@@ -185,10 +188,10 @@ export default function Resultados() {
 
         {/* Gastos por categoría */}
         <div className="card">
-          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">Gastos por categoría</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-ink-soft mb-4">{t('resultados.gastosPorCategoria')}</div>
           {data.sinGastos || Object.keys(data.gastosPorCat).length === 0 ? (
             <div className="text-sm text-ink-soft text-center py-8">
-              {data.sinGastos ? 'Tabla de gastos no configurada' : 'Sin gastos registrados en ' + anio}
+              {data.sinGastos ? t('resultados.tablaNoConfiguradaLarga') : t('resultados.sinGastosEnAnio', { anio })}
             </div>
           ) : (
             <div className="space-y-3">
@@ -197,7 +200,7 @@ export default function Resultados() {
                 return (
                   <div key={cat}>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-ink-soft truncate max-w-[65%]">{cat}</span>
+                      <span className="text-ink-soft truncate max-w-[65%]">{t(`gastos.categoria.${cat}`, cat)}</span>
                       <span className="font-semibold text-ink">{fmt(val)}</span>
                     </div>
                     <div className="flex items-center gap-2">
