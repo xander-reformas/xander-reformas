@@ -1,24 +1,44 @@
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 
 const ESTADOS = [
-  { value: 'pendiente',   label: 'Pendiente',   color: 'bg-stone/20 text-ink-soft' },
-  { value: 'en_curso',    label: 'En curso',    color: 'bg-gold/20 text-gold-dark' },
-  { value: 'pausada',     label: 'Pausada',     color: 'bg-orange-100 text-orange-700' },
-  { value: 'completada',  label: 'Completada',  color: 'bg-green-100 text-green-700' },
-  { value: 'cancelada',   label: 'Cancelada',   color: 'bg-red-100 text-red-600' },
+  { value: 'pendiente',   color: 'bg-stone/20 text-ink-soft' },
+  { value: 'en_curso',    color: 'bg-gold/20 text-gold-dark' },
+  { value: 'pausada',     color: 'bg-orange-100 text-orange-700' },
+  { value: 'completada',  color: 'bg-green-100 text-green-700' },
+  { value: 'cancelada',   color: 'bg-red-100 text-red-600' },
 ]
 
+// Los valores de ETAPAS se guardan tal cual en la base de datos (en español),
+// por eso no se traducen aquí — solo su etiqueta visible (ver ETAPA_KEYS).
 const ETAPAS = [
   'Planificación', 'Inicio de obra', 'Demolición', 'Albañilería',
   'Instalaciones', 'Revestimientos', 'Carpintería', 'Pintura', 'Acabados', 'Entrega'
 ]
 
+const ETAPA_KEYS = {
+  'Planificación': 'planificacion',
+  'Inicio de obra': 'inicio_obra',
+  'Demolición': 'demolicion',
+  'Albañilería': 'albanileria',
+  'Instalaciones': 'instalaciones',
+  'Revestimientos': 'revestimientos',
+  'Carpintería': 'carpinteria',
+  'Pintura': 'pintura',
+  'Acabados': 'acabados',
+  'Entrega': 'entrega',
+}
+
+function estadoLabel(t, value) { return t(`obras.estado.${value}`) }
+function etapaLabel(t, etapa) { return t(`obras.etapa.${ETAPA_KEYS[etapa] || 'planificacion'}`) }
+
 const BUCKET = 'obras-fotos'
 
 function EstadoBadge({ estado }) {
+  const { t } = useTranslation()
   const e = ESTADOS.find(s => s.value === estado) || ESTADOS[0]
-  return <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${e.color}`}>{e.label}</span>
+  return <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${e.color}`}>{estadoLabel(t, e.value)}</span>
 }
 
 function EtapaBar({ etapa, onChange }) {
@@ -64,6 +84,7 @@ function EtapaBar({ etapa, onChange }) {
 
 // ── Panel de detalle de obra ───────────────────────────────
 function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
+  const { t } = useTranslation()
   const [obra, setObra] = useState(obraInicial)
   const [tab, setTab] = useState('seguimiento')
   const [saving, setSaving] = useState(false)
@@ -363,7 +384,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               onChange={e => cambiarEstado(e.target.value)}
               className="text-xs font-semibold bg-white/10 text-white border border-white/20 rounded-lg px-3 py-1.5 focus:outline-none focus:border-gold cursor-pointer"
             >
-              {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+              {ESTADOS.map(s => <option key={s.value} value={s.value}>{estadoLabel(t, s.value)}</option>)}
             </select>
             {obra.presupuesto_total > 0 && (
               <span className="text-xs text-white/60">
@@ -372,7 +393,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
             )}
             {margen !== null && (
               <span className={`text-xs font-bold ${parseFloat(margen) >= 30 ? 'text-green-300' : 'text-orange-300'}`}>
-                Margen {margen}%
+                {t('obras.list.margen', { pct: margen })}
               </span>
             )}
             {obra.fecha_inicio && <span className="text-xs text-white/50">📅 {new Date(obra.fecha_inicio).toLocaleDateString('es-ES')}</span>}
@@ -382,23 +403,23 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
           {/* Barra de etapa */}
           <div className="mt-4">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs text-white/50 font-semibold uppercase tracking-wide">Etapa actual</span>
-              <span className="text-xs font-bold text-gold">{obra.etapa || 'Planificación'}</span>
+              <span className="text-xs text-white/50 font-semibold uppercase tracking-wide">{t('obras.detalle.etapaActual')}</span>
+              <span className="text-xs font-bold text-gold">{etapaLabel(t, obra.etapa || 'Planificación')}</span>
             </div>
             <div className="flex gap-1">
               {ETAPAS.map((e, i) => {
                 const actual = ETAPAS.indexOf(obra.etapa || 'Planificación')
                 const done = i <= actual
                 return (
-                  <button key={e} onClick={() => cambiarEtapa(e)} title={e}
+                  <button key={e} onClick={() => cambiarEtapa(e)} title={etapaLabel(t, e)}
                     className={`h-1.5 flex-1 rounded-full transition-all hover:opacity-80 cursor-pointer ${done ? 'bg-gold' : 'bg-white/20'}`}
                   />
                 )
               })}
             </div>
             <div className="flex justify-between mt-1">
-              <span className="text-[9px] text-white/30">{ETAPAS[0]}</span>
-              <span className="text-[9px] text-white/30">{ETAPAS[ETAPAS.length - 1]}</span>
+              <span className="text-[9px] text-white/30">{etapaLabel(t, ETAPAS[0])}</span>
+              <span className="text-[9px] text-white/30">{etapaLabel(t, ETAPAS[ETAPAS.length - 1])}</span>
             </div>
           </div>
         </div>
@@ -419,18 +440,18 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
         {/* Tabs */}
         <div className="flex gap-0 border-b border-edge flex-shrink-0 bg-surface px-4">
           {[
-            { id: 'seguimiento', label: '📋 Seguimiento', count: obra.seguimiento?.length },
-            { id: 'fotos',       label: '📷 Fotos',       count: fotos.length },
-            { id: 'planos',      label: '📐 Planos',      count: planos.length },
-            { id: 'equipo',      label: '👷 Equipo',      count: equipoObra.length },
-            { id: 'datos',       label: '✏️ Datos' },
-          ].map(t => (
-            <button key={t.id} onClick={() => setTab(t.id)}
+            { id: 'seguimiento', label: t('obras.detalle.tabs.seguimiento'), count: obra.seguimiento?.length },
+            { id: 'fotos',       label: t('obras.detalle.tabs.fotos'),       count: fotos.length },
+            { id: 'planos',      label: t('obras.detalle.tabs.planos'),      count: planos.length },
+            { id: 'equipo',      label: t('obras.detalle.tabs.equipo'),      count: equipoObra.length },
+            { id: 'datos',       label: t('obras.detalle.tabs.datos') },
+          ].map(tb => (
+            <button key={tb.id} onClick={() => setTab(tb.id)}
               className={`px-4 py-3 text-sm font-semibold border-b-2 transition-colors flex items-center gap-1.5 ${
-                tab === t.id ? 'border-gold text-ink' : 'border-transparent text-ink-soft hover:text-ink'
+                tab === tb.id ? 'border-gold text-ink' : 'border-transparent text-ink-soft hover:text-ink'
               }`}>
-              {t.label}
-              {t.count > 0 && <span className="text-xs bg-edge text-ink-soft px-1.5 py-0.5 rounded-full">{t.count}</span>}
+              {tb.label}
+              {tb.count > 0 && <span className="text-xs bg-edge text-ink-soft px-1.5 py-0.5 rounded-full">{tb.count}</span>}
             </button>
           ))}
         </div>
@@ -446,10 +467,10 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                   ❌ {errorSeg}
                 </div>
               )}
-              {saving && <div className="mb-3 text-xs text-ink-soft animate-pulse">Guardando…</div>}
+              {saving && <div className="mb-3 text-xs text-ink-soft animate-pulse">{t('obras.detalle.seguimiento.saving')}</div>}
               {/* Cambio de etapa rápido */}
               <div className="mb-5">
-                <label className="label mb-2">Avanzar etapa</label>
+                <label className="label mb-2">{t('obras.detalle.avanzarEtapa')}</label>
                 <div className="flex flex-wrap gap-2">
                   {ETAPAS.map((e, i) => {
                     const actual = ETAPAS.indexOf(obra.etapa || 'Planificación')
@@ -462,7 +483,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                             ? 'bg-green-50 text-green-700 border-green-200'
                             : 'bg-surface text-ink-soft border-edge hover:border-gold hover:text-ink'
                         }`}>
-                        {i < actual ? '✓ ' : ''}{e}
+                        {i < actual ? '✓ ' : ''}{etapaLabel(t, e)}
                       </button>
                     )
                   })}
@@ -471,16 +492,16 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
               {/* Añadir nota */}
               <form onSubmit={agregarNota} className="mb-6">
-                <label className="label mb-2">Añadir actualización</label>
+                <label className="label mb-2">{t('obras.detalle.seguimiento.addUpdateLabel')}</label>
                 <div className="flex gap-2">
                   <input
                     className="input flex-1"
-                    placeholder="Ej: Se terminó el solado del salón…"
+                    placeholder={t('obras.detalle.seguimiento.addUpdatePlaceholder')}
                     value={nota}
                     onChange={e => setNota(e.target.value)}
                   />
                   <button type="submit" disabled={addingNota || !nota.trim()} className="btn-primary px-4">
-                    {addingNota ? '…' : 'Añadir'}
+                    {addingNota ? '…' : t('obras.detalle.seguimiento.addBtn')}
                   </button>
                 </div>
               </form>
@@ -489,7 +510,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               {seguimientoOrdenado.length === 0 ? (
                 <div className="text-center py-10 text-ink-soft text-sm">
                   <div className="text-3xl mb-2">📋</div>
-                  Aún no hay actualizaciones. Añade la primera nota.
+                  {t('obras.detalle.seguimiento.emptyText')}
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -535,8 +556,8 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                 className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors mb-5 group ${subiendo ? 'border-gold bg-gold/5 cursor-wait' : 'border-edge hover:border-gold cursor-pointer'}`}
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{subiendo ? '⏳' : '📷'}</div>
-                <div className="font-semibold text-ink mb-1">{subiendo ? 'Subiendo fotos…' : 'Toca para añadir fotos'}</div>
-                <div className="text-xs text-ink-soft">JPG, PNG, WEBP · Máx 10 MB por foto</div>
+                <div className="font-semibold text-ink mb-1">{subiendo ? t('obras.detalle.fotos.dropZoneUploading') : t('obras.detalle.fotos.dropZoneIdle')}</div>
+                <div className="text-xs text-ink-soft">{t('obras.detalle.fotos.hint')}</div>
                 <input ref={fileRef} type="file" multiple accept="image/*" className="sr-only" onChange={subirFotos} disabled={subiendo} />
               </div>
               {errorFoto && (
@@ -554,11 +575,11 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               )}
 
               {cargandoFotos ? (
-                <div className="text-center py-8 text-ink-soft text-sm">Cargando fotos…</div>
+                <div className="text-center py-8 text-ink-soft text-sm">{t('obras.detalle.fotos.loading')}</div>
               ) : fotos.length === 0 ? (
                 <div className="text-center py-8 text-ink-soft text-sm">
                   <div className="text-3xl mb-2">🖼️</div>
-                  Aún no hay fotos de esta obra
+                  {t('obras.detalle.fotos.empty')}
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
@@ -604,8 +625,8 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                 className={`border-2 border-dashed rounded-xl p-7 text-center transition-colors mb-5 group cursor-pointer ${subiendoPlano ? 'border-gold bg-gold/5 cursor-wait' : 'border-edge hover:border-gold'}`}
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{subiendoPlano ? '⏳' : '📐'}</div>
-                <div className="font-semibold text-ink mb-1">{subiendoPlano ? 'Subiendo planos…' : 'Añadir planos del proyecto'}</div>
-                <div className="text-xs text-ink-soft">PDF, DWG, DXF, RVT, imágenes · Sin límite de archivos</div>
+                <div className="font-semibold text-ink mb-1">{subiendoPlano ? t('obras.detalle.planos.dropZoneUploading') : t('obras.detalle.planos.dropZoneIdle')}</div>
+                <div className="text-xs text-ink-soft">{t('obras.detalle.planos.hint')}</div>
                 <input
                   ref={planoRef}
                   type="file"
@@ -623,12 +644,12 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
               {/* Lista de planos */}
               {cargandoPlanos ? (
-                <div className="text-center py-8 text-ink-soft text-sm">Cargando planos…</div>
+                <div className="text-center py-8 text-ink-soft text-sm">{t('obras.detalle.planos.loading')}</div>
               ) : planos.length === 0 ? (
                 <div className="text-center py-10 text-ink-soft text-sm">
                   <div className="text-4xl mb-2">📂</div>
-                  <div className="font-semibold text-ink mb-1">Sin planos</div>
-                  <div className="text-xs">Sube el proyecto, memorias, mediciones o cualquier documento técnico</div>
+                  <div className="font-semibold text-ink mb-1">{t('obras.detalle.planos.emptyTitle')}</div>
+                  <div className="text-xs">{t('obras.detalle.planos.emptyHint')}</div>
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -650,13 +671,13 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                             rel="noopener noreferrer"
                             className="text-xs font-semibold text-gold hover:text-gold-dark px-2 py-1 rounded-lg border border-gold/30 hover:bg-gold/10 transition-colors"
                           >
-                            ↓ Abrir
+                            {t('obras.detalle.planos.download')}
                           </a>
                         )}
                         <button
                           onClick={() => eliminarPlano(p)}
                           className="text-ink-soft/30 hover:text-red-500 text-sm opacity-0 group-hover:opacity-100 transition-opacity px-1"
-                          title="Eliminar"
+                          title={t('obras.list.eliminar')}
                         >
                           ×
                         </button>
@@ -667,7 +688,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               )}
 
               <div className="mt-4 bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 text-xs text-ink-soft">
-                <strong className="text-ink">💡 Consejo:</strong> Aquí van los documentos técnicos del proyecto — memoria, planos, mediciones, detalles constructivos. Las fotos de obra van en el tab <strong>Fotos</strong>.
+                <strong className="text-ink">{t('obras.detalle.planos.tipTitle')}</strong> {t('obras.detalle.planos.tipBody')}
               </div>
             </div>
           )}
@@ -678,12 +699,12 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               {/* Asignar empleado */}
               {asignando ? (
                 <form onSubmit={asignarEmpleado} className="card bg-page mb-5 space-y-3">
-                  <div className="font-semibold text-ink">Asignar empleado a esta obra</div>
+                  <div className="font-semibold text-ink">{t('obras.detalle.equipo.assignTitle')}</div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="col-span-2">
-                      <label className="label">Empleado *</label>
+                      <label className="label">{t('obras.detalle.equipo.employeeLabel')}</label>
                       <select className="input" value={formEq.empleado_id} onChange={e=>setFormEq(p=>({...p,empleado_id:e.target.value}))} required>
-                        <option value="">Seleccionar…</option>
+                        <option value="">{t('obras.detalle.equipo.selectPlaceholder')}</option>
                         {todosEmpleados
                           .filter(e => !equipoObra.some(eq => eq.empleado_id === e.id))
                           .map(e => (
@@ -692,27 +713,27 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                       </select>
                     </div>
                     <div className="col-span-2">
-                      <label className="label">Rol en obra</label>
-                      <input className="input" placeholder="Ej: Jefe de equipo, Fontanero…" value={formEq.rol_en_obra} onChange={e=>setFormEq(p=>({...p,rol_en_obra:e.target.value}))} />
+                      <label className="label">{t('obras.detalle.equipo.roleLabel')}</label>
+                      <input className="input" placeholder={t('obras.detalle.equipo.rolePlaceholder')} value={formEq.rol_en_obra} onChange={e=>setFormEq(p=>({...p,rol_en_obra:e.target.value}))} />
                     </div>
                     <div>
-                      <label className="label">Fecha inicio</label>
+                      <label className="label">{t('obras.detalle.equipo.startDateLabel')}</label>
                       <input className="input" type="date" value={formEq.fecha_inicio} onChange={e=>setFormEq(p=>({...p,fecha_inicio:e.target.value}))} />
                     </div>
                     <div>
-                      <label className="label">Fecha fin prevista</label>
+                      <label className="label">{t('obras.detalle.equipo.endDateLabel')}</label>
                       <input className="input" type="date" value={formEq.fecha_fin} onChange={e=>setFormEq(p=>({...p,fecha_fin:e.target.value}))} />
                     </div>
                   </div>
                   {errEq && <div className="text-red-600 text-xs">{errEq}</div>}
                   <div className="flex gap-2">
-                    <button type="button" onClick={()=>setAsignando(false)} className="btn-secondary text-sm py-1.5">Cancelar</button>
-                    <button type="submit" disabled={savingEq} className="btn-primary text-sm py-1.5">{savingEq?'Asignando…':'Asignar'}</button>
+                    <button type="button" onClick={()=>setAsignando(false)} className="btn-secondary text-sm py-1.5">{t('obras.detalle.equipo.cancel')}</button>
+                    <button type="submit" disabled={savingEq} className="btn-primary text-sm py-1.5">{savingEq?t('obras.detalle.equipo.assigning'):t('obras.detalle.equipo.assign')}</button>
                   </div>
                 </form>
               ) : (
                 <button onClick={()=>setAsignando(true)} className="btn-gold w-full mb-5">
-                  + Asignar empleado
+                  {t('obras.detalle.equipo.assignBtn')}
                 </button>
               )}
 
@@ -720,7 +741,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               {equipoObra.length === 0 ? (
                 <div className="text-center py-10 text-ink-soft text-sm">
                   <div className="text-4xl mb-2">👷</div>
-                  Aún no hay empleados asignados a esta obra
+                  {t('obras.detalle.equipo.emptyText')}
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -736,8 +757,8 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                           <div className="text-xs text-ink-soft flex flex-wrap gap-x-3 mt-0.5">
                             <span>{emp?.puesto}</span>
                             {eq.rol_en_obra && <span className="text-gold-dark font-semibold">{eq.rol_en_obra}</span>}
-                            {eq.fecha_inicio && <span>Desde {new Date(eq.fecha_inicio+'T12:00:00').toLocaleDateString('es-ES')}</span>}
-                            {eq.fecha_fin && <span>Hasta {new Date(eq.fecha_fin+'T12:00:00').toLocaleDateString('es-ES')}</span>}
+                            {eq.fecha_inicio && <span>{t('obras.detalle.equipo.since')} {new Date(eq.fecha_inicio+'T12:00:00').toLocaleDateString('es-ES')}</span>}
+                            {eq.fecha_fin && <span>{t('obras.detalle.equipo.until')} {new Date(eq.fecha_fin+'T12:00:00').toLocaleDateString('es-ES')}</span>}
                           </div>
                         </div>
                         {emp?.telefono && (
@@ -763,59 +784,59 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
           {tab === 'datos' && (
             <form onSubmit={saveForm} className="p-5 space-y-4">
               <div>
-                <label className="label">Nombre de la obra *</label>
+                <label className="label">{t('obras.form.nameLabel')}</label>
                 <input className="input" value={form.nombre} onChange={e => setF('nombre', e.target.value)} required />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Cliente</label>
+                  <label className="label">{t('obras.form.clientLabel')}</label>
                   <select className="input" value={form.cliente_id} onChange={e => setF('cliente_id', e.target.value)}>
-                    <option value="">Sin cliente</option>
+                    <option value="">{t('obras.form.noClient')}</option>
                     {clientes.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="label">Estado</label>
+                  <label className="label">{t('obras.form.stateLabel')}</label>
                   <select className="input" value={form.estado} onChange={e => setF('estado', e.target.value)}>
-                    {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                    {ESTADOS.map(s => <option key={s.value} value={s.value}>{estadoLabel(t, s.value)}</option>)}
                   </select>
                 </div>
               </div>
               <div>
-                <label className="label">Dirección</label>
+                <label className="label">{t('obras.form.addressLabel')}</label>
                 <input className="input" value={form.direccion_obra} onChange={e => setF('direccion_obra', e.target.value)} />
               </div>
               <div>
-                <label className="label">Descripción</label>
+                <label className="label">{t('obras.form.descriptionLabel')}</label>
                 <textarea className="input resize-none h-16" value={form.descripcion} onChange={e => setF('descripcion', e.target.value)} />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Fecha inicio</label>
+                  <label className="label">{t('obras.form.startDateLabel')}</label>
                   <input className="input" type="date" value={form.fecha_inicio} onChange={e => setF('fecha_inicio', e.target.value)} />
                 </div>
                 <div>
-                  <label className="label">Fecha fin prevista</label>
+                  <label className="label">{t('obras.form.endDateLabel')}</label>
                   <input className="input" type="date" value={form.fecha_fin_prevista} onChange={e => setF('fecha_fin_prevista', e.target.value)} />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Presupuesto (€)</label>
+                  <label className="label">{t('obras.form.budgetLabel')}</label>
                   <input className="input" type="number" min="0" step="0.01" value={form.presupuesto_total} onChange={e => setF('presupuesto_total', e.target.value)} placeholder="0.00" />
                 </div>
                 <div>
-                  <label className="label">Coste real (€)</label>
+                  <label className="label">{t('obras.form.actualCostLabel')}</label>
                   <input className="input" type="number" min="0" step="0.01" value={form.coste_real} onChange={e => setF('coste_real', e.target.value)} placeholder="0.00" />
                 </div>
               </div>
               <div>
-                <label className="label">Notas internas</label>
+                <label className="label">{t('obras.form.internalNotesLabel')}</label>
                 <textarea className="input resize-none h-16" value={form.notas} onChange={e => setF('notas', e.target.value)} />
               </div>
               {formError && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{formError}</div>}
               <button type="submit" disabled={savingForm} className="btn-primary w-full">
-                {savingForm ? 'Guardando…' : 'Guardar cambios'}
+                {savingForm ? t('obras.form.saving') : t('obras.form.saveChanges')}
               </button>
             </form>
           )}
@@ -833,6 +854,7 @@ const FORM_EMPTY = {
 }
 
 export default function Obras() {
+  const { t } = useTranslation()
   const [obras, setObras] = useState([])
   const [clientes, setClientes] = useState([])
   const [loading, setLoading] = useState(true)
@@ -905,21 +927,21 @@ export default function Obras() {
     <div className="p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-ink">Obras</h1>
-          <p className="text-sm text-ink-soft mt-0.5">{obras.length} obra{obras.length !== 1 ? 's' : ''} en total</p>
+          <h1 className="text-2xl font-bold text-ink">{t('obras.list.title')}</h1>
+          <p className="text-sm text-ink-soft mt-0.5">{t('obras.list.count', { count: obras.length })}</p>
         </div>
-        <button onClick={openNew} className="btn-primary">+ Nueva obra</button>
+        <button onClick={openNew} className="btn-primary">{t('obras.list.newObra')}</button>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-3 mb-6">
         {[
-          { label: 'Total', value: resumen.total, color: 'text-ink' },
-          { label: 'En curso', value: resumen.en_curso, color: 'text-gold-dark' },
-          { label: 'Pendientes', value: resumen.pendiente, color: 'text-ink-soft' },
-          { label: 'Completadas', value: resumen.completada, color: 'text-green-700' },
+          { key: '', label: t('obras.list.statTotal'), value: resumen.total, color: 'text-ink' },
+          { key: 'en_curso', label: t('obras.list.statEnCurso'), value: resumen.en_curso, color: 'text-gold-dark' },
+          { key: 'pendiente', label: t('obras.list.statPendientes'), value: resumen.pendiente, color: 'text-ink-soft' },
+          { key: 'completada', label: t('obras.list.statCompletadas'), value: resumen.completada, color: 'text-green-700' },
         ].map(s => (
-          <div key={s.label} className="card text-center py-3 cursor-pointer hover:shadow-sm" onClick={() => setFiltroEstado(s.label === 'Total' ? '' : s.label.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(' ', '_'))}>
+          <div key={s.label} className="card text-center py-3 cursor-pointer hover:shadow-sm" onClick={() => setFiltroEstado(s.key)}>
             <div className={`text-xl font-bold ${s.color}`}>{s.value}</div>
             <div className="text-xs text-ink-soft mt-0.5">{s.label}</div>
           </div>
@@ -928,24 +950,24 @@ export default function Obras() {
 
       {/* Filtros */}
       <div className="flex flex-wrap gap-3 mb-5">
-        <input className="input max-w-xs" placeholder="🔍  Buscar obra o cliente…" value={search} onChange={e => setSearch(e.target.value)} />
+        <input className="input max-w-xs" placeholder={t('obras.list.searchPlaceholder')} value={search} onChange={e => setSearch(e.target.value)} />
         <select className="input w-auto" value={filtroEstado} onChange={e => setFiltroEstado(e.target.value)}>
-          <option value="">Todos los estados</option>
-          {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+          <option value="">{t('obras.list.allStates')}</option>
+          {ESTADOS.map(s => <option key={s.value} value={s.value}>{estadoLabel(t, s.value)}</option>)}
         </select>
       </div>
 
       {/* Listado */}
       {loading ? (
-        <div className="text-ink-soft text-sm py-10 text-center">Cargando obras…</div>
+        <div className="text-ink-soft text-sm py-10 text-center">{t('obras.list.loading')}</div>
       ) : filtered.length === 0 ? (
         <div className="card text-center py-16">
           <div className="text-5xl mb-3">🔨</div>
-          <div className="font-bold text-ink mb-1">{search || filtroEstado ? 'Sin resultados' : 'Aún no tienes obras'}</div>
+          <div className="font-bold text-ink mb-1">{search || filtroEstado ? t('obras.list.noResultsTitle') : t('obras.list.noObrasTitle')}</div>
           <div className="text-sm text-ink-soft mb-5">
-            {search || filtroEstado ? 'Prueba otros filtros' : 'Crea tu primera obra para empezar a gestionar proyectos'}
+            {search || filtroEstado ? t('obras.list.noResultsHint') : t('obras.list.noObrasHint')}
           </div>
-          {!search && !filtroEstado && <button onClick={openNew} className="btn-primary">+ Nueva obra</button>}
+          {!search && !filtroEstado && <button onClick={openNew} className="btn-primary">{t('obras.list.newObra')}</button>}
         </div>
       ) : (
         <div className="space-y-3">
@@ -979,7 +1001,7 @@ export default function Obras() {
                       <div className="flex-1 h-1 bg-edge rounded-full overflow-hidden">
                         <div className="h-full bg-gold rounded-full transition-all" style={{ width: `${pct}%` }} />
                       </div>
-                      <span className="text-xs text-ink-soft flex-shrink-0">{o.etapa || 'Planificación'}</span>
+                      <span className="text-xs text-ink-soft flex-shrink-0">{etapaLabel(t, o.etapa || 'Planificación')}</span>
                     </div>
                   </div>
                   <div className="text-right flex-shrink-0">
@@ -990,14 +1012,14 @@ export default function Obras() {
                     )}
                     {margen !== null && (
                       <div className={`text-xs font-semibold ${parseFloat(margen) >= 30 ? 'text-green-600' : 'text-orange-600'}`}>
-                        Margen {margen}%
+                        {t('obras.list.margen', { pct: margen })}
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="flex gap-4 mt-3 pt-3 border-t border-edge" onClick={e => e.stopPropagation()}>
-                  <button onClick={() => setDetalleObra(o)} className="text-gold hover:text-gold-dark text-xs font-semibold">Ver detalle →</button>
-                  <button onClick={e => remove(o.id, o.nombre, e)} className="text-ink-soft/40 hover:text-red-500 text-xs transition-colors">Eliminar</button>
+                  <button onClick={() => setDetalleObra(o)} className="text-gold hover:text-gold-dark text-xs font-semibold">{t('obras.list.verDetalle')}</button>
+                  <button onClick={e => remove(o.id, o.nombre, e)} className="text-ink-soft/40 hover:text-red-500 text-xs transition-colors">{t('obras.list.eliminar')}</button>
                 </div>
               </div>
             )
@@ -1010,65 +1032,65 @@ export default function Obras() {
         <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col">
             <div className="px-6 py-4 border-b border-edge flex items-center justify-between flex-shrink-0">
-              <h2 className="text-lg font-bold text-ink">Nueva obra</h2>
+              <h2 className="text-lg font-bold text-ink">{t('obras.form.newTitle')}</h2>
               <button onClick={() => setShowForm(false)} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
             </div>
             <form onSubmit={save} className="p-6 space-y-4 overflow-y-auto">
               <div>
-                <label className="label">Nombre de la obra *</label>
+                <label className="label">{t('obras.form.nameLabel')}</label>
                 <input className="input" value={form.nombre} onChange={e => setF('nombre', e.target.value)} required autoFocus />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Cliente</label>
+                  <label className="label">{t('obras.form.clientLabel')}</label>
                   <select className="input" value={form.cliente_id} onChange={e => setF('cliente_id', e.target.value)}>
-                    <option value="">Sin cliente</option>
+                    <option value="">{t('obras.form.noClient')}</option>
                     {clientes.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="label">Estado</label>
+                  <label className="label">{t('obras.form.stateLabel')}</label>
                   <select className="input" value={form.estado} onChange={e => setF('estado', e.target.value)}>
-                    {ESTADOS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                    {ESTADOS.map(s => <option key={s.value} value={s.value}>{estadoLabel(t, s.value)}</option>)}
                   </select>
                 </div>
               </div>
               <div>
-                <label className="label">Dirección de la obra</label>
+                <label className="label">{t('obras.form.addressLabelObra')}</label>
                 <input className="input" value={form.direccion_obra} onChange={e => setF('direccion_obra', e.target.value)} />
               </div>
               <div>
-                <label className="label">Descripción</label>
+                <label className="label">{t('obras.form.descriptionLabel')}</label>
                 <textarea className="input resize-none h-16" value={form.descripcion} onChange={e => setF('descripcion', e.target.value)} />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Fecha inicio</label>
+                  <label className="label">{t('obras.form.startDateLabel')}</label>
                   <input className="input" type="date" value={form.fecha_inicio} onChange={e => setF('fecha_inicio', e.target.value)} />
                 </div>
                 <div>
-                  <label className="label">Fecha fin prevista</label>
+                  <label className="label">{t('obras.form.endDateLabel')}</label>
                   <input className="input" type="date" value={form.fecha_fin_prevista} onChange={e => setF('fecha_fin_prevista', e.target.value)} />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label">Presupuesto (€)</label>
+                  <label className="label">{t('obras.form.budgetLabel')}</label>
                   <input className="input" type="number" min="0" step="0.01" value={form.presupuesto_total} onChange={e => setF('presupuesto_total', e.target.value)} placeholder="0.00" />
                 </div>
                 <div>
-                  <label className="label">Coste real (€)</label>
+                  <label className="label">{t('obras.form.actualCostLabel')}</label>
                   <input className="input" type="number" min="0" step="0.01" value={form.coste_real} onChange={e => setF('coste_real', e.target.value)} placeholder="0.00" />
                 </div>
               </div>
               <div>
-                <label className="label">Notas internas</label>
+                <label className="label">{t('obras.form.internalNotesLabel')}</label>
                 <textarea className="input resize-none h-16" value={form.notas} onChange={e => setF('notas', e.target.value)} />
               </div>
               {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">Cancelar</button>
-                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Guardando…' : 'Crear obra'}</button>
+                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">{t('obras.form.cancel')}</button>
+                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? t('obras.form.saving') : t('obras.form.create')}</button>
               </div>
             </form>
           </div>

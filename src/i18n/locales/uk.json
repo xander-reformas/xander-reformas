@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "tagline": "УПРАВЛІННЯ БІЗНЕСОМ",
+    "groups": {
+      "general": "ЗАГАЛЬНЕ",
+      "negocio": "БІЗНЕС",
+      "facturacion": "РАХУНКИ",
+      "control": "КОНТРОЛЬ",
+      "expansion": "РОЗВИТОК",
+      "miEmpresa": "МОЯ КОМПАНІЯ",
+      "administracion": "АДМІНІСТРУВАННЯ"
+    },
+    "items": {
+      "dashboard": "Панель керування",
+      "clientes": "Клієнти",
+      "obras": "Об'єкти",
+      "rentabilidad": "Рентабельність об'єктів",
+      "presupuestos": "Кошториси",
+      "facturas": "Рахунки-фактури",
+      "cobros": "Платежі",
+      "gastos": "Витрати",
+      "empleados": "Співробітники",
+      "partes": "Табелі обліку часу",
+      "nominas": "Заробітна плата",
+      "hubDigital": "Цифровий хаб",
+      "fiscal": "Податки",
+      "legislacion": "Законодавство",
+      "resultados": "Результати",
+      "referidos": "Реферали",
+      "miEmpresaItem": "Моя компанія",
+      "tarifas": "Тарифи та ціни",
+      "documentos": "Документи",
+      "copiasSeguridad": "Резервні копії"
+    },
+    "panelAdmin": "Панель адміністратора",
+    "logout": "Вийти"
+  },
+  "common": {
+    "language": "Мова",
+    "close": "Закрити",
+    "cancel": "Скасувати"
+  },
+  "obras": {
+    "estado": {
+      "pendiente": "Очікує",
+      "en_curso": "В процесі",
+      "pausada": "Призупинено",
+      "completada": "Завершено",
+      "cancelada": "Скасовано"
+    },
+    "etapa": {
+      "planificacion": "Планування",
+      "inicio_obra": "Початок робіт",
+      "demolicion": "Демонтаж",
+      "albanileria": "Мурування",
+      "instalaciones": "Інженерні системи",
+      "revestimientos": "Оздоблення",
+      "carpinteria": "Столярні роботи",
+      "pintura": "Фарбування",
+      "acabados": "Фінішні роботи",
+      "entrega": "Здача об'єкта"
+    },
+    "list": {
+      "title": "Об'єкти",
+      "count_one": "{{count}} об'єкт всього",
+      "count_other": "{{count}} об'єктів всього",
+      "newObra": "+ Новий об'єкт",
+      "statTotal": "Всього",
+      "statEnCurso": "В процесі",
+      "statPendientes": "Очікують",
+      "statCompletadas": "Завершено",
+      "searchPlaceholder": "🔍  Пошук об'єкта або клієнта…",
+      "allStates": "Усі статуси",
+      "loading": "Завантаження об'єктів…",
+      "noResultsTitle": "Немає результатів",
+      "noResultsHint": "Спробуйте інші фільтри",
+      "noObrasTitle": "У вас поки немає об'єктів",
+      "noObrasHint": "Створіть свій перший об'єкт, щоб почати керувати проєктами",
+      "verDetalle": "Переглянути деталі →",
+      "eliminar": "Видалити",
+      "margen": "Маржа {{pct}}%"
+    },
+    "form": {
+      "newTitle": "Новий об'єкт",
+      "nameLabel": "Назва об'єкта *",
+      "clientLabel": "Клієнт",
+      "noClient": "Без клієнта",
+      "stateLabel": "Статус",
+      "addressLabel": "Адреса",
+      "addressLabelObra": "Адреса об'єкта",
+      "descriptionLabel": "Опис",
+      "startDateLabel": "Дата початку",
+      "endDateLabel": "Очікувана дата завершення",
+      "budgetLabel": "Бюджет (€)",
+      "actualCostLabel": "Фактична вартість (€)",
+      "internalNotesLabel": "Внутрішні нотатки",
+      "cancel": "Скасувати",
+      "saving": "Збереження…",
+      "create": "Створити об'єкт",
+      "saveChanges": "Зберегти зміни"
+    },
+    "detalle": {
+      "tabs": {
+        "seguimiento": "📋 Хід робіт",
+        "fotos": "📷 Фото",
+        "planos": "📐 Креслення",
+        "equipo": "👷 Команда",
+        "datos": "✏️ Дані"
+      },
+      "etapaActual": "Поточний етап",
+      "avanzarEtapa": "Перейти до етапу",
+      "seguimiento": {
+        "saving": "Збереження…",
+        "addUpdateLabel": "Додати оновлення",
+        "addUpdatePlaceholder": "Напр.: Завершено укладання підлоги у вітальні…",
+        "addBtn": "Додати",
+        "emptyText": "Оновлень поки немає. Додайте першу нотатку."
+      },
+      "fotos": {
+        "dropZoneIdle": "Торкніться, щоб додати фото",
+        "dropZoneUploading": "Завантаження фото…",
+        "hint": "JPG, PNG, WEBP · Макс. 10 МБ на фото",
+        "loading": "Завантаження фото…",
+        "empty": "Фото цього об'єкта ще немає"
+      },
+      "planos": {
+        "dropZoneIdle": "Додати креслення проєкту",
+        "dropZoneUploading": "Завантаження креслень…",
+        "hint": "PDF, DWG, DXF, RVT, зображення · Без обмеження кількості файлів",
+        "loading": "Завантаження креслень…",
+        "emptyTitle": "Немає креслень",
+        "emptyHint": "Завантажте проєкт, кошториси, обміри або будь-який технічний документ",
+        "download": "↓ Відкрити",
+        "tipTitle": "💡 Порада:",
+        "tipBody": "Тут розміщуються технічні документи проєкту — опис, креслення, обміри, будівельні деталі. Фото об'єкта додавайте у вкладці «Фото»."
+      },
+      "equipo": {
+        "assignBtn": "+ Призначити співробітника",
+        "assignTitle": "Призначити співробітника на цей об'єкт",
+        "employeeLabel": "Співробітник *",
+        "selectPlaceholder": "Обрати…",
+        "roleLabel": "Роль на об'єкті",
+        "rolePlaceholder": "Напр.: Бригадир, Сантехнік…",
+        "startDateLabel": "Дата початку",
+        "endDateLabel": "Очікувана дата завершення",
+        "cancel": "Скасувати",
+        "assign": "Призначити",
+        "assigning": "Призначення…",
+        "emptyText": "На цей об'єкт ще не призначено співробітників",
+        "since": "З",
+        "until": "До"
+      }
+    }
+  }
+}

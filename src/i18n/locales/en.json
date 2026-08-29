@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "tagline": "BUSINESS MANAGEMENT",
+    "groups": {
+      "general": "GENERAL",
+      "negocio": "BUSINESS",
+      "facturacion": "BILLING",
+      "control": "CONTROL",
+      "expansion": "GROWTH",
+      "miEmpresa": "MY COMPANY",
+      "administracion": "ADMINISTRATION"
+    },
+    "items": {
+      "dashboard": "Dashboard",
+      "clientes": "Clients",
+      "obras": "Projects",
+      "rentabilidad": "Project profitability",
+      "presupuestos": "Quotes",
+      "facturas": "Invoices",
+      "cobros": "Payments",
+      "gastos": "Expenses",
+      "empleados": "Employees",
+      "partes": "Timesheets",
+      "nominas": "Payroll",
+      "hubDigital": "Digital Hub",
+      "fiscal": "Tax",
+      "legislacion": "Legislation",
+      "resultados": "Results",
+      "referidos": "Referrals",
+      "miEmpresaItem": "My Company",
+      "tarifas": "Rates & Prices",
+      "documentos": "Documents",
+      "copiasSeguridad": "Backups"
+    },
+    "panelAdmin": "Admin Panel",
+    "logout": "Sign out"
+  },
+  "common": {
+    "language": "Language",
+    "close": "Close",
+    "cancel": "Cancel"
+  },
+  "obras": {
+    "estado": {
+      "pendiente": "Pending",
+      "en_curso": "In progress",
+      "pausada": "Paused",
+      "completada": "Completed",
+      "cancelada": "Cancelled"
+    },
+    "etapa": {
+      "planificacion": "Planning",
+      "inicio_obra": "Site start",
+      "demolicion": "Demolition",
+      "albanileria": "Masonry",
+      "instalaciones": "Installations",
+      "revestimientos": "Finishes/coatings",
+      "carpinteria": "Carpentry",
+      "pintura": "Painting",
+      "acabados": "Final touches",
+      "entrega": "Handover"
+    },
+    "list": {
+      "title": "Projects",
+      "count_one": "{{count}} project in total",
+      "count_other": "{{count}} projects in total",
+      "newObra": "+ New project",
+      "statTotal": "Total",
+      "statEnCurso": "In progress",
+      "statPendientes": "Pending",
+      "statCompletadas": "Completed",
+      "searchPlaceholder": "🔍  Search project or client…",
+      "allStates": "All statuses",
+      "loading": "Loading projects…",
+      "noResultsTitle": "No results",
+      "noResultsHint": "Try other filters",
+      "noObrasTitle": "You don't have any projects yet",
+      "noObrasHint": "Create your first project to start managing your work",
+      "verDetalle": "View details →",
+      "eliminar": "Delete",
+      "margen": "Margin {{pct}}%"
+    },
+    "form": {
+      "newTitle": "New project",
+      "nameLabel": "Project name *",
+      "clientLabel": "Client",
+      "noClient": "No client",
+      "stateLabel": "Status",
+      "addressLabel": "Address",
+      "addressLabelObra": "Project address",
+      "descriptionLabel": "Description",
+      "startDateLabel": "Start date",
+      "endDateLabel": "Expected end date",
+      "budgetLabel": "Budget (€)",
+      "actualCostLabel": "Actual cost (€)",
+      "internalNotesLabel": "Internal notes",
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "create": "Create project",
+      "saveChanges": "Save changes"
+    },
+    "detalle": {
+      "tabs": {
+        "seguimiento": "📋 Progress",
+        "fotos": "📷 Photos",
+        "planos": "📐 Plans",
+        "equipo": "👷 Team",
+        "datos": "✏️ Details"
+      },
+      "etapaActual": "Current stage",
+      "avanzarEtapa": "Advance stage",
+      "seguimiento": {
+        "saving": "Saving…",
+        "addUpdateLabel": "Add update",
+        "addUpdatePlaceholder": "E.g.: Living room flooring finished…",
+        "addBtn": "Add",
+        "emptyText": "No updates yet. Add the first note."
+      },
+      "fotos": {
+        "dropZoneIdle": "Tap to add photos",
+        "dropZoneUploading": "Uploading photos…",
+        "hint": "JPG, PNG, WEBP · Max 10 MB per photo",
+        "loading": "Loading photos…",
+        "empty": "No photos of this project yet"
+      },
+      "planos": {
+        "dropZoneIdle": "Add project plans",
+        "dropZoneUploading": "Uploading plans…",
+        "hint": "PDF, DWG, DXF, RVT, images · No file limit",
+        "loading": "Loading plans…",
+        "emptyTitle": "No plans",
+        "emptyHint": "Upload the project files, reports, measurements or any technical document",
+        "download": "↓ Open",
+        "tipTitle": "💡 Tip:",
+        "tipBody": "Technical project documents go here — reports, plans, measurements, construction details. Site photos go in the Photos tab."
+      },
+      "equipo": {
+        "assignBtn": "+ Assign employee",
+        "assignTitle": "Assign an employee to this project",
+        "employeeLabel": "Employee *",
+        "selectPlaceholder": "Select…",
+        "roleLabel": "Role on site",
+        "rolePlaceholder": "E.g.: Team lead, Plumber…",
+        "startDateLabel": "Start date",
+        "endDateLabel": "Expected end date",
+        "cancel": "Cancel",
+        "assign": "Assign",
+        "assigning": "Assigning…",
+        "emptyText": "No employees assigned to this project yet",
+        "since": "Since",
+        "until": "Until"
+      }
+    }
+  }
+}

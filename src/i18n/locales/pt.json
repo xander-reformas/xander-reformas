@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "tagline": "GESTÃO DE NEGÓCIO",
+    "groups": {
+      "general": "GERAL",
+      "negocio": "NEGÓCIO",
+      "facturacion": "FATURAÇÃO",
+      "control": "CONTROLO",
+      "expansion": "EXPANSÃO",
+      "miEmpresa": "MINHA EMPRESA",
+      "administracion": "ADMINISTRAÇÃO"
+    },
+    "items": {
+      "dashboard": "Painel",
+      "clientes": "Clientes",
+      "obras": "Obras",
+      "rentabilidad": "Rentabilidade das obras",
+      "presupuestos": "Orçamentos",
+      "facturas": "Faturas",
+      "cobros": "Cobranças",
+      "gastos": "Despesas",
+      "empleados": "Funcionários",
+      "partes": "Registos de horas",
+      "nominas": "Folhas de pagamento",
+      "hubDigital": "Hub Digital",
+      "fiscal": "Fiscal",
+      "legislacion": "Legislação",
+      "resultados": "Resultados",
+      "referidos": "Indicações",
+      "miEmpresaItem": "Minha Empresa",
+      "tarifas": "Tarifas & Preços",
+      "documentos": "Documentos",
+      "copiasSeguridad": "Cópias de segurança"
+    },
+    "panelAdmin": "Painel Admin",
+    "logout": "Sair"
+  },
+  "common": {
+    "language": "Idioma",
+    "close": "Fechar",
+    "cancel": "Cancelar"
+  },
+  "obras": {
+    "estado": {
+      "pendiente": "Pendente",
+      "en_curso": "Em curso",
+      "pausada": "Pausada",
+      "completada": "Concluída",
+      "cancelada": "Cancelada"
+    },
+    "etapa": {
+      "planificacion": "Planeamento",
+      "inicio_obra": "Início da obra",
+      "demolicion": "Demolição",
+      "albanileria": "Alvenaria",
+      "instalaciones": "Instalações",
+      "revestimientos": "Revestimentos",
+      "carpinteria": "Carpintaria",
+      "pintura": "Pintura",
+      "acabados": "Acabamentos",
+      "entrega": "Entrega"
+    },
+    "list": {
+      "title": "Obras",
+      "count_one": "{{count}} obra no total",
+      "count_other": "{{count}} obras no total",
+      "newObra": "+ Nova obra",
+      "statTotal": "Total",
+      "statEnCurso": "Em curso",
+      "statPendientes": "Pendentes",
+      "statCompletadas": "Concluídas",
+      "searchPlaceholder": "🔍  Procurar obra ou cliente…",
+      "allStates": "Todos os estados",
+      "loading": "A carregar obras…",
+      "noResultsTitle": "Sem resultados",
+      "noResultsHint": "Tente outros filtros",
+      "noObrasTitle": "Ainda não tem obras",
+      "noObrasHint": "Crie a sua primeira obra para começar a gerir projetos",
+      "verDetalle": "Ver detalhe →",
+      "eliminar": "Eliminar",
+      "margen": "Margem {{pct}}%"
+    },
+    "form": {
+      "newTitle": "Nova obra",
+      "nameLabel": "Nome da obra *",
+      "clientLabel": "Cliente",
+      "noClient": "Sem cliente",
+      "stateLabel": "Estado",
+      "addressLabel": "Morada",
+      "addressLabelObra": "Morada da obra",
+      "descriptionLabel": "Descrição",
+      "startDateLabel": "Data de início",
+      "endDateLabel": "Data prevista de conclusão",
+      "budgetLabel": "Orçamento (€)",
+      "actualCostLabel": "Custo real (€)",
+      "internalNotesLabel": "Notas internas",
+      "cancel": "Cancelar",
+      "saving": "A guardar…",
+      "create": "Criar obra",
+      "saveChanges": "Guardar alterações"
+    },
+    "detalle": {
+      "tabs": {
+        "seguimiento": "📋 Acompanhamento",
+        "fotos": "📷 Fotos",
+        "planos": "📐 Plantas",
+        "equipo": "👷 Equipa",
+        "datos": "✏️ Dados"
+      },
+      "etapaActual": "Etapa atual",
+      "avanzarEtapa": "Avançar etapa",
+      "seguimiento": {
+        "saving": "A guardar…",
+        "addUpdateLabel": "Adicionar atualização",
+        "addUpdatePlaceholder": "Ex.: Terminado o piso da sala…",
+        "addBtn": "Adicionar",
+        "emptyText": "Ainda não há atualizações. Adicione a primeira nota."
+      },
+      "fotos": {
+        "dropZoneIdle": "Toque para adicionar fotos",
+        "dropZoneUploading": "A enviar fotos…",
+        "hint": "JPG, PNG, WEBP · Máx. 10 MB por foto",
+        "loading": "A carregar fotos…",
+        "empty": "Ainda não há fotos desta obra"
+      },
+      "planos": {
+        "dropZoneIdle": "Adicionar plantas do projeto",
+        "dropZoneUploading": "A enviar plantas…",
+        "hint": "PDF, DWG, DXF, RVT, imagens · Sem limite de ficheiros",
+        "loading": "A carregar plantas…",
+        "emptyTitle": "Sem plantas",
+        "emptyHint": "Envie o projeto, memórias, medições ou qualquer documento técnico",
+        "download": "↓ Abrir",
+        "tipTitle": "💡 Dica:",
+        "tipBody": "Aqui vão os documentos técnicos do projeto — memória descritiva, plantas, medições, pormenores construtivos. As fotos da obra vão no separador Fotos."
+      },
+      "equipo": {
+        "assignBtn": "+ Atribuir funcionário",
+        "assignTitle": "Atribuir um funcionário a esta obra",
+        "employeeLabel": "Funcionário *",
+        "selectPlaceholder": "Selecionar…",
+        "roleLabel": "Função na obra",
+        "rolePlaceholder": "Ex.: Chefe de equipa, Canalizador…",
+        "startDateLabel": "Data de início",
+        "endDateLabel": "Data prevista de conclusão",
+        "cancel": "Cancelar",
+        "assign": "Atribuir",
+        "assigning": "A atribuir…",
+        "emptyText": "Ainda não há funcionários atribuídos a esta obra",
+        "since": "Desde",
+        "until": "Até"
+      }
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "tagline": "MANAGEMENTUL AFACERII",
+    "groups": {
+      "general": "GENERAL",
+      "negocio": "AFACERE",
+      "facturacion": "FACTURARE",
+      "control": "CONTROL",
+      "expansion": "EXTINDERE",
+      "miEmpresa": "COMPANIA MEA",
+      "administracion": "ADMINISTRARE"
+    },
+    "items": {
+      "dashboard": "Panou principal",
+      "clientes": "Clienți",
+      "obras": "Șantiere",
+      "rentabilidad": "Rentabilitate șantiere",
+      "presupuestos": "Oferte",
+      "facturas": "Facturi",
+      "cobros": "Încasări",
+      "gastos": "Cheltuieli",
+      "empleados": "Angajați",
+      "partes": "Pontaje",
+      "nominas": "Salarii",
+      "hubDigital": "Hub Digital",
+      "fiscal": "Fiscal",
+      "legislacion": "Legislație",
+      "resultados": "Rezultate",
+      "referidos": "Recomandări",
+      "miEmpresaItem": "Compania mea",
+      "tarifas": "Tarife & Prețuri",
+      "documentos": "Documente",
+      "copiasSeguridad": "Copii de siguranță"
+    },
+    "panelAdmin": "Panou admin",
+    "logout": "Deconectare"
+  },
+  "common": {
+    "language": "Limbă",
+    "close": "Închide",
+    "cancel": "Anulează"
+  },
+  "obras": {
+    "estado": {
+      "pendiente": "În așteptare",
+      "en_curso": "În desfășurare",
+      "pausada": "În pauză",
+      "completada": "Finalizat",
+      "cancelada": "Anulat"
+    },
+    "etapa": {
+      "planificacion": "Planificare",
+      "inicio_obra": "Începerea lucrărilor",
+      "demolicion": "Demolare",
+      "albanileria": "Zidărie",
+      "instalaciones": "Instalații",
+      "revestimientos": "Finisaje",
+      "carpinteria": "Tâmplărie",
+      "pintura": "Vopsire",
+      "acabados": "Finisări",
+      "entrega": "Predare"
+    },
+    "list": {
+      "title": "Șantiere",
+      "count_one": "{{count}} șantier în total",
+      "count_other": "{{count}} șantiere în total",
+      "newObra": "+ Șantier nou",
+      "statTotal": "Total",
+      "statEnCurso": "În desfășurare",
+      "statPendientes": "În așteptare",
+      "statCompletadas": "Finalizate",
+      "searchPlaceholder": "🔍  Caută șantier sau client…",
+      "allStates": "Toate stările",
+      "loading": "Se încarcă șantierele…",
+      "noResultsTitle": "Niciun rezultat",
+      "noResultsHint": "Încearcă alte filtre",
+      "noObrasTitle": "Încă nu ai niciun șantier",
+      "noObrasHint": "Creează primul tău șantier pentru a începe să gestionezi proiecte",
+      "verDetalle": "Vezi detalii →",
+      "eliminar": "Șterge",
+      "margen": "Marjă {{pct}}%"
+    },
+    "form": {
+      "newTitle": "Șantier nou",
+      "nameLabel": "Numele șantierului *",
+      "clientLabel": "Client",
+      "noClient": "Fără client",
+      "stateLabel": "Stare",
+      "addressLabel": "Adresă",
+      "addressLabelObra": "Adresa șantierului",
+      "descriptionLabel": "Descriere",
+      "startDateLabel": "Data de început",
+      "endDateLabel": "Data estimată de finalizare",
+      "budgetLabel": "Buget (€)",
+      "actualCostLabel": "Cost real (€)",
+      "internalNotesLabel": "Note interne",
+      "cancel": "Anulează",
+      "saving": "Se salvează…",
+      "create": "Creează șantier",
+      "saveChanges": "Salvează modificările"
+    },
+    "detalle": {
+      "tabs": {
+        "seguimiento": "📋 Progres",
+        "fotos": "📷 Fotografii",
+        "planos": "📐 Planuri",
+        "equipo": "👷 Echipă",
+        "datos": "✏️ Date"
+      },
+      "etapaActual": "Etapa curentă",
+      "avanzarEtapa": "Avansează etapa",
+      "seguimiento": {
+        "saving": "Se salvează…",
+        "addUpdateLabel": "Adaugă o actualizare",
+        "addUpdatePlaceholder": "Ex.: S-a terminat pardoseala din living…",
+        "addBtn": "Adaugă",
+        "emptyText": "Încă nu există actualizări. Adaugă prima notă."
+      },
+      "fotos": {
+        "dropZoneIdle": "Atinge pentru a adăuga fotografii",
+        "dropZoneUploading": "Se încarcă fotografiile…",
+        "hint": "JPG, PNG, WEBP · Max 10 MB per fotografie",
+        "loading": "Se încarcă fotografiile…",
+        "empty": "Încă nu există fotografii pentru acest șantier"
+      },
+      "planos": {
+        "dropZoneIdle": "Adaugă planurile proiectului",
+        "dropZoneUploading": "Se încarcă planurile…",
+        "hint": "PDF, DWG, DXF, RVT, imagini · Fără limită de fișiere",
+        "loading": "Se încarcă planurile…",
+        "emptyTitle": "Niciun plan",
+        "emptyHint": "Încarcă proiectul, memoriile, măsurătorile sau orice document tehnic",
+        "download": "↓ Deschide",
+        "tipTitle": "💡 Sfat:",
+        "tipBody": "Aici se încarcă documentele tehnice ale proiectului — memoriu, planuri, măsurători, detalii constructive. Fotografiile de șantier se pun în tab-ul Fotografii."
+      },
+      "equipo": {
+        "assignBtn": "+ Alocă angajat",
+        "assignTitle": "Alocă un angajat pe acest șantier",
+        "employeeLabel": "Angajat *",
+        "selectPlaceholder": "Selectează…",
+        "roleLabel": "Rol pe șantier",
+        "rolePlaceholder": "Ex.: Șef de echipă, Instalator…",
+        "startDateLabel": "Data de început",
+        "endDateLabel": "Data estimată de finalizare",
+        "cancel": "Anulează",
+        "assign": "Alocă",
+        "assigning": "Se alocă…",
+        "emptyText": "Încă nu există angajați alocați acestui șantier",
+        "since": "Din",
+        "until": "Până la"
+      }
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "tagline": "إدارة الأعمال",
+    "groups": {
+      "general": "عام",
+      "negocio": "الأعمال",
+      "facturacion": "الفوترة",
+      "control": "المراقبة",
+      "expansion": "التوسع",
+      "miEmpresa": "شركتي",
+      "administracion": "الإدارة"
+    },
+    "items": {
+      "dashboard": "لوحة التحكم",
+      "clientes": "العملاء",
+      "obras": "المشاريع",
+      "rentabilidad": "ربحية المشاريع",
+      "presupuestos": "عروض الأسعار",
+      "facturas": "الفواتير",
+      "cobros": "المدفوعات",
+      "gastos": "المصروفات",
+      "empleados": "الموظفون",
+      "partes": "سجلات الدوام",
+      "nominas": "الرواتب",
+      "hubDigital": "المركز الرقمي",
+      "fiscal": "الضرائب",
+      "legislacion": "التشريعات",
+      "resultados": "النتائج",
+      "referidos": "الإحالات",
+      "miEmpresaItem": "شركتي",
+      "tarifas": "الأسعار والتعرفات",
+      "documentos": "المستندات",
+      "copiasSeguridad": "النسخ الاحتياطية"
+    },
+    "panelAdmin": "لوحة الإدارة",
+    "logout": "تسجيل الخروج"
+  },
+  "common": {
+    "language": "اللغة",
+    "close": "إغلاق",
+    "cancel": "إلغاء"
+  },
+  "obras": {
+    "estado": {
+      "pendiente": "قيد الانتظار",
+      "en_curso": "قيد التنفيذ",
+      "pausada": "متوقف مؤقتًا",
+      "completada": "مكتمل",
+      "cancelada": "ملغى"
+    },
+    "etapa": {
+      "planificacion": "التخطيط",
+      "inicio_obra": "بدء العمل",
+      "demolicion": "الهدم",
+      "albanileria": "البناء",
+      "instalaciones": "التمديدات",
+      "revestimientos": "التكسية والتشطيب",
+      "carpinteria": "النجارة",
+      "pintura": "الدهان",
+      "acabados": "اللمسات الأخيرة",
+      "entrega": "التسليم"
+    },
+    "list": {
+      "title": "المشاريع",
+      "count_one": "{{count}} مشروع إجمالاً",
+      "count_other": "{{count}} مشاريع إجمالاً",
+      "newObra": "+ مشروع جديد",
+      "statTotal": "الإجمالي",
+      "statEnCurso": "قيد التنفيذ",
+      "statPendientes": "قيد الانتظار",
+      "statCompletadas": "مكتمل",
+      "searchPlaceholder": "🔍  ابحث عن مشروع أو عميل…",
+      "allStates": "جميع الحالات",
+      "loading": "جارٍ تحميل المشاريع…",
+      "noResultsTitle": "لا توجد نتائج",
+      "noResultsHint": "جرّب مرشحات أخرى",
+      "noObrasTitle": "ليس لديك أي مشاريع بعد",
+      "noObrasHint": "أنشئ مشروعك الأول لبدء إدارة أعمالك",
+      "verDetalle": "عرض التفاصيل ←",
+      "eliminar": "حذف",
+      "margen": "الهامش {{pct}}%"
+    },
+    "form": {
+      "newTitle": "مشروع جديد",
+      "nameLabel": "اسم المشروع *",
+      "clientLabel": "العميل",
+      "noClient": "بدون عميل",
+      "stateLabel": "الحالة",
+      "addressLabel": "العنوان",
+      "addressLabelObra": "عنوان المشروع",
+      "descriptionLabel": "الوصف",
+      "startDateLabel": "تاريخ البدء",
+      "endDateLabel": "تاريخ الانتهاء المتوقع",
+      "budgetLabel": "الميزانية (€)",
+      "actualCostLabel": "التكلفة الفعلية (€)",
+      "internalNotesLabel": "ملاحظات داخلية",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "create": "إنشاء المشروع",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "detalle": {
+      "tabs": {
+        "seguimiento": "📋 المتابعة",
+        "fotos": "📷 الصور",
+        "planos": "📐 المخططات",
+        "equipo": "👷 الفريق",
+        "datos": "✏️ البيانات"
+      },
+      "etapaActual": "المرحلة الحالية",
+      "avanzarEtapa": "الانتقال إلى مرحلة",
+      "seguimiento": {
+        "saving": "جارٍ الحفظ…",
+        "addUpdateLabel": "إضافة تحديث",
+        "addUpdatePlaceholder": "مثال: تم الانتهاء من أرضية الصالة…",
+        "addBtn": "إضافة",
+        "emptyText": "لا توجد تحديثات بعد. أضف أول ملاحظة."
+      },
+      "fotos": {
+        "dropZoneIdle": "اضغط لإضافة صور",
+        "dropZoneUploading": "جارٍ رفع الصور…",
+        "hint": "JPG, PNG, WEBP · الحد الأقصى 10 ميجابايت للصورة",
+        "loading": "جارٍ تحميل الصور…",
+        "empty": "لا توجد صور لهذا المشروع بعد"
+      },
+      "planos": {
+        "dropZoneIdle": "أضف مخططات المشروع",
+        "dropZoneUploading": "جارٍ رفع المخططات…",
+        "hint": "PDF, DWG, DXF, RVT, صور · بدون حد لعدد الملفات",
+        "loading": "جارٍ تحميل المخططات…",
+        "emptyTitle": "لا توجد مخططات",
+        "emptyHint": "ارفع ملف المشروع أو التقارير أو القياسات أو أي مستند فني",
+        "download": "↓ فتح",
+        "tipTitle": "💡 نصيحة:",
+        "tipBody": "هنا توضع المستندات الفنية للمشروع — التقرير والمخططات والقياسات وتفاصيل البناء. أما صور الموقع فتوضع في تبويب الصور."
+      },
+      "equipo": {
+        "assignBtn": "+ تعيين موظف",
+        "assignTitle": "تعيين موظف لهذا المشروع",
+        "employeeLabel": "الموظف *",
+        "selectPlaceholder": "اختر…",
+        "roleLabel": "الدور في الموقع",
+        "rolePlaceholder": "مثال: رئيس فريق، سباك…",
+        "startDateLabel": "تاريخ البدء",
+        "endDateLabel": "تاريخ الانتهاء المتوقع",
+        "cancel": "إلغاء",
+        "assign": "تعيين",
+        "assigning": "جارٍ التعيين…",
+        "emptyText": "لا يوجد موظفون معيّنون لهذا المشروع بعد",
+        "since": "منذ",
+        "until": "حتى"
+      }
+    }
+  }
+}

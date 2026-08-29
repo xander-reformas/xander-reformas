@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "tagline": "业务管理",
+    "groups": {
+      "general": "总览",
+      "negocio": "业务",
+      "facturacion": "开票",
+      "control": "管控",
+      "expansion": "拓展",
+      "miEmpresa": "我的公司",
+      "administracion": "管理"
+    },
+    "items": {
+      "dashboard": "仪表盘",
+      "clientes": "客户",
+      "obras": "项目",
+      "rentabilidad": "项目盈利分析",
+      "presupuestos": "报价单",
+      "facturas": "发票",
+      "cobros": "收款",
+      "gastos": "支出",
+      "empleados": "员工",
+      "partes": "工时记录",
+      "nominas": "工资单",
+      "hubDigital": "数字中心",
+      "fiscal": "税务",
+      "legislacion": "法规",
+      "resultados": "经营结果",
+      "referidos": "推荐",
+      "miEmpresaItem": "我的公司",
+      "tarifas": "价目表",
+      "documentos": "文件",
+      "copiasSeguridad": "备份"
+    },
+    "panelAdmin": "管理面板",
+    "logout": "退出登录"
+  },
+  "common": {
+    "language": "语言",
+    "close": "关闭",
+    "cancel": "取消"
+  },
+  "obras": {
+    "estado": {
+      "pendiente": "待处理",
+      "en_curso": "进行中",
+      "pausada": "已暂停",
+      "completada": "已完成",
+      "cancelada": "已取消"
+    },
+    "etapa": {
+      "planificacion": "规划",
+      "inicio_obra": "开工",
+      "demolicion": "拆除",
+      "albanileria": "砌筑",
+      "instalaciones": "水电安装",
+      "revestimientos": "饰面",
+      "carpinteria": "木工",
+      "pintura": "油漆",
+      "acabados": "收尾",
+      "entrega": "交付"
+    },
+    "list": {
+      "title": "项目",
+      "count_one": "共 {{count}} 个项目",
+      "count_other": "共 {{count}} 个项目",
+      "newObra": "+ 新建项目",
+      "statTotal": "总计",
+      "statEnCurso": "进行中",
+      "statPendientes": "待处理",
+      "statCompletadas": "已完成",
+      "searchPlaceholder": "🔍  搜索项目或客户…",
+      "allStates": "所有状态",
+      "loading": "正在加载项目…",
+      "noResultsTitle": "无结果",
+      "noResultsHint": "请尝试其他筛选条件",
+      "noObrasTitle": "您还没有任何项目",
+      "noObrasHint": "创建您的第一个项目以开始管理工程",
+      "verDetalle": "查看详情 →",
+      "eliminar": "删除",
+      "margen": "利润率 {{pct}}%"
+    },
+    "form": {
+      "newTitle": "新建项目",
+      "nameLabel": "项目名称 *",
+      "clientLabel": "客户",
+      "noClient": "无客户",
+      "stateLabel": "状态",
+      "addressLabel": "地址",
+      "addressLabelObra": "项目地址",
+      "descriptionLabel": "描述",
+      "startDateLabel": "开始日期",
+      "endDateLabel": "预计完成日期",
+      "budgetLabel": "预算 (€)",
+      "actualCostLabel": "实际成本 (€)",
+      "internalNotesLabel": "内部备注",
+      "cancel": "取消",
+      "saving": "保存中…",
+      "create": "创建项目",
+      "saveChanges": "保存更改"
+    },
+    "detalle": {
+      "tabs": {
+        "seguimiento": "📋 进度",
+        "fotos": "📷 照片",
+        "planos": "📐 图纸",
+        "equipo": "👷 团队",
+        "datos": "✏️ 详情"
+      },
+      "etapaActual": "当前阶段",
+      "avanzarEtapa": "推进阶段",
+      "seguimiento": {
+        "saving": "保存中…",
+        "addUpdateLabel": "添加进度更新",
+        "addUpdatePlaceholder": "例如：客厅地板已完工…",
+        "addBtn": "添加",
+        "emptyText": "暂无更新，添加第一条记录吧。"
+      },
+      "fotos": {
+        "dropZoneIdle": "点击添加照片",
+        "dropZoneUploading": "正在上传照片…",
+        "hint": "JPG、PNG、WEBP · 每张照片最大 10 MB",
+        "loading": "正在加载照片…",
+        "empty": "该项目暂无照片"
+      },
+      "planos": {
+        "dropZoneIdle": "添加项目图纸",
+        "dropZoneUploading": "正在上传图纸…",
+        "hint": "PDF、DWG、DXF、RVT、图片 · 文件数量不限",
+        "loading": "正在加载图纸…",
+        "emptyTitle": "暂无图纸",
+        "emptyHint": "上传项目文件、说明书、测量数据或任何技术文档",
+        "download": "↓ 打开",
+        "tipTitle": "💡 提示：",
+        "tipBody": "项目的技术文档放在这里——说明书、图纸、测量数据、施工细节。工地照片请放在“照片”标签页。"
+      },
+      "equipo": {
+        "assignBtn": "+ 分配员工",
+        "assignTitle": "为该项目分配员工",
+        "employeeLabel": "员工 *",
+        "selectPlaceholder": "请选择…",
+        "roleLabel": "现场职责",
+        "rolePlaceholder": "例如：领班、水管工…",
+        "startDateLabel": "开始日期",
+        "endDateLabel": "预计完成日期",
+        "cancel": "取消",
+        "assign": "分配",
+        "assigning": "分配中…",
+        "emptyText": "该项目尚未分配任何员工",
+        "since": "起始",
+        "until": "截至"
+      }
+    }
+  }
+}

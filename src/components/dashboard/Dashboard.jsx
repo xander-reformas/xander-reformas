@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../hooks/useAuth'
+import LanguageSwitcher from '../shared/LanguageSwitcher'
 import { supabase } from '../../lib/supabase'
 import CalendarioWidget from './CalendarioWidget'
 import AgenteChat from './AgenteChat'
@@ -31,58 +33,62 @@ import CopiasSeguridad from '../backups/CopiasSeguridad'
 
 const ADMIN_EMAIL = 'reformasxander@gmail.com'
 
-const NAV_GROUPS = [
-  {
-    label: 'GENERAL',
-    items: [
-      { to: '', label: 'Dashboard', icon: '⊞', end: true },
-    ],
-  },
-  {
-    label: 'NEGOCIO',
-    items: [
-      { to: 'clientes',           label: 'Clientes',          icon: '👤' },
-      { to: 'obras',              label: 'Obras',             icon: '🔨' },
-      { to: 'rentabilidad',       label: 'Rentabilidad obras', icon: '📈' },
-    ],
-  },
-  {
-    label: 'FACTURACIÓN',
-    items: [
-      { to: 'presupuestos',       label: 'Presupuestos',      icon: '📋' },
-      { to: 'facturas',           label: 'Facturas',          icon: '📄' },
-      { to: 'cobros',             label: 'Cobros',            icon: '💳' },
-    ],
-  },
-  {
-    label: 'CONTROL',
-    items: [
-      { to: 'gastos',             label: 'Gastos',            icon: '💸' },
-      { to: 'empleados',          label: 'Empleados',         icon: '👷' },
-      { to: 'partes',             label: 'Partes de trabajo', icon: '🕐' },
-      { to: 'nominas',            label: 'Nóminas',           icon: '📑' },
-    ],
-  },
-  {
-    label: 'EXPANSIÓN',
-    items: [
-      { to: 'hub-digital',        label: 'Hub Digital',       icon: '🌐' },
-      { to: 'fiscal',             label: 'Fiscal',            icon: '🏛️' },
-      { to: 'legislacion',        label: 'Legislación',       icon: '⚖️' },
-      { to: 'resultados',         label: 'Resultados',        icon: '📊' },
-      { to: 'referidos',          label: 'Referidos',         icon: '🎁' },
-    ],
-  },
-  {
-    label: 'MI EMPRESA',
-    items: [
-      { to: 'mi-empresa',         label: 'Mi Empresa',        icon: '🏢' },
-      { to: 'tarifas',            label: 'Tarifas & Precios', icon: '💰' },
-      { to: 'documentos',         label: 'Documentos',        icon: '📁' },
-      { to: 'copias-seguridad',   label: 'Copias de seguridad', icon: '💾' },
-    ],
-  },
-]
+// Grupos del menú lateral. Los labels se resuelven con i18n (ver getNavGroups)
+// para que la app pueda mostrarse en varios idiomas.
+function getNavGroups(t) {
+  return [
+    {
+      label: t('nav.groups.general'),
+      items: [
+        { to: '', label: t('nav.items.dashboard'), icon: '⊞', end: true },
+      ],
+    },
+    {
+      label: t('nav.groups.negocio'),
+      items: [
+        { to: 'clientes',           label: t('nav.items.clientes'),     icon: '👤' },
+        { to: 'obras',              label: t('nav.items.obras'),        icon: '🔨' },
+        { to: 'rentabilidad',       label: t('nav.items.rentabilidad'), icon: '📈' },
+      ],
+    },
+    {
+      label: t('nav.groups.facturacion'),
+      items: [
+        { to: 'presupuestos',       label: t('nav.items.presupuestos'), icon: '📋' },
+        { to: 'facturas',           label: t('nav.items.facturas'),     icon: '📄' },
+        { to: 'cobros',             label: t('nav.items.cobros'),       icon: '💳' },
+      ],
+    },
+    {
+      label: t('nav.groups.control'),
+      items: [
+        { to: 'gastos',             label: t('nav.items.gastos'),    icon: '💸' },
+        { to: 'empleados',          label: t('nav.items.empleados'), icon: '👷' },
+        { to: 'partes',             label: t('nav.items.partes'),    icon: '🕐' },
+        { to: 'nominas',            label: t('nav.items.nominas'),   icon: '📑' },
+      ],
+    },
+    {
+      label: t('nav.groups.expansion'),
+      items: [
+        { to: 'hub-digital',        label: t('nav.items.hubDigital'),  icon: '🌐' },
+        { to: 'fiscal',             label: t('nav.items.fiscal'),      icon: '🏛️' },
+        { to: 'legislacion',        label: t('nav.items.legislacion'), icon: '⚖️' },
+        { to: 'resultados',         label: t('nav.items.resultados'),  icon: '📊' },
+        { to: 'referidos',          label: t('nav.items.referidos'),   icon: '🎁' },
+      ],
+    },
+    {
+      label: t('nav.groups.miEmpresa'),
+      items: [
+        { to: 'mi-empresa',         label: t('nav.items.miEmpresaItem'),   icon: '🏢' },
+        { to: 'tarifas',            label: t('nav.items.tarifas'),         icon: '💰' },
+        { to: 'documentos',         label: t('nav.items.documentos'),      icon: '📁' },
+        { to: 'copias-seguridad',   label: t('nav.items.copiasSeguridad'), icon: '💾' },
+      ],
+    },
+  ]
+}
 
 function Placeholder({ title }) {
   return (
@@ -178,10 +184,12 @@ function HomePanel({ profile }) {
 
 
 export default function Dashboard() {
+  const { t } = useTranslation()
   const { user, profile, signOut } = useAuth()
   const [sidebarOpen, setSidebarOpen]   = useState(true)
   const [notifCount, setNotifCount]     = useState(0)
   const isAdmin = user?.email === ADMIN_EMAIL
+  const NAV_GROUPS = getNavGroups(t)
 
   // Cargar badge de notificaciones (solo admin)
   useEffect(() => {
@@ -213,7 +221,7 @@ export default function Dashboard() {
           </div>
           {sidebarOpen && (
             <div className="text-[9px] tracking-widest text-white/30 leading-tight mt-0.5">
-              GESTIÓN DE NEGOCIO
+              {t('nav.tagline')}
             </div>
           )}
           <button
@@ -283,7 +291,7 @@ export default function Dashboard() {
                     )}
                   </span>
                   {sidebarOpen && (
-                    <span className="truncate flex-1">Panel Admin</span>
+                    <span className="truncate flex-1">{t('nav.panelAdmin')}</span>
                   )}
                   {sidebarOpen && notifCount > 0 && (
                     <span className="bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold leading-none flex-shrink-0">
@@ -314,7 +322,7 @@ export default function Dashboard() {
               onClick={signOut}
               className="mt-3 w-full text-xs text-white/30 hover:text-white/70 text-left px-1 transition-colors"
             >
-              Cerrar sesión
+              {t('nav.logout')}
             </button>
           )}
         </div>
@@ -325,6 +333,7 @@ export default function Dashboard() {
         {/* Barra superior */}
         <header className="flex items-center justify-end gap-2 px-6 py-3 border-b border-edge bg-surface flex-shrink-0">
           <OfflineBadge />
+          <LanguageSwitcher />
           <NotificationBell />
           <ThemeToggle compact />
         </header>

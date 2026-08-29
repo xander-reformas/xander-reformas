@@ -5,6 +5,7 @@ import { AuthProvider } from './hooks/useAuth'
 import { ThemeProvider } from './hooks/useTheme'
 import App from './App'
 import PWAUpdateToast from './components/shared/PWAUpdateToast'
+import './i18n'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
