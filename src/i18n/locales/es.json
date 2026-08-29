@@ -62,8 +62,8 @@
     },
     "list": {
       "title": "Obras",
-      "count_one": "{{count}} obra en total",
-      "count_other": "{{count}} obras en total",
+      "countOne": "{{count}} obra en total",
+      "countOther": "{{count}} obras en total",
       "newObra": "+ Nueva obra",
       "statTotal": "Total",
       "statEnCurso": "En curso",

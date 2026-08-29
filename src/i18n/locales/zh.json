@@ -62,8 +62,8 @@
     },
     "list": {
       "title": "项目",
-      "count_one": "共 {{count}} 个项目",
-      "count_other": "共 {{count}} 个项目",
+      "countOne": "共 {{count}} 个项目",
+      "countOther": "共 {{count}} 个项目",
       "newObra": "+ 新建项目",
       "statTotal": "总计",
       "statEnCurso": "进行中",

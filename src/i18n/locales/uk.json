@@ -62,8 +62,8 @@
     },
     "list": {
       "title": "Об'єкти",
-      "count_one": "{{count}} об'єкт всього",
-      "count_other": "{{count}} об'єктів всього",
+      "countOne": "{{count}} об'єкт всього",
+      "countOther": "{{count}} об'єктів всього",
       "newObra": "+ Новий об'єкт",
       "statTotal": "Всього",
       "statEnCurso": "В процесі",

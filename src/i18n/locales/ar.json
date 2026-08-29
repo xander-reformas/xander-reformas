@@ -62,8 +62,8 @@
     },
     "list": {
       "title": "المشاريع",
-      "count_one": "{{count}} مشروع إجمالاً",
-      "count_other": "{{count}} مشاريع إجمالاً",
+      "countOne": "{{count}} مشروع إجمالاً",
+      "countOther": "{{count}} مشاريع إجمالاً",
       "newObra": "+ مشروع جديد",
       "statTotal": "الإجمالي",
       "statEnCurso": "قيد التنفيذ",

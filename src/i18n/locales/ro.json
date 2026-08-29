@@ -62,8 +62,8 @@
     },
     "list": {
       "title": "Șantiere",
-      "count_one": "{{count}} șantier în total",
-      "count_other": "{{count}} șantiere în total",
+      "countOne": "{{count}} șantier în total",
+      "countOther": "{{count}} șantiere în total",
       "newObra": "+ Șantier nou",
       "statTotal": "Total",
       "statEnCurso": "În desfășurare",

@@ -62,8 +62,8 @@
     },
     "list": {
       "title": "Projects",
-      "count_one": "{{count}} project in total",
-      "count_other": "{{count}} projects in total",
+      "countOne": "{{count}} project in total",
+      "countOther": "{{count}} projects in total",
       "newObra": "+ New project",
       "statTotal": "Total",
       "statEnCurso": "In progress",

@@ -928,7 +928,9 @@ export default function Obras() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-ink">{t('obras.list.title')}</h1>
-          <p className="text-sm text-ink-soft mt-0.5">{t('obras.list.count', { count: obras.length })}</p>
+          <p className="text-sm text-ink-soft mt-0.5">
+            {t(obras.length === 1 ? 'obras.list.countOne' : 'obras.list.countOther', { count: obras.length })}
+          </p>
         </div>
         <button onClick={openNew} className="btn-primary">{t('obras.list.newObra')}</button>
       </div>
