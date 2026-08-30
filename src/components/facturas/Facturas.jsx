@@ -593,6 +593,59 @@ function EnviarEmailModal({ factura, onClose, onSent }) {
   )
 }
 
+function limpiarTelefono(raw) {
+  let digits = (raw || '').replace(/[^\d]/g, '')
+  digits = digits.replace(/^00/, '')
+  if (digits.length === 9) digits = '34' + digits // móvil/fijo español sin prefijo
+  return digits
+}
+
+function EnviarWhatsappModal({ factura, totalFmt, onClose }) {
+  const { t } = useTranslation()
+  const [telefono, setTelefono] = useState(factura.clientes?.telefono || '')
+  const [mensaje, setMensaje] = useState(
+    t('facturas.enviarWhatsapp.mensajeDefault', {
+      nombre: factura.clientes?.nombre || '',
+      numero: factura.numero,
+      total: totalFmt,
+    })
+  )
+  const numeroLimpio = limpiarTelefono(telefono)
+  const href = numeroLimpio
+    ? `https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`
+    : `https://wa.me/?text=${encodeURIComponent(mensaje)}`
+
+  return (
+    <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+      <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-md">
+        <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
+          <h2 className="text-lg font-bold text-ink">{t('facturas.enviarWhatsapp.title', { numero: factura.numero })}</h2>
+          <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+        </div>
+        <div className="p-6 space-y-4">
+          <div>
+            <label className="label">{t('facturas.enviarWhatsapp.telefonoLabel')}</label>
+            <input className="input" type="tel" value={telefono} onChange={e => setTelefono(e.target.value)} placeholder="600 000 000" />
+            {!factura.clientes?.telefono && (
+              <p className="text-xs text-gold-dark mt-1.5">{t('facturas.enviarWhatsapp.sinTelefonoGuardado')}</p>
+            )}
+          </div>
+          <div>
+            <label className="label">{t('facturas.enviarWhatsapp.mensajeLabel')}</label>
+            <textarea className="input resize-none h-28 text-sm" value={mensaje} onChange={e => setMensaje(e.target.value)} />
+          </div>
+          <div className="flex gap-3 pt-1">
+            <button type="button" onClick={onClose} className="btn-secondary flex-1">{t('facturas.enviarWhatsapp.cancelar')}</button>
+            <a href={href} target="_blank" rel="noreferrer" onClick={onClose} className="btn-primary flex-1 text-center">
+              {t('facturas.enviarWhatsapp.abrir')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function CobroModal({ factura, url, onClose }) {
   const { t } = useTranslation()
   const [copiado, setCopiado] = useState(false)
@@ -640,6 +693,7 @@ export default function Facturas() {
   const [cobrando, setCobrando] = useState(null)
   const [cobroLink, setCobroLink] = useState(null)
   const [enviarModal, setEnviarModal] = useState(null)
+  const [whatsappModal, setWhatsappModal] = useState(null)
 
   useEffect(() => {
     load()
@@ -656,7 +710,7 @@ export default function Facturas() {
   async function load() {
     setLoading(true)
     const [{ data: facs }, { data: clis }, { data: obs }, { data: pres }, { data: reg }] = await Promise.all([
-      supabase.from('facturas').select('*, clientes(nombre), obras(nombre)').order('fecha', { ascending: false }),
+      supabase.from('facturas').select('*, clientes(nombre, email, telefono), obras(nombre)').order('fecha', { ascending: false }),
       supabase.from('clientes').select('id, nombre').order('nombre'),
       supabase.from('obras').select('id, nombre, cliente_id').order('nombre'),
       supabase.from('presupuestos').select('id, numero, cliente_id, obra_id, items, iva, descuento, estado, clientes(nombre)').eq('estado', 'aceptado').order('created_at', { ascending: false }),
@@ -852,6 +906,11 @@ export default function Facturas() {
                           {t('facturas.list.enviarEmail')}
                         </button>
                       )}
+                      {f.estado !== 'anulada' && (
+                        <button onClick={() => setWhatsappModal({ factura: f, totalFmt: fmt(total) })} className="text-green-600 hover:text-green-700 text-xs font-semibold mr-3">
+                          {t('facturas.list.enviarWhatsapp')}
+                        </button>
+                      )}
                       {f.estado !== 'pagada' && f.estado !== 'anulada' && (
                         <button
                           onClick={() => cobrarConTarjeta(f)}
@@ -923,6 +982,14 @@ export default function Facturas() {
           factura={enviarModal}
           onClose={() => setEnviarModal(null)}
           onSent={load}
+        />
+      )}
+
+      {whatsappModal && (
+        <EnviarWhatsappModal
+          factura={whatsappModal.factura}
+          totalFmt={whatsappModal.totalFmt}
+          onClose={() => setWhatsappModal(null)}
         />
       )}
     </div>

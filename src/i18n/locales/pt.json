@@ -464,7 +464,8 @@
       "cannotDeleteLocked": "Esta fatura já está registada no livro Verifactu e não pode ser eliminada. Emita uma fatura retificativa ou anule-a.",
       "anularPrompt": "Vai anular a fatura {{numero}}. Fica registada como anulada no livro Verifactu (não é eliminada). Motivo? (opcional)",
       "noEnlacePago": "Não foi possível gerar o link de pagamento.",
-      "enviarEmail": "Enviar por email"
+      "enviarEmail": "Enviar por email",
+      "enviarWhatsapp": "Enviar por WhatsApp"
     },
     "altQR": "Código QR Verifactu",
     "enviarEmail": {
@@ -480,6 +481,15 @@
       "errorGenerico": "Não foi possível enviar o email. Tente novamente.",
       "exito": "Fatura enviada para {{email}}.",
       "cerrar": "Fechar"
+    },
+    "enviarWhatsapp": {
+      "title": "Enviar fatura {{numero}} por WhatsApp",
+      "telefonoLabel": "Número de telefone",
+      "sinTelefonoGuardado": "Este cliente não tem telefone guardado. Pode escrever um apenas para este envio.",
+      "mensajeLabel": "Mensagem",
+      "cancelar": "Cancelar",
+      "abrir": "Abrir WhatsApp",
+      "mensajeDefault": "Olá {{nombre}}, envio-lhe a fatura {{numero}} no valor de {{total}}. Qualquer dúvida, estou à disposição."
     }
   },
   "cobros": {

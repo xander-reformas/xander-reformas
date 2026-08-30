@@ -464,7 +464,8 @@
       "cannotDeleteLocked": "This invoice is already registered in the Verifactu ledger and cannot be deleted. Issue a corrective invoice or void it.",
       "anularPrompt": "You are about to void invoice {{numero}}. It will remain on record as voided in the Verifactu ledger (not deleted). Reason? (optional)",
       "noEnlacePago": "Could not generate the payment link.",
-      "enviarEmail": "Send by email"
+      "enviarEmail": "Send by email",
+      "enviarWhatsapp": "Send by WhatsApp"
     },
     "altQR": "Verifactu QR code",
     "enviarEmail": {
@@ -480,6 +481,15 @@
       "errorGenerico": "The email could not be sent. Please try again.",
       "exito": "Invoice sent to {{email}}.",
       "cerrar": "Close"
+    },
+    "enviarWhatsapp": {
+      "title": "Send invoice {{numero}} by WhatsApp",
+      "telefonoLabel": "Phone number",
+      "sinTelefonoGuardado": "This client has no saved phone number. You can type one just for this send.",
+      "mensajeLabel": "Message",
+      "cancelar": "Cancel",
+      "abrir": "Open WhatsApp",
+      "mensajeDefault": "Hi {{nombre}}, here is invoice {{numero}} for {{total}}. Let me know if you have any questions."
     }
   },
   "cobros": {

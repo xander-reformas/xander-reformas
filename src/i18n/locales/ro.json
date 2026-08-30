@@ -464,7 +464,8 @@
       "cannotDeleteLocked": "Această factură este deja înregistrată în registrul Verifactu și nu poate fi ștearsă. Emite o factură rectificativă sau anuleaz-o.",
       "anularPrompt": "Vei anula factura {{numero}}. Rămâne înregistrată ca anulată în registrul Verifactu (nu se șterge). Motiv? (opțional)",
       "noEnlacePago": "Nu s-a putut genera linkul de plată.",
-      "enviarEmail": "Trimite prin email"
+      "enviarEmail": "Trimite prin email",
+      "enviarWhatsapp": "Trimite prin WhatsApp"
     },
     "altQR": "Cod QR Verifactu",
     "enviarEmail": {
@@ -480,6 +481,15 @@
       "errorGenerico": "Emailul nu a putut fi trimis. Încearcă din nou.",
       "exito": "Factură trimisă către {{email}}.",
       "cerrar": "Închide"
+    },
+    "enviarWhatsapp": {
+      "title": "Trimite factura {{numero}} prin WhatsApp",
+      "telefonoLabel": "Număr de telefon",
+      "sinTelefonoGuardado": "Acest client nu are un număr de telefon salvat. Poți introduce unul doar pentru această trimitere.",
+      "mensajeLabel": "Mesaj",
+      "cancelar": "Anulează",
+      "abrir": "Deschide WhatsApp",
+      "mensajeDefault": "Bună {{nombre}}, îți trimit factura {{numero}} în valoare de {{total}}. Dacă ai întrebări, sunt la dispoziția ta."
     }
   },
   "cobros": {

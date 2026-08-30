@@ -464,7 +464,8 @@
       "cannotDeleteLocked": "此发票已在 Verifactu 账簿中登记，无法删除。请开具更正发票或将其作废。",
       "anularPrompt": "您即将作废发票 {{numero}}。它将在 Verifactu 账簿中保留作废记录（不会删除）。原因？（可选）",
       "noEnlacePago": "无法生成付款链接。",
-      "enviarEmail": "通过邮件发送"
+      "enviarEmail": "通过邮件发送",
+      "enviarWhatsapp": "通过 WhatsApp 发送"
     },
     "altQR": "Verifactu 二维码",
     "enviarEmail": {
@@ -480,6 +481,15 @@
       "errorGenerico": "邮件发送失败，请重试。",
       "exito": "发票已发送至 {{email}}。",
       "cerrar": "关闭"
+    },
+    "enviarWhatsapp": {
+      "title": "通过 WhatsApp 发送发票 {{numero}}",
+      "telefonoLabel": "电话号码",
+      "sinTelefonoGuardado": "该客户没有保存的电话号码，您可以仅为本次发送输入一个。",
+      "mensajeLabel": "留言",
+      "cancelar": "取消",
+      "abrir": "打开 WhatsApp",
+      "mensajeDefault": "您好 {{nombre}}，附上发票 {{numero}}，金额为 {{total}}。如有任何疑问，请随时联系我。"
     }
   },
   "cobros": {
