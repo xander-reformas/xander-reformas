@@ -499,7 +499,7 @@ function FacturaVista({ factura, obra, onClose }) {
                   <>
                     <img
                       src={`data:image/png;base64,${registro.verifacti_qr}`}
-                      alt="Código QR Verifactu"
+                      alt={t('facturas.altQR')}
                       className="w-20 h-20 shrink-0"
                     />
                     <div className="text-[10px] leading-tight text-ink-soft">

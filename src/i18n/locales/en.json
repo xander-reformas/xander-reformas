@@ -150,6 +150,25 @@
         "since": "Since",
         "until": "Until"
       }
+    },
+    "confirm": {
+      "eliminarPlano": "Delete \"{{nombre}}\"?",
+      "quitarEmpleado": "Remove this employee from the project?",
+      "eliminarFoto": "Delete this photo?",
+      "eliminarObra": "Delete the project \"{{nombre}}\"?"
+    },
+    "setup": {
+      "cacheAccionNecesaria": "Action required in Supabase:",
+      "cacheBody": "Changing the stage/tracking requires refreshing the cache. Go to",
+      "cacheEjecuta": "and run:",
+      "cerrar": "Close",
+      "faltaPoliticaStorage": "Missing Storage policy. Run in Supabase SQL Editor:",
+      "primeraVez": "First time:",
+      "primeraVezBody": "Make sure you've created the bucket",
+      "primeraVezFin": "in Supabase → Storage → New bucket (public).",
+      "equipoAccionNecesaria": "Action required:",
+      "equipoBody": "Run",
+      "equipoFin": "in Supabase → SQL Editor to create the necessary tables."
     }
   },
   "clientes": {
@@ -304,7 +323,9 @@
       "eliminar": "Delete",
       "confirmDelete": "Delete quote {{numero}}?"
     },
-    "firmarModalTitle": "Sign quote {{numero}}"
+    "firmarModalTitle": "Sign quote {{numero}}",
+    "noIncluidoPlaceholder": "Supply of sanitary fixtures\nPermit management",
+    "condicionesPlaceholder": "30% payment on signing\nValid for 30 days"
   },
   "facturas": {
     "estado": {
@@ -443,7 +464,8 @@
       "cannotDeleteLocked": "This invoice is already registered in the Verifactu ledger and cannot be deleted. Issue a corrective invoice or void it.",
       "anularPrompt": "You are about to void invoice {{numero}}. It will remain on record as voided in the Verifactu ledger (not deleted). Reason? (optional)",
       "noEnlacePago": "Could not generate the payment link."
-    }
+    },
+    "altQR": "Verifactu QR code"
   },
   "cobros": {
     "title": "Collections",
@@ -1838,6 +1860,26 @@
     "contactoDirecto": "Direct contact",
     "escribirWhatsapp": "Message on WhatsApp",
     "footerText": "XANDER Interior Renovations · Madrid",
-    "footerCopyright": "© 2026 XANDER Gestión"
+    "footerCopyright": "© 2026 XANDER Gestión",
+    "whatsappMensaje": "Hi, I saw XANDER Gestión and I'd like to know more."
+  },
+  "home": {
+    "hola": "Hi, {{nombre}}",
+    "bienvenido": "welcome",
+    "tarifaReducidaActiva": "Reduced rate active",
+    "periodoTarifaPlana": "You're in the self-employed flat-rate period",
+    "clientes": "Clients",
+    "enCartera": "in portfolio",
+    "obrasActivas": "Active projects",
+    "enCursoAhora": "in progress now",
+    "presupuestos": "Quotes",
+    "pendientesRespuesta": "awaiting response",
+    "pendienteCobro": "Pending collection",
+    "facturasEnviadas": "invoices sent",
+    "proximamente": "Coming soon"
+  },
+  "offlineBadge": {
+    "tooltip": "Offline — you'll see the last saved data. Changes will sync once you reconnect.",
+    "label": "Offline"
   }
 }

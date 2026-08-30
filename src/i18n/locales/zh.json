@@ -150,6 +150,25 @@
         "since": "起始",
         "until": "截至"
       }
+    },
+    "confirm": {
+      "eliminarPlano": "删除\"{{nombre}}\"？",
+      "quitarEmpleado": "要将此员工从工程中移除吗？",
+      "eliminarFoto": "删除这张照片吗？",
+      "eliminarObra": "删除工程\"{{nombre}}\"吗？"
+    },
+    "setup": {
+      "cacheAccionNecesaria": "需要在 Supabase 中操作：",
+      "cacheBody": "更改阶段/跟踪需要刷新缓存。请前往",
+      "cacheEjecuta": "并执行：",
+      "cerrar": "关闭",
+      "faltaPoliticaStorage": "缺少 Storage 策略。请在 Supabase SQL Editor 中执行：",
+      "primeraVez": "首次使用：",
+      "primeraVezBody": "请确认已创建存储桶",
+      "primeraVezFin": "在 Supabase → Storage → New bucket（公开）。",
+      "equipoAccionNecesaria": "需要操作：",
+      "equipoBody": "执行",
+      "equipoFin": "在 Supabase → SQL Editor 中创建所需的表。"
     }
   },
   "clientes": {
@@ -304,7 +323,9 @@
       "eliminar": "删除",
       "confirmDelete": "删除报价单 {{numero}}？"
     },
-    "firmarModalTitle": "签署报价单 {{numero}}"
+    "firmarModalTitle": "签署报价单 {{numero}}",
+    "noIncluidoPlaceholder": "卫浴用品供应\n许可证办理",
+    "condicionesPlaceholder": "签约时支付30%\n有效期30天"
   },
   "facturas": {
     "estado": {
@@ -443,7 +464,8 @@
       "cannotDeleteLocked": "此发票已在 Verifactu 账簿中登记，无法删除。请开具更正发票或将其作废。",
       "anularPrompt": "您即将作废发票 {{numero}}。它将在 Verifactu 账簿中保留作废记录（不会删除）。原因？（可选）",
       "noEnlacePago": "无法生成付款链接。"
-    }
+    },
+    "altQR": "Verifactu 二维码"
   },
   "cobros": {
     "title": "收款",
@@ -1838,6 +1860,26 @@
     "contactoDirecto": "直接联系",
     "escribirWhatsapp": "通过 WhatsApp 联系",
     "footerText": "XANDER 室内装修 · 马德里",
-    "footerCopyright": "© 2026 XANDER Gestión"
+    "footerCopyright": "© 2026 XANDER Gestión",
+    "whatsappMensaje": "你好，我看到了 XANDER Gestión，想了解更多信息。"
+  },
+  "home": {
+    "hola": "你好，{{nombre}}",
+    "bienvenido": "欢迎",
+    "tarifaReducidaActiva": "优惠费率已生效",
+    "periodoTarifaPlana": "您正处于个体经营者固定费率期",
+    "clientes": "客户",
+    "enCartera": "客户总数",
+    "obrasActivas": "进行中的工程",
+    "enCursoAhora": "当前进行中",
+    "presupuestos": "报价单",
+    "pendientesRespuesta": "待回复",
+    "pendienteCobro": "待收款",
+    "facturasEnviadas": "已发送的发票",
+    "proximamente": "敬请期待"
+  },
+  "offlineBadge": {
+    "tooltip": "离线中——您将看到最后保存的数据。重新连接后更改会自动同步。",
+    "label": "离线"
   }
 }

@@ -8,7 +8,6 @@ import LanguageSwitcher from '../shared/LanguageSwitcher'
 import { PRECIO_PRO } from '../../hooks/usePlan'
 
 const WHATSAPP_NUMERO = '34640689121'
-const WHATSAPP_MENSAJE = encodeURIComponent('Hola, he visto XANDER Gestión y me gustaría saber más.')
 
 function useRefCapture() {
   useEffect(() => {
@@ -87,6 +86,7 @@ export default function LandingPage() {
   const { user } = useAuth()
   useRefCapture()
 
+  const WHATSAPP_MENSAJE = encodeURIComponent(t('landing.whatsappMensaje'))
   const FUNCIONES = t('landing.funciones', { returnObjects: true })
   const PLANES = [
     { ...t('landing.planPrueba', { returnObjects: true }), precio: '0 €', destacado: false },

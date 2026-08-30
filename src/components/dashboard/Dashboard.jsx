@@ -91,18 +91,23 @@ function getNavGroups(t) {
 }
 
 function Placeholder({ title }) {
+  const { t } = useTranslation()
   return (
     <div className="flex-1 flex items-center justify-center min-h-[60vh]">
       <div className="text-center text-ink-soft">
         <div className="text-5xl mb-4">🚧</div>
         <div className="font-bold text-ink text-lg">{title}</div>
-        <div className="text-sm mt-1 text-ink-soft">Próximamente</div>
+        <div className="text-sm mt-1 text-ink-soft">{t('home.proximamente')}</div>
       </div>
     </div>
   )
 }
 
+const LOCALE_MAP = { es: 'es-ES', en: 'en-US', uk: 'uk-UA', ro: 'ro-RO', ar: 'ar-SA', pt: 'pt-PT', zh: 'zh-CN' }
+
 function HomePanel({ profile }) {
+  const { t, i18n } = useTranslation()
+  const locale = LOCALE_MAP[i18n.language] || 'es-ES'
   const [stats, setStats] = useState(null)
 
   useEffect(() => {
@@ -132,13 +137,13 @@ function HomePanel({ profile }) {
   }, [])
 
   const cards = [
-    { label: 'Clientes', value: stats ? stats.clientes : '—', sub: 'en cartera' },
-    { label: 'Obras activas', value: stats ? stats.obrasActivas : '—', sub: 'en curso ahora' },
-    { label: 'Presupuestos', value: stats ? stats.presPendientes : '—', sub: 'pendientes respuesta' },
+    { label: t('home.clientes'), value: stats ? stats.clientes : '—', sub: t('home.enCartera') },
+    { label: t('home.obrasActivas'), value: stats ? stats.obrasActivas : '—', sub: t('home.enCursoAhora') },
+    { label: t('home.presupuestos'), value: stats ? stats.presPendientes : '—', sub: t('home.pendientesRespuesta') },
     {
-      label: 'Pendiente cobro',
-      value: stats ? stats.pendienteCobro.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }) : '—',
-      sub: 'facturas enviadas',
+      label: t('home.pendienteCobro'),
+      value: stats ? stats.pendienteCobro.toLocaleString(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }) : '—',
+      sub: t('home.facturasEnviadas'),
       highlight: stats && stats.pendienteCobro > 0,
     },
   ]
@@ -147,11 +152,11 @@ function HomePanel({ profile }) {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-ink">
-          Hola, {profile?.nombre || 'bienvenido'} 👋
+          {t('home.hola', { nombre: profile?.nombre || t('home.bienvenido') })} 👋
         </h1>
         <p className="text-sm text-ink-soft mt-0.5">
           {profile?.empresa_nombre || 'XANDER Gestión'} ·{' '}
-          {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
+          {new Date().toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' })}
         </p>
       </div>
 
@@ -161,8 +166,8 @@ function HomePanel({ profile }) {
         <div className="bg-navy rounded-xl p-4 flex items-center gap-4">
           <div className="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center text-gold text-lg">€</div>
           <div>
-            <div className="text-gold font-semibold text-sm">Tarifa reducida activa</div>
-            <div className="text-white/60 text-xs">Estás en período de tarifa plana de autónomo</div>
+            <div className="text-gold font-semibold text-sm">{t('home.tarifaReducidaActiva')}</div>
+            <div className="text-white/60 text-xs">{t('home.periodoTarifaPlana')}</div>
           </div>
         </div>
       )}
@@ -268,7 +273,7 @@ export default function Dashboard() {
             <div className="mb-2 mt-2 border-t border-white/10 pt-3">
               {sidebarOpen && (
                 <div className="px-4 py-1.5 text-[10px] font-semibold tracking-widest text-gold/50">
-                  ADMINISTRACIÓN
+                  {t('nav.groups.administracion')}
                 </div>
               )}
               <div className="px-2">

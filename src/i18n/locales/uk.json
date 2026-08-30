@@ -150,6 +150,25 @@
         "since": "З",
         "until": "До"
       }
+    },
+    "confirm": {
+      "eliminarPlano": "Видалити \"{{nombre}}\"?",
+      "quitarEmpleado": "Видалити цього співробітника з об'єкта?",
+      "eliminarFoto": "Видалити це фото?",
+      "eliminarObra": "Видалити об'єкт \"{{nombre}}\"?"
+    },
+    "setup": {
+      "cacheAccionNecesaria": "Необхідна дія в Supabase:",
+      "cacheBody": "Зміна етапу/відстеження вимагає оновлення кешу. Перейдіть до",
+      "cacheEjecuta": "і виконайте:",
+      "cerrar": "Закрити",
+      "faltaPoliticaStorage": "Відсутня політика Storage. Виконайте в Supabase SQL Editor:",
+      "primeraVez": "Вперше:",
+      "primeraVezBody": "Переконайтеся, що ви створили bucket",
+      "primeraVezFin": "у Supabase → Storage → New bucket (публічний).",
+      "equipoAccionNecesaria": "Необхідна дія:",
+      "equipoBody": "Виконайте",
+      "equipoFin": "у Supabase → SQL Editor, щоб створити необхідні таблиці."
     }
   },
   "clientes": {
@@ -304,7 +323,9 @@
       "eliminar": "Видалити",
       "confirmDelete": "Видалити кошторис {{numero}}?"
     },
-    "firmarModalTitle": "Підписати кошторис {{numero}}"
+    "firmarModalTitle": "Підписати кошторис {{numero}}",
+    "noIncluidoPlaceholder": "Постачання сантехніки\nОформлення дозволів",
+    "condicionesPlaceholder": "Оплата 30% при підписанні\nДійсно 30 днів"
   },
   "facturas": {
     "estado": {
@@ -443,7 +464,8 @@
       "cannotDeleteLocked": "Цей рахунок вже зареєстровано в реєстрі Verifactu і не може бути видалений. Оформіть коригувальний рахунок або анулюйте його.",
       "anularPrompt": "Ви анулюєте рахунок {{numero}}. Він залишиться в записах як анульований у реєстрі Verifactu (не видаляється). Причина? (необов'язково)",
       "noEnlacePago": "Не вдалося створити посилання на оплату."
-    }
+    },
+    "altQR": "QR-код Verifactu"
   },
   "cobros": {
     "title": "Надходження",
@@ -1838,6 +1860,26 @@
     "contactoDirecto": "Прямий контакт",
     "escribirWhatsapp": "Написати у WhatsApp",
     "footerText": "XANDER Внутрішні ремонти · Мадрид",
-    "footerCopyright": "© 2026 XANDER Gestión"
+    "footerCopyright": "© 2026 XANDER Gestión",
+    "whatsappMensaje": "Вітаю, я бачив(ла) XANDER Gestión і хотів(ла) б дізнатися більше."
+  },
+  "home": {
+    "hola": "Привіт, {{nombre}}",
+    "bienvenido": "ласкаво просимо",
+    "tarifaReducidaActiva": "Знижений тариф активний",
+    "periodoTarifaPlana": "Ви перебуваєте в періоді фіксованого тарифу для самозайнятих",
+    "clientes": "Клієнти",
+    "enCartera": "у портфелі",
+    "obrasActivas": "Активні об'єкти",
+    "enCursoAhora": "наразі в процесі",
+    "presupuestos": "Кошториси",
+    "pendientesRespuesta": "очікують відповіді",
+    "pendienteCobro": "Очікує оплати",
+    "facturasEnviadas": "надіслані рахунки",
+    "proximamente": "Незабаром"
+  },
+  "offlineBadge": {
+    "tooltip": "Немає з'єднання — ви бачите останні збережені дані. Зміни синхронізуються після відновлення з'єднання.",
+    "label": "Немає з'єднання"
   }
 }

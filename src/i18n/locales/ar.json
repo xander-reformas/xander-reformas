@@ -150,6 +150,25 @@
         "since": "منذ",
         "until": "حتى"
       }
+    },
+    "confirm": {
+      "eliminarPlano": "هل تريد حذف \"{{nombre}}\"؟",
+      "quitarEmpleado": "هل تريد إزالة هذا الموظف من العمل؟",
+      "eliminarFoto": "هل تريد حذف هذه الصورة؟",
+      "eliminarObra": "هل تريد حذف العمل \"{{nombre}}\"؟"
+    },
+    "setup": {
+      "cacheAccionNecesaria": "إجراء مطلوب في Supabase:",
+      "cacheBody": "يتطلب تغيير المرحلة/المتابعة تحديث ذاكرة التخزين المؤقت. اذهب إلى",
+      "cacheEjecuta": "ونفّذ:",
+      "cerrar": "إغلاق",
+      "faltaPoliticaStorage": "سياسة التخزين مفقودة. نفّذ في محرر SQL في Supabase:",
+      "primeraVez": "أول مرة:",
+      "primeraVezBody": "تأكد من أنك أنشأت الحاوية (bucket)",
+      "primeraVezFin": "في Supabase → Storage → New bucket (عام).",
+      "equipoAccionNecesaria": "إجراء مطلوب:",
+      "equipoBody": "نفّذ",
+      "equipoFin": "في Supabase → SQL Editor لإنشاء الجداول اللازمة."
     }
   },
   "clientes": {
@@ -304,7 +323,9 @@
       "eliminar": "حذف",
       "confirmDelete": "حذف عرض السعر {{numero}}؟"
     },
-    "firmarModalTitle": "توقيع عرض السعر {{numero}}"
+    "firmarModalTitle": "توقيع عرض السعر {{numero}}",
+    "noIncluidoPlaceholder": "توريد الأدوات الصحية\nإدارة التراخيص",
+    "condicionesPlaceholder": "دفع 30% عند التوقيع\nصالح لمدة 30 يومًا"
   },
   "facturas": {
     "estado": {
@@ -443,7 +464,8 @@
       "cannotDeleteLocked": "هذه الفاتورة مسجلة بالفعل في سجل Verifactu ولا يمكن حذفها. أصدر فاتورة تصحيحية أو ألغِها.",
       "anularPrompt": "أنت على وشك إلغاء الفاتورة {{numero}}. ستبقى مسجلة كملغاة في سجل Verifactu (لا تُحذف). السبب؟ (اختياري)",
       "noEnlacePago": "تعذّر إنشاء رابط الدفع."
-    }
+    },
+    "altQR": "رمز QR الخاص بـ Verifactu"
   },
   "cobros": {
     "title": "التحصيلات",
@@ -1838,6 +1860,26 @@
     "contactoDirecto": "اتصال مباشر",
     "escribirWhatsapp": "راسلنا عبر واتساب",
     "footerText": "XANDER لتجديدات المساحات الداخلية · مدريد",
-    "footerCopyright": "© 2026 XANDER Gestión"
+    "footerCopyright": "© 2026 XANDER Gestión",
+    "whatsappMensaje": "مرحبًا، لقد رأيت XANDER Gestión وأود معرفة المزيد."
+  },
+  "home": {
+    "hola": "مرحبًا، {{nombre}}",
+    "bienvenido": "مرحبًا",
+    "tarifaReducidaActiva": "السعر المخفض نشط",
+    "periodoTarifaPlana": "أنت في فترة السعر الثابت للعاملين المستقلين",
+    "clientes": "العملاء",
+    "enCartera": "في المحفظة",
+    "obrasActivas": "الأعمال النشطة",
+    "enCursoAhora": "قيد التنفيذ الآن",
+    "presupuestos": "عروض الأسعار",
+    "pendientesRespuesta": "بانتظار الرد",
+    "pendienteCobro": "في انتظار التحصيل",
+    "facturasEnviadas": "الفواتير المرسلة",
+    "proximamente": "قريبًا"
+  },
+  "offlineBadge": {
+    "tooltip": "غير متصل — سترى آخر البيانات المحفوظة. ستتم مزامنة التغييرات عند إعادة الاتصال.",
+    "label": "غير متصل"
   }
 }

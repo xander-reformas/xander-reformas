@@ -150,6 +150,25 @@
         "since": "Desde",
         "until": "Até"
       }
+    },
+    "confirm": {
+      "eliminarPlano": "Eliminar \"{{nombre}}\"?",
+      "quitarEmpleado": "Remover este funcionário da obra?",
+      "eliminarFoto": "Eliminar esta foto?",
+      "eliminarObra": "Eliminar a obra \"{{nombre}}\"?"
+    },
+    "setup": {
+      "cacheAccionNecesaria": "Ação necessária no Supabase:",
+      "cacheBody": "A alteração de etapa/acompanhamento requer atualizar a cache. Vá a",
+      "cacheEjecuta": "e execute:",
+      "cerrar": "Fechar",
+      "faltaPoliticaStorage": "Falta política de Storage. Execute no Supabase SQL Editor:",
+      "primeraVez": "Primeira vez:",
+      "primeraVezBody": "Certifique-se de que criou o bucket",
+      "primeraVezFin": "em Supabase → Storage → New bucket (público).",
+      "equipoAccionNecesaria": "Ação necessária:",
+      "equipoBody": "Execute",
+      "equipoFin": "no Supabase → SQL Editor para criar as tabelas necessárias."
     }
   },
   "clientes": {
@@ -304,7 +323,9 @@
       "eliminar": "Eliminar",
       "confirmDelete": "Eliminar o orçamento {{numero}}?"
     },
-    "firmarModalTitle": "Assinar orçamento {{numero}}"
+    "firmarModalTitle": "Assinar orçamento {{numero}}",
+    "noIncluidoPlaceholder": "Fornecimento de sanitários\nGestão de licenças",
+    "condicionesPlaceholder": "Pagamento de 30% na assinatura\nValidade de 30 dias"
   },
   "facturas": {
     "estado": {
@@ -443,7 +464,8 @@
       "cannotDeleteLocked": "Esta fatura já está registada no livro Verifactu e não pode ser eliminada. Emita uma fatura retificativa ou anule-a.",
       "anularPrompt": "Vai anular a fatura {{numero}}. Fica registada como anulada no livro Verifactu (não é eliminada). Motivo? (opcional)",
       "noEnlacePago": "Não foi possível gerar o link de pagamento."
-    }
+    },
+    "altQR": "Código QR Verifactu"
   },
   "cobros": {
     "title": "Cobranças",
@@ -1838,6 +1860,26 @@
     "contactoDirecto": "Contacto direto",
     "escribirWhatsapp": "Escrever pelo WhatsApp",
     "footerText": "XANDER Reformas de Interiores · Madrid",
-    "footerCopyright": "© 2026 XANDER Gestión"
+    "footerCopyright": "© 2026 XANDER Gestión",
+    "whatsappMensaje": "Olá, vi o XANDER Gestión e gostaria de saber mais."
+  },
+  "home": {
+    "hola": "Olá, {{nombre}}",
+    "bienvenido": "bem-vindo",
+    "tarifaReducidaActiva": "Tarifa reduzida ativa",
+    "periodoTarifaPlana": "Está no período de tarifa fixa de trabalhador independente",
+    "clientes": "Clientes",
+    "enCartera": "em carteira",
+    "obrasActivas": "Obras ativas",
+    "enCursoAhora": "em curso agora",
+    "presupuestos": "Orçamentos",
+    "pendientesRespuesta": "pendentes de resposta",
+    "pendienteCobro": "Pendente de cobrança",
+    "facturasEnviadas": "faturas enviadas",
+    "proximamente": "Brevemente"
+  },
+  "offlineBadge": {
+    "tooltip": "Sem ligação — verá os últimos dados guardados. As alterações serão sincronizadas ao reconectar.",
+    "label": "Sem ligação"
   }
 }

@@ -215,11 +215,11 @@ function FormPresupuesto({ editData, clientes, obras, onSave, onCancel }) {
             <div className="space-y-3">
               <div>
                 <label className="label">{t('presupuestos.form.noIncluidoLabel')}</label>
-                <textarea className="input resize-none h-20 text-sm" value={form.no_incluido} onChange={e => setF('no_incluido', e.target.value)} placeholder="Suministro de sanitarios&#10;Gestión de licencias" />
+                <textarea className="input resize-none h-20 text-sm" value={form.no_incluido} onChange={e => setF('no_incluido', e.target.value)} placeholder={t('presupuestos.noIncluidoPlaceholder')} />
               </div>
               <div>
                 <label className="label">{t('presupuestos.form.condicionesLabel')}</label>
-                <textarea className="input resize-none h-20 text-sm" value={form.condiciones} onChange={e => setF('condiciones', e.target.value)} placeholder="Pago 30% a la firma&#10;Validez 30 días" />
+                <textarea className="input resize-none h-20 text-sm" value={form.condiciones} onChange={e => setF('condiciones', e.target.value)} placeholder={t('presupuestos.condicionesPlaceholder')} />
               </div>
               <div>
                 <label className="label">{t('presupuestos.form.notasLabel')}</label>

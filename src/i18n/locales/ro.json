@@ -150,6 +150,25 @@
         "since": "Din",
         "until": "Până la"
       }
+    },
+    "confirm": {
+      "eliminarPlano": "Ștergi \"{{nombre}}\"?",
+      "quitarEmpleado": "Elimini acest angajat din lucrare?",
+      "eliminarFoto": "Ștergi această fotografie?",
+      "eliminarObra": "Ștergi lucrarea \"{{nombre}}\"?"
+    },
+    "setup": {
+      "cacheAccionNecesaria": "Acțiune necesară în Supabase:",
+      "cacheBody": "Schimbarea etapei/urmăririi necesită reîmprospătarea cache-ului. Mergi la",
+      "cacheEjecuta": "și execută:",
+      "cerrar": "Închide",
+      "faltaPoliticaStorage": "Lipsește politica de Storage. Execută în Supabase SQL Editor:",
+      "primeraVez": "Prima dată:",
+      "primeraVezBody": "Asigură-te că ai creat bucket-ul",
+      "primeraVezFin": "în Supabase → Storage → New bucket (public).",
+      "equipoAccionNecesaria": "Acțiune necesară:",
+      "equipoBody": "Execută",
+      "equipoFin": "în Supabase → SQL Editor pentru a crea tabelele necesare."
     }
   },
   "clientes": {
@@ -304,7 +323,9 @@
       "eliminar": "Șterge",
       "confirmDelete": "Ștergi oferta {{numero}}?"
     },
-    "firmarModalTitle": "Semnează oferta {{numero}}"
+    "firmarModalTitle": "Semnează oferta {{numero}}",
+    "noIncluidoPlaceholder": "Furnizare de obiecte sanitare\nGestionarea autorizațiilor",
+    "condicionesPlaceholder": "Plată 30% la semnare\nValabilitate 30 de zile"
   },
   "facturas": {
     "estado": {
@@ -443,7 +464,8 @@
       "cannotDeleteLocked": "Această factură este deja înregistrată în registrul Verifactu și nu poate fi ștearsă. Emite o factură rectificativă sau anuleaz-o.",
       "anularPrompt": "Vei anula factura {{numero}}. Rămâne înregistrată ca anulată în registrul Verifactu (nu se șterge). Motiv? (opțional)",
       "noEnlacePago": "Nu s-a putut genera linkul de plată."
-    }
+    },
+    "altQR": "Cod QR Verifactu"
   },
   "cobros": {
     "title": "Încasări",
@@ -1838,6 +1860,26 @@
     "contactoDirecto": "Contact direct",
     "escribirWhatsapp": "Scrie pe WhatsApp",
     "footerText": "XANDER Renovări Interioare · Madrid",
-    "footerCopyright": "© 2026 XANDER Gestión"
+    "footerCopyright": "© 2026 XANDER Gestión",
+    "whatsappMensaje": "Bună, am văzut XANDER Gestión și aș vrea să aflu mai multe."
+  },
+  "home": {
+    "hola": "Salut, {{nombre}}",
+    "bienvenido": "bine ai venit",
+    "tarifaReducidaActiva": "Tarif redus activ",
+    "periodoTarifaPlana": "Ești în perioada de tarif fix pentru liber-profesioniști",
+    "clientes": "Clienți",
+    "enCartera": "în portofoliu",
+    "obrasActivas": "Lucrări active",
+    "enCursoAhora": "în desfășurare acum",
+    "presupuestos": "Oferte",
+    "pendientesRespuesta": "în așteptarea răspunsului",
+    "pendienteCobro": "În așteptarea încasării",
+    "facturasEnviadas": "facturi trimise",
+    "proximamente": "În curând"
+  },
+  "offlineBadge": {
+    "tooltip": "Fără conexiune — vezi ultimele date salvate. Modificările se vor sincroniza la reconectare.",
+    "label": "Fără conexiune"
   }
 }

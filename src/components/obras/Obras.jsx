@@ -209,7 +209,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
   }
 
   async function eliminarPlano(plano) {
-    if (!confirm(`¿Eliminar "${plano.nombre}"?`)) return
+    if (!confirm(t('obras.confirm.eliminarPlano', { nombre: plano.nombre }))) return
     await supabase.storage.from(BUCKET).remove([plano.path])
     await cargarPlanos()
   }
@@ -243,7 +243,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
   }
 
   async function quitarEmpleado(id) {
-    if (!confirm('¿Quitar este empleado de la obra?')) return
+    if (!confirm(t('obras.confirm.quitarEmpleado'))) return
     await supabase.from('obra_empleados').delete().eq('id', id)
     cargarEquipo()
   }
@@ -334,7 +334,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
   }
 
   async function eliminarFoto(foto) {
-    if (!confirm('¿Eliminar esta foto?')) return
+    if (!confirm(t('obras.confirm.eliminarFoto'))) return
     await supabase.storage.from(BUCKET).remove([foto.path])
     await cargarFotos()
   }
@@ -429,10 +429,10 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
           <div className="bg-amber-50 border-b border-amber-200 px-5 py-3 flex items-start gap-3 flex-shrink-0">
             <span className="text-lg">⚠️</span>
             <div className="flex-1 text-xs text-amber-800">
-              <strong>Acción necesaria en Supabase:</strong> El cambio de etapa/seguimiento requiere refrescar la caché. Ve a{' '}
-              <strong>Supabase → SQL Editor</strong> y ejecuta:<br />
+              <strong>{t('obras.setup.cacheAccionNecesaria')}</strong> {t('obras.setup.cacheBody')}{' '}
+              <strong>Supabase → SQL Editor</strong> {t('obras.setup.cacheEjecuta')}<br />
               <code className="font-mono bg-amber-100 px-1 rounded">NOTIFY pgrst, &apos;reload schema&apos;;</code>
-              <button onClick={() => setCacheError(false)} className="ml-3 text-amber-600 underline">Cerrar</button>
+              <button onClick={() => setCacheError(false)} className="ml-3 text-amber-600 underline">{t('obras.setup.cerrar')}</button>
             </div>
           </div>
         )}
@@ -565,7 +565,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                   {errorFoto}
                   {errorFoto.includes('policy') || errorFoto.includes('Unauthorized') ? (
                     <div className="mt-2 font-semibold">
-                      ⚙️ Falta política de Storage. Ejecuta en Supabase SQL Editor:<br />
+                      ⚙️ {t('obras.setup.faltaPoliticaStorage')}<br />
                       <code className="font-mono text-ink">
                         CREATE POLICY &quot;up&quot; ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = &apos;obras-fotos&apos;);
                       </code>
@@ -609,8 +609,8 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               {/* Info bucket */}
               {fotos.length === 0 && (
                 <div className="mt-4 bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 text-xs text-ink-soft">
-                  <strong className="text-ink">⚙️ Primera vez:</strong> Asegúrate de haber creado el bucket{' '}
-                  <code className="bg-surface px-1 rounded">obras-fotos</code> en Supabase → Storage → New bucket (público).
+                  <strong className="text-ink">⚙️ {t('obras.setup.primeraVez')}</strong> {t('obras.setup.primeraVezBody')}{' '}
+                  <code className="bg-surface px-1 rounded">obras-fotos</code> {t('obras.setup.primeraVezFin')}
                 </div>
               )}
             </div>
@@ -774,7 +774,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               {/* Aviso si faltan tablas en Supabase */}
               {errEq && errEq.includes('does not exist') && (
                 <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-xs text-amber-800">
-                  <strong>Acción necesaria:</strong> Ejecuta <code>supabase/equipo_v2.sql</code> en Supabase → SQL Editor para crear las tablas necesarias.
+                  <strong>{t('obras.setup.equipoAccionNecesaria')}</strong> {t('obras.setup.equipoBody')} <code>supabase/equipo_v2.sql</code> {t('obras.setup.equipoFin')}
                 </div>
               )}
             </div>
@@ -902,7 +902,7 @@ export default function Obras() {
 
   async function remove(id, nombre, e) {
     e.stopPropagation()
-    if (!confirm(`¿Eliminar la obra "${nombre}"?`)) return
+    if (!confirm(t('obras.confirm.eliminarObra', { nombre }))) return
     await supabase.from('obras').delete().eq('id', id)
     load()
   }
