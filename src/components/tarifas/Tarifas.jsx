@@ -191,7 +191,7 @@ export default function Tarifas() {
                   <tbody className="divide-y divide-edge/60">
                     {items.map(t2 => (
                       <tr key={t2.id} className="hover:bg-page/40 transition-colors">
-                        <td className="px-4 py-3 text-ink">{t2.descripcion}</td>
+                        <td className="px-4 py-3 text-ink">{tab === 'base' ? t(`tarifas.descripcionBase.${t2.descripcion}`, t2.descripcion) : t2.descripcion}</td>
                         <td className="px-3 py-3 text-center text-ink-soft hidden sm:table-cell">{t2.unidad}</td>
                         <td className="px-3 py-3 text-right text-ink-soft hidden md:table-cell">{parseFloat(t2.coste_material).toFixed(2)}</td>
                         <td className="px-3 py-3 text-right text-ink-soft hidden md:table-cell">{parseFloat(t2.coste_mo).toFixed(2)}</td>
