@@ -49,74 +49,13 @@ function fmt(n) {
   return Number(n || 0).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'
 }
 
-// ── Referencia Convenio Colectivo ────────────────────────────────────────────
-const CONVENIO_SECCIONES = [
-  {
-    titulo: 'Convenio Colectivo General del Sector de la Construcción (CGSC)',
-    icon: '🏗️',
-    desc: 'El VI CGSC (2022-2026) regula las condiciones laborales de todos los trabajadores del sector en España. Aplica a empresas de reformas, acabados y mantenimiento de edificios (CNAE 41, 42, 43).',
-    items: [
-      { label: 'Jornada máxima anual', valor: '1.736 horas (2025)' },
-      { label: 'Jornada semanal', valor: '40 horas ordinarias' },
-      { label: 'Vacaciones', valor: '30 días naturales / año' },
-      { label: 'Pagas extraordinarias', valor: '2 (junio y diciembre) — 30 días cada una' },
-      { label: 'Horas extraordinarias', valor: 'Máx. 80/año — recargo mín. 75% o descanso compensatorio' },
-    ],
-  },
-  {
-    titulo: 'Grupos profesionales y salarios orientativos (2025)',
-    icon: '💰',
-    desc: 'Salarios mínimos según el Convenio. Las tablas salariales definitivas se actualizan anualmente. Comprueba la tabla vigente en tu provincia (algunos convenios provinciales mejoran el estatal).',
-    items: [
-      { label: 'Grupo III — Encargado / Capataz',  valor: 'Desde ~1.700 € / mes bruto' },
-      { label: 'Grupo IV — Oficial 1ª',             valor: 'Desde ~1.550 € / mes bruto' },
-      { label: 'Grupo IV — Oficial 2ª',             valor: 'Desde ~1.450 € / mes bruto' },
-      { label: 'Grupo V — Ayudante',                valor: 'Desde ~1.350 € / mes bruto' },
-      { label: 'Grupo VI — Peón especializado',     valor: 'Desde ~1.280 € / mes bruto' },
-      { label: 'Grupo VI — Peón ordinario',         valor: 'Desde ~1.220 € / mes bruto' },
-    ],
-  },
-  {
-    titulo: 'Plus convenio y complementos salariales',
-    icon: '➕',
-    desc: 'Además del salario base, el convenio establece pluses obligatorios que deben sumarse al coste total del trabajador.',
-    items: [
-      { label: 'Plus de Convenio',   valor: 'Fijado por tabla salarial del convenio (varía por grupo)' },
-      { label: 'Plus de Distancia',  valor: 'Por desplazamiento al centro de trabajo (km > 2 desde municipio de contratación)' },
-      { label: 'Dietas',             valor: 'Media dieta: ~13 €/día | Dieta completa: ~30 €/día (pernocta fuera)' },
-      { label: 'Plus de locomoción', valor: 'Cuando el trabajador usa vehículo propio: €/km según convenio provincial' },
-      { label: 'IT / Incapacidad',   valor: 'Complemento empresa hasta el 100% desde el 1er día (accidente laboral)' },
-    ],
-  },
-  {
-    titulo: 'Cotizaciones SS — Cuotas empresa (construcción)',
-    icon: '🏛️',
-    desc: 'El empresario asume la mayor parte de las cotizaciones. Estos porcentajes aplican sobre la base de cotización (que puede diferir del salario bruto).',
-    items: [
-      { label: 'Contingencias comunes',              valor: `${SS.contingencias.toFixed(2)}%` },
-      { label: 'AT y EP (construcción, CNAE 43)',    valor: `~${SS.at_ep.toFixed(2)}% (varía por CNAE y siniestralidad)` },
-      { label: 'Desempleo (CG)',                     valor: `${SS.desempleo.toFixed(2)}%` },
-      { label: 'FOGASA',                             valor: `${SS.fogasa.toFixed(2)}%` },
-      { label: 'Formación profesional',              valor: `${SS.fp.toFixed(2)}%` },
-      { label: 'MEI (2024-2025)',                    valor: `${SS.mei.toFixed(2)}%` },
-      { label: '▶ Total aproximado empresa',         valor: `~${SS_TOTAL.toFixed(2)}% sobre base cotización`, bold: true },
-    ],
-  },
-  {
-    titulo: 'Obligaciones formales al contratar',
-    icon: '📋',
-    desc: 'Al contratar tu primer empleado deberás cumplir una serie de trámites previos y periódicos.',
-    items: [
-      { label: 'Alta como empleador en SS', valor: 'Código de Cuenta de Cotización (CCC) — antes del 1er contrato' },
-      { label: 'Alta del trabajador en SS', valor: 'Sistema RED / SILTRA — antes del inicio de la actividad' },
-      { label: 'Comunicación contrato',     valor: 'SEPE — 10 días hábiles desde la firma' },
-      { label: 'TC1 / TC2 mensual',         valor: 'Cotización mensual SS — domiciliación o ingreso directo' },
-      { label: 'Nómina',                    valor: 'Mensual, firmada por el trabajador (o acuse electrónico)' },
-      { label: 'Retención IRPF',            valor: 'Mod. 111 trimestral + Mod. 190 anual (resumen retenciones)' },
-      { label: 'Calendio laboral',          valor: 'Publicar en el centro de trabajo antes del 1 de enero' },
-      { label: 'PRL (Prevención de Riesgos)', valor: 'Plan de prevención + evaluación de riesgos obligatoria' },
-    ],
-  },
+// ── Referencia Convenio Colectivo — traducido vía i18n (ver empleados.convenio.*) ──
+const CONVENIO_SECCIONES_KEYS = [
+  { key: 'convenioGeneral', icon: '🏗️', items: ['jornadaMaxAnual', 'jornadaSemanal', 'vacaciones', 'pagasExtra', 'horasExtra'] },
+  { key: 'gruposSalarios', icon: '💰', items: ['grupoIIIEncargado', 'grupoIVOficial1', 'grupoIVOficial2', 'grupoVAyudante', 'grupoVIPeonEsp', 'grupoVIPeonOrd'] },
+  { key: 'plusesComplementos', icon: '➕', items: ['plusConvenio', 'plusDistancia', 'dietas', 'plusLocomocion', 'itIncapacidad'] },
+  { key: 'cotizacionesSS', icon: '🏛️', items: ['contingenciasComunes', 'atEp', 'desempleoCG', 'fogasa', 'formacionProfesional', 'mei', 'totalAproxEmpresa'] },
+  { key: 'obligacionesFormales', icon: '📋', items: ['altaEmpleadorSS', 'altaTrabajadorSS', 'comunicacionContrato', 'tc1tc2', 'nomina', 'retencionIrpfEmp', 'calendarioLaboral', 'prl'] },
 ]
 
 // ── Estado inicial del formulario ────────────────────────────────────────────
@@ -447,26 +386,48 @@ export default function Empleados() {
       {/* ── CONVENIO ──────────────────────────────────────────────────────── */}
       {tab === 'convenio' && (
         <div>
-          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-6 text-sm text-ink-soft">
+          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-4 text-sm text-ink-soft">
             <strong>{t('empleados.convenio.disclaimerPre')}</strong> {t('empleados.convenio.disclaimerPost')}
           </div>
+          <div className="mb-6 bg-navy/5 border border-navy/15 rounded-xl px-4 py-3 flex items-start gap-3 text-xs text-ink-soft">
+            <span className="text-base flex-shrink-0">ℹ️</span>
+            <div>
+              <div className="font-semibold text-ink">{t('legalAviso.titulo')}</div>
+              <div className="mt-0.5">{t('legalAviso.texto')}</div>
+            </div>
+          </div>
           <div className="space-y-6">
-            {CONVENIO_SECCIONES.map(sec => (
-              <div key={sec.titulo} className="card">
+            {CONVENIO_SECCIONES_KEYS.map(sec => (
+              <div key={sec.key} className="card">
                 <div className="flex items-start gap-3 mb-4">
                   <span className="text-2xl flex-shrink-0">{sec.icon}</span>
                   <div>
-                    <h2 className="font-bold text-ink">{sec.titulo}</h2>
-                    <p className="text-sm text-ink-soft mt-1 leading-relaxed">{sec.desc}</p>
+                    <h2 className="font-bold text-ink">{t(`empleados.convenio.secciones.${sec.key}.titulo`)}</h2>
+                    <p className="text-sm text-ink-soft mt-1 leading-relaxed">{t(`empleados.convenio.secciones.${sec.key}.desc`)}</p>
                   </div>
                 </div>
                 <div className="bg-page rounded-xl overflow-hidden">
-                  {sec.items.map((item, i) => (
-                    <div key={i} className={`flex items-baseline justify-between gap-4 px-4 py-2.5 ${i < sec.items.length - 1 ? 'border-b border-white/60' : ''}`}>
-                      <span className={`text-sm ${item.bold ? 'font-bold text-ink' : 'text-ink-soft'}`}>{item.label}</span>
-                      <span className={`text-sm text-right flex-shrink-0 ${item.bold ? 'font-bold text-ink' : 'text-ink'}`}>{item.valor}</span>
-                    </div>
-                  ))}
+                  {sec.items.map((itemKey, i) => {
+                    const bold = itemKey === 'totalAproxEmpresa'
+                    let valor
+                    if (sec.key === 'cotizacionesSS') {
+                      if (itemKey === 'contingenciasComunes') valor = `${SS.contingencias.toFixed(2)}%`
+                      else if (itemKey === 'atEp') valor = `~${SS.at_ep.toFixed(2)}% ${t('empleados.convenio.atEpSufijo')}`
+                      else if (itemKey === 'desempleoCG') valor = `${SS.desempleo.toFixed(2)}%`
+                      else if (itemKey === 'fogasa') valor = `${SS.fogasa.toFixed(2)}%`
+                      else if (itemKey === 'formacionProfesional') valor = `${SS.fp.toFixed(2)}%`
+                      else if (itemKey === 'mei') valor = `${SS.mei.toFixed(2)}%`
+                      else if (itemKey === 'totalAproxEmpresa') valor = `~${SS_TOTAL.toFixed(2)}% ${t('empleados.convenio.items.totalAproxEmpresa.sufijo')}`
+                    } else {
+                      valor = t(`empleados.convenio.items.${itemKey}.valor`)
+                    }
+                    return (
+                      <div key={itemKey} className={`flex items-baseline justify-between gap-4 px-4 py-2.5 ${i < sec.items.length - 1 ? 'border-b border-white/60' : ''}`}>
+                        <span className={`text-sm ${bold ? 'font-bold text-ink' : 'text-ink-soft'}`}>{t(`empleados.convenio.items.${itemKey}.label`)}</span>
+                        <span className={`text-sm text-right flex-shrink-0 ${bold ? 'font-bold text-ink' : 'text-ink'}`}>{valor}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             ))}

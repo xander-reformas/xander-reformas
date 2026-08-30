@@ -398,8 +398,17 @@ export default function Documentos() {
     load()
   }
 
-  const plantillasFiltradas = PLANTILLAS.filter(p =>
-    [p.titulo, p.desc, p.categoria].some(v => v.toLowerCase().includes(search.toLowerCase()))
+  const plantillasTr = t('documentos.plantillasTr', { returnObjects: true })
+  const categoriaPlantillaTr = t('documentos.categoriaPlantilla', { returnObjects: true })
+  const PLANTILLAS_I18N = PLANTILLAS.map(p => ({
+    ...p,
+    titulo: plantillasTr[p.id]?.titulo || p.titulo,
+    desc: plantillasTr[p.id]?.desc || p.desc,
+    categoriaLabel: categoriaPlantillaTr[p.categoria] || p.categoria,
+  }))
+
+  const plantillasFiltradas = PLANTILLAS_I18N.filter(p =>
+    [p.titulo, p.desc, p.categoriaLabel].some(v => v.toLowerCase().includes(search.toLowerCase()))
   )
 
   return (
@@ -439,8 +448,15 @@ export default function Documentos() {
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
-          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-5 text-sm text-ink-soft">
+          <div className="bg-gold/10 border border-gold/30 rounded-xl px-4 py-3 mb-4 text-sm text-ink-soft">
             {t('documentos.disclaimerPlantillas')}
+          </div>
+          <div className="mb-5 bg-navy/5 border border-navy/15 rounded-xl px-4 py-3 flex items-start gap-3 text-xs text-ink-soft">
+            <span className="text-base flex-shrink-0">ℹ️</span>
+            <div>
+              <div className="font-semibold text-ink">{t('legalAviso.titulo')}</div>
+              <div className="mt-0.5">{t('legalAviso.texto')}</div>
+            </div>
           </div>
           {plantillasFiltradas.length === 0 ? (
             <div className="card text-center py-12">
@@ -455,7 +471,7 @@ export default function Documentos() {
                     <span className="text-2xl flex-shrink-0">{p.icon}</span>
                     <div className="flex-1 min-w-0">
                       <div className="font-bold text-ink">{p.titulo}</div>
-                      <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full mt-0.5 inline-block">{p.categoria}</span>
+                      <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full mt-0.5 inline-block">{p.categoriaLabel}</span>
                     </div>
                   </div>
                   <p className="text-sm text-ink-soft flex-1 mb-4">{p.desc}</p>

@@ -717,7 +717,150 @@
     "convenio": {
       "disclaimerPre": "ℹ️ Ghid orientativ.",
       "disclaimerPost": "Bazat pe al VI-lea Contract Colectiv General al Sectorului Construcțiilor (2022-2026). Verifică întotdeauna sumele actualizate cu consultantul tău de resurse umane sau în BOE / contractul provincial.",
-      "recursosTitle": "Resurse și linkuri utile"
+      "recursosTitle": "Resurse și linkuri utile",
+      "secciones": {
+        "convenioGeneral": {
+          "titulo": "Contractul Colectiv General al Sectorului Construcțiilor (CGSC)",
+          "desc": "Al VI-lea CGSC (2022-2026) reglementează condițiile de muncă ale tuturor lucrătorilor din sector în Spania. Se aplică firmelor de renovări, finisaje și întreținere a clădirilor (CNAE 41, 42, 43)."
+        },
+        "gruposSalarios": {
+          "titulo": "Grupuri profesionale și salarii orientative (2025)",
+          "desc": "Salarii minime conform Contractului. Tabelele salariale finale se actualizează anual. Verifică tabelul valabil pentru provincia ta (unele contracte provinciale îmbunătățesc contractul de stat)."
+        },
+        "plusesComplementos": {
+          "titulo": "Spor de contract și suplimente salariale",
+          "desc": "Pe lângă salariul de bază, contractul stabilește sporuri obligatorii care trebuie adăugate la costul total al angajatului."
+        },
+        "cotizacionesSS": {
+          "titulo": "Contribuții la Asigurările Sociale — Cote angajator (construcții)",
+          "desc": "Angajatorul suportă cea mai mare parte a contribuțiilor. Aceste procente se aplică bazei de cotizare (care poate diferi de salariul brut)."
+        },
+        "obligacionesFormales": {
+          "titulo": "Obligații formale la angajare",
+          "desc": "La angajarea primului tău angajat, va trebui să îndeplinești o serie de proceduri prealabile și periodice."
+        }
+      },
+      "items": {
+        "jornadaMaxAnual": {
+          "label": "Program maxim anual",
+          "valor": "1.736 ore (2025)"
+        },
+        "jornadaSemanal": {
+          "label": "Program săptămânal",
+          "valor": "40 de ore obișnuite"
+        },
+        "vacaciones": {
+          "label": "Concediu",
+          "valor": "30 de zile calendaristice / an"
+        },
+        "pagasExtra": {
+          "label": "Plăți suplimentare",
+          "valor": "2 (iunie și decembrie) — câte 30 de zile fiecare"
+        },
+        "horasExtra": {
+          "label": "Ore suplimentare",
+          "valor": "Max. 80/an — spor min. 75% sau odihnă compensatorie"
+        },
+        "grupoIIIEncargado": {
+          "label": "Grupa III — Șef de echipă / Maistru",
+          "valor": "De la ~1.700 € / lună brut"
+        },
+        "grupoIVOficial1": {
+          "label": "Grupa IV — Meseriaș clasa I",
+          "valor": "De la ~1.550 € / lună brut"
+        },
+        "grupoIVOficial2": {
+          "label": "Grupa IV — Meseriaș clasa a II-a",
+          "valor": "De la ~1.450 € / lună brut"
+        },
+        "grupoVAyudante": {
+          "label": "Grupa V — Ajutor",
+          "valor": "De la ~1.350 € / lună brut"
+        },
+        "grupoVIPeonEsp": {
+          "label": "Grupa VI — Muncitor specializat",
+          "valor": "De la ~1.280 € / lună brut"
+        },
+        "grupoVIPeonOrd": {
+          "label": "Grupa VI — Muncitor necalificat",
+          "valor": "De la ~1.220 € / lună brut"
+        },
+        "plusConvenio": {
+          "label": "Spor de Contract",
+          "valor": "Stabilit de tabelul salarial al contractului (variază pe grupă)"
+        },
+        "plusDistancia": {
+          "label": "Spor de Distanță",
+          "valor": "Pentru deplasarea la locul de muncă (km > 2 de la municipiul de angajare)"
+        },
+        "dietas": {
+          "label": "Diurne",
+          "valor": "Diurnă parțială: ~13 €/zi | Diurnă completă: ~30 €/zi (cazare în afara domiciliului)"
+        },
+        "plusLocomocion": {
+          "label": "Spor de Transport",
+          "valor": "Când angajatul folosește vehicul propriu: €/km conform contractului provincial"
+        },
+        "itIncapacidad": {
+          "label": "Concediu Medical / Incapacitate",
+          "valor": "Complement angajator până la 100% din prima zi (accident de muncă)"
+        },
+        "contingenciasComunes": {
+          "label": "Contingențe comune"
+        },
+        "atEp": {
+          "label": "Accidente de muncă și boli profesionale (construcții, CNAE 43)"
+        },
+        "desempleoCG": {
+          "label": "Șomaj (contract general)"
+        },
+        "fogasa": {
+          "label": "FOGASA (Fondul de Garantare a Salariilor)"
+        },
+        "formacionProfesional": {
+          "label": "Formare profesională"
+        },
+        "mei": {
+          "label": "MEI — Mecanismul de Echitate Intergenerațională (2024-2025)"
+        },
+        "totalAproxEmpresa": {
+          "label": "▶ Total aproximativ angajator",
+          "sufijo": "din baza de cotizare"
+        },
+        "altaEmpleadorSS": {
+          "label": "Înregistrare ca angajator la Asigurările Sociale",
+          "valor": "Cod de Cont de Cotizare (CCC) — înainte de primul contract"
+        },
+        "altaTrabajadorSS": {
+          "label": "Înregistrarea angajatului la Asigurările Sociale",
+          "valor": "Sistemul RED / SILTRA — înainte de începerea activității"
+        },
+        "comunicacionContrato": {
+          "label": "Notificarea contractului",
+          "valor": "SEPE — 10 zile lucrătoare de la semnare"
+        },
+        "tc1tc2": {
+          "label": "TC1 / TC2 lunar",
+          "valor": "Cotizația lunară la Asigurările Sociale — debit direct sau transfer"
+        },
+        "nomina": {
+          "label": "Fluturaș de salariu",
+          "valor": "Lunar, semnat de angajat (sau confirmare electronică)"
+        },
+        "retencionIrpfEmp": {
+          "label": "Reținere impozit pe venit",
+          "valor": "Formularul 111 trimestrial + Formularul 190 anual (rezumat rețineri)"
+        },
+        "calendarioLaboral": {
+          "label": "Calendar de lucru",
+          "valor": "Se afișează la locul de muncă înainte de 1 ianuarie"
+        },
+        "prl": {
+          "label": "Prevenirea Riscurilor la Locul de Muncă",
+          "valor": "Plan de prevenire + evaluare obligatorie a riscurilor"
+        }
+      },
+      "atEpSufijo": "(variază în funcție de codul CAEN și rata accidentelor)"
     },
     "form": {
       "editTitle": "Editează angajatul",
@@ -1082,6 +1225,62 @@
       "trimestreLabel": "Trimestru",
       "cancelar": "Anulează",
       "generarDocumento": "Generează document"
+    },
+    "trimestres": {
+      "hastaFecha": "Până la {{dia}} {{mes}}",
+      "anioSiguiente": "(anul următor)"
+    },
+    "periodo": {
+      "trimestral": "Trimestrial",
+      "anual": "Anual"
+    },
+    "modelos": {
+      "130": {
+        "nombre": "IRPF în rate",
+        "desc": "Plată în avans a impozitului pe venit. Dacă facturezi companii cu reținere de 15%, s-ar putea să nu fie necesar să-l depui. Se calculează ca 20% din venitul net (venituri minus cheltuieli)."
+      },
+      "303": {
+        "nombre": "TVA",
+        "desc": "TVA colectat (cel facturat) minus TVA deductibil (cel plătit la achiziții și cheltuieli). Rezultatul pozitiv se achită; cel negativ se compensează."
+      },
+      "111": {
+        "nombre": "Rețineri IRPF",
+        "desc": "Dacă ai angajați sau plătești profesioniști cu reținere, trebuie să achiți reținerile efectuate."
+      },
+      "100": {
+        "nombre": "Declarația anuală de venit",
+        "desc": "Se depune între aprilie și iunie anul următor. Include toate veniturile din activitatea economică a anului."
+      },
+      "390": {
+        "nombre": "Rezumat anual TVA",
+        "desc": "Rezumatul tuturor trimestrelor Formularului 303. Se depune în ianuarie anul următor."
+      }
+    },
+    "tips": {
+      "tickets": {
+        "titulo": "Păstrează TOATE bonurile",
+        "desc": "Materiale, combustibil, unelte, îmbrăcăminte de lucru, telefon (50%), diurne pe șantier. Fără bon, nu este deductibil."
+      },
+      "despacho": {
+        "titulo": "Birou acasă",
+        "desc": "Dacă folosești o parte din locuință pentru muncă, poți deduce un % proporțional din utilități (curent, internet). Verifică procentul cu contabilul tău."
+      },
+      "vehiculo": {
+        "titulo": "Vehicul profesional",
+        "desc": "Dacă ai un vehicul exclusiv profesional (dubă de lucru) deduci 100%. Mașină personală: doar dacă este de uz exclusiv profesional."
+      },
+      "telefono": {
+        "titulo": "Telefon și tehnologie",
+        "desc": "Telefon, calculator, software: deductibil 100% dacă e uz exclusiv profesional, 50% dacă e mixt."
+      },
+      "tarifaPlana": {
+        "titulo": "Tarif fix pentru liber-profesioniști",
+        "desc": "Primele 12 luni: cotă fixă redusă. Se poate prelungi încă 12 luni dacă veniturile nu depășesc salariul minim. Planifică bine momentul înregistrării."
+      },
+      "ivaReformas": {
+        "titulo": "TVA la renovări",
+        "desc": "Cotă redusă 10% pentru renovarea locuințelor particulare cu vechime peste 2 ani. Cotă generală 21% pentru spații comerciale și construcții noi."
+      }
     }
   },
   "legislacion": {
@@ -1106,7 +1305,313 @@
     "avisoText": "Reglementările urbanistice se modifică frecvent. Consultă întotdeauna primăria corespunzătoare și un tehnician competent (arhitect sau maistru) în caz de îndoială. Condițiile pot varia în funcție de municipiu, chiar și în aceeași regiune.",
     "estatalCaption": "Reglementare națională — se aplică în toată Spania",
     "incluyeAplica": "Include / Se aplică la:",
-    "recursosUtiles": "Resurse utile (naționale)"
+    "recursosUtiles": "Resurse utile (naționale)",
+    "normativaSecciones": {
+      "tiposIntervencion": "Tipuri de intervenții în construcții",
+      "seguridadSalud": "Securitate și sănătate pe șantier",
+      "normativaTecnica": "Reglementări tehnice",
+      "relacionClientes": "Relația cu clienții și obligații fiscale"
+    },
+    "tipo": {
+      "comunicacionPrevia": "Notificare prealabilă",
+      "licencia": "Autorizație",
+      "acuerdoJunta": "Acordul Adunării Proprietarilor",
+      "obligatorio": "Obligatoriu",
+      "usoObligatorio": "Utilizare obligatorie",
+      "obligatorioObraMayor": "Obligatoriu la lucrări majore",
+      "marcoGeneral": "Cadru general",
+      "recomendadoSiempre": "Întotdeauna recomandat"
+    },
+    "plazo": {
+      "un1a4sem": "Aprox. 1–4 săptămâni",
+      "un1a6mes": "Aprox. 1–6 luni",
+      "variable": "Variabil",
+      "antesInicio": "Înainte de începere",
+      "siempre": "Întotdeauna",
+      "aplicacionConstante": "Aplicare constantă",
+      "inmediato": "Imediat"
+    },
+    "items": {
+      "obraMenor": {
+        "titulo": "Lucrări minore / Notificare prealabilă sau Declarație pe proprie răspundere",
+        "tipo": "comunicacionPrevia",
+        "plazo": "un1a4sem",
+        "desc": "Intervenții care nu afectează structura, fațada sau elementele comune. Denumirea exactă și pragul variază în funcție de comunitatea autonomă și municipiu — selectează comunitatea ta pentru detalii.",
+        "incluye": [
+          "Renovare baie sau bucătărie",
+          "Schimbare de distribuție nestructurală",
+          "Rigips / pereți despărțitori interiori",
+          "Placări cu gresie/faianță și pardoseli",
+          "Instalații (sanitare, electrice)",
+          "Vopsire și placări"
+        ]
+      },
+      "obraMayor": {
+        "titulo": "Lucrări majore / Autorizație de construire",
+        "tipo": "licencia",
+        "plazo": "un1a6mes",
+        "desc": "Când este afectată structura, fațada, are loc o schimbare de destinație sau suprafața este considerabilă. Necesită un proiect semnat de un tehnician competent (arhitect sau arhitect tehnic, după caz).",
+        "incluye": [
+          "Schimbarea destinației din spațiu comercial în locuință",
+          "Modificarea structurii sau fundației",
+          "Extinderea suprafeței",
+          "Renovarea fațadei sau acoperișului",
+          "Legalizarea lucrărilor executate fără autorizație"
+        ]
+      },
+      "obrasComunidades": {
+        "titulo": "Lucrări în asociații de proprietari",
+        "tipo": "acuerdoJunta",
+        "plazo": "variable",
+        "desc": "Orice lucrare care afectează elementele comune necesită acordul Adunării Proprietarilor conform Legii Proprietății Orizontale (Legea 49/1960). Cvorumul necesar variază în funcție de tipul acțiunii.",
+        "incluye": [
+          "Instalarea liftului",
+          "Renovarea fațadei sau a intrării",
+          "Lucrări în zonele comune",
+          "Instalații care traversează elemente comune",
+          "Eliminarea barierelor arhitecturale"
+        ]
+      },
+      "rd1627": {
+        "titulo": "Decretul Regal 1627/1997 — Securitatea pe șantiere",
+        "tipo": "obligatorio",
+        "plazo": "antesInicio",
+        "desc": "Se aplică în toată Spania. Pentru lucrări cu proiect, trebuie numit un Coordonator de Securitate și Sănătate. Pentru lucrări fără proiect, obligațiile revin antreprenorului.",
+        "incluye": [
+          "Notificare prealabilă către Autoritatea de Muncă",
+          "Plan de Securitate și Sănătate (lucrări >500 m² sau >30 de zile)",
+          "Registrul de Subcontractare",
+          "Notificarea deschiderii șantierului",
+          "Coordonator S&S pe șantiere cu mai mulți antreprenori"
+        ]
+      },
+      "epi": {
+        "titulo": "EIP — Echipament Individual de Protecție",
+        "tipo": "usoObligatorio",
+        "plazo": "siempre",
+        "desc": "Decretul Regal 773/1997 obligă la furnizarea și utilizarea EIP adecvat riscului. Nerespectarea poate atrage sancțiuni grave și răspundere civilă și penală.",
+        "incluye": [
+          "Cască de protecție",
+          "Încălțăminte de protecție (bombeu + talpă antiperforare)",
+          "Mănuși potrivite pentru lucrare",
+          "Ochelari de protecție la demolări",
+          "Ham și linie de viață pentru lucrul la înălțime",
+          "Mască pentru lucrări cu praf sau fibre"
+        ]
+      },
+      "cte": {
+        "titulo": "CTE — Codul Tehnic al Construcțiilor din Spania (DR 314/2006)",
+        "tipo": "obligatorioObraMayor",
+        "plazo": "aplicacionConstante",
+        "desc": "Cadru normativ național care stabilește cerințele de bază de calitate ale clădirilor și instalațiilor acestora. Se aplică în special la renovări complete și schimbări de destinație.",
+        "incluye": [
+          "DB-SI: Siguranță la incendiu",
+          "DB-SUA: Siguranța utilizării și accesibilitate",
+          "DB-HS: Salubritate (umiditate, ventilație, apă)",
+          "DB-HE: Economie de energie",
+          "DB-SE: Siguranță structurală",
+          "DB-HR: Protecție împotriva zgomotului"
+        ]
+      },
+      "rebt": {
+        "titulo": "REBT — Regulamentul Electrotehnic de Joasă Tensiune (DR 842/2002)",
+        "tipo": "obligatorio",
+        "plazo": "aplicacionConstante",
+        "desc": "Orice instalație electrică nouă sau modificată trebuie să respecte REBT. Necesită un instalator autorizat de comunitatea autonomă și un certificat de instalare pentru demersurile cu furnizorul.",
+        "incluye": [
+          "Electrician cu carnet de calificare valabil",
+          "Certificat de instalație electrică",
+          "Înregistrare la organul competent al comunității autonome",
+          "Inspecție obligatorie pentru instalații de o anumită dimensiune"
+        ]
+      },
+      "rite": {
+        "titulo": "RITE — Regulamentul Instalațiilor Termice (DR 1027/2007)",
+        "tipo": "obligatorio",
+        "plazo": "aplicacionConstante",
+        "desc": "Reglementează proiectarea, dimensionarea, execuția, întreținerea și inspecția instalațiilor de climatizare, apă caldă menajeră și ventilație.",
+        "incluye": [
+          "Instalator acreditat de comunitatea autonomă",
+          "Proiect sau memoriu tehnic în funcție de putere",
+          "Certificat de instalare pentru punerea în funcțiune",
+          "Întreținere periodică obligatorie"
+        ]
+      },
+      "loe": {
+        "titulo": "LOE — Legea Ordonării Construcțiilor (Legea 38/1999)",
+        "tipo": "marcoGeneral",
+        "plazo": "siempre",
+        "desc": "Definește agenții implicați în construcție, obligațiile acestora și garanțiile procesului constructiv. Esențială pentru înțelegerea responsabilităților și termenelor de garanție.",
+        "incluye": [
+          "Garanție de 1 an: finisaje și terminații",
+          "Garanție de 3 ani: locuibilitate",
+          "Garanție de 10 ani: daune structurale",
+          "Asigurare decenală obligatorie la locuințe noi",
+          "Răspundere solidară a agenților implicați"
+        ]
+      },
+      "contratoObra": {
+        "titulo": "Contract de lucrări",
+        "tipo": "recomendadoSiempre",
+        "plazo": "antesInicio",
+        "desc": "Codul Civil reglementează contractul de lucrări în toată Spania (art. 1588–1600). Protejează ambele părți. Trebuie să detalieze lucrările, materialele, termenele, prețurile și condițiile de modificare.",
+        "incluye": [
+          "Descrierea detaliată a lucrărilor și materialelor",
+          "Termen de execuție și penalizări",
+          "Modalitate și calendar de plăți",
+          "Procedură pentru lucrări suplimentare și modificări",
+          "Garanții conform LOE",
+          "Clauză de soluționare a conflictelor"
+        ]
+      },
+      "rgpd": {
+        "titulo": "GDPR și LOPDGDD — Protecția datelor",
+        "tipo": "obligatorio",
+        "plazo": "inmediato",
+        "desc": "Regulamentul General privind Protecția Datelor (UE 2016/679) și LOPDGDD (Legea Organică 3/2018) reglementează prelucrarea datelor personale ale clienților în toată Spania.",
+        "incluye": [
+          "Clauză informativă în oferte și contracte",
+          "Politică de confidențialitate dacă ai website sau aplicație",
+          "Registrul activităților de prelucrare",
+          "Nu ceda date terților fără consimțământ",
+          "Dreptul la ștergere și acces al persoanei vizate"
+        ]
+      },
+      "facturacion": {
+        "titulo": "Facturare și obligații ca liber-profesionist",
+        "tipo": "obligatorio",
+        "plazo": "siempre",
+        "desc": "Ca liber-profesionist (RETA), trebuie să emiți factură pentru fiecare lucrare, să declari TVA trimestrial (formularul 303) și impozitul pe venit (formularul 130 sau rețineri). Legea antifraudă impune software de facturare omologat din 2025.",
+        "incluye": [
+          "Înregistrare IAE (rubrica 501–505 în funcție de activitate)",
+          "Facturare cu toate elementele legale",
+          "Declarație trimestrială de TVA (form. 303)",
+          "Plată în rate a impozitului pe venit (form. 130)",
+          "Păstrarea facturilor 4 ani (impozit pe venit) / 10 ani (comercial)"
+        ]
+      }
+    },
+    "comunidadesTr": {
+      "andalucia": {
+        "ley": "Legea 7/2021 LISTA (Legea pentru Promovarea Sustenabilității Teritoriale)",
+        "menorNombre": "Declarație Urbanistică pe Proprie Răspundere",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Regional al Andaluziei (Departamentul de Lucrări Publice)",
+        "notas": "LISTA a simplificat regimul autorizațiilor. Multe lucrări care necesitau anterior autorizație trec acum la declarație pe proprie răspundere. Fiecare municipiu adaptează regimul prin propriile ordonanțe. Zonele cu protecție specială (litoral, centre istorice) au cerințe suplimentare."
+      },
+      "aragon": {
+        "ley": "Decretul Legislativ 1/2014 — Legea Urbanistică a Aragonului (LUArg)",
+        "menorNombre": "Notificare Prealabilă",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Aragonului (Departamentul de Structurare Teritorială)",
+        "notas": "În capitala Zaragoza se aplică Ordonanța Municipală de Construcții. Notificarea prealabilă se aplică lucrărilor de mică amploare. Zonele de protecție a patrimoniului necesită un raport prealabil de la Patrimoniul Cultural al Aragonului."
+      },
+      "asturias": {
+        "ley": "Decretul Legislativ 1/2004 — Legea Consolidată a Terenurilor (TROTU)",
+        "menorNombre": "Notificare Prealabilă",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Principatul Asturias (Departamentul de Planificare Teritorială)",
+        "notas": "Litoralul asturian și zonele muntoase din interior au restricții specifice. Centrele istorice Oviedo, Gijón și Avilés necesită demersuri suplimentare la Departamentul de Cultură."
+      },
+      "baleares": {
+        "ley": "Legea 12/2017 — Urbanismul Insulelor Baleare (LUIB)",
+        "menorNombre": "Notificare Prealabilă / Declarație pe Proprie Răspundere",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Insulelor Baleare (Departamentul de Mediu și Teritoriu)",
+        "notas": "LUIB diferențiază intervențiile pe teren urban consolidat de cele din zone protejate. Consiliile Insulare (Mallorca, Menorca, Eivissa, Formentera) au competențe urbanistice proprii. Atenție specială pentru zonele de coastă și zonele de intensificare turistică."
+      },
+      "canarias": {
+        "ley": "Legea 4/2017 — Terenuri și Spații Naturale Protejate (LSENPC)",
+        "menorNombre": "Notificare Prealabilă / Declarație pe Proprie Răspundere",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Insulelor Canare (Departamentul de Tranziție Ecologică)",
+        "notas": "Arhipelagul are o reglementare specifică datorită naturii sale insulare și spațiilor naturale (Rețeaua Canară de Spații Naturale). Consiliile insulare (cabildos) au competențe proprii. Există restricții speciale în zonele de coastă și turistice."
+      },
+      "cantabria": {
+        "ley": "Legea 2/2001 — Amenajarea Teritorială și Regimul Urbanistic al Terenului (LOTRUS)",
+        "menorNombre": "Notificare Prealabilă",
+        "mayorNombre": "Autorizație de Lucrări",
+        "organismo": "Primărie + Guvernul Cantabriei (Departamentul de Lucrări Publice)",
+        "notas": "Legea Coastelor are un impact deosebit asupra litoralului cantabric. Municipiile din interior cu patrimoniu etnografic și natural pot necesita rapoarte sectoriale suplimentare."
+      },
+      "castilla-la-mancha": {
+        "ley": "Decretul Legislativ 1/2023 — Textul Consolidat al Legii de Amenajare a Teritoriului",
+        "menorNombre": "Declarație pe Proprie Răspundere",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Castilia-La Mancha (Departamentul de Lucrări Publice)",
+        "notas": "Reglementarea distinge clar între acte supuse autorizației și acte supuse declarației pe proprie răspundere. Ansamblurile istorico-artistice (Toledo, Cuenca...) au un regim special al Departamentului de Cultură."
+      },
+      "castilla-leon": {
+        "ley": "Legea 5/1999 — Urbanismul Castiliei și León (LUCyL) și modificări",
+        "menorNombre": "Notificare Prealabilă",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Castiliei și León (Departamentul de Mediu, Locuințe și Planificare Teritorială)",
+        "notas": "Regiune vastă cu o mare varietate de situații. Orașele cu centre istorice declarate Bun de Interes Cultural (Ávila, Segovia, Salamanca, Burgos, León...) necesită un raport prealabil de la Direcția Generală a Patrimoniului Cultural. Zonele rurale au reguli specifice de utilizare a terenului."
+      },
+      "cataluna": {
+        "ley": "Decretul Legislativ 1/2010 — Legea Urbanismului din Catalonia (LUC)",
+        "menorNombre": "Notificare Prealabilă / Confirmare",
+        "mayorNombre": "Autorizație de Lucrări",
+        "organismo": "Primărie + Generalitat de Catalunya (Departamentul de Teritoriu)",
+        "notas": "Orașul Barcelona are propria Ordonanță Metropolitană de Construcții și reglementările Zonei Metropolitane (AMB). Lucrările în Cartierul Gotic sau în clădiri clasificate necesită autorizația Patrimoniului Cultural. Planul de Îmbunătățire a Locuinței (PMH) oferă ajutoare specifice pentru renovări."
+      },
+      "extremadura": {
+        "ley": "Legea 15/2001 — Terenuri și Amenajare Teritorială a Extremadurei (LESOTEX)",
+        "menorNombre": "Notificare Prealabilă",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Extremadurei (Departamentul de Amenajare Teritorială)",
+        "notas": "Patrimoniul natural (Parcul Național Monfragüe, Parcul Natural Cornalvo...) și cultural (Mérida, Cáceres, Trujillo cu ansambluri BIC) au un rol major, condiționând lucrările în zonele afectate."
+      },
+      "galicia": {
+        "ley": "Legea 2/2016 — Legea Funciară a Galiciei (LSG)",
+        "menorNombre": "Notificare Prealabilă de Lucrări",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Galiciei (Departamentul de Mediu, Teritoriu și Locuințe)",
+        "notas": "LSG are un regim special pentru \"nucleul rural\" și clădirile de pe terenuri rustice. Santiago de Compostela, ca oraș Patrimoniu Mondial, are un Plan Special de Protecție a centrului istoric. Legea Coastelor afectează intens litoralul galician."
+      },
+      "madrid": {
+        "ley": "Legea 9/2001 — Legea Funciară a Comunității Madrid (LSCM)",
+        "menorNombre": "Notificare Prealabilă de Lucrări",
+        "mayorNombre": "Autorizație Urbanistică de Construire",
+        "organismo": "Primărie + Comunitatea Madrid (Departamentul de Locuințe și Administrație Locală)",
+        "notas": "În municipiul Madrid se aplică Planul General de Dezvoltare Urbană (PGOU). Notificarea prealabilă permite începerea imediată a lucrărilor. Clădirile clasificate și zonele de protecție specială necesită rapoarte de la Biroul de Supervizare a Proiectelor. Districtele centrale (Centro, Salamanca, Chamberí) au reguli de protecție a peisajului urban."
+      },
+      "murcia": {
+        "ley": "Decretul Legislativ 1/2005 — Legea Funciară a Regiunii Murcia (LSRM)",
+        "menorNombre": "Declarație pe Proprie Răspundere",
+        "mayorNombre": "Autorizație de Lucrări",
+        "organismo": "Primărie + Guvernul Regional Murcia (Departamentul de Turism, Cultură și Mediu)",
+        "notas": "Laguna Mar Menor și litoralul murcian au legislație de protecție specifică. Cartagena și Lorca au situri arheologice care condiționează lucrările din împrejurimile lor. Ordonanțele municipale variază semnificativ între litoral și interior."
+      },
+      "navarra": {
+        "ley": "Legea Regională 5/2015 — Amenajarea Teritoriului și Urbanism (LFOTU)",
+        "menorNombre": "Notificare Prealabilă",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul Navarrei (Departamentul de Amenajare Teritorială)",
+        "notas": "Navarra are propriul statut (\"fuero\") care îi conferă competențe fiscale și normative speciale. Drumul lui Santiago traversează comunitatea și generează zone de protecție specifice. Bardenas Reales, ca spațiu natural protejat, condiționează lucrările în municipiile învecinate."
+      },
+      "pais-vasco": {
+        "ley": "Legea 2/2006 — Terenuri și Urbanism din Țara Bascilor (LSPV)",
+        "menorNombre": "Notificare Prealabilă (Comunicazio Aurretiaskoa)",
+        "mayorNombre": "Autorizație Urbanistică (Hirigintza Lizentzia)",
+        "organismo": "Udala (Primărie) + Guvernul Basc (Departamentul de Planificare Teritorială)",
+        "notas": "Țara Bascilor are propriul acord economic cu un regim fiscal distinct. Adunările Generale ale celor trei Teritorii Istorice (Álava, Bizkaia, Gipuzkoa) au competențe normative proprii. Patrimoniul industrial basc este special protejat. Bilbao, San Sebastián și Vitoria-Gasteiz au planuri generale cu reguli specifice."
+      },
+      "la-rioja": {
+        "ley": "Legea 5/2006 — Amenajarea Teritoriului și Urbanismul din La Rioja (LOTUR)",
+        "menorNombre": "Notificare Prealabilă",
+        "mayorNombre": "Autorizație Urbanistică",
+        "organismo": "Primărie + Guvernul La Rioja (Departamentul de Lucrări Publice)",
+        "notas": "Comunitate mică cu reglementare relativ simplificată. Logroño și municipiile viticole de pe Drumul lui Santiago au zone de protecție specială. Crama, ca element constructiv singular, are reglementare proprie în zonele cu Denumire de Origine."
+      },
+      "valencia": {
+        "ley": "Legea 5/2014 — Amenajarea Teritoriului, Urbanism și Peisaj (LOTUP)",
+        "menorNombre": "Declarație pe Proprie Răspundere / Notificare de Acțiune",
+        "mayorNombre": "Autorizație Urbanistică (Llicència Urbanística)",
+        "organismo": "Primărie + Generalitat Valenciana (Departamentul de Teritoriu)",
+        "notas": "LOTUP încorporează evaluarea de mediu și peisagistică în procesul urbanistic. Litoralul valencian (PATIVEL) are protecție specială. Orașul Valencia are propriul Plan General. Zonele inundabile (ZP sau ZFC) condiționează lucrările la parter, subsoluri și elementele în contact cu solul."
+      }
+    }
   },
   "resultados": {
     "title": "Rezultate",
@@ -1398,6 +1903,37 @@
         "titulo": "Formare continuă",
         "desc": "Cursuri de perfecționare profesională: rigips, hidroizolații, electricitate, instalații sanitare, management, oferte."
       }
+    },
+    "plantillasTr": {
+      "contrato-obra": {
+        "titulo": "Contract de lucrări",
+        "desc": "Contract tip pentru renovarea unei locuințe sau spațiu comercial. Include descrierea lucrărilor, termenul, modalitatea de plată și garanțiile."
+      },
+      "acta-inicio": {
+        "titulo": "Proces-verbal de începere a lucrărilor",
+        "desc": "Document care formalizează începerea lucrărilor și starea imobilului înainte de renovare."
+      },
+      "acta-fin": {
+        "titulo": "Proces-verbal de finalizare și recepție a lucrărilor",
+        "desc": "Document de predare a lucrării finalizate. Clientul semnează conformitatea cu lucrările efectuate."
+      },
+      "parte-trabajo": {
+        "titulo": "Raport zilnic de lucru",
+        "desc": "Înregistrare zilnică a lucrărilor efectuate pe șantier. Util pentru controlul intern și justificarea față de client."
+      },
+      "presupuesto-extras": {
+        "titulo": "Ofertă pentru lucrări suplimentare",
+        "desc": "Pentru documentarea și aprobarea lucrărilor suplimentare care nu au fost incluse în oferta inițială."
+      },
+      "politica-privacidad": {
+        "titulo": "Clauză de confidențialitate (GDPR)",
+        "desc": "Text informativ privind protecția datelor de inclus în oferte și contracte."
+      }
+    },
+    "categoriaPlantilla": {
+      "Contratos": "Contracte",
+      "Otros": "Altele",
+      "Presupuestos": "Oferte"
     }
   },
   "copias": {
@@ -1881,5 +2417,9 @@
   "offlineBadge": {
     "tooltip": "Fără conexiune — vezi ultimele date salvate. Modificările se vor sincroniza la reconectare.",
     "label": "Fără conexiune"
+  },
+  "legalAviso": {
+    "titulo": "Conținut oficial în limba spaniolă",
+    "texto": "Această traducere are caracter orientativ. Textul oficial, cu valabilitate legală, este originalul în limba spaniolă. În caz de îndoială, consultă un traducător profesionist sau contabilul/consilierul tău."
   }
 }

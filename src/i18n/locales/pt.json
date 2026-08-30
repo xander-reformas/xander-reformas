@@ -717,7 +717,150 @@
     "convenio": {
       "disclaimerPre": "ℹ️ Guia orientativo.",
       "disclaimerPost": "Baseado na VI Convenção Coletiva Geral do Setor da Construção (2022-2026). Verifique sempre os valores atualizados com o seu consultor laboral ou no BOE / convenção provincial.",
-      "recursosTitle": "Recursos e links úteis"
+      "recursosTitle": "Recursos e links úteis",
+      "secciones": {
+        "convenioGeneral": {
+          "titulo": "Convenção Coletiva Geral do Setor da Construção (CGSC)",
+          "desc": "A VI CGSC (2022-2026) regula as condições laborais de todos os trabalhadores do setor em Espanha. Aplica-se a empresas de reformas, acabamentos e manutenção de edifícios (CNAE 41, 42, 43)."
+        },
+        "gruposSalarios": {
+          "titulo": "Grupos profissionais e salários orientativos (2025)",
+          "desc": "Salários mínimos segundo a Convenção. As tabelas salariais definitivas são atualizadas anualmente. Verifique a tabela em vigor na sua província (algumas convenções provinciais melhoram a estatal)."
+        },
+        "plusesComplementos": {
+          "titulo": "Plus de convenção e complementos salariais",
+          "desc": "Além do salário base, a convenção estabelece plus obrigatórios que devem ser somados ao custo total do trabalhador."
+        },
+        "cotizacionesSS": {
+          "titulo": "Contribuições Segurança Social — Quotas empresa (construção)",
+          "desc": "O empresário assume a maior parte das contribuições. Estas percentagens aplicam-se sobre a base de contribuição (que pode diferir do salário bruto)."
+        },
+        "obligacionesFormales": {
+          "titulo": "Obrigações formais ao contratar",
+          "desc": "Ao contratar o seu primeiro funcionário, deverá cumprir uma série de trâmites prévios e periódicos."
+        }
+      },
+      "items": {
+        "jornadaMaxAnual": {
+          "label": "Jornada máxima anual",
+          "valor": "1.736 horas (2025)"
+        },
+        "jornadaSemanal": {
+          "label": "Jornada semanal",
+          "valor": "40 horas ordinárias"
+        },
+        "vacaciones": {
+          "label": "Férias",
+          "valor": "30 dias corridos / ano"
+        },
+        "pagasExtra": {
+          "label": "Subsídios extraordinários",
+          "valor": "2 (junho e dezembro) — 30 dias cada"
+        },
+        "horasExtra": {
+          "label": "Horas extraordinárias",
+          "valor": "Máx. 80/ano — acréscimo mín. 75% ou descanso compensatório"
+        },
+        "grupoIIIEncargado": {
+          "label": "Grupo III — Encarregado / Capataz",
+          "valor": "A partir de ~1.700 € / mês bruto"
+        },
+        "grupoIVOficial1": {
+          "label": "Grupo IV — Oficial de 1ª",
+          "valor": "A partir de ~1.550 € / mês bruto"
+        },
+        "grupoIVOficial2": {
+          "label": "Grupo IV — Oficial de 2ª",
+          "valor": "A partir de ~1.450 € / mês bruto"
+        },
+        "grupoVAyudante": {
+          "label": "Grupo V — Ajudante",
+          "valor": "A partir de ~1.350 € / mês bruto"
+        },
+        "grupoVIPeonEsp": {
+          "label": "Grupo VI — Peão especializado",
+          "valor": "A partir de ~1.280 € / mês bruto"
+        },
+        "grupoVIPeonOrd": {
+          "label": "Grupo VI — Peão ordinário",
+          "valor": "A partir de ~1.220 € / mês bruto"
+        },
+        "plusConvenio": {
+          "label": "Plus de Convenção",
+          "valor": "Fixado pela tabela salarial da convenção (varia por grupo)"
+        },
+        "plusDistancia": {
+          "label": "Plus de Distância",
+          "valor": "Por deslocação ao centro de trabalho (km > 2 do município de contratação)"
+        },
+        "dietas": {
+          "label": "Ajudas de custo",
+          "valor": "Meia ajuda de custo: ~13 €/dia | Ajuda de custo completa: ~30 €/dia (pernoita fora)"
+        },
+        "plusLocomocion": {
+          "label": "Plus de locomoção",
+          "valor": "Quando o trabalhador usa veículo próprio: €/km segundo a convenção provincial"
+        },
+        "itIncapacidad": {
+          "label": "IT / Incapacidade",
+          "valor": "Complemento da empresa até 100% desde o 1º dia (acidente de trabalho)"
+        },
+        "contingenciasComunes": {
+          "label": "Contingências comuns"
+        },
+        "atEp": {
+          "label": "AT e DP (construção, CNAE 43)"
+        },
+        "desempleoCG": {
+          "label": "Desemprego (CG)"
+        },
+        "fogasa": {
+          "label": "FOGASA"
+        },
+        "formacionProfesional": {
+          "label": "Formação profissional"
+        },
+        "mei": {
+          "label": "MEI — Mecanismo de Equidade Intergeracional (2024-2025)"
+        },
+        "totalAproxEmpresa": {
+          "label": "▶ Total aproximado empresa",
+          "sufijo": "sobre a base de contribuição"
+        },
+        "altaEmpleadorSS": {
+          "label": "Inscrição como empregador na Segurança Social",
+          "valor": "Código de Conta de Contribuição (CCC) — antes do 1º contrato"
+        },
+        "altaTrabajadorSS": {
+          "label": "Inscrição do trabalhador na Segurança Social",
+          "valor": "Sistema RED / SILTRA — antes do início da atividade"
+        },
+        "comunicacionContrato": {
+          "label": "Comunicação de contrato",
+          "valor": "SEPE — 10 dias úteis a partir da assinatura"
+        },
+        "tc1tc2": {
+          "label": "TC1 / TC2 mensal",
+          "valor": "Contribuição mensal SS — domiciliação ou depósito direto"
+        },
+        "nomina": {
+          "label": "Recibo de vencimento",
+          "valor": "Mensal, assinado pelo trabalhador (ou confirmação eletrónica)"
+        },
+        "retencionIrpfEmp": {
+          "label": "Retenção de IRS",
+          "valor": "Mod. 111 trimestral + Mod. 190 anual (resumo de retenções)"
+        },
+        "calendarioLaboral": {
+          "label": "Calendário laboral",
+          "valor": "Publicar no centro de trabalho antes de 1 de janeiro"
+        },
+        "prl": {
+          "label": "PRL (Prevenção de Riscos)",
+          "valor": "Plano de prevenção + avaliação de riscos obrigatória"
+        }
+      },
+      "atEpSufijo": "(varia por CAE e sinistralidade)"
     },
     "form": {
       "editTitle": "Editar funcionário",
@@ -1082,6 +1225,62 @@
       "trimestreLabel": "Trimestre",
       "cancelar": "Cancelar",
       "generarDocumento": "Gerar documento"
+    },
+    "trimestres": {
+      "hastaFecha": "Até {{dia}} de {{mes}}",
+      "anioSiguiente": "(ano seguinte)"
+    },
+    "periodo": {
+      "trimestral": "Trimestral",
+      "anual": "Anual"
+    },
+    "modelos": {
+      "130": {
+        "nombre": "IRS fracionado",
+        "desc": "Pagamento por conta do IRS. Se faturar a empresas com retenção de 15%, poderá não ser necessário apresentá-lo. Calcula-se 20% sobre o rendimento líquido (receitas menos despesas)."
+      },
+      "303": {
+        "nombre": "IVA",
+        "desc": "IVA liquidado (o que cobra nas faturas) menos IVA suportado (o que paga em compras e despesas). O resultado positivo é entregue; o negativo é compensado."
+      },
+      "111": {
+        "nombre": "Retenções de IRS",
+        "desc": "Se tiver funcionários ou pagar a profissionais com retenção, deve liquidar as retenções praticadas."
+      },
+      "100": {
+        "nombre": "Declaração de IRS",
+        "desc": "Apresentação entre abril e junho do ano seguinte. Inclui todos os rendimentos da atividade económica do ano."
+      },
+      "390": {
+        "nombre": "Resumo anual de IVA",
+        "desc": "Resumo de todos os trimestres do Modelo 303. Apresenta-se em janeiro do ano seguinte."
+      }
+    },
+    "tips": {
+      "tickets": {
+        "titulo": "Guarde TODOS os recibos",
+        "desc": "Materiais, combustível, ferramentas, roupa de trabalho, telemóvel (50%), ajudas de custo em obra. Sem o comprovativo, não é dedutível."
+      },
+      "despacho": {
+        "titulo": "Escritório em casa",
+        "desc": "Se usar parte da sua casa para trabalhar, pode deduzir uma % proporcional de fornecimentos (luz, internet). Consulte o seu contabilista sobre a percentagem."
+      },
+      "vehiculo": {
+        "titulo": "Veículo profissional",
+        "desc": "Se tiver um veículo exclusivamente profissional (carrinha de trabalho) deduz 100%. Automóvel pessoal: só se for de uso exclusivamente profissional."
+      },
+      "telefono": {
+        "titulo": "Telefone e tecnologia",
+        "desc": "Telemóvel, computador, software: dedutível a 100% se for uso exclusivamente profissional, a 50% se for misto."
+      },
+      "tarifaPlana": {
+        "titulo": "Tarifa fixa de trabalhador independente",
+        "desc": "Primeiros 12 meses: quota fixa reduzida. Prorrogável mais 12 meses se os rendimentos não ultrapassarem o salário mínimo. Planeie bem o momento da inscrição."
+      },
+      "ivaReformas": {
+        "titulo": "IVA em reformas",
+        "desc": "Taxa reduzida de 10% para obras de reabilitação de habitações particulares com mais de 2 anos. Taxa geral de 21% para locais comerciais e obras novas."
+      }
     }
   },
   "legislacion": {
@@ -1106,7 +1305,313 @@
     "avisoText": "A regulamentação urbanística é alterada com frequência. Consulte sempre a Câmara Municipal correspondente e um técnico competente (arquiteto ou engenheiro) em caso de dúvida. As condições podem variar por município mesmo dentro da mesma região.",
     "estatalCaption": "Regulamentação nacional — aplica-se em toda a Espanha",
     "incluyeAplica": "Inclui / Aplica-se a:",
-    "recursosUtiles": "Recursos úteis (nacionais)"
+    "recursosUtiles": "Recursos úteis (nacionais)",
+    "normativaSecciones": {
+      "tiposIntervencion": "Tipos de intervenção em obra",
+      "seguridadSalud": "Segurança e saúde em obra",
+      "normativaTecnica": "Normativa técnica",
+      "relacionClientes": "Relação com clientes e obrigações fiscais"
+    },
+    "tipo": {
+      "comunicacionPrevia": "Comunicação prévia",
+      "licencia": "Licença",
+      "acuerdoJunta": "Acordo da Assembleia",
+      "obligatorio": "Obrigatório",
+      "usoObligatorio": "Uso obrigatório",
+      "obligatorioObraMayor": "Obrigatório em obra maior",
+      "marcoGeneral": "Enquadramento geral",
+      "recomendadoSiempre": "Sempre recomendado"
+    },
+    "plazo": {
+      "un1a4sem": "Aprox. 1–4 semanas",
+      "un1a6mes": "Aprox. 1–6 meses",
+      "variable": "Variável",
+      "antesInicio": "Antes do início",
+      "siempre": "Sempre",
+      "aplicacionConstante": "Aplicação constante",
+      "inmediato": "Imediato"
+    },
+    "items": {
+      "obraMenor": {
+        "titulo": "Obra menor / Comunicação prévia ou Declaração de Responsabilidade",
+        "tipo": "comunicacionPrevia",
+        "plazo": "un1a4sem",
+        "desc": "Intervenções que não afetam a estrutura, fachada ou elementos comuns. A denominação exata e o limite variam por região e município — selecione a sua região para ver o detalhe.",
+        "incluye": [
+          "Reforma de casa de banho ou cozinha",
+          "Alteração de distribuição não estrutural",
+          "Pladur / divisórias interiores",
+          "Azulejos e pavimentos",
+          "Instalações (canalização, eletricidade)",
+          "Pintura e revestimentos"
+        ]
+      },
+      "obraMayor": {
+        "titulo": "Obra maior / Licença urbanística",
+        "tipo": "licencia",
+        "plazo": "un1a6mes",
+        "desc": "Quando é afetada a estrutura, a fachada, ocorre mudança de uso ou a área é considerável. Requer projeto assinado por técnico competente (arquiteto ou arquiteto técnico consoante o caso).",
+        "incluye": [
+          "Mudança de uso de local para habitação",
+          "Modificação de estrutura ou fundação",
+          "Ampliação de área",
+          "Reforma de fachada ou cobertura",
+          "Legalização de obras executadas sem licença"
+        ]
+      },
+      "obrasComunidades": {
+        "titulo": "Obras em condomínios",
+        "tipo": "acuerdoJunta",
+        "plazo": "variable",
+        "desc": "Qualquer obra que afete elementos comuns requer acordo da Assembleia de Condóminos segundo a Lei de Propriedade Horizontal (Lei 49/1960). O quórum varia consoante o tipo de atuação.",
+        "incluye": [
+          "Instalação de elevador",
+          "Reforma de fachada ou entrada",
+          "Obras em zonas comuns",
+          "Instalações que atravessem elementos comuns",
+          "Supressão de barreiras arquitetónicas"
+        ]
+      },
+      "rd1627": {
+        "titulo": "Decreto Real 1627/1997 — Segurança em obras",
+        "tipo": "obligatorio",
+        "plazo": "antesInicio",
+        "desc": "Aplica-se em toda a Espanha. Para obras com projeto, deve ser nomeado um Coordenador de Segurança e Saúde. Em obras sem projeto, as obrigações recaem sobre o empreiteiro.",
+        "incluye": [
+          "Aviso prévio à Autoridade Laboral",
+          "Plano de Segurança e Saúde (obras >500 m² ou >30 dias)",
+          "Livro de Subcontratação",
+          "Abertura de centro de trabalho",
+          "Coordenador de S&S em obras com vários empreiteiros"
+        ]
+      },
+      "epi": {
+        "titulo": "EPI — Equipamento de Proteção Individual",
+        "tipo": "usoObligatorio",
+        "plazo": "siempre",
+        "desc": "O Decreto Real 773/1997 obriga a fornecer e usar EPIs adequados ao risco. O incumprimento pode implicar sanções graves e responsabilidade civil e penal.",
+        "incluye": [
+          "Capacete de segurança",
+          "Calçado de segurança (biqueira + sola antiperfuração)",
+          "Luvas adequadas ao trabalho",
+          "Óculos de proteção em demolições",
+          "Arnês e linha de vida em trabalhos em altura",
+          "Máscara em trabalhos com pó ou fibras"
+        ]
+      },
+      "cte": {
+        "titulo": "CTE — Código Técnico da Edificação espanhol (RD 314/2006)",
+        "tipo": "obligatorioObraMayor",
+        "plazo": "aplicacionConstante",
+        "desc": "Enquadramento normativo estatal que estabelece os requisitos básicos de qualidade dos edifícios e das suas instalações. Aplica-se especialmente em reabilitações integrais e mudanças de uso.",
+        "incluye": [
+          "DB-SI: Segurança contra incêndio",
+          "DB-SUA: Segurança de utilização e acessibilidade",
+          "DB-HS: Salubridade (humidades, ventilação, água)",
+          "DB-HE: Poupança de energia",
+          "DB-SE: Segurança estrutural",
+          "DB-HR: Proteção contra o ruído"
+        ]
+      },
+      "rebt": {
+        "titulo": "REBT — Regulamento Eletrotécnico de Baixa Tensão (RD 842/2002)",
+        "tipo": "obligatorio",
+        "plazo": "aplicacionConstante",
+        "desc": "Qualquer instalação elétrica nova ou modificada deve cumprir o REBT. Requer instalador autorizado pela região e certificado de instalação para o trâmite junto da distribuidora.",
+        "incluye": [
+          "Eletricista com carteira habilitada",
+          "Certificado de instalação elétrica",
+          "Inscrição no órgão competente da região",
+          "Inspeção obrigatória em instalações de certa dimensão"
+        ]
+      },
+      "rite": {
+        "titulo": "RITE — Regulamento de Instalações Térmicas (RD 1027/2007)",
+        "tipo": "obligatorio",
+        "plazo": "aplicacionConstante",
+        "desc": "Regula o design, dimensionamento, execução, manutenção e inspeção das instalações de climatização, água quente sanitária e ventilação.",
+        "incluye": [
+          "Instalador acreditado pela região",
+          "Projeto ou memória técnica consoante a potência",
+          "Certificado de instalação para o arranque",
+          "Manutenção periódica obrigatória"
+        ]
+      },
+      "loe": {
+        "titulo": "LOE — Lei de Ordenamento da Edificação (Lei 38/1999)",
+        "tipo": "marcoGeneral",
+        "plazo": "siempre",
+        "desc": "Define os agentes da edificação, as suas obrigações e as garantias do processo construtivo. Fundamental para compreender responsabilidades e prazos de garantia.",
+        "incluye": [
+          "Garantia de 1 ano: acabamentos",
+          "Garantia de 3 anos: habitabilidade",
+          "Garantia de 10 anos: danos estruturais",
+          "Seguro decenal obrigatório em obra nova de habitação",
+          "Responsabilidade solidária dos agentes"
+        ]
+      },
+      "contratoObra": {
+        "titulo": "Contrato de obra",
+        "tipo": "recomendadoSiempre",
+        "plazo": "antesInicio",
+        "desc": "O Código Civil regula o contrato de obra em toda a Espanha (arts. 1588–1600). Protege ambas as partes. Deve detalhar trabalhos, materiais, prazos, preços e condições de alteração.",
+        "incluye": [
+          "Descrição detalhada de trabalhos e materiais",
+          "Prazo de execução e penalizações",
+          "Forma e calendário de pagamentos",
+          "Procedimento para extras e alterações",
+          "Garantias segundo a LOE",
+          "Cláusula de resolução de conflitos"
+        ]
+      },
+      "rgpd": {
+        "titulo": "RGPD e LOPDGDD — Proteção de dados",
+        "tipo": "obligatorio",
+        "plazo": "inmediato",
+        "desc": "O Regulamento Geral de Proteção de Dados (UE 2016/679) e a LOPDGDD (Lei Orgânica 3/2018) regulam o tratamento de dados pessoais de clientes em toda a Espanha.",
+        "incluye": [
+          "Cláusula informativa em orçamentos e contratos",
+          "Política de privacidade se tiver site ou app",
+          "Registo de atividades de tratamento",
+          "Não ceder dados a terceiros sem consentimento",
+          "Direito de apagamento e acesso do titular"
+        ]
+      },
+      "facturacion": {
+        "titulo": "Faturação e obrigações como trabalhador independente",
+        "tipo": "obligatorio",
+        "plazo": "siempre",
+        "desc": "Como trabalhador independente (RETA), deve emitir fatura por cada trabalho, declarar IVA trimestralmente (modelo 303) e IRS (modelo 130 ou retenções). A lei antifraude exige software de faturação certificado desde 2025.",
+        "incluye": [
+          "Inscrição no IAE (epígrafe 501–505 consoante a atividade)",
+          "Faturação com todos os elementos legais",
+          "Declaração trimestral de IVA (mod. 303)",
+          "Pagamento fracionado de IRS (mod. 130)",
+          "Conservação de faturas 4 anos (IRS) / 10 anos (comercial)"
+        ]
+      }
+    },
+    "comunidadesTr": {
+      "andalucia": {
+        "ley": "Lei 7/2021 LISTA (Lei de Impulso para a Sustentabilidade do Território)",
+        "menorNombre": "Declaração de Responsabilidade Urbanística",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Junta da Andaluzia (Departamento de Obras Públicas)",
+        "notas": "A LISTA simplificou o regime de licenças. Muitas obras antes sujeitas a licença passam a Declaração de Responsabilidade. Cada município adapta o regime através das suas próprias posturas. Destacam-se as zonas de proteção especial (litoral, centros históricos) com requisitos adicionais."
+      },
+      "aragon": {
+        "ley": "Decreto Legislativo 1/2014 — Lei Urbanística de Aragão (LUArg)",
+        "menorNombre": "Comunicação Prévia",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Governo de Aragão (Departamento de Estruturação do Território)",
+        "notas": "Na capital, Saragoça, vigora a Postura Municipal de Edificação. A comunicação prévia aplica-se a obras de pequena dimensão. As zonas de proteção patrimonial requerem relatório prévio do Património Cultural de Aragão."
+      },
+      "asturias": {
+        "ley": "Decreto Legislativo 1/2004 — Texto Consolidado da Lei do Solo (TROTU)",
+        "menorNombre": "Comunicação Prévia",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Principado das Astúrias (Departamento de Ordenamento do Território)",
+        "notas": "O litoral asturiano e as áreas do interior montanhoso têm restrições específicas. Os conjuntos históricos de Oviedo, Gijón e Avilés requerem trâmites adicionais junto do Departamento de Cultura."
+      },
+      "baleares": {
+        "ley": "Lei 12/2017 — Urbanismo das Ilhas Baleares (LUIB)",
+        "menorNombre": "Comunicação Prévia / Declaração de Responsabilidade",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Governo das Ilhas Baleares (Departamento de Ambiente e Território)",
+        "notas": "A LUIB diferencia entre intervenções em solo urbano consolidado e em zonas protegidas. Os Conselhos Insulares (Maiorca, Menorca, Ibiza, Formentera) têm competências urbanísticas próprias. Atenção especial às zonas costeiras e áreas de intensificação turística."
+      },
+      "canarias": {
+        "ley": "Lei 4/2017 — Solo e Espaços Naturais Protegidos (LSENPC)",
+        "menorNombre": "Comunicação Prévia / Declaração de Responsabilidade",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Governo das Canárias (Departamento de Transição Ecológica)",
+        "notas": "O arquipélago tem regulamentação específica pela sua insularidade e espaços naturais (Rede Canária de Espaços Naturais). Os cabildos insulares têm competências próprias. Existem restrições especiais em zonas costeiras e áreas turísticas."
+      },
+      "cantabria": {
+        "ley": "Lei 2/2001 — Ordenamento Territorial e Regime Urbanístico do Solo (LOTRUS)",
+        "menorNombre": "Comunicação Prévia",
+        "mayorNombre": "Licença de Obras",
+        "organismo": "Câmara Municipal + Governo da Cantábria (Departamento de Obras Públicas)",
+        "notas": "A Lei de Costas tem impacto especial no litoral cântabro. Os municípios do interior com património etnográfico e natural podem requerer relatórios setoriais adicionais."
+      },
+      "castilla-la-mancha": {
+        "ley": "Decreto Legislativo 1/2023 — Texto Consolidado da Lei de Ordenamento do Território",
+        "menorNombre": "Declaração de Responsabilidade",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Junta de CLM (Departamento de Obras Públicas)",
+        "notas": "A norma distingue claramente entre atos sujeitos a licença e atos sujeitos a declaração de responsabilidade. Os conjuntos histórico-artísticos (Toledo, Cuenca...) têm regime especial do Departamento de Cultura."
+      },
+      "castilla-leon": {
+        "ley": "Lei 5/1999 — Urbanismo de Castela e Leão (LUCyL) e alterações",
+        "menorNombre": "Comunicação Prévia",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Junta de CyL (Departamento de Ambiente, Habitação e Ordenamento do Território)",
+        "notas": "Região extensa com grande variedade de situações. As cidades com conjuntos históricos classificados como Bem de Interesse Cultural (Ávila, Segóvia, Salamanca, Burgos, Leão...) requerem relatório prévio da Direção-Geral do Património Cultural. As zonas rurais têm regras específicas de uso do solo."
+      },
+      "cataluna": {
+        "ley": "Decreto Legislativo 1/2010 — Lei do Urbanismo da Catalunha (LUC)",
+        "menorNombre": "Comunicação Prévia / Aviso de Receção",
+        "mayorNombre": "Licença de Obras",
+        "organismo": "Câmara Municipal + Generalitat da Catalunha (Departamento de Território)",
+        "notas": "A cidade de Barcelona tem a sua própria Postura Metropolitana de Edificação e a regulamentação da Área Metropolitana (AMB). As atuações no Bairro Gótico ou em edifícios classificados requerem autorização do Património Cultural. O PMH (Plano de Melhoria da Habitação) oferece ajudas específicas para reformas."
+      },
+      "extremadura": {
+        "ley": "Lei 15/2001 — Solo e Ordenamento Territorial da Extremadura (LESOTEX)",
+        "menorNombre": "Comunicação Prévia",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Junta da Extremadura (Departamento de Ordenamento do Território)",
+        "notas": "Grande protagonismo do património natural (Parque Nacional de Monfragüe, Parque Natural de Cornalvo...) e cultural (Mérida, Cáceres, Trujillo com conjuntos BIC) que condicionam as atuações nas zonas afetadas."
+      },
+      "galicia": {
+        "ley": "Lei 2/2016 — Solo da Galiza (LSG)",
+        "menorNombre": "Comunicação Prévia de Obras",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Xunta da Galiza (Departamento de Ambiente, Território e Habitação)",
+        "notas": "A LSG tem um regime especial para o \"núcleo rural\" e as edificações em solo rústico. Santiago de Compostela, como cidade Património da Humanidade, conta com um Plano Especial de Proteção do centro histórico. A Lei de Costas afeta intensamente o litoral galego."
+      },
+      "madrid": {
+        "ley": "Lei 9/2001 — Solo da Comunidade de Madrid (LSCM)",
+        "menorNombre": "Comunicação Prévia de Obras",
+        "mayorNombre": "Licença Urbanística de Edificação",
+        "organismo": "Câmara Municipal + Comunidade de Madrid (Departamento de Habitação e Administração Local)",
+        "notas": "No município de Madrid vigora o Plano Geral de Ordenamento Urbano (PGOU). A comunicação prévia permite o início imediato das obras. Os edifícios classificados e as zonas de proteção especial requerem relatórios do Gabinete de Supervisão de Projetos. Os distritos centrais (Centro, Salamanca, Chamberí) têm normas de proteção da paisagem urbana."
+      },
+      "murcia": {
+        "ley": "Decreto Legislativo 1/2005 — Lei do Solo da Região de Múrcia (LSRM)",
+        "menorNombre": "Declaração de Responsabilidade",
+        "mayorNombre": "Licença de Obras",
+        "organismo": "Câmara Municipal + CARM (Departamento de Turismo, Cultura e Ambiente)",
+        "notas": "A Mar Menor e o litoral murciano têm legislação de proteção específica. Cartagena e Lorca têm conjuntos arqueológicos que condicionam as obras no seu entorno. As posturas municipais variam significativamente entre o litoral e o interior."
+      },
+      "navarra": {
+        "ley": "Lei Foral 5/2015 — Ordenamento do Território e Urbanismo (LFOTU)",
+        "menorNombre": "Comunicação Prévia",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Governo de Navarra (Departamento de Ordenamento do Território)",
+        "notas": "Navarra tem foral próprio que lhe concede competências fiscais e normativas especiais. O Caminho de Santiago atravessa a comunidade e gera zonas de proteção específicas. A Bardena Real, como espaço natural protegido, condiciona as atuações nos municípios limítrofes."
+      },
+      "pais-vasco": {
+        "ley": "Lei 2/2006 — Solo e Urbanismo do País Basco (LSPV)",
+        "menorNombre": "Comunicação Prévia (Comunicazio Aurretiaskoa)",
+        "mayorNombre": "Licença Urbanística (Hirigintza Lizentzia)",
+        "organismo": "Udala (Câmara Municipal) + Governo Basco (Departamento de Planeamento Territorial)",
+        "notas": "O País Basco tem concerto económico próprio com um regime fiscal diferenciado. As Juntas Gerais dos três Territórios Históricos (Álava, Biscaia, Guipúscoa) têm competências normativas próprias. O património industrial basco está especialmente protegido. Bilbau, San Sebastián e Vitória-Gasteiz têm planos gerais com normas específicas."
+      },
+      "la-rioja": {
+        "ley": "Lei 5/2006 — Ordenamento do Território e Urbanismo de La Rioja (LOTUR)",
+        "menorNombre": "Comunicação Prévia",
+        "mayorNombre": "Licença Urbanística",
+        "organismo": "Câmara Municipal + Governo de La Rioja (Departamento de Obras Públicas)",
+        "notas": "Comunidade pequena com regulamentação relativamente simplificada. Logroño e os municípios vitivinícolas do Caminho de Santiago têm áreas de proteção especial. A adega, como elemento construtivo singular, tem regulamentação própria em zonas de Denominação de Origem."
+      },
+      "valencia": {
+        "ley": "Lei 5/2014 — Ordenamento do Território, Urbanismo e Paisagem (LOTUP)",
+        "menorNombre": "Declaração de Responsabilidade / Comunicação de Atuação",
+        "mayorNombre": "Licença Urbanística (Llicència Urbanística)",
+        "organismo": "Câmara Municipal + Generalitat Valenciana (Departamento de Território)",
+        "notas": "A LOTUP incorpora a avaliação ambiental e paisagística no processo urbanístico. O litoral valenciano (PATIVEL) tem proteção especial. A cidade de Valência tem Plano Geral próprio. As áreas inundáveis (ZP ou ZFC) condicionam as atuações em piso térreo, caves e elementos em contacto com o solo."
+      }
+    }
   },
   "resultados": {
     "title": "Resultados",
@@ -1398,6 +1903,37 @@
         "titulo": "Formação Contínua",
         "desc": "Cursos de aperfeiçoamento profissional: pladur, impermeabilização, eletricidade, canalização, gestão, orçamentos."
       }
+    },
+    "plantillasTr": {
+      "contrato-obra": {
+        "titulo": "Contrato de obra",
+        "desc": "Contrato-tipo para reforma de habitação ou local. Inclui descrição de trabalhos, prazo, forma de pagamento e garantias."
+      },
+      "acta-inicio": {
+        "titulo": "Auto de início de obra",
+        "desc": "Documento que formaliza o início dos trabalhos e o estado do imóvel antes da reforma."
+      },
+      "acta-fin": {
+        "titulo": "Auto de fim de obra e conformidade",
+        "desc": "Documento de entrega de obra concluída. O cliente assina a conformidade com os trabalhos realizados."
+      },
+      "parte-trabajo": {
+        "titulo": "Parte de trabalho diário",
+        "desc": "Registo diário de trabalhos realizados em obra. Útil para controlo interno e justificação perante o cliente."
+      },
+      "presupuesto-extras": {
+        "titulo": "Orçamento de trabalhos extra",
+        "desc": "Para documentar e aprovar trabalhos adicionais não contemplados no orçamento original."
+      },
+      "politica-privacidad": {
+        "titulo": "Cláusula de privacidade (RGPD)",
+        "desc": "Texto informativo sobre proteção de dados para incluir em orçamentos e contratos."
+      }
+    },
+    "categoriaPlantilla": {
+      "Contratos": "Contratos",
+      "Otros": "Outros",
+      "Presupuestos": "Orçamentos"
     }
   },
   "copias": {
@@ -1881,5 +2417,9 @@
   "offlineBadge": {
     "tooltip": "Sem ligação — verá os últimos dados guardados. As alterações serão sincronizadas ao reconectar.",
     "label": "Sem ligação"
+  },
+  "legalAviso": {
+    "titulo": "Conteúdo oficial em espanhol",
+    "texto": "Esta tradução é apenas orientativa. O texto oficial, com validade legal, é o original em espanhol. Em caso de dúvida, consulte um tradutor profissional ou o seu contabilista/consultor."
   }
 }

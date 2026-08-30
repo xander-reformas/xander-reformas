@@ -717,7 +717,150 @@
     "convenio": {
       "disclaimerPre": "ℹ️ Reference guide.",
       "disclaimerPost": "Based on the VI General Collective Agreement for the Construction Sector (2022-2026). Always verify the updated figures with your labour advisor or the BOE / provincial agreement.",
-      "recursosTitle": "Useful resources and links"
+      "recursosTitle": "Useful resources and links",
+      "secciones": {
+        "convenioGeneral": {
+          "titulo": "General Collective Agreement for the Construction Sector (CGSC)",
+          "desc": "The 6th CGSC (2022-2026) regulates the working conditions of all workers in the sector in Spain. It applies to renovation, finishing and building maintenance companies (CNAE 41, 42, 43)."
+        },
+        "gruposSalarios": {
+          "titulo": "Professional groups and indicative salaries (2025)",
+          "desc": "Minimum wages according to the Agreement. Final salary tables are updated annually. Check the current table for your province (some provincial agreements improve on the national one)."
+        },
+        "plusesComplementos": {
+          "titulo": "Agreement bonus and salary supplements",
+          "desc": "In addition to the base salary, the agreement establishes mandatory bonuses that must be added to the total cost of the employee."
+        },
+        "cotizacionesSS": {
+          "titulo": "Social Security contributions — Employer rates (construction)",
+          "desc": "The employer bears most of the contributions. These percentages apply to the contribution base (which may differ from the gross salary)."
+        },
+        "obligacionesFormales": {
+          "titulo": "Formal obligations when hiring",
+          "desc": "When hiring your first employee, you must complete a series of prior and periodic procedures."
+        }
+      },
+      "items": {
+        "jornadaMaxAnual": {
+          "label": "Maximum annual working hours",
+          "valor": "1,736 hours (2025)"
+        },
+        "jornadaSemanal": {
+          "label": "Weekly working hours",
+          "valor": "40 regular hours"
+        },
+        "vacaciones": {
+          "label": "Vacation",
+          "valor": "30 calendar days / year"
+        },
+        "pagasExtra": {
+          "label": "Extra pay installments",
+          "valor": "2 (June and December) — 30 days each"
+        },
+        "horasExtra": {
+          "label": "Overtime hours",
+          "valor": "Max. 80/year — min. 75% surcharge or compensatory rest"
+        },
+        "grupoIIIEncargado": {
+          "label": "Group III — Foreman / Site supervisor",
+          "valor": "From ~€1,700 / gross month"
+        },
+        "grupoIVOficial1": {
+          "label": "Group IV — 1st Class Tradesman",
+          "valor": "From ~€1,550 / gross month"
+        },
+        "grupoIVOficial2": {
+          "label": "Group IV — 2nd Class Tradesman",
+          "valor": "From ~€1,450 / gross month"
+        },
+        "grupoVAyudante": {
+          "label": "Group V — Assistant",
+          "valor": "From ~€1,350 / gross month"
+        },
+        "grupoVIPeonEsp": {
+          "label": "Group VI — Specialized laborer",
+          "valor": "From ~€1,280 / gross month"
+        },
+        "grupoVIPeonOrd": {
+          "label": "Group VI — General laborer",
+          "valor": "From ~€1,220 / gross month"
+        },
+        "plusConvenio": {
+          "label": "Agreement Bonus",
+          "valor": "Set by the agreement's salary table (varies by group)"
+        },
+        "plusDistancia": {
+          "label": "Distance Bonus",
+          "valor": "For commuting to the workplace (km > 2 from the hiring municipality)"
+        },
+        "dietas": {
+          "label": "Meal allowances",
+          "valor": "Half allowance: ~€13/day | Full allowance: ~€30/day (overnight away)"
+        },
+        "plusLocomocion": {
+          "label": "Transport Bonus",
+          "valor": "When the employee uses their own vehicle: €/km per provincial agreement"
+        },
+        "itIncapacidad": {
+          "label": "Sick Leave / Incapacity",
+          "valor": "Employer top-up up to 100% from day 1 (workplace accident)"
+        },
+        "contingenciasComunes": {
+          "label": "Common contingencies"
+        },
+        "atEp": {
+          "label": "Workplace accidents & occupational disease (construction, CNAE 43)"
+        },
+        "desempleoCG": {
+          "label": "Unemployment (general contract)"
+        },
+        "fogasa": {
+          "label": "FOGASA (Wage Guarantee Fund)"
+        },
+        "formacionProfesional": {
+          "label": "Vocational training"
+        },
+        "mei": {
+          "label": "MEI — Intergenerational Equity Mechanism (2024-2025)"
+        },
+        "totalAproxEmpresa": {
+          "label": "▶ Approximate employer total",
+          "sufijo": "of the contribution base"
+        },
+        "altaEmpleadorSS": {
+          "label": "Registration as employer with Social Security",
+          "valor": "Contribution Account Code (CCC) — before the 1st contract"
+        },
+        "altaTrabajadorSS": {
+          "label": "Employee registration with Social Security",
+          "valor": "RED / SILTRA system — before starting the activity"
+        },
+        "comunicacionContrato": {
+          "label": "Contract notification",
+          "valor": "SEPE (employment office) — 10 business days from signing"
+        },
+        "tc1tc2": {
+          "label": "Monthly TC1 / TC2",
+          "valor": "Monthly Social Security contribution — direct debit or bank transfer"
+        },
+        "nomina": {
+          "label": "Payslip",
+          "valor": "Monthly, signed by the employee (or electronic acknowledgment)"
+        },
+        "retencionIrpfEmp": {
+          "label": "Personal income tax withholding",
+          "valor": "Quarterly Form 111 + annual Form 190 (withholdings summary)"
+        },
+        "calendarioLaboral": {
+          "label": "Work calendar",
+          "valor": "Must be posted at the workplace before January 1st"
+        },
+        "prl": {
+          "label": "Occupational Risk Prevention",
+          "valor": "Prevention plan + mandatory risk assessment"
+        }
+      },
+      "atEpSufijo": "(varies by activity code and accident rate)"
     },
     "form": {
       "editTitle": "Edit employee",
@@ -1082,6 +1225,62 @@
       "trimestreLabel": "Quarter",
       "cancelar": "Cancel",
       "generarDocumento": "Generate document"
+    },
+    "trimestres": {
+      "hastaFecha": "Until {{mes}} {{dia}}",
+      "anioSiguiente": "(following year)"
+    },
+    "periodo": {
+      "trimestral": "Quarterly",
+      "anual": "Annual"
+    },
+    "modelos": {
+      "130": {
+        "nombre": "Installment personal income tax (IRPF)",
+        "desc": "Advance payment of personal income tax. If you invoice companies with a 15% withholding, you may not need to file it. It's calculated as 20% of net income (income minus expenses)."
+      },
+      "303": {
+        "nombre": "VAT",
+        "desc": "Output VAT (charged on your invoices) minus input VAT (paid on purchases and expenses). A positive result is paid to the tax authority; a negative one is offset."
+      },
+      "111": {
+        "nombre": "Personal income tax withholdings",
+        "desc": "If you have employees or pay professionals subject to withholding, you must settle the withholdings applied."
+      },
+      "100": {
+        "nombre": "Annual income tax return",
+        "desc": "Filed between April and June of the following year. It includes all income from economic activity for the year."
+      },
+      "390": {
+        "nombre": "Annual VAT summary",
+        "desc": "Summary of all quarterly Form 303 filings. Filed in January of the following year."
+      }
+    },
+    "tips": {
+      "tickets": {
+        "titulo": "Keep ALL your receipts",
+        "desc": "Materials, fuel, tools, work clothing, phone (50%), on-site meal allowances. Without a receipt, it isn't deductible."
+      },
+      "despacho": {
+        "titulo": "Home office",
+        "desc": "If you use part of your home for work, you can deduct a proportional % of utilities (electricity, internet). Check the percentage with your accountant."
+      },
+      "vehiculo": {
+        "titulo": "Work vehicle",
+        "desc": "If you have a vehicle used exclusively for work (a work van) you deduct 100%. A personal car: only if used exclusively for professional purposes."
+      },
+      "telefono": {
+        "titulo": "Phone and technology",
+        "desc": "Phone, computer, software: 100% deductible if used exclusively for work, 50% if mixed use."
+      },
+      "tarifaPlana": {
+        "titulo": "Self-employed flat rate",
+        "desc": "First 12 months: reduced flat fee. Extendable for another 12 months if income doesn't exceed the minimum wage. Plan the timing of your registration carefully."
+      },
+      "ivaReformas": {
+        "titulo": "VAT on renovations",
+        "desc": "Reduced 10% rate for renovation of private homes over 2 years old. General 21% rate for commercial premises and new builds."
+      }
     }
   },
   "legislacion": {
@@ -1106,7 +1305,313 @@
     "avisoText": "Urban planning regulations change frequently. Always check with the relevant Town Hall and a qualified professional (architect or building surveyor) if in doubt. Conditions may vary by municipality even within the same region.",
     "estatalCaption": "National regulation — applies throughout Spain",
     "incluyeAplica": "Includes / Applies to:",
-    "recursosUtiles": "Useful resources (national)"
+    "recursosUtiles": "Useful resources (national)",
+    "normativaSecciones": {
+      "tiposIntervencion": "Types of construction intervention",
+      "seguridadSalud": "Health and safety on site",
+      "normativaTecnica": "Technical regulations",
+      "relacionClientes": "Client relations and tax obligations"
+    },
+    "tipo": {
+      "comunicacionPrevia": "Prior notice",
+      "licencia": "Permit",
+      "acuerdoJunta": "Homeowners' Association approval",
+      "obligatorio": "Mandatory",
+      "usoObligatorio": "Mandatory use",
+      "obligatorioObraMayor": "Mandatory for major works",
+      "marcoGeneral": "General framework",
+      "recomendadoSiempre": "Always recommended"
+    },
+    "plazo": {
+      "un1a4sem": "Approx. 1–4 weeks",
+      "un1a6mes": "Approx. 1–6 months",
+      "variable": "Variable",
+      "antesInicio": "Before starting",
+      "siempre": "Always",
+      "aplicacionConstante": "Continuous application",
+      "inmediato": "Immediate"
+    },
+    "items": {
+      "obraMenor": {
+        "titulo": "Minor works / Prior notice or Responsible Declaration",
+        "tipo": "comunicacionPrevia",
+        "plazo": "un1a4sem",
+        "desc": "Works that do not affect the structure, facade, or shared elements. The exact name and threshold vary by region and municipality — select your region to see the details.",
+        "incluye": [
+          "Bathroom or kitchen renovation",
+          "Non-structural layout changes",
+          "Drywall / interior partitions",
+          "Tiling and flooring",
+          "Installations (plumbing, electrical)",
+          "Painting and wall coverings"
+        ]
+      },
+      "obraMayor": {
+        "titulo": "Major works / Building permit",
+        "tipo": "licencia",
+        "plazo": "un1a6mes",
+        "desc": "When the structure or facade is affected, there is a change of use, or the surface area is significant. Requires a project signed by a qualified professional (architect or building surveyor, depending on the case).",
+        "incluye": [
+          "Change of use from commercial to residential",
+          "Structural or foundation modification",
+          "Extension of floor area",
+          "Facade or roof renovation",
+          "Legalization of works carried out without a permit"
+        ]
+      },
+      "obrasComunidades": {
+        "titulo": "Works in residential communities (condominiums)",
+        "tipo": "acuerdoJunta",
+        "plazo": "variable",
+        "desc": "Any work affecting shared elements requires approval from the Homeowners' Association under the Horizontal Property Act (Law 49/1960). The required quorum varies depending on the type of action.",
+        "incluye": [
+          "Elevator installation",
+          "Facade or entrance renovation",
+          "Works in common areas",
+          "Installations crossing shared elements",
+          "Removal of architectural barriers"
+        ]
+      },
+      "rd1627": {
+        "titulo": "Royal Decree 1627/1997 — Construction site safety",
+        "tipo": "obligatorio",
+        "plazo": "antesInicio",
+        "desc": "Applies throughout Spain. For works with a project, a Health and Safety Coordinator must be appointed. For works without a project, the obligations fall on the contractor.",
+        "incluye": [
+          "Prior notice to the Labor Authority",
+          "Health and Safety Plan (works >500 m² or >30 days)",
+          "Subcontracting Register",
+          "Workplace opening notification",
+          "H&S Coordinator on works with multiple contractors"
+        ]
+      },
+      "epi": {
+        "titulo": "PPE — Personal Protective Equipment",
+        "tipo": "usoObligatorio",
+        "plazo": "siempre",
+        "desc": "Royal Decree 773/1997 requires providing and using PPE appropriate to the risk. Non-compliance can lead to serious penalties and civil or criminal liability.",
+        "incluye": [
+          "Safety helmet",
+          "Safety footwear (toe cap + puncture-resistant sole)",
+          "Gloves suited to the task",
+          "Protective goggles for demolition work",
+          "Harness and lifeline for work at height",
+          "Face mask for dust or fiber work"
+        ]
+      },
+      "cte": {
+        "titulo": "CTE — Spanish Building Code (RD 314/2006)",
+        "tipo": "obligatorioObraMayor",
+        "plazo": "aplicacionConstante",
+        "desc": "National regulatory framework establishing the basic quality requirements for buildings and their installations. Applies especially to full renovations and changes of use.",
+        "incluye": [
+          "DB-SI: Fire safety",
+          "DB-SUA: Safety of use and accessibility",
+          "DB-HS: Health (damp, ventilation, water)",
+          "DB-HE: Energy saving",
+          "DB-SE: Structural safety",
+          "DB-HR: Noise protection"
+        ]
+      },
+      "rebt": {
+        "titulo": "REBT — Low Voltage Electrotechnical Regulation (RD 842/2002)",
+        "tipo": "obligatorio",
+        "plazo": "aplicacionConstante",
+        "desc": "Any new or modified electrical installation must comply with the REBT. Requires an installer authorized by the region and an installation certificate for processing with the utility company.",
+        "incluye": [
+          "Electrician with a valid qualification card",
+          "Electrical installation certificate",
+          "Registration with the competent regional authority",
+          "Mandatory inspection for installations of a certain size"
+        ]
+      },
+      "rite": {
+        "titulo": "RITE — Thermal Installations Regulation (RD 1027/2007)",
+        "tipo": "obligatorio",
+        "plazo": "aplicacionConstante",
+        "desc": "Regulates the design, sizing, installation, maintenance and inspection of heating, air conditioning, domestic hot water and ventilation systems.",
+        "incluye": [
+          "Installer accredited by the region",
+          "Project or technical report depending on power output",
+          "Installation certificate to commission the system",
+          "Mandatory periodic maintenance"
+        ]
+      },
+      "loe": {
+        "titulo": "LOE — Building Regulation Act (Law 38/1999)",
+        "tipo": "marcoGeneral",
+        "plazo": "siempre",
+        "desc": "Defines the parties involved in construction, their obligations, and the guarantees of the construction process. Essential for understanding liabilities and warranty periods.",
+        "incluye": [
+          "1-year warranty: finishes and fittings",
+          "3-year warranty: habitability",
+          "10-year warranty: structural damage",
+          "Mandatory ten-year insurance on new-build housing",
+          "Joint liability of the parties involved"
+        ]
+      },
+      "contratoObra": {
+        "titulo": "Works contract",
+        "tipo": "recomendadoSiempre",
+        "plazo": "antesInicio",
+        "desc": "The Civil Code regulates works contracts throughout Spain (arts. 1588–1600). It protects both parties. It should detail the work, materials, timelines, prices, and conditions for changes.",
+        "incluye": [
+          "Detailed description of work and materials",
+          "Execution timeline and penalties",
+          "Payment method and schedule",
+          "Procedure for extras and changes",
+          "Warranties under the LOE",
+          "Dispute resolution clause"
+        ]
+      },
+      "rgpd": {
+        "titulo": "GDPR and LOPDGDD — Data protection",
+        "tipo": "obligatorio",
+        "plazo": "inmediato",
+        "desc": "The General Data Protection Regulation (EU 2016/679) and the LOPDGDD (Organic Law 3/2018) regulate the processing of customers' personal data throughout Spain.",
+        "incluye": [
+          "Information clause in quotes and contracts",
+          "Privacy policy if you have a website or app",
+          "Record of processing activities",
+          "No sharing data with third parties without consent",
+          "Right to erasure and access for data subjects"
+        ]
+      },
+      "facturacion": {
+        "titulo": "Invoicing and obligations as a self-employed professional",
+        "tipo": "obligatorio",
+        "plazo": "siempre",
+        "desc": "As a self-employed worker (RETA), you must issue an invoice for every job, file VAT quarterly (Form 303) and personal income tax (Form 130 or withholdings). The anti-fraud law requires approved invoicing software since 2025.",
+        "incluye": [
+          "Registration for business tax (IAE, heading 501–505 depending on activity)",
+          "Invoicing with all legally required elements",
+          "Quarterly VAT return (Form 303)",
+          "Installment personal income tax payment (Form 130)",
+          "Keep invoices for 4 years (income tax) / 10 years (commercial)"
+        ]
+      }
+    },
+    "comunidadesTr": {
+      "andalucia": {
+        "ley": "Law 7/2021 LISTA (Law for the Promotion of Territorial Sustainability)",
+        "menorNombre": "Urban Planning Self-Declaration",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Regional Government of Andalusia (Department of Public Works)",
+        "notas": "LISTA simplified the permitting system. Many works previously requiring a permit now only require a self-declaration. Each municipality adapts the system through its own bylaws. Specially protected areas (coastline, historic centers) have additional requirements."
+      },
+      "aragon": {
+        "ley": "Legislative Decree 1/2014 — Urban Planning Law of Aragon (LUArg)",
+        "menorNombre": "Prior Notice",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Government of Aragon (Department of Territorial Structuring)",
+        "notas": "In the capital, Zaragoza, the Municipal Building Bylaw applies. Prior notice applies to minor works. Heritage protection zones require a prior report from Aragon's Cultural Heritage authority."
+      },
+      "asturias": {
+        "ley": "Legislative Decree 1/2004 — Consolidated Land Law (TROTU)",
+        "menorNombre": "Prior Notice",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Principality of Asturias (Department of Land Planning)",
+        "notas": "The Asturian coastline and inland mountain areas have specific restrictions. The historic centers of Oviedo, Gijón and Avilés require additional processing with the Department of Culture."
+      },
+      "baleares": {
+        "ley": "Law 12/2017 — Urban Planning of the Balearic Islands (LUIB)",
+        "menorNombre": "Prior Notice / Self-Declaration",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Government of the Balearic Islands (Department of Environment and Territory)",
+        "notas": "The LUIB distinguishes between interventions in consolidated urban land and protected areas. The Island Councils (Mallorca, Menorca, Eivissa, Formentera) have their own urban planning powers. Special attention to coastal zones and tourist intensification areas."
+      },
+      "canarias": {
+        "ley": "Law 4/2017 — Land and Protected Natural Areas (LSENPC)",
+        "menorNombre": "Prior Notice / Self-Declaration",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Government of the Canary Islands (Department of Ecological Transition)",
+        "notas": "The archipelago has specific regulations due to its island nature and natural areas (Canary Islands Network of Natural Areas). Island councils (cabildos) have their own powers. Special restrictions apply in coastal and tourist areas."
+      },
+      "cantabria": {
+        "ley": "Law 2/2001 — Territorial Planning and Land Urban Regime (LOTRUS)",
+        "menorNombre": "Prior Notice",
+        "mayorNombre": "Works Permit",
+        "organismo": "Town Hall + Government of Cantabria (Department of Public Works)",
+        "notas": "The Coastal Law has a particular impact on the Cantabrian coastline. Inland municipalities with ethnographic and natural heritage may require additional sector reports."
+      },
+      "castilla-la-mancha": {
+        "ley": "Legislative Decree 1/2023 — Consolidated Text of the Land Planning Law",
+        "menorNombre": "Self-Declaration",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Regional Government of Castilla-La Mancha (Department of Public Works)",
+        "notas": "The regulation clearly distinguishes between acts requiring a permit and acts requiring a self-declaration. Historic-artistic sites (Toledo, Cuenca...) have a special regime from the Department of Culture."
+      },
+      "castilla-leon": {
+        "ley": "Law 5/1999 — Urban Planning of Castilla y León (LUCyL) and amendments",
+        "menorNombre": "Prior Notice",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Regional Government of Castilla y León (Department of Environment, Housing and Land Planning)",
+        "notas": "A vast region with a wide variety of situations. Cities with historic centers declared as Assets of Cultural Interest (Ávila, Segovia, Salamanca, Burgos, León...) require a prior report from the Directorate General of Cultural Heritage. Rural areas have specific land-use rules."
+      },
+      "cataluna": {
+        "ley": "Legislative Decree 1/2010 — Catalonia Urban Planning Law (LUC)",
+        "menorNombre": "Prior Notice / Acknowledgment",
+        "mayorNombre": "Works Permit",
+        "organismo": "Town Hall + Government of Catalonia (Department of Territory)",
+        "notas": "Barcelona city has its own Metropolitan Building Bylaw and the regulations of the Metropolitan Area (AMB). Work in the Gothic Quarter or in listed buildings requires Cultural Heritage authorization. The Housing Improvement Plan (PMH) offers specific grants for renovations."
+      },
+      "extremadura": {
+        "ley": "Law 15/2001 — Land and Territorial Planning of Extremadura (LESOTEX)",
+        "menorNombre": "Prior Notice",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Regional Government of Extremadura (Department of Land Planning)",
+        "notas": "Natural heritage (Monfragüe National Park, Cornalvo Natural Park...) and cultural heritage (Mérida, Cáceres, Trujillo with protected historic sites) play a major role in shaping works in affected areas."
+      },
+      "galicia": {
+        "ley": "Law 2/2016 — Land Law of Galicia (LSG)",
+        "menorNombre": "Prior Notice of Works",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Regional Government of Galicia (Department of Environment, Territory and Housing)",
+        "notas": "The LSG has a special regime for \"rural settlements\" and buildings on rustic land. Santiago de Compostela, as a World Heritage city, has a Special Protection Plan for its historic center. The Coastal Law heavily affects the Galician coastline."
+      },
+      "madrid": {
+        "ley": "Law 9/2001 — Land Law of the Community of Madrid (LSCM)",
+        "menorNombre": "Prior Notice of Works",
+        "mayorNombre": "Building Urban Planning Permit",
+        "organismo": "Town Hall + Community of Madrid (Department of Housing and Local Administration)",
+        "notas": "In the municipality of Madrid, the General Urban Development Plan (PGOU) applies. Prior notice allows works to start immediately. Listed buildings and special protection areas require reports from the Project Supervision Office. Central districts (Centro, Salamanca, Chamberí) have urban landscape protection rules."
+      },
+      "murcia": {
+        "ley": "Legislative Decree 1/2005 — Land Law of the Region of Murcia (LSRM)",
+        "menorNombre": "Self-Declaration",
+        "mayorNombre": "Works Permit",
+        "organismo": "Town Hall + Regional Government of Murcia (Department of Tourism, Culture and Environment)",
+        "notas": "The Mar Menor lagoon and the Murcian coastline have specific protection legislation. Cartagena and Lorca have archaeological sites that affect works in their surroundings. Municipal bylaws vary significantly between the coast and the inland areas."
+      },
+      "navarra": {
+        "ley": "Regional Law 5/2015 — Land and Urban Planning (LFOTU)",
+        "menorNombre": "Prior Notice",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Government of Navarre (Department of Land Planning)",
+        "notas": "Navarre has its own charter (\"fuero\") granting it special fiscal and regulatory powers. The Camino de Santiago pilgrim route crosses the region, creating specific protection zones. The Bardenas Reales protected natural area affects works in neighboring municipalities."
+      },
+      "pais-vasco": {
+        "ley": "Law 2/2006 — Land and Urban Planning of the Basque Country (LSPV)",
+        "menorNombre": "Prior Notice (Comunicazio Aurretiaskoa)",
+        "mayorNombre": "Urban Planning Permit (Hirigintza Lizentzia)",
+        "organismo": "Udala (Town Hall) + Basque Government (Department of Land Planning)",
+        "notas": "The Basque Country has its own economic agreement with a distinct tax regime. The General Assemblies of the three Historic Territories (Álava, Bizkaia, Gipuzkoa) have their own regulatory powers. Basque industrial heritage is specially protected. Bilbao, San Sebastián and Vitoria-Gasteiz have general plans with specific rules."
+      },
+      "la-rioja": {
+        "ley": "Law 5/2006 — Land and Urban Planning of La Rioja (LOTUR)",
+        "menorNombre": "Prior Notice",
+        "mayorNombre": "Urban Planning Permit",
+        "organismo": "Town Hall + Government of La Rioja (Department of Public Works)",
+        "notas": "A small region with relatively simplified regulations. Logroño and the wine-producing municipalities along the Camino de Santiago have specially protected areas. Wine cellars, as a distinctive building type, have their own regulations in Designation of Origin zones."
+      },
+      "valencia": {
+        "ley": "Law 5/2014 — Land Planning, Urban Planning and Landscape (LOTUP)",
+        "menorNombre": "Self-Declaration / Notice of Action",
+        "mayorNombre": "Urban Planning Permit (Llicència Urbanística)",
+        "organismo": "Town Hall + Valencian Regional Government (Department of Territory)",
+        "notas": "The LOTUP incorporates environmental and landscape assessment into the urban planning process. The Valencian coastline (PATIVEL) has special protection. Valencia city has its own General Plan. Flood-prone areas (ZP or ZFC) affect works on ground floors, basements and elements in contact with the ground."
+      }
+    }
   },
   "resultados": {
     "title": "Results",
@@ -1398,6 +1903,37 @@
         "titulo": "Ongoing Training",
         "desc": "Professional development courses: drywall, waterproofing, electrical, plumbing, management, quoting."
       }
+    },
+    "plantillasTr": {
+      "contrato-obra": {
+        "titulo": "Works contract",
+        "desc": "Standard contract for the renovation of a home or commercial premises. Includes description of works, timeline, payment method and warranties."
+      },
+      "acta-inicio": {
+        "titulo": "Works commencement record",
+        "desc": "Document that formalizes the start of the works and the condition of the property before the renovation."
+      },
+      "acta-fin": {
+        "titulo": "Works completion and acceptance record",
+        "desc": "Document for handing over completed works. The client signs to confirm acceptance of the work carried out."
+      },
+      "parte-trabajo": {
+        "titulo": "Daily work report",
+        "desc": "Daily record of work carried out on site. Useful for internal control and justification to the client."
+      },
+      "presupuesto-extras": {
+        "titulo": "Additional works quote",
+        "desc": "To document and approve additional work not included in the original quote."
+      },
+      "politica-privacidad": {
+        "titulo": "Privacy clause (GDPR)",
+        "desc": "Data protection information text to include in quotes and contracts."
+      }
+    },
+    "categoriaPlantilla": {
+      "Contratos": "Contracts",
+      "Otros": "Other",
+      "Presupuestos": "Quotes"
     }
   },
   "copias": {
@@ -1881,5 +2417,9 @@
   "offlineBadge": {
     "tooltip": "Offline — you'll see the last saved data. Changes will sync once you reconnect.",
     "label": "Offline"
+  },
+  "legalAviso": {
+    "titulo": "Official content in Spanish",
+    "texto": "This translation is for guidance only. The official text, with legal validity, is the original in Spanish. If in doubt, consult a professional translator or your accountant/advisor."
   }
 }
