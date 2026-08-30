@@ -8,7 +8,7 @@ const IDIOMA_NOMBRE = {
 }
 
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY
-const GROQ_MODEL = 'llama-3.1-8b-instant'
+const GROQ_MODEL = 'openai/gpt-oss-20b'
 const MAX_HISTORIAL = 20  // mensajes que se envían como contexto a Groq
 
 const SYSTEM_PROMPT = `Eres el asistente de negocio personal de XANDER Reformas, una empresa de reformas interiores en Madrid especializada en clientes de clase media-alta. El propietario es autónomo y te usa para gestionar su día a día.
