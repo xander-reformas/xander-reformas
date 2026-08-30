@@ -783,6 +783,7 @@ export default function Facturas() {
         </div>
       ) : (
         <div className="card p-0 overflow-hidden">
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-edge text-ink-soft text-xs uppercase tracking-wide">
@@ -884,6 +885,7 @@ export default function Facturas() {
               })}
             </tbody>
           </table>
+          </div>
         </div>
       )}
 
