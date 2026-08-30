@@ -166,9 +166,8 @@ Deno.serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // TODO: sustituir por un remitente del dominio propio verificado en Resend
-        // cuando esté disponible. onboarding@resend.dev funciona mientras tanto.
-        from: `${empresaNombre} <onboarding@resend.dev>`,
+        // Remitente en el dominio propio verificado en Resend (xandergestion.com).
+        from: `${empresaNombre} <avisos@xandergestion.com>`,
         to: destino,
         reply_to: remitenteReply,
         subject: `Factura ${factura.numero} — ${empresaNombre}`,

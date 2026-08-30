@@ -136,10 +136,8 @@ async function enviarEmail(
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      // TODO: sustituir por un remitente de tu dominio verificado en Resend
-      // (Ajustes → Domains) en cuanto lo verifiques. onboarding@resend.dev
-      // funciona sin verificación mientras tanto, para que los avisos no se rompan.
-      from: 'XANDER Gestión <onboarding@resend.dev>',
+      // Remitente en el dominio propio verificado en Resend (xandergestion.com).
+      from: 'XANDER Gestión <avisos@xandergestion.com>',
       to: email,
       subject: `⏰ En ${anticipacion}: ${ev.titulo}`,
       html,
