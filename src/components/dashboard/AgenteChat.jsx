@@ -300,7 +300,7 @@ export default function AgenteChat() {
               <div className="p-3 border-t border-edge flex gap-2 flex-shrink-0">
                 <input
                   ref={inputRef}
-                  className="flex-1 text-sm border border-edge rounded-xl px-3 py-2 focus:outline-none focus:border-gold resize-none"
+                  className="flex-1 text-sm border border-edge rounded-xl px-3 py-2 bg-surface text-ink focus:outline-none focus:border-gold resize-none"
                   placeholder={t('agenteChat.placeholder')}
                   value={input}
                   onChange={e => setInput(e.target.value)}
