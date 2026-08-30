@@ -547,7 +547,11 @@ function EnviarEmailModal({ factura, onClose, onSent }) {
     })
     setEnviando(false)
     if (err || data?.error) {
-      setError(data?.error || err.message || t('facturas.enviarEmail.errorGenerico'))
+      let msg = data?.error
+      if (!msg && err?.context) {
+        try { msg = (await err.context.json())?.error } catch { /* respuesta no era JSON */ }
+      }
+      setError(msg || err?.message || t('facturas.enviarEmail.errorGenerico'))
       return
     }
     setEnviado(true)

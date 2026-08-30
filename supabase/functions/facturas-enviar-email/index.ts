@@ -179,7 +179,13 @@ Deno.serve(async (req) => {
     const body = await resp.text()
     if (!resp.ok) {
       console.error('Resend error', resp.status, body)
-      return json({ error: 'No se pudo enviar el email. Inténtalo de nuevo en unos minutos.' }, 502)
+      let detalle = ''
+      try { detalle = JSON.parse(body)?.message || '' } catch { /* no era JSON */ }
+      const esRestriccionSandbox = /own email|verify a domain|testing emails/i.test(detalle)
+      const error = esRestriccionSandbox
+        ? 'Tu cuenta de Resend está en modo de pruebas: solo puede enviar al email con el que creaste la cuenta. Verifica un dominio propio en Resend (resend.com/domains) para poder enviar a tus clientes.'
+        : (detalle || 'No se pudo enviar el email. Inténtalo de nuevo en unos minutos.')
+      return json({ error }, 502)
     }
 
     // Si estaba en borrador, al enviarla pasa a "enviada" (igual que el cambio manual de estado en la lista)
