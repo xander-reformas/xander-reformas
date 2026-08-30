@@ -14,6 +14,8 @@ export default function Clientes() {
   const [form, setForm] = useState(FORM_EMPTY)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [invitando, setInvitando] = useState({})
+  const [inviteMsg, setInviteMsg] = useState({})
 
   useEffect(() => { load() }, [])
 
@@ -61,6 +63,25 @@ export default function Clientes() {
     load()
   }
 
+  // Invita (o reenvía el acceso a) el Portal del Cliente para que pueda ver
+  // el estado de su(s) obra(s) online.
+  async function invitarPortal(c) {
+    if (!c.email) {
+      setInviteMsg(p => ({ ...p, [c.id]: { ok: false, text: 'Añade un email a este cliente antes de invitarlo.' } }))
+      return
+    }
+    setInvitando(p => ({ ...p, [c.id]: true }))
+    setInviteMsg(p => ({ ...p, [c.id]: null }))
+    const { data, error: err } = await supabase.functions.invoke('clientes-invitar-portal', { body: { cliente_id: c.id } })
+    setInvitando(p => ({ ...p, [c.id]: false }))
+    if (err || data?.error) {
+      setInviteMsg(p => ({ ...p, [c.id]: { ok: false, text: data?.error || err.message } }))
+      return
+    }
+    setInviteMsg(p => ({ ...p, [c.id]: { ok: true, text: `Invitación enviada a ${data.email}` } }))
+    load()
+  }
+
   const filtered = clientes.filter(c =>
     [c.nombre, c.email, c.ciudad, c.telefono].some(v => v?.toLowerCase().includes(search.toLowerCase()))
   )
@@ -102,6 +123,7 @@ export default function Clientes() {
                 <th className="text-left px-4 py-3 hidden md:table-cell">{t('clientes.table.telefono')}</th>
                 <th className="text-left px-4 py-3 hidden lg:table-cell">{t('clientes.table.email')}</th>
                 <th className="text-left px-4 py-3 hidden lg:table-cell">{t('clientes.table.ciudad')}</th>
+                <th className="text-left px-4 py-3">Portal</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -115,6 +137,27 @@ export default function Clientes() {
                   <td className="px-4 py-3.5 hidden md:table-cell text-ink-soft">{c.telefono || '—'}</td>
                   <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">{c.email || '—'}</td>
                   <td className="px-4 py-3.5 hidden lg:table-cell text-ink-soft">{c.ciudad || '—'}</td>
+                  <td className="px-4 py-3.5">
+                    {c.portal_user_id ? (
+                      <div>
+                        <span className="text-xs font-semibold text-green-700 bg-green-100 px-2 py-1 rounded-full">✓ Portal activo</span>
+                        <button onClick={() => invitarPortal(c)} disabled={invitando[c.id]}
+                          className="block mt-1 text-xs text-ink-soft hover:text-gold underline">
+                          {invitando[c.id] ? 'Enviando…' : 'Reenviar acceso'}
+                        </button>
+                      </div>
+                    ) : (
+                      <button onClick={() => invitarPortal(c)} disabled={invitando[c.id]}
+                        className="text-xs font-semibold text-gold hover:text-gold-dark px-2 py-1 rounded-lg border border-gold/30 hover:bg-gold/10 transition-colors whitespace-nowrap">
+                        {invitando[c.id] ? 'Enviando…' : 'Invitar al portal'}
+                      </button>
+                    )}
+                    {inviteMsg[c.id] && (
+                      <div className={`text-[11px] mt-1 max-w-[160px] ${inviteMsg[c.id].ok ? 'text-green-700' : 'text-red-600'}`}>
+                        {inviteMsg[c.id].text}
+                      </div>
+                    )}
+                  </td>
                   <td className="px-4 py-3.5 text-right whitespace-nowrap">
                     <button onClick={() => openEdit(c)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">{t('clientes.editar')}</button>
                     <button onClick={() => remove(c.id, c.nombre)} className="text-ink-soft/50 hover:text-red-500 text-xs transition-colors">{t('clientes.eliminar')}</button>

@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
+import { usePortalCliente } from './hooks/usePortalCliente'
 import LoginPage from './components/auth/LoginPage'
 import RegisterPage from './components/auth/RegisterPage'
 import ForgotPasswordPage from './components/auth/ForgotPasswordPage'
@@ -7,11 +8,36 @@ import ResetPasswordPage from './components/auth/ResetPasswordPage'
 import OnboardingWizard from './components/onboarding/OnboardingWizard'
 import Dashboard from './components/dashboard/Dashboard'
 import LandingPage from './components/landing/LandingPage'
+import PortalLoginPage from './components/portal/PortalLoginPage'
+import PortalSetPasswordPage from './components/portal/PortalSetPasswordPage'
+import PortalDashboard from './components/portal/PortalDashboard'
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
   if (loading) return <LoadingScreen />
   if (!user) return <Navigate to="/login" replace />
+  return children
+}
+
+// Puerta de /dashboard/*: si la sesión activa es de un cliente del Portal
+// (no de un profesional), lo mandamos a /portal en vez de mostrarle el
+// dashboard interno. Ver usePortalCliente para el porqué de esta comprobación.
+function DashboardGate() {
+  const { profile } = useAuth()
+  const { esCliente, loading } = usePortalCliente()
+  if (loading) return <LoadingScreen />
+  if (esCliente) return <Navigate to="/portal" replace />
+  return profile && !profile.onboarding_completado
+    ? <Navigate to="/onboarding" replace />
+    : <Dashboard />
+}
+
+function PortalRoute({ children }) {
+  const { user, loading: authLoading } = useAuth()
+  const { esCliente, loading } = usePortalCliente()
+  if (authLoading || loading) return <LoadingScreen />
+  if (!user) return <Navigate to="/portal/login" replace />
+  if (!esCliente) return <Navigate to="/dashboard" replace />
   return children
 }
 
@@ -37,8 +63,6 @@ function LoadingScreen() {
 }
 
 export default function App() {
-  const { profile } = useAuth()
-
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -57,13 +81,17 @@ export default function App() {
         <PrivateRoute><OnboardingWizard /></PrivateRoute>
       } />
       <Route path="/dashboard/*" element={
-        <PrivateRoute>
-          {profile && !profile.onboarding_completado
-            ? <Navigate to="/onboarding" replace />
-            : <Dashboard />
-          }
-        </PrivateRoute>
+        <PrivateRoute><DashboardGate /></PrivateRoute>
       } />
+
+      {/* Portal del Cliente — acceso de solo lectura al estado de su obra */}
+      <Route path="/portal/login" element={<PortalLoginPage />} />
+      {/* set-password NO usa PortalRoute: el cliente llega desde el email sin sesión activa */}
+      <Route path="/portal/set-password" element={<PortalSetPasswordPage />} />
+      <Route path="/portal" element={
+        <PortalRoute><PortalDashboard /></PortalRoute>
+      } />
+
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   )

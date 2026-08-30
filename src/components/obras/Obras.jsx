@@ -92,6 +92,7 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
 
   // Seguimiento
   const [nota, setNota] = useState('')
+  const [notaVisibleCliente, setNotaVisibleCliente] = useState(true)
   const [addingNota, setAddingNota] = useState(false)
   const [errorSeg, setErrorSeg] = useState('')
 
@@ -290,21 +291,37 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
     if (data) { setObra(data); onUpdate(data) }
   }
 
+  // Avisa al cliente por email (si tiene portal/email) de una novedad en su obra.
+  // No crítico: si falla, no interrumpe el flujo del profesional.
+  async function notificarCliente(tipo, mensaje) {
+    try {
+      await supabase.functions.invoke('obras-notificar-actualizacion', {
+        body: { obra_id: obra.id, tipo, mensaje },
+      })
+    } catch { /* no bloquea el guardado si el aviso falla */ }
+  }
+
   async function cambiarEtapa(val) {
-    const entrada = { id: crypto.randomUUID(), fecha: new Date().toISOString().split('T')[0], nota: `Etapa avanzada a: ${val}`, tipo: 'etapa' }
+    // El cambio de etapa siempre es visible para el cliente: es lo primero que
+    // le interesa saber sobre el avance de su obra.
+    const entrada = { id: crypto.randomUUID(), fecha: new Date().toISOString().split('T')[0], nota: `Etapa avanzada a: ${val}`, tipo: 'etapa', visible_cliente: true }
     const nuevoSeguimiento = [...(obra.seguimiento || []), entrada]
     await patchRpc({ nueva_etapa: val, nuevo_seguimiento: nuevoSeguimiento })
+    notificarCliente('etapa', `La obra ha avanzado a la etapa "${val}".`)
   }
 
   async function agregarNota(e) {
     e.preventDefault()
     if (!nota.trim()) return
     setAddingNota(true)
-    const entrada = { id: crypto.randomUUID(), fecha: new Date().toISOString().split('T')[0], nota: nota.trim(), tipo: 'nota' }
+    const textoNota = nota.trim()
+    const visible = notaVisibleCliente
+    const entrada = { id: crypto.randomUUID(), fecha: new Date().toISOString().split('T')[0], nota: textoNota, tipo: 'nota', visible_cliente: visible }
     const nuevoSeguimiento = [...(obra.seguimiento || []), entrada]
     await patchRpc({ nuevo_seguimiento: nuevoSeguimiento })
     setNota('')
     setAddingNota(false)
+    if (visible) notificarCliente('nota', textoNota)
   }
 
   async function eliminarNota(id) {
@@ -504,6 +521,15 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                     {addingNota ? '…' : t('obras.detalle.seguimiento.addBtn')}
                   </button>
                 </div>
+                <label className="flex items-center gap-2 mt-2 text-xs text-ink-soft cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={notaVisibleCliente}
+                    onChange={e => setNotaVisibleCliente(e.target.checked)}
+                    className="rounded border-edge"
+                  />
+                  Visible para el cliente en su Portal (le avisamos por email)
+                </label>
               </form>
 
               {/* Timeline */}
@@ -536,9 +562,16 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
                             </button>
                           )}
                         </div>
-                        <span className="text-xs text-ink-soft/50 mt-1 block">
-                          {new Date(entry.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
-                        </span>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-xs text-ink-soft/50">
+                            {new Date(entry.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+                          </span>
+                          {entry.tipo === 'etapa' || entry.visible_cliente ? (
+                            <span className="text-[10px] font-semibold text-gold-dark bg-gold/10 px-1.5 py-0.5 rounded-full">👁 Visible cliente</span>
+                          ) : (
+                            <span className="text-[10px] font-semibold text-ink-soft/50 bg-edge px-1.5 py-0.5 rounded-full">🔒 Interno</span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}
