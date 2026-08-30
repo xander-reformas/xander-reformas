@@ -844,11 +844,11 @@ export default function Facturas() {
                     </td>
                     <td className="px-5 py-3.5 text-right font-bold text-ink">{fmt(total)}</td>
                     <td className="px-4 py-3.5 text-right whitespace-nowrap">
-                      <button onClick={() => setVerData(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
+                      <button onClick={() => setVerData(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">
                         {t('facturas.list.verFactura')}
                       </button>
                       {f.estado !== 'anulada' && (
-                        <button onClick={() => setEnviarModal(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
+                        <button onClick={() => setEnviarModal(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">
                           {t('facturas.list.enviarEmail')}
                         </button>
                       )}
@@ -856,12 +856,12 @@ export default function Facturas() {
                         <button
                           onClick={() => cobrarConTarjeta(f)}
                           disabled={cobrando === f.id}
-                          className="text-green-700 hover:text-green-800 text-xs font-semibold mr-4 disabled:opacity-50"
+                          className="text-green-700 hover:text-green-800 text-xs font-semibold mr-3 disabled:opacity-50"
                         >
                           {cobrando === f.id ? t('facturas.list.cobrando') : t('facturas.list.cobrar')}
                         </button>
                       )}
-                      <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-4">
+                      <button onClick={() => openEdit(f)} className="text-gold hover:text-gold-dark text-xs font-semibold mr-3">
                         {lockedIds.has(f.id) ? t('facturas.list.ver') : t('facturas.list.editar')}
                       </button>
                       {lockedIds.has(f.id) ? (
