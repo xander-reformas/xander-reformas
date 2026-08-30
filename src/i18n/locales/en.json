@@ -463,9 +463,24 @@
       "confirmDelete": "Delete invoice {{numero}}?",
       "cannotDeleteLocked": "This invoice is already registered in the Verifactu ledger and cannot be deleted. Issue a corrective invoice or void it.",
       "anularPrompt": "You are about to void invoice {{numero}}. It will remain on record as voided in the Verifactu ledger (not deleted). Reason? (optional)",
-      "noEnlacePago": "Could not generate the payment link."
+      "noEnlacePago": "Could not generate the payment link.",
+      "enviarEmail": "Send by email"
     },
-    "altQR": "Verifactu QR code"
+    "altQR": "Verifactu QR code",
+    "enviarEmail": {
+      "title": "Send invoice {{numero}} by email",
+      "paraLabel": "Send to",
+      "sinEmailGuardado": "This client has no saved email. You can type one just for this send.",
+      "mensajeLabel": "Message (optional)",
+      "mensajePlaceholder": "Add a personal note for the client...",
+      "cancelar": "Cancel",
+      "enviar": "Send",
+      "enviando": "Sending...",
+      "emailRequerido": "Enter a recipient email.",
+      "errorGenerico": "The email could not be sent. Please try again.",
+      "exito": "Invoice sent to {{email}}.",
+      "cerrar": "Close"
+    }
   },
   "cobros": {
     "title": "Collections",

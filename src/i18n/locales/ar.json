@@ -463,9 +463,24 @@
       "confirmDelete": "حذف الفاتورة {{numero}}؟",
       "cannotDeleteLocked": "هذه الفاتورة مسجلة بالفعل في سجل Verifactu ولا يمكن حذفها. أصدر فاتورة تصحيحية أو ألغِها.",
       "anularPrompt": "أنت على وشك إلغاء الفاتورة {{numero}}. ستبقى مسجلة كملغاة في سجل Verifactu (لا تُحذف). السبب؟ (اختياري)",
-      "noEnlacePago": "تعذّر إنشاء رابط الدفع."
+      "noEnlacePago": "تعذّر إنشاء رابط الدفع.",
+      "enviarEmail": "إرسال بالبريد الإلكتروني"
     },
-    "altQR": "رمز QR الخاص بـ Verifactu"
+    "altQR": "رمز QR الخاص بـ Verifactu",
+    "enviarEmail": {
+      "title": "إرسال الفاتورة {{numero}} بالبريد الإلكتروني",
+      "paraLabel": "إرسال إلى",
+      "sinEmailGuardado": "لا يوجد بريد إلكتروني محفوظ لهذا العميل. يمكنك كتابة واحد لهذا الإرسال فقط.",
+      "mensajeLabel": "رسالة (اختياري)",
+      "mensajePlaceholder": "أضف ملاحظة شخصية للعميل...",
+      "cancelar": "إلغاء",
+      "enviar": "إرسال",
+      "enviando": "جارٍ الإرسال...",
+      "emailRequerido": "اكتب بريدًا إلكترونيًا للمستلم.",
+      "errorGenerico": "تعذر إرسال البريد الإلكتروني. حاول مرة أخرى.",
+      "exito": "تم إرسال الفاتورة إلى {{email}}.",
+      "cerrar": "إغلاق"
+    }
   },
   "cobros": {
     "title": "التحصيلات",

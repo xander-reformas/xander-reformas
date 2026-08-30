@@ -463,9 +463,24 @@
       "confirmDelete": "Ștergi factura {{numero}}?",
       "cannotDeleteLocked": "Această factură este deja înregistrată în registrul Verifactu și nu poate fi ștearsă. Emite o factură rectificativă sau anuleaz-o.",
       "anularPrompt": "Vei anula factura {{numero}}. Rămâne înregistrată ca anulată în registrul Verifactu (nu se șterge). Motiv? (opțional)",
-      "noEnlacePago": "Nu s-a putut genera linkul de plată."
+      "noEnlacePago": "Nu s-a putut genera linkul de plată.",
+      "enviarEmail": "Trimite prin email"
     },
-    "altQR": "Cod QR Verifactu"
+    "altQR": "Cod QR Verifactu",
+    "enviarEmail": {
+      "title": "Trimite factura {{numero}} prin email",
+      "paraLabel": "Trimite către",
+      "sinEmailGuardado": "Acest client nu are un email salvat. Poți introduce unul doar pentru această trimitere.",
+      "mensajeLabel": "Mesaj (opțional)",
+      "mensajePlaceholder": "Adaugă o notă personală pentru client...",
+      "cancelar": "Anulează",
+      "enviar": "Trimite",
+      "enviando": "Se trimite...",
+      "emailRequerido": "Introdu un email de destinatar.",
+      "errorGenerico": "Emailul nu a putut fi trimis. Încearcă din nou.",
+      "exito": "Factură trimisă către {{email}}.",
+      "cerrar": "Închide"
+    }
   },
   "cobros": {
     "title": "Încasări",

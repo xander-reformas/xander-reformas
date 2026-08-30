@@ -530,6 +530,69 @@ function FacturaVista({ factura, obra, onClose }) {
   )
 }
 
+function EnviarEmailModal({ factura, onClose, onSent }) {
+  const { t } = useTranslation()
+  const [to, setTo] = useState(factura.clientes?.email || '')
+  const [mensaje, setMensaje] = useState('')
+  const [enviando, setEnviando] = useState(false)
+  const [error, setError] = useState('')
+  const [enviado, setEnviado] = useState(false)
+
+  async function enviar(e) {
+    e.preventDefault()
+    if (!to.trim()) { setError(t('facturas.enviarEmail.emailRequerido')); return }
+    setEnviando(true); setError('')
+    const { data, error: err } = await supabase.functions.invoke('facturas-enviar-email', {
+      body: { factura_id: factura.id, to: to.trim(), mensaje: mensaje.trim() || undefined },
+    })
+    setEnviando(false)
+    if (err || data?.error) {
+      setError(data?.error || err.message || t('facturas.enviarEmail.errorGenerico'))
+      return
+    }
+    setEnviado(true)
+    onSent?.()
+  }
+
+  return (
+    <div className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+      <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-md">
+        <div className="px-6 py-4 border-b border-edge flex items-center justify-between">
+          <h2 className="text-lg font-bold text-ink">{t('facturas.enviarEmail.title', { numero: factura.numero })}</h2>
+          <button onClick={onClose} className="text-ink-soft hover:text-ink text-2xl leading-none w-8 h-8 flex items-center justify-center">×</button>
+        </div>
+        {enviado ? (
+          <div className="p-6 space-y-4">
+            <div className="bg-green-50 border border-green-200 text-green-700 rounded-xl p-4 text-sm">
+              {t('facturas.enviarEmail.exito', { email: to.trim() })}
+            </div>
+            <button onClick={onClose} className="btn-primary w-full">{t('facturas.enviarEmail.cerrar')}</button>
+          </div>
+        ) : (
+          <form onSubmit={enviar} className="p-6 space-y-4">
+            <div>
+              <label className="label">{t('facturas.enviarEmail.paraLabel')}</label>
+              <input className="input" type="email" required value={to} onChange={e => setTo(e.target.value)} placeholder="cliente@email.com" />
+              {!factura.clientes?.email && (
+                <p className="text-xs text-gold-dark mt-1.5">{t('facturas.enviarEmail.sinEmailGuardado')}</p>
+              )}
+            </div>
+            <div>
+              <label className="label">{t('facturas.enviarEmail.mensajeLabel')}</label>
+              <textarea className="input resize-none h-24 text-sm" value={mensaje} onChange={e => setMensaje(e.target.value)} placeholder={t('facturas.enviarEmail.mensajePlaceholder')} />
+            </div>
+            {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
+            <div className="flex gap-3 pt-1">
+              <button type="button" onClick={onClose} className="btn-secondary flex-1">{t('facturas.enviarEmail.cancelar')}</button>
+              <button type="submit" disabled={enviando} className="btn-primary flex-1">{enviando ? t('facturas.enviarEmail.enviando') : t('facturas.enviarEmail.enviar')}</button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function CobroModal({ factura, url, onClose }) {
   const { t } = useTranslation()
   const [copiado, setCopiado] = useState(false)
@@ -576,6 +639,7 @@ export default function Facturas() {
   const [verData, setVerData] = useState(null)
   const [cobrando, setCobrando] = useState(null)
   const [cobroLink, setCobroLink] = useState(null)
+  const [enviarModal, setEnviarModal] = useState(null)
 
   useEffect(() => {
     load()
@@ -782,6 +846,11 @@ export default function Facturas() {
                       <button onClick={() => setVerData(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
                         {t('facturas.list.verFactura')}
                       </button>
+                      {f.estado !== 'anulada' && (
+                        <button onClick={() => setEnviarModal(f)} className="text-navy hover:text-gold-dark text-xs font-semibold mr-4">
+                          {t('facturas.list.enviarEmail')}
+                        </button>
+                      )}
                       {f.estado !== 'pagada' && f.estado !== 'anulada' && (
                         <button
                           onClick={() => cobrarConTarjeta(f)}
@@ -844,6 +913,14 @@ export default function Facturas() {
           factura={cobroLink.factura}
           url={cobroLink.url}
           onClose={() => setCobroLink(null)}
+        />
+      )}
+
+      {enviarModal && (
+        <EnviarEmailModal
+          factura={enviarModal}
+          onClose={() => setEnviarModal(null)}
+          onSent={load}
         />
       )}
     </div>

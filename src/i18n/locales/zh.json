@@ -463,9 +463,24 @@
       "confirmDelete": "删除发票 {{numero}}？",
       "cannotDeleteLocked": "此发票已在 Verifactu 账簿中登记，无法删除。请开具更正发票或将其作废。",
       "anularPrompt": "您即将作废发票 {{numero}}。它将在 Verifactu 账簿中保留作废记录（不会删除）。原因？（可选）",
-      "noEnlacePago": "无法生成付款链接。"
+      "noEnlacePago": "无法生成付款链接。",
+      "enviarEmail": "通过邮件发送"
     },
-    "altQR": "Verifactu 二维码"
+    "altQR": "Verifactu 二维码",
+    "enviarEmail": {
+      "title": "通过邮件发送发票 {{numero}}",
+      "paraLabel": "发送至",
+      "sinEmailGuardado": "该客户没有保存的邮箱地址，您可以仅为本次发送输入一个。",
+      "mensajeLabel": "留言（可选）",
+      "mensajePlaceholder": "为客户添加一条个性化留言...",
+      "cancelar": "取消",
+      "enviar": "发送",
+      "enviando": "发送中...",
+      "emailRequerido": "请输入收件人邮箱。",
+      "errorGenerico": "邮件发送失败，请重试。",
+      "exito": "发票已发送至 {{email}}。",
+      "cerrar": "关闭"
+    }
   },
   "cobros": {
     "title": "收款",
