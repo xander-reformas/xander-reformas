@@ -41,6 +41,8 @@ export default function MiEmpresa() {
         empresa_email: profile.empresa_email || '',
         empresa_telefono: profile.empresa_telefono || '',
         empresa_web: profile.empresa_web || '',
+        gestoria_nombre: profile.gestoria_nombre || '',
+        gestoria_email: profile.gestoria_email || '',
         fecha_inicio_actividad: profile.fecha_inicio_actividad || '',
         tarifa_reducida: profile.tarifa_reducida || false,
         especialidades: profile.especialidades || [],
@@ -232,6 +234,26 @@ export default function MiEmpresa() {
             <div className="col-span-2">
               <label className="label">{t('miEmpresa.web')}</label>
               <input className="input" type="url" value={form.empresa_web} onChange={e => setF('empresa_web', e.target.value)} placeholder="https://" />
+            </div>
+          </div>
+        </div>
+
+        {/* Gestoría */}
+        <div className="card space-y-4">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-ink-soft border-b border-edge pb-3">
+            {t('miEmpresa.gestoriaTitulo', 'Gestoría / Asesoría')}
+          </h2>
+          <p className="text-sm text-ink-soft -mt-2">
+            {t('miEmpresa.gestoriaDesc', 'Configura el email de tu gestoría para poder enviarle las facturas y gastos del mes desde la sección Gestoría, sin que se quede nada por mandar.')}
+          </p>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="label">{t('miEmpresa.gestoriaNombre', 'Nombre de contacto (opcional)')}</label>
+              <input className="input" value={form.gestoria_nombre} onChange={e => setF('gestoria_nombre', e.target.value)} />
+            </div>
+            <div>
+              <label className="label">{t('miEmpresa.gestoriaEmail', 'Email de la gestoría')}</label>
+              <input className="input" type="email" value={form.gestoria_email} onChange={e => setF('gestoria_email', e.target.value)} placeholder="gestoria@ejemplo.com" />
             </div>
           </div>
         </div>

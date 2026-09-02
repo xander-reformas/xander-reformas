@@ -10,6 +10,8 @@ const CATEGORIAS = [
   'Gestoría / Asesoría', 'Alquiler', 'Formación', 'Comunicaciones', 'Otros',
 ]
 
+const COMPROBANTES_BUCKET = 'gastos-comprobantes'
+
 const IVA_OPTS = [
   { key: 'exento', value: '0' },
   { key: 'superreducido', value: '4' },
@@ -164,6 +166,10 @@ export default function Gastos() {
   const [lightbox,   setLightbox]   = useState(false)
   const fileRef = useRef()
 
+  // Comprobante (el archivo real que se guarda y se puede enviar a la gestoría)
+  const [archivoOriginal, setArchivoOriginal] = useState(null) // File nuevo, pendiente de subir al guardar
+  const [comprobanteExistenteUrl, setComprobanteExistenteUrl] = useState(null) // URL firmada del ya guardado (al editar)
+
   useEffect(() => { load() }, [])
 
   async function load() {
@@ -191,8 +197,18 @@ export default function Gastos() {
       factura_num: g.factura_num || '', notas: g.notas || '',
     })
     resetOcr(); setError(''); setShowForm(true)
+    if (g.comprobante_path) {
+      supabase.storage.from(COMPROBANTES_BUCKET).createSignedUrl(g.comprobante_path, 3600)
+        .then(({ data }) => setComprobanteExistenteUrl(data?.signedUrl || null))
+    }
   }
-  function resetOcr() { setImgPreview(null); setOcrMsg('') }
+  function resetOcr() { setImgPreview(null); setOcrMsg(''); setArchivoOriginal(null); setComprobanteExistenteUrl(null) }
+
+  async function verComprobante(path) {
+    const { data, error: err } = await supabase.storage.from(COMPROBANTES_BUCKET).createSignedUrl(path, 300)
+    if (err || !data?.signedUrl) { alert(t('gastos.form.noPudoAbrirComprobante', 'No se pudo abrir el comprobante.')); return }
+    window.open(data.signedUrl, '_blank', 'noopener')
+  }
 
   function setF(f, v) {
     setForm(prev => {
@@ -212,6 +228,11 @@ export default function Gastos() {
     const esPdf = file.type === 'application/pdf'
     const esImg = file.type.startsWith('image/')
     if (!esPdf && !esImg) { setOcrMsg(t('gastos.form.soloImagenesPdf')); return }
+
+    // Guardamos el archivo real: es lo que luego se sube como comprobante y se
+    // podrá adjuntar al enviar los gastos del mes a la gestoría.
+    setArchivoOriginal(file)
+    setComprobanteExistenteUrl(null)
 
     if (esImg) setImgPreview(URL.createObjectURL(file))
     else setImgPreview(null)
@@ -273,11 +294,22 @@ export default function Gastos() {
       obra_id: form.obra_id || null, proveedor: form.proveedor || null,
       factura_num: form.factura_num || null, notas: form.notas || null,
     }
-    const { error: err } = editId
-      ? await supabase.from('gastos').update(payload).eq('id', editId)
-      : await supabase.from('gastos').insert(payload)
+    const { data: saved, error: err } = editId
+      ? await supabase.from('gastos').update(payload).eq('id', editId).select().single()
+      : await supabase.from('gastos').insert(payload).select().single()
+    if (err) { setSaving(false); setError(err.message); return }
+
+    // Si se adjuntó un comprobante nuevo, lo subimos y lo enlazamos al gasto.
+    // Si esto falla no rompemos el guardado: el gasto ya está guardado, solo
+    // se queda sin comprobante adjunto (se puede volver a intentar editando).
+    if (archivoOriginal && saved) {
+      const ext = archivoOriginal.name.split('.').pop().toLowerCase()
+      const path = `${user_id}/${saved.id}-${Date.now()}.${ext}`
+      const { error: upErr } = await supabase.storage.from(COMPROBANTES_BUCKET).upload(path, archivoOriginal, { upsert: false })
+      if (!upErr) await supabase.from('gastos').update({ comprobante_path: path }).eq('id', saved.id)
+    }
+
     setSaving(false)
-    if (err) { setError(err.message); return }
     setShowForm(false); load()
   }
 
@@ -415,7 +447,14 @@ export default function Gastos() {
                     <tr key={g.id} className="hover:bg-page/50 transition-colors">
                       <td className="px-4 py-3">
                         <div className="font-medium text-ink">{g.descripcion}</div>
-                        {g.proveedor && <div className="text-xs text-ink-soft mt-0.5">{g.proveedor}</div>}
+                        <div className="flex items-center gap-2 mt-0.5">
+                          {g.proveedor && <span className="text-xs text-ink-soft">{g.proveedor}</span>}
+                          {g.comprobante_path && (
+                            <button onClick={() => verComprobante(g.comprobante_path)} className="text-xs text-gold hover:text-gold-dark">
+                              📎 {t('gastos.table.verComprobante', 'comprobante')}
+                            </button>
+                          )}
+                        </div>
                       </td>
                       <td className="px-3 py-3 hidden md:table-cell">
                         <span className="text-xs bg-edge text-ink-soft px-2 py-0.5 rounded-full">{t(`gastos.categoria.${g.categoria}`, g.categoria)}</span>
@@ -495,7 +534,20 @@ export default function Gastos() {
                   className={`relative border-2 border-dashed rounded-xl cursor-pointer transition-colors overflow-hidden
                     ${dragging ? 'border-gold bg-gold/10' : 'border-edge hover:border-gold hover:bg-gold/5'}`}
                 >
-                  {imgPreview ? (
+                  {!imgPreview && comprobanteExistenteUrl ? (
+                    <div className="flex items-center gap-4 p-3" onClick={e => e.stopPropagation()}>
+                      <div className="w-20 h-20 rounded-lg border border-edge bg-page flex items-center justify-center text-3xl flex-shrink-0">📎</div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-ink-soft leading-relaxed">{t('gastos.form.comprobanteGuardado', 'Ya hay un comprobante guardado en este gasto.')}</p>
+                        <div className="flex items-center gap-3 mt-1">
+                          <a href={comprobanteExistenteUrl} target="_blank" rel="noopener noreferrer"
+                            className="text-xs text-gold hover:text-gold-dark font-semibold">{t('gastos.form.verComprobante', 'Ver comprobante')}</a>
+                          <button type="button" onClick={() => fileRef.current?.click()}
+                            className="text-xs text-ink-soft hover:text-ink">{t('gastos.form.sustituir', 'Sustituir archivo')}</button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : imgPreview ? (
                     <div className="flex items-center gap-4 p-3">
                       {/* Miniatura con lupa */}
                       <div className="relative flex-shrink-0 group">

@@ -30,6 +30,7 @@ import PartesTrabajo from '../partes/PartesTrabajo'
 import Nominas from '../nominas/Nominas'
 import Referidos from '../referidos/Referidos'
 import CopiasSeguridad from '../backups/CopiasSeguridad'
+import Gestoria from '../gestoria/Gestoria'
 
 const ADMIN_EMAIL = 'reformasxander@gmail.com'
 
@@ -63,6 +64,7 @@ function getNavGroups(t) {
       label: t('nav.groups.control'),
       items: [
         { to: 'gastos',             label: t('nav.items.gastos'),    icon: '💸' },
+        { to: 'gestoria',           label: t('nav.items.gestoria', 'Gestoría'), icon: '🧾' },
         { to: 'empleados',          label: t('nav.items.empleados'), icon: '👷' },
         { to: 'partes',             label: t('nav.items.partes'),    icon: '🕐' },
         { to: 'nominas',            label: t('nav.items.nominas'),   icon: '📑' },
@@ -355,6 +357,7 @@ export default function Dashboard() {
             <Route path="facturas"     element={<Facturas />} />
             <Route path="cobros"       element={<Cobros />} />
             <Route path="gastos"       element={<Gastos />} />
+            <Route path="gestoria"     element={<Gestoria />} />
             <Route path="hub-digital"  element={<HubDigital />} />
             <Route path="fiscal"       element={<Fiscal />} />
             <Route path="legislacion"  element={<Legislacion />} />
