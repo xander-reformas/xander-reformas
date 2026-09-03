@@ -287,7 +287,9 @@ export default function Gastos() {
       setOcrMsg(t('gastos.form.datosExtraidos'))
     } catch (err) {
       console.error('[OCR]', err)
-      setOcrMsg(t('gastos.form.noPudoLeer'))
+      // Incluimos el detalle técnico en el propio aviso (temporal, para poder
+      // diagnosticar por captura de pantalla sin acceso a la consola del móvil).
+      setOcrMsg(`${t('gastos.form.noPudoLeer')} [${(err?.message || String(err)).slice(0, 160)}]`)
     } finally {
       setLeyendo(false)
     }
