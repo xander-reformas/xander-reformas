@@ -228,8 +228,11 @@ export default function Gastos() {
 
   // ── OCR ──────────────────────────────────────────────────────────────────
   async function procesarArchivo(file) {
-    const esPdf = file.type === 'application/pdf'
-    const esImg = file.type.startsWith('image/')
+    const nombre = (file.name || '').toLowerCase()
+    // Algunos gestores de archivos (Drive, Android) no informan bien el MIME type;
+    // en ese caso nos apoyamos en la extensión del nombre del archivo.
+    const esPdf = file.type === 'application/pdf' || nombre.endsWith('.pdf')
+    const esImg = file.type.startsWith('image/') || /\.(jpe?g|png|heic|heif|webp|gif|bmp)$/.test(nombre)
     if (!esPdf && !esImg) { setOcrMsg(t('gastos.form.soloImagenesPdf')); return }
 
     // Guardamos el archivo real: es lo que luego se sube como comprobante y se
@@ -585,6 +588,14 @@ export default function Gastos() {
                     <div className="py-5 flex items-center justify-center gap-3">
                       <div className="w-5 h-5 border-2 border-gold border-t-transparent rounded-full animate-spin" />
                       <span className="text-sm text-ink-soft">{ocrMsg}</span>
+                    </div>
+                  ) : ocrMsg ? (
+                    <div className="py-5 text-center" onClick={e => e.stopPropagation()}>
+                      <div className="text-2xl mb-1">⚠️</div>
+                      <div className="text-sm text-orange-600 px-4">{ocrMsg}</div>
+                      <p className="text-xs text-ink-soft mt-2">{t('gastos.form.puedesRellenarManual', 'Puedes rellenar los datos a mano y guardarlo igualmente.')}</p>
+                      <button type="button" onClick={() => { resetOcr(); if (fileRef.current) fileRef.current.value = '' }}
+                        className="text-xs text-gold hover:text-gold-dark font-semibold mt-2">{t('gastos.form.intentarOtroArchivo', 'Probar con otro archivo')}</button>
                     </div>
                   ) : (
                     <div className="py-6 text-center">
