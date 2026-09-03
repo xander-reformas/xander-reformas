@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { supabase, getUID } from '../../lib/supabase'
 
 const GROQ_KEY = import.meta.env.VITE_GROQ_API_KEY
+// Groq retiró llama-3.3-70b-versatile en agosto de 2026 (ver console.groq.com/docs/deprecations).
+// openai/gpt-oss-120b es el modelo recomendado de reemplazo.
+const GROQ_MODEL = 'openai/gpt-oss-120b'
 
 const CATEGORIAS = [
   'Materiales', 'Mano de obra / Subcontratas', 'Herramientas y equipos',
@@ -99,7 +102,7 @@ async function textoADatos(textoOcr) {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
+      model: GROQ_MODEL,
       messages: [
         {
           role: 'system',
