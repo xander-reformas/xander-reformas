@@ -7,6 +7,7 @@
 // todo lo que se ha incluido — así nunca se pierde de vista qué falta.
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { PDFDocument, StandardFonts, rgb } from 'https://esm.sh/pdf-lib@1.17.1'
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')!
 const SUPABASE_URL   = Deno.env.get('SUPABASE_URL')!
@@ -40,7 +41,7 @@ function fmt(v: number) {
 
 function pad(n: number) { return String(n).padStart(2, '0') }
 
-type Item = { importe?: string | number; iva?: number; descuento?: number; retencion?: number }
+type Item = { titulo?: string; detalle?: string; cantidad?: string | number; unidad?: string; precio_unitario?: string | number; importe?: string | number; iva?: number; descuento?: number; retencion?: number }
 function calculoFactura(items: Item[], iva: number, descuento: number, retencion: number) {
   const base = (items || []).reduce((s, i) => s + (parseFloat(String(i.importe)) || 0), 0)
   const dto = base * (descuento || 0) / 100
@@ -48,7 +49,113 @@ function calculoFactura(items: Item[], iva: number, descuento: number, retencion
   const ivaImporte = baseConDto * (iva || 0) / 100
   const retImporte = baseConDto * (retencion || 0) / 100
   const total = baseConDto + ivaImporte - retImporte
-  return { base: baseConDto, total }
+  return { base: baseConDto, dto, ivaImporte, retImporte, total }
+}
+
+function bytesToBase64(buf: Uint8Array): string {
+  let binary = ''
+  for (let i = 0; i < buf.length; i++) binary += String.fromCharCode(buf[i])
+  return btoa(binary)
+}
+
+// ── Genera un PDF sencillo de una factura (para adjuntar a la gestoría) ──
+async function generarFacturaPdf(
+  factura: any,
+  profile: { empresa_nombre?: string; empresa_nif?: string; empresa_direccion?: string; empresa_cp?: string; empresa_ciudad?: string } | null,
+  clienteNombre: string,
+  qrBase64: string | null,
+): Promise<Uint8Array> {
+  const pdfDoc = await PDFDocument.create()
+  const page = pdfDoc.addPage([595.28, 841.89]) // A4
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+  const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
+  const { width, height } = page.getSize()
+
+  const navy = rgb(0x1A / 255, 0x1A / 255, 0x2E / 255)
+  const gold = rgb(0xC9 / 255, 0xA8 / 255, 0x4C / 255)
+  const gray = rgb(0.47, 0.47, 0.47)
+  const ink = rgb(0.1, 0.1, 0.13)
+  const lineGray = rgb(0.87, 0.87, 0.87)
+
+  // Cabecera
+  page.drawRectangle({ x: 0, y: height - 64, width, height: 64, color: navy })
+  page.drawText('X', { x: 40, y: height - 42, size: 20, font: fontBold, color: gold })
+  page.drawText('ANDER', { x: 51, y: height - 42, size: 20, font: fontBold, color: rgb(1, 1, 1) })
+  page.drawText('GESTIÓN', { x: 145, y: height - 38, size: 7, font, color: rgb(1, 1, 1) })
+
+  let y = height - 96
+  page.drawText(`Factura ${factura.numero}`, { x: 40, y, size: 16, font: fontBold, color: navy })
+  if (factura.estado === 'anulada') {
+    page.drawText('ANULADA', { x: 480, y, size: 11, font: fontBold, color: rgb(0.75, 0.2, 0.2) })
+  }
+  y -= 20
+  const empresaNombre = profile?.empresa_nombre || ''
+  const empresaLinea2 = [profile?.empresa_nif, profile?.empresa_direccion].filter(Boolean).join(' · ')
+  const empresaLinea3 = [profile?.empresa_cp, profile?.empresa_ciudad].filter(Boolean).join(' ')
+  page.drawText(empresaNombre, { x: 40, y, size: 10, font: fontBold, color: ink })
+  y -= 13
+  if (empresaLinea2) { page.drawText(empresaLinea2, { x: 40, y, size: 9, font, color: gray }); y -= 12 }
+  if (empresaLinea3) { page.drawText(empresaLinea3, { x: 40, y, size: 9, font, color: gray }); y -= 12 }
+  y -= 4
+  page.drawText(`Fecha: ${new Date(factura.fecha).toLocaleDateString('es-ES')}`, { x: 40, y, size: 9, font, color: gray })
+  y -= 13
+  page.drawText(`Cliente: ${clienteNombre || '—'}`, { x: 40, y, size: 9, font, color: gray })
+
+  y -= 30
+  page.drawText('CONCEPTO', { x: 40, y, size: 8, font: fontBold, color: gray })
+  page.drawText('CANT.', { x: 330, y, size: 8, font: fontBold, color: gray })
+  page.drawText('PRECIO', { x: 400, y, size: 8, font: fontBold, color: gray })
+  page.drawText('IMPORTE', { x: 480, y, size: 8, font: fontBold, color: gray })
+  y -= 6
+  page.drawLine({ start: { x: 40, y }, end: { x: 555, y }, thickness: 1, color: lineGray })
+  y -= 16
+
+  for (const it of (factura.items || []) as Item[]) {
+    if (y < 150) break // factura demasiado larga para una página; se corta (caso raro)
+    const titulo = String(it.titulo || '').slice(0, 55)
+    page.drawText(titulo, { x: 40, y, size: 9, font, color: ink })
+    page.drawText(String(it.cantidad ?? ''), { x: 330, y, size: 9, font, color: ink })
+    page.drawText(fmt(parseFloat(String(it.precio_unitario)) || 0), { x: 400, y, size: 9, font, color: ink })
+    page.drawText(fmt(parseFloat(String(it.importe)) || 0), { x: 480, y, size: 9, font: fontBold, color: ink })
+    y -= 16
+  }
+
+  const { base, dto, ivaImporte, retImporte, total } = calculoFactura(factura.items || [], factura.iva, factura.descuento, factura.retencion)
+
+  y -= 8
+  page.drawLine({ start: { x: 350, y }, end: { x: 555, y }, thickness: 1, color: lineGray })
+  y -= 16
+  page.drawText('Base imponible', { x: 400, y, size: 9, font, color: gray })
+  page.drawText(fmt(base), { x: 480, y, size: 9, font, color: ink })
+  if (dto > 0) {
+    y -= 14
+    page.drawText('Descuento', { x: 400, y, size: 9, font, color: gray })
+    page.drawText(`−${fmt(dto)}`, { x: 480, y, size: 9, font, color: ink })
+  }
+  y -= 14
+  page.drawText(`IVA (${factura.iva}%)`, { x: 400, y, size: 9, font, color: gray })
+  page.drawText(`+${fmt(ivaImporte)}`, { x: 480, y, size: 9, font, color: ink })
+  if (retImporte > 0) {
+    y -= 14
+    page.drawText(`Retención (${factura.retencion}%)`, { x: 400, y, size: 9, font, color: gray })
+    page.drawText(`−${fmt(retImporte)}`, { x: 480, y, size: 9, font, color: ink })
+  }
+  y -= 20
+  page.drawLine({ start: { x: 350, y: y + 8 }, end: { x: 555, y: y + 8 }, thickness: 1.2, color: navy })
+  page.drawText('TOTAL', { x: 400, y, size: 12, font: fontBold, color: navy })
+  page.drawText(fmt(total), { x: 480, y, size: 12, font: fontBold, color: navy })
+
+  if (qrBase64) {
+    try {
+      const qrBytes = Uint8Array.from(atob(qrBase64), c => c.charCodeAt(0))
+      const qrImg = await pdfDoc.embedPng(qrBytes)
+      page.drawImage(qrImg, { x: 40, y: 55, width: 55, height: 55 })
+      page.drawText('Factura verificable ante la AEAT', { x: 104, y: 88, size: 7, font, color: gray })
+      page.drawText('(Verifactu / RD 1007/2023).', { x: 104, y: 78, size: 7, font, color: gray })
+    } catch { /* si el QR no se puede decodificar, se omite sin romper el PDF */ }
+  }
+
+  return await pdfDoc.save()
 }
 
 Deno.serve(async (req) => {
@@ -70,7 +177,7 @@ Deno.serve(async (req) => {
 
     const { data: profile } = await supabase
       .from('profiles')
-      .select('empresa_nombre, empresa_email, gestoria_email, gestoria_nombre')
+      .select('empresa_nombre, empresa_nif, empresa_direccion, empresa_cp, empresa_ciudad, empresa_email, gestoria_email, gestoria_nombre')
       .eq('id', user.id)
       .single()
 
@@ -107,7 +214,7 @@ Deno.serve(async (req) => {
       return json({ ok: true, skipped: true, motivo: 'No hay nada pendiente de enviar en ese periodo.' })
     }
 
-    // ── Adjuntos: comprobantes de gastos (hasta el límite de tamaño) ──
+    // ── Adjuntos: comprobantes de gastos + PDF de cada factura (hasta el límite de tamaño) ──
     const attachments: { filename: string; content: string }[] = []
     let bytesAdjuntos = 0
     let comprobantesOmitidos = 0
@@ -120,13 +227,30 @@ Deno.serve(async (req) => {
         const buf = new Uint8Array(await blob.arrayBuffer())
         if (bytesAdjuntos + buf.length > LIMITE_ADJUNTOS_BYTES) { comprobantesOmitidos++; continue }
         bytesAdjuntos += buf.length
-        let binary = ''
-        for (let i = 0; i < buf.length; i++) binary += String.fromCharCode(buf[i])
-        const base64 = btoa(binary)
+        const base64 = bytesToBase64(buf)
         const ext = g.comprobante_path.split('.').pop()
         const nombreArchivo = `${g.fecha}_${(g.descripcion || 'gasto').replace(/[^a-zA-Z0-9]+/g, '_').slice(0, 40)}.${ext}`
         attachments.push({ filename: nombreArchivo, content: base64 })
       } catch {
+        comprobantesOmitidos++
+      }
+    }
+
+    // QR de Verifactu de las facturas de este lote (para incluirlo en cada PDF)
+    const facturaIds = (facturas || []).map(f => f.id)
+    const { data: registros } = facturaIds.length
+      ? await supabase.from('registro_facturacion').select('factura_id, verifacti_qr').in('factura_id', facturaIds).eq('tipo_registro', 'alta')
+      : { data: [] as { factura_id: string; verifacti_qr: string | null }[] }
+    const qrPorFactura = new Map((registros || []).map(r => [r.factura_id, r.verifacti_qr]))
+
+    for (const f of facturas || []) {
+      try {
+        const pdfBytes = await generarFacturaPdf(f, profile, f.clientes?.nombre || '', qrPorFactura.get(f.id) || null)
+        if (bytesAdjuntos + pdfBytes.length > LIMITE_ADJUNTOS_BYTES) { comprobantesOmitidos++; continue }
+        bytesAdjuntos += pdfBytes.length
+        attachments.push({ filename: `Factura_${f.numero}.pdf`, content: bytesToBase64(pdfBytes) })
+      } catch (e) {
+        console.error('Error generando PDF de factura', f.id, e)
         comprobantesOmitidos++
       }
     }
@@ -216,7 +340,7 @@ Deno.serve(async (req) => {
 
           ${comprobantesOmitidos > 0 ? `
             <p style="font-size:12px;color:#c0392b;background:#fdf0ef;border-radius:6px;padding:10px 14px;margin-bottom:16px">
-              ⚠️ ${comprobantesOmitidos} comprobante(s) no se han podido adjuntar (tamaño del correo). Están disponibles en la app, en Gastos.
+              ⚠️ ${comprobantesOmitidos} documento(s) (comprobantes de gasto o PDF de factura) no se han podido adjuntar por tamaño del correo. Están disponibles en la app.
             </p>
           ` : ''}
 

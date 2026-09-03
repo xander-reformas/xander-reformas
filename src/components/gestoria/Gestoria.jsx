@@ -86,7 +86,7 @@ export default function Gestoria() {
     setEnviando(false)
     if (err || data?.error) { setMsg({ ok: false, text: data?.error || err.message }); return }
     if (data?.skipped) { setMsg({ ok: true, text: data.motivo }); return }
-    setMsg({ ok: true, text: `Enviado a ${data.to}: ${data.facturas} factura(s) y ${data.gastos} gasto(s).${data.comprobantesOmitidos ? ` (${data.comprobantesOmitidos} comprobante(s) no cupieron en el correo.)` : ''}` })
+    setMsg({ ok: true, text: `Enviado a ${data.to}: ${data.facturas} factura(s) y ${data.gastos} gasto(s), con sus documentos adjuntos.${data.comprobantesOmitidos ? ` (${data.comprobantesOmitidos} documento(s) no cupieron en el correo.)` : ''}` })
     cargar()
   }
 
