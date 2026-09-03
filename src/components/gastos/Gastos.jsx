@@ -4,8 +4,11 @@ import { supabase, getUID } from '../../lib/supabase'
 
 const GROQ_KEY = import.meta.env.VITE_GROQ_API_KEY
 // Groq retiró llama-3.3-70b-versatile en agosto de 2026 (ver console.groq.com/docs/deprecations).
-// openai/gpt-oss-120b es el modelo recomendado de reemplazo.
-const GROQ_MODEL = 'openai/gpt-oss-120b'
+// Se probó openai/gpt-oss-120b (el reemplazo que sugiere Groq), pero ese modelo
+// tiene fallos conocidos devolviendo JSON limpio (se le cuela el razonamiento
+// interno en la respuesta). qwen/qwen3.6-27b sí soporta el modo JSON nativo de
+// Groq de forma fiable, así que es el que usamos aquí.
+const GROQ_MODEL = 'qwen/qwen3.6-27b'
 
 const CATEGORIAS = [
   'Materiales', 'Mano de obra / Subcontratas', 'Herramientas y equipos',
@@ -103,10 +106,16 @@ async function textoADatos(textoOcr) {
     headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: GROQ_MODEL,
+      // Modo JSON nativo de Groq: obliga a que message.content sea JSON válido,
+      // en vez de confiar en que el modelo "no añada texto extra" (con gpt-oss
+      // el razonamiento interno a veces se colaba en el content y rompía el
+      // regex que usábamos antes).
+      response_format: { type: 'json_object' },
+      reasoning_format: 'hidden',
       messages: [
         {
           role: 'system',
-          content: 'Eres un asistente que extrae datos estructurados de textos OCR de facturas españolas. Respondes ÚNICAMENTE con JSON válido, sin texto adicional ni bloques de código markdown.',
+          content: 'Eres un asistente que extrae datos estructurados de textos OCR de facturas españolas. Respondes ÚNICAMENTE con un objeto JSON válido, sin texto adicional ni bloques de código markdown.',
         },
         {
           role: 'user',
@@ -120,8 +129,10 @@ async function textoADatos(textoOcr) {
   if (!res.ok) throw new Error(`Groq ${res.status}: ${await res.text()}`)
   const data = await res.json()
   const texto = data.choices?.[0]?.message?.content || ''
+  // El modo JSON debería devolver ya un objeto limpio; el regex queda como red
+  // de seguridad por si el modelo aún así añade algo alrededor.
   const match = texto.match(/\{[\s\S]*\}/)
-  if (!match) throw new Error('Sin JSON en respuesta')
+  if (!match) throw new Error('Sin JSON en respuesta: ' + texto.slice(0, 200))
   return JSON.parse(match[0])
 }
 
