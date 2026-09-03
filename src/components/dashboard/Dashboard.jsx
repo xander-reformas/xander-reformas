@@ -194,6 +194,7 @@ export default function Dashboard() {
   const { t } = useTranslation()
   const { user, profile, signOut } = useAuth()
   const [sidebarOpen, setSidebarOpen]   = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [notifCount, setNotifCount]     = useState(0)
   const isAdmin = user?.email === ADMIN_EMAIL
   const NAV_GROUPS = getNavGroups(t)
@@ -218,24 +219,44 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen flex bg-page">
+      {/* Fondo oscurecido al abrir el menú en móvil */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={`${sidebarOpen ? 'w-56' : 'w-16'} bg-navy flex flex-col transition-all duration-200 flex-shrink-0`}>
+      <aside
+        className={`fixed md:static inset-y-0 left-0 z-40 w-64 md:w-auto ${
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0 ${sidebarOpen ? 'md:w-56' : 'md:w-16'} bg-navy flex flex-col transition-all duration-200 flex-shrink-0`}
+      >
         {/* Logo */}
         <div className="p-4 border-b border-white/10 flex items-center gap-3">
           <div className="text-xl font-black flex-shrink-0">
             <span className="text-gold">X</span>
-            {sidebarOpen && <span className="text-white">ANDER</span>}
+            <span className="text-white md:hidden">ANDER</span>
+            {sidebarOpen && <span className="text-white hidden md:inline">ANDER</span>}
           </div>
           {sidebarOpen && (
-            <div className="text-[9px] tracking-widest text-white/30 leading-tight mt-0.5">
+            <div className="text-[9px] tracking-widest text-white/30 leading-tight mt-0.5 hidden md:block">
               {t('nav.tagline')}
             </div>
           )}
           <button
             onClick={() => setSidebarOpen(p => !p)}
-            className="ml-auto text-white/30 hover:text-white text-xs"
+            className="ml-auto text-white/30 hover:text-white text-xs hidden md:block"
           >
             {sidebarOpen ? '◀' : '▶'}
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="ml-auto text-white/50 hover:text-white text-xl md:hidden"
+            aria-label="Cerrar menú"
+          >
+            ✕
           </button>
         </div>
 
@@ -254,6 +275,7 @@ export default function Dashboard() {
                     key={to}
                     to={`/dashboard/${to}`}
                     end={end}
+                    onClick={() => setMobileMenuOpen(false)}
                     className={({ isActive }) =>
                       `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                         isActive
@@ -281,6 +303,7 @@ export default function Dashboard() {
               <div className="px-2">
                 <NavLink
                   to="/dashboard/admin"
+                  onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                       isActive
@@ -338,11 +361,20 @@ export default function Dashboard() {
       {/* Main content */}
       <main className="flex-1 overflow-auto flex flex-col">
         {/* Barra superior */}
-        <header className="flex items-center justify-end gap-2 px-6 py-3 border-b border-edge bg-surface flex-shrink-0">
-          <OfflineBadge />
-          <LanguageSwitcher />
-          <NotificationBell />
-          <ThemeToggle compact />
+        <header className="flex items-center justify-between md:justify-end gap-2 px-4 md:px-6 py-3 border-b border-edge bg-surface flex-shrink-0">
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="md:hidden text-xl text-ink -ml-1 px-2 py-1"
+            aria-label="Abrir menú"
+          >
+            ☰
+          </button>
+          <div className="flex items-center gap-2">
+            <OfflineBadge />
+            <LanguageSwitcher />
+            <NotificationBell />
+            <ThemeToggle compact />
+          </div>
         </header>
 
         <div className="flex-1 overflow-auto">
