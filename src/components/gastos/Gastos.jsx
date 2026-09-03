@@ -111,7 +111,11 @@ async function textoADatos(textoOcr) {
       // el razonamiento interno a veces se colaba en el content y rompía el
       // regex que usábamos antes).
       response_format: { type: 'json_object' },
-      reasoning_format: 'hidden',
+      // qwen3.6 "piensa" antes de responder por defecto, y ese razonamiento
+      // consumía todo el max_tokens sin dejar espacio para el JSON final
+      // (por eso Groq devolvía "Failed to validate JSON"). Lo desactivamos:
+      // esto es una extracción de datos simple, no hace falta que razone.
+      reasoning_effort: 'none',
       messages: [
         {
           role: 'system',
@@ -287,9 +291,7 @@ export default function Gastos() {
       setOcrMsg(t('gastos.form.datosExtraidos'))
     } catch (err) {
       console.error('[OCR]', err)
-      // Incluimos el detalle técnico en el propio aviso (temporal, para poder
-      // diagnosticar por captura de pantalla sin acceso a la consola del móvil).
-      setOcrMsg(`${t('gastos.form.noPudoLeer')} [${(err?.message || String(err)).slice(0, 160)}]`)
+      setOcrMsg(t('gastos.form.noPudoLeer'))
     } finally {
       setLeyendo(false)
     }
