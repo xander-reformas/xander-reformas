@@ -587,23 +587,19 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
           {tab === 'fotos' && (
             <div className="p-5">
               {/* Upload */}
-              <div
-                onClick={() => {
-                  if (subiendo) return
-                  try {
-                    if (!fileRef.current) { setErrorFoto('⚠️ [debug] fileRef.current es null'); return }
-                    fileRef.current.click()
-                  } catch (e) {
-                    setErrorFoto(`⚠️ [debug] Error al abrir el selector: ${e?.message || e}`)
-                  }
-                }}
-                className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors mb-5 group ${subiendo ? 'border-gold bg-gold/5 cursor-wait' : 'border-edge hover:border-gold cursor-pointer'}`}
+              <label
+                htmlFor="obra-fotos-input"
+                className={`block border-2 border-dashed rounded-xl p-8 text-center transition-colors mb-5 group ${subiendo ? 'border-gold bg-gold/5 cursor-wait' : 'border-edge hover:border-gold cursor-pointer'}`}
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{subiendo ? '⏳' : '📷'}</div>
                 <div className="font-semibold text-ink mb-1">{subiendo ? t('obras.detalle.fotos.dropZoneUploading') : t('obras.detalle.fotos.dropZoneIdle')}</div>
                 <div className="text-xs text-ink-soft">{t('obras.detalle.fotos.hint')}</div>
-                <input ref={fileRef} type="file" multiple accept="image/*" className="sr-only" onChange={subirFotos} disabled={subiendo} />
-              </div>
+                {/* <label htmlFor> nativo en vez de un div+onClick que simula el
+                    clic por JS: algunos navegadores/webviews de móvil no abren
+                    el selector con input.click() disparado desde otro elemento,
+                    pero sí respetan la asociación nativa label→input. */}
+                <input id="obra-fotos-input" ref={fileRef} type="file" multiple accept="image/*" className="sr-only" onChange={subirFotos} disabled={subiendo} />
+              </label>
               {errorFoto && (
                 <div className="text-red-700 text-xs bg-red-50 border border-red-200 rounded-lg px-3 py-2 mb-4">
                   {errorFoto}
