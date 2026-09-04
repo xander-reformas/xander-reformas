@@ -588,7 +588,15 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
             <div className="p-5">
               {/* Upload */}
               <div
-                onClick={() => !subiendo && fileRef.current?.click()}
+                onClick={() => {
+                  if (subiendo) return
+                  try {
+                    if (!fileRef.current) { setErrorFoto('⚠️ [debug] fileRef.current es null'); return }
+                    fileRef.current.click()
+                  } catch (e) {
+                    setErrorFoto(`⚠️ [debug] Error al abrir el selector: ${e?.message || e}`)
+                  }
+                }}
                 className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors mb-5 group ${subiendo ? 'border-gold bg-gold/5 cursor-wait' : 'border-edge hover:border-gold cursor-pointer'}`}
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{subiendo ? '⏳' : '📷'}</div>
