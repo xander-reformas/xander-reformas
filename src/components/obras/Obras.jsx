@@ -401,7 +401,10 @@ function ObraDetalle({ obra: obraInicial, clientes, onClose, onUpdate }) {
               onChange={e => cambiarEstado(e.target.value)}
               className="text-xs font-semibold bg-white/10 text-white border border-white/20 rounded-lg px-3 py-1.5 focus:outline-none focus:border-gold cursor-pointer"
             >
-              {ESTADOS.map(s => <option key={s.value} value={s.value}>{estadoLabel(t, s.value)}</option>)}
+              {/* El desplegable del navegador ignora el fondo translúcido del
+                  <select> y lo pinta sólido; sin bg/color explícitos en cada
+                  <option> el texto blanco queda invisible sobre ese fondo. */}
+              {ESTADOS.map(s => <option key={s.value} value={s.value} className="bg-navy text-white">{estadoLabel(t, s.value)}</option>)}
             </select>
             {obra.presupuesto_total > 0 && (
               <span className="text-xs text-white/60">
